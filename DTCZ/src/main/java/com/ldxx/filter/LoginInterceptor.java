@@ -16,6 +16,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		
 		//String requestUrl = request.getRequestURL().toString();
 		HttpSession session = request.getSession();
+		
+		
 		return true;
 	}
 
