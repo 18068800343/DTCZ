@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>tbale</title>
+		<link href="/view/favicon.ico" rel="shortcut icon">
+		<link href="/view/style/bootstrap.min.css" rel="stylesheet">
+		<link href="/view/style/style.css" rel="stylesheet">
+		<link href="/view/toastr/toastr.css" rel="stylesheet">
+		<link rel="stylesheet" href="/view/font2/iconfont.css">
+		<link rel="stylesheet" href="/view/style/jquery.dataTables.min.css">
+		<link rel="stylesheet" type="text/css" href="/view/easyUI/themes/default/easyui.css" />
+		<link rel="stylesheet" type="text/css" href="/view/easyUI/themes/icon.css" />
+		<link rel="stylesheet" type="text/css" href="/view/easyUI/demo/demo.css" />
+		<link rel="stylesheet" type="text/css" href="/view/css/layui.css" />
+		<link rel="stylesheet" type="text/css" href="/view/css/layui.mobile.css" />
+		<link rel="stylesheet" type="text/css" href="/view/css/laydate.css" />
+		<link rel="stylesheet" type="text/css" href="/view/css/code.css" />
+		<link rel="stylesheet" type="text/css" href="/view/../js/skin/default/layer.css" />
+		<link rel="stylesheet" type="text/css" href="/view/css/laydate.css" />
+
+
+	</head>
+
+	<body>
+
+		<div class="UpperPartR">
+
+		</div>
+		<div class="layui-tab layui-tab-card">
+			<ul class="layui-tab-title">
+				<li class="layui-this">配方信息</li>
+				<li>生产计划数据</li>
+				<li>生产数据监控</li>
+				<li>拌合站产能分析</li>
+			</ul>
+			<div class="layui-tab-content" style="height: 100px;">
+				<div class="layui-tab-item layui-show">
+					<div class="bottom">
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin: 5PX;float: left;">录入</button>
+						<table class="layui-table">
+							<colgroup>
+								<col width="150">
+								<col width="200">
+								<col>
+							</colgroup>
+							<thead>
+								<tr>
+									<th>序号</th>
+									<td>配方名称</td>
+									<td>配1用量</td>
+									<td>配2用量</td>
+									<td>配3用量</td>
+									<td>配4用量</td>
+									<td>配5用量</td>
+									<td>配6用量</td>
+									<td>粉料用量</td>
+									<td>沥青用量</td>
+									<td>附属材料</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>1</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<!--1结束-->
+				</div>
+				<div class="layui-tab-item">
+					<div class="bottom">
+						<table class="layui-table">
+							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal_SEC" style="margin: 5PX;float: left;">录入</button>
+							<colgroup>
+								<col width="150">
+								<col width="200">
+								<col>
+							</colgroup>
+							<thead>
+								<tr>
+									<th>序号</th>
+									<td>路段</td>
+									<td>成品量</td>
+									<td>料1偏差量</td>
+									<td>料2偏差量</td>
+									<td>料3偏差量</td>
+									<td>料4偏差量</td>
+									<td>料5偏差量</td>
+									<td>料6偏差量</td>
+									<td>粉料偏差量</td>
+									<td>沥青偏差量</td>
+									<td>干拌时间</td>
+									<td>油石比</td>
+									<td>湿拌时间</td>
+									<td>级配</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>1</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+
+								</tr>
+								<tr>
+									<td>1</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<!--二结束-->
+				<div class="layui-tab-item">
+					<div class="bottom">
+						<table class="layui-table">
+							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal_SEC" style="margin: 5PX;float: left;">录入</button>
+							<colgroup>
+								<col width="150">
+								<col width="200">
+								<col>
+							</colgroup>
+							<thead>
+								<tr>
+									<th>序号</th>
+									<td>料1偏差量</td>
+									<td>料2偏差量</td>
+									<td>料3偏差量</td>
+									<td>料4偏差量</td>
+									<td>料5偏差量</td>
+									<td>料6偏差量</td>
+									<td>最低温度</td>
+									<td>最高温度</td>
+									<td>料1误差</td>
+									<td>料2误差</td>
+									<td>料3误差</td>
+									<td>料4误差</td>
+									<td>料5误差</td>
+									<td>料6误差</td>
+									<td>干拌用时</td>
+									<td>湿拌用时</td>
+									<td>生产时间</td>
+									<td>油石比</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>1</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+
+								</tr>
+								<tr>
+									<td>1</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+
+								</tr>
+								<tr>
+									<td>1</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+
+								</tr>
+								<tr>
+									<td>1</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<!-- 三结束 -->
+					<div class="layui-tab-item weadmin-body">        
+						<!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+						<div id="main" style="width: 1000px;height:400px;"></div>          
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel"><b>录入</b></h4>
+					</div>
+					<div class="modal-body">
+						<div>
+							<form class="form-inline">
+								<table class="table table-bordered table-condensed" style="height: 400PX;">
+									<tr>
+										<td>序号</td>
+										<td><input type="text" id="" placeholder="请输入" /style="width: 100%;height: 100%;border: none;"></td>
+									</tr>
+									<tr>
+										<td>配方名称</th>
+										<td><input type="text" id="" placeholder="请输入" /style="width: 100%;height: 100%;border: none;"></td>
+									</tr>
+									<tr>
+										<td>料1用量</th>
+										<td><input type="text" id="" placeholder="请输入" /style="width: 100%;height: 100%;border: none;"></td>
+									</tr>
+									<tr>
+										<td>料2用量</th>
+										<td><input type="text" id="" placeholder="请输入" /style="width: 100%;height: 100%;border: none;"></td>
+									</tr>
+									<tr>
+										<td>料3用量</th>
+										<td><input type="text" id="" placeholder="请输入" /style="width: 100%;height: 100%;border: none;"></td>
+									</tr>
+									<tr>
+										<td>料4用量</th>
+										<td><input type="text" id="" placeholder="请输入" /style="width: 100%;height: 100%;border: none;"></td>
+									</tr>
+									<tr>
+										<td>料5用量</th>
+										<td><input type="text" id="" placeholder="请输入" /style="width: 100%;height: 100%;border: none;"></td>
+									</tr>
+									<tr>
+										<td>料6用量</th>
+										<td><input type="text" id="" placeholder="请输入" /style="width: 100%;height: 100%;border: none;"></td>
+									</tr>
+									<tr>
+										<td>粉料用量</th>
+										<td><input type="text" id="" placeholder="请输入" /style="width: 100%;height: 100%;border: none;"></td>
+									</tr>
+									<tr>
+										<td>沥青用量</th>
+										<td><input type="text" id="" placeholder="请输入" /style="width: 100%;height: 100%;border: none;"></td>
+									</tr>
+									<tr>
+										<td>附属材料</th>
+										<td><select name="" style="width: 100%;height: 100%;border: none;">
+												<option value="">请选择</option>
+												<option value="">木质纤维</option>
+												<option value="">玄武岩纤维</option>
+												<option value="">抗车辙剂</option>
+												<option value="">聚酯纤维</option>
+												<option value="">高粘剂</option>
+												<option value="">相变材料</option>
+												<option value="">复合高模量剂</option>
+											</select></td>
+									</tr>
+
+									</tr>
+								</table>
+							</form>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button type="button" class="btn btn-success">保存</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal_SEC">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel"><b>录入</b></h4>
+					</div>
+					<div class="modal-body">
+						<div>
+							<form class="form-inline">
+								<table class="table table-bordered table-condensed" style="height: 400PX;">
+									<tr>
+										<td>序号</td>
+										<td><input type="text" id="" placeholder="请输入" /style="width: 100%;height: 100%;border: none;"></td>
+									</tr>
+									<tr>
+										<td>路段</th>
+										<td><input type="text" id="" placeholder="请输入" /style="width: 100%;height: 100%;border: none;"></td>
+									</tr>
+									<tr>
+										<td>成品差</th>
+										<td><input type="text" id="" placeholder="请输入" /style="width: 100%;height: 100%;border: none;"></td>
+									</tr>
+									<tr>
+										<td>料1用量</th>
+										<td><input type="text" id="" placeholder="请输入" /style="width: 100%;height: 100%;border: none;"></td>
+									</tr>
+									<tr>
+										<td>料2用量</th>
+										<td><input type="text" id="" placeholder="请输入" /style="width: 100%;height: 100%;border: none;"></td>
+									</tr>
+									<tr>
+										<td>料3用量</th>
+										<td><input type="text" id="" placeholder="请输入" /style="width: 100%;height: 100%;border: none;"></td>
+									</tr>
+									<tr>
+										<td>料4用量</th>
+										<td><input type="text" id="" placeholder="请输入" /style="width: 100%;height: 100%;border: none;"></td>
+									</tr>
+									<tr>
+										<td>料5用量</th>
+										<td><input type="text" id="" placeholder="请输入" /style="width: 100%;height: 100%;border: none;"></td>
+									</tr>
+									<tr>
+										<td>料6用量</th>
+										<td><input type="text" id="" placeholder="请输入" /style="width: 100%;height: 100%;border: none;"></td>
+									</tr>
+									<tr>
+										<td>粉料偏差量</th>
+										<td><input type="text" id="" placeholder="请输入" /style="width: 100%;height: 100%;border: none;"></td>
+									</tr>
+									<tr>
+										<td>沥青偏差量</th>
+										<td><input type="text" id="" placeholder="请输入" /style="width: 100%;height: 100%;border: none;"></td>
+									</tr>
+									<tr>
+										<td>干拌时间</th>
+										<td><input type="text" id="" placeholder="请输入" /style="width: 100%;height: 100%;border: none;"></td>
+									</tr>
+									<tr>
+										<td>油石比</th>
+										<td><input type="text" id="" placeholder="请输入" /style="width: 100%;height: 100%;border: none;"></td>
+									</tr>
+									<tr>
+										<td>湿拌时间</th>
+										<td><input type="text" id="" placeholder="请输入" /style="width: 100%;height: 100%;border: none;"></td>
+									</tr>
+									<tr>
+										<td>级配</th>
+										<td><input type="text" id="" placeholder="请输入" /style="width: 100%;height: 100%;border: none;"></td>
+									</tr>
+									</tr>
+								</table>
+							</form>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button type="button" class="btn btn-success">保存</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="/view/js/jquery.js"></script>
+	<script src="/view/easyUI/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/view/easyUI/jquery.easyui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/view/js/common-scripts.js"></script>
+	<script src="/view/js/jquery.dataTables.min.js"></script>
+	<script src="/view/js/main.js"></script>
+	<script src="/view/js/bootstrap.min.js"></script>
+	<script src="/view/js/layui.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/view/js/element.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/view/js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
+
+	<script>
+		 // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+ 
+        var option = {
+				    color: ['#3398DB'],
+				    tooltip : {
+				        trigger: 'axis',
+				        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+				            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+				        }
+				    },
+				    grid: {
+				        left: '3%',
+				        right: '4%',
+				        bottom: '3%',
+				        containLabel: true
+				    },
+				    xAxis : [
+				        {
+				            type : 'category',
+				            data : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+				            axisTick: {
+				                alignWithLabel: true
+				            }
+				        }
+				    ],
+				    yAxis : [
+				        {
+				            type : 'value'
+				        }
+				    ],
+				    series : [
+				        {
+				            name:'直接访问',
+				            type:'bar',
+				            barWidth: '60%',
+				            data:[10, 52, 200, 334, 390, 330, 220]
+				        }
+				    ]
+				};
+ 
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+
+		layui.use('element', function() {
+			var $ = layui.jquery,
+				element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+
+			//触发事件
+			var active = {
+				tabAdd: function() {
+					//新增一个Tab项
+					element.tabAdd('demo', {
+						title: '新选项' + (Math.random() * 1000 | 0) //用于演示
+							,
+						content: '内容' + (Math.random() * 1000 | 0),
+						id: new Date().getTime() //实际使用一般是规定好的id，这里以时间戳模拟下
+					})
+				},
+				tabDelete: function(othis) {
+					//删除指定Tab项
+					element.tabDelete('demo', '44'); //删除：“商品管理”
+
+
+					othis.addClass('layui-btn-disabled');
+				},
+				tabChange: function() {
+					//切换到指定Tab项
+					element.tabChange('demo', '22'); //切换到：用户管理
+				}
+			};
+
+			$('.site-demo-active').on('click', function() {
+				var othis = $(this),
+					type = othis.data('type');
+				active[type] ? active[type].call(this, othis) : '';
+			});
+
+			//Hash地址的定位
+			var layid = location.hash.replace(/^#test=/, '');
+			element.tabChange('test', layid);
+
+			element.on('tab(test)', function(elem) {
+				location.hash = 'test=' + $(this).attr('lay-id');
+			});
+
+		});
+	</script>
+
+</html>

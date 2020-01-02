@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>tbale</title>
+		<link href="/view/favicon.ico" rel="shortcut icon">
+		<link href="/view/style/bootstrap.min.css" rel="stylesheet">
+		<link href="/view/style/style.css" rel="stylesheet">
+		<link href="/view/toastr/toastr.css" rel="stylesheet">
+		<link rel="stylesheet" href="/view/font2/iconfont.css">
+		<link rel="stylesheet" href="/view/style/jquery.dataTables.min.css">
+		<link rel="stylesheet" type="text/css" href="/view/easyUI/themes/default/easyui.css" />
+		<link rel="stylesheet" type="text/css" href="/view/easyUI/themes/icon.css" />
+		<link rel="stylesheet" type="text/css" href="/view/easyUI/demo/demo.css" />
+		<link rel="stylesheet" type="text/css" href="/view/css/layui.css"/>
+		<link rel="stylesheet" type="text/css" href="/view/css/layui.mobile.css"/>
+		<link rel="stylesheet" type="text/css" href="/view/css/laydate.css"/>
+
+	</head>
+
+	<body>
+		<!--<div class="UpperPartR">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"style="margin: 5PX;">新建</button>
+            </div>-->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+        <!--<div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel"><b>新建</b></h4>
+        </div>-->
+        <!--<div class="modal-body">
+                <div>     
+                    <form class="form-inline">
+                        <table class="table table-bordered table-condensed" style="height: 400PX;">
+                           <tr>
+							<td>序号</td>
+							<td>2</td>
+						</tr>
+						 <tr>
+							<td>时间</th>
+							<td><input type="date" name="" id="" value="请选择" / style="border: none;width: 100%; height: 100%;"></td>
+						</tr>
+						 <tr>
+							<td>重量</th>
+							<td><input type="text" id="" value="请输入" /style="width: 100%;height: 100%;border: none;"></td>
+						</tr>
+						 <tr>
+							<td>材料</th>
+							<td><select name="请选择" style="width: 100%;height: 100%;border: none;">
+								<option value="">请选择</option>
+								<option value="">某种粒度石料</option>
+								<option value="">添加剂</option>
+								<option value="">粉料</option>
+								<option value="">沥青</option>
+								<option value="">柴油</option>
+							</select></td>
+						</tr>
+						 <tr>
+							<td>含水量</th>
+							<td><select name="请选择" style="width: 100%;height: 100%;border: none;">
+								<option value="">请选择</option>
+								<option value="">某种粒度石料</option>
+							</select></td>
+						</tr>
+						 <tr>
+							<td>来货单位</th>
+							<td><input type="text" id="" value="请输入" /style="width: 100%;height: 100%;border: none;"></td>
+						</tr>
+						 <tr>
+							<td>单价</th>
+							<td><input type="text" id="" value="请输入" /style="width: 100%;height: 100%;border: none;"></td>
+						</tr>
+						 <tr>
+							<td>总价</th>
+							<td><input type="text" id="" value="请输入" /style="width: 100%;height: 100%;border: none;"></td>
+						</tr>
+						
+                            </tr>
+                        </table> 
+                    </form>  
+                </div>
+        </div>-->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-success">保存</button>
+        </div>
+        </div>
+    </div>
+</div>
+	<div class="bottom">
+		<table class="layui-table">
+			<colgroup>
+				<col width="150">
+				<col width="200">
+				<col>
+			</colgroup>
+			<thead>
+				<tr>
+					<th>序号</th>
+					<td>时间</td>
+					<td>批次</td>
+					<td>摊铺前温度</td>
+					<td>摊铺后温度</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		</div>
+	</body>
+	<script src="/view/js/jquery.js"></script>
+		<script src="/view/easyUI/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/view/easyUI/jquery.easyui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/view/js/common-scripts.js"></script>
+		<script src="/view/js/jquery.dataTables.min.js"></script>
+		<script src="/view/js/main.js"></script>
+		<script src="/view/js/bootstrap.min.js"></script>
+</html>

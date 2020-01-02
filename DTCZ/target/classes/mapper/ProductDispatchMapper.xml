@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldxx.dao.ProductDispatchDao" >
+
+    <select id="getAllProductDispatch" resultType="ProductDispatchVo">
+        select a.id,a.batch_id,a.plan_id,a.dispatch_time,a.edit_user_id,a.edit_datetime,a.delete_state,b.price,srm.road_name,srm.road_no,
+        bm.batch,sfm.fl_name,wwm.pitch_weight,usr.u_name
+        from product_dispatch a
+        LEFT JOIN plan_production_collection b ON a.plan_id=b.plan_id
+        LEFT JOIN sys_road_mgn srm on b.road_id = srm.road_id and srm.delete_state = 1
+        LEFT JOIN batch_mgt bm on a.batch_id=bm.id AND bm.delete_state=1
+        LEFT JOIN sys_formulation_management sfm on bm.pitch_type=sfm.fl_id AND sfm.delete_state = 1
+        LEFT JOIN wh_waste_mgn wwm on a.batch_id=wwm.batch_id  AND wwm.delete_state = 1
+        LEFT JOIN u_user usr ON a.edit_user_id = usr.user_id and usr.delete_state = 1
+        where a.delete_state=1
+    </select>
+
+    <update id="delProductDispatch">
+        update product_dispatch set delete_state=0 where id=#{id}
+    </update>
+
+    <insert id="insertProductDispatch" parameterType="ProductDispatch">
+        insert into product_dispatch(id,batch_id,plan_id,dispatch_time,edit_user_id,edit_datetime,delete_state)
+            values(#{id},#{batchId},#{planId},#{dispatchTime},#{editUserId},#{editDatetime},1)
+    </insert>
+</mapper>

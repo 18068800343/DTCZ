@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldxx.dao.ShengChanJiHuaDao" >
+	<insert id="addShengChanJiHua" parameterType="planProductionCollection">
+		insert into plan_production_collection 
+			(plan_id,road_id,plan_no,recipe_id,pd_need,dry_mixing_time,wet_mixing_time,radio,pd_temp,
+			arrive_temp,price,datetime,edit_user_id,edit_datetime,delete_state,finish_time)
+			values(#{planid},#{roadid},#{planno},
+			#{recipeid},#{pdneed},
+			#{drymixingtime},#{wetmixingtime},
+			#{radio},#{pdtemp},
+			#{arrivetemp},#{price},
+			#{datetime},#{edituserid},
+			#{editdatetime},#{deletestate},#{finishTime})
+	</insert>
+	
+	<insert id="addShiGongPianCha" parameterType="planConstructionDeviation">
+		insert into plan_construction_deviation 
+			(id,Material_deviation_1,Material_deviation_2,Material_deviation_3,
+			Material_deviation_4,Material_deviation_5,Material_deviation_6,
+			Bone_flour_deviation,pitch_deviation,
+			temp_max,temp_min,dry_mixing_time_deviation,wet_mixing_time_deviation,pass_475,pass_236,pass_0075,datetime,delete_state,piancha_name,piancha_no)
+			values(#{id},#{Materialdeviation1},#{Materialdeviation2},
+			#{Materialdeviation3},#{Materialdeviation4},
+			#{Materialdeviation5},#{Materialdeviation6},
+			#{Boneflourdeviation},#{pitchdeviation},
+			#{pdTempOffset},#{arriveTempOffset},#{drymixingtimedeviation},#{wetmixingtimedeviation},#{pass475},
+			#{pass236},#{pass0075},
+			#{datetime},#{deletestate},#{pianchaname},#{pianchano})
+	</insert>
+	
+	<update id="updateShiGongPianCha" parameterType="planConstructionDeviation">
+		update plan_construction_deviation 
+			set Material_deviation_1=#{Materialdeviation1},Material_deviation_2=#{Materialdeviation2},
+			Material_deviation_3=#{Materialdeviation3},Material_deviation_4=#{Materialdeviation4},
+			Material_deviation_5=#{Materialdeviation5},Material_deviation_6=#{Materialdeviation6},
+			Bone_flour_deviation=#{Boneflourdeviation},pitch_deviation=#{pitchdeviation},
+			temp_max=#{pdTempOffset},temp_min=#{arriveTempOffset},
+			dry_mixing_time_deviation=#{drymixingtimedeviation},wet_mixing_time_deviation=#{wetmixingtimedeviation},
+			pass_475=#{pass475},pass_236=#{pass236},pass_0075=#{pass0075},datetime=#{datetime},
+			delete_state=#{deletestate},piancha_name=#{pianchaname},piancha_no=#{pianchano}
+			where id=#{id}
+	</update>
+	
+	<update id="updateShengChanJiHua" parameterType="planProductionCollection">
+		update plan_production_collection 
+			set road_id=#{roadid},plan_no=#{planno},
+			recipe_id=#{recipeid},pd_need=#{pdneed},dry_mixing_time=#{drymixingtime},
+			wet_mixing_time=#{wetmixingtime},radio=#{radio},pd_temp=#{pdtemp},
+			arrive_temp=#{arrivetemp},price=#{price},datetime=#{datetime},
+			edit_user_id=#{edituserid},edit_datetime=#{editdatetime},
+			finish_time=#{finishTime},
+			delete_state=#{deletestate}
+			where plan_id=#{planid}
+	</update>
+
+	<update id="delShengChanJiHuaById" parameterType="String">
+		update plan_production_collection set delete_state=0 where plan_id=#{planid}
+	</update>
+	
+	<update id="linkShiGongPianCha" parameterType="String">
+		update plan_production_collection set piancha_id=#{pianchaid} where plan_id=#{planid}
+	</update>
+	
+	<update id="delShiGongPianChaById" parameterType="String">
+		update plan_construction_deviation set delete_state=0 where id=#{id}
+	</update>
+
+	<update id="updateUser" parameterType="user" >
+	  update u_user
+	  set 
+	    username=#{user.username,jdbcType=VARCHAR},
+	    password=#{user.password,jdbcType=VARCHAR},
+	    work_id = #{user.workId,jdbcType=VARCHAR},
+	    record_no = #{user.recordNo,jdbcType=VARCHAR},
+	    u_name = #{user.uName,jdbcType=VARCHAR},
+	    sex = #{user.sex,jdbcType=VARCHAR},
+	    birthday = #{user.birthday,jdbcType=VARCHAR},
+	    nation = #{user.nation,jdbcType=VARCHAR},
+	    marriage = #{user.marriage,jdbcType=VARCHAR},
+	    political_status = #{user.politicalStatus,jdbcType=VARCHAR},
+	    entry_time = #{user.entryTime,jdbcType=VARCHAR},
+	    address = #{user.address,jdbcType=VARCHAR},
+	    card_id = #{user.cardId,jdbcType=VARCHAR},
+	    postal_code = #{user.postalCode,jdbcType=VARCHAR},
+	    phone_no = #{user.phoneNo,jdbcType=VARCHAR},
+	    email = #{user.email,jdbcType=VARCHAR},
+	    diploma = #{user.diploma,jdbcType=VARCHAR},
+	    school = #{user.school,jdbcType=VARCHAR},
+	    specialty = #{user.specialty,jdbcType=VARCHAR},
+	    graduation_time = #{user.graduationTime,jdbcType=VARCHAR},
+	    om_id = #{user.omId,jdbcType=VARCHAR},
+	    duty_id = #{user.dutyId,jdbcType=VARCHAR},
+	    duty_name = #{user.dutyName,jdbcType=VARCHAR},
+	    certificate = #{user.certificate,jdbcType=VARCHAR},
+	    certificate_grade=#{user.certificateGrade,jdbcType=VARCHAR},
+	    position=#{user.position,jdbcType=VARCHAR}
+	  where user_id = #{user.userId,jdbcType=VARCHAR}
+	</update>
+	
+	
+	<select id="getShengChanJiHuaListByCondition" resultType="planProductionCollectionVo">
+		SELECT
+		 case  a.plan_state
+		 when 0 then '未完成'
+		 when 1 then '未完成'
+		 else '已完成'
+		 end as planstatecn,
+		 round(a.price*a.pd_need,2) as price,a.*,usr.u_name,sfm.fl_no,srm.road_name,srm.road_no,
+		 pcd.piancha_name,pcd.piancha_no,pniod.sumneed
+		FROM
+		 plan_production_collection AS a
+		LEFT JOIN u_user usr ON a.edit_user_id = usr.user_id and usr.delete_state = 1
+		LEFT JOIN sys_road_mgn srm on a.road_id = srm.road_id and srm.delete_state = 1
+		LEFT JOIN sys_formulation_management sfm on sfm.fl_id = a.recipe_id and sfm.delete_state = 1
+    	LEFT JOIN plan_construction_deviation pcd on a.piancha_id = pcd.id and pcd.delete_state = 1
+		LEFT JOIN (select a.plan_id,sum(a.pd_need_inc_or_dec) sumneed from plan_production_count a GROUP BY a.plan_id) pniod on pniod.plan_id = a.plan_id
+	    WHERE
+  		a.delete_state = 1 order by a.datetime desc
+	</select>
+	
+	<select id="getAllShiGongPianCha" resultType="planConstructionDeviationVo">
+		SELECT a.* from plan_construction_deviation a
+    WHERE  a.delete_state = 1 order by a.datetime desc
+	</select>
+	
+	<select id="selectUserById" parameterType="String" resultType="user">
+		select * from u_user where user_id=#{userId}
+	</select>
+	
+	<select id="getPianChaById" parameterType="String" resultType="planConstructionDeviationVo">
+		select * from plan_construction_deviation where id=#{id} and delete_state=1
+	</select>
+	<select id="getShengChanJiHuaById" parameterType="string" resultType="planProductionCollection">
+		select * from plan_production_collection where plan_id=#{id} and delete_state=1
+	</select>
+	
+	<insert id="addPlanProductionCount" parameterType="planProductionCount">
+		insert into plan_production_count(id,plan_id,batch_id,pd_need_inc_or_dec,pd_need_source)
+		values(#{id},#{planId},#{batchId},#{pdNeedIncOrDec},#{pdNeedSource})
+	</insert>
+
+	<select id="getPiancha" parameterType="siteFieldMaterialMgtVo" resultType="PianChaLiangVo">
+        SELECT top 1a.arrive_temp as arrivetemp,b.arrive_temp_offset as arriveTempOffset,(#{temp}-a.arrive_temp) as PianCha from plan_production_collection a
+        LEFT JOIN plan_construction_deviation b ON b.id=a.piancha_id
+        where a.road_id=(SELECT road_id from batch_mgt where id=#{batchid}) AND a.delete_state=1 ORDER BY a.datetime DESC
+	</select>
+</mapper>

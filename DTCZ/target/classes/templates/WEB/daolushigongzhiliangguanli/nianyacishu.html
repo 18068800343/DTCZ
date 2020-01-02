@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div class="layui-tab-item weadmin-body">        
+						<!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+						<div id="main" style="width: 1000px;height:400px;"></div>          
+		</div>
+	</body>
+		<script src="/view/js/jquery.js"></script>
+	<script src="/view/easyUI/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/view/easyUI/jquery.easyui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/view/js/common-scripts.js"></script>
+	<script src="/view/js/jquery.dataTables.min.js"></script>
+	<script src="/view/js/main.js"></script>
+	<script src="/view/js/bootstrap.min.js"></script>
+	<script src="/view/js/layui.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/view/js/element.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/view/js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
+
+	<script>
+		 // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+ 
+        var option = {
+				    color: ['#3398DB'],
+				    tooltip : {
+				        trigger: 'axis',
+				        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+				            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+				        }
+				    },
+				    grid: {
+				        left: '3%',
+				        right: '4%',
+				        bottom: '3%',
+				        containLabel: true
+				    },
+				    xAxis : [
+				        {
+				            type : 'category',
+				            data : ['2019-08-03', '2019-08-02', '2019-08-01'],
+				            axisTick: {
+				                alignWithLabel: true
+				            }
+				        }
+				    ],
+				    yAxis : [
+				        {
+				            type : 'value'
+				        }
+				    ],
+				    series : [
+				        {
+				            name:'直接访问',
+				            type:'bar',
+				            barWidth: '20%',
+				            data:[10, 52, 200]
+				        }
+				    ]
+				};
+ 
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+
+		layui.use('element', function() {
+			var $ = layui.jquery,
+				element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+
+			//触发事件
+			var active = {
+				tabAdd: function() {
+					//新增一个Tab项
+					element.tabAdd('demo', {
+						title: '新选项' + (Math.random() * 1000 | 0) //用于演示
+							,
+						content: '内容' + (Math.random() * 1000 | 0),
+						id: new Date().getTime() //实际使用一般是规定好的id，这里以时间戳模拟下
+					})
+				},
+				tabDelete: function(othis) {
+					//删除指定Tab项
+					element.tabDelete('demo', '44'); //删除：“商品管理”
+
+
+					othis.addClass('layui-btn-disabled');
+				},
+				tabChange: function() {
+					//切换到指定Tab项
+					element.tabChange('demo', '22'); //切换到：用户管理
+				}
+			};
+
+			$('.site-demo-active').on('click', function() {
+				var othis = $(this),
+					type = othis.data('type');
+				active[type] ? active[type].call(this, othis) : '';
+			});
+
+			//Hash地址的定位
+			var layid = location.hash.replace(/^#test=/, '');
+			element.tabChange('test', layid);
+
+			element.on('tab(test)', function(elem) {
+				location.hash = 'test=' + $(this).attr('lay-id');
+			});
+
+		});
+	</script>
+</html>

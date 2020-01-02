@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldxx.dao.JiHuaZengJianDao" >
+	<insert id="addJiHuaZengJian" parameterType="PlanProductionCount">
+		insert into plan_production_count
+			(id,plan_id,batch_id,pd_need_inc_or_dec,pd_need_source_state,datetime)
+			values(#{id},#{planid},#{batchid},#{pdneedincordec},#{pdneedsourcestate},#{datetime})
+	</insert>
+
+	<update id="updateJiHuaZengJian" parameterType="PlanProductionCount">
+		update plan_production_count
+			set site_id=#{siteid},batch_id=#{batchid},
+			road_roller_name=#{roadrollername},edit_user_id=#{edituserid},
+			edit_datetime=#{editdatetime},
+			compaction_num=#{compactionnum} where id=#{id}
+	</update>
+
+	<update id="delJiHuaZengJian" parameterType="string">
+		update plan_production_count set delete_state=0 where id=#{id}
+	</update>
+
+	<select id="getAllJiHuaZengJian" parameterType="string" resultType="PlanProductionCount">
+		SELECT
+			scn.*,sfm.fl_name,bm.batch,srm.road_name,srm.road_no,uu.u_name,sc.site_number,srm.road_id
+		FROM
+			plan_production_count scn
+		LEFT JOIN batch_mgt bm ON scn.batch_id = bm.id and bm.delete_state = 1
+		LEFT JOIN sys_road_mgn srm ON bm.road_id = srm.road_id and srm.delete_state = 1
+		LEFT JOIN sys_formulation_management sfm ON sfm.fl_id= bm.pitch_type and sfm.delete_state = 1
+		LEFT JOIN u_user uu ON uu.user_id= scn.edit_user_id and uu.delete_state = 1
+    	LEFT JOIN site_construction sc on sc.id = scn.site_id and sc.delete_state = 1
+		where scn.delete_state=1 ORDER BY scn.datetime desc
+	</select>
+
+</mapper>

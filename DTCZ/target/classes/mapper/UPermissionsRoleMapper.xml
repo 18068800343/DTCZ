@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldxx.dao.UPermissionsRoleDao" >
+
+    <select id="getAllUPermissionsRole" resultType="UPermissionsRole">
+        select id,name,coding from u_permissions_role where delete_state=1 order by LEN(coding)
+    </select>
+
+</mapper>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldxx.dao.LaiLiaoWenDuYuJingDao" >
+
+	<sql id="luduanquanxian_sql">
+		<if test="luduanquanxian != null and luduanquanxian != ''">
+			<if test="luduanquanxian.indexOf(',') != -1 ">
+				bm1.road_id in
+				<foreach collection="luduanquanxian.split(',')" item="item" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+			<if test="luduanquanxian.indexOf(',') == -1">
+				bm1.road_id=#{luduanquanxian}
+			</if>
+			and
+		</if>
+	</sql>
+
+	<insert id="addLaiLiaoWenDu" parameterType="SiteIncomingMaterialTempWarningVo">
+		insert into site_incoming_material_temp_warning
+			(id,fie_id,datetime,warning_type,warning_content,warning_state,edit_user_id,edit_datetime,delete_state)
+			values(#{id},#{fieid},#{datetime},#{warningtype},#{warningcontent},#{warningstate},#{edituserid},#{editdatetime},
+			#{deletestate})
+	</insert>
+
+	<update id="updateLaiLiaoWenDu" parameterType="SiteIncomingMaterialTempWarningVo">
+		update site_incoming_material_temp_warning
+			set warning_type=#{warningtype},warning_content=#{warningcontent},
+			edit_user_id=#{edituserid},edit_datetime=#{editdatetime} where id=#{id}
+	</update>
+
+	<update id="delLaiLiaoWenDu" parameterType="string">
+		update site_incoming_material_temp_warning set delete_state=0 where id=#{id}
+	</update>
+
+	<select id="getAllLaiLiaoWenDu" parameterType="string" resultType="SiteIncomingMaterialTempWarningVo">
+		/*SELECT
+			simtw.*,sfm.fl_name,bm.batch,srm.road_name,srm.road_no,uu.u_name
+		FROM
+			site_incoming_material_temp_warning simtw
+		LEFT JOIN site_field_material_mgt sfmm ON simtw.fie_id = sfmm.id and sfmm.delete_state = 1
+		LEFT JOIN batch_mgt bm ON sfmm.batch_id = bm.id and bm.delete_state = 1
+		LEFT JOIN sys_road_mgn srm ON bm.road_id = srm.road_id and srm.delete_state = 1
+		LEFT JOIN sys_formulation_management sfm ON sfm.fl_id= bm.pitch_type and sfm.delete_state = 1
+		LEFT JOIN u_user uu ON uu.user_id= simtw.edit_user_id and uu.delete_state = 1
+		where simtw.delete_state=1 ORDER BY simtw.datetime desc*/
+		SELECT
+			simtw.*,sfm.fl_name,bm.batch,srm.road_name,srm.road_no,uu.u_name
+		FROM
+			site_incoming_material_temp_warning simtw
+		LEFT JOIN site_field_material_mgt sfmm ON simtw.fie_id = sfmm.id and sfmm.delete_state !=0
+		LEFT JOIN (SELECT * from batch_mgt bm1 where <include refid="luduanquanxian_sql"></include> bm1.delete_state!=0 ) bm ON sfmm.batch_id = bm.id and bm.delete_state !=0
+		LEFT JOIN sys_road_mgn srm ON bm.road_id = srm.road_id and srm.delete_state !=0
+		LEFT JOIN sys_formulation_management sfm ON sfm.fl_id= bm.pitch_type and sfm.delete_state !=0
+		LEFT JOIN u_user uu ON uu.user_id= simtw.edit_user_id and uu.delete_state = 1
+		where simtw.delete_state!=0 AND sfmm.batch_id = bm.id ORDER BY simtw.datetime desc
+	</select>
+
+    <update id="updWarningstate">
+        update site_incoming_material_temp_warning set warning_state=#{warningstate} where id=#{id}
+    </update>
+
+	<update id="updWarningstateBybatchId">
+		UPDATE site_incoming_material_temp_warning set warning_state=#{warningState} where fie_id=(SELECT id from site_field_material_mgt where batch_id=#{id}) and  delete_state=1
+	</update>
+
+
+	<select id="getshengchanjihua" resultType="PlanProductionCollection">
+        SELECT
+            TOP 1a.*
+        FROM
+            plan_production_collection a
+        LEFT JOIN plan_construction_deviation b ON b.id = a.piancha_id
+        WHERE
+            a.road_id = (
+                SELECT
+                    road_id
+                FROM
+                    batch_mgt
+        WHERE id =(SELECT batch_id from site_field_material_mgt WHERE id=(SELECT fie_id from site_incoming_material_temp_warning where id=#{id}) )
+            )
+        AND a.delete_state = 1
+        ORDER BY
+            a.datetime DESC
+    </select>
+	
+	<select id="getPiciId" resultType="SiteIncomingMaterialTempWarningVo">
+		SELECT batch_id as batchId from site_field_material_mgt WHERE id=(SELECT fie_id from site_incoming_material_temp_warning where id=#{id})
+	</select>
+
+	<select id="getWeightandType" resultType="WhWasteMgnVo">
+		select a.warning_content as reason,b.weight as pitch_weight,c.pitch_type,c.loading_weight,d.fl_name
+		from site_incoming_material_temp_warning  as a
+		LEFT JOIN site_field_material_mgt as b on a.fie_id=b.id AND b.delete_state=1
+		LEFT JOIN batch_mgt c on c.id=b.batch_id AND c.delete_state=1
+		LEFT JOIN sys_formulation_management d ON d.fl_id= c.pitch_type and d.delete_state = 1
+		WHERE a.id=#{id}
+	</select>
+	
+	<select id="getLaiLiaoWenDuByBatch" parameterType="string" resultType="SiteIncomingMaterialTempWarningVo">
+		SELECT top 1
+			simtw.*,sfm.fl_name,bm.batch,srm.road_name,srm.road_no,uu.u_name
+		FROM
+			site_incoming_material_temp_warning simtw
+		LEFT JOIN site_field_material_mgt sfmm ON simtw.fie_id = sfmm.id and sfmm.delete_state = 1
+		LEFT JOIN batch_mgt bm ON sfmm.batch_id = bm.id and bm.delete_state = 1
+		LEFT JOIN sys_road_mgn srm ON bm.road_id = srm.road_id and srm.delete_state = 1
+		LEFT JOIN sys_formulation_management sfm ON sfm.fl_id= bm.pitch_type and sfm.delete_state = 1
+		LEFT JOIN u_user uu ON uu.user_id= simtw.edit_user_id and uu.delete_state = 1
+		where simtw.delete_state=1 and bm.batch=#{batch} and simtw.warning_state=0 ORDER BY simtw.datetime desc
+	</select>
+
+	<select id="getByLuDuanId" resultType="SiteIncomingMaterialTempWarningVo">
+		SELECT
+					simtw.*,sfm.fl_name,bm.batch,srm.road_name,srm.road_no,uu.u_name
+				FROM
+					site_incoming_material_temp_warning simtw
+				LEFT JOIN site_field_material_mgt sfmm ON simtw.fie_id = sfmm.id and sfmm.delete_state != 0
+				LEFT JOIN batch_mgt bm ON sfmm.batch_id = bm.id and bm.delete_state != 0
+				LEFT JOIN sys_road_mgn srm ON bm.road_id = srm.road_id and srm.delete_state != 0
+				LEFT JOIN sys_formulation_management sfm ON sfm.fl_id= bm.pitch_type and sfm.delete_state != 0
+				LEFT JOIN u_user uu ON uu.user_id= simtw.edit_user_id and uu.delete_state = 1
+				where simtw.delete_state !=0 AND simtw.fie_id in(
+		SELECT id from site_field_material_mgt where delete_state!= 0 and batch_id IN(SELECT id from batch_mgt where road_id=#{roadId})
+		)
+	</select>
+	
+</mapper>

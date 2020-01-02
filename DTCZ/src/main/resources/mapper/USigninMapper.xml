@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldxx.dao.USigninDao" >
+	<select id="selectAllUSignin" resultType="USignin">
+		select 
+			id,user_id,work_no,name,date,time_in,time_out,remarks,delete_state
+		from u_signin
+		where delete_state=1
+	</select>
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldxx.dao.StateRoleLinkDao">
+
+    <select id="getStateRoleByUserId" parameterType="string" resultType="int">
+		SELECT DISTINCT state from (SELECT
+		a.[u_name],
+		b.[user_role]
+		FROM
+		(
+		SELECT
+		[u_name],[user_role]
+		= CAST (
+		'&lt;v&gt;' + REPLACE([user_role], '_', '&lt;/v&gt;&lt;v&gt;') + '&lt;/v&gt;' AS xml
+		)
+		FROM
+		u_user where user_id=#{userId}
+		) a OUTER APPLY (
+		SELECT
+		[user_role] =
+		T.C.value
+		('.', 'varchar(50)')
+		FROM
+		a.[user_role].nodes ('/v') AS T (C)
+		) b) al INNER JOIN state_role_link srl on al.user_role = srl.role_code
+	</select>
+
+</mapper>

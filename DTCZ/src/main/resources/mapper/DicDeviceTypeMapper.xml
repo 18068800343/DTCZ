@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldxx.dao.DicDeviceTypeDao" >
+
+<select id="selectAllDicDeviceType" resultType="DicDeviceType">
+	select 
+		id,type_name,delete_state 
+	from dic_device_type
+	where delete_state=1
+</select>
+
+<insert id="addDicDeviceType" parameterType="dicDeviceType">
+		insert into 
+		dic_device_type(id,type_name,delete_state )
+		values(#{dicDeviceType.id},
+			   #{dicDeviceType.typeName},
+			   1)
+</insert>
+
+<update id="updateDicDeviceType" parameterType="dicDeviceType">
+	update dic_device_type
+	set 
+	     type_name=#{dicDeviceType.typeName}
+    where id=#{dicDeviceType.id}
+</update>
+
+<update id="deleteDicDeviceType">
+	update dic_device_type 
+	set
+		delete_state=0
+	where id=#{id}
+</update>
+
+<select id="selectByTypeName" resultType="DicDeviceType">
+	select 
+		id,type_name,delete_state 
+	from dic_device_type
+	where delete_state=1 and type_name=#{typeName}
+</select>
+	
+<select id="selectByIdDicDeviceType" resultType="DicDeviceType">
+	select 
+		id,type_name,delete_state 
+	from dic_device_type
+	where delete_state=1 and id=#{id}
+</select>
+</mapper>

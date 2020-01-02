@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldxx.dao.NianYaSuDuDao" >
+
+	<sql id="luduanquanxian_sql">
+		<if test="luduanquanxian != null and luduanquanxian != ''">
+			<if test="luduanquanxian.indexOf(',') != -1 ">
+				sc.road_id in
+				<foreach collection="luduanquanxian.split(',')" item="item" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+			<if test="luduanquanxian.indexOf(',') == -1">
+				sc.road_id=#{luduanquanxian}
+			</if>
+			and
+		</if>
+	</sql>
+
+	<insert id="addNianYaSuDu" parameterType="SiteCompactionSpeedVo">
+		insert into site_compaction_speed
+			(id,site_id,batch_id,road_roller_name,compaction_speed,datetime,edit_user_id,edit_datetime,delete_state)
+			values(#{id},#{siteid},#{batchid},#{roadrollername},#{compactionspeed},#{datetime},#{edituserid},#{editdatetime},
+			#{deletestate})
+	</insert>
+
+	<update id="updateNianYaSuDu" parameterType="SiteCompactionSpeedVo">
+		update site_compaction_speed
+			set site_id=#{siteid},batch_id=#{batchid},
+			road_roller_name=#{roadrollername},edit_user_id=#{edituserid},
+			edit_datetime=#{editdatetime},
+			compaction_speed=#{compactionspeed} where id=#{id}
+	</update>
+
+	<update id="delNianYaSuDu" parameterType="string">
+		update site_compaction_speed set delete_state=0 where id=#{id}
+	</update>
+
+	<select id="getAllNianYaSuDu" parameterType="string" resultType="SiteCompactionSpeedVo">
+		/*SELECT
+			scn.*,sfm.fl_name,bm.batch,srm.road_name,srm.road_no,uu.u_name,sc.site_number,srm.road_id
+		FROM
+			site_compaction_speed scn
+		LEFT JOIN batch_mgt bm ON scn.batch_id = bm.id and bm.delete_state = 1
+		LEFT JOIN sys_road_mgn srm ON bm.road_id = srm.road_id and srm.delete_state = 1
+		LEFT JOIN sys_formulation_management sfm ON sfm.fl_id= bm.pitch_type and sfm.delete_state = 1
+		LEFT JOIN u_user uu ON uu.user_id= scn.edit_user_id and uu.delete_state = 1
+    	LEFT JOIN site_construction sc on sc.id = scn.site_id and sc.delete_state = 1
+		where scn.delete_state=1 ORDER BY scn.datetime desc*/
+		SELECT
+			scn.*,sfm.fl_name,bm.batch,srm.road_name,srm.road_no,uu.u_name,sc.site_number,srm.road_id
+		FROM
+			site_compaction_speed scn
+		LEFT JOIN batch_mgt bm ON scn.batch_id = bm.id and bm.delete_state != 0
+		LEFT JOIN sys_formulation_management sfm ON sfm.fl_id= bm.pitch_type and sfm.delete_state != 0
+		LEFT JOIN u_user uu ON uu.user_id= scn.edit_user_id and uu.delete_state != 0
+    	LEFT JOIN (SELECT *  from site_construction sc  WHERE <include refid="luduanquanxian_sql"></include>  sc.delete_state!=0) sc on sc.id = scn.site_id and sc.delete_state != 0
+		LEFT JOIN sys_road_mgn srm ON srm.road_id=sc.road_id AND srm.delete_state!= 0
+		where scn.delete_state!= 0 and sc.id = scn.site_id ORDER BY scn.datetime desc
+	</select>
+
+	<select id="getByLuDuanId" resultType="SiteCompactionSpeedVo">
+		SELECT
+			scn.*,sfm.fl_name,bm.batch,srm.road_name,srm.road_no,uu.u_name,sc.site_number,srm.road_id
+		FROM
+			site_compaction_speed scn
+		LEFT JOIN batch_mgt bm ON scn.batch_id = bm.id and bm.delete_state != 0
+		LEFT JOIN sys_formulation_management sfm ON sfm.fl_id= bm.pitch_type and sfm.delete_state != 0
+		LEFT JOIN u_user uu ON uu.user_id= scn.edit_user_id and uu.delete_state != 0
+    	LEFT JOIN site_construction sc on sc.id = scn.site_id and sc.delete_state != 0
+		LEFT JOIN sys_road_mgn srm ON srm.road_id=sc.road_id AND srm.delete_state!= 0
+		where scn.delete_state!= 0 and scn.site_id IN (SELECT id from site_construction sc2 where sc2.road_id=#{roadId} AND sc2.delete_state!=0)
+	</select>
+
+</mapper>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldxx.dao.WhIncomingMaterialDao" >
+
+	<select id="getAllWhIncomingMaterial" resultType="WhIncomingMaterial">
+		select a.id,a.no,a.datetime,a.weight,a.materials,a.water_content,a.company_id,a.price,a.stor_no,a.meminfo,a.edit_user_id,a.delete_state,b.material_name as materialsName,usr.u_name
+		from wh_incoming_material as a
+		left join dic_materials b on a.materials=b.id
+		LEFT JOIN u_user usr ON a.edit_user_id = usr.user_id and usr.delete_state = 1
+		 where a.delete_state=1
+	</select>
+	
+	<select id="getWhIncomingMaterialById" resultType="WhIncomingMaterial">
+		select a.id,a.no,a.datetime,a.weight,a.materials,a.water_content,a.company_id,a.price,a.stor_no,a.meminfo,a.edit_user_id,a.delete_state,b.material_name as materialsName
+		from wh_incoming_material as a
+		left join dic_materials b on a.materials=b.id
+		 where id=#{id} and a.delete_state=1
+	</select>
+	
+	<update id="updWhIncomingMaterialById" parameterType="WhIncomingMaterial">
+		update wh_incoming_material set 
+		no=#{wm.no},
+		datetime=#{wm.datetime},
+		weight=#{wm.weight},
+		materials=#{wm.materials},
+		water_content=#{wm.waterContent},
+		company_id=#{wm.companyId},
+		price=#{wm.price},
+		stor_no=#{wm.storNo},
+		meminfo=#{wm.meminfo},
+		edit_user_id=#{wm.editUserId}
+		where id=#{wm.id}
+	</update>
+	
+	<update id="delWhIncomingMaterialById">
+		update wh_incoming_material set delete_state=0 where id=#{id}
+	</update>
+	
+	<insert id="insertWhIncomingMaterial" parameterType="WhIncomingMaterial">
+		insert into wh_incoming_material(id,no,datetime,weight,materials,water_content,company_id,price,stor_no,meminfo,edit_user_id,delete_state)
+		values(#{wm.id},#{wm.no},#{wm.datetime},#{wm.weight},#{wm.materials},#{wm.waterContent},#{wm.companyId},#{wm.price},#{wm.storNo},#{wm.meminfo},#{wm.editUserId},1)
+	</insert>
+	
+</mapper>

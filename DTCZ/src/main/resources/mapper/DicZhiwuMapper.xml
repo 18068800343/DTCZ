@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldxx.dao.DicZhiwuDao" >
+
+	<select id="getAllDicZhiwu" resultType="DicZhiwu">
+		select id,zhiwu_name from dic_zhiwu where delete_state=1
+	</select>
+	
+	<update id="updDicZhiwu" parameterType="DicZhiwu">
+		update dic_zhiwu set zhiwu_name=#{zw.zhiwuName} where id=#{zw.id}
+	</update>
+	
+	<update id="delDicZhiwu">
+		update dic_zhiwu set delete_state=0 where id=#{id}
+	</update>
+	
+	<insert id="insertDicZhiwu" parameterType="DicZhiwu">
+		insert into dic_zhiwu(id,zhiwu_name,delete_state) values(#{zw.id},#{zw.zhiwuName},1)
+	</insert>
+<select id="selectByName" resultType="DicZhiwu">
+		select id,zhiwu_name from dic_zhiwu where delete_state=1 and zhiwu_name=#{name}
+	</select>
+</mapper>

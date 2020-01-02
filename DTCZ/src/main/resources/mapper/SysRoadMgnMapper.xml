@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldxx.dao.SysRoadMgnDao" >
+	
+	<insert id="addSysRoadMgn" parameterType="sysRoadMgn">
+		insert into 
+			sys_road_mgn(road_id,road_no,road_name,expressway_name,start_lng,start_lat,end_lng,end_lat,remarks,delete_state,direction,start_mark,end_mark,storey,road_long,road_weight,road_deep)
+		values(#{sysRoadMgn.roadId},
+			   #{sysRoadMgn.roadNo},
+			   #{sysRoadMgn.roadName},
+			   #{sysRoadMgn.expresswayName},
+			   #{sysRoadMgn.startLng},
+			   #{sysRoadMgn.startLat},
+			   #{sysRoadMgn.endLng},
+			   #{sysRoadMgn.endLat},
+			   #{sysRoadMgn.remarks},
+			   1,
+			   #{sysRoadMgn.direction},
+			   #{sysRoadMgn.startMark},
+			   #{sysRoadMgn.endMark},
+			   #{sysRoadMgn.storey},
+			   #{sysRoadMgn.roadLong},
+			   #{sysRoadMgn.roadWeight},
+			   #{sysRoadMgn.roadDeep}
+			   )
+	</insert>
+	
+	<update id="updateSysRoadMgnById">
+		update sys_road_mgn set 
+		road_no=#{sysRoadMgn.roadNo},
+		road_name=#{sysRoadMgn.roadName},
+		expressway_name=#{sysRoadMgn.expresswayName},
+		start_lng=#{sysRoadMgn.startLng},
+		start_lat=#{sysRoadMgn.startLat},
+		end_lng=#{sysRoadMgn.endLng},
+		end_lat=#{sysRoadMgn.endLat},
+		remarks=#{sysRoadMgn.remarks},
+		direction=#{sysRoadMgn.direction},
+		start_mark=#{sysRoadMgn.startMark},
+		end_mark=#{sysRoadMgn.endMark},
+		storey=#{sysRoadMgn.storey},
+		road_long=#{sysRoadMgn.roadLong},
+		road_weight=#{sysRoadMgn.roadWeight},
+		road_deep=#{sysRoadMgn.roadDeep}
+		where road_id=#{sysRoadMgn.roadId} and delete_state=1
+	</update>
+
+	<sql id="luduanquanxian">
+		<if test="luduanquanxian != null and luduanquanxian != ''">
+			<if test="luduanquanxian.indexOf(',') != -1 ">
+				srm.road_id in
+				<foreach collection="luduanquanxian.split(',')" item="item" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+			<if test="luduanquanxian.indexOf(',') == -1">
+				srm.road_id=#{luduanquanxian}
+			</if>
+			and
+		</if>
+
+	</sql>
+	
+	<select id="getAllSysRoadMgn" resultType="SysRoadMgn">
+		select road_id,road_no,road_name,start_lng,start_lat,end_lng,end_lat,remarks,delete_state,expressway_name,direction,start_mark,end_mark,storey,road_long,road_weight,road_deep
+	    from sys_road_mgn srm
+		<where>
+			<include refid="luduanquanxian"></include>
+			srm.delete_state != 0
+		</where>
+	</select>
+
+	<select id="getAllSysRoadMgnVoHomePage" resultType="SysRoadMgnVo">
+		SELECT
+		srm.road_id,
+		road_no,
+		road_name,
+		start_lng,
+		start_lat,
+		end_lng,
+		end_lat,
+		remarks,
+		delete_state,
+		expressway_name,direction,start_mark,end_mark,storey,road_long,road_weight,road_deep,
+		rn.allXuQiu,
+		gy.allGongYing
+		FROM
+		sys_road_mgn srm
+		LEFT JOIN (
+		SELECT
+		SUM (pd_need) allXuQiu,
+		road_id
+		FROM
+		plan_production_collection
+		WHERE
+		delete_state = 1
+		GROUP BY
+		road_id
+		) rn ON srm.road_id = rn.road_id
+		LEFT JOIN (
+		SELECT
+		SUM (sfmm.weight) allGongYing,
+		srm.road_id
+		FROM
+		site_field_material_mgt sfmm
+		LEFT JOIN (
+		SELECT
+		*
+		FROM
+		batch_mgt bm
+		WHERE
+		bm.delete_state != 0
+		) bm ON sfmm.batch_id = bm.id
+		LEFT JOIN sys_formulation_management sfm ON bm.pitch_type = sfm.fl_id
+		AND sfm.delete_state != 0
+		LEFT JOIN sys_road_mgn srm ON bm.road_id = srm.road_id
+		AND srm.delete_state != 0
+		WHERE
+		sfmm.delete_state != 0
+		AND sfmm.batch_id = bm.id
+		GROUP BY
+		srm.road_id
+		) gy ON gy.road_id = srm.road_id
+		<where>
+			<include refid="luduanquanxian"></include>
+			srm.delete_state != 0
+		</where>
+	</select>
+
+	<select id="getAllSysRoadMgn2" resultType="SysRoadMgnLowcase">
+		select road_id,road_no,road_name,start_lng,start_lat,end_lng,end_lat,remarks,delete_state,expressway_name,direction,start_mark,end_mark,storey,road_long,road_weight,road_deep
+		from sys_road_mgn srm
+		<where>
+			<include refid="luduanquanxian"></include>
+			srm.delete_state != 0
+		</where>
+	</select>
+
+	<select id="getAllSysRoadMgnLowcase" resultType="SysRoadMgnLowcase">
+		select road_id,road_no,road_name,start_lng,start_lat,end_lng,end_lat,remarks,delete_state,expressway_name,direction,start_mark,end_mark,storey,road_long,road_weight,road_deep
+	    from sys_road_mgn
+	    where delete_state=1
+	</select>
+	
+	<update id="delSysRoadMgn">
+		update sys_road_mgn set 
+		delete_state =0
+		where road_id=#{id} and delete_state=1
+	</update>
+	
+	<select id="getByIdSysRoadMgn" resultType="SysRoadMgn">
+		select road_id,road_no,road_name,start_lng,start_lat,end_lng,end_lat,remarks,delete_state,expressway_name,direction,start_mark,end_mark,storey,road_long,road_weight,road_deep
+	    from sys_road_mgn 
+	    where delete_state!=0 and road_id=#{id}
+	</select>
+
+	<select id="selectSysRoadMgnById" resultType="SysRoadMgn">
+		select * from sys_road_mgn where road_id=#{luduan}
+	</select>
+	<update id="finishRoad">
+		update sys_road_mgn set
+		delete_state =2
+		where road_id=#{id} and delete_state=1
+	</update>
+
+</mapper>

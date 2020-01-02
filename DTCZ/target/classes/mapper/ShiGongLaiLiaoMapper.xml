@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldxx.dao.ShiGongLaiLiaoDao" >
+
+	<sql id="luduanquanxian_sql">
+		<if test="luduanquanxian != null and luduanquanxian != ''">
+			<if test="luduanquanxian.indexOf(',') != -1 ">
+				bm.road_id in
+				<foreach collection="luduanquanxian.split(',')" item="item" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+			<if test="luduanquanxian.indexOf(',') == -1">
+				bm.road_id=#{luduanquanxian}
+			</if>
+			and
+		</if>
+	</sql>
+
+	<insert id="addShiGongLaiLiao" parameterType="siteFieldMaterialMgtVo">
+		insert into site_field_material_mgt 
+			(id,batch_id,temp,weight,datetime,edit_user_id,edit_datetime,delete_state)
+			values(#{id},#{batchid},#{temp},#{weight},#{datetime},#{edituserid},
+			#{editdatetime},#{deletestate})
+	</insert>
+	
+	<update id="updateShiGongLaiLiao" parameterType="siteFieldMaterialMgtVo">
+		update site_field_material_mgt 
+			set batch_id=#{batchid},
+			temp=#{temp},
+			weight=#{weight},datetime=#{datetime},
+			edit_user_id=#{edituserid},
+			edit_datetime=#{editdatetime} where id=#{id}
+	</update>
+	
+	<update id="delShiGongLaiLiao" parameterType="String">
+		update site_field_material_mgt set delete_state=0 where id=#{id}
+	</update>
+	
+	<select id="getAllShiGongLaiLiao" parameterType="String" resultType="siteFieldMaterialMgtVo">
+		SELECT
+		sfmm.*,bm.licence_plate,bm.batch,bm.unloaded_weight,sfm.fl_name,srm.road_no,srm.road_name,
+		uu.u_name,(bm.loading_weight-bm.unloaded_weight) as yuguweight
+		FROM
+		site_field_material_mgt sfmm
+		LEFT JOIN (SELECT *  from batch_mgt bm  WHERE <include refid="luduanquanxian_sql"></include>  bm.delete_state!=0) bm ON sfmm.batch_id = bm.id
+		LEFT JOIN sys_formulation_management sfm ON bm.pitch_type = sfm.fl_id
+		AND sfm.delete_state != 0
+		LEFT JOIN u_user uu ON sfmm.edit_user_id = uu.user_id
+		AND uu.delete_state = 1
+		LEFT JOIN sys_road_mgn srm on bm.road_id = srm.road_id and srm.delete_state = 1
+		where sfmm.delete_state != 0 AND sfmm.batch_id = bm.id ORDER BY sfmm.datetime desc
+	</select>
+
+	<select id="getByLuDuanId" resultType="siteFieldMaterialMgtVo">
+		select sfmm.*,bm.licence_plate,bm.batch,bm.unloaded_weight,sfm.fl_name,srm.road_no,srm.road_name,
+		uu.u_name,(bm.loading_weight-bm.unloaded_weight) as yuguweight
+		from site_field_material_mgt as sfmm
+		left join batch_mgt as bm on sfmm.batch_id=bm.id AND bm.delete_state!=0
+		LEFT JOIN sys_formulation_management sfm ON bm.pitch_type = sfm.fl_id AND sfm.delete_state = 1
+		LEFT JOIN u_user uu ON sfmm.edit_user_id = uu.user_id AND uu.delete_state = 1
+		LEFT JOIN sys_road_mgn srm on bm.road_id = srm.road_id and srm.delete_state != 0
+		where sfmm.delete_state!=0 AND sfmm.batch_id in (SELECT id  from batch_mgt  WHERE road_id=#{roadId} and delete_state!=0)
+	</select>
+	
+</mapper>

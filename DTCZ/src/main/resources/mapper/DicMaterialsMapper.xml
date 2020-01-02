@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldxx.dao.DicMaterialsDao" >
+
+<select id="selectAllDicMaterials" resultType="DicMaterials">
+	select 
+		id,material_name,delete_state 
+	from dic_materials
+	where delete_state=1
+</select>
+
+<insert id="addDicMaterials" parameterType="dicMaterials">
+		insert into 
+		dic_materials(id,material_name,delete_state)
+		values(#{dicMaterials.id},
+			   #{dicMaterials.materialName},
+			   1)
+</insert>
+
+<update id="updateDicMaterials" parameterType="dicMaterials">
+	update dic_materials
+	set 
+	     material_name=#{dicMaterials.materialName}
+    where id=#{dicMaterials.id}
+</update>
+
+<update id="deleteDicMaterials">
+	update dic_materials 
+	set
+		delete_state=0
+	where id=#{id}
+</update>
+
+<select id="selectByName" resultType="DicMaterials">
+	select 
+		id,material_name,delete_state 
+	from dic_materials
+	where delete_state=1 and material_name=#{name}
+</select>
+
+</mapper>

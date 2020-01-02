@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldxx.dao.ChenBenJinDuDao" >
+    
+    <select id="getDistinctDatetime" resultType="ChenBenJinDuVo">
+        SELECT DISTINCT LEFT(datetime,10) as datetime from plan_production_collection where delete_state!=0
+    </select>
+
+    <select id="getAllpdNeed"  resultType="ChenBenJinDuVo">
+        select sum(pd_need) as pdNeed FROM plan_production_collection
+        WHERE datetime LIKE concat(concat('%',#{datetime}),'%') and delete_state!=0
+         GROUP BY LEFT(datetime,10)
+    </select>
+
+    <select id="getAllchenneng"  resultType="ChenBenJinDuVo">
+        select sum(loading_weight-unloaded_weight) as chenneng FROM batch_mgt
+        WHERE Convert(varchar,datetime_in,120) LIKE concat(concat('%',#{datetime}),'%') and delete_state!=0 AND batch IS NOT NULL
+         GROUP BY LEFT(datetime_in,10)
+    </select>
+
+    <select id="getAllfeiliao"  resultType="ChenBenJinDuVo">
+       SELECT SUM(pitch_weight) as feiliao from wh_waste_mgn where Convert(varchar,deal_time,120) LIKE concat(concat('%',#{datetime}),'%') AND warning_state=1 AND delete_state!=0
+    </select>
+
+</mapper>

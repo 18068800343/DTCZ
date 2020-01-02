@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldxx.dao.BatchMgtDao" >
+
+	<select id="getAllBatchMgt" resultType="BatchMgtVo">
+		select a.id,a.road_id,a.batch,a.licence_plate,a.unloaded_weight,a.loading_weight,a.loading_temperature,a.pitch_type,a.datetime_in,
+		a.datetime_out,a.edit_user_id,a.edit_datetime,a.delete_state,b.fl_name as pitchTypeName,c.road_name,usr.u_name
+		from batch_mgt a
+		left join sys_formulation_management b on a.pitch_type=b.fl_id
+		left join sys_road_mgn c on a.road_id=c.road_id
+		LEFT JOIN u_user usr ON a.edit_user_id = usr.user_id and usr.delete_state = 1
+		 where a.delete_state=1
+	</select>
+	
+	<select id="getBatchMgtById" resultType="BatchMgt">
+		select id,road_id,batch,licence_plate,unloaded_weight,loading_weight,loading_temperature,pitch_type,datetime_in,datetime_out,edit_user_id,edit_datetime,delete_state
+		from batch_mgt where id=#{id}
+	</select>
+	
+	<select id="getBatchMgtVoById" resultType="batchMgtVo">
+		SELECT
+		bm.*,(bm.loading_weight-bm.unloaded_weight) yuguweight,srm.road_name,srm.road_no,sfm.fl_name
+		FROM
+			batch_mgt bm
+		LEFT JOIN sys_road_mgn srm ON bm.road_id = srm.road_id
+		AND srm.delete_state = 1
+		LEFT JOIN sys_formulation_management sfm on sfm.fl_id = bm.pitch_type and sfm.delete_state = 1
+		where bm.delete_state = 1 and id=#{id}
+	</select>
+	
+	<update id="updBatchMgt" parameterType="BatchMgt">
+		update batch_mgt set
+		road_id=#{bm.roadId},
+		batch=#{bm.batch},
+		licence_plate=#{bm.licencePlate},
+		unloaded_weight=#{bm.unloadedWeight},
+		loading_weight=#{bm.loadingWeight},
+		loading_temperature=#{bm.loadingTemperature},
+		pitch_type=#{bm.pitchType},
+		datetime_in=#{bm.datetimeIn},
+		datetime_out=#{bm.datetimeOut},
+		edit_user_id=#{bm.editUserId},
+		edit_datetime=#{bm.editDatetime}
+		where id=#{bm.id}
+	</update>
+	
+	<update id="delBatchMgt">
+		update batch_mgt set delete_state=0 where id=#{id}
+	</update>
+	
+	<insert id="insertBatchMgt" parameterType="BatchMgt">
+		insert into batch_mgt(id,road_id,batch,licence_plate,unloaded_weight,loading_weight,
+		loading_temperature,pitch_type,datetime_in,datetime_out,edit_user_id,edit_datetime,delete_state)
+		values(#{bm.id},#{bm.roadId},#{bm.batch},#{bm.licencePlate},#{bm.unloadedWeight},#{bm.loadingWeight},
+		#{bm.loadingTemperature},#{bm.pitchType},#{bm.datetimeIn},#{bm.datetimeOut},#{bm.editUserId},#{bm.editDatetime},1)
+	</insert>
+
+	<select id="getBatchMgtByPlate" resultType="BatchMgt">
+		select top 1 id,licence_plate,unloaded_weight,datetime_in
+		from batch_mgt where licence_plate=#{licencePlate} and loading_weight is null and delete_state=1 order by datetime_in desc
+	</select>
+
+</mapper>

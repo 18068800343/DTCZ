@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link href="../../favicon.ico" rel="shortcut icon">
+		<link href="../../style/bootstrap.min.css" rel="stylesheet">
+		<link href="../../style/style.css" rel="stylesheet">
+		<link href="../../toastr/toastr.css" rel="stylesheet">
+		<link rel="stylesheet" href="../../font2/iconfont.css">
+		<link rel="stylesheet" href="../../style/jquery.dataTables.min.css">
+		<link rel="stylesheet" type="text/css" href="../../easyUI/themes/default/easyui.css" />
+		<link rel="stylesheet" type="text/css" href="../../easyUI/themes/icon.css" />
+		<link rel="stylesheet" type="text/css" href="../../easyUI/demo/demo.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/layui.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/layui.mobile.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/code.css" />
+		<link rel="stylesheet" type="text/css" href="../../../js/skin/default/layer.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
+	</head>
+
+	<body>
+		<div class="layui-tab">
+			<ul class="layui-tab-title">
+				<li class="layui-this">摊铺速度里程列表</li>
+				<li>摊铺速度统计</li>
+				<li>逐标段摊铺速度统计</li>
+				<li>摊铺里程统计</li>
+				<li>逐标段摊铺里程统计</li>
+			</ul>
+			<div class="layui-tab-content">
+				<div class="layui-tab-item layui-show">
+					<div class="bottom">
+						<!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin: 5PX;float: left;">录入</button>-->
+						<table class="layui-table">
+							<colgroup>
+								<col width="150">
+								<col width="200">
+								<col>
+							</colgroup>
+							<thead>
+								<tr>
+									<th>序号</th>
+									<td>施工时间</td>
+									<td>里程</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>1</td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="layui-tab-item weadmin-body">        
+						<!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+						<div id="main" style="width: 1000px;height:400px;"></div>          
+					</div>
+				<div class="layui-tab-item">
+					<!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+						<div id="two" style="width: 1000px;height:400px;"></div>        
+				</div>
+				<div class="layui-tab-item">
+					<!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+						<div id="sec" style="width: 1000px;height:400px;"></div>        
+				</div>
+				<div class="layui-tab-item">
+					<div id="fou" style="width: 1000px;height:400px;"></div>        
+				</div>
+			</div>
+		</div>
+		</div>
+	</body>
+	<script src="../../js/jquery.js"></script>
+	<script src="../../easyUI/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../easyUI/jquery.easyui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/common-scripts.js"></script>
+	<script src="../../js/jquery.dataTables.min.js"></script>
+	<script src="../../js/main.js"></script>
+	<script src="../../js/bootstrap.min.js"></script>
+	<script src="../../js/layui.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/element.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		 // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+ 
+        var option = {
+				    color: ['#3398DB'],
+				    tooltip : {
+				        trigger: 'axis',
+				        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+				            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+				        }
+				    },
+				    grid: {
+				        left: '3%',
+				        right: '4%',
+				        bottom: '3%',
+				        containLabel: true
+				    },
+				    xAxis : [
+				        {
+				            type : 'category',
+				            data : ['2019-08-03', '2019-08-02', '2019-08-01'],
+				            axisTick: {
+				                alignWithLabel: true
+				            }
+				        }
+				    ],
+				    yAxis : [
+				        {
+				            type : 'value'
+				        }
+				    ],
+				    series : [
+				        {
+				            name:'直接访问',
+				            type:'bar',
+				            barWidth: '20%',
+				            data:[10, 52, 200]
+				        }
+				    ]
+				};
+  	// 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+        
+        
+         var myChart = echarts.init(document.getElementById('two'));
+ 
+        var option = {
+				    color: ['#3398DB'],
+				    tooltip : {
+				        trigger: 'axis',
+				        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+				            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+				        }
+				    },
+				    grid: {
+				        left: '3%',
+				        right: '4%',
+				        bottom: '3%',
+				        containLabel: true
+				    },
+				    xAxis : [
+				        {
+				            type : 'category',
+				            data : ['汾灌告诉养护段', '沿海高速养护项目'],
+				            axisTick: {
+				                alignWithLabel: true
+				            }
+				        }
+				    ],
+				    yAxis : [
+				        {
+				            type : 'value'
+				        }
+				    ],
+				    series : [
+				        {
+				            name:'直接访问',
+				            type:'bar',
+				            barWidth: '10%',
+				            data:[100, 100]
+				        }
+				    ]
+				};
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+//      ==========================================================折线=======================================================================
+         var myChart = echarts.init(document.getElementById('sec'));
+ 
+        var option = {
+			    title: {
+			        text: '折线图堆叠'
+			    },
+			    tooltip: {
+			        trigger: 'axis'
+			    },
+			    legend: {
+			        data:['2019-08-03','2019-08-02','2019-08-01']
+			    },
+			    grid: {
+			        left: '3%',
+			        right: '4%',
+			        bottom: '3%',
+			        containLabel: true
+			    },
+			    toolbox: {
+			        feature: {
+			            saveAsImage: {}
+			        }
+			    },
+			    xAxis: {
+			        type: 'category',
+			        boundaryGap: false,
+			        data: ['2019-08-03','2019-08-02','2019-08-01']
+			    },
+			    yAxis: {
+			        type: 'value'
+			    },
+			    series: [
+			        {
+			            name:'邮件营销',
+			            type:'line',
+			            stack: '总量',
+			            data:[120, 132, 101, 134, 90, 230, 210]
+			        }
+			    ]
+			};
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+//===================================================================最后========================================================================
+ var myChart = echarts.init(document.getElementById('fou'));
+ 
+        var option = {
+				    color: ['#3398DB'],
+				    tooltip : {
+				        trigger: 'axis',
+				        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+				            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+				        }
+				    },
+				    grid: {
+				        left: '3%',
+				        right: '4%',
+				        bottom: '3%',
+				        containLabel: true
+				    },
+				    xAxis : [
+				        {
+				            type : 'category',
+				            data : ['连云港汉通路桥养护标段', '宁宿徐养护项目','汾灌高速养护段','沿海高速养护项目'],
+				            axisTick: {
+				                alignWithLabel: true
+				            }
+				        }
+				    ],
+				    yAxis : [
+				        {
+				            type : 'value'
+				        }
+				    ],
+				    series : [
+				        {
+				            name:'直接访问',
+				            type:'bar',
+				            barWidth: '30%',
+				            data:[0, 0,100,70]
+				        }
+				    ]
+				};
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+		layui.use('element', function() {
+			var $ = layui.jquery,
+				element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+
+			//触发事件
+			var active = {
+				tabAdd: function() {
+					//新增一个Tab项
+					element.tabAdd('demo', {
+						title: '新选项' + (Math.random() * 1000 | 0) //用于演示
+							,
+						content: '内容' + (Math.random() * 1000 | 0),
+						id: new Date().getTime() //实际使用一般是规定好的id，这里以时间戳模拟下
+					})
+				},
+				tabDelete: function(othis) {
+					//删除指定Tab项
+					element.tabDelete('demo', '44'); //删除：“商品管理”
+
+
+					othis.addClass('layui-btn-disabled');
+				},
+				tabChange: function() {
+					//切换到指定Tab项
+					element.tabChange('demo', '22'); //切换到：用户管理
+				}
+			};
+
+			$('.site-demo-active').on('click', function() {
+				var othis = $(this),
+					type = othis.data('type');
+				active[type] ? active[type].call(this, othis) : '';
+			});
+
+			//Hash地址的定位
+			var layid = location.hash.replace(/^#test=/, '');
+			element.tabChange('test', layid);
+
+			element.on('tab(test)', function(elem) {
+				location.hash = 'test=' + $(this).attr('lay-id');
+			});
+
+		});
+	</script>
+</html>
