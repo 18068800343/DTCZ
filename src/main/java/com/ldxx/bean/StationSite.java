@@ -4,72 +4,81 @@ package com.ldxx.bean;
  * 测点
  */
 public class StationSite {
-    private String StationId;
-    private String StationName;
+    private String sId;
+    //站点Id
+    private String stationId;
+    //站点名称
+    private String stationName;
     //ip地址
-    private String StationIp;
+    private String stationIp;
     //端口号
-    private String StationPort;
+    private String stationPort;
     //经度
-    private String StationLongitude;
+    private String stationLongitude;
     //纬度
-    private String StationLatitude;
+    private String stationLatitude;
+    //1:在编；0：已删
+    private Integer delState;
 
-    private String DelState;
-
-    public String getDelState() {
-        return DelState;
+    public String getsId() {
+        return sId;
     }
-
-    public void setDelState(String delState) {
-        DelState = delState;
+    public void setsId(String sId) {
+        this.sId = sId;
     }
-
     public String getStationId() {
-        return StationId;
+        return stationId;
     }
 
     public void setStationId(String stationId) {
-        StationId = stationId;
+        this.stationId = stationId;
     }
 
     public String getStationName() {
-        return StationName;
+        return stationName;
     }
 
     public void setStationName(String stationName) {
-        StationName = stationName;
+        this.stationName = stationName;
     }
 
     public String getStationIp() {
-        return StationIp;
+        return stationIp;
     }
 
     public void setStationIp(String stationIp) {
-        StationIp = stationIp;
+        this.stationIp = stationIp;
     }
 
     public String getStationPort() {
-        return StationPort;
+        return stationPort;
     }
 
     public void setStationPort(String stationPort) {
-        StationPort = stationPort;
+        this.stationPort = stationPort;
     }
 
     public String getStationLongitude() {
-        return StationLongitude;
+        return stationLongitude;
     }
 
     public void setStationLongitude(String stationLongitude) {
-        StationLongitude = stationLongitude;
+        this.stationLongitude = stationLongitude;
     }
 
     public String getStationLatitude() {
-        return StationLatitude;
+        return stationLatitude;
     }
 
     public void setStationLatitude(String stationLatitude) {
-        StationLatitude = stationLatitude;
+        this.stationLatitude = stationLatitude;
+    }
+
+    public Integer getDelState() {
+        return delState;
+    }
+
+    public void setDelState(Integer delState) {
+        this.delState = delState;
     }
 }

@@ -19,9 +19,9 @@
 		where Usr_Id=#{usrId}
 	</update>
 
-	<delete id="deltUserInfo">
+	<update id="deltUserInfo">
 		update t_user_info set Del_State=0 where Usr_Id=#{id}
-	</delete>
+	</update>
 
 	<select id="getAlltUserInfo" resultType="tUserInfoVo">
 		select  * from t_user_info where Del_State=1

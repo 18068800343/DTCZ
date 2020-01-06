@@ -30,7 +30,7 @@ public class tUserInfoController {
          if(iscountName>0){
              i=-1;
          }else{
-             String id=LDXXUtils.getUUID32();
+             String id=LDXXUtils.getUUID12();
              tUserInfo.setUsrId(id);
              tUserInfo.setDelState(1);
              i= service.addtUserInfo(tUserInfo);

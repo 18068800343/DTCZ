@@ -7,4 +7,28 @@ import java.util.List;
 public interface StationSiteService {
 
     List<StationSite> getAllStationSite();
+
+    StationSite getStationSiteById(String id);
+
+    int addStationSite(StationSite StationSite);
+
+    int updStationSite(StationSite StationSite);
+
+    int delStationSite(String id);
+
+    int iscountStationId(String stationId);
+
+    int iscountStationName(String stationName);
+
+    int iscountStationIp(String stationIp);
+
+    int iscountStationPort(String stationPort);
+
+    int xg_iscountStationId(String stationId,String id);
+
+    int xg_iscountStationName(String stationName,String id);
+
+    int xg_iscountStationIp(String stationIp,String id);
+
+    int xg_iscountStationPort(String stationPort,String id);
 }
