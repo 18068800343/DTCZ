@@ -16,17 +16,10 @@ public interface StationSiteDao {
 
     int delStationSite(String id);
 
-    int iscountStationId(String stationId);
-
-    int iscountStationName(String stationName);
-
     int iscountStationIp(String stationIp);
 
     int iscountStationPort(String stationPort);
 
-    int xg_iscountStationId(String stationId,String id);
-
-    int xg_iscountStationName(String stationName,String id);
 
     int xg_iscountStationIp(String stationIp,String id);
 

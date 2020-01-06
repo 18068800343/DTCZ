@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldxx.dao.VehicleTypeDao" >
+
+    <select id="getVehicleType" resultType="VehicleType">
+        select Vehicle_Type_Id,Vehicle_Type_Name,Vehicle_Type_Max_Weight,Del_State from Vehicle_Type where Del_State=1
+    </select>
+
+    <insert id="addVehicleType" parameterType="VehicleType">
+        insert into Vehicle_Type(Vehicle_Type_Id,Vehicle_Type_Name,Vehicle_Type_Max_Weight,Del_State)
+            values(#{vehicleTypeId},#{vehicleTypeName},#{vehicleTypeMaxWeight},#{delState})
+    </insert>
+
+    <update id="updVehicleType" parameterType="VehicleType">
+        update  Vehicle_Type set
+        Vehicle_Type_Name=#{vehicleTypeName},
+        Vehicle_Type_Max_Weight=#{vehicleTypeMaxWeight}
+        where Vehicle_Type_Id=#{vehicleTypeId} and Del_State=1
+    </update>
+
+    <update id="delLicensePlate">
+        update Vehicle_Type set Del_State=0 where Vehicle_Type_Id=#{id}
+    </update>
+
+    <select id="iscountvehicleTypeName" resultType="int">
+        select count(Vehicle_Type_Name) from Vehicle_Type where Vehicle_Type_Name=#{name} and Del_State=1
+    </select>
+
+    <select id="xgiscountvehicleTypeName" resultType="int">
+        select count(Vehicle_Type_Name) from Vehicle_Type where Vehicle_Type_Name=#{name} and Del_State=1 and Vehicle_Type_Id!=#{id}
+    </select>
+</mapper>

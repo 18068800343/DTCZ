@@ -9,6 +9,8 @@ public class StationSite {
     private String stationId;
     //站点名称
     private String stationName;
+    //路线名称
+    private String routeName;
     //ip地址
     private String stationIp;
     //端口号
@@ -19,6 +21,14 @@ public class StationSite {
     private String stationLatitude;
     //1:在编；0：已删
     private Integer delState;
+
+    public String getRouteName() {
+        return routeName;
+    }
+
+    public void setRouteName(String routeName) {
+        this.routeName = routeName;
+    }
 
     public String getsId() {
         return sId;

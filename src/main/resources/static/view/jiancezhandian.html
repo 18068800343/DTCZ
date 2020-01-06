@@ -52,6 +52,7 @@
                     <tr>
                         <th>站点ID</th>
                         <th>站点名称</th>
+                        <th>路线名称</th>
                         <th>IP地址</th>
                         <th>端口号</th>
                         <th>经度</th>
@@ -93,9 +94,15 @@
                             </tr>
                             <tr>
                                 <td>经度</td>
-                                <td><input type="text" @blur="reg(stationLongitude,'stationLongitude_zhengze','stationLongitude')" v-model="stationLongitude" @input="checknum('stationLongitude')"  class="form-control" placeholder="请输入" style="width:100%;"></td>
+                                <td><input type="text" @blur="reg(stationLongitude,'stationLongitude_zhengze','stationLongitude')" v-model="stationLongitude"   class="form-control" placeholder="请输入" style="width:100%;"></td>
                                 <td style="width: 20%;">纬度</td>
-                                <td><input type="text" @blur="reg(stationLatitude,'stationLatitude_zhengze','stationLatitude')" v-model="stationLatitude"  @input="checknum('stationLatitude')" class="form-control" placeholder="请输入" style="width:100%;"></td>
+                                <td><input type="text" @blur="reg(stationLatitude,'stationLatitude_zhengze','stationLatitude')" v-model="stationLatitude"   class="form-control" placeholder="请输入" style="width:100%;"></td>
+                            </tr>
+                            <tr>
+                                <td>路线名称</td>
+                                <td><input type="text" v-model="routeName"   class="form-control" placeholder="请输入" style="width:100%;"></td>
+                                <td style="width: 20%;"></td>
+                                <td></td>
                             </tr>
 
                         </table>
@@ -137,9 +144,15 @@
                             </tr>
                             <tr>
                                 <td>经度</td>
-                                <td><input type="text" @blur="reg(stationLongitude,'stationLongitude_zhengze','stationLongitude')" v-model="stationLongitude" @input="checknum('stationLongitude')"  class="form-control" placeholder="请输入" style="width:100%;"></td>
+                                <td><input type="text" @blur="reg(stationLongitude,'stationLongitude_zhengze','stationLongitude')" v-model="stationLongitude" class="form-control" placeholder="请输入" style="width:100%;"></td>
                                 <td style="width: 20%;">纬度</td>
-                                <td><input type="text" @blur="reg(stationLatitude,'stationLatitude_zhengze','stationLatitude')" v-model="stationLatitude"  @input="checknum('stationLatitude')" class="form-control" placeholder="请输入" style="width:100%;"></td>
+                                <td><input type="text" @blur="reg(stationLatitude,'stationLatitude_zhengze','stationLatitude')" v-model="stationLatitude"  class="form-control" placeholder="请输入" style="width:100%;"></td>
+                            </tr>
+                            <tr>
+                                <td>路线名称</td>
+                                <td><input type="text" v-model="routeName"   class="form-control" placeholder="请输入" style="width:100%;"></td>
+                                <td style="width: 20%;"></td>
+                                <td></td>
                             </tr>
                         </table>
                     </form>
@@ -212,6 +225,7 @@
         "columns": [
             { "data": "stationId"},
             { "data": "stationName"},
+            { "data": "routeName"},
             { "data": "stationIp"},
             { "data": "stationPort"},
             { "data": "stationLongitude"},
@@ -220,7 +234,7 @@
         ],
         "columnDefs": [{
             "class": "tcenter",
-            "targets": 6,
+            "targets": 7,
             "searchable": true,
             "render": function(data, type, full) {
                 var xiugai='<i class="iconfont icon-xiugai" style="font-size:20px;cursor:pointer;" id="upd" title="修改" data-toggle="modal" data-target="#change"></i>';
@@ -248,6 +262,7 @@
             }},
 
     });
+    $.fn.dataTable.ext.errMode = 'none';       //屏蔽掉报错弹窗
 
     function initTable(){
         $.ajax({
@@ -297,6 +312,7 @@
             stationPort:"",
             stationLongitude:"",
             stationLatitude:"",
+            routeName:"",
         },
         methods:{
             baocun:function(){
@@ -306,10 +322,6 @@
                         $('#mainContent').DataTable().row.add(resMsg.obj).draw();
                         $("#myModal").modal("hide");
                         toastr.success(resMsg.resultMsg);
-                    }else if(resMsg.daoMsg==-1){
-                        toastr.error("站点ID重复");
-                    }else if(resMsg.daoMsg==-2){
-                        toastr.error("站点名称重复");
                     }else if(resMsg.daoMsg==-3){
                         toastr.error("IP地址重复");
                     }else if(resMsg.daoMsg==-4){
@@ -378,6 +390,7 @@
         xgzhandian.stationPort=data.stationPort
         xgzhandian.stationLongitude=data.stationLongitude
         xgzhandian.stationLatitude=data.stationLatitude
+        xgzhandian.routeName=data.routeName
 
     })
     var xgzhandian = new Vue({
@@ -390,6 +403,7 @@
             stationPort:"",
             stationLongitude:"",
             stationLatitude:"",
+            routeName:"",
         },
         methods:{
             baocun:function(){
@@ -399,10 +413,6 @@
                         $('#mainContent').DataTable().row(trr).data(resMsg.obj);
                         $("#change").modal("hide");
                         toastr.success(resMsg.resultMsg);
-                    }else if(resMsg.daoMsg==-1){
-                        toastr.error("站点ID重复");
-                    }else if(resMsg.daoMsg==-2){
-                        toastr.error("站点名称重复");
                     }else if(resMsg.daoMsg==-3){
                         toastr.error("IP地址重复");
                     }else if(resMsg.daoMsg==-4){

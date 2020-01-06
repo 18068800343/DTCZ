@@ -3,16 +3,16 @@
 <mapper namespace="com.ldxx.dao.StationSiteDao" >
 
     <select id="getAllStationSite" resultType="StationSite">
-		select  * from Station_Site where Del_State=1
+		select  S_Id,Station_Id,Station_Name,Station_Ip,Station_Port,Station_Longitude,Station_Latitude,Del_State,Route_Name from Station_Site where Del_State=1
 	</select>
 
 	<select id="getStationSiteById" resultType="StationSite">
-		select  * from Station_Site where S_Id=#{id} and Del_State=1
+		select  S_Id,Station_Id,Station_Name,Station_Ip,Station_Port,Station_Longitude,Station_Latitude,Del_State,Route_Name from Station_Site where S_Id=#{id} and Del_State=1
 	</select>
 
 	<insert id="addStationSite" parameterType="StationSite">
-		insert into Station_Site (S_Id,Station_Id,Station_Name,Station_Ip,Station_Port,Station_Longitude,Station_Latitude,Del_State)
-			values(#{sId},#{stationId},#{stationName},#{stationIp},#{stationPort},#{stationLongitude},#{stationLatitude},#{delState})
+		insert into Station_Site (S_Id,Station_Id,Station_Name,Station_Ip,Station_Port,Station_Longitude,Station_Latitude,Del_State,Route_Name)
+			values(#{sId},#{stationId},#{stationName},#{stationIp},#{stationPort},#{stationLongitude},#{stationLatitude},#{delState},#{routeName})
 	</insert>
 
 	<update id="updStationSite" parameterType="StationSite">
@@ -22,7 +22,8 @@
 		Station_Ip=#{stationIp},
 		Station_Port=#{stationPort},
 		Station_Longitude=#{stationLongitude},
-		Station_Latitude=#{stationLatitude}
+		Station_Latitude=#{stationLatitude},
+		Route_Name=#{routeName}
 		where S_Id=#{sId}
 	</update>
 
@@ -30,12 +31,7 @@
 		update Station_Site set Del_State=0 where S_Id=#{id}
 	</update>
 
-	<select id="iscountStationId" resultType="int">
-		select count(Station_Id) from Station_Site where Station_Id=#{stationId} and Del_State=1
-	</select>
-	<select id="iscountStationName" resultType="int">
-		select count(Station_Name) from Station_Site where Station_Name=#{stationName} and Del_State=1
-	</select>
+
 	<select id="iscountStationIp" resultType="int">
 		select count(Station_Ip) from Station_Site where Station_Ip=#{stationIp} and Del_State=1
 	</select>
@@ -43,12 +39,6 @@
 		select count(Station_Port) from Station_Site where Station_Port=#{stationPort} and Del_State=1
 	</select>
 
-	<select id="xg_iscountStationId" resultType="int">
-		select count(Station_Id) from Station_Site where Station_Id=#{stationId} and Del_State=1 and S_Id!=#{id}
-	</select>
-	<select id="xg_iscountStationName" resultType="int">
-		select count(Station_Name) from Station_Site where Station_Name=#{stationName} and Del_State=1 and S_Id!=#{id}
-	</select>
 	<select id="xg_iscountStationIp" resultType="int">
 		select count(Station_Ip) from Station_Site where Station_Ip=#{stationIp} and Del_State=1 and S_Id!=#{id}
 	</select>

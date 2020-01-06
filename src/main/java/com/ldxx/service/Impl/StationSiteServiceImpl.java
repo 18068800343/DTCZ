@@ -41,16 +41,6 @@ public class StationSiteServiceImpl implements StationSiteService {
     }
 
     @Override
-    public int iscountStationId(String stationId) {
-        return dao.iscountStationId(stationId);
-    }
-
-    @Override
-    public int iscountStationName(String stationName) {
-        return dao.iscountStationName(stationName);
-    }
-
-    @Override
     public int iscountStationIp(String stationIp) {
         return dao.iscountStationIp(stationIp);
     }
@@ -58,16 +48,6 @@ public class StationSiteServiceImpl implements StationSiteService {
     @Override
     public int iscountStationPort(String stationPort) {
         return dao.iscountStationPort(stationPort);
-    }
-
-    @Override
-    public int xg_iscountStationId(String stationId, String id) {
-        return dao.xg_iscountStationId(stationId,id);
-    }
-
-    @Override
-    public int xg_iscountStationName(String stationName, String id) {
-        return dao.xg_iscountStationName(stationName,id);
     }
 
     @Override
