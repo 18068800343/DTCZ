@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldxx.dao.tUserInfoDao" >
+
+	<insert id="addtUserInfo" parameterType="tUserInfo">
+		insert into t_user_info (Usr_Id,Usr_Name,Usr_Pwd,Usr_Sex,Usr_Phone,Usr_Role,Station_Id,Station_Name,Del_State)
+			values(#{usrId},#{usrName},#{usrPwd},#{usrSex},#{usrPhone},#{usrRole},#{stationId},#{stationName},#{delState})
+	</insert>
+
+	<update id="updatetUserInfo" parameterType="tUserInfo">
+		update t_user_info set
+		Usr_Name=#{usrName},
+		Usr_Pwd=#{usrPwd},
+		Usr_Sex=#{usrSex},
+		Usr_Phone=#{usrPhone},
+		Usr_Role=#{usrRole},
+		Station_Id=#{stationId},
+		Station_Name=#{stationName}
+		where Usr_Id=#{usrId}
+	</update>
+
+	<delete id="deltUserInfo">
+		update t_user_info set Del_State=0 where Usr_Id=#{id}
+	</delete>
+
+	<select id="getAlltUserInfo" resultType="tUserInfoVo">
+		select  * from t_user_info where Del_State=1
+	</select>
+
+	<select id="iscountName" resultType="int">
+		select count(Usr_Name) from t_user_info where Usr_Name=#{name} and Del_State=1
+	</select>
+
+	<select id="iscountUNameEdit" parameterType="String" resultType="int">
+		select count(Usr_Name) from t_user_info where Usr_Name=#{name} and Usr_Id !=#{id} and Del_State=1
+	</select>
+</mapper>

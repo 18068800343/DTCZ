@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <link rel="stylesheet" href="../font2/iconfont.css">
+    <link href="../style/bootstrap.min.css" rel="stylesheet">
+    <link href="../style/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="../style/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="../style/jquery-editable-select.css">
+
+    <link href="../font3/bootstrap-select.css" rel="stylesheet">
+    <link rel="stylesheet"  href="css/layui.css" />
+    <link rel="stylesheet"  href="css/toastr.css"/>
+
+    <style lang="">
+        body{
+            background: #fff;
+        }
+        .UpperPart{
+            display: flex;
+            justify-content:space-between;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 12px;
+        }
+        .selected{
+            background: rgba(247, 161, 3,0.2);
+        }
+        #mainContent th{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body style="background-image: none;width: 90%;margin-left: 10%;">
+<!-- 面包屑 -->
+<!--<div class="mianbao">
+    <ul class="breadcrumb">
+        <li><i class="iconfont icon-knowledgebase"></i></li>
+        <li>系统管理</li>
+        <li class="active">人员管理</li>
+    </ul>
+</div>-->
+
+<div>
+    <!-- Tab panes -->
+    <div role="tabpanel" class="tab-pane active" id="home">
+        <div class="zhuti-content">
+            <div class="UpperPart">
+                <div class="UpperPartL">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin: 5PX;float: left;">录入人员账户</button>
+                </div>
+                <div class="UpperPartR">
+                </div>
+            </div>
+            <div class="LowerPart" style="margin-top:3px;">
+                <table class="table table-bordered table-condensed table-hover" id="mainContent">
+                    <thead>
+                    <tr>
+                        <th>姓名</th>
+                        <th>性别</th>
+                        <th>联系方式</th>
+                        <th>站点</th>
+                        <th style="width:75px;">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"><b>录入人员信息</b></h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <form class="form-inline">
+                        <table class="table table-bordered table-condensed">
+                            <tr>
+                                <td>姓名</td>
+                                <td><input type="text" id="UsrName"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+                                <td>密码</td>
+                                <td><input type="text" id="UsrPwd"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">性别</td>
+                                <td>
+                                    <select class="form-control" id="UsrSex"  style="width:100%;">
+                                        <option value="男">男</option>
+                                        <option value="女">女</option>
+                                    </select>
+                                </td>
+                                <td>联系方式</td>
+                                <td><input type="text" id="UsrPhone"  class="form-control" placeholder="请输入" style="width:100%;"></td>
+                            </tr>
+                            <tr>
+                                <!--<td>角色</td>
+                                <td>
+                                    <select class="form-control" id="zhiwu" style="width:80%;">
+                                        <option>管理员</option>
+                                        <option>普通员工</option>
+                                    </select>
+                                </td>-->
+                                <td style="width: 20%;">站点</td>
+                                <td>
+                                    <select class="form-control selectpicker" multiple data-max-options="2"  data-live-search="true"  id="StationName"  style="width:100%;">
+                                    </select>
+                                </td>
+                            </tr>
+
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-default" id="baocun">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- model结束 -->
+
+<!-- 修改Modal -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="change">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"><b>修改基本信息</b></h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <form class="form-inline">
+                        <table class="table table-bordered table-condensed" style="height: auto;">
+                            <tr>
+                                <td>姓名</td>
+                                <td><input type="text" id="xg_UsrName"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+                                <td>密码</td>
+                                <td><input type="text" id="xg_UsrPwd"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">性别</td>
+                                <td>
+                                    <select class="form-control" id="xg_UsrSex"  style="width:100%;">
+                                        <option value="男">男</option>
+                                        <option value="女">女</option>
+                                    </select>
+                                </td>
+                                <td>联系方式</td>
+                                <td><input type="text" id="xg_UsrPhone"  class="form-control" placeholder="请输入" style="width:100%;"></td>
+                            </tr>
+                            <tr>
+                                <!--<td>角色</td>
+                                <td>
+                                    <select class="form-control" id="zhiwu" style="width:80%;">
+                                        <option>管理员</option>
+                                        <option>普通员工</option>
+                                    </select>
+                                </td>-->
+                                <td style="width: 20%;">站点</td>
+                                <td>
+                                    <select class="form-control selectpicker" multiple data-max-options="2"  data-live-search="true"  id="xg_StationName"  style="width:100%;">
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-success" id="xg_baocun" >保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 修改model结束 -->
+
+<!-- 修改Modal -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="change2">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"><b>添加用户名及密码</b></h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <form class="form-inline">
+                        <table class="table table-bordered table-condensed" style="height: auto;">
+                            <tr>
+                                <td style="width: 20%;">用户名</td>
+                                <td><input type="text" id="username" class="form-control" placeholder="请输入" style="width: 80%;"></td>
+                                <td>密码</td>
+                                <td><input type="password" id="password" class="form-control" placeholder="请输入" style="width: 80%;"></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-success" id="tianjia">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 修改model结束 -->
+
+<!-- allMsg -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg1">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"><b>账户信息</b></h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <form class="form-inline">
+                        <table class="table table-bordered table-condensed" style="height: auto;">
+                            <tr>
+                                <td style="width: 20%;">用户名</td>
+                                <td><input type="text" id="xg_username" class="form-control" placeholder="请输入" style="width: 80%;"></td>
+                                <td>密码</td>
+                                <td><input type="password" id="xg_password" class="form-control" placeholder="请输入" style="width: 80%;"></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-success" id="xgup_baocun">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="../js/jquery.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="js/datatables/jquery.dataTables.min.js"></script>
+<script src="../js/bootstrap-select.js" ></script>
+<script src="../js/jquery-editable-select.js" ></script>
+<script src="js/toastr.js" ></script>
+
+<script>
+
+    $(document).ready( function () {
+
+        initTable()
+        initzhandian()
+    });
+    var table=$('#mainContent').dataTable({
+        "deferRender": true,
+        "processing": true,
+        "bDestroy": true,
+        "iDisplayLength": 10,
+        "searching": true,
+        "lengthChange": false,
+        "oLanguage": {
+            "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+        },
+        "columns": [
+            { "data": "usrName"},
+            { "data": "usrSex"},
+            { "data": "usrPhone"},
+            { "data": "stationName"},
+            { "data": null},
+        ],
+        "columnDefs": [{
+            "class": "tcenter",
+            "targets": 4,
+            "searchable": true,
+            "render": function(data, type, full) {
+                var xiugai='<i class="iconfont icon-xiugai" style="font-size:20px;cursor:pointer;" id="upd" title="修改" data-toggle="modal" data-target="#change"></i>';
+                var shanchu='<i class="iconfont icon-shanchu" style="font-size:20px;cursor:pointer;" id="del"  title="删除"></i>';
+                //var look='<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" onclick="lookMs(this)" data-toggle="modal" data-target="#allMsg1" id="lookDetall"></i>'
+                return xiugai+shanchu;
+            }
+        }],
+        "order": [[0, 'asc']],
+        "oLanguage": { //国际化配置
+            "sProcessing": "正在获取数据，请稍后...",
+            "sLengthMenu": "显示 _MENU_ 条",
+            "sZeroRecords": "查询不到相关数据",
+            "sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
+            "sInfoEmpty": "记录数为0",
+            "sInfoFiltered": "(全部记录数 _MAX_ 条)",
+            "sInfoPostFix": "",
+            "sSearch": "搜索",
+            "sUrl": "",
+            "oPaginate": {
+                "sFirst": "第一页",
+                "sPrevious": "上一页",
+                "sNext": "下一页",
+                "sLast": "最后一页"
+            }},
+
+    });
+
+    function initTable(){
+        $.ajax({
+            type: 'POST',
+            url: '/tUserInfo/getAlltUserInfo',
+            dataType: 'json',
+            data: {
+            },
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                $('#mainContent').dataTable().fnClearTable();
+                $('#mainContent').DataTable().rows.add(json).draw(false);
+            }
+        });
+    }
+    function initzhandian(){
+        $.ajax({
+            type: 'POST',
+            url: '/StationSite/getAllStationSite',
+            dataType: 'json',
+            data: {
+            },
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                if(json!=null){
+                    $("#StationName").html('');
+                    $("#xg_StationName").html('');
+                    for(var i=0;i<json.length;i++){
+                        $("#StationName").append("<option  value='"+json[i].stationId+"'>"+json[i].stationName+"</option>");
+                        $("#xg_StationName").append("<option  value='"+json[i].stationId+"'>"+json[i].stationName+"</option>");
+                    }
+                    $(".selectpicker").selectpicker({
+                        noneSelectedText: '请选择',
+                    });
+                }
+            }
+        });
+    }
+
+
+    $("#baocun").click(function(){
+        var UsrName=$("#UsrName").val();
+        var UsrPwd=$("#UsrPwd").val();
+        var UsrSex=$("#UsrSex").val();
+        var UsrPhone=$("#UsrPhone").val();
+        var checkParam = $('#StationName').find('option:selected');
+        var checkText=[];
+        for (var i=0;i<checkParam.length;i++) {
+            checkText.push(checkParam[i].textContent);
+        }
+        var StationName = checkText.join(',');
+        var StationId=$("#StationName").val().toString();
+        $.ajax({
+            type: 'POST',
+            url: '/tUserInfo/addtUserInfo',
+            dataType: 'json',
+            data: {
+                usrName:UsrName,
+                usrPwd:UsrPwd,
+                usrSex:UsrSex,
+                usrPhone:UsrPhone,
+                stationId:StationId,
+                stationName:StationName,
+
+            },
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                if(json.result>0){
+                    toastr.success("添加成功");
+                    $('#mainContent').DataTable().row.add(json.user).draw(false);     //新增行立即显示
+                    $("#myModal").modal('hide');
+                }else if(json.result==-1){
+                    toastr.error("姓名重复");
+                }else{
+                    toastr.error("添加失败");
+                }
+            }
+        });
+    })
+
+    var xgId;
+    var tr;
+    $("#mainContent").delegate("#upd","click",function(){
+        var dom = $(this).parents('tr');
+        tr = $(this).closest('tr');
+        var data=$('#mainContent').DataTable().row(dom).data();
+        xgId=data.usrId
+
+        $("#xg_UsrName").val(data.usrName);
+        $("#xg_UsrPwd").val(data.usrPwd);
+        $("#xg_UsrSex").val(data.usrSex);
+        $("#xg_UsrPhone").val(data.usrPhone);
+        xg_initzhandian(data.stationId.split(","))
+    })
+    function xg_initzhandian(obj){
+        $.ajax({
+            type: 'POST',
+            url: '/StationSite/getAllStationSite',
+            dataType: 'json',
+            data: {
+            },
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                if(json!=null){
+                    $("#xg_StationName").html('');
+                    for(var i=0;i<json.length;i++){
+                        $("#xg_StationName").append("<option  value='"+json[i].stationId+"'>"+json[i].stationName+"</option>");
+                    }
+                    $(".selectpicker").selectpicker({
+                        noneSelectedText: '请选择',
+                    });
+                    $("#xg_StationName").val(obj);
+                    $('#xg_StationName').selectpicker('val', obj);
+                    $("#xg_StationName").selectpicker("refresh");
+                    $('#xg_StationName').selectpicker('render');
+                }
+            }
+        });
+    }
+
+    $("#xg_baocun").click(function(){
+        var UsrName=$("#xg_UsrName").val();
+        var UsrPwd=$("#xg_UsrPwd").val();
+        var UsrSex=$("#xg_UsrSex").val();
+        var UsrPhone=$("#xg_UsrPhone").val();
+        var checkParam = $('#xg_StationName').find('option:selected');
+        var checkText=[];
+        for (var i=0;i<checkParam.length;i++) {
+            checkText.push(checkParam[i].textContent);
+        }
+        var StationName = checkText.join(',');
+        var StationId=$("#xg_StationName").val().toString();
+        $.ajax({
+            type: 'POST',
+            url: '/tUserInfo/updatetUserInfo',
+            dataType: 'json',
+            data: {
+                usrId:xgId,
+                usrName:UsrName,
+                usrPwd:UsrPwd,
+                usrSex:UsrSex,
+                usrPhone:UsrPhone,
+                stationId:StationId,
+                stationName:StationName,
+
+            },
+            error: function (msg) {
+                errMessage("请求失败");
+            },
+            success: function (json) {
+                if(json.result>0){
+                    toastr.success("修改成功");
+                    $('#mainContent').DataTable().row(tr).data(json.user);
+                    $("#change").modal('hide');
+                }else if(json.result==-1){
+                    toastr.error("姓名重复");
+                }else{
+                    toastr.error("修改失败");
+                }
+            }
+        });
+    })
+
+
+
+    //删除
+    $('#mainContent').delegate('#del','click', function () {
+        var dom = $(this).parents('tr');
+        var data=$('#mainContent').DataTable().row(dom).data();
+        var msg = "您真的确定要删除吗？\n\n请确认！";
+        if (confirm(msg)==true){
+            $.ajax({
+                type: 'POST',
+                url:'/tUserInfo/deltUserInfo',
+                dataType: 'json',
+                data: {
+                    id:data.usrId
+                },
+                success: function (json) {
+
+                    if(json!=0){
+                        $('#mainContent').DataTable().row(dom).remove().draw(false); //删除行立即显示
+                        toastr.success('删除成功');
+                    }else{
+                        toastr.error('删除失败');
+                    }
+                }
+            });
+        }else{
+            return false;
+        }
+
+
+    })
+
+</script>
+</html>
