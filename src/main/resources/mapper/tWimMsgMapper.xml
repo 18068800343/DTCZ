@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldxx.dao.CruxWeightDao" >
+
+    <select id="getCruxWeight" resultType="tWimMsg">
+        select Crux_Weight_Id,Crux_Weight,Del_State from crux_weight where Del_State=1
+    </select>
+
+    <insert id="addCruxWeight" parameterType="CruxWeight">
+        insert into crux_weight(Crux_Weight_Id,Crux_Weight,Del_State)
+            values(#{cruxWeightId},#{cruxWeight},#{delState})
+    </insert>
+
+    <update id="updCruxWeight" parameterType="CruxWeight">
+        update  crux_weight set
+        Crux_Weight=#{cruxWeight}
+        where Crux_Weight_Id=#{cruxWeightId} and Del_State=1
+    </update>
+
+    <update id="delCruxWeight">
+        update crux_weight set Del_State=0 where Crux_Weight_Id=#{id}
+    </update>
+
+</mapper>

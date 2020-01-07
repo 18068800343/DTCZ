@@ -12,7 +12,7 @@ public class tUserInfo {
     //用户角色
     private String usrRole;
     //站点名字
-    private String stationId;
+    private String stationPort;
     //站点名称
     private String stationName;
     //1:在编人员；0：已删人员
@@ -66,12 +66,12 @@ public class tUserInfo {
         this.usrRole = usrRole;
     }
 
-    public String getStationId() {
-        return stationId;
+    public String getStationPort() {
+        return stationPort;
     }
 
-    public void setStationId(String stationId) {
-        this.stationId = stationId;
+    public void setStationPort(String stationPort) {
+        this.stationPort = stationPort;
     }
 
     public String getStationName() {

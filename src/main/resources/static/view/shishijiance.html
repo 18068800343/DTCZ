@@ -2,23 +2,25 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title></title>
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Document</title>
+		<link href="../font2/iconfont.css" rel="stylesheet">
+		<link href="../style/bootstrap.min.css" rel="stylesheet" />
+		<link href="../font3/bootstrap-select.css" rel="stylesheet">
+		<link rel="stylesheet" href="../style/jquery.dataTables.min.css">
+		<link href="../style/style.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="css/home.css" />
 		<link rel="stylesheet" type="text/css" href="css/layui.css" />
+		<link rel="stylesheet"  href="css/toastr.css"/>
 	</head>
 	<body style="background-image: none;">
 		<div class="form-group" id="rightTab">
 			<div class="sele">
 				<label for="email" class="col-sm-2 control-label">监测站点</label>
-				<div class="col-sm-2">
+				<div class="col-sm-2" style="width: 20%">
 					<!-- 样式1 -->
-					<select class="form-control">
-						<option>请选择</option>
-						<option>2</option>
-						<option>3</option>
-						<option>4</option>
-						<option>5</option>
+					<select class="form-control selectpicker" multiple data-max-options="2"  data-live-search="true" id="zhandian" style="width:80%;">
 					</select>
 				</div>
 			</div>
@@ -152,9 +154,46 @@
            </div>
           </div>
 	</body>
-		<script src="//res.layui.com/layui/dist/layui.js" charset="utf-8"></script>
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="../js/jquery.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+	<script src="../js/bootstrap-select.js" ></script>
+	<script src="../js/common-scripts.js"></script>
+	<script src="js/layui.js" charset="utf-8"></script>
+	<!--<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>-->
 	<script src="js/echarts.min(1).js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/datatables/jquery.dataTables.min.js"></script>
+	<script src="js/toastr.js" ></script>
+	<script>
+
+		$(document).ready( function () {
+			initzhandian()
+		});
+
+		function initzhandian(){
+			$.ajax({
+				type: 'POST',
+				url: '/StationSite/getAllStationSite',
+				dataType: 'json',
+				data: {
+				},
+				error: function (msg) {
+					errMessage("请求UserController失败");
+				},
+				success: function (json) {
+					if(json!=null){
+						$("#zhandian").html('');
+						for(var i=0;i<json.length;i++){
+							$("#zhandian").append("<option  value='"+json[i].stationPort+"'>"+(json[i].stationName+"+"+json[i].routeName)+"</option>");
+
+						}
+						$(".selectpicker").selectpicker({
+							noneSelectedText: '请选择',
+						});
+					}
+				}
+			});
+		}
+	</script>
 	<!--======================================================================================左边柱状图===============================================================================-->
 	<script type="text/javascript">
 		// 基于准备好的dom，初始化echarts实例

@@ -340,8 +340,8 @@
                     $("#StationName").html('');
                     $("#xg_StationName").html('');
                     for(var i=0;i<json.length;i++){
-                        $("#StationName").append("<option  value='"+json[i].stationId+"'>"+json[i].stationName+"</option>");
-                        $("#xg_StationName").append("<option  value='"+json[i].stationId+"'>"+json[i].stationName+"</option>");
+                        $("#StationName").append("<option  value='"+json[i].stationPort+"'>"+(json[i].stationName+"+"+json[i].routeName)+"</option>");
+                        $("#xg_StationName").append("<option  value='"+json[i].stationPort+"'>"+(json[i].stationName+"+"+json[i].routeName)+"</option>");
                     }
                     $(".selectpicker").selectpicker({
                         noneSelectedText: '请选择',
@@ -363,7 +363,7 @@
             checkText.push(checkParam[i].textContent);
         }
         var StationName = checkText.join(',');
-        var StationId=$("#StationName").val().toString();
+        var stationPort=$("#StationName").val().toString();
         $.ajax({
             type: 'POST',
             url: '/tUserInfo/addtUserInfo',
@@ -373,7 +373,7 @@
                 usrPwd:UsrPwd,
                 usrSex:UsrSex,
                 usrPhone:UsrPhone,
-                stationId:StationId,
+                stationPort:stationPort,
                 stationName:StationName,
 
             },
@@ -406,7 +406,7 @@
         $("#xg_UsrPwd").val(data.usrPwd);
         $("#xg_UsrSex").val(data.usrSex);
         $("#xg_UsrPhone").val(data.usrPhone);
-        xg_initzhandian(data.stationId.split(","))
+        xg_initzhandian(data.stationPort.split(","))
     })
     function xg_initzhandian(obj){
         $.ajax({
@@ -422,7 +422,7 @@
                 if(json!=null){
                     $("#xg_StationName").html('');
                     for(var i=0;i<json.length;i++){
-                        $("#xg_StationName").append("<option  value='"+json[i].stationId+"'>"+json[i].stationName+"</option>");
+                        $("#xg_StationName").append("<option  value='"+json[i].stationPort+"'>"+(json[i].stationName+"+"+json[i].routeName)+"</option>");
                     }
                     $(".selectpicker").selectpicker({
                         noneSelectedText: '请选择',
@@ -447,7 +447,7 @@
             checkText.push(checkParam[i].textContent);
         }
         var StationName = checkText.join(',');
-        var StationId=$("#xg_StationName").val().toString();
+        var stationPort=$("#xg_StationName").val().toString();
         $.ajax({
             type: 'POST',
             url: '/tUserInfo/updatetUserInfo',
@@ -458,7 +458,7 @@
                 usrPwd:UsrPwd,
                 usrSex:UsrSex,
                 usrPhone:UsrPhone,
-                stationId:StationId,
+                stationPort:stationPort,
                 stationName:StationName,
 
             },
