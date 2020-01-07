@@ -48,4 +48,9 @@ public class tUserInfoServiceImpl implements tUserInfoService {
     public int iscountUNameEdit(String name, String id) {
         return dao.iscountUNameEdit(name,id);
     }
+
+    @Override
+    public tUserInfoVo selectUserByUsrName(String name) {
+        return dao.selectUserByUsrName(name);
+    }
 }

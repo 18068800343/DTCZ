@@ -18,4 +18,6 @@ public interface tUserInfoService {
     int deltUserInfo(String id);
 
     int iscountUNameEdit(String name, String id);
+
+    tUserInfoVo selectUserByUsrName(String name);
 }

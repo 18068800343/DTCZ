@@ -34,4 +34,8 @@
 	<select id="iscountUNameEdit" parameterType="String" resultType="int">
 		select count(Usr_Name) from t_user_info where Usr_Name=#{name} and Usr_Id !=#{id} and Del_State=1
 	</select>
+
+	<select id="selectUserByUsrName" resultType="tUserInfoVo">
+		select * from t_user_info where Usr_Name=#{name} and Del_State=1
+	</select>
 </mapper>
