@@ -21,4 +21,8 @@ public interface tUserInfoDao {
     int iscountUNameEdit(String name,String id);
 
     tUserInfoVo selectUserByUsrName(String name);
+
+    int updatepasswordById(String usrPwd,String usrId);
+
+    tUserInfoVo selectUserById(String usrId);
 }

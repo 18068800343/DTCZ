@@ -66,4 +66,21 @@ public class tUserInfoController {
     public List<tUserInfoVo> getAlltUserInfo() {
         return service.getAlltUserInfo();
     }
+
+    @RequestMapping("/updatepasswordById")
+    public int updatepasswordById(String usrPwd, String usrId) {
+        String old_password = usrPwd.split(",")[0];
+        String new_password = usrPwd.split(",")[1];
+        tUserInfoVo user = service.selectUserById(usrId);
+        int i=0;
+        if(!user.getUsrPwd().equals(old_password)){
+            i=-1;
+        }else if(user.getUsrPwd().equals(new_password)){
+            i=-2;
+        }else{
+            i=service.updatepasswordById(new_password,usrId);
+        }
+        return i;
+        //return service.updatepasswordById(usrPwd,usrId);
+    }
 }

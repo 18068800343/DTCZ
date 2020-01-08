@@ -53,4 +53,14 @@ public class tUserInfoServiceImpl implements tUserInfoService {
     public tUserInfoVo selectUserByUsrName(String name) {
         return dao.selectUserByUsrName(name);
     }
+
+    @Override
+    public int updatepasswordById(String usrPwd, String usrId) {
+        return dao.updatepasswordById(usrPwd,usrId);
+    }
+
+    @Override
+    public tUserInfoVo selectUserById(String usrId) {
+        return dao.selectUserById(usrId);
+    }
 }

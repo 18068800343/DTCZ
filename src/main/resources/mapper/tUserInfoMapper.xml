@@ -19,6 +19,12 @@
 		where Usr_Id=#{usrId}
 	</update>
 
+	<update id="updatepasswordById">
+		update t_user_info set
+		Usr_Pwd=#{usrPwd}
+		where Usr_Id=#{usrId}
+	</update>
+
 	<update id="deltUserInfo">
 		update t_user_info set Del_State=0 where Usr_Id=#{id}
 	</update>
@@ -37,5 +43,9 @@
 
 	<select id="selectUserByUsrName" resultType="tUserInfoVo">
 		select * from t_user_info where Usr_Name=#{name} and Del_State=1
+	</select>
+
+	<select id="selectUserById" resultType="tUserInfoVo">
+		select * from t_user_info where Usr_Id=#{usrId} and Del_State=1
 	</select>
 </mapper>

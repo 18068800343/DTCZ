@@ -18,7 +18,7 @@ public class LoginConfig extends WebMvcConfigurerAdapter{
 	public void addInterceptors(InterceptorRegistry registry) {
 		// TODO Auto-generated method stub
 		registry.addInterceptor(loginInterceptor())
-		.addPathPatterns("/**/view/WEB/**")
-		.excludePathPatterns("/**/view/WEB/login.html");
+		.addPathPatterns("/**/view/**")
+		.excludePathPatterns("/**/view/login.html");
 	}
 	}

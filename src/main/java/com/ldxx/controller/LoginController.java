@@ -9,13 +9,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
-@Controller
+@RestController
 @RequestMapping("login")
 public class LoginController {
 	
@@ -29,11 +30,10 @@ public class LoginController {
     
     @RequestMapping("/login")
     public String login(){ 
-        return "redirect:../view/WEB/login.html";
+        return "redirect:../view/login.html";
     }
     
     @RequestMapping(value="/userlogin",method= RequestMethod.POST)
-	@ResponseBody
 	public Map<String,Object> userlogin(tUserInfo user, HttpServletRequest request){
     	int state=0;
 		tUserInfoVo loginUser=null;
@@ -57,20 +57,17 @@ public class LoginController {
     }
     
     @RequestMapping("/getUser")
-    @ResponseBody
     public tUserInfoVo getUser(HttpServletRequest request){
 		tUserInfoVo user=(tUserInfoVo) request.getSession().getAttribute("user");
     	return user;
     }
     
     @RequestMapping("/exit")//退出
-	@ResponseBody
 	public void exit(HttpServletRequest request){
 		request.getSession().removeAttribute("user");
 	}
 
 	@RequestMapping("/keepSession")//退出
-	@ResponseBody
 	public int keepSession(){
 		return 1;
 	}
