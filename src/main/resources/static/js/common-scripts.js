@@ -54,5 +54,5 @@ var Script = function () {
     var oDate = document.getElementById('date');
     var nowTime = new Date();
     var str = nowTime.getFullYear()+'/'+toDou(nowTime.getMonth()+1)+'/'+nowTime.getDate()+'<br/>星期'+change(nowTime.getDay());
-    oDate.innerHTML = str;
+/*    oDate.innerHTML = str;*/
 }();

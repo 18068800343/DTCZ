@@ -1,380 +1,435 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-		<link rel="stylesheet" type="text/css" href="css/home.css" />
-		<link rel="stylesheet" type="text/css" href="css/layui.css" />
-	</head>
-	<body style="background-image: none;">
-		<div class="form-group" id="rightTab">
-			<div class="sele">
-				<label for="email" class="col-sm-2 control-label">统计分析</label>
-				<div class="col-sm-2">
-					<!-- 样式1 -->
-					<select class="form-control">
-						<option>请选择</option>
-						<option>2</option>
-						<option>3</option>
-						<option>4</option>
-						<option>5</option>
-					</select>
-				</div>
-					
-			</div>
-			<label  class="col-sm-1	 control-label" style="margin-left: 200px;width: 70px;line-height: 30px;">日期:</label>
-			<div class="col-sm-2" >
-					
-					<!-- 样式1 -->
-					<input type="date" name="" id="" value="请选择" / style="height: 34px;border-radius: 5px;box-shadow: none;width: 250%;">
-				</div>
-			
-				<div class="col-sm-2" style="margin-left: 6%;">
-					<div class="xian2" style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: 8%;margin-top: 15%;">
-				
-			</div>
-					<!-- 样式1 -->
-					<input type="date" name="" id="" value="请选择" / style="height: 34px;border-radius: 5px;box-shadow: none;width: 250%;margin-left: 30px;">
-				</div>
-				<button type="button" class="btn btn-primary" style="margin-left: 80px;width: 100px; background-image: linear-gradient(#1F62C8,#262E9F);margin-left: 20%;">确定</button>
-				<a href="javascript:;" style="float: right;color: #262E9F;text-decoration: underline;margin-right: 5%;line-height: 40px;"id="less">详细筛选</a>
-					<div id="Two" style="display: block;width: 100%;height: 30px;display: none;">
-					<label  class="col-sm-1	 control-label" style="margin-left: -45.8%;width: 100px;line-height: 30px;">统计内容:</label>
-					<input type="checkbox" name="" id="" value="" / style="margin-top: 10px;margin-left: -39%;">
-					<span>交通量统计</span>
-					<input type="checkbox" name="" id="" value="" / style="margin-top: 10px;margin-left: 2%;">
-					<span>超重统计</span>
-					<input type="text" name="" id="" value="超重阈值" style="width: 100px;color: #666666;"/>
-					<input type="checkbox" name="" id="" value="" / style="margin-top: 10px;margin-left: 2%;">
-					<span>超载统计</span>
-					<span style="margin-left: 3%;">统计方式:</span>
-					<input type="radio" name="" id="" value="" / style="margin-top: 12px;">
-					<span>逐日</span>
-					<input type="radio" name="" id="" value="" / style="margin-top: 12px;margin-left: 10px;">
-					<span>逐月</span>
-					<input type="checkbox" name="" id="" value="" / style="margin-top: 10px;margin-left: 11%;">
-					<span>区分车型</span>
-					<input type="checkbox" name="" id="" value="" / style="margin-top: 10px;margin-left: 11%;">
-					<span>区分方向</span>
-					</div>
-					
-			<div class="xian"></div>
-			
-	
-			<!--表格-->
-			<table class="table table-striped " style="width: 90%;margin: 0 auto; margin-top: 20px;">
-				<thead style="background-color: #DDE6F7;">
-					<tr>
-						<th>地点</th>
-						<th>方向</th>
-						<th>车道</th>
-						<th>车牌号</th>
-						<th>车型</th>
-						<th>方向</th>
-						<th>轴放</th>
-						<th>总重</th>
-						<th>长</th>
-						<th>宽</th>
-						<th>高</th>
-						<th>速度</th>
-						<th>超载</th>
-						<th>照片</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-					</tr>
-					<tr>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-					</tr>
-					<tr>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-					</tr>
-					<tr>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-					</tr>
-					<tr>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-					</tr>
-				</tbody>
-			</table>
-				<ul class="pagination" style="float: right;position: relative;right: 5%;">
-				<li><a href="">&laquo;</a></li>
-				<li><a href="">1</a></li>
-				<li><a href="">2</a></li>
-				<li><a href="">3</a></li>
-				<li><a href="">4</a></li>
-				<li><a href="">5</a></li>
-				<li><a href="">6</a></li>
-				<li><a href="">7</a></li>
-				<li><a href="">8</a></li>
-				<li><a href="">&raquo;</a></li>
-			</ul>
-			<p style="display: inline-block;float: left;margin-top: 1.5%;margin-left: 5%;">共<span style="color:#1F62C8 ;">1928</span>条数据,当前显示<span style="color: #1F62C8;">6</span>条</p>
-			<div class="tujitu" style="width: 100%;">
-			<div class="bright"style="margin-top: 70px;">
-				<div class="blue">
-					<p>当日超载车辆统计</p>
-					<div class="left col-xs-4 ">
-						<div id="_top" style="width:600px;height: 400px;margin-left: 50px;">
-						</div>
-						<!--左边-->
-					</div>
-				</div>
-			</div>
-			<div class="bleft" style="margin-top: 70px;margin-right: -14%;">
-				<div class="blue">
-					<p>当日超重车辆统计</p>
-					<div id="_right" style="width:60%;height: 400px;">
-					<!--右边-->
-				</div>
-				</div>
-			</div>
-			</div>
-			<!--左上半部分结束-->
-           <div class="bottom">
-           	<div id="bottom_" style="width:97%;margin-left: 15px;">
-			</div>
-           </div>
-          </div>
-	</body>
-		<script src="//res.layui.com/layui/dist/layui.js" charset="utf-8"></script>
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script src="js/echarts.min(1).js" type="text/javascript" charset="utf-8"></script>
-	<!--======================================================================================左边柱状图===============================================================================-->
-	<script type="text/javascript">
-		// 基于准备好的dom，初始化echarts实例
-		var myChart = echarts.init(document.getElementById('_top'));
-		//		app.title = '世界人口总量 - 条形图';
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="../font2/iconfont.css" rel="stylesheet">
+    <link href="../style/bootstrap.min.css" rel="stylesheet" />
+    <link href="../font3/bootstrap-select.css" rel="stylesheet">
+    <link rel="stylesheet" href="../style/jquery.dataTables.min.css">
+    <link href="../style/style.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/home.css" />
+    <link rel="stylesheet"  href="css/toastr.css"/>
+</head>
+<body style="background-image: none;">
+<div class="form-group" id="rightTab">
+    <div class="sele" >
+        <label for="email" class="col-sm-2 control-label">统计分析</label>
+        <div class="col-sm-3" id="roadVm">
+            <!-- 样式1 -->
+            <select class="form-control selectpicker" multiple data-max-options="2"  data-live-search="true" id="zhandian" style="width:80%;">
+            </select>
+        </div>
 
-		var option = {
+    </div>
+    <label class="col-sm-1	 control-label" style="margin-left: 200px;width: 70px;line-height: 30px;">日期:</label>
+    <div class="col-sm-2">
 
-			title: {
+        <!-- 样式1 -->
+        <input type="date" name="" id="" value="请选择"  style="height: 34px;border-radius: 5px;box-shadow: none;width:
+        250%;">
+    </div>
 
-			},
-			tooltip: {
-				trigger: 'axis',
-				axisPointer: {
-					type: 'shadow'
-				}
-			},
+    <div class="col-sm-2" style="margin-left: 6%;">
+        <div class="xian2"
+             style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: 8%;margin-top: 15%;">
 
-			grid: {
-				left: '3%',
-				right: '4%',
-				bottom: '3%',
-				containLabel: true
-			},
-			xAxis: {
-				type: 'value',
-				boundaryGap: [0, 0.01]
-			},	
-			yAxis: {
-				type: 'category',
-				data: ['S65苏皖省界', 'G30苏皖省界', 'S69济徐苏鲁省界', 'G3京福苏鲁省界', 'G25临连苏鲁省界', 'G15苏鲁省界']
-			},
+        </div>
+        <!-- 样式1 -->
+        <input type="date" name="" id="" value="请选择" style="height: 34px;border-radius: 5px;box-shadow: none;width:
+        250%;margin-left: 30px;">
+    </div>
+    <button type="button" class="btn btn-primary"
+            style="margin-left: 80px;width: 100px; background-image: linear-gradient(#1F62C8,#262E9F);margin-left: 20%;">
+        确定
+    </button>
+    <a href="javascript:;"
+       style="float: right;color: #262E9F;text-decoration: underline;margin-right: 5%;line-height: 40px;"
+       id="less">详细筛选</a>
+    <div id="Two" style="display: block;width: 100%;height: 30px;display: none;">
+        <label class="col-sm-1	 control-label"
+               style="margin-left: -45.8%;width: 100px;line-height: 30px;">统计内容:</label>
+        <input type="checkbox" name="" id="" value=""  style="margin-top: 10px;margin-left: -39%;">
+        <span>交通量统计</span>
+        <input type="checkbox" name="" id="" value=""  style="margin-top: 10px;margin-left: 2%;">
+        <span>超重统计</span>
+        <input type="text" name="" id="" value="超重阈值" style="width: 100px;color: #666666;"/>
+        <input type="checkbox" name="" id="" value=""  style="margin-top: 10px;margin-left: 2%;">
+        <span>超载统计</span>
+        <span style="margin-left: 3%;">统计方式:</span>
+        <input type="radio" name="" id="" value=""  style="margin-top: 12px;">
+        <span>逐日</span>
+        <input type="radio" name="" id="" value=""  style="margin-top: 12px;margin-left: 10px;">
+        <span>逐月</span>
+        <input type="checkbox" name="" id="" value=""  style="margin-top: 10px;margin-left: 11%;">
+        <span>区分车型</span>
+        <input type="checkbox" name="" id="" value=""  style="margin-top: 10px;margin-left: 11%;">
+        <span>区分方向</span>
+    </div>
 
-			series: [{
-				name: '2011年',
-				type: 'bar',
-				data: [367, 213, 253, 353, 448, 270],
-				barWidth: 20,
-				itemStyle: {
-					normal: {
-						color: '#91FD63'
-					}
-			                                                                       	},
+    <div class="xian"></div>
 
-			}, ]
-		};
 
-		// 使用刚指定的配置项和数据显示图表。
-		myChart.setOption(option);
-	</script>
-	<!--饼状图-->
-	<script type="text/javascript">
-		var myChart = echarts.init(document.getElementById('_right'));
+    <!--表格-->
+    <table class="table table-striped " style="width: 90%;margin: 0 auto; margin-top: 20px;">
+        <thead style="background-color: #DDE6F7;">
+        <tr>
+            <th>地点</th>
+            <th>方向</th>
+            <th>车道</th>
+            <th>车牌号</th>
+            <th>车型</th>
+            <th>方向</th>
+            <th>轴放</th>
+            <th>总重</th>
+            <th>长</th>
+            <th>宽</th>
+            <th>高</th>
+            <th>速度</th>
+            <th>超载</th>
+            <th>照片</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+        </tr>
+        <tr>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+        </tr>
+        <tr>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+        </tr>
+        <tr>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+        </tr>
+        <tr>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+            <td>　</td>
+        </tr>
+        </tbody>
+    </table>
+    <ul class="pagination" style="float: right;position: relative;right: 5%;">
+        <li><a href="">&laquo;</a></li>
+        <li><a href="">1</a></li>
+        <li><a href="">2</a></li>
+        <li><a href="">3</a></li>
+        <li><a href="">4</a></li>
+        <li><a href="">5</a></li>
+        <li><a href="">6</a></li>
+        <li><a href="">7</a></li>
+        <li><a href="">8</a></li>
+        <li><a href="">&raquo;</a></li>
+    </ul>
+    <p style="display: inline-block;float: left;margin-top: 1.5%;margin-left: 5%;">共<span
+            style="color:#1F62C8 ;">1928</span>条数据,当前显示<span style="color: #1F62C8;">6</span>条</p>
+    <div class="tujitu" style="width: 100%;">
+        <div class="bright" style="margin-top: 70px;">
+            <div class="blue">
+                <p>当日超载车辆统计</p>
+                <div class="left col-xs-4 ">
+                    <div id="_top" style="width:600px;height: 400px;margin-left: 50px;">
+                    </div>
+                    <!--左边-->
+                </div>
+            </div>
+        </div>
+        <div class="bleft" style="margin-top: 70px;margin-right: -14%;">
+            <div class="blue">
+                <p>当日超重车辆统计</p>
+                <div id="_right" style="width:60%;height: 400px;">
+                    <!--右边-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--左上半部分结束-->
+    <div class="bottom">
+        <div id="bottom_" style="width:97%;margin-left: 15px;">
+        </div>
+    </div>
+</div>
+</body>
 
-		var option = {
-			title: {
-				x: 'center'
-			},
-			tooltip: {
-				trigger: 'item',
-				formatter: "{a} <br/>{b} : {c} ({d}%)"
-			},
-			legend: {
-				orient: 'vertical',
-				right: 'right',
-				data: ['S65苏皖省界', 'G30苏皖省界', 'S69济徐苏鲁省界', 'G3京福苏鲁省界', 'G25临连苏鲁省界', 'G15苏鲁省界'],
-				color: '#FFFFFF',
-			},
-			series: [{
-				name: '访问来源',
-				type: 'pie',
-				radius: '55%',
-				center: ['50%', '60%'],
-				color: ['#06d3c4', '#ffbb32', '#2ccc44', "#0278fe", "#FF3976", "#6058E1", "#e569ff", "#00d6fb"],
-				data: [{
-						value: 335,
-						name: 'S65苏皖省界'
-					},
-					{
-						value: 310,
-						name: 'G30苏皖省界'
-					},
-					{
-						value: 234,
-						name: 'S69济徐苏鲁省界'
-					},
-					{
-						value: 135,
-						name: 'G3京福苏鲁省界'
-					},
-					{
-						value: 200,
-						name: 'G25临连苏鲁省界'
-					},
-					{
-						value: 120,
-						name: 'G15苏鲁省界'
-					}
-				
-				],
-				itemStyle: {
-					emphasis: {
-						shadowBlur: 10,
-						shadowOffsetX: 0,
-						shadowColor: 'rgba(0, 0, 0, 0.5)'
-					}
-				}
-			}]
-		};
+<script src="../js/jquery.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/bootstrap-select.js" ></script>
+<script src="js/echarts.min(1).js" type="text/javascript" charset="utf-8"></script>
+<script src="js/datatables/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+<script src="../js/common-scripts.js"></script>
+<script src="js/toastr.js" ></script>
 
-		// 使用刚指定的配置项和数据显示图表。
-		myChart.setOption(option);
-	</script>
-    <script type="text/javascript">
-    	var myChart = echarts.init(document.getElementById('bottom_'));
-    	var option = {
-    color: ['#29DC93'],
-    tooltip : {
-        trigger: 'axis',
-        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-        }
-    },
-    grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
-    },
-    xAxis : [
-        {
-            type : 'category',
-            data : ['G15', 'G25', 'G3', 'G69', 'G30', 'S65', 'G1516','G36','S38','S68',,'S50','G2','G40'],
-            axisTick: {
-                alignWithLabel: true
+<!--======================================================================================左边柱状图===============================================================================-->
+<script type="text/javascript">
+    $(document).ready( function () {
+        initzhandian();
+    });
+
+    function initzhandian(){
+        $.ajax({
+            type: 'POST',
+            url: '/StationSite/getAllStationSite',
+            dataType: 'json',
+            data: {
+            },
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                if(json!=null){
+                    $("#zhandian").html('');
+                    for(var i=0;i<json.length;i++){
+                        $("#zhandian").append("<option  value='"+json[i].stationPort+"'>"+(json[i].stationName+"+"+json[i].routeName)+"</option>");
+                    }
+                    $(".selectpicker").selectpicker({
+                        noneSelectedText: '请选择',
+                    });
+                }
             }
+        });
+    }
+	//新建生产计划
+    let roadVm = new Vue({
+		el: '#roadVm',
+		//表单数据
+		data: {
+            roadId:"",
+            roadList:""
+		},
+		methods: {
+			//新建生产计划保存按钮事件
+			initRoad: function () {
+				//发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
+				this.$http.post('/StationSite/getAllStationSite',{},{}).then((res)=>{
+				},(res)=>{
+
+				});
+			},
+		}
+	});
+
+    // 基于准备好的dom，初始化echarts实例
+    let myChart1 = echarts.init(document.getElementById('_top'));
+    //		app.title = '世界人口总量 - 条形图';
+
+    let option1 = {
+
+        title: {},
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow'
+            }
+        },
+
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: {
+            type: 'value',
+            boundaryGap: [0, 0.01]
+        },
+        yAxis: {
+            type: 'category',
+            data: ['S65苏皖省界', 'G30苏皖省界', 'S69济徐苏鲁省界', 'G3京福苏鲁省界', 'G25临连苏鲁省界', 'G15苏鲁省界']
+        },
+
+        series: [{
+            name: '2011年',
+            type: 'bar',
+            data: [367, 213, 253, 353, 448, 270],
+            barWidth: 20,
+            itemStyle: {
+                normal: {
+                    color: '#91FD63'
+                }
+            },
+
+        },]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart1.setOption(option1);
+
+	<!--饼状图-->
+    let myChart2 = echarts.init(document.getElementById('_right'));
+
+    let option2 = {
+        title: {
+            x: 'center'
+        },
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+            orient: 'vertical',
+            right: 'right',
+            data: ['S65苏皖省界', 'G30苏皖省界', 'S69济徐苏鲁省界', 'G3京福苏鲁省界', 'G25临连苏鲁省界', 'G15苏鲁省界'],
+            color: '#FFFFFF',
+        },
+        series: [{
+            name: '访问来源',
+            type: 'pie',
+            radius: '55%',
+            center: ['50%', '60%'],
+            color: ['#06d3c4', '#ffbb32', '#2ccc44', "#0278fe", "#FF3976", "#6058E1", "#e569ff", "#00d6fb"],
+            data: [{
+                value: 335,
+                name: 'S65苏皖省界'
+            },
+                {
+                    value: 310,
+                    name: 'G30苏皖省界'
+                },
+                {
+                    value: 234,
+                    name: 'S69济徐苏鲁省界'
+                },
+                {
+                    value: 135,
+                    name: 'G3京福苏鲁省界'
+                },
+                {
+                    value: 200,
+                    name: 'G25临连苏鲁省界'
+                },
+                {
+                    value: 120,
+                    name: 'G15苏鲁省界'
+                }
+
+            ],
+            itemStyle: {
+                emphasis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
+        }]
+    };
+    // 使用刚指定的配置项和数据显示图表。
+    myChart2.setOption(option2);
+
+    let myChart3 = echarts.init(document.getElementById('bottom_'));
+    let option3 = {
+        color: ['#29DC93'],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: [
+            {
+                type: 'category',
+                data: ['G15', 'G25', 'G3', 'G69', 'G30', 'S65', 'G1516', 'G36', 'S38', 'S68', , 'S50', 'G2', 'G40'],
+                axisTick: {
+                    alignWithLabel: true
+                }
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value'
+            }
+        ],
+        series: [
+            {
+                name: '直接访问',
+                type: 'bar',
+                barWidth: '20%',
+                data: [10, 52, 200, 334, 390, 330, 220, 192, 83, 29, 352, 201, 102, 91]
+            }
+        ]
+    };
+    // 使用刚指定的配置项和数据显示图表。
+    myChart3.setOption(option3);
+
+    $("#less").click(function () {
+        let divV = document.getElementById("Two");
+        if (divV.style.display == "none") {
+            divV.style.display = "block";
+            //$("#Two").attr("style","display:block;");//显示div
+        } else {
+            divV.style.display = "none";
         }
-    ],
-    yAxis : [
-        {
-            type : 'value'
-        }
-    ],
-    series : [
-        {
-            name:'直接访问',
-            type:'bar',
-            barWidth: '20%',
-            data:[10, 52, 200, 334, 390, 330, 220,192,83,29,352,201,102,91]
-        }
-    ]
-};
-// 使用刚指定的配置项和数据显示图表。
-		myChart.setOption(option);
-    </script>
-   <script>
-	$("#less").click(function(){
-		var divV = document.getElementById("Two");   
-		if(divV.style.display=="none")   
-		{   
-			divV.style.display = "block";   
-			//$("#Two").attr("style","display:block;");//显示div
-		}   
-		else   
-		{   
-			divV.style.display = "none";   
-		}   
-		})
-  </script>
-</html
+    })
+</script>
+</html>
