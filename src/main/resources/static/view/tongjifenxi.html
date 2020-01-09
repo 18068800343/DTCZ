@@ -72,56 +72,76 @@
 
 
     <!--表格-->
-    <table class="table table-striped " id="mainContent" style="width: 90%;margin: 0 auto; margin-top: 20px;">
+    <table class="table table-striped " id="mainContent" style="width: 90%;">
         <thead style="background-color: #DDE6F7;">
         <tr>
             <th>站点</th>
-            <th>行驶方向</th>
-            <th>车道</th>
+            <th>车道号</th>
+            <th>车牌号</th>
+            <th>车牌颜色</th>
             <th>车型</th>
+            <th>长</th>
+            <th>车速(Km/h)</th>
+            <th>行驶方向</th>
             <th>轴数</th>
-            <th>总重量</th>
-            <th>车速</th>
-            <th>车长</th>
-            <th>跨道</th>
-            <th>车头轴数</th>、
-            <th>牵引杆挂车</th>
-            <th>车间距</th>
-            <th>加速度</th>
-            <th>超重数量</th>
+            <th>总重量(Kg)</th>
+            <th>是否跨道</th>
+            <th>路面温度</th>
             <th>超重比率</th>
-            <th>照片</th>
-            <th>操作</th>
         </tr>
         </thead>
         <tbody>
         </tbody>
     </table>
 
-
-    <div class="tujitu" style="width: 100%;">
-        <div class="bright" style="margin-top: 70px;">
-            <div class="blue">
-                <p>当日超载车辆统计</p>
-                <div class="left col-xs-4 ">
-                    <div id="_top" style="width:600px;height: 400px;margin-left: 50px;">
+    <!--    <div class="tujitu" style="width: 100%;">
+            <div class="bright" style="margin-top: 70px;">
+                <div class="blue">
+                    <p>当日超载车辆统计</p>
+                    <div class="left col-xs-4 ">
+                        <div id="_top" style="width:600px;height: 400px;margin-left: 50px;">
+                        </div>
+                        &lt;!&ndash;左边&ndash;&gt;
                     </div>
-                    <!--左边-->
                 </div>
             </div>
-        </div>
-        <div class="bleft" style="margin-top: 70px;margin-right: -14%;">
-            <div class="blue">
-                <p>当日超重车辆统计</p>
-                <div id="_right" style="width:60%;height: 400px;">
-                    <!--右边-->
+            <div class="bleft" style="margin-top: 70px;margin-right: -4%;">
+                <div class="blue">
+                    <p>当日超重车辆统计</p>
+                    <div id="_right" style="width:60%;height: 400px;">
+                        &lt;!&ndash;右边&ndash;&gt;
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </div>-->
     <!--左上半部分结束-->
     <div class="bottom">
-        <div id="bottom_" style="width:97%;margin-left: 15px;">
+        <!--        <div id="bottom_" style="width:97%;margin-left: 15px;">
+                </div>-->
+    </div>
+
+    <div class="row clearfix" style="margin-left: 2%;">
+        <div class="col-md-6 column">
+            <p>
+                <div class="blue">
+                    <h4>当日超载车辆统计</h4>
+                    <div class="left col-xs-4 ">
+                        <div id="_top" style="width:600px;height: 400px;">
+                        </div>
+                    </div>
+                 </div>
+            </p>
+        </div>
+        <div class="col-md-6 column">
+            <p>
+            <div class="blue">
+                <h4>当日超重车辆统计</h4>
+                <div class="left col-xs-4 ">
+                    <div id="_right" style="width:600px;height: 400px;">
+                    </div>
+                </div>
+            </div>
+            </p>
         </div>
     </div>
 </div>
@@ -144,52 +164,39 @@
     });
 
 
-    let table=$('#mainContent').dataTable({
+    let table = $('#mainContent').dataTable({
         "deferRender": true,
         "processing": true,
         "bDestroy": true,
         "iDisplayLength": 10,
-        "searching": true,
-        "lengthChange": false,
+        "searching": false,
+        "bLengthChange": false,
+        'paging': true,
         "oLanguage": {
             "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
         },
         "columns": [
-            { "data": "stationNameRouteName"},
-            { "data": "directionName"},
-            { "data": "laneNo"},
-            { "data": "className"},
-            { "data": "axlesCount"},
-            { "data": "totalWeight"},
-            { "data": "speed"},
-            { "data": "length"},
-            { "data": "isStraddleName"},
-            { "data": "axlesHauler"},
-            { "data": "drawBarTrailerName"},
-            { "data": "gap"},
-            { "data": "acceleration"},
-            { "data": "overWeight"},
-            { "data": "overWeightRatio"},
-            { "data": "overWeightRatio"},
-            { "data": null},
+            {"data": "stationNameRouteName"},
+            {"data": "laneNo"},
+            {"data": "plate"},
+            {"data": "licensePlateColor"},
+            {"data": "vehicleTypeName"},
+            {"data": "length"},
+            {"data": "speed"},
+            {"data": "directionName"},
+            {"data": "axlesCount"},
+            {"data": "totalWeight"},
+            {"data": "isStraddleName"},
+            {"data": "temperature"},
+            {"data": "overWeightRatio"},
+
         ],
         "columnDefs": [{
             "class": "tcenter",
-            "targets": 16,
-            "searchable": true,
-            "render": function(data, type, full) {
-                var xiugai='<i class="iconfont icon-xiugai" style="font-size:20px;cursor:pointer;" id="upd" title="修改" data-toggle="modal" data-target="#change"></i>';
-                var shanchu='<i class="iconfont icon-shanchu" style="font-size:20px;cursor:pointer;" id="del"  title="删除"></i>';
-                //var look='<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" onclick="lookMs(this)" data-toggle="modal" data-target="#allMsg1" id="lookDetall"></i>'
-                return xiugai+shanchu;
-            }
-        },{
-            "class": "tcenter",
             "targets": 0,
             "searchable": true,
-            "render": function(data, type, full) {
-
-                return "<marquee scrollAmount=6>"+data+"</marquee>";
+            "render": function (data, type, full) {
+                return "<marquee scrollAmount=3>" + data + "</marquee>";
             }
         }],
         "order": [[0, 'asc']],
@@ -208,7 +215,8 @@
                 "sPrevious": "上一页",
                 "sNext": "下一页",
                 "sLast": "最后一页"
-            }},
+            }
+        },
 
     });
 
@@ -241,7 +249,7 @@
         //表单数据
         data: {
             zhandian: "",
-            stationPort:"",
+            stationPort: "",
             startTime: "",
             endTime: "",
         },
@@ -250,7 +258,7 @@
             searchInit: function () {
                 this.stationPort = this.zhandian;
                 //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
-                this.$http.post('/tWimMsg/getAlltWimMsgByCondiTion',this._data, {emulateJSON:true}).then((res) => {
+                this.$http.post('/tWimMsg/getAlltWimMsgByCondiTion', this._data, {emulateJSON: true}).then((res) => {
 
                     $('#mainContent').dataTable().fnClearTable();
                     $('#mainContent').DataTable().rows.add(res.body).draw(false);
@@ -258,7 +266,7 @@
 
                 });
             },
-            init:function(){
+            init: function () {
 
             },
         }
