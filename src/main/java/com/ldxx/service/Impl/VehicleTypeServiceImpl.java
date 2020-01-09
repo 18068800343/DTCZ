@@ -43,4 +43,14 @@ public class VehicleTypeServiceImpl implements VehicleTypeService {
     public int xgiscountvehicleTypeName(String name, String id) {
         return dao.xgiscountvehicleTypeName(name,id);
     }
+
+    @Override
+    public int iscountvehicleTypeNo(String no) {
+        return dao.iscountvehicleTypeNo(no);
+    }
+
+    @Override
+    public int xgiscountvehicleTypeNo(String no, String id) {
+        return dao.xgiscountvehicleTypeNo(no,id);
+    }
 }

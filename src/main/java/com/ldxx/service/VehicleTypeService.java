@@ -17,4 +17,8 @@ public interface VehicleTypeService {
     int iscountvehicleTypeName(String name);
 
     int xgiscountvehicleTypeName(String name,String id);
+
+    int iscountvehicleTypeNo(String no);
+
+    int xgiscountvehicleTypeNo(String no,String id);
 }

@@ -31,8 +31,11 @@ public class LicensePlateController {
         String id = LDXXUtils.getUUID12();
         int i=0;
         int iscountLicensePlateColor=service.iscountLicensePlateColor(LicensePlate.getLicensePlateColor());
+        int iscountLicensePlateNo=service.iscountLicensePlateNo(LicensePlate.getLicensePlateNo());
         if(iscountLicensePlateColor>0){
             i=-1;
+        }else if(iscountLicensePlateNo>0){
+            i=-2;
         }else{
             LicensePlate.setLicensePlateId(id);
             LicensePlate.setDelState(1);
@@ -50,8 +53,11 @@ public class LicensePlateController {
         JSONObject jsonObject=new JSONObject();
         int i=0;
         int xgiscountLicensePlateColor=service.xgiscountLicensePlateColor(LicensePlate.getLicensePlateColor(),LicensePlate.getLicensePlateId());
+        int xgiscountLicensePlateNo=service.xgiscountLicensePlateNo(LicensePlate.getLicensePlateNo(),LicensePlate.getLicensePlateId());
         if(xgiscountLicensePlateColor>0){
             i=-1;
+        }else if(xgiscountLicensePlateNo>0){
+            i=-2;
         }else{
             i=service.updLicensePlate(LicensePlate);
         }

@@ -30,9 +30,12 @@ public class VehicleTypeController {
         JSONObject jsonObject=new JSONObject();
         String id = LDXXUtils.getUUID12();
         int i=0;
-        int xgiscountLicensePlateColor=service.iscountvehicleTypeName(VehicleType.getVehicleTypeName());
-        if(xgiscountLicensePlateColor>0){
+        int iscountvehicleTypeName=service.iscountvehicleTypeName(VehicleType.getVehicleTypeName());
+        int iscountvehicleTypeNo=service.iscountvehicleTypeNo(VehicleType.getVehicleTypeNo());
+        if(iscountvehicleTypeName>0){
             i=-1;
+        }else if(iscountvehicleTypeNo>0){
+            i=-2;
         }else{
             VehicleType.setVehicleTypeId(id);
             VehicleType.setDelState(1);
@@ -49,9 +52,12 @@ public class VehicleTypeController {
     public String updVehicleType(@RequestBody VehicleType VehicleType) {
         JSONObject jsonObject=new JSONObject();
         int i=0;
-        int xgiscountLicensePlateColor=service.xgiscountvehicleTypeName(VehicleType.getVehicleTypeName(),VehicleType.getVehicleTypeId());
-        if(xgiscountLicensePlateColor>0){
+        int xgiscountvehicleTypeName=service.xgiscountvehicleTypeName(VehicleType.getVehicleTypeName(),VehicleType.getVehicleTypeId());
+        int xgiscountvehicleTypeNo=service.xgiscountvehicleTypeNo(VehicleType.getVehicleTypeNo(),VehicleType.getVehicleTypeId());
+        if(xgiscountvehicleTypeName>0){
             i=-1;
+        }else if(xgiscountvehicleTypeNo>0){
+            i=-2;
         }else{
             i=service.updVehicleType(VehicleType);
         }

@@ -25,7 +25,7 @@
         ELSE '是'
         end as isStraddleName,
         a.*,b.Station_Name,b.Route_Name,concat_ws("+",b.Station_Name,b.Route_Name) as stationNameRouteName,
-        c.License_Plate_Color,d.Vehicle_Type_Name,(a.Over_Weight/d.Vehicle_Type_Max_Weight)as overWeightRatio
+        c.License_Plate_Color,d.Vehicle_Type_Name,(a.Over_Weight/d.Vehicle_Type_Max_Weight)as overWeightRatio2
         from t_vehicle_msg a
         LEFT JOIN station_site b on a.Station_IP=b.Station_Port
         LEFT JOIN license_plate c ON a.Plate_Color=c.License_Plate_No
@@ -41,7 +41,7 @@
         ELSE '是'
         end as isStraddleName,
         a.*,b.Station_Name,b.Route_Name,concat_ws("+",b.Station_Name,b.Route_Name) as stationNameRouteName,
-        c.License_Plate_Color,d.Vehicle_Type_Name,(a.Over_Weight/d.Vehicle_Type_Max_Weight)as overWeightRatio
+        c.License_Plate_Color,d.Vehicle_Type_Name,(a.Over_Weight/d.Vehicle_Type_Max_Weight)as overWeightRatio2
         from t_vehicle_msg a
         LEFT JOIN station_site b on a.Station_IP=b.Station_Port
         LEFT JOIN license_plate c ON a.Plate_Color=c.License_Plate_No

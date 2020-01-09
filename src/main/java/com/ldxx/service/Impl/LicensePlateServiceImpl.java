@@ -40,7 +40,17 @@ public class LicensePlateServiceImpl implements LicensePlateService {
     }
 
     @Override
+    public int iscountLicensePlateNo(String no) {
+        return dao.iscountLicensePlateNo(no);
+    }
+
+    @Override
     public int xgiscountLicensePlateColor(String color, String id) {
         return dao.xgiscountLicensePlateColor(color,id);
+    }
+
+    @Override
+    public int xgiscountLicensePlateNo(String no, String id) {
+        return dao.xgiscountLicensePlateNo(no,id);
     }
 }

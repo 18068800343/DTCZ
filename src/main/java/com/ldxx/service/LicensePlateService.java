@@ -16,5 +16,9 @@ public interface LicensePlateService {
 
     int iscountLicensePlateColor(String color);
 
+    int iscountLicensePlateNo(String no);
+
     int xgiscountLicensePlateColor(String color,String id);
+
+    int xgiscountLicensePlateNo(String no,String id);
 }

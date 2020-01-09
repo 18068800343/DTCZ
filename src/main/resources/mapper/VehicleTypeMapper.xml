@@ -3,18 +3,19 @@
 <mapper namespace="com.ldxx.dao.VehicleTypeDao" >
 
     <select id="getVehicleType" resultType="VehicleType">
-        select Vehicle_Type_Id,Vehicle_Type_Name,Vehicle_Type_Max_Weight,Del_State from Vehicle_Type where Del_State=1
+        select Vehicle_Type_Id,Vehicle_Type_No,Vehicle_Type_Name,Vehicle_Type_Max_Weight,Del_State from Vehicle_Type where Del_State=1
     </select>
 
     <insert id="addVehicleType" parameterType="VehicleType">
-        insert into Vehicle_Type(Vehicle_Type_Id,Vehicle_Type_Name,Vehicle_Type_Max_Weight,Del_State)
-            values(#{vehicleTypeId},#{vehicleTypeName},#{vehicleTypeMaxWeight},#{delState})
+        insert into Vehicle_Type(Vehicle_Type_Id,Vehicle_Type_No,Vehicle_Type_Name,Vehicle_Type_Max_Weight,Del_State)
+            values(#{vehicleTypeId},#{vehicleTypeNo},#{vehicleTypeName},#{vehicleTypeMaxWeight},#{delState})
     </insert>
 
     <update id="updVehicleType" parameterType="VehicleType">
         update  Vehicle_Type set
         Vehicle_Type_Name=#{vehicleTypeName},
-        Vehicle_Type_Max_Weight=#{vehicleTypeMaxWeight}
+        Vehicle_Type_Max_Weight=#{vehicleTypeMaxWeight},
+        Vehicle_Type_No=#{vehicleTypeNo}
         where Vehicle_Type_Id=#{vehicleTypeId} and Del_State=1
     </update>
 
@@ -25,8 +26,14 @@
     <select id="iscountvehicleTypeName" resultType="int">
         select count(Vehicle_Type_Name) from Vehicle_Type where Vehicle_Type_Name=#{name} and Del_State=1
     </select>
+    <select id="iscountvehicleTypeNo" resultType="int">
+        select count(Vehicle_Type_No) from Vehicle_Type where Vehicle_Type_No=#{no} and Del_State=1
+    </select>
 
     <select id="xgiscountvehicleTypeName" resultType="int">
         select count(Vehicle_Type_Name) from Vehicle_Type where Vehicle_Type_Name=#{name} and Del_State=1 and Vehicle_Type_Id!=#{id}
+    </select>
+    <select id="xgiscountvehicleTypeNo" resultType="int">
+        select count(Vehicle_Type_No) from Vehicle_Type where Vehicle_Type_No=#{no} and Del_State=1 and Vehicle_Type_Id!=#{id}
     </select>
 </mapper>

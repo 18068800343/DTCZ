@@ -25,8 +25,14 @@
     <select id="iscountLicensePlateColor" resultType="int">
         select count(License_Plate_Color) from license_Plate where License_Plate_Color=#{color} and Del_State=1
     </select>
+    <select id="iscountLicensePlateNo" resultType="int">
+        select count(License_Plate_No) from license_Plate where License_Plate_No=#{no} and Del_State=1
+    </select>
 
     <select id="xgiscountLicensePlateColor" resultType="int">
         select count(License_Plate_Color) from license_Plate where License_Plate_Color=#{color} and Del_State=1 and License_Plate_Id!=#{id}
+    </select>
+    <select id="xgiscountLicensePlateNo" resultType="int">
+        select count(License_Plate_No) from license_Plate where License_Plate_No=#{no} and Del_State=1 and License_Plate_Id!=#{id}
     </select>
 </mapper>

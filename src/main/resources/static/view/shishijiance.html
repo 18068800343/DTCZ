@@ -35,10 +35,10 @@
 			<button type="button" class="btn btn-primary" onclick="queding()" style="margin-left: 80px;width: 100px; background-image: linear-gradient(#1F62C8,#262E9F);">确定</button>
 			<div class="xian"></div>
 			<!--表格-->
-			<table class="table table-striped " id="mainContent" style="width: 90%;margin: 0 auto; margin-top: 20px;">
+			<table class="table table-striped table-hover" id="mainContent" style="width: 90%;margin: 0 auto; margin-top: 20px;">
 				<thead style="background-color: #DDE6F7;">
 					<tr>
-						<th>站点</th>
+						<th style="width: 15%">站点</th>
 						<th>车道号</th>
 						<th>车牌号</th>
 						<th>车牌颜色</th>
@@ -56,98 +56,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<!--<tr>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-					</tr>
-					<tr>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-					</tr>
-					<tr>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-					</tr>
-					<tr>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
 
-					</tr>
-					<tr>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-
-					</tr>-->
 				</tbody>
 			</table>
 			<div class="bright">
@@ -188,7 +97,8 @@
 
 		$(document).ready( function () {
 			initzhandian()
-			initTable();
+			initTable()
+			//setInterval(initTable, 1000);
 		});
 		var table=$('#mainContent').dataTable({
 			"deferRender": true,
@@ -214,15 +124,23 @@
 				{ "data": "totalWeight"},
 				{ "data": "isStraddleName"},
 				{ "data": "temperature"},
-				{ "data": "overWeightRatio"},
+				{ "data": "overWeightRatio2"},
 
 			],
-			"columnDefs": [{
+			"columnDefs": [/*{
 				"class": "tcenter",
 				"targets": 0,
 				"searchable": true,
 				"render": function(data, type, full) {
-					return "<marquee scrollAmount=3>"+data+"</marquee>";
+					return "<marquee scrollAmount=4  behavior=\"scroll\">"+data+"</marquee>";
+				}
+			},*/{
+				"class": "tcenter",
+				"targets": 12,
+				"searchable": true,
+				"render": function(data, type, full) {
+
+					return (data/100).toFixed(2)+"%";
 				}
 			}],
 			"order": [[0, 'asc']],
