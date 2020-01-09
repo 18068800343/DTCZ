@@ -6,12 +6,21 @@ package com.ldxx.bean;
 public class VehicleType {
 
     private String vehicleTypeId;
+    private String vehicleTypeNo;
     //车型
     private String vehicleTypeName;
     //最大承载重量
     private Integer vehicleTypeMaxWeight;
 
     private Integer delState;
+
+    public String getVehicleTypeNo() {
+        return vehicleTypeNo;
+    }
+
+    public void setVehicleTypeNo(String vehicleTypeNo) {
+        this.vehicleTypeNo = vehicleTypeNo;
+    }
 
     public Integer getDelState() {
         return delState;

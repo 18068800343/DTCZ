@@ -3,15 +3,19 @@
 <mapper namespace="com.ldxx.dao.LicensePlateDao" >
 
     <select id="getLicensePlate" resultType="LicensePlate">
-        select License_Plate_Id,License_Plate_Color,Del_State from license_Plate where Del_State=1
+        select License_Plate_Id,License_Plate_No,License_Plate_Color,Del_State from license_Plate where Del_State=1
     </select>
 
     <insert id="addLicensePlate" parameterType="LicensePlate">
-        insert into license_Plate(License_Plate_Id,License_Plate_Color,Del_State) values(#{licensePlateId},#{licensePlateColor},#{delState})
+        insert into license_Plate(License_Plate_Id,License_Plate_No,License_Plate_Color,Del_State)
+        values(#{licensePlateId},#{licensePlateNo},#{licensePlateColor},#{delState})
     </insert>
 
     <update id="updLicensePlate" parameterType="LicensePlate">
-        update  license_Plate set License_Plate_Color=#{licensePlateColor} where License_Plate_Id=#{licensePlateId} and Del_State=1
+        update  license_Plate set
+        License_Plate_Color=#{licensePlateColor},
+        License_Plate_No=#{licensePlateNo}
+        where License_Plate_Id=#{licensePlateId} and Del_State=1
     </update>
 
     <update id="delLicensePlate">

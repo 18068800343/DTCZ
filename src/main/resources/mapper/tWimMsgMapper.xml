@@ -13,52 +13,39 @@
             <if test="stationPort.indexOf(',')==-1">
                 a.Station_IP=#{stationPort}
             </if>
+            ORDER BY a.Evt_Time desc limit 5
         </if>
     </sql>
 
     <select id="getAlltWimMsg" resultType="tWimMsgVo">
-        select
-        CASE a.Dev_Type WHEN 0 THEN '100+'
-        WHEN 1 THEN 'WIM'
-        when 2 then 'EMU'
-        when 3 THEN 'TMU'
-        else 'WanJi'
-        END as  DevTypeName,
-        CASE a.Direction WHEN 0 THEN '正常行驶'
+        select CASE a.Direction WHEN 0 THEN '正常行驶'
         ELSE '逆行'
-        END as DirectionName,
+        END as directionName,
         CASE a.Is_Straddle WHEN 0 THEN '否'
         ELSE '是'
-        end as IsStraddleName,
-        case a.Draw_Bar_Trailer WHEN 0 THEN '否'
-        WHEN 1 THEN '是'
-        ELSE '未知'
-        END as DrawBarTrailerName,
-        a.*,b.Station_Name,b.Route_Name,concat_ws("+",b.Station_Name,b.Route_Name) as stationNameRouteName from t_wim_msg a
+        end as isStraddleName,
+        a.*,b.Station_Name,b.Route_Name,concat_ws("+",b.Station_Name,b.Route_Name) as stationNameRouteName,
+        c.License_Plate_Color,d.Vehicle_Type_Name,(a.Over_Weight/d.Vehicle_Type_Max_Weight)as overWeightRatio
+        from t_vehicle_msg a
         LEFT JOIN station_site b on a.Station_IP=b.Station_Port
+        LEFT JOIN license_plate c ON a.Plate_Color=c.License_Plate_No
+        LEFT JOIN vehicle_type d ON a.Class_Index=d.Vehicle_Type_No
         where <include refid="StationIP_sql"></include>
     </select>
 
     <select id="getAlltWimMsgByCondition" resultType="tWimMsgVo">
-        select
-        CASE a.Dev_Type WHEN 0 THEN '100+'
-        WHEN 1 THEN 'WIM'
-        when 2 then 'EMU'
-        when 3 THEN 'TMU'
-        else 'WanJi'
-        END as  DevTypeName,
-        CASE a.Direction WHEN 0 THEN '正常行驶'
+        select CASE a.Direction WHEN 0 THEN '正常行驶'
         ELSE '逆行'
-        END as DirectionName,
+        END as directionName,
         CASE a.Is_Straddle WHEN 0 THEN '否'
         ELSE '是'
-        end as IsStraddleName,
-        case a.Draw_Bar_Trailer WHEN 0 THEN '否'
-        WHEN 1 THEN '是'
-        ELSE '未知'
-        END as DrawBarTrailerName,
-        a.*,b.Station_Name,b.Route_Name,concat_ws("+",b.Station_Name,b.Route_Name) as stationNameRouteName from t_wim_msg a
+        end as isStraddleName,
+        a.*,b.Station_Name,b.Route_Name,concat_ws("+",b.Station_Name,b.Route_Name) as stationNameRouteName,
+        c.License_Plate_Color,d.Vehicle_Type_Name,(a.Over_Weight/d.Vehicle_Type_Max_Weight)as overWeightRatio
+        from t_vehicle_msg a
         LEFT JOIN station_site b on a.Station_IP=b.Station_Port
+        LEFT JOIN license_plate c ON a.Plate_Color=c.License_Plate_No
+        LEFT JOIN vehicle_type d ON a.Class_Index=d.Vehicle_Type_No
         where  #{startTime} &lt; msg_time and msg_time &lt;#{endTime} and
         <include refid="StationIP_sql">
        </include>

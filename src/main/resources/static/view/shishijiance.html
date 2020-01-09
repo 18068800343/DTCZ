@@ -39,22 +39,20 @@
 				<thead style="background-color: #DDE6F7;">
 					<tr>
 						<th>站点</th>
-						<th>行驶方向</th>
-						<th>车道</th>
+						<th>车道号</th>
+						<th>车牌号</th>
+						<th>车牌颜色</th>
 						<th>车型</th>
+						<th>长</th>
+						<th>车速(Km/h)</th>
+						<th>行驶方向</th>
 						<th>轴数</th>
-						<th>总重量</th>
-						<th>车速</th>
-						<th>车长</th>
-						<th>跨道</th>
-						<th>车头轴数</th>、
-						<th>牵引杆挂车</th>
-						<th>车间距</th>
-						<th>加速度</th>
-						<th>超重数量</th>
+						<th>总重量(Kg)</th>
+						<th>是否跨道</th>
+						<th>路面温度</th>
 						<th>超重比率</th>
-						<th>照片</th>
-						<th>操作</th>
+
+
 					</tr>
 				</thead>
 				<tbody>
@@ -197,47 +195,34 @@
 			"processing": true,
 			"bDestroy": true,
 			"iDisplayLength": 10,
-			"searching": true,
-			"lengthChange": false,
+			"searching": false,
+			"bLengthChange": false,
+			'paging':false,
 			"oLanguage": {
 				"sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
 			},
 			"columns": [
 				{ "data": "stationNameRouteName"},
-				{ "data": "directionName"},
 				{ "data": "laneNo"},
-				{ "data": "className"},
+				{ "data": "plate"},
+				{ "data": "licensePlateColor"},
+				{ "data": "vehicleTypeName"},
+				{ "data": "length"},
+				{ "data": "speed"},
+				{ "data": "directionName"},
 				{ "data": "axlesCount"},
 				{ "data": "totalWeight"},
-				{ "data": "speed"},
-				{ "data": "length"},
 				{ "data": "isStraddleName"},
-				{ "data": "axlesHauler"},
-				{ "data": "drawBarTrailerName"},
-				{ "data": "gap"},
-				{ "data": "acceleration"},
-				{ "data": "overWeight"},
+				{ "data": "temperature"},
 				{ "data": "overWeightRatio"},
-				{ "data": "overWeightRatio"},
-				{ "data": null},
+
 			],
 			"columnDefs": [{
-				"class": "tcenter",
-				"targets": 16,
-				"searchable": true,
-				"render": function(data, type, full) {
-					var xiugai='<i class="iconfont icon-xiugai" style="font-size:20px;cursor:pointer;" id="upd" title="修改" data-toggle="modal" data-target="#change"></i>';
-					var shanchu='<i class="iconfont icon-shanchu" style="font-size:20px;cursor:pointer;" id="del"  title="删除"></i>';
-					//var look='<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" onclick="lookMs(this)" data-toggle="modal" data-target="#allMsg1" id="lookDetall"></i>'
-					return xiugai+shanchu;
-				}
-			},{
 				"class": "tcenter",
 				"targets": 0,
 				"searchable": true,
 				"render": function(data, type, full) {
-
-					return "<marquee scrollAmount=6>"+data+"</marquee>";
+					return "<marquee scrollAmount=3>"+data+"</marquee>";
 				}
 			}],
 			"order": [[0, 'asc']],

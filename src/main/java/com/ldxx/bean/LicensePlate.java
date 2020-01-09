@@ -6,10 +6,19 @@ package com.ldxx.bean;
 public class LicensePlate {
 
     private String licensePlateId;
+    private String licensePlateNo;
     //车牌颜色
     private String licensePlateColor;
 
     private Integer delState;
+
+    public String getLicensePlateNo() {
+        return licensePlateNo;
+    }
+
+    public void setLicensePlateNo(String licensePlateNo) {
+        this.licensePlateNo = licensePlateNo;
+    }
 
     public Integer getDelState() {
         return delState;

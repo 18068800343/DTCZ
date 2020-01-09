@@ -4,12 +4,12 @@ import com.ldxx.bean.tWimMsg;
 
 public class tWimMsgVo extends tWimMsg {
     private String stationNameRouteName;//站点名称+路线名称
-    private String devTypeName;//称重设备类型名称
     private String directionName;//行驶方向名称
     private String isStraddleName;//跨道
-    private String drawBarTrailerName;//牵引杆挂车
     private String stationName;//站点名称
     private String routeName;//路线名称
+    private String licensePlateColor;//车牌颜色
+    private String vehicleTypeName;//车型
 
     public String getStationNameRouteName() {
         return stationNameRouteName;
@@ -17,14 +17,6 @@ public class tWimMsgVo extends tWimMsg {
 
     public void setStationNameRouteName(String stationNameRouteName) {
         this.stationNameRouteName = stationNameRouteName;
-    }
-
-    public String getDevTypeName() {
-        return devTypeName;
-    }
-
-    public void setDevTypeName(String devTypeName) {
-        this.devTypeName = devTypeName;
     }
 
     public String getDirectionName() {
@@ -43,14 +35,6 @@ public class tWimMsgVo extends tWimMsg {
         this.isStraddleName = isStraddleName;
     }
 
-    public String getDrawBarTrailerName() {
-        return drawBarTrailerName;
-    }
-
-    public void setDrawBarTrailerName(String drawBarTrailerName) {
-        this.drawBarTrailerName = drawBarTrailerName;
-    }
-
     public String getStationName() {
         return stationName;
     }
@@ -65,5 +49,21 @@ public class tWimMsgVo extends tWimMsg {
 
     public void setRouteName(String routeName) {
         this.routeName = routeName;
+    }
+
+    public String getLicensePlateColor() {
+        return licensePlateColor;
+    }
+
+    public void setLicensePlateColor(String licensePlateColor) {
+        this.licensePlateColor = licensePlateColor;
+    }
+
+    public String getVehicleTypeName() {
+        return vehicleTypeName;
+    }
+
+    public void setVehicleTypeName(String vehicleTypeName) {
+        this.vehicleTypeName = vehicleTypeName;
     }
 }
