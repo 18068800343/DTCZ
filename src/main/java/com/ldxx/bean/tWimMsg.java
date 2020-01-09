@@ -18,7 +18,7 @@ public class tWimMsg {
     private Date EvtTime;
     //车道号
     private Integer LaneNo;
-    //称重设备类型
+    //称重设备类型 0: 100+，1: WIM, 2: EMU , 3 ：TMU，5: WanJi
     private Integer DevType;
     //车型分类编码
     private Integer ClassIndex;
@@ -26,9 +26,9 @@ public class tWimMsg {
     private String ClassName;
     //轴数
     private Integer AxlesCount;
-    //总重量
+    //总重量 kg
     private Integer TotalWeight;
-    //轴1重
+    //轴1重 kg
     private Integer Axle1;
     private Integer Axle2;
     private Integer Axle3;
@@ -39,7 +39,7 @@ public class tWimMsg {
     private Integer Axle8;
     private Integer Axle9;
     private Integer Axle10;
-    //轴距1
+    //轴距1 cm
     private Integer AxleSpace1;
     private Integer AxleSpace2;
     private Integer AxleSpace3;
@@ -49,31 +49,32 @@ public class tWimMsg {
     private Integer AxleSpace7;
     private Integer AxleSpace8;
     private Integer AxleSpace9;
-    //行驶方向
+    //行驶方向 0 正常行驶，1逆行
     private Integer Direction;
-    //车速
+    //车速 Km/h
     private Integer Speed;
-    //车长
+    //车长 cm
     private Integer Length;
-    //跨道
+    //跨道 0：否，1，是
     private Integer IsStraddle;
     //车头轴数
     private Integer AxlesHauler;
-    //牵引杆挂车
+    //牵引杆挂车 牵引杆挂车，全挂车
+    // 0：否,1 是，2 未知
     private Integer DrawBarTrailer;
-    //车间距
+    //车间距 cm
     private Integer Gap;
-    //车间时距
+    //车间时距 单位：百毫秒
     private Integer TimeGap;
-    //车头时距
+    //车头时距 单位：毫秒
     private Integer Headway;
-    //路面温度
+    //路面温度 摄氏度(+100)
     private Integer Temperature;
-    //加速度
+    //加速度 万集(m/s)
     private Integer Acceleration;
-    //超重数量
+    //超重数量 万集(m/s)
     private Integer OverWeight;
-    //超重比率
+    //超重比率 百分之X
     private Integer OverWeightRatio;
     //收到信息时间
     private Date MsgTime;

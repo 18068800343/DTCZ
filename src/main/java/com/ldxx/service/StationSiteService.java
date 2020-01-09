@@ -23,4 +23,6 @@ public interface StationSiteService {
     int xg_iscountStationIp(String stationIp,String id);
 
     int xg_iscountStationPort(String stationPort,String id);
+
+    List<StationSite> getStationSiteByPort(String stationPort);
 }

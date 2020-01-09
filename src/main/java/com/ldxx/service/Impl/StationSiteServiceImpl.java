@@ -59,4 +59,9 @@ public class StationSiteServiceImpl implements StationSiteService {
     public int xg_iscountStationPort(String stationPort, String id) {
         return dao.xg_iscountStationPort(stationPort,id);
     }
+
+    @Override
+    public List<StationSite> getStationSiteByPort(String stationPort) {
+        return dao.getStationSiteByPort(stationPort);
+    }
 }

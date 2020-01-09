@@ -2,6 +2,7 @@ package com.ldxx.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.ldxx.bean.StationSite;
+import com.ldxx.bean.tUserInfo;
 import com.ldxx.service.StationSiteService;
 import com.ldxx.util.LDXXUtils;
 import com.ldxx.util.MsgFormatUtils;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
@@ -89,5 +91,22 @@ public class StationSiteController {
     @RequestMapping("/delStationSite")
     public int delStationSite(String id) {
         return service.delStationSite(id);
+    }
+
+    /**
+     * 通过登录人的站点端口号查询站点信息
+     * @param stationPort
+     * @return
+     */
+    @RequestMapping("/getStationSiteByPort")
+    public List<StationSite> getStationSiteByPort(HttpSession session, String stationPort) {
+        String zhandianduankouhao="";
+        if(stationPort!=null){
+            zhandianduankouhao=stationPort;
+        }else{
+            tUserInfo user = (tUserInfo) session.getAttribute("user");
+            zhandianduankouhao = user.getStationPort();
+        }
+        return service.getStationSiteByPort(stationPort);
     }
 }

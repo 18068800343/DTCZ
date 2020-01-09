@@ -11,59 +11,56 @@
 		<link rel="stylesheet" href="../style/jquery.dataTables.min.css">
 		<link href="../style/style.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="css/home.css" />
-		<link rel="stylesheet" type="text/css" href="css/layui.css" />
+		<!--<link rel="stylesheet" type="text/css" href="css/layui.css" />-->
 		<link rel="stylesheet"  href="css/toastr.css"/>
+		<style>
+			#mainContent_info{
+				margin-left: 5%;
+			}
+			#mainContent_paginate{
+				margin-right: 5%;
+			}
+		</style>
 	</head>
 	<body style="background-image: none;">
 		<div class="form-group" id="rightTab">
 			<div class="sele">
-				<label for="email" class="col-sm-2 control-label">监测站点</label>
+				<label for="" class="col-sm-2 control-label">监测站点</label>
 				<div class="col-sm-2" style="width: 20%">
 					<!-- 样式1 -->
 					<select class="form-control selectpicker" multiple data-max-options="2"  data-live-search="true" id="zhandian" style="width:80%;">
 					</select>
 				</div>
 			</div>
-			<button type="button" class="btn btn-primary" style="margin-left: 80px;width: 100px; background-image: linear-gradient(#1F62C8,#262E9F);">确定</button>
+			<button type="button" class="btn btn-primary" onclick="queding()" style="margin-left: 80px;width: 100px; background-image: linear-gradient(#1F62C8,#262E9F);">确定</button>
 			<div class="xian"></div>
 			<!--表格-->
-			<table class="table table-striped " style="width: 90%;margin: 0 auto; margin-top: 20px;">
+			<table class="table table-striped " id="mainContent" style="width: 90%;margin: 0 auto; margin-top: 20px;">
 				<thead style="background-color: #DDE6F7;">
 					<tr>
-						<th>地点</th>
-						<th>方向</th>
+						<th>站点</th>
+						<th>行驶方向</th>
 						<th>车道</th>
-						<th>车牌号</th> 
 						<th>车型</th>
-						<th>方向</th>
-						<th>轴放</th>
-						<th>总重</th>、
-						<th>长</th>
-						<th>宽</th>
-						<th>高</th>
-						<th>速度</th>
-						<th>超载</th>
+						<th>轴数</th>
+						<th>总重量</th>
+						<th>车速</th>
+						<th>车长</th>
+						<th>跨道</th>
+						<th>车头轴数</th>、
+						<th>牵引杆挂车</th>
+						<th>车间距</th>
+						<th>加速度</th>
+						<th>超重数量</th>
+						<th>超重比率</th>
 						<th>照片</th>
+						<th>操作</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
+					<!--<tr>
 						<td>　</td>
 						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-					</tr>
-					<tr>
 						<td>　</td>
 						<td>　</td>
 						<td>　</td>
@@ -94,20 +91,6 @@
 						<td>　</td>
 						<td>　</td>
 						<td>　</td>
-					</tr>
-					<tr>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
-						<td>　</td>
 						<td>　</td>
 						<td>　</td>
 					</tr>
@@ -126,7 +109,47 @@
 						<td>　</td>
 						<td>　</td>
 						<td>　</td>
+						<td>　</td>
+						<td>　</td>
 					</tr>
+					<tr>
+						<td>　</td>
+						<td>　</td>
+						<td>　</td>
+						<td>　</td>
+						<td>　</td>
+						<td>　</td>
+						<td>　</td>
+						<td>　</td>
+						<td>　</td>
+						<td>　</td>
+						<td>　</td>
+						<td>　</td>
+						<td>　</td>
+						<td>　</td>
+						<td>　</td>
+						<td>　</td>
+
+					</tr>
+					<tr>
+						<td>　</td>
+						<td>　</td>
+						<td>　</td>
+						<td>　</td>
+						<td>　</td>
+						<td>　</td>
+						<td>　</td>
+						<td>　</td>
+						<td>　</td>
+						<td>　</td>
+						<td>　</td>
+						<td>　</td>
+						<td>　</td>
+						<td>　</td>
+						<td>　</td>
+						<td>　</td>
+
+					</tr>-->
 				</tbody>
 			</table>
 			<div class="bright">
@@ -157,8 +180,8 @@
 	<script src="../js/jquery.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
 	<script src="../js/bootstrap-select.js" ></script>
-	<script src="../js/common-scripts.js"></script>
-	<script src="js/layui.js" charset="utf-8"></script>
+	<!--<script src="../js/common-scripts.js"></script>
+	<script src="js/layui.js" charset="utf-8"></script>-->
 	<!--<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>-->
 	<script src="js/echarts.min(1).js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/datatables/jquery.dataTables.min.js"></script>
@@ -167,12 +190,98 @@
 
 		$(document).ready( function () {
 			initzhandian()
+			initTable();
 		});
+		var table=$('#mainContent').dataTable({
+			"deferRender": true,
+			"processing": true,
+			"bDestroy": true,
+			"iDisplayLength": 10,
+			"searching": true,
+			"lengthChange": false,
+			"oLanguage": {
+				"sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+			},
+			"columns": [
+				{ "data": "stationNameRouteName"},
+				{ "data": "directionName"},
+				{ "data": "laneNo"},
+				{ "data": "className"},
+				{ "data": "axlesCount"},
+				{ "data": "totalWeight"},
+				{ "data": "speed"},
+				{ "data": "length"},
+				{ "data": "isStraddleName"},
+				{ "data": "axlesHauler"},
+				{ "data": "drawBarTrailerName"},
+				{ "data": "gap"},
+				{ "data": "acceleration"},
+				{ "data": "overWeight"},
+				{ "data": "overWeightRatio"},
+				{ "data": "overWeightRatio"},
+				{ "data": null},
+			],
+			"columnDefs": [{
+				"class": "tcenter",
+				"targets": 16,
+				"searchable": true,
+				"render": function(data, type, full) {
+					var xiugai='<i class="iconfont icon-xiugai" style="font-size:20px;cursor:pointer;" id="upd" title="修改" data-toggle="modal" data-target="#change"></i>';
+					var shanchu='<i class="iconfont icon-shanchu" style="font-size:20px;cursor:pointer;" id="del"  title="删除"></i>';
+					//var look='<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" onclick="lookMs(this)" data-toggle="modal" data-target="#allMsg1" id="lookDetall"></i>'
+					return xiugai+shanchu;
+				}
+			},{
+				"class": "tcenter",
+				"targets": 0,
+				"searchable": true,
+				"render": function(data, type, full) {
+
+					return "<marquee scrollAmount=6>"+data+"</marquee>";
+				}
+			}],
+			"order": [[0, 'asc']],
+			"oLanguage": { //国际化配置
+				"sProcessing": "正在获取数据，请稍后...",
+				"sLengthMenu": "显示 _MENU_ 条",
+				"sZeroRecords": "查询不到相关数据",
+				"sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
+				"sInfoEmpty": "记录数为0",
+				"sInfoFiltered": "(全部记录数 _MAX_ 条)",
+				"sInfoPostFix": "",
+				"sSearch": "搜索",
+				"sUrl": "",
+				"oPaginate": {
+					"sFirst": "第一页",
+					"sPrevious": "上一页",
+					"sNext": "下一页",
+					"sLast": "最后一页"
+				}},
+
+		});
+
+		function initTable(){
+			$.ajax({
+				type: 'POST',
+				url: '/tWimMsg/getAlltWimMsg',
+				dataType: 'json',
+				data: {
+					stationPort:"",
+				},
+				error: function (msg) {
+					errMessage("请求UserController失败");
+				},
+				success: function (json) {
+					$('#mainContent').dataTable().fnClearTable();
+					$('#mainContent').DataTable().rows.add(json).draw(false);
+				}
+			});
+		}
 
 		function initzhandian(){
 			$.ajax({
 				type: 'POST',
-				url: '/StationSite/getAllStationSite',
+				url: '/login/getUser',
 				dataType: 'json',
 				data: {
 				},
@@ -180,11 +289,18 @@
 					errMessage("请求UserController失败");
 				},
 				success: function (json) {
+					$("#zhandian").html('');
 					if(json!=null){
-						$("#zhandian").html('');
-						for(var i=0;i<json.length;i++){
-							$("#zhandian").append("<option  value='"+json[i].stationPort+"'>"+(json[i].stationName+"+"+json[i].routeName)+"</option>");
-
+						if(json.stationPort.indexOf(",")!=-1&&json.stationName.indexOf(",")!=-1){
+							var stationPort=json.stationPort.split(",");
+							var stationName=json.stationName.split(",");
+							for(var i=0;i<stationPort.length;i++){
+								for(var i=0;i<stationName.length;i++){
+									$("#zhandian").append("<option  value='"+stationPort[i]+"'>"+stationName[i]+"</option>");
+								}
+							}
+						}else{
+							$("#zhandian").append("<option  value='"+json.stationPort+"'>"+json.stationName+"</option>");
 						}
 						$(".selectpicker").selectpicker({
 							noneSelectedText: '请选择',
@@ -193,6 +309,27 @@
 				}
 			});
 		}
+
+
+		function queding(){
+			var stationPort=$("#zhandian").val().toString();
+			$.ajax({
+				type: 'POST',
+				url: '/tWimMsg/getAlltWimMsg',
+				dataType: 'json',
+				data: {
+					stationPort:stationPort,
+				},
+				error: function (msg) {
+					errMessage("请求UserController失败");
+				},
+				success: function (json) {
+					$('#mainContent').dataTable().fnClearTable();
+					$('#mainContent').DataTable().rows.add(json).draw(false);
+				}
+			});
+		}
+
 	</script>
 	<!--======================================================================================左边柱状图===============================================================================-->
 	<script type="text/javascript">
