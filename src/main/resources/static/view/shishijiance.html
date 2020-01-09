@@ -98,7 +98,9 @@
 		$(document).ready( function () {
 			initzhandian()
 			initTable()
-			//setInterval(initTable, 1000);
+			if(user!=null&&user!=""&&user!=undefined){
+				setInterval(initTable, 5000);
+			}
 		});
 		var table=$('#mainContent').dataTable({
 			"deferRender": true,
@@ -124,7 +126,7 @@
 				{ "data": "totalWeight"},
 				{ "data": "isStraddleName"},
 				{ "data": "temperature"},
-				{ "data": "overWeightRatio2"},
+				{ "data": "overWeightRatio"},
 
 			],
 			"columnDefs": [/*{
@@ -140,7 +142,7 @@
 				"searchable": true,
 				"render": function(data, type, full) {
 
-					return (data/100).toFixed(2)+"%";
+					return (data*100)+"%";
 				}
 			}],
 			"order": [[0, 'asc']],
@@ -180,7 +182,7 @@
 				}
 			});
 		}
-
+     var user;
 		function initzhandian(){
 			$.ajax({
 				type: 'POST',
@@ -192,6 +194,7 @@
 					errMessage("请求UserController失败");
 				},
 				success: function (json) {
+					user=json;
 					$("#zhandian").html('');
 					if(json!=null){
 						if(json.stationPort.indexOf(",")!=-1&&json.stationName.indexOf(",")!=-1){

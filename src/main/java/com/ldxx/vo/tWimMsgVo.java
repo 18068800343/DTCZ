@@ -10,16 +10,7 @@ public class tWimMsgVo extends tWimMsg {
     private String routeName;//路线名称
     private String licensePlateColor;//车牌颜色
     private String vehicleTypeName;//车型
-    private double overWeightRatio2;
 
-
-    public double getOverWeightRatio2() {
-        return overWeightRatio2;
-    }
-
-    public void setOverWeightRatio2(double overWeightRatio2) {
-        this.overWeightRatio2 = overWeightRatio2;
-    }
 
     public String getStationNameRouteName() {
         return stationNameRouteName;

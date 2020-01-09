@@ -24,7 +24,9 @@ public class tWimMsgController {
             zhandianduankouhao=stationPort;
         }else{
             tUserInfo user = (tUserInfo) session.getAttribute("user");
-            zhandianduankouhao = user.getStationPort();
+            if(user!=null){
+                zhandianduankouhao = user.getStationPort();
+            }
         }
         List<tWimMsgVo> list= service.getAlltWimMsg(zhandianduankouhao);
         return list;
