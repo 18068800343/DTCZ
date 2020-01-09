@@ -15,8 +15,18 @@ public class tUserInfo {
     private String stationPort;
     //站点名称
     private String stationName;
+    //上次登录监测的站点
+    private String lastMonitoringSite;
     //1:在编人员；0：已删人员
     private Integer delState;
+
+    public String getLastMonitoringSite() {
+        return lastMonitoringSite;
+    }
+
+    public void setLastMonitoringSite(String lastMonitoringSite) {
+        this.lastMonitoringSite = lastMonitoringSite;
+    }
 
     public String getUsrId() {
         return usrId;

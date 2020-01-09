@@ -25,4 +25,6 @@ public interface tUserInfoDao {
     int updatepasswordById(String usrPwd,String usrId);
 
     tUserInfoVo selectUserById(String usrId);
+
+    int updlastMonitoringSiteById(String lastMonitoringSite,String usrId);
 }

@@ -17,7 +17,9 @@ public class tWimMsgServiceImpl implements tWimMsgService {
 
     @Override
     public List<tWimMsgVo> getAlltWimMsg(String stationPort) {
-        return dao.getAlltWimMsg(stationPort);
+        List<tWimMsgVo> list = dao.getAlltWimMsg(stationPort);
+
+        return list;
     }
 
     @Override

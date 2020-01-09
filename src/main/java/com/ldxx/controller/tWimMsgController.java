@@ -1,6 +1,7 @@
 package com.ldxx.controller;
 
 import com.ldxx.bean.tUserInfo;
+import com.ldxx.dao.tUserInfoDao;
 import com.ldxx.service.tWimMsgService;
 import com.ldxx.vo.tWimMsgVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,20 +17,29 @@ public class tWimMsgController {
 
     @Autowired
     private tWimMsgService service;
+    @Autowired
+    private tUserInfoDao tUserInfoDao;
 
     @RequestMapping("/getAlltWimMsg")
     public List<tWimMsgVo> getAlltWimMsg(HttpSession session,String  stationPort) {
         String zhandianduankouhao="";
+        tUserInfo user = (tUserInfo) session.getAttribute("user");
         if(stationPort!=null&&stationPort!=""){
             zhandianduankouhao=stationPort;
+            updlastMonitoringSiteById(stationPort,user.getUsrId());
         }else{
-            tUserInfo user = (tUserInfo) session.getAttribute("user");
             if(user!=null){
                 zhandianduankouhao = user.getStationPort();
+                updlastMonitoringSiteById(user.getStationPort(),user.getUsrId());
             }
         }
         List<tWimMsgVo> list= service.getAlltWimMsg(zhandianduankouhao);
         return list;
+    }
+
+    private int  updlastMonitoringSiteById(String stationPort,String usrId){
+        int i=tUserInfoDao.updlastMonitoringSiteById(stationPort,usrId);
+        return i;
     }
 
     @RequestMapping("/getAlltWimMsgByCondiTion")

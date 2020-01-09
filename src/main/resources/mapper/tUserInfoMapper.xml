@@ -48,4 +48,10 @@
 	<select id="selectUserById" resultType="tUserInfoVo">
 		select * from t_user_info where Usr_Id=#{usrId} and Del_State=1
 	</select>
+
+	<update id="updlastMonitoringSiteById">
+		update t_user_info set
+		Last_Monitoring_Site=#{lastMonitoringSite}
+		where Usr_Id=#{usrId}
+	</update>
 </mapper>
