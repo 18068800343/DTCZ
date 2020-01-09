@@ -29,4 +29,17 @@ public class tWimMsgController {
         List<tWimMsgVo> list= service.getAlltWimMsg(zhandianduankouhao);
         return list;
     }
+
+    @RequestMapping("/getAlltWimMsgByCondiTion")
+    public List<tWimMsgVo> getAlltWimMsgByCondiTion(HttpSession session,String  stationPort,String startTime,String endTime) {
+        String zhandianduankouhao="";
+        if(stationPort!=null&&stationPort!=""){
+            zhandianduankouhao=stationPort;
+        }else{
+            tUserInfo user = (tUserInfo) session.getAttribute("user");
+            zhandianduankouhao = user.getStationPort();
+        }
+        List<tWimMsgVo> list= service.getAlltWimMsgByCondition(zhandianduankouhao,startTime,endTime);
+        return list;
+    }
 }

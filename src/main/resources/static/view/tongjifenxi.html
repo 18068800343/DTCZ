@@ -4,66 +4,66 @@
     <meta charset="UTF-8">
     <title></title>
     <link href="../font2/iconfont.css" rel="stylesheet">
-    <link href="../style/bootstrap.min.css" rel="stylesheet" />
+    <link href="../style/bootstrap.min.css" rel="stylesheet"/>
     <link href="../font3/bootstrap-select.css" rel="stylesheet">
     <link rel="stylesheet" href="../style/jquery.dataTables.min.css">
     <link href="../style/style.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/home.css" />
-    <link rel="stylesheet"  href="css/toastr.css"/>
+    <link rel="stylesheet" type="text/css" href="css/home.css"/>
+    <link rel="stylesheet" href="css/toastr.css"/>
 </head>
 <body style="background-image: none;">
 <div class="form-group" id="rightTab">
     <div>
-        <label  class="col-sm-2 control-label">统计分析</label>
-        <div class="col-sm-3" id="roadVm">
+        <div>
+            <label class="col-sm-1 control-label">统计分析</label>
+            <div class="col-sm-3" id="roadVm">
+                <!-- 样式1 -->
+                <select class="form-control selectpicker" multiple data-max-options="2" data-live-search="true"
+                        id="zhandian" style="width:60%;">
+                </select>
+            </div>
+
+        </div>
+        <label class="col-sm-1	 control-label" style="margin-left: 50px;width: 70px;line-height: 30px;">日期:</label>
+        <div class="col-sm-2">
             <!-- 样式1 -->
-            <select class="form-control selectpicker" multiple data-max-options="2"  data-live-search="true" id="zhandian" style="width:80%;">
-            </select>
+            <input type="date" name="" value="请选择"
+                   style="height: 34px;border-radius: 5px;box-shadow: none;width: 250%;">
         </div>
 
-    </div>
-    <label class="col-sm-1	 control-label" style="margin-left: 200px;width: 70px;line-height: 30px;">日期:</label>
-    <div class="col-sm-2">
-
-        <!-- 样式1 -->
-        <input type="date" name=""  value="请选择"  style="height: 34px;border-radius: 5px;box-shadow: none;width:
-        250%;">
-    </div>
-
-    <div class="col-sm-2" style="margin-left: 6%;">
-        <div class="xian2"
-             style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: 8%;margin-top: 15%;">
-
-        </div>
-        <!-- 样式1 -->
-        <input type="date" name="" id="" value="请选择" style="height: 34px;border-radius: 5px;box-shadow: none;width:
+        <div class="col-sm-2" style="margin-left: 6%;">
+            <div class="xian2"
+                 style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: 8%;margin-top: 15%;">
+            </div>
+            <input type="date" name="" id="" value="请选择" style="height: 34px;border-radius: 5px;box-shadow: none;width:
         250%;margin-left: 30px;">
+        </div>
+        <button type="button" class="btn btn-primary"
+                style="margin-left: 80px;width: 100px; background-image: linear-gradient(#1F62C8,#262E9F);margin-left: 20%;">
+            确定
+        </button>
+        <a href="javascript:;"
+           style="float: right;color: #262E9F;text-decoration: underline;margin-right: 5%;line-height: 40px;"
+           id="less">详细筛选</a>
     </div>
-    <button type="button" class="btn btn-primary"
-            style="margin-left: 80px;width: 100px; background-image: linear-gradient(#1F62C8,#262E9F);margin-left: 20%;">
-        确定
-    </button>
-    <a href="javascript:;"
-       style="float: right;color: #262E9F;text-decoration: underline;margin-right: 5%;line-height: 40px;"
-       id="less">详细筛选</a>
     <div id="Two" style="display: block;width: 100%;height: 30px;display: none;">
         <label class="col-sm-1	 control-label"
                style="margin-left: -45.8%;width: 100px;line-height: 30px;">统计内容:</label>
-        <input type="checkbox" name="" value=""  style="margin-top: 10px;margin-left: -39%;">
+        <input type="checkbox" name="" value="" style="margin-top: 10px;margin-left: -39%;">
         <span>交通量统计</span>
-        <input type="checkbox" name=""  value=""  style="margin-top: 10px;margin-left: 2%;">
+        <input type="checkbox" name="" value="" style="margin-top: 10px;margin-left: 2%;">
         <span>超重统计</span>
-        <input type="text" name=""  value="超重阈值" style="width: 100px;color: #666666;"/>
-        <input type="checkbox" name=""  value=""  style="margin-top: 10px;margin-left: 2%;">
+        <input type="text" name="" value="超重阈值" style="width: 100px;color: #666666;"/>
+        <input type="checkbox" name="" value="" style="margin-top: 10px;margin-left: 2%;">
         <span>超载统计</span>
-        <span style="margin-left: 3%;">统计方式:</span>
-        <input type="radio" name=""  value=""  style="margin-top: 12px;">
-        <span>逐日</span>
-        <input type="radio" name=""  value=""  style="margin-top: 12px;margin-left: 10px;">
-        <span>逐月</span>
-        <input type="checkbox" name=""  value=""  style="margin-top: 10px;margin-left: 11%;">
+        <label class="control-label" style="margin-left: 3%;">统计方式:</label>
+        <!-- <input type="radio" name=""  value=""  style="margin-top: 12px;">
+         <span>逐日</span>
+         <input type="radio" name=""  value=""  style="margin-top: 12px;margin-left: 10px;">
+         <span>逐月</span>-->
+        <input type="checkbox" name="" value="" style="margin-top: 10px;margin-left: 3%;">
         <span>区分车型</span>
-        <input type="checkbox" name=""  value=""  style="margin-top: 10px;margin-left: 11%;">
+        <input type="checkbox" name="" value="" style="margin-top: 10px;margin-left: 3%;">
         <span>区分方向</span>
     </div>
 
@@ -217,35 +217,34 @@
 
 <script src="../js/jquery.js"></script>
 <script src="../js/bootstrap.min.js"></script>
-<script src="../js/bootstrap-select.js" ></script>
+<script src="../js/bootstrap-select.js"></script>
 <script src="js/echarts.min(1).js" type="text/javascript" charset="utf-8"></script>
 <script src="js/datatables/jquery.dataTables.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
 <script src="../js/common-scripts.js"></script>
-<script src="js/toastr.js" ></script>
+<script src="js/toastr.js"></script>
 
 <!--======================================================================================左边柱状图===============================================================================-->
 <script type="text/javascript">
-    $(document).ready( function () {
+    $(document).ready(function () {
         initzhandian();
     });
 
-    function initzhandian(){
+    function initzhandian() {
         $.ajax({
             type: 'POST',
             url: '/StationSite/getAllStationSite',
             dataType: 'json',
-            data: {
-            },
+            data: {},
             error: function (msg) {
                 errMessage("请求UserController失败");
             },
             success: function (json) {
-                if(json!=null){
+                if (json != null) {
                     $("#zhandian").html('');
-                    for(var i=0;i<json.length;i++){
-                        $("#zhandian").append("<option  value='"+json[i].stationPort+"'>"+(json[i].stationName+"+"+json[i].routeName)+"</option>");
+                    for (var i = 0; i < json.length; i++) {
+                        $("#zhandian").append("<option  value='" + json[i].stationPort + "'>" + (json[i].stationName + "+" + json[i].routeName) + "</option>");
                     }
                     $(".selectpicker").selectpicker({
                         noneSelectedText: '请选择',
@@ -254,25 +253,26 @@
             }
         });
     }
-	//新建生产计划
-    let roadVm = new Vue({
-		el: '#roadVm',
-		//表单数据
-		data: {
-            roadId:"",
-            roadList:""
-		},
-		methods: {
-			//新建生产计划保存按钮事件
-			initRoad: function () {
-				//发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
-				this.$http.post('/StationSite/getAllStationSite',{},{}).then((res)=>{
-				},(res)=>{
 
-				});
-			},
-		}
-	});
+    //新建生产计划
+    let roadVm = new Vue({
+        el: '#roadVm',
+        //表单数据
+        data: {
+            roadId: "",
+            roadList: ""
+        },
+        methods: {
+            //新建生产计划保存按钮事件
+            initRoad: function () {
+                //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
+                this.$http.post('/StationSite/getAllStationSite', {}, {}).then((res) => {
+                }, (res) => {
+
+                });
+            },
+        }
+    });
 
     // 基于准备好的dom，初始化echarts实例
     let myChart1 = echarts.init(document.getElementById('_top'));
@@ -320,7 +320,7 @@
     // 使用刚指定的配置项和数据显示图表。
     myChart1.setOption(option1);
 
-	<!--饼状图-->
+    <!--饼状图-->
     let myChart2 = echarts.init(document.getElementById('_right'));
 
     let option2 = {
