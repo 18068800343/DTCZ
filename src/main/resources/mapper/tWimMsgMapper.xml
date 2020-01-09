@@ -59,9 +59,9 @@
         END as DrawBarTrailerName,
         a.*,b.Station_Name,b.Route_Name,concat_ws("+",b.Station_Name,b.Route_Name) as stationNameRouteName from t_wim_msg a
         LEFT JOIN station_site b on a.Station_IP=b.Station_Port
-        where  #{startTime} &lt; msg_time &lt;#{endTime} and
+        where  #{startTime} &lt; msg_time and msg_time &lt;#{endTime} and
         <include refid="StationIP_sql">
-    </include>
+       </include>
     </select>
 
 
