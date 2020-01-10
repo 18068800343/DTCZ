@@ -248,7 +248,7 @@
         methods: {
             //新建生产计划保存按钮事件
             searchInit: function () {
-                this.stationPort = this.zhandian.toString();
+                this.stationPort = $("#zhandian").val().toString();
                 //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
                 this.$http.post('/tWimMsg/getAlltWimMsgByCondiTion', this._data, {emulateJSON: true}).then((res) => {
 

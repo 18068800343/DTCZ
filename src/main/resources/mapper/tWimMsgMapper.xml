@@ -16,6 +16,20 @@
             ORDER BY a.Evt_Time desc limit 5
         </if>
     </sql>
+    <sql id="StationIP_sql_tongji">
+        <if test="stationPort!=null and stationPort!=''">
+            <if test="stationPort.indexOf(',')!=-1">
+                a.Station_IP in
+                <foreach collection="stationPort.split(',')" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="stationPort.indexOf(',')==-1">
+                a.Station_IP=#{stationPort}
+            </if>
+            ORDER BY a.Evt_Time desc
+        </if>
+    </sql>
 
     <select id="getAlltWimMsg" resultType="tWimMsgVo">
         select CASE a.Direction WHEN 0 THEN '正常行驶'
@@ -46,8 +60,8 @@
         LEFT JOIN station_site b on a.Station_IP=b.Station_Port
         LEFT JOIN license_plate c ON a.Plate_Color=c.License_Plate_No
         LEFT JOIN vehicle_type d ON a.Class_Index=d.Vehicle_Type_No
-        where  #{startTime} &lt; msg_time and msg_time &lt;#{endTime} and
-        <include refid="StationIP_sql">
+        where  #{startTime} &lt; msg_time and msg_time &lt; #{endTime} and #{startWeight} &lt; total_weight and  total_weight &lt; #{endWeight} and
+        <include refid="StationIP_sql_tongji">
        </include>
     </select>
 

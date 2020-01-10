@@ -23,8 +23,8 @@ public class tWimMsgServiceImpl implements tWimMsgService {
     }
 
     @Override
-    public List<tWimMsgVo> getAlltWimMsgByCondition(String stationPort, String startTime, String endTime) {
+    public List<tWimMsgVo> getAlltWimMsgByCondition(String stationPort, String startTime, String endTime,Double startWeight,Double endWeight) {
 
-        return dao.getAlltWimMsgByCondition(stationPort, startTime,endTime);
+        return dao.getAlltWimMsgByCondition(stationPort, startTime,endTime,startWeight,endWeight);
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class tWimMsgController {
 
     @Autowired
     private tWimMsgService service;
-    @Autowired
+    @Resource
     private tUserInfoDao tUserInfoDao;
 
     @RequestMapping("/getAlltWimMsg")
@@ -43,7 +44,7 @@ public class tWimMsgController {
     }
 
     @RequestMapping("/getAlltWimMsgByCondiTion")
-    public List<tWimMsgVo> getAlltWimMsgByCondiTion(HttpSession session,String  stationPort,String startTime,String endTime) {
+    public List<tWimMsgVo> getAlltWimMsgByCondiTion(HttpSession session,String  stationPort,String startTime,String endTime,Double startWeight,Double endWeight) {
         String zhandianduankouhao="";
         if(stationPort!=null&&stationPort!=""){
             zhandianduankouhao=stationPort;
@@ -51,7 +52,13 @@ public class tWimMsgController {
             tUserInfo user = (tUserInfo) session.getAttribute("user");
             zhandianduankouhao = user.getStationPort();
         }
-        List<tWimMsgVo> list= service.getAlltWimMsgByCondition(zhandianduankouhao,startTime,endTime);
+        Double mid = 0.0;
+        if(startWeight>endWeight){
+            mid=startWeight;
+            startWeight = endWeight;
+            endWeight = mid;
+        }
+        List<tWimMsgVo> list= service.getAlltWimMsgByCondition(zhandianduankouhao,startTime,endTime,startWeight,endWeight);
         return list;
     }
 }

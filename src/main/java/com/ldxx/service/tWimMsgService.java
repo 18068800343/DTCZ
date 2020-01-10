@@ -8,5 +8,5 @@ public interface tWimMsgService {
 
     List<tWimMsgVo> getAlltWimMsg(String stationPort);
 
-    List<tWimMsgVo> getAlltWimMsgByCondition(String stationPort,String startTime,String endTime);
+    List<tWimMsgVo> getAlltWimMsgByCondition(String stationPort,String startTime,String endTime,Double startWeight,Double endWeight);
 }
