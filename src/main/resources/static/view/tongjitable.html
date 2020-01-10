@@ -21,8 +21,8 @@
             margin-right: 5%;
         }
         .jiance{
-            float: right;
-            margin-right: 5%;
+            float:right;
+            
         }
         .xian{
             margin-top:3.5%;
@@ -31,37 +31,11 @@
 </head>
 <body style="background-image: none;">
 <div class="form-group" id="rightTab">
-    <div class="sele">
-        <label for="" class="col-sm-2 control-label">筛选站点</label>
-        <div class="col-sm-2" style="width: 20%">
-            <!-- 样式1 -->
-            <select class="form-control selectpicker" multiple data-max-options="2"  data-live-search="true" id="zhandian" style="width:80%;">
-            </select>
-        </div>
-    </div>
-     <label class="col-sm-1	 control-label" style="margin-left: 50px;width: 70px;line-height: 30px;">日期:</label>
-        <div class="col-sm-2">
-            <!-- 样式1 -->
-            <input type="date" v-model="startTime" value="请选择"
-                   style="height: 34px;border-radius: 5px;box-shadow: none;width: 250%;border:1px solid #DDD;"">
-        </div>
-
-        <div class="col-sm-2" style="margin-left: 6%;">
-            <div class="xian2"
-                 style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: 8%;margin-top: 15%;">
-            </div>
-            <input type="date" v-model="endTime" value="请选择" style="height: 34px;border-radius: 5px;box-shadow: none;width:
-        250%;margin-left: 30px;border:1px solid #DDD;">
-        </div>
-    <button type="button" class="btn btn-primary" onclick="queding()" style="margin-left: 10%;width: 100px; background-image: linear-gradient(#1F62C8,#262E9F);">确定</button>
-    <div class="jiance">
-        <button type="button" class="btn btn-primary" onclick="nowJianceSite()" data-toggle="modal" data-target="#jianceDiv" style="width: 150px; background-image: linear-gradient(#1F62C8,#262E9F);">当前监测站点</button>
-    </div>
-        <div class="sele">
+ <div class="sele">
         <label for="" class="col-sm-2 control-label">重量范围</label>
          <div class="col-sm-2">
             <!-- 样式1 -->
-            <input type="text" v-model="startTime" value="请选择"
+            <input type="text"  value="请输入"
                    style="height: 34px;border-radius: 5px;box-shadow: none;width: 250%;border:1px solid #DDD;padding:3px;">
         </div>
 
@@ -69,9 +43,38 @@
             <div class="xian2"
                  style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: 8%;margin-top: 15%;">
             </div>
-            <input type="text" v-model="endTime" value="请选择" style="height: 34px;border-radius: 5px;box-shadow: none;width:
+            <input type="text" value="请输入" style="height: 34px;border-radius: 5px;box-shadow: none;width:
         250%;margin-left: 30px;border:1px solid #DDD;padding:3px;">
         </div>
+    </div>
+   
+     <label class="col-sm-1	 control-label" style="margin-left: 9%;width: 70px;line-height: 30px;">日期:</label>
+        <div class="col-sm-2">
+            <!-- 样式1 -->
+            <input type="date" v-model="startTime" value="请选择"
+                   style="height: 34px;border-radius: 5px;box-shadow: none;width: 250%;border:1px solid #DDD;"">
+        </div>
+ <button type="button" class="btn btn-primary" onclick="nowJianceSite()" data-toggle="modal" data-target="#jianceDiv" style="width: 150px; margin-left:10%;background-image: linear-gradient(#1F62C8,#262E9F);">当前监测站点</button>
+        <div class="col-sm-2" style="margin-left: 6%;">
+            <div class="xian2"
+                 style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: 8%;margin-top: 15%;">
+            </div>
+            <input type="date" v-model="endTime" value="请选择" style="height: 34px;border-radius: 5px;box-shadow: none;width:
+        250%;margin-left: 30px;border:1px solid #DDD;">
+        </div>
+    
+    
+        <div class="sele">
+        <label for="" class="col-sm-2 control-label">筛选站点</label>
+        <div class="col-sm-2" style="width: 20%">
+            <!-- 样式1 -->
+            <select class="form-control selectpicker" multiple data-max-options="2"  data-live-search="true" id="zhandian" style="width:80%;">
+            </select>
+        </div>
+        <div class="jiance" style="margin-right:18%;">
+        <button type="button" class="btn btn-primary" onclick="queding()" style="width: 150px; background-image: linear-gradient(#1F62C8,#262E9F);">确定</button>
+       
+    </div>
     </div>
     <div class="xian"></div>
     <!--表格-->
