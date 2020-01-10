@@ -1,8 +1,11 @@
 package com.ldxx.controller;
 
+import com.ldxx.bean.StationSite;
 import com.ldxx.bean.tUserInfo;
+import com.ldxx.dao.StationSiteDao;
 import com.ldxx.dao.tUserInfoDao;
 import com.ldxx.service.tWimMsgService;
+import com.ldxx.vo.ChaoZaiVo;
 import com.ldxx.vo.tWimMsgVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -20,6 +24,8 @@ public class tWimMsgController {
     private tWimMsgService service;
     @Resource
     private tUserInfoDao tUserInfoDao;
+    @Autowired
+    private StationSiteDao sitedao;
 
     @RequestMapping("/getAlltWimMsg")
     public List<tWimMsgVo> getAlltWimMsg(HttpSession session,String  stationPort) {
@@ -27,7 +33,9 @@ public class tWimMsgController {
         tUserInfo user = (tUserInfo) session.getAttribute("user");
         if(stationPort!=null&&stationPort!=""){
             zhandianduankouhao=stationPort;
-            updlastMonitoringSiteById(stationPort,user.getUsrId());
+            if(user!=null){
+                updlastMonitoringSiteById(stationPort,user.getUsrId());
+            }
         }else{
             if(user!=null){
                 zhandianduankouhao = user.getStationPort();
@@ -59,6 +67,44 @@ public class tWimMsgController {
             endWeight = mid;
         }
         List<tWimMsgVo> list= service.getAlltWimMsgByCondition(zhandianduankouhao,startTime,endTime,startWeight,endWeight);
+        return list;
+    }
+
+    /**
+     * 每日超流量
+     * @param stationPort
+     * @return
+     */
+    @RequestMapping("/getMeiRiCheLiuLiangByStationPort")
+    public List<Integer> getMeiRiCheLiuLiangByStationPort(String stationPort) {
+        List<Integer> list=new ArrayList<Integer>();
+        if(stationPort!=null){
+            String[] split = stationPort.split(",");
+            for (String sport:split){
+                int i=service.getMeiRiCheLiuLiangByStationPort(sport);
+                list.add(i);
+            }
+        }
+        return list;
+    }
+
+    @RequestMapping("/getMeiRiChaoZhongByStationPort")
+    public List<ChaoZaiVo> getMeiRiChaoZhongByStationPort(String stationPort) {
+        List<ChaoZaiVo> list=new ArrayList<ChaoZaiVo>();
+        if(stationPort!=null){
+            String[] split = stationPort.split(",");
+            for (String sport:split){
+                tWimMsgVo tWimMsgVo=new tWimMsgVo();
+                ChaoZaiVo chaoZaiVo=new ChaoZaiVo();
+                int i=service.getMeiRiChaoZhongByStationPort(sport);
+                List<StationSite> stationSites = sitedao.getStationSiteByPort(sport);
+                if(i>0){
+                    chaoZaiVo.setValue(i);
+                    chaoZaiVo.setName(stationSites.get(0).getStationName()+"+"+stationSites.get(0).getRouteName());
+                    list.add(chaoZaiVo);
+                }
+            }
+        }
         return list;
     }
 }

@@ -71,9 +71,9 @@
 			</table>
 			<div class="bright">
 				<div class="blue">
-					<p>当日超载车辆统计</p>
+					<p>当日车流量统计</p>
 					<div class="left col-xs-4 ">
-						<div id="_top" style="width:600px;height: 400px;margin-left: 50px;">
+						<div id="_top" style="width:700px;height: 400px;">
 						</div>
 						<!--左边-->
 					</div>
@@ -131,12 +131,15 @@
 	<script src="js/echarts.min(1).js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/datatables/jquery.dataTables.min.js"></script>
 	<script src="js/toastr.js" ></script>
+	<script src="js/jianceEcharts.js" ></script>
 	<script>
 
 		$(document).ready( function () {
 			initzhandian()
 			queding()
 			setInterval(refresh, 4000);
+			setLeftEcharts()
+			setRightEcharts()
 		});
 		var table=$('#mainContent').dataTable({
 			"deferRender": true,
@@ -231,8 +234,16 @@
 						$(".selectpicker").selectpicker({
 							noneSelectedText: '请选择',
 						});
-						$("#zhandian").val(user.lastMonitoringSite.split(","));
-						$('#zhandian').selectpicker('val', user.lastMonitoringSite.split(","));
+						if(user.lastMonitoringSite!=null&&user.lastMonitoringSite!=""&&user.lastMonitoringSite!=undefined){
+							if(user.lastMonitoringSite.indexOf(",")!=-1){
+								$("#zhandian").val(user.lastMonitoringSite.split(","));
+								$('#zhandian').selectpicker('val', user.lastMonitoringSite.split(","));
+							}else{
+								$("#zhandian").val(user.lastMonitoringSite);
+								$('#zhandian').selectpicker('val', user.lastMonitoringSite);
+							}
+
+						}
 						$("#zhandian").selectpicker("refresh");
 						$('#zhandian').selectpicker('render');
 					}
@@ -263,6 +274,8 @@
 				success: function (json) {
 					$('#mainContent').dataTable().fnClearTable();
 					$('#mainContent').DataTable().rows.add(json).draw(false);
+					setLeftEcharts()
+					setRightEcharts()
 				}
 			});
 		}
@@ -296,129 +309,152 @@
 		function refresh(){
 			if(user!=null&&user!=""&&user!=undefined){
 				queding()
-				/*if($("#zhandian").val()!=""&&$("#zhandian").val()!=undefined&&$("#zhandian").val()!=null){
-					queding()
-				}else{
-					initTable()
-				}*/
-
+				setLeftEcharts()
+				setRightEcharts()
 			}
 		}
 
-	</script>
-	<!--======================================================================================左边柱状图===============================================================================-->
-	<script type="text/javascript">
+
+	<!--======================================================================================左边柱状图（当日车流量）===============================================================================-->
+
 		// 基于准备好的dom，初始化echarts实例
-		var myChart = echarts.init(document.getElementById('_top'));
-		//		app.title = '世界人口总量 - 条形图';
 
-		var option = {
-
-			title: {
-
-			},
-			tooltip: {
-				trigger: 'axis',
-				axisPointer: {
-					type: 'shadow'
-				}
-			},
-
-			grid: {
-				left: '3%',
-				right: '4%',
-				bottom: '3%',
-				containLabel: true
-			},
-			xAxis: {
-				type: 'value',
-				boundaryGap: [0, 0.01]
-			},
-			yAxis: {
-				type: 'category',
-				data: ['S65苏皖省界', 'G30苏皖省界', 'S69济徐苏鲁省界', 'G3京福苏鲁省界', 'G25临连苏鲁省界', 'G15苏鲁省界']
-			},
-
-			series: [{
-				name: '2011年',
-				type: 'bar',
-				data: [367, 213, 253, 353, 448, 270],
-				barWidth: 20,
-				itemStyle: {
-					normal: {
-						color: '#91FD63'
-					}
+		var user;
+		function getLoginUser(){
+			$.ajax({
+				type: 'POST',
+				url: '/login/getUser',
+				dataType: 'json',
+				async:false,
+				data: {
 				},
+				error: function (msg) {
+					errMessage("请求UserController失败");
+				},
+				success: function (json) {
+					user = json;
+				}
+			});
+			return user;
+		}
 
-			}, ]
-		};
+		function getstationName(user){
+			var stationName
+			if($("#zhandian").val()!=""&&$("#zhandian").val()!=undefined&&$("#zhandian").val()!=null){
+				var text=[];
+				var checkParam = $('#zhandian').find('option:selected');
+				for (var i=0;i<checkParam.length;i++) {
+					text.push(checkParam[i].textContent);
+				}
+				stationName=text;
+			}else{
+				stationName=user.stationName.split(",")
+			}
+			return stationName;
+		}
 
-		// 使用刚指定的配置项和数据显示图表。
-		myChart.setOption(option);
-	</script>
-	<!--饼状图-->
-	<script type="text/javascript">
-		var myChart = echarts.init(document.getElementById('_right'));
+		function getstationPort(user){
+			var stationPort
+			if($("#zhandian").val()!=""&&$("#zhandian").val()!=undefined&&$("#zhandian").val()!=null){
+				stationPort=$("#zhandian").val().toString();
+			}else{
+				stationPort=user.stationPort
+			}
+			return stationPort;
+		}
 
-		var option = {
-			title: {
-				x: 'center'
-			},
-			tooltip: {
-				trigger: 'item',
-				formatter: "{a} <br/>{b} : {c} ({d}%)"
-			},
-			legend: {
-				orient: 'vertical',
-				right: 'right',
-				data: ['S65苏皖省界', 'G30苏皖省界', 'S69济徐苏鲁省界', 'G3京福苏鲁省界', 'G25临连苏鲁省界', 'G15苏鲁省界'],
-				color: '#FFFFFF',
-			},
-			series: [{
-				name: '访问来源',
-				type: 'pie',
-				radius: '55%',
-				center: ['50%', '60%'],
-				color: ['#06d3c4', '#ffbb32', '#2ccc44', "#0278fe", "#FF3976", "#6058E1", "#e569ff", "#00d6fb"],
-				data: [{
-						value: 335,
-						name: 'S65苏皖省界'
-					},
-					{
-						value: 310,
-						name: 'G30苏皖省界'
-					},
-					{
-						value: 234,
-						name: 'S69济徐苏鲁省界'
-					},
-					{
-						value: 135,
-						name: 'G3京福苏鲁省界'
-					},
-					{
-						value: 200,
-						name: 'G25临连苏鲁省界'
-					},
-					{
-						value: 120,
-						name: 'G15苏鲁省界'
-					}
-				
-				],
-				itemStyle: {
-					emphasis: {
-						shadowBlur: 10,
-						shadowOffsetX: 0,
-						shadowColor: 'rgba(0, 0, 0, 0.5)'
+		function setLeftEcharts(){
+			var user=getLoginUser();
+			var stationName=getstationName(user);
+			var stationPort=getstationPort(user);
+
+			$.ajax({
+				type: 'POST',
+				url: '/tWimMsg/getMeiRiCheLiuLiangByStationPort',
+				dataType: 'json',
+				data: {
+					stationPort: stationPort,
+				},
+				error: function (msg) {
+					errMessage("请求UserController失败");
+				},
+				success: function (json) {
+					setEcharts(json,stationName)
+
+				}
+			});
+		}
+
+		function setEcharts(list,stationName){
+			var arr='';
+			for(var i=0;i<list.length;i++){
+				for (var i=0;i<stationName.length;i++){
+					if(list[i]==0){
+						arr+=stationName[i]+"今日无车流量,"
+						list.splice($.inArray(list[i],list),1);
+						stationName.splice($.inArray(stationName[i],stationName),1);
 					}
 				}
-			}]
-		};
+			}
+			arr=arr.substring(0,arr.length-1);
+
+			var myChart = echarts.init(document.getElementById('_top'));
+			let option = setjiancezhandianLeft(list,stationName);
+			// 使用刚指定的配置项和数据显示图表。
+			myChart.setOption(option);
+			/*$("#_top").append(arr).css({
+				"margin-left":"30px"
+			})*/
+		}
+
+
+
+	<!--==========================================================饼状图（当日超载车辆）===========================================-->
+
+		function setRightEcharts(){
+			var user=getLoginUser();
+			var stationName=getstationName(user);
+			var stationPort=getstationPort(user);
+
+			$.ajax({
+				type: 'POST',
+				url: '/tWimMsg/getMeiRiChaoZhongByStationPort',
+				dataType: 'json',
+				data: {
+					stationPort: stationPort,
+				},
+				error: function (msg) {
+					errMessage("请求UserController失败");
+				},
+				success: function (json) {
+					setEcharts2(json,stationName)
+
+				}
+			});
+		}
+
+		function setEcharts2(list,stationName){
+			var myChart2 = echarts.init(document.getElementById('_right'));
+			if(list!=null&&list.length!=0){
+				let option2 = setjiancezhandianRight(list,stationName);
+				// 使用刚指定的配置项和数据显示图表。
+				myChart2.setOption(option2);
+			}else{
+				$("#_right").html('今日无超重车辆').css({
+					"margin-left":"30px"
+				})
+			}
+
+		}
+		/*var myChart = echarts.init(document.getElementById('_right'));
+
+		let option2 = setjiancezhandianRight();
 
 		// 使用刚指定的配置项和数据显示图表。
-		myChart.setOption(option);
+		myChart.setOption(option2);*/
+
 	</script>
+	<!--==========================================================下面的柱状图（当日关键车辆）===========================================-->
     <script type="text/javascript">
     	var myChart = echarts.init(document.getElementById('bottom_'));
     	var option = {

@@ -65,5 +65,12 @@
        </include>
     </select>
 
+    <select id="getMeiRiCheLiuLiangByStationPort" resultType="int">
+        SELECT COUNT(*) from t_vehicle_msg where  Station_IP=#{stationPort} AND date(Evt_Time) = curdate()
+    </select>
+
+    <select id="getMeiRiChaoZhongByStationPort" resultType="int">
+        SELECT COUNT(*) from t_vehicle_msg where  Station_IP=#{stationPort} AND date(Evt_Time) = curdate() and Over_Weight>0
+    </select>
 
 </mapper>
