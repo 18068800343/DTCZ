@@ -89,7 +89,10 @@
 			</div>
 			<!--左上半部分结束-->
            <div class="bottom">
-           	<div id="bottom_" style="width:97%;margin-left: 15px;">
+			   <div class="blue" style="width:90%;margin-left: 5%;">
+					<p style="width:800px;margin-top: 600px;">当日关键超重车辆统计</p>
+				   <div id="bottom_" style="width:97%;margin-left: 15px;"></div>
+				</div>
 			</div>
            </div>
           </div>
@@ -137,9 +140,10 @@
 		$(document).ready( function () {
 			initzhandian()
 			queding()
-			setInterval(refresh, 4000);
 			setLeftEcharts()
 			setRightEcharts()
+			setBottomEcharts()
+			setInterval(refresh, 4000);
 		});
 		var table=$('#mainContent').dataTable({
 			"deferRender": true,
@@ -276,6 +280,7 @@
 					$('#mainContent').DataTable().rows.add(json).draw(false);
 					setLeftEcharts()
 					setRightEcharts()
+					setBottomEcharts()
 				}
 			});
 		}
@@ -311,6 +316,7 @@
 				queding()
 				setLeftEcharts()
 				setRightEcharts()
+				setBottomEcharts()
 			}
 		}
 
@@ -386,6 +392,8 @@
 		}
 
 		function setEcharts(list,stationName){
+			/*
+			//不显示为0的站点
 			var arr='';
 			for(var i=0;i<list.length;i++){
 				for (var i=0;i<stationName.length;i++){
@@ -396,15 +404,12 @@
 					}
 				}
 			}
-			arr=arr.substring(0,arr.length-1);
+			arr=arr.substring(0,arr.length-1);*/
 
 			var myChart = echarts.init(document.getElementById('_top'));
 			let option = setjiancezhandianLeft(list,stationName);
 			// 使用刚指定的配置项和数据显示图表。
 			myChart.setOption(option);
-			/*$("#_top").append(arr).css({
-				"margin-left":"30px"
-			})*/
 		}
 
 
@@ -446,55 +451,41 @@
 			}
 
 		}
-		/*var myChart = echarts.init(document.getElementById('_right'));
 
-		let option2 = setjiancezhandianRight();
 
-		// 使用刚指定的配置项和数据显示图表。
-		myChart.setOption(option2);*/
 
-	</script>
 	<!--==========================================================下面的柱状图（当日关键车辆）===========================================-->
-    <script type="text/javascript">
-    	var myChart = echarts.init(document.getElementById('bottom_'));
-    	var option = {
-    color: ['#29DC93'],
-    tooltip : {
-        trigger: 'axis',
-        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-        }
-    },
-    grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
-    },
-    xAxis : [
-        {
-            type : 'category',
-            data : ['G15', 'G25', 'G3', 'G69', 'G30', 'S65', 'G1516','G36','S38','S68',,'S50','G2','G40'],
-            axisTick: {
-                alignWithLabel: true
-            }
-        }
-    ],
-    yAxis : [
-        {
-            type : 'value'
-        }
-    ],
-    series : [
-        {
-            name:'直接访问',
-            type:'bar',
-            barWidth: '20%',
-            data:[10, 52, 200, 334, 390, 330, 220,192,83,29,352,201,102,91]
-        }
-    ]
-};
-// 使用刚指定的配置项和数据显示图表。
-		myChart.setOption(option);
+
+		function setBottomEcharts(){
+			var user=getLoginUser();
+			var stationName=getstationName(user);
+			var stationPort=getstationPort(user);
+
+			$.ajax({
+				type: 'POST',
+				url: '/tWimMsg/getMeiRiCheLiuLiangByStationPort',
+				dataType: 'json',
+				data: {
+					stationPort: stationPort,
+				},
+				error: function (msg) {
+					errMessage("请求UserController失败");
+				},
+				success: function (json) {
+					setEcharts3(json,stationName)
+
+				}
+			});
+		}
+		function setEcharts3(list,stationName){
+			var myChart3 = echarts.init(document.getElementById('bottom_'));
+			if(list!=null&&list.length!=0){
+				let option = setjiancezhandianBottom(list,stationName);
+				// 使用刚指定的配置项和数据显示图表。
+				myChart3.setOption(option);
+			}
+
+		}
+
     </script>
 </html>

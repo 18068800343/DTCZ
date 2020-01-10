@@ -98,11 +98,11 @@ public class tWimMsgController {
                 ChaoZaiVo chaoZaiVo=new ChaoZaiVo();
                 int i=service.getMeiRiChaoZhongByStationPort(sport);
                 List<StationSite> stationSites = sitedao.getStationSiteByPort(sport);
-                if(i>0){
+                /*if(i>0){*/
                     chaoZaiVo.setValue(i);
                     chaoZaiVo.setName(stationSites.get(0).getStationName()+"+"+stationSites.get(0).getRouteName());
                     list.add(chaoZaiVo);
-                }
+                /*}*/
             }
         }
         return list;
