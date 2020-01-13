@@ -2,8 +2,8 @@ function setjiancezhandianLeft(list,stationName){
     var seriesLabel = {
         normal: {
             show: true,
-            textBorderColor: '#333',
-            textBorderWidth: 2
+            textBorderColor: '#fff',
+            textBorderWidth: 1
         }
     }
     var option = {
@@ -67,7 +67,7 @@ function setjiancezhandianRight(list,stationName){
         legend: {
             orient: 'vertical',
             right: 'right',
-            data: /*['S65苏皖省界', 'G30苏皖省界', 'S69济徐苏鲁省界', 'G3京福苏鲁省界', 'G25临连苏鲁省界', 'G15苏鲁省界']*/stationName,
+            data: stationName,
             color: '#FFFFFF',
 
         },
@@ -97,8 +97,8 @@ function setjiancezhandianBottom(list,stationName){
     var seriesLabel = {
         normal: {
             show: true,
-            textBorderColor: '#333',
-            textBorderWidth: 2
+            textBorderColor: '#fff',
+            textBorderWidth: 1
         }
     }
     var option = {
@@ -117,11 +117,23 @@ function setjiancezhandianBottom(list,stationName){
         },
         xAxis : [
             {
+                triggerEvent: true,
                 type : 'category',
-                data : /*['G15', 'G25', 'G3', 'G69', 'G30', 'S65', 'G1516','G36','S38','S68',,'S50','G2','G40']*/stationName,
+                data :stationName,
                 axisTick: {
                     alignWithLabel: true
+                },
+                //文字过长隐藏剩余部分
+                axisLabel: {
+                    formatter: function(value) {
+                        var res = value;
+                        if(res.length > 6) {
+                            res = res.substring(0, 5) + "..";
+                        }
+                        return res;
+                    }
                 }
+
             }
         ],
         yAxis : [
@@ -131,11 +143,11 @@ function setjiancezhandianBottom(list,stationName){
         ],
         series : [
             {
-                name:'直接访问',
+                name:'关键车辆超重统计',
                 type:'bar',
                 label: seriesLabel,
                 barWidth: '20%',
-                data:/*[10, 52, 200, 334, 390, 330, 220,192,83,29,352,201,102,91]*/list
+                data:list
             }
         ]
     };

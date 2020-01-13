@@ -13,4 +13,6 @@ public interface tWimMsgService {
     int getMeiRiCheLiuLiangByStationPort(String stationPort);
 
     int getMeiRiChaoZhongByStationPort(String stationPort);
+
+    int getMeiRiGuanJianCheLiangByStationPort(String stationPort);
 }

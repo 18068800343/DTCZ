@@ -82,7 +82,7 @@
 			<div class="bleft">
 				<div class="blue">
 					<p>当日超重车辆统计</p>
-					<div id="_right" style="width:500px;height: 400px;margin-top: 20px;">
+					<div id="_right" style="width:700px;height: 400px;margin-top: 20px;">
 					<!--右边-->
 				</div>
 				</div>
@@ -463,7 +463,7 @@
 
 			$.ajax({
 				type: 'POST',
-				url: '/tWimMsg/getMeiRiCheLiuLiangByStationPort',
+				url: '/tWimMsg/getMeiRiGuanJianCheLiangByStationPort',
 				dataType: 'json',
 				data: {
 					stationPort: stationPort,
@@ -472,6 +472,7 @@
 					errMessage("请求UserController失败");
 				},
 				success: function (json) {
+					console.log(json)
 					setEcharts3(json,stationName)
 
 				}
@@ -483,6 +484,7 @@
 				let option = setjiancezhandianBottom(list,stationName);
 				// 使用刚指定的配置项和数据显示图表。
 				myChart3.setOption(option);
+
 			}
 
 		}

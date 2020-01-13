@@ -73,4 +73,9 @@
         SELECT COUNT(*) from t_vehicle_msg where  Station_IP=#{stationPort} AND date(Evt_Time) = curdate() and Over_Weight>0
     </select>
 
+    <select id="getMeiRiGuanJianCheLiangByStationPort" resultType="int">
+        SELECT COUNT(*) from t_vehicle_msg
+        where  Station_IP=#{stationPort} AND date(Evt_Time) = curdate() and Total_Weight>(SELECT Crux_Weight FROM crux_weight where Del_State=1)
+    </select>
+
 </mapper>

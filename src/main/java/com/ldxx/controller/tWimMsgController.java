@@ -107,4 +107,17 @@ public class tWimMsgController {
         }
         return list;
     }
+
+    @RequestMapping("/getMeiRiGuanJianCheLiangByStationPort")
+    public List<Integer> getMeiRiGuanJianCheLiangByStationPort(String stationPort) {
+        List<Integer> list=new ArrayList<Integer>();
+        if(stationPort!=null){
+            String[] split = stationPort.split(",");
+            for (String sport:split){
+                int i=service.getMeiRiGuanJianCheLiangByStationPort(sport);
+                list.add(i);
+            }
+        }
+        return list;
+    }
 }

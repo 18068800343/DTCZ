@@ -37,4 +37,9 @@ public class tWimMsgServiceImpl implements tWimMsgService {
     public int getMeiRiChaoZhongByStationPort(String stationPort) {
         return dao.getMeiRiChaoZhongByStationPort(stationPort);
     }
+
+    @Override
+    public int getMeiRiGuanJianCheLiangByStationPort(String stationPort) {
+        return dao.getMeiRiGuanJianCheLiangByStationPort(stationPort);
+    }
 }

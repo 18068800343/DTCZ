@@ -13,4 +13,6 @@ public interface tWimMsgDao {
     int getMeiRiCheLiuLiangByStationPort(String stationPort);
 
     int getMeiRiChaoZhongByStationPort(String stationPort);
+
+    int getMeiRiGuanJianCheLiangByStationPort(String stationPort);
 }
