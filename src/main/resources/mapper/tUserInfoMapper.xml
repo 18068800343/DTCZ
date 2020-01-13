@@ -43,7 +43,7 @@
 
     <select id="selectUserByUsrName" resultType="tUserInfoVo">
 		SELECT
-		tui.*,GROUP_CONCAT(ss.Station_Longitude) as lng,GROUP_CONCAT(ss.Station_Latitude) as lat
+		tui.*,GROUP_CONCAT(CONCAT(ss.Station_Longitude,"-",ss.Station_Latitude)) as lnglat
 		FROM
 			t_user_info tui
 		LEFT JOIN station_site ss
@@ -53,7 +53,14 @@
 	</select>
 
     <select id="selectUserById" resultType="tUserInfoVo">
-		select * from t_user_info where Usr_Id=#{usrId} and Del_State=1
+		SELECT
+		tui.*,GROUP_CONCAT(CONCAT(ss.Station_Longitude,"-",ss.Station_Latitude)) as lnglat
+		FROM
+			t_user_info tui
+		LEFT JOIN station_site ss
+		on FIND_IN_SET(ss.Station_Port,tui.Station_Port)
+		WHERE
+		Usr_Id = #{usrId} and tui.Del_State=1
 	</select>
 
     <update id="updlastMonitoringSiteById">
