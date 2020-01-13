@@ -84,6 +84,7 @@
 	setRightEcharts();
 	setBottomEcharts();
 	setInterval(refresh, 4000);
+
 	function refresh(){
 		if(user!=null&&user!=""&&user!=undefined){
 			//queding();
@@ -189,11 +190,41 @@
         createMap(); //创建地图
         setMapEvent(); //设置地图事件
     }
+
+    function initMarker(){
+	    let lnglatStr = user.lnglat;
+	    let array = ""!=lnglatStr&&null!=lnglatStr&&lnglatStr.indexOf(",")>0 == true?lnglatStr.split(","):lnglatStr;
+          for(let i in array){
+              let lng = array[i]!=""&&array[i]!=null&&array[i].indexOf("-")>0?array[i].split("-")[0]:"";
+              let lat = array[i]!=""&&array[i]!=null&&array[i].indexOf("-")>0?array[i].split("-")[1]:"";
+              addMarker(lng,lat);
+          }
+    }
+    function addMarker(lng,lat) {
+        let point = new BMap.Point(lng, lat);
+        let marker = new BMap.Marker(point);
+        marker = new BMap.Marker(point);
+        let sContent =
+            "<h4 style='margin:0 0 5px 0;padding:0.2em 0'>" + "" + "</h4>" +"<br/>"
+        +"";
+        let infoWindow = new BMap.InfoWindow(sContent);
+        map.addOverlay(marker);
+        marker.addEventListener("click", function () {
+            this.openInfoWindow(infoWindow);
+        });
+    }
+
+
+    var page_map;
     //创建地图函数：
     function createMap() {
         var map = new BMap.Map("dituContent"); //在百度地图容器中创建一个地图
-        var point = new BMap.Point(118.064214, 36.811252); //定义一个中心点坐标
-        map.centerAndZoom(point, 18); //设定地图的中心点和坐标并将地图显示在地图容器中
+        page_map = map;
+        var x = 119.605720;
+        var y = 32.989924;
+        var ggPoint = new BMap.Point(x,y);
+        // 创建点坐标
+        map.centerAndZoom(ggPoint, 5);
         window.map = map; //将map变量存储在全局
     }
     //地图事件设置函数：
@@ -204,7 +235,7 @@
         map.enableKeyboard(); //启用键盘上下左右键移动地图
     }
     initMap(); //创建和初始化地图
-
+    initMarker();
 
 	<!--==========================================================下面的柱状图（当日关键车辆）===========================================-->
 
@@ -237,7 +268,6 @@
 		}
 
 	}
-
 </script>
 
 </html>
