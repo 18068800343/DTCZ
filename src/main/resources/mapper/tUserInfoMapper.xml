@@ -43,7 +43,7 @@
 
     <select id="selectUserByUsrName" resultType="tUserInfoVo">
 		SELECT
-		tui.*,GROUP_CONCAT(ss.Station_Longitude) as '经度',GROUP_CONCAT(ss.Station_Latitude) as '纬度'
+		tui.*,GROUP_CONCAT(ss.Station_Longitude) as lng,GROUP_CONCAT(ss.Station_Latitude) as lat
 		FROM
 			t_user_info tui
 		LEFT JOIN station_site ss
