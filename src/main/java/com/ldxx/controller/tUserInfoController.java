@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,7 +43,7 @@ public class tUserInfoController {
     }
 
     @RequestMapping("/updatetUserInfo")
-    public Map<String,Object> updatetUserInfo(tUserInfo tUserInfo) {
+    public Map<String,Object> updatetUserInfo(tUserInfo tUserInfo, HttpSession session) {
         Map<String,Object> map=new HashMap<>();
         int i=0;
         int iscountName=service.iscountUNameEdit(tUserInfo.getUsrName(),tUserInfo.getUsrId());
@@ -51,7 +52,10 @@ public class tUserInfoController {
         }else{
             i= service.updatetUserInfo(tUserInfo);
         }
-
+        if(i>0){
+            tUserInfoVo tUserInfoVo= service.selectUserById(tUserInfo.getUsrId());
+            session.setAttribute("user",tUserInfoVo);
+        }
         map.put("result",i);
         map.put("user",tUserInfo);
         return map;
