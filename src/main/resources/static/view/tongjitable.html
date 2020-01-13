@@ -210,24 +210,45 @@
 
     });
 
-    function initzhandian() {
+    let user;
+    function initzhandian(){
         $.ajax({
             type: 'POST',
-            url: '/StationSite/getAllStationSite',
+            url: '/login/getUser',
             dataType: 'json',
-            data: {},
+            async:false,
+            data: {
+            },
             error: function (msg) {
-                errMessage("请求UserController失败");
             },
             success: function (json) {
-                if (json != null) {
-                    $("#zhandian").html('');
-                    for (var i = 0; i < json.length; i++) {
-                        $("#zhandian").append("<option  value='" + json[i].stationPort + "'>" + (json[i].stationName + "+" + json[i].routeName) + "</option>");
+                user=json;
+                $("#zhandian").html('');
+                if(json!=null){
+                    if(json.stationPort.indexOf(",")!=-1&&json.stationName.indexOf(",")!=-1){
+                        let stationPort=json.stationPort.split(",");
+                        let stationName=json.stationName.split(",");
+                        for(let i=0;i<stationPort.length;i++){
+                            $("#zhandian").append("<option  value='"+stationPort[i]+"'>"+stationName[i]+"</option>");
+                        }
+                    }else{
+                        $("#zhandian").append("<option  value='"+json.stationPort+"'>"+json.stationName+"</option>");
                     }
                     $(".selectpicker").selectpicker({
                         noneSelectedText: '请选择',
                     });
+                    if(user.lastMonitoringSite!=null&&user.lastMonitoringSite!=""&&user.lastMonitoringSite!=undefined){
+                        if(user.lastMonitoringSite.indexOf(",")!=-1){
+                            $("#zhandian").val(user.lastMonitoringSite.split(","));
+                            $('#zhandian').selectpicker('val', user.lastMonitoringSite.split(","));
+                        }else{
+                            $("#zhandian").val(user.lastMonitoringSite);
+                            $('#zhandian').selectpicker('val', user.lastMonitoringSite);
+                        }
+
+                    }
+                    $("#zhandian").selectpicker("refresh");
+                    $('#zhandian').selectpicker('render');
                 }
             }
         });
@@ -248,7 +269,7 @@
         methods: {
             //新建生产计划保存按钮事件
             searchInit: function () {
-                this.stationPort = $("#zhandian").val().toString();
+                this.stationPort = $("#zhandian").val()==null?"":$("#zhandian").val().toString();
                 //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
                 this.$http.post('/tWimMsg/getAlltWimMsgByCondiTion', this._data, {emulateJSON: true}).then((res) => {
 

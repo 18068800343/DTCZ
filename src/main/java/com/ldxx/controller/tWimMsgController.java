@@ -54,11 +54,17 @@ public class tWimMsgController {
     @RequestMapping("/getAlltWimMsgByCondiTion")
     public List<tWimMsgVo> getAlltWimMsgByCondiTion(HttpSession session,String  stationPort,String startTime,String endTime,Double startWeight,Double endWeight) {
         String zhandianduankouhao="";
-        if(stationPort!=null&&stationPort!=""){
+        tUserInfo user = (tUserInfo) session.getAttribute("user");
+           if(stationPort!=null&&stationPort!=""){
             zhandianduankouhao=stationPort;
+            if(user!=null){
+                updlastMonitoringSiteById(stationPort,user.getUsrId());
+            }
         }else{
-            tUserInfo user = (tUserInfo) session.getAttribute("user");
-            zhandianduankouhao = user.getStationPort();
+             if(user!=null){
+                zhandianduankouhao = user.getStationPort();
+                updlastMonitoringSiteById(user.getStationPort(),user.getUsrId());
+            }
         }
         Double mid = 0.0;
         if(startWeight>endWeight){

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ldxx.dao.tUserInfoDao" >
+<mapper namespace="com.ldxx.dao.tUserInfoDao">
 
-	<insert id="addtUserInfo" parameterType="tUserInfo">
+    <insert id="addtUserInfo" parameterType="tUserInfo">
 		insert into t_user_info (Usr_Id,Usr_Name,Usr_Pwd,Usr_Sex,Usr_Phone,Usr_Role,Station_Port,Station_Name,Del_State)
 			values(#{usrId},#{usrName},#{usrPwd},#{usrSex},#{usrPhone},#{usrRole},#{stationPort},#{stationName},#{delState})
 	</insert>
 
-	<update id="updatetUserInfo" parameterType="tUserInfo">
+    <update id="updatetUserInfo" parameterType="tUserInfo">
 		update t_user_info set
 		Usr_Name=#{usrName},
 		Usr_Pwd=#{usrPwd},
@@ -19,37 +19,44 @@
 		where Usr_Id=#{usrId}
 	</update>
 
-	<update id="updatepasswordById">
+    <update id="updatepasswordById">
 		update t_user_info set
 		Usr_Pwd=#{usrPwd}
 		where Usr_Id=#{usrId}
 	</update>
 
-	<update id="deltUserInfo">
+    <update id="deltUserInfo">
 		update t_user_info set Del_State=0 where Usr_Id=#{id}
 	</update>
 
-	<select id="getAlltUserInfo" resultType="tUserInfoVo">
+    <select id="getAlltUserInfo" resultType="tUserInfoVo">
 		select  * from t_user_info where Del_State=1
 	</select>
 
-	<select id="iscountName" resultType="int">
+    <select id="iscountName" resultType="int">
 		select count(Usr_Name) from t_user_info where Usr_Name=#{name} and Del_State=1
 	</select>
 
-	<select id="iscountUNameEdit" parameterType="String" resultType="int">
+    <select id="iscountUNameEdit" parameterType="String" resultType="int">
 		select count(Usr_Name) from t_user_info where Usr_Name=#{name} and Usr_Id !=#{id} and Del_State=1
 	</select>
 
-	<select id="selectUserByUsrName" resultType="tUserInfoVo">
-		select * from t_user_info where Usr_Name=#{name} and Del_State=1
+    <select id="selectUserByUsrName" resultType="tUserInfoVo">
+		SELECT
+		tui.*,GROUP_CONCAT(ss.Station_Longitude) as '经度',GROUP_CONCAT(ss.Station_Latitude) as '纬度'
+		FROM
+			t_user_info tui
+		LEFT JOIN station_site ss
+		on FIND_IN_SET(ss.Station_Port,tui.Station_Port)
+		WHERE
+		Usr_Name = #{name} and tui.Del_State=1
 	</select>
 
-	<select id="selectUserById" resultType="tUserInfoVo">
+    <select id="selectUserById" resultType="tUserInfoVo">
 		select * from t_user_info where Usr_Id=#{usrId} and Del_State=1
 	</select>
 
-	<update id="updlastMonitoringSiteById">
+    <update id="updlastMonitoringSiteById">
 		update t_user_info set
 		Last_Monitoring_Site=#{lastMonitoringSite}
 		where Usr_Id=#{usrId}
