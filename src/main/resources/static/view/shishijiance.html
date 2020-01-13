@@ -82,7 +82,7 @@
 			<div class="bleft">
 				<div class="blue">
 					<p>当日超重车辆统计</p>
-					<div id="_right" style="width:700px;height: 400px;margin-top: 20px;">
+					<div id="_right" style="height: 400px;margin-top: 20px;word-wrap:break-word;">
 					<!--右边-->
 				</div>
 				</div>
@@ -118,7 +118,7 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-						<button type="button" class="btn btn-success" id="xgup_baocun">保存</button>
+						<!--<button type="button" class="btn btn-success" id="xgup_baocun">保存</button>-->
 					</div>
 				</div>
 			</div>
@@ -472,7 +472,6 @@
 					errMessage("请求UserController失败");
 				},
 				success: function (json) {
-					console.log(json)
 					setEcharts3(json,stationName)
 
 				}
@@ -484,7 +483,6 @@
 				let option = setjiancezhandianBottom(list,stationName);
 				// 使用刚指定的配置项和数据显示图表。
 				myChart3.setOption(option);
-
 			}
 
 		}
