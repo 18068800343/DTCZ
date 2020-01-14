@@ -132,7 +132,7 @@
 </div>
 <!-- 修改model结束 -->
 
-<iframe src="home.html"  name="iframe_a" width="100%" height="1500"></iframe>
+<iframe id="iframe-player" src="home.html"  name="iframe_a" width="100%" height="1000px;"></iframe>
 <script src="../js/jquery.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 <script src="js/datatables/jquery.dataTables.min.js"></script>
@@ -140,7 +140,24 @@
 <script src="js/toastr.js" ></script>
 <script src="js/layui.all.js" type="text/javascript" charset="utf-8"></script>
 <!--<script src="js/layui.js" type="text/javascript" charset="utf-8"></script>-->
+<script type="text/javascript">
+var pagestyle = function () {
+    var rframe = $("#iframe-player");
+    //这里宽高比里就看你自己的设置了，随意，例如：
+    //var h = $(window).height() - 200;  //根据窗口大小调节控件高度
+    var h = rframe.width() * 9 / 16;     //根据控件宽度调节控件高度
+    rframe.height(h);
+}
+//iframe加载事件
+$("#iframe-player").on('load', function () {
+    pagestyle();
 
+    // 父页面调用iframe的方法xxx()
+    document.getElementById('iframe-player').contentWindow.xxx();
+});
+//窗体改变大小事件
+$(window).resize(pagestyle);
+</script>
 
 <script type="text/javascript">
 	var user;
