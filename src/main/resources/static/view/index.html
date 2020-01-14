@@ -143,16 +143,13 @@
 <script type="text/javascript">
 var pagestyle = function () {
     var rframe = $("#iframe-player");
-    //这里宽高比里就看你自己的设置了，随意，例如：
-    //var h = $(window).height() - 200;  //根据窗口大小调节控件高度
+ 
     var h = rframe.width() * 9 / 16;     //根据控件宽度调节控件高度
     rframe.height(h);
 }
-//iframe加载事件
 $("#iframe-player").on('load', function () {
     pagestyle();
 
-    // 父页面调用iframe的方法xxx()
     document.getElementById('iframe-player').contentWindow.xxx();
 });
 //窗体改变大小事件
