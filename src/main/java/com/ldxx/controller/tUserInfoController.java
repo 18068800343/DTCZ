@@ -71,6 +71,11 @@ public class tUserInfoController {
         return service.getAlltUserInfo();
     }
 
+    @RequestMapping("/selectUserById")
+    public tUserInfoVo selectUserById(String id) {
+        return service.selectUserById(id);
+    }
+
     @RequestMapping("/updatepasswordById")
     public int updatepasswordById(String usrPwd, String usrId) {
         String old_password = usrPwd.split(",")[0];

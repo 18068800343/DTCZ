@@ -188,6 +188,9 @@
 					return (data*100)+"%";
 				}
 			}],
+			"fnDrawCallback" : function() {
+				getLoginUser()
+			},
 			"order": [[0, 'asc']],
 			"oLanguage": { //国际化配置
 				"sProcessing": "正在获取数据，请稍后...",
@@ -207,15 +210,33 @@
 				}},
 
 		});
-
 		var user;
-		function initzhandian(){
+		function getLoginUser(){
 			$.ajax({
 				type: 'POST',
 				url: '/login/getUser',
 				dataType: 'json',
 				async:false,
 				data: {
+				},
+				error: function (msg) {
+					errMessage("请求UserController失败");
+				},
+				success: function (json) {
+					user = json;
+				}
+			});
+			return user;
+		}
+		/*var user;*/
+		function initzhandian(){
+			$.ajax({
+				type: 'POST',
+				url: '/tUserInfo/selectUserById',
+				dataType: 'json',
+				async:false,
+				data: {
+					id:user.usrId,
 				},
 				error: function (msg) {
 					errMessage("请求UserController失败");
@@ -325,24 +346,7 @@
 
 		// 基于准备好的dom，初始化echarts实例
 
-		var user;
-		function getLoginUser(){
-			$.ajax({
-				type: 'POST',
-				url: '/login/getUser',
-				dataType: 'json',
-				async:false,
-				data: {
-				},
-				error: function (msg) {
-					errMessage("请求UserController失败");
-				},
-				success: function (json) {
-					user = json;
-				}
-			});
-			return user;
-		}
+
 
 		function getstationName(user){
 			var stationName
