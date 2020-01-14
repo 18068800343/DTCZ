@@ -155,6 +155,7 @@
 <script src="../js/common-scripts.js"></script>
 <script src="../js/echartsOptionInit.js"></script>
 <script src="js/toastr.js"></script>
+<script src="../js/myTool.js"></script>
 <script>
     $(document).ready(function () {
         initzhandian();
@@ -301,6 +302,7 @@
         methods: {
             //新建生产计划保存按钮事件
             searchInit: function () {
+                showMask();
                 this.stationPort = $("#zhandian").val() == null ? "" : $("#zhandian").val().toString();
                 this.chexing = $("#chexing").val() == null ? "" : $("#chexing").val().toString();
                 //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
@@ -308,6 +310,8 @@
 
                     $('#mainContent').dataTable().fnClearTable();
                     $('#mainContent').DataTable().rows.add(res.body).draw(false);
+                    hidMask();
+
                 }, (res) => {
 
                 });
@@ -359,6 +363,13 @@
             })
         }
 
+    }
+
+    function showMask() {
+        myTool.mask.show('查询中...');
+    }
+    function hidMask() {
+        myTool.mask.hide();
     }
 </script>
 
