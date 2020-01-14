@@ -73,7 +73,8 @@
 				<div class="blue">
 					<p>当日车流量统计</p>
 					<div class="left col-xs-4 ">
-						<div id="_top" style="width:700px;height: 400px;">
+						<p id="errorMsg"  style="display: inline-block;"></p>
+						<div id="_top" style="width:700px;height: 400px;margin-top: -50px">
 						</div>
 						<!--左边-->
 					</div>
@@ -82,16 +83,18 @@
 			<div class="bleft">
 				<div class="blue">
 					<p>当日超重车辆统计</p>
-					<div id="_right" style="height: 400px;margin-top: 20px;word-wrap:break-word;">
+					<p id="errorMsg2" style="display: inline-block;"></p>
+					<div id="_right" style="height: 400px;margin-top: -50px;">
 					<!--右边-->
-				</div>
+					</div>
 				</div>
 			</div>
 			<!--左上半部分结束-->
            <div class="bottom">
 			   <div class="blue" style="width:90%;margin-left: 5%;">
 					<p style="width:800px;margin-top: 600px;">当日关键超重车辆统计</p>
-				   <div id="bottom_" style="width:97%;margin-left: 15px;margin-top: 0px;"></div>
+				   <p id="errorMsg3" style="display: inline-block;"></p>
+				   <div id="bottom_" style="width:97%;margin-left: 15px;margin-top: -50px;"></div>
 				</div>
 			</div>
            </div>
@@ -409,11 +412,22 @@
 				}
 			}
 			arr=arr.substring(0,arr.length-1);*/
-
+			var flag=0;
+			for(var i=0;i<list.length;i++){
+				flag+=list[i];
+			}
+			if(flag==0){
+				$("#errorMsg").html('今日无流量').css({
+					"margin-left":"30px",
+					"color":"red",
+				})
+			}
 			var myChart = echarts.init(document.getElementById('_top'));
 			let option = setjiancezhandianLeft(list,stationName);
 			// 使用刚指定的配置项和数据显示图表。
 			myChart.setOption(option);
+
+
 		}
 
 
@@ -443,16 +457,21 @@
 		}
 
 		function setEcharts2(list,stationName){
-			var myChart2 = echarts.init(document.getElementById('_right'));
-			if(list!=null&&list.length!=0){
-				let option2 = setjiancezhandianRight(list,stationName);
-				// 使用刚指定的配置项和数据显示图表。
-				myChart2.setOption(option2);
-			}else{
-				$("#_right").html('今日无超重车辆').css({
-					"margin-left":"30px"
+			var flag=0;
+			for(var i=0;i<list.length;i++){
+				flag+=list[i].value;
+			}
+			if(flag==0){
+				$("#errorMsg2").html('今日无超重车辆').css({
+					"margin-left":"30px",
+					"color":"red",
 				})
 			}
+			var myChart2 = echarts.init(document.getElementById('_right'));
+			let option2 = setjiancezhandianRight(list,stationName);
+			// 使用刚指定的配置项和数据显示图表。
+			myChart2.setOption(option2);
+
 
 		}
 
@@ -482,6 +501,16 @@
 			});
 		}
 		function setEcharts3(list,stationName){
+			var flag=0;
+			for(var i=0;i<list.length;i++){
+				flag+=list[i];
+			}
+			if(flag==0){
+				$("#errorMsg3").html('今日无关键超重车辆').css({
+					"margin-left":"30px",
+					"color":"red",
+				})
+			}
 			var myChart3 = echarts.init(document.getElementById('bottom_'));
 			if(list!=null&&list.length!=0){
 				let option = setjiancezhandianBottom(list,stationName);

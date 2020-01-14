@@ -64,13 +64,13 @@ function setjiancezhandianRight(list,stationName){
             trigger: 'item',
             formatter: "{b} <br/>{a} : {c} ({d}%)"
         },
-        legend: {
+        /*legend: {
             orient: 'vertical',
             right: 'right',
             data: stationName,
             color: '#FFFFFF',
 
-        },
+        },*/
         series: [{
             name: '超载车辆',
             type: 'pie',
