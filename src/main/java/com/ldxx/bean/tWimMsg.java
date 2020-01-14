@@ -1,5 +1,8 @@
 package com.ldxx.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.xml.crypto.Data;
 import java.math.BigInteger;
 import java.util.Date;
@@ -14,8 +17,12 @@ public class tWimMsg {
     private String stationId;
 
     //通行时间
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date evtTime;
     //打包时间
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date msgTime;
     //车道号
     private Integer laneNo;
