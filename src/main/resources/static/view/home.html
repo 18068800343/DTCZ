@@ -9,6 +9,7 @@
     <meta name="description" content="百度地图API自定义地图，帮助用户在可视化操作下生成百度地图"/>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="css/index.css"/>
+    <link rel="stylesheet"  href="css/toastr.css"/>
     <!--引用百度地图API-->
     <style type="text/css">
         html,
@@ -80,12 +81,15 @@
 <script src="js/echarts.min(1).js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/echartsOptionIndex.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="js/toastr.js" ></script>
 <script type="text/javascript">
 	setLeftEcharts();
 	setRightEcharts();
 	setBottomEcharts();
 	setInterval(refresh, 4000);
-
+	let page_flag=0;
+	let page_flag1=0;
+	let page_flag2=0;
 	function refresh(){
 		if(user!=null&&user!=""&&user!=undefined){
 			//queding();
@@ -119,6 +123,14 @@
 	}
 
 	function setEcharts2(list,stationName){
+        var flag=0;
+        for(var i=0;i<list.length;i++){
+            flag+=list[i].value;
+        }
+        if(flag==0&&page_flag1==0){
+            toastr.error('今日无超重车辆');
+            page_flag1++;
+        }
 		var myChart2 = echarts.init(document.getElementById('_right'));
 		if(list!=null&&list.length!=0){
 			let option2 = initRightOption(list,stationName);
@@ -181,6 +193,14 @@
         });
     }
     function setEcharts(list, stationName) {
+        var flag=0;
+        for(var i=0;i<list.length;i++){
+            flag+=list[i];
+        }
+        if(flag==0&&page_flag==0){
+            page_flag++;
+            toastr.error('今日无车流量');
+        }
         let myChart = echarts.init(document.getElementById('_top'));
         let option = initLeftOption(list, stationName);
         // 使用刚指定的配置项和数据显示图表。
@@ -261,6 +281,14 @@
 		});
 	}
 	function setEcharts3(list,stationName){
+        var flag=0;
+        for(var i=0;i<list.length;i++){
+            flag+=list[i];
+        }
+        if(flag==0&&page_flag2==0){
+            page_flag2++;
+            toastr.error('今日无关键超重车辆');
+        }
 		let myChart3 = echarts.init(document.getElementById('bottom_'));
 		if(list!=null&&list.length!=0){
 			let option = initDownOption(list,stationName);
