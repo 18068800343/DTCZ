@@ -24,7 +24,7 @@ public class tWimMsgController {
     private tWimMsgService service;
     @Resource
     private tUserInfoDao tUserInfoDao;
-    @Autowired
+    @Resource
     private StationSiteDao sitedao;
 
     @RequestMapping("/getAlltWimMsg")
@@ -52,7 +52,7 @@ public class tWimMsgController {
     }
 
     @RequestMapping("/getAlltWimMsgByCondiTion")
-    public List<tWimMsgVo> getAlltWimMsgByCondiTion(HttpSession session,String  stationPort,String startTime,String endTime,Double startWeight,Double endWeight) {
+    public List<tWimMsgVo> getAlltWimMsgByCondiTion(HttpSession session,String  stationPort,String startTime,String endTime,Double startWeight,Double endWeight,String chexing) {
         String zhandianduankouhao="";
         tUserInfo user = (tUserInfo) session.getAttribute("user");
            if(stationPort!=null&&stationPort!=""){
@@ -67,12 +67,12 @@ public class tWimMsgController {
             }
         }
         Double mid = 0.0;
-        if(startWeight>endWeight){
+        if(null!=startWeight&&null!=endWeight&&startWeight>endWeight){
             mid=startWeight;
             startWeight = endWeight;
             endWeight = mid;
         }
-        List<tWimMsgVo> list= service.getAlltWimMsgByCondition(zhandianduankouhao,startTime,endTime,startWeight,endWeight);
+        List<tWimMsgVo> list= service.getAlltWimMsgByCondition(zhandianduankouhao,startTime,endTime,startWeight,endWeight,chexing);
         return list;
     }
 

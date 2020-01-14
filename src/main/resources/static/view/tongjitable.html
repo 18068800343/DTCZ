@@ -42,7 +42,7 @@
                 <div class="xian2"
                      style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: 8%;margin-top: 15%;">
                 </div>
-                <input type="text" value="请输入"  v-model="endWeight" @input="checknum('endWeight')" style="height: 34px;border-radius: 5px;box-shadow: none;width:
+                <input type="text" value="请输入" v-model="endWeight" @input="checknum('endWeight')" style="height: 34px;border-radius: 5px;box-shadow: none;width:
         250%;margin-left: 30px;border:1px solid #DDD;padding:3px;">
             </div>
         </div>
@@ -53,6 +53,7 @@
             <input type="date" v-model="startTime" value="请选择"
                    style="height: 34px;border-radius: 5px;box-shadow: none;width: 250%;border:1px solid #DDD;">
         </div>
+
         <button type="button" class="btn btn-primary" onclick="nowJianceSite()" data-toggle="modal"
                 data-target="#jianceDiv"
                 style="width: 150px; position:relative;top:43px;right:14%;background-image: linear-gradient(#1F62C8,#262E9F);">
@@ -65,7 +66,13 @@
             <input type="date" v-model="endTime" value="请选择" style="height: 34px;border-radius: 5px;box-shadow: none;width:
         250%;margin-left: 30px;border:1px solid #DDD;">
         </div>
-
+        <label class="col-sm-1	 control-label" style="margin-left: 9%; width: 70px; line-height: 30px;">车型:</label>
+        <div class="col-sm-2" style="margin-left: 1%;">
+            <div class="xian2"
+                 style="width: 10px; height: 2px; background-color: rgb(222, 222, 222); position: absolute; margin-left: 5%; margin-top: 15%;"></div>
+            <select  value="请选择" class="selectpicker" multiple data-max-options="1" data-live-search="true" id="chexing"
+                   style="height: 34px; border-radius: 5px; box-shadow: none; margin-left: 30px; border: 1px solid rgb(221, 221, 221);"></select>
+        </div>
 
         <div class="sele">
             <label for="" class="col-sm-2 control-label">筛选站点</label>
@@ -132,7 +139,6 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-success" id="xgup_baocun">保存</button>
             </div>
         </div>
     </div>
@@ -152,6 +158,7 @@
 <script>
     $(document).ready(function () {
         initzhandian();
+        initchexing();
     });
 
     let table = $('#mainContent').dataTable({
@@ -211,37 +218,37 @@
     });
 
     let user;
-    function initzhandian(){
+
+    function initzhandian() {
         $.ajax({
             type: 'POST',
             url: '/login/getUser',
             dataType: 'json',
-            async:false,
-            data: {
-            },
+            async: false,
+            data: {},
             error: function (msg) {
             },
             success: function (json) {
-                user=json;
+                user = json;
                 $("#zhandian").html('');
-                if(json!=null){
-                    if(json.stationPort.indexOf(",")!=-1&&json.stationName.indexOf(",")!=-1){
-                        let stationPort=json.stationPort.split(",");
-                        let stationName=json.stationName.split(",");
-                        for(let i=0;i<stationPort.length;i++){
-                            $("#zhandian").append("<option  value='"+stationPort[i]+"'>"+stationName[i]+"</option>");
+                if (json != null) {
+                    if (json.stationPort.indexOf(",") != -1 && json.stationName.indexOf(",") != -1) {
+                        let stationPort = json.stationPort.split(",");
+                        let stationName = json.stationName.split(",");
+                        for (let i = 0; i < stationPort.length; i++) {
+                            $("#zhandian").append("<option  value='" + stationPort[i] + "'>" + stationName[i] + "</option>");
                         }
-                    }else{
-                        $("#zhandian").append("<option  value='"+json.stationPort+"'>"+json.stationName+"</option>");
+                    } else {
+                        $("#zhandian").append("<option  value='" + json.stationPort + "'>" + json.stationName + "</option>");
                     }
                     $(".selectpicker").selectpicker({
                         noneSelectedText: '请选择',
                     });
-                    if(user.lastMonitoringSite!=null&&user.lastMonitoringSite!=""&&user.lastMonitoringSite!=undefined){
-                        if(user.lastMonitoringSite.indexOf(",")!=-1){
+                    if (user.lastMonitoringSite != null && user.lastMonitoringSite != "" && user.lastMonitoringSite != undefined) {
+                        if (user.lastMonitoringSite.indexOf(",") != -1) {
                             $("#zhandian").val(user.lastMonitoringSite.split(","));
                             $('#zhandian').selectpicker('val', user.lastMonitoringSite.split(","));
-                        }else{
+                        } else {
                             $("#zhandian").val(user.lastMonitoringSite);
                             $('#zhandian').selectpicker('val', user.lastMonitoringSite);
                         }
@@ -249,6 +256,30 @@
                     }
                     $("#zhandian").selectpicker("refresh");
                     $('#zhandian').selectpicker('render');
+                }
+            }
+        });
+    }
+    function initchexing() {
+        $.ajax({
+            type: 'POST',
+            url: '/VehicleType/getVehicleType',
+            dataType: 'json',
+            async: false,
+            data: {},
+            error: function (msg) {
+            },
+            success: function (json) {
+                $("#chexing").html('');
+                if (json != null) {
+                        for (let i in json) {
+                            $("#chexing").append("<option  value='" + json[i].vehicleTypeId + "'>" + json[i].vehicleTypeName + "</option>");
+                        }
+                    $(".selectpicker").selectpicker({
+                        noneSelectedText: '请选择',
+                    });
+                    $("#chexing").selectpicker("refresh");
+                    $('#chexing').selectpicker('render');
                 }
             }
         });
@@ -263,13 +294,15 @@
             stationPort: "",
             startTime: "",
             endTime: "",
-            endWeight:"",
-            startWeight:"",
+            endWeight: "",
+            startWeight: "",
+            chexing:"",
         },
         methods: {
             //新建生产计划保存按钮事件
             searchInit: function () {
-                this.stationPort = $("#zhandian").val()==null?"":$("#zhandian").val().toString();
+                this.stationPort = $("#zhandian").val() == null ? "" : $("#zhandian").val().toString();
+                this.chexing = $("#chexing").val() == null ? "" : $("#chexing").val().toString();
                 //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
                 this.$http.post('/tWimMsg/getAlltWimMsgByCondiTion', this._data, {emulateJSON: true}).then((res) => {
 
@@ -279,11 +312,12 @@
 
                 });
             },
-            checknum:function(msg){
-                this._data[msg]=this._data[msg].replace(/[^\d.]/g,'');
+            checknum: function (msg) {
+                this._data[msg] = this._data[msg].replace(/[^\d.]/g, '');
                 let str = this._data[msg].split('.');
-                if(str.length>2)
-                {this._data[msg]=this._data[msg].substr(0,this._data[msg].length-1);}
+                if (str.length > 2) {
+                    this._data[msg] = this._data[msg].substr(0, this._data[msg].length - 1);
+                }
             },
             init: function () {
 
@@ -301,6 +335,31 @@
         }
     })
 
+    function nowJianceSite(){
+        $("#jianceTable tbody").empty('')
+        if($("#zhandian").val()!=""&&$("#zhandian").val()!=undefined&&$("#zhandian").val()!=null){
+            var text=[];
+            var checkParam = $('#zhandian').find('option:selected');
+            for (var i=0;i<checkParam.length;i++) {
+                text.push(checkParam[i].textContent);
+            }
+            for(i in text){
+                $("#jianceTable tbody").append("<tr><td colspan='2'>"+text[i]+"<td></tr>")
+                $("#jianceTable tbody").find("td:last").hide()
+            }
+        }else{
+            $("#zhandian option").each(function(){
+                //遍历所有option
+                var value = $(this).val();   //获取option值
+                var text = $(this).text();
+                if(text!=''){
+                    $("#jianceTable tbody").append("<tr><td colspan='2'>"+text+"<td></tr>")
+                    $("#jianceTable tbody").find("td:last").hide()
+                }
+            })
+        }
+
+    }
 </script>
 
 

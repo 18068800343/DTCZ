@@ -23,9 +23,9 @@ public class tWimMsgServiceImpl implements tWimMsgService {
     }
 
     @Override
-    public List<tWimMsgVo> getAlltWimMsgByCondition(String stationPort, String startTime, String endTime,Double startWeight,Double endWeight) {
+    public List<tWimMsgVo> getAlltWimMsgByCondition(String stationPort, String startTime, String endTime,Double startWeight,Double endWeight,String chexing) {
 
-        return dao.getAlltWimMsgByCondition(stationPort, startTime,endTime,startWeight,endWeight);
+        return dao.getAlltWimMsgByCondition(stationPort, startTime,endTime,startWeight,endWeight,chexing);
     }
 
     @Override
