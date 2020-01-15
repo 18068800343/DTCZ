@@ -4,6 +4,16 @@ public class ChaoZaiVo {
     private String name;//站名+路线名
     private Integer value;//数量
 
+    private Integer num;//数量
+
+    public Integer getNum() {
+        return num;
+    }
+
+    public void setNum(Integer num) {
+        this.num = num;
+    }
+
     public String getName() {
         return name;
     }
