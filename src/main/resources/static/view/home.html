@@ -63,7 +63,7 @@
     
     <div class="right col-xs-4 ">
 	    <div class="right_text">
-	        <img src="img/title_second.png"/>
+	        <img src="img/title_chaozai.png"/>
 	    </div>
         <div id="_right" style="width:380px;height: 300px;margin-left: 20px;margin-top: -20px;">
             <!--右边-->
@@ -128,7 +128,7 @@
             flag+=list[i].value;
         }
         if(flag==0&&page_flag1==0){
-            toastr.error('今日无超重车辆');
+            toastr.error('今日无超载车辆');
             page_flag1++;
         }
 		var myChart2 = echarts.init(document.getElementById('_right'));
@@ -137,7 +137,7 @@
 			// 使用刚指定的配置项和数据显示图表。
 			myChart2.setOption(option2);
 		}else{
-			$("#_right").html('今日无超重车辆').css({
+			$("#_right").html('今日无超载车辆').css({
 				"margin-left":"30px"
 			})
 		}
