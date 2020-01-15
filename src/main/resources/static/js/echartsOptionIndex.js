@@ -103,6 +103,24 @@ function initRightOption(list,stationName) {
                     shadowColor: 'rgba(0, 0, 0, 0.5)'
                 }
             }
+        },{
+            name: '访问来源',
+            type: 'pie',
+            radius: '55%',
+            center: ['50%', '60%'],
+            color: ['#06d3c4', '#ffbb32', '#2ccc44', "#0278fe", "#FF3976", "#6058E1", "#e569ff", "#00d6fb"],
+            data: list,
+            label: {
+                position: 'inner',
+                formatter: '{d}%',
+            },
+            itemStyle: {
+                emphasis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
         }]
     };
     return optionRight;
