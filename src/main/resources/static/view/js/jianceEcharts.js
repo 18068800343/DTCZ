@@ -97,7 +97,13 @@ function setjiancezhandianRight(list,stationName){
                 data:list,
                 label: {
                     position: 'inner',
-                    formatter: '{d}%',
+                    formatter: function (params) {
+                        if(params.data.num==0){
+                            return '';
+                        }else{
+                            return params.percent+"%";
+                        }
+                    },
                 },
                 itemStyle: {
                     emphasis: {
