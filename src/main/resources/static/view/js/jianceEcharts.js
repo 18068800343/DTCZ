@@ -99,6 +99,7 @@ function setjiancezhandianRight(list,stationName){
                 data:list,
                 label: {
                     position: 'inner',
+                    color:'black',
                     formatter: function (params) {
                         if(params.data.num==0){
                             return '';
