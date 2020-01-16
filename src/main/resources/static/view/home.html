@@ -35,6 +35,13 @@
             white-space: -moz-pre-wrap;
             word-wrap: break-word
         }
+        th,td{
+            white-space:nowrap;
+        }
+        .dataTables_scrollHead {
+            height: 50px;
+        }
+
     </style>
     <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=BmTwezCvWyGaH3KNYkc5P6uq&s=1"></script>
 </head>
@@ -82,7 +89,7 @@
 <!-- 修改Modal -->
 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
      id="chart1Detail">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-lg" style="width:70%" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
@@ -94,7 +101,7 @@
                     <form class="form-inline">
                         <!--表格-->
                         <table class="table table-striped table-hover" id="mainContent"
-                               style="width: 150%;margin: 0 auto; margin-top: 20px;">
+                               style="width: 100%;margin: 0 auto; margin-top: 20px;">
                             <thead style="background-color: #DDE6F7;">
                             <tr>
                                 <th style="width: 15%">站点</th>
@@ -438,7 +445,10 @@
         "iDisplayLength": 10,
         "searching": true,
         "bLengthChange": false,
+        "scrollX": true,
+        "autoWidth":true,
         'paging': true,
+
         "oLanguage": {
             "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
         },
