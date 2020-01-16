@@ -8,6 +8,23 @@ function initLeftOption(list, stationname) {
       arrayItem[2]=stationname[i];
       arrList.push(arrayItem);
     }
+
+    let seriesLabel = {
+        normal: {
+            show: true,
+            textBorderColor: '#fff',
+            textBorderWidth: 0,
+            formatter:function (params) {
+                if(params.value[0]!=0){
+                    return params.value[0]+"";
+                }else{
+                    return "";
+                }
+            }
+        },
+
+    }
+
     let optionLeft = {
         tooltip: {
             trigger: 'item',
@@ -22,6 +39,7 @@ function initLeftOption(list, stationname) {
             containLabel: true
         },
         xAxis: {
+
             triggerEvent: true,
             name: 'amount',
             axisLabel: {
@@ -37,6 +55,7 @@ function initLeftOption(list, stationname) {
                     return res;
                 }
             },
+            max:30000,
 
         },
         yAxis: {
@@ -57,11 +76,13 @@ function initLeftOption(list, stationname) {
                     }
                     return res;
                 }
-            }
+            },
+
 
         },
         series: [{
             type: 'bar',
+            label: seriesLabel,
             encode: {
                 // Map the "amount" column to X axis.
                 x: 'amount',
@@ -183,7 +204,8 @@ function initDownOption(list,stationName){
                 textStyle: {
                     color: '#999'
                 }
-            }
+            },
+            max:30000,
         },
         dataZoom: [{
             type: 'inside'
