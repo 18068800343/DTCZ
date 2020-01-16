@@ -156,11 +156,42 @@
 			</div>
 			<!--左上半部分结束-->
            <div class="bottom">
-			   <div class="blue" style="width:90%;margin-left: 5%;">
-					<p style="width:800px;margin-top: 600px;">当日关键超重车辆统计</p>
-				   <p id="errorMsg3" style="display: inline-block;"></p>
-				   <div id="bottom_" style="width:97%;margin-left: 15px;margin-top: -50px;"></div>
-				</div>
+
+			   <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+				   <ul class="layui-tab-title">
+					   <li class="layui-this">当日关键超重车辆统计</li>
+					   <li>当日关键超重车辆</li>
+				   </ul>
+				   <div class="layui-tab-content" style="height: 100px;">
+					   <div class="layui-tab-item layui-show">
+						   <p id="errorMsg3" style="display: inline-block;"></p>
+						   <div id="bottom_" style="width:97%;margin-left: 15px;margin-top: -50px;"></div>
+					   </div>
+					   <div class="layui-tab-item">
+						   <table class="layui-table" lay-skin="line" id="mainContent4" style="width: 100%">
+							   <thead style="background-color: #DDE6F7;">
+							   <tr>
+								   <th style="width: 15%">站点</th>
+								   <th>车道号</th>
+								   <th>车牌号</th>
+								   <th>车牌颜色</th>
+								   <th>车型</th>
+								   <th>长</th>
+								   <th>车速(Km/h)</th>
+								   <th>行驶方向</th>
+								   <th>轴数</th>
+								   <th>总重量(Kg)</th>
+								   <th>是否跨道</th>
+								   <th>路面温度</th>
+								   <th>超重比率</th>
+							   </tr>
+							   </thead>
+							   <tbody>
+							   </tbody>
+						   </table>
+					   </div>
+				   </div>
+			   </div>
 			</div>
            </div>
           </div>
