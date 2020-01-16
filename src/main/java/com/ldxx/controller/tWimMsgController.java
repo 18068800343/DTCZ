@@ -151,6 +151,20 @@ public class tWimMsgController {
         return list;
     }
 
+    @RequestMapping("/getMeiRiCheLiuLiangShujuByStationPort")
+    public List<tWimMsgVo> getMeiRiCheLiuLiangShujuByStationPort(String stationPort,HttpSession session) {
+        String zhandianduankouhao="";
+        tUserInfo user = (tUserInfo) session.getAttribute("user");
+        if(stationPort!=null&&stationPort!=""){
+            zhandianduankouhao=stationPort;
+        }else{
+            if(user!=null){
+                zhandianduankouhao = user.getStationPort();
+                updlastMonitoringSiteById(user.getStationPort(),user.getUsrId());
+            }
+        }
+        return service.getMeiRiCheLiuLiangShujuByStationPort(stationPort);
+    }
 
     @RequestMapping("/getMeiRiChaoZaiShujuByStationPort")
     public List<tWimMsgVo> getMeiRiChaoZaiShujuByStationPort(String stationPort,HttpSession session) {
