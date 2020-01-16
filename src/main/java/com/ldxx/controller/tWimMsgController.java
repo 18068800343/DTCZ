@@ -7,6 +7,7 @@ import com.ldxx.dao.tUserInfoDao;
 import com.ldxx.service.tWimMsgService;
 import com.ldxx.vo.ChaoZaiVo;
 import com.ldxx.vo.tWimMsgVo;
+import org.apache.catalina.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -77,7 +78,7 @@ public class tWimMsgController {
     }
 
     /**
-     * 每日超流量
+     * 每日车流量
      * @param stationPort
      * @return
      */
@@ -94,6 +95,11 @@ public class tWimMsgController {
         return list;
     }
 
+    /**
+     * 每日超载量
+     * @param stationPort
+     * @return
+     */
     @RequestMapping("/getMeiRiChaoZhongByStationPort")
     public List<ChaoZaiVo> getMeiRiChaoZhongByStationPort(String stationPort) {
         List<ChaoZaiVo> list=new ArrayList<ChaoZaiVo>();
@@ -116,6 +122,11 @@ public class tWimMsgController {
         return list;
     }
 
+    /**
+     * 每日关键超重测量
+     * @param stationPort
+     * @return
+     */
     @RequestMapping("/getMeiRiGuanJianCheLiangByStationPort")
     public List<Integer> getMeiRiGuanJianCheLiangByStationPort(String stationPort) {
         List<Integer> list=new ArrayList<Integer>();
@@ -128,4 +139,36 @@ public class tWimMsgController {
         }
         return list;
     }
+
+
+    @RequestMapping("/getMeiRiChaoZaiShujuByStationPort")
+    public List<tWimMsgVo> getMeiRiChaoZaiShujuByStationPort(String stationPort,HttpSession session) {
+        String zhandianduankouhao="";
+        tUserInfo user = (tUserInfo) session.getAttribute("user");
+        if(stationPort!=null&&stationPort!=""){
+            zhandianduankouhao=stationPort;
+        }else{
+            if(user!=null){
+                zhandianduankouhao = user.getStationPort();
+                updlastMonitoringSiteById(user.getStationPort(),user.getUsrId());
+            }
+        }
+        return service.getMeiRiChaoZaiShujuByStationPort(stationPort);
+    }
+
+    @RequestMapping("/getMeiRiGuanJianChaoZHongShujuByStationPort")
+    public List<tWimMsgVo> getMeiRiGuanJianChaoZHongShujuByStationPort(String stationPort,HttpSession session) {
+        String zhandianduankouhao="";
+        tUserInfo user = (tUserInfo) session.getAttribute("user");
+        if(stationPort!=null&&stationPort!=""){
+            zhandianduankouhao=stationPort;
+        }else{
+            if(user!=null){
+                zhandianduankouhao = user.getStationPort();
+                updlastMonitoringSiteById(user.getStationPort(),user.getUsrId());
+            }
+        }
+        return service.getMeiRiGuanJianChaoZHongShujuByStationPort(stationPort);
+    }
+
 }

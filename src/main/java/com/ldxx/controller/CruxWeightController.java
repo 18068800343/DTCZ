@@ -44,7 +44,7 @@ public class CruxWeightController {
     public String updCruxWeight(@RequestBody CruxWeight CruxWeight) {
         JSONObject jsonObject=new JSONObject();
         int i=service.updCruxWeight(CruxWeight);
-        String daoMsg = MsgFormatUtils.getMsgByResult(i, "新增");
+        String daoMsg = MsgFormatUtils.getMsgByResult(i, "更新");
         jsonObject.put("resultMsg",daoMsg);
         jsonObject.put("daoMsg",i);
         jsonObject.put("obj",CruxWeight);

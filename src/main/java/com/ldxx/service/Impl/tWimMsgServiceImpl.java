@@ -42,4 +42,14 @@ public class tWimMsgServiceImpl implements tWimMsgService {
     public int getMeiRiGuanJianCheLiangByStationPort(String stationPort) {
         return dao.getMeiRiGuanJianCheLiangByStationPort(stationPort);
     }
+
+    @Override
+    public List<tWimMsgVo> getMeiRiChaoZaiShujuByStationPort(String stationPort) {
+        return dao.getMeiRiChaoZaiShujuByStationPort(stationPort);
+    }
+
+    @Override
+    public List<tWimMsgVo> getMeiRiGuanJianChaoZHongShujuByStationPort(String stationPort) {
+        return dao.getMeiRiGuanJianChaoZHongShujuByStationPort(stationPort);
+    }
 }
