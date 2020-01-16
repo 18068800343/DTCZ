@@ -50,11 +50,11 @@ public class tWimMsgController {
     @RequestMapping("/getWimMsgHomePage")
     public List<tWimMsgVo> getWimMsgHomePage(HttpSession session,String  roadName) {
         boolean b = roadName != null && !"".equals(roadName) && roadName.contains("+");
-        String stationName = b ?roadName.split("/+")[0]:"";
-        String routeName = b ?roadName.split("/+")[1]:"";
+        String stationName = b ?roadName.split("\\+")[0]:"";
+        String routeName = b ?roadName.split("\\+")[1]:"";
         StationSite stationSite = sitedao.getStationSiteByStationNameAndRouteName(stationName,routeName);
         String port = stationSite.getStationPort();
-        List<tWimMsgVo> list= service.getAlltWimMsg(port);
+        List<tWimMsgVo> list= service.getMeiRiCheLiuLiangShujuByStationPort(port);
         return list;
     }
 
@@ -184,8 +184,8 @@ public class tWimMsgController {
     @RequestMapping("/getChaoZaiHomePage")
     public List<tWimMsgVo> getChaoZaiHomePage(String roadName,HttpSession session) {
         boolean b = roadName != null && !"".equals(roadName) && roadName.contains("+");
-        String stationName = b ?roadName.split("/+")[0]:"";
-        String routeName = b ?roadName.split("/+")[1]:"";
+        String stationName = b ?roadName.split("\\+")[0]:"";
+        String routeName = b ?roadName.split("\\+")[1]:"";
         StationSite stationSite = sitedao.getStationSiteByStationNameAndRouteName(stationName,routeName);
         String port = stationSite.getStationPort();
         return service.getMeiRiChaoZaiShujuByStationPort(port);
@@ -209,8 +209,8 @@ public class tWimMsgController {
     @RequestMapping("/getChaoZHongHomePage")
     public List<tWimMsgVo> getChaoZHongHomePage(String roadName,HttpSession session) {
         boolean b = roadName != null && !"".equals(roadName) && roadName.contains("+");
-        String stationName = b ?roadName.split("/+")[0]:"";
-        String routeName = b ?roadName.split("/+")[1]:"";
+        String stationName = b ?roadName.split("\\+")[0]:"";
+        String routeName = b ?roadName.split("\\+")[1]:"";
         StationSite stationSite = sitedao.getStationSiteByStationNameAndRouteName(stationName,routeName);
         String port = stationSite.getStationPort();
         return service.getMeiRiGuanJianChaoZHongShujuByStationPort(port);
