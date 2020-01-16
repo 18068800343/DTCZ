@@ -5,6 +5,17 @@
     <select id="getAllStationSite" resultType="StationSite">
 		select  S_Id,Station_Id,Station_Name,Station_Ip,Station_Port,Station_Longitude,Station_Latitude,Del_State,Route_Name from Station_Site where Del_State=1
 	</select>
+	<select id="getStationSiteByStationNameAndRouteName" resultType="StationSite">
+		select  S_Id,Station_Id,Station_Name,Station_Ip,Station_Port,Station_Longitude,Station_Latitude,Del_State,Route_Name from Station_Site
+		where Del_State=1
+		<if test="stationName!=null and stationName!=''">
+		and Station_Name = #{stationName}
+		</if>
+		<if test="routeName!=null and routeName!=''">
+		and Route_Name = #{routeName}
+		</if>
+		limit 1
+	</select>
 
 	<select id="getStationSiteById" resultType="StationSite">
 		select  S_Id,Station_Id,Station_Name,Station_Ip,Station_Port,Station_Longitude,Station_Latitude,Del_State,Route_Name from Station_Site where S_Id=#{id} and Del_State=1

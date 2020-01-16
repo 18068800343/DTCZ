@@ -47,6 +47,17 @@ public class tWimMsgController {
         return list;
     }
 
+    @RequestMapping("/getWimMsgHomePage")
+    public List<tWimMsgVo> getWimMsgHomePage(HttpSession session,String  roadName) {
+        boolean b = roadName != null && !"".equals(roadName) && roadName.contains("+");
+        String stationName = b ?roadName.split("/+")[0]:"";
+        String routeName = b ?roadName.split("/+")[1]:"";
+        StationSite stationSite = sitedao.getStationSiteByStationNameAndRouteName(stationName,routeName);
+        String port = stationSite.getStationPort();
+        List<tWimMsgVo> list= service.getAlltWimMsg(port);
+        return list;
+    }
+
     private int  updlastMonitoringSiteById(String stationPort,String usrId){
         int i=tUserInfoDao.updlastMonitoringSiteById(stationPort,usrId);
         return i;
@@ -140,6 +151,20 @@ public class tWimMsgController {
         return list;
     }
 
+    @RequestMapping("/getMeiRiCheLiuLiangShujuByStationPort")
+    public List<tWimMsgVo> getMeiRiCheLiuLiangShujuByStationPort(String stationPort,HttpSession session) {
+        String zhandianduankouhao="";
+        tUserInfo user = (tUserInfo) session.getAttribute("user");
+        if(stationPort!=null&&stationPort!=""){
+            zhandianduankouhao=stationPort;
+        }else{
+            if(user!=null){
+                zhandianduankouhao = user.getStationPort();
+                updlastMonitoringSiteById(user.getStationPort(),user.getUsrId());
+            }
+        }
+        return service.getMeiRiCheLiuLiangShujuByStationPort(stationPort);
+    }
 
     @RequestMapping("/getMeiRiChaoZaiShujuByStationPort")
     public List<tWimMsgVo> getMeiRiChaoZaiShujuByStationPort(String stationPort,HttpSession session) {
@@ -156,6 +181,16 @@ public class tWimMsgController {
         return service.getMeiRiChaoZaiShujuByStationPort(stationPort);
     }
 
+    @RequestMapping("/getChaoZaiHomePage")
+    public List<tWimMsgVo> getChaoZaiHomePage(String roadName,HttpSession session) {
+        boolean b = roadName != null && !"".equals(roadName) && roadName.contains("+");
+        String stationName = b ?roadName.split("/+")[0]:"";
+        String routeName = b ?roadName.split("/+")[1]:"";
+        StationSite stationSite = sitedao.getStationSiteByStationNameAndRouteName(stationName,routeName);
+        String port = stationSite.getStationPort();
+        return service.getMeiRiChaoZaiShujuByStationPort(port);
+    }
+
     @RequestMapping("/getMeiRiGuanJianChaoZHongShujuByStationPort")
     public List<tWimMsgVo> getMeiRiGuanJianChaoZHongShujuByStationPort(String stationPort,HttpSession session) {
         String zhandianduankouhao="";
@@ -169,6 +204,16 @@ public class tWimMsgController {
             }
         }
         return service.getMeiRiGuanJianChaoZHongShujuByStationPort(stationPort);
+    }
+
+    @RequestMapping("/getChaoZHongHomePage")
+    public List<tWimMsgVo> getChaoZHongHomePage(String roadName,HttpSession session) {
+        boolean b = roadName != null && !"".equals(roadName) && roadName.contains("+");
+        String stationName = b ?roadName.split("/+")[0]:"";
+        String routeName = b ?roadName.split("/+")[1]:"";
+        StationSite stationSite = sitedao.getStationSiteByStationNameAndRouteName(stationName,routeName);
+        String port = stationSite.getStationPort();
+        return service.getMeiRiGuanJianChaoZHongShujuByStationPort(port);
     }
 
 }

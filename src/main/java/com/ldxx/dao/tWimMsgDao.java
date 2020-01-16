@@ -19,4 +19,6 @@ public interface tWimMsgDao {
     List<tWimMsgVo> getMeiRiChaoZaiShujuByStationPort(String stationPort);
 
     List<tWimMsgVo> getMeiRiGuanJianChaoZHongShujuByStationPort(String stationPort);
+
+    List<tWimMsgVo> getMeiRiCheLiuLiangShujuByStationPort(String stationPort);
 }
