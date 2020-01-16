@@ -12,7 +12,7 @@
 		<link rel="stylesheet" href="../style/jquery.dataTables.min.css">
 		<link href="../style/style.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="css/home.css" />
-		<!--<link rel="stylesheet" type="text/css" href="css/layui.css" />-->
+		<link rel="stylesheet" type="text/css" href="css/layui.css" />
 		<link rel="stylesheet"  href="css/toastr.css"/>
 		<style>
 			#mainContent_info{
@@ -70,10 +70,11 @@
 
 				</tbody>
 			</table>
-			<div class="bright">
-				<div class="blue">
+
+			<div class="bright" style="width:90%;display: block;position: relative;margin-left: 5%;">
+				<div class="blue" >
 					<p>当日车流量统计</p>
-					<div class="left col-xs-4 ">
+					<div class=" col-xs-4 ">
 						<p id="errorMsg"  style="display: inline-block;"></p>
 						<div id="_top" style="width:700px;height: 400px;margin-top: -50px">
 						</div>
@@ -81,12 +82,42 @@
 					</div>
 				</div>
 			</div>
-			<div class="bleft">
-				<div class="blue">
-					<p>当日超载车辆统计</p>
-					<p id="errorMsg2" style="display: inline-block;"></p>
-					<div id="_right" style="height: 400px;margin-top: -50px;">
-					<!--右边-->
+			<div class="bleft" style="width:90%;display: block;position: relative;margin-left: 5%;">
+				<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+					<ul class="layui-tab-title">
+						<li class="layui-this">当日超载车辆统计</li>
+						<li>当日超载车辆</li>
+					</ul>
+					<div class="layui-tab-content" style="height: 100px;">
+						<div class="layui-tab-item layui-show">
+							<p id="errorMsg2" style="display: inline-block;"></p>
+							<div id="_right" style="height: 400px;margin-top: -50px;">
+								<!--右边-->
+							</div>
+						</div>
+						<div class="layui-tab-item">
+							<table class="layui-table" lay-skin="line" id="mainContent2">
+								<thead style="background-color: #DDE6F7;">
+								<tr>
+									<th style="width: 15%">站点</th>
+									<th>车道号</th>
+									<th>车牌号</th>
+									<th>车牌颜色</th>
+									<th>车型</th>
+									<th>长</th>
+									<th>车速(Km/h)</th>
+									<th>行驶方向</th>
+									<th>轴数</th>
+									<th>总重量(Kg)</th>
+									<th>是否跨道</th>
+									<th>路面温度</th>
+									<th>超重比率</th>
+								</tr>
+								</thead>
+								<tbody>
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -133,8 +164,8 @@
 	<script src="../js/bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
 	<!--<script src="../js/bootstrap-select.js" ></script>-->
-	<!--<script src="../js/common-scripts.js"></script>
-	<script src="js/layui.js" charset="utf-8"></script>-->
+	<!--<script src="../js/common-scripts.js"></script>-->
+	<script src="js/layui.js" charset="utf-8"></script>
 	<!--<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>-->
 	<script src="js/echarts.min(1).js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/datatables/jquery.dataTables.min.js"></script>
