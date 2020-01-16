@@ -47,6 +47,17 @@ public class tWimMsgController {
         return list;
     }
 
+    @RequestMapping("/getWimMsgHomePage")
+    public List<tWimMsgVo> getWimMsgHomePage(HttpSession session,String  roadName) {
+        boolean b = roadName != null && !"".equals(roadName) && roadName.contains("+");
+        String stationName = b ?roadName.split("/+")[0]:"";
+        String routeName = b ?roadName.split("/+")[1]:"";
+        StationSite stationSite = sitedao.getStationSiteByStationNameAndRouteName(stationName,routeName);
+        String port = stationSite.getStationPort();
+        List<tWimMsgVo> list= service.getAlltWimMsg(port);
+        return list;
+    }
+
     private int  updlastMonitoringSiteById(String stationPort,String usrId){
         int i=tUserInfoDao.updlastMonitoringSiteById(stationPort,usrId);
         return i;
