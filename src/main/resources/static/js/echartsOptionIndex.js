@@ -14,13 +14,7 @@ function initLeftOption(list, stationname) {
             show: true,
             textBorderColor: '#fff',
             textBorderWidth: 0,
-            formatter:function (params) {
-                if(params.value[0]!=0){
-                    return params.value[0]+"";
-                }else{
-                    return "";
-                }
-            }
+
         },
 
     }
@@ -162,6 +156,15 @@ function initDownOption(list,stationName){
     for (var i = 0; i < data.length; i++) {
         dataShadow.push(data[i]);
     }
+    let seriesLabel = {
+        normal: {
+            show: true,
+            textBorderColor: '#fff',
+            textBorderWidth: 0,
+
+        },
+
+    }
 
     var optionBottom = {
         tooltip: {
@@ -217,6 +220,7 @@ function initDownOption(list,stationName){
                     color: 'rgba(0,0,0,0.05)'
                 }
             },
+            label: seriesLabel,
             barGap: '-100%',
             barCategoryGap: '40%',
             data: dataShadow,
