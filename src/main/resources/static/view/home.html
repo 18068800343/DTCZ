@@ -41,12 +41,48 @@
         .dataTables_scrollHead {
             height: 50px;
         }
+        @media screen and (max-width:1440px) {
+		   #_top{
+		    height:330px !important;
+		    width:350px !important;
+		    margin-left:-30px;
+		   }
+		   .left{
+		    margin-left:3%;
+		    width:38%;
+		   }
+		   .center{
+		    margin-top:20px !important;
+		    margin-right:-60px !important;
+		   }
+		   .right{
+		    margin-top:4.5%;
+		    width:27%;
+		    height:40%;
+		    margin-right:-5%;
+		   
+		   }
+		   #_right{
+		    width:300px !important;
+		    height:300px;
+		   }
+		   .head{
+		    margin-left:50px;
+		   }
+		   .bottom{
+		    margin-left:3%;
+		    height:400px;
+		   }
+		   #bottom_{
+		    left:-40px !important;
+		   }
+		}
 
     </style>
     <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=BmTwezCvWyGaH3KNYkc5P6uq&s=1"></script>
 </head>
 
-<body style="width: 70%;margin-left: 10%;text-align: center;">
+<body style="width: 70%;text-align: center; overflow-x:hidden; overflow-y:hidden;">
 <div class="head col-xs-12">
     <img src="img/header.png"/>
 </div>
@@ -82,7 +118,7 @@
             <img src="img/title_third.png"/>
         </div>
         <div id="bottom_"
-             style="width:110%;height: 400px;margin-left: -50px;margin-top: 20px;margin:0 auto;left:-70px;">
+             style="width:110%;height:85%;margin-left: -50px;margin-top: 20px;margin:0 auto;left:-70px;">
         </div>
     </div>
 </div>

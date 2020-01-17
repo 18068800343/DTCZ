@@ -6,13 +6,14 @@ body{
 .head{
 	width: 100%;
 	/*text-align: center;*/
-	margin-left: 8%;
+	margin-left:20%;
 }
 .left{
 	margin-left: 1%;
 	margin-top: 3%;
 	height: 23%;
 	width: 33%;
+	left:15%;
 	background-size: 100%;
 	background-repeat: no-repeat;
 	background-image: url(../img/border_chaozhong.png);
@@ -31,7 +32,7 @@ body{
 	position: absolute;
 	margin:0 auto;
 	width: 30%;
-	right: 32%;
+	right: 34%;
 	top:5%;
 	background-size: 100%;
 	background-repeat: no-repeat;
@@ -40,7 +41,7 @@ body{
 .right{
 	margin-left: 1%;
 	margin-top: 3%;
-	height: 23%;
+	height: 35%;
 	position: absolute;
 	right: 80px;
 	top: 3%;
@@ -66,6 +67,7 @@ body{
 	width: 122%;
 	height: 500px;
 	margin-left: 1%;
+	left:15%;
 	margin-top: 5%;
 	background-repeat: no-repeat;
 	background-size: 100%;
