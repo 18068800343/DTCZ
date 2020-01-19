@@ -1,5 +1,8 @@
 package com.ldxx.service.Impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.ldxx.bean.TongJiTableQuery;
 import com.ldxx.dao.tWimMsgDao;
 import com.ldxx.service.tWimMsgService;
 import com.ldxx.vo.tWimMsgVo;
@@ -26,6 +29,14 @@ public class tWimMsgServiceImpl implements tWimMsgService {
     public List<tWimMsgVo> getAlltWimMsgByCondition(String stationPort, String startTime, String endTime,Double startWeight,Double endWeight,String chexing) {
 
         return dao.getAlltWimMsgByCondition(stationPort, startTime,endTime,startWeight,endWeight,chexing);
+    }
+
+    @Override
+    public PageInfo<tWimMsgVo>  getAlltWimMsgByConditionByPage(TongJiTableQuery tongJiTableQuery) {
+        PageHelper.startPage(tongJiTableQuery.getStart(), tongJiTableQuery.getLength());
+        List<tWimMsgVo> list = dao.getAlltWimMsgByCondition(tongJiTableQuery.getStationPort(), tongJiTableQuery.getStartTime(),tongJiTableQuery.getEndTime(),tongJiTableQuery.getStartWeight(),tongJiTableQuery.getEndWeight(),tongJiTableQuery.getChexing());
+        PageInfo<tWimMsgVo> pageInfo = new PageInfo<>(list);
+        return pageInfo;
     }
 
     @Override

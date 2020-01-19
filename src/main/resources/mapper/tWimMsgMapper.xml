@@ -80,26 +80,7 @@
         LEFT JOIN station_site b on a.Station_IP=b.Station_Port
         LEFT JOIN license_plate c ON a.Plate_Color=c.License_Plate_No
         LEFT JOIN vehicle_type d ON a.Class_Index=d.Vehicle_Type_No
-        <where>
-            <if test="startTime!=null and startTime!='' ">
-               and #{startTime} &lt; msg_time
-            </if>
-            <if test="endTime!=null and endTime!='' ">
-                and  msg_time &lt; #{endTime}
-            </if>
-            <if test="startWeight!=null and startWeight!='' ">
-                and  #{startWeight} &lt; total_weight
-            </if>
-            <if test="endWeight!=null and endWeight!='' ">
-                and   total_weight &lt; #{endWeight}
-            </if>
 
-            <include refid="CheXing_IP_sql_tongji">
-            </include>
-            <include refid="StationIP_sql_tongji">
-            </include>
-
-        </where>
     </select>
 
     <select id="getMeiRiCheLiuLiangByStationPort" resultType="int">

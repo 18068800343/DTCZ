@@ -170,69 +170,7 @@
         initchexing();
     });
 
-    let table = $('#mainContent').dataTable({
-        "deferRender": true,
-        "processing": true,
-        "bDestroy": true,
-        "iDisplayLength": 10,
-        "searching": false,
-        "bLengthChange": false,
-        'paging': true,
-        "oLanguage": {
-            "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
-        },
-        "columns": [
-            {"data": "stationNameRouteName"},
-            {"data": "laneNo"},
-            {"data": "plate"},
-            {"data": "licensePlateColor"},
-            {"data": "vehicleTypeName"},
-            {"data": "length"},
-            {"data": "speed"},
-            {"data": "directionName"},
-            {"data": "axlesCount"},
-            {"data": "totalWeight"},
-            {"data": "isStraddleName"},
-            {"data": "temperature"},
-            {"data": "overWeightRatio"},
-            {"data": "evtTime"},
 
-        ],
-        "columnDefs": [{
-            "class": "tcenter",
-            "targets": 0,
-            "searchable": true,
-            "render": function (data, type, full) {
-                return "<marquee scrollAmount=3>" + data + "</marquee>";
-            }
-        },{
-            "class": "tcenter",
-            "targets": 13,
-            "searchable": true,
-            "render": function (data, type, full) {
-                return "<marquee scrollAmount=3>" + data + "</marquee>";
-            }
-        },],
-        "order": [[0, 'asc']],
-        "oLanguage": { //国际化配置
-            "sProcessing": "正在获取数据，请稍后...",
-            "sLengthMenu": "显示 _MENU_ 条",
-            "sZeroRecords": "查询不到相关数据",
-            "sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
-            "sInfoEmpty": "记录数为0",
-            "sInfoFiltered": "(全部记录数 _MAX_ 条)",
-            "sInfoPostFix": "",
-            "sSearch": "搜索",
-            "sUrl": "",
-            "oPaginate": {
-                "sFirst": "第一页",
-                "sPrevious": "上一页",
-                "sNext": "下一页",
-                "sLast": "最后一页"
-            }
-        },
-
-    });
 
     let user;
 
@@ -322,15 +260,114 @@
                 this.stationPort = $("#zhandian").val() == null ? "" : $("#zhandian").val().toString();
                 this.chexing = $("#chexing").val() == null ? "" : $("#chexing").val().toString();
                 //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
-                this.$http.post('/tWimMsg/getAlltWimMsgByCondiTion', this._data, {emulateJSON: true}).then((res) => {
+/*                this.$http.post('/tWimMsg/getAlltWimMsgByCondiTion', this._data, {emulateJSON: true}).then((res) => {
 
                     $('#mainContent').dataTable().fnClearTable();
-                    $('#mainContent').DataTable().rows.add(res.body).draw(false);
+                    $('#mainContent').dataTable().fnServerData()
                     hidMask();
 
                 }, (res) => {
 
+                });*/
+
+                let table = $('#mainContent').dataTable({
+                    "deferRender": true,
+                    "processing": true,
+                    "bDestroy": true,
+                    "destroy": true,
+                    "serverSide": true,
+                    "ajax": {
+                        // url可以直接指定远程的json文件，或是MVC的请求地址 /Controller/Action
+                        url: "/tWimMsg/getAlltWimMsgByCondiTion",
+                        type: 'POST',
+                        // 传给服务器的数据，可以添加我们自己的查询参数
+                        data: function (param) {
+                            param.stationPort = mainVm.stationPort;
+                            param.chexing = mainVm.chexing;
+                            param.startTime = mainVm.startTime;
+                            param.endTime = mainVm.endTime;
+                            param.endWeight = mainVm.endWeight;
+                            param.startWeight = mainVm.startWeight;
+                            return param;
+                        },
+                        //用于处理服务器端返回的数据。 dataSrc是DataTable特有的
+                        dataSrc: function (myJson) {
+                            hidMask();
+                            if (myJson.timeout) {
+                                return "";
+                            }
+                            return myJson.data;
+                        }
+                    },
+                    "iDisplayLength": 10,
+                    "searching": false,
+                    "bLengthChange": false,
+                    'paging': true,
+                    "oLanguage": {
+                        "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+                    },
+                    "columns": [
+                        {"data": "stationNameRouteName"},
+                        {"data": "laneNo"},
+                        {"data": "plate"},
+                        {"data": "licensePlateColor"},
+                        {"data": "vehicleTypeName"},
+                        {"data": "length"},
+                        {"data": "speed"},
+                        {"data": "directionName"},
+                        {"data": "axlesCount"},
+                        {"data": "totalWeight"},
+                        {"data": "isStraddleName"},
+                        {"data": "temperature"},
+                        {"data": "overWeightRatio"},
+                        {"data": "evtTime"},
+
+                    ],
+                    "columnDefs": [{
+                        "class": "tcenter",
+                        "targets": 0,
+                        "searchable": true,
+                        "render": function (data, type, full) {
+                            return "<marquee scrollAmount=3>" + data + "</marquee>";
+                        }
+                    },{
+                        "class": "tcenter",
+                        "targets": 13,
+                        "searchable": true,
+                        "render": function (data, type, full) {
+                            return "<marquee scrollAmount=3>" + data + "</marquee>";
+                        }
+                    },],
+                    "order": [],
+                    "ordering": false,
+                    "oLanguage": { //国际化配置
+                        "sProcessing": "正在获取数据，请稍后...",
+                        "sLengthMenu": "显示 _MENU_ 条",
+                        "sZeroRecords": "查询不到相关数据",
+                        "sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
+                        "sInfoEmpty": "记录数为0",
+                        "sInfoFiltered": "(全部记录数 _MAX_ 条)",
+                        "sInfoPostFix": "",
+                        "sSearch": "搜索",
+                        "sLoadingRecords": "载入中...",
+                        "sInfoThousands": ",",
+                        "sUrl": "",
+                        "oPaginate": {
+                            "sFirst": "第一页",
+                            "sPrevious": "上一页",
+                            "sNext": "下一页",
+                            "sLast": "最后一页"
+                        },
+                        "oAria": {
+                            "sSortAscending": ": 以升序排列此列",
+                            "sSortDescending": ": 以降序排列此列"
+                        }
+
+                    },
+
                 });
+                /*$('#mainContent').dataTable().fnClearTable();
+                $('#mainContent').dataTable().draw();*/
             },
             checknum: function (msg) {
                 this._data[msg] = this._data[msg].replace(/[^\d.]/g, '');

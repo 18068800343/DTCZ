@@ -1,6 +1,11 @@
 package com.ldxx.controller;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.ldxx.bean.PageData;
 import com.ldxx.bean.StationSite;
+import com.ldxx.bean.TongJiTableQuery;
 import com.ldxx.bean.tUserInfo;
 import com.ldxx.dao.StationSiteDao;
 import com.ldxx.dao.tUserInfoDao;
@@ -9,6 +14,7 @@ import com.ldxx.vo.ChaoZaiVo;
 import com.ldxx.vo.tWimMsgVo;
 import org.apache.catalina.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -64,9 +70,16 @@ public class tWimMsgController {
     }
 
     @RequestMapping("/getAlltWimMsgByCondiTion")
-    public List<tWimMsgVo> getAlltWimMsgByCondiTion(HttpSession session,String  stationPort,String startTime,String endTime,Double startWeight,Double endWeight,String chexing) {
+    public PageData<tWimMsgVo> getAlltWimMsgByCondiTion(HttpSession session,  TongJiTableQuery tongJiTableQuery) {
+
         String zhandianduankouhao="";
         tUserInfo user = (tUserInfo) session.getAttribute("user");
+        String stationPort = tongJiTableQuery.getStationPort();
+        String startTime = tongJiTableQuery.getStartTime();
+        String endTime = tongJiTableQuery.getEndTime();
+        String chexing = tongJiTableQuery.getChexing();
+        Double startWeight = tongJiTableQuery.getStartWeight();
+        Double endWeight = tongJiTableQuery.getEndWeight();
            if(stationPort!=null&&stationPort!=""){
             zhandianduankouhao=stationPort;
             if(user!=null){
@@ -84,8 +97,13 @@ public class tWimMsgController {
             startWeight = endWeight;
             endWeight = mid;
         }
-        List<tWimMsgVo> list= service.getAlltWimMsgByCondition(zhandianduankouhao,startTime,endTime,startWeight,endWeight,chexing);
-        return list;
+        tongJiTableQuery.setStationPort(zhandianduankouhao);
+        PageInfo<tWimMsgVo> pageInfo= service.getAlltWimMsgByConditionByPage(tongJiTableQuery);
+        PageData<tWimMsgVo> pd = new PageData<>();
+        pd.setData(pageInfo.getList());
+        pd.setiTotalRecords(pageInfo.getTotal());
+        pd.setiTotalDisplayRecords(pageInfo.getTotal());
+        return pd;
     }
 
     /**
