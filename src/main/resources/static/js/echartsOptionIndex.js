@@ -179,7 +179,7 @@ function initDownOption(list,stationName){
                 show: false
             },
             axisLabel: {
-                inside: true,
+                /*inside: true,*/
                 textStyle: {
                     color: '#fff'
                 },
@@ -220,7 +220,7 @@ function initDownOption(list,stationName){
                     color: 'rgba(0,0,0,0.05)'
                 }
             },
-            label: seriesLabel,
+           /* label: seriesLabel,*/
             barGap: '-100%',
             barCategoryGap: '40%',
             data: dataShadow,
