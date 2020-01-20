@@ -353,12 +353,14 @@
                 errMessage("请求UserController失败");
             },
             success: function (json) {
-                setEcharts(json, stationName)
+                let list = json.list;
+                let max = json.max;
+                setEcharts(list, stationName,max)
             }
         });
     }
 
-    function setEcharts(list, stationName) {
+    function setEcharts(list, stationName,max) {
         var flag = 0;
         for (var i = 0; i < list.length; i++) {
             flag += list[i];
@@ -368,7 +370,7 @@
             toastr.error('今日无车流量');
         }
         let myChart = echarts.init(document.getElementById('_top'));
-        let option = initLeftOption(list, stationName);
+        let option = initLeftOption(list, stationName,max);
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
         bindChartClick(myChart, 1);
@@ -450,13 +452,15 @@
             error: function (msg) {
             },
             success: function (json) {
-                setEcharts3(json, stationName)
+                let list = json.list;
+                let max = json.max;
+                setEcharts3(list, stationName,max);
 
             }
         });
     }
 
-    function setEcharts3(list, stationName) {
+    function setEcharts3(list, stationName,max) {
         var flag = 0;
         for (var i = 0; i < list.length; i++) {
             flag += list[i];
@@ -467,7 +471,7 @@
         }
         let myChart3 = echarts.init(document.getElementById('bottom_'));
         if (list != null && list.length != 0) {
-            let option = initDownOption(list, stationName);
+            let option = initDownOption(list, stationName,max);
             // 使用刚指定的配置项和数据显示图表。
             myChart3.setOption(option);
         }

@@ -105,6 +105,9 @@
     <select id="getMeiRiCheLiuLiangByStationPort" resultType="int">
         SELECT COUNT(*) from t_vehicle_msg where  Station_IP=#{stationPort} AND date(Evt_Time) = curdate()
     </select>
+    <select id="getMeiRiCheLiuLiangMaxByStationPort" resultType="int">
+       SELECT max(a.cnt) FROM (SELECT COUNT(*) cnt FROM t_vehicle_msg WHERE date(Evt_Time) = curdate() GROUP BY Station_IP)a
+    </select>
 
     <select id="getMeiRiChaoZhongByStationPort" resultType="int">
         SELECT COUNT(*) from t_vehicle_msg where  Station_IP=#{stationPort} AND date(Evt_Time) = curdate() and Over_Weight>0
@@ -113,6 +116,10 @@
     <select id="getMeiRiGuanJianCheLiangByStationPort" resultType="int">
         SELECT COUNT(*) from t_vehicle_msg
         where  Station_IP=#{stationPort} AND date(Evt_Time) = curdate() and Total_Weight>(SELECT Crux_Weight FROM crux_weight where Del_State=1)
+    </select>
+    <select id="getMeiRiGuanJianCheLiangMax" resultType="int">
+        SELECT max(a.cnt) FROM (SELECT COUNT(*) cnt from t_vehicle_msg
+        where   date(Evt_Time) = curdate() and Total_Weight>(SELECT Crux_Weight FROM crux_weight where Del_State=1) GROUP BY Station_IP)a
     </select>
 
     <select id="getMeiRiCheLiuLiangShujuByStationPort" resultType="tWimMsgVo">

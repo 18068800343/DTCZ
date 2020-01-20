@@ -9,6 +9,7 @@ import com.ldxx.bean.TongJiTableQuery;
 import com.ldxx.bean.tUserInfo;
 import com.ldxx.dao.StationSiteDao;
 import com.ldxx.dao.tUserInfoDao;
+import com.ldxx.dao.tWimMsgDao;
 import com.ldxx.service.tWimMsgService;
 import com.ldxx.vo.ChaoZaiVo;
 import com.ldxx.vo.tWimMsgVo;
@@ -21,7 +22,9 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("tWimMsg")
@@ -29,6 +32,8 @@ public class tWimMsgController {
 
     @Autowired
     private tWimMsgService service;
+    @Resource
+    private tWimMsgDao tWimMsgDao;
     @Resource
     private tUserInfoDao tUserInfoDao;
     @Resource
@@ -112,7 +117,8 @@ public class tWimMsgController {
      * @return
      */
     @RequestMapping("/getMeiRiCheLiuLiangByStationPort")
-    public List<Integer> getMeiRiCheLiuLiangByStationPort(String stationPort) {
+    public Map getMeiRiCheLiuLiangByStationPort(String stationPort) {
+        Map map = new HashMap();
         List<Integer> list=new ArrayList<Integer>();
         if(stationPort!=null){
             String[] split = stationPort.split(",");
@@ -121,7 +127,17 @@ public class tWimMsgController {
                 list.add(i);
             }
         }
-        return list;
+        Integer max = tWimMsgDao.getMeiRiCheLiuLiangMaxByStationPort();
+        if(10000<max&&max<=20000){
+            max = 20000;
+        }else if (max<=10000){
+            max = 10000;
+        }else{
+            max = 30000;
+        }
+        map.put("list",list);
+        map.put("max",max);
+        return map;
     }
 
     /**
@@ -157,7 +173,7 @@ public class tWimMsgController {
      * @return
      */
     @RequestMapping("/getMeiRiGuanJianCheLiangByStationPort")
-    public List<Integer> getMeiRiGuanJianCheLiangByStationPort(String stationPort) {
+    public Map getMeiRiGuanJianCheLiangByStationPort(String stationPort) {
         List<Integer> list=new ArrayList<Integer>();
         if(stationPort!=null){
             String[] split = stationPort.split(",");
@@ -166,7 +182,20 @@ public class tWimMsgController {
                 list.add(i);
             }
         }
-        return list;
+        Integer max = tWimMsgDao.getMeiRiGuanJianCheLiangMax();
+        Map map = new HashMap();
+        if(10000<max&&max<=20000){
+            max = 20000;
+        }else if (max<=10000&&max>5000){
+            max = 10000;
+        }else if (max<=5000){
+            max = 5000;
+        }else{
+            max = 30000;
+        }
+        map.put("list",list);
+        map.put("max",max);
+        return map;
     }
 
     @RequestMapping("/getMeiRiCheLiuLiangShujuByStationPort")

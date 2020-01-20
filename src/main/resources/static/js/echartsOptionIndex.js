@@ -1,4 +1,4 @@
-function initLeftOption(list, stationname) {
+function initLeftOption(list, stationname,max) {
     let arrList = [];
     arrList.push(['score', 'amount', 'product']);
     for(let i in list){
@@ -49,7 +49,7 @@ function initLeftOption(list, stationname) {
                     return res;
                 }
             },
-            max:30000,
+            max:max,
 
         },
         yAxis: {
@@ -148,7 +148,7 @@ function initRightOption(list,stationName) {
 }
 
 
-function initDownOption(list,stationName){
+function initDownOption(list,stationName,max){
     var dataAxis = stationName;
     var data = list;
     var yMax = 500;
@@ -208,7 +208,7 @@ function initDownOption(list,stationName){
                     color: '#999'
                 }
             },
-            max:30000,
+            max:max,
         },
         dataZoom: [{
             type: 'inside'
