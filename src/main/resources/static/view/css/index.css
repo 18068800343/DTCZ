@@ -12,7 +12,6 @@ body{
 	margin-left: 1%;
 	margin-top: 3%;
 	height: 23%;
-	width: 33%;
 	left:15%;
 	background-size: 100%;
 	background-repeat: no-repeat;
@@ -28,11 +27,10 @@ body{
 	margin-left: 2%;
 	margin-top: 2%;
 	margin-right: 2%;
-	height: 41%;
+	height: 50%;
 	position: absolute;
 	margin:0 auto;
-	width: 30%;
-	right: 34%;
+	right: 31%;
 	top:5%;
 	background-size: 100%;
 	background-repeat: no-repeat;
