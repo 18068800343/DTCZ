@@ -263,4 +263,8 @@ public class tWimMsgController {
         return service.getMeiRiGuanJianChaoZHongShujuByStationPort(port);
     }
 
+    @RequestMapping("/gettWimMsgById")
+    public tWimMsgVo gettWimMsgById(String idLocal) {
+        return service.gettWimMsgById(idLocal);
+    }
 }

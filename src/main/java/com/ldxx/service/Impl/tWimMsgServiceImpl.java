@@ -68,4 +68,9 @@ public class tWimMsgServiceImpl implements tWimMsgService {
     public List<tWimMsgVo> getMeiRiCheLiuLiangShujuByStationPort(String stationPort) {
         return dao.getMeiRiCheLiuLiangShujuByStationPort(stationPort);
     }
+
+    @Override
+    public tWimMsgVo gettWimMsgById(String idLocal) {
+        return dao.gettWimMsgById(idLocal);
+    }
 }

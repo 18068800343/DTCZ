@@ -1,4 +1,4 @@
-function setjiancezhandianLeft(list,stationName){
+function setjiancezhandianLeft(list,stationName,max){
     var seriesLabel = {
         normal: {
             show: true,
@@ -25,7 +25,7 @@ function setjiancezhandianLeft(list,stationName){
         },
         xAxis: {
             type: 'value',
-            max: 30000,
+            max: max,
             boundaryGap: [0, 0.01]
         },
         yAxis: {
@@ -121,7 +121,7 @@ function setjiancezhandianRight(list,stationName){
     return option;
 }
 
-function setjiancezhandianBottom(list,stationName){
+function setjiancezhandianBottom(list,stationName,max){
     var seriesLabel = {
         normal: {
             show: true,
@@ -168,7 +168,7 @@ function setjiancezhandianBottom(list,stationName){
         yAxis : [
             {
                 type : 'value',
-                max: 30000
+                max: max
             }
         ],
         series : [

@@ -174,4 +174,20 @@
         <include refid="StationIP_chaozaishuju_sql"></include>
     </select>
 
+    <select id="gettWimMsgById" resultType="tWimMsgVo">
+        select CASE a.Direction WHEN 0 THEN '正常行驶'
+        ELSE '逆行'
+        END as directionName,
+        CASE a.Is_Straddle WHEN 0 THEN '否'
+        ELSE '是'
+        end as isStraddleName,
+        a.*,b.Station_Name,b.Route_Name,concat_ws("+",b.Station_Name,b.Route_Name) as stationNameRouteName,
+        c.License_Plate_Color,d.Vehicle_Type_Name
+        from t_vehicle_msg a
+        LEFT JOIN station_site b on a.Station_IP=b.Station_Port
+        LEFT JOIN license_plate c ON a.Plate_Color=c.License_Plate_No
+        LEFT JOIN vehicle_type d ON a.Class_Index=d.Vehicle_Type_No
+        where a.id_local=#{idLocal}
+    </select>
+
 </mapper>
