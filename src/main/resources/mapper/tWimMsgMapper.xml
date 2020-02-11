@@ -27,7 +27,7 @@
             <if test="stationPort.indexOf(',')==-1">
             and  a.Station_IP=#{stationPort}
             </if>
-            ORDER BY a.Evt_Time desc
+            /*ORDER BY a.Evt_Time desc*/
         </if>
     </sql>
     <sql id="CheXing_IP_sql_tongji">
