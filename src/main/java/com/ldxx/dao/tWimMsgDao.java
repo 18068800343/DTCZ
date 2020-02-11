@@ -8,13 +8,15 @@ public interface tWimMsgDao {
 
     List<tWimMsgVo> getAlltWimMsg(String stationPort);
 
-    List<tWimMsgVo> getAlltWimMsgByCondition(String stationPort, String startTime, String endTime,Double startWeight,Double endWeight,String chexing);
+    List<tWimMsgVo> getAlltWimMsgByCondition(String stationPort, String startTime, String endTime,Double startWeight,Double endWeight,String chexing,Integer start,Integer length);
 
     int getMeiRiCheLiuLiangByStationPort(String stationPort);
 
     int getMeiRiCheLiuLiangMaxByStationPort();
 
     int getMeiRiGuanJianCheLiangMax();
+
+    int getCountByTableName(String tableName);
 
     int getMeiRiChaoZhongByStationPort(String stationPort);
 

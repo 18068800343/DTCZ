@@ -14,8 +14,18 @@ public class tWimMsgVo extends tWimMsg {
     private String licensePlateColor;//车牌颜色
     private String vehicleTypeName;//车型
 
+    private Integer totalCount;
+
     private List<Integer> count;//车流量数量
     private List<String> name;
+
+    public Integer getTotalCount() {
+        return totalCount;
+    }
+
+    public void setTotalCount(Integer totalCount) {
+        this.totalCount = totalCount;
+    }
 
     public List<Integer> getCount() {
         return count;

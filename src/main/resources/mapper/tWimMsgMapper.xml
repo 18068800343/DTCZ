@@ -68,18 +68,35 @@
     </select>
 
     <select id="getAlltWimMsgByCondition" resultType="tWimMsgVo">
-        select CASE a.Direction WHEN 0 THEN '正常行驶'
-        ELSE '逆行'
-        END as directionName,
-        CASE a.Is_Straddle WHEN 0 THEN '否'
-        ELSE '是'
-        end as isStraddleName,
-        a.*,b.Station_Name,b.Route_Name,concat_ws("+",b.Station_Name,b.Route_Name) as stationNameRouteName,
-        c.License_Plate_Color,d.Vehicle_Type_Name
-        from t_vehicle_msg a
-        LEFT JOIN station_site b on a.Station_IP=b.Station_Port
-        LEFT JOIN license_plate c ON a.Plate_Color=c.License_Plate_No
-        LEFT JOIN vehicle_type d ON a.Class_Index=d.Vehicle_Type_No
+        SELECT
+        CASE a.Direction
+        WHEN 0 THEN
+        '正常行驶'
+        ELSE
+        '逆行'
+        END AS directionName,
+        CASE a.Is_Straddle
+        WHEN 0 THEN
+        '否'
+        ELSE
+        '是'
+        END AS isStraddleName,
+        a.*, b.Station_Name,
+        b.Route_Name,
+        concat_ws(
+        "+",
+        b.Station_Name,
+        b.Route_Name
+        ) AS stationNameRouteName,
+        c.License_Plate_Color,
+        d.Vehicle_Type_Name
+        FROM
+        (select  * from t_vehicle_msg ORDER BY
+        Evt_Time DESC LIMIT #{start},
+        #{length}) a
+        LEFT JOIN station_site b ON a.Station_IP = b.Station_Port
+        LEFT JOIN license_plate c ON a.Plate_Color = c.License_Plate_No
+        LEFT JOIN vehicle_type d ON a.Class_Index = d.Vehicle_Type_No
         <where>
             <if test="startTime!=null and startTime!='' ">
                 and #{startTime} &lt; msg_time
@@ -111,6 +128,11 @@
 
     <select id="getMeiRiChaoZhongByStationPort" resultType="int">
         SELECT COUNT(*) from t_vehicle_msg where  Station_IP=#{stationPort} AND date(Evt_Time) = curdate() and Over_Weight>0
+    </select>
+
+
+    <select id="getCountByTableName" resultType="int">
+        SELECT COUNT(*) from t_vehicle_msg
     </select>
 
     <select id="getMeiRiGuanJianCheLiangByStationPort" resultType="int">

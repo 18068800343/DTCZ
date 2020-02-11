@@ -28,15 +28,17 @@ public class tWimMsgServiceImpl implements tWimMsgService {
     @Override
     public List<tWimMsgVo> getAlltWimMsgByCondition(String stationPort, String startTime, String endTime,Double startWeight,Double endWeight,String chexing) {
 
-        return dao.getAlltWimMsgByCondition(stationPort, startTime,endTime,startWeight,endWeight,chexing);
+        return dao.getAlltWimMsgByCondition(stationPort, startTime,endTime,startWeight,endWeight,chexing,1,1);
     }
 
     @Override
-    public PageInfo<tWimMsgVo>  getAlltWimMsgByConditionByPage(TongJiTableQuery tongJiTableQuery) {
-        PageHelper.startPage(tongJiTableQuery.getStart(), tongJiTableQuery.getLength());
-        List<tWimMsgVo> list = dao.getAlltWimMsgByCondition(tongJiTableQuery.getStationPort(), tongJiTableQuery.getStartTime(),tongJiTableQuery.getEndTime(),tongJiTableQuery.getStartWeight(),tongJiTableQuery.getEndWeight(),tongJiTableQuery.getChexing());
-        PageInfo<tWimMsgVo> pageInfo = new PageInfo<>(list);
-        return pageInfo;
+    public List<tWimMsgVo>  getAlltWimMsgByConditionByPage(TongJiTableQuery tongJiTableQuery) {
+
+        //PageHelper.startPage(tongJiTableQuery.getStart(), tongJiTableQuery.getLength());
+
+        List<tWimMsgVo> list = dao.getAlltWimMsgByCondition(tongJiTableQuery.getStationPort(), tongJiTableQuery.getStartTime(),tongJiTableQuery.getEndTime(),tongJiTableQuery.getStartWeight(),tongJiTableQuery.getEndWeight(),tongJiTableQuery.getChexing(),tongJiTableQuery.getStart(),tongJiTableQuery.getLength());
+        //PageInfo<tWimMsgVo> pageInfo = new PageInfo<>(list);
+        return list;
     }
 
     @Override
@@ -47,6 +49,12 @@ public class tWimMsgServiceImpl implements tWimMsgService {
     @Override
     public int getMeiRiChaoZhongByStationPort(String stationPort) {
         return dao.getMeiRiChaoZhongByStationPort(stationPort);
+    }
+
+    @Override
+    public int getCountByTableName(String tableName) {
+
+        return dao.getCountByTableName(tableName);
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.ldxx.controller;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.ldxx.Thread.PageCountCallable;
 import com.ldxx.bean.PageData;
 import com.ldxx.bean.StationSite;
 import com.ldxx.bean.TongJiTableQuery;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.*;
 
 @RestController
 @RequestMapping("tWimMsg")
@@ -103,11 +105,23 @@ public class tWimMsgController {
             endWeight = mid;
         }
         tongJiTableQuery.setStationPort(zhandianduankouhao);
-        PageInfo<tWimMsgVo> pageInfo= service.getAlltWimMsgByConditionByPage(tongJiTableQuery);
+        List<tWimMsgVo> list= service.getAlltWimMsgByConditionByPage(tongJiTableQuery);
         PageData<tWimMsgVo> pd = new PageData<>();
-        pd.setData(pageInfo.getList());
-        pd.setiTotalRecords(pageInfo.getTotal());
-        pd.setiTotalDisplayRecords(pageInfo.getTotal());
+        pd.setData(list);
+        ExecutorService threadPoolExecutor = Executors.newFixedThreadPool(1);
+        Callable callable = new PageCountCallable();
+        Future<Integer> res = null;
+        res = threadPoolExecutor.submit(callable);
+        try {
+            Integer count  = res.get();
+            pd.setiTotalRecords(count);
+            pd.setiTotalDisplayRecords(count);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        threadPoolExecutor.shutdown();
         return pd;
     }
 

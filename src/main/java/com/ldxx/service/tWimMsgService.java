@@ -12,11 +12,13 @@ public interface tWimMsgService {
 
     List<tWimMsgVo> getAlltWimMsgByCondition(String stationPort,String startTime,String endTime,Double startWeight,Double endWeight,String chexing);
 
-    PageInfo<tWimMsgVo> getAlltWimMsgByConditionByPage(TongJiTableQuery tongJiTableQuery);
+    List<tWimMsgVo> getAlltWimMsgByConditionByPage(TongJiTableQuery tongJiTableQuery);
 
     int getMeiRiCheLiuLiangByStationPort(String stationPort);
 
     int getMeiRiChaoZhongByStationPort(String stationPort);
+
+    int getCountByTableName(String tableName);
 
     int getMeiRiGuanJianCheLiangByStationPort(String stationPort);
 
