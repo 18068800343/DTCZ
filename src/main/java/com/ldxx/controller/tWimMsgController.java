@@ -12,6 +12,7 @@ import com.ldxx.dao.StationSiteDao;
 import com.ldxx.dao.tUserInfoDao;
 import com.ldxx.dao.tWimMsgDao;
 import com.ldxx.service.tWimMsgService;
+import com.ldxx.util.FormatUtil;
 import com.ldxx.vo.ChaoZaiVo;
 import com.ldxx.vo.tWimMsgVo;
 import org.apache.catalina.Session;
@@ -98,18 +99,44 @@ public class tWimMsgController {
                 updlastMonitoringSiteById(user.getStationPort(),user.getUsrId());
             }
         }
+           //格式化重量范围s
         Double mid = 0.0;
         if(null!=startWeight&&null!=endWeight&&startWeight>endWeight){
             mid=startWeight;
             startWeight = endWeight;
             endWeight = mid;
         }
+        //格式化车速
+        Map<String,Double> doubleMid = FormatUtil.changeBigAndSmall(tongJiTableQuery.getChesuStart(),tongJiTableQuery.getChesuEnd());
+        Double chesuStart = doubleMid.get("start");
+        Double chesuEnd = doubleMid.get("end");
+
+        //格式化温度
+        doubleMid = FormatUtil.changeBigAndSmall(tongJiTableQuery.getRoadTmpStart(),tongJiTableQuery.getRoadTmpEnd());
+        Double roadTmpStart = doubleMid.get("start");
+        Double roadTmpEnd = doubleMid.get("end");
+
+        //格式化超重比率
+        doubleMid = FormatUtil.changeBigAndSmall(tongJiTableQuery.getChaozhongStart(),tongJiTableQuery.getChaozhongEnd());
+        Double chaozhongStart = doubleMid.get("start");
+        Double chaozhongEnd = doubleMid.get("end");
+
+        tongJiTableQuery.setStartWeight(startWeight);
+        tongJiTableQuery.setEndWeight(endWeight);
+        tongJiTableQuery.setChesuStart(chesuStart);
+        tongJiTableQuery.setChesuEnd(chesuEnd);
+        tongJiTableQuery.setRoadTmpStart(roadTmpStart);
+        tongJiTableQuery.setRoadTmpEnd(roadTmpEnd);
+        tongJiTableQuery.setChaozhongStart(chaozhongStart);
+        tongJiTableQuery.setChaozhongEnd(chaozhongEnd);
+
         tongJiTableQuery.setStationPort(zhandianduankouhao);
+
         List<tWimMsgVo> list= service.getAlltWimMsgByConditionByPage(tongJiTableQuery);
         PageData<tWimMsgVo> pd = new PageData<>();
         pd.setData(list);
         ExecutorService threadPoolExecutor = Executors.newFixedThreadPool(1);
-        Callable callable = new PageCountCallable();
+        Callable callable = new PageCountCallable(tongJiTableQuery);
         Future<Integer> res = null;
         res = threadPoolExecutor.submit(callable);
         try {

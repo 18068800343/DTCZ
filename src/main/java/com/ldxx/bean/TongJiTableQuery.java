@@ -7,8 +7,80 @@ public class TongJiTableQuery {
     Double startWeight;
     Double endWeight;
     String chexing;
+    String chepai;
+    Double chesuStart;
+    Double chesuEnd;
+    Double zhoushu;
+    Double roadTmpStart;
+    Double roadTmpEnd;
+    Double chaozhongStart;
+    Double chaozhongEnd;
     int start;
     int length;
+
+    public String getChepai() {
+        return chepai;
+    }
+
+    public void setChepai(String chepai) {
+        this.chepai = chepai;
+    }
+
+    public Double getChesuStart() {
+        return chesuStart;
+    }
+
+    public void setChesuStart(Double chesuStart) {
+        this.chesuStart = chesuStart;
+    }
+
+    public Double getChesuEnd() {
+        return chesuEnd;
+    }
+
+    public void setChesuEnd(Double chesuEnd) {
+        this.chesuEnd = chesuEnd;
+    }
+
+    public Double getZhoushu() {
+        return zhoushu;
+    }
+
+    public void setZhoushu(Double zhoushu) {
+        this.zhoushu = zhoushu;
+    }
+
+    public Double getRoadTmpStart() {
+        return roadTmpStart;
+    }
+
+    public void setRoadTmpStart(Double roadTmpStart) {
+        this.roadTmpStart = roadTmpStart;
+    }
+
+    public Double getRoadTmpEnd() {
+        return roadTmpEnd;
+    }
+
+    public void setRoadTmpEnd(Double roadTmpEnd) {
+        this.roadTmpEnd = roadTmpEnd;
+    }
+
+    public Double getChaozhongStart() {
+        return chaozhongStart;
+    }
+
+    public void setChaozhongStart(Double chaozhongStart) {
+        this.chaozhongStart = chaozhongStart;
+    }
+
+    public Double getChaozhongEnd() {
+        return chaozhongEnd;
+    }
+
+    public void setChaozhongEnd(Double chaozhongEnd) {
+        this.chaozhongEnd = chaozhongEnd;
+    }
 
     public String getStationPort() {
         return stationPort;

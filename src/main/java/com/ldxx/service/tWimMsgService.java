@@ -3,6 +3,7 @@ package com.ldxx.service;
 import com.github.pagehelper.PageInfo;
 import com.ldxx.bean.TongJiTableQuery;
 import com.ldxx.vo.tWimMsgVo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ public interface tWimMsgService {
 
     List<tWimMsgVo> getAlltWimMsg(String stationPort);
 
-    List<tWimMsgVo> getAlltWimMsgByCondition(String stationPort,String startTime,String endTime,Double startWeight,Double endWeight,String chexing);
+    List<tWimMsgVo> getAlltWimMsgByCondition(TongJiTableQuery tongJiTableQuery);
 
     List<tWimMsgVo> getAlltWimMsgByConditionByPage(TongJiTableQuery tongJiTableQuery);
 
@@ -18,7 +19,7 @@ public interface tWimMsgService {
 
     int getMeiRiChaoZhongByStationPort(String stationPort);
 
-    int getCountByTableName(String tableName);
+    int getCountByTableName(@Param("tjq") TongJiTableQuery tongJiTableQuery);
 
     int getMeiRiGuanJianCheLiangByStationPort(String stationPort);
 

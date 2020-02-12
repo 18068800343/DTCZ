@@ -6,6 +6,7 @@ import com.ldxx.bean.TongJiTableQuery;
 import com.ldxx.dao.tWimMsgDao;
 import com.ldxx.service.tWimMsgService;
 import com.ldxx.vo.tWimMsgVo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,9 +27,11 @@ public class tWimMsgServiceImpl implements tWimMsgService {
     }
 
     @Override
-    public List<tWimMsgVo> getAlltWimMsgByCondition(String stationPort, String startTime, String endTime,Double startWeight,Double endWeight,String chexing) {
+    public List<tWimMsgVo> getAlltWimMsgByCondition(TongJiTableQuery tongJiTableQuery) {
 
-        return dao.getAlltWimMsgByCondition(stationPort, startTime,endTime,startWeight,endWeight,chexing,1,1);
+        tongJiTableQuery.setStart(1);
+        tongJiTableQuery.setLength(1);
+        return dao.getAlltWimMsgByCondition(tongJiTableQuery);
     }
 
     @Override
@@ -36,7 +39,8 @@ public class tWimMsgServiceImpl implements tWimMsgService {
 
         //PageHelper.startPage(tongJiTableQuery.getStart(), tongJiTableQuery.getLength());
 
-        List<tWimMsgVo> list = dao.getAlltWimMsgByCondition(tongJiTableQuery.getStationPort(), tongJiTableQuery.getStartTime(),tongJiTableQuery.getEndTime(),tongJiTableQuery.getStartWeight(),tongJiTableQuery.getEndWeight(),tongJiTableQuery.getChexing(),tongJiTableQuery.getStart(),tongJiTableQuery.getLength());
+
+        List<tWimMsgVo> list = dao.getAlltWimMsgByCondition(tongJiTableQuery);
         //PageInfo<tWimMsgVo> pageInfo = new PageInfo<>(list);
         return list;
     }
@@ -52,9 +56,9 @@ public class tWimMsgServiceImpl implements tWimMsgService {
     }
 
     @Override
-    public int getCountByTableName(String tableName) {
+    public int getCountByTableName(@Param("tjq") TongJiTableQuery tongJiTableQuery) {
 
-        return dao.getCountByTableName(tableName);
+        return dao.getCountByTableName(tongJiTableQuery);
     }
 
     @Override

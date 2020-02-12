@@ -1,6 +1,8 @@
 package com.ldxx.dao;
 
+import com.ldxx.bean.TongJiTableQuery;
 import com.ldxx.vo.tWimMsgVo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -8,7 +10,7 @@ public interface tWimMsgDao {
 
     List<tWimMsgVo> getAlltWimMsg(String stationPort);
 
-    List<tWimMsgVo> getAlltWimMsgByCondition(String stationPort, String startTime, String endTime,Double startWeight,Double endWeight,String chexing,Integer start,Integer length);
+    List<tWimMsgVo> getAlltWimMsgByCondition(@Param("tjq") TongJiTableQuery tongJiTableQuery);
 
     int getMeiRiCheLiuLiangByStationPort(String stationPort);
 
@@ -16,7 +18,7 @@ public interface tWimMsgDao {
 
     int getMeiRiGuanJianCheLiangMax();
 
-    int getCountByTableName(String tableName);
+    int getCountByTableName(@Param("tjq") TongJiTableQuery tongJiTableQuery);
 
     int getMeiRiChaoZhongByStationPort(String stationPort);
 

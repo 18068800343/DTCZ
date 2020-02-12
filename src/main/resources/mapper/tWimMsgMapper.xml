@@ -17,22 +17,22 @@
         </if>
     </sql>
     <sql id="StationIP_sql_tongji">
-        <if test="stationPort!=null and stationPort!=''">
-            <if test="stationPort.indexOf(',')!=-1">
+        <if test="tjq.stationPort!=null and tjq.stationPort!=''">
+            <if test="tjq.stationPort.indexOf(',')!=-1">
              and   a.Station_IP in
-                <foreach collection="stationPort.split(',')" item="item" open="(" separator="," close=")">
+                <foreach collection="tjq.stationPort.split(',')" item="item" open="(" separator="," close=")">
                     #{item}
                 </foreach>
             </if>
-            <if test="stationPort.indexOf(',')==-1">
-            and  a.Station_IP=#{stationPort}
+            <if test="tjq.stationPort.indexOf(',')==-1">
+            and  a.Station_IP=#{tjq.stationPort}
             </if>
             /*ORDER BY a.Evt_Time desc*/
         </if>
     </sql>
     <sql id="CheXing_IP_sql_tongji">
-        <if test="chexing!=null and chexing!=''">
-              and FIND_IN_SET(a.Class_Index,#{chexing})
+        <if test="tjq.chexing!=null and tjq.chexing!=''">
+              and FIND_IN_SET(a.Class_Index,#{tjq.chexing})
         </if>
     </sql>
     <sql id="StationIP_chaozaishuju_sql">
@@ -69,19 +69,19 @@
 
     <select id="getAlltWimMsgByCondition" resultType="tWimMsgVo">
         SELECT
-        CASE a.Direction
+        CASE aa.Direction
         WHEN 0 THEN
         '正常行驶'
         ELSE
         '逆行'
         END AS directionName,
-        CASE a.Is_Straddle
+        CASE aa.Is_Straddle
         WHEN 0 THEN
         '否'
         ELSE
         '是'
         END AS isStraddleName,
-        a.*, b.Station_Name,
+        aa.*, b.Station_Name,
         b.Route_Name,
         concat_ws(
         "+",
@@ -91,25 +91,51 @@
         c.License_Plate_Color,
         d.Vehicle_Type_Name
         FROM
-        (select  * from t_vehicle_msg ORDER BY
-        Evt_Time DESC LIMIT #{start},
-        #{length}) a
-        LEFT JOIN station_site b ON a.Station_IP = b.Station_Port
-        LEFT JOIN license_plate c ON a.Plate_Color = c.License_Plate_No
-        LEFT JOIN vehicle_type d ON a.Class_Index = d.Vehicle_Type_No
+        (select  * from t_vehicle_msg a
         <where>
-            <if test="startTime!=null and startTime!='' ">
-                and #{startTime} &lt; msg_time
+            <if test="tjq.startTime!=null and tjq.startTime!='' ">
+                and #{tjq.startTime} &lt; msg_time
             </if>
-            <if test="endTime!=null and endTime!='' ">
-                and  msg_time &lt; #{endTime}
+            <if test="tjq.endTime!=null and tjq.endTime!='' ">
+                and  msg_time &lt; #{tjq.endTime}
             </if>
-            <if test="startWeight!=null and startWeight!='' ">
-                and  #{startWeight} &lt; total_weight
+            <if test="tjq.startWeight!=null and tjq.startWeight!='' ">
+                and  #{tjq.startWeight} &lt; total_weight
             </if>
-            <if test="endWeight!=null and endWeight!='' ">
-                and   total_weight &lt; #{endWeight}
+            <if test="tjq.endWeight!=null and tjq.endWeight!='' ">
+                and   total_weight &lt; #{tjq.endWeight}
             </if>
+
+            <if test="tjq.chesuStart!=null and tjq.chesuStart!='' ">
+                and  #{tjq.chesuStart} &lt; speed
+            </if>
+            <if test="tjq.chesuEnd!=null and tjq.chesuEnd!='' ">
+                and   speed &lt; #{tjq.chesuEnd}
+            </if>
+
+            <if test="tjq.roadTmpStart!=null and tjq.roadTmpStart!='' ">
+                and  #{tjq.roadTmpStart} &lt; Temperature
+            </if>
+            <if test="tjq.roadTmpEnd!=null and tjq.roadTmpEnd!='' ">
+                and   Temperature &lt; #{tjq.roadTmpEnd}
+            </if>
+
+            <if test="tjq.chaozhongStart!=null and tjq.chaozhongStart!='' ">
+                and  #{tjq.chaozhongStart} &lt; Over_Weight_Ratio
+            </if>
+            <if test="tjq.chaozhongEnd!=null and tjq.chaozhongEnd!='' ">
+                and   Over_Weight_Ratio &lt; #{tjq.chaozhongEnd}
+            </if>
+
+            <if test="tjq.chepai!=null and tjq.chepai!='' ">
+                and  Plate like CONCAT('%',#{tjq.chepai},'%')
+            </if>
+
+            <if test="tjq.zhoushu!=null and tjq.zhoushu!='' ">
+                and  Axles_Count = #{tjq.zhoushu}
+            </if>
+
+
 
             <include refid="CheXing_IP_sql_tongji">
             </include>
@@ -117,6 +143,13 @@
             </include>
 
         </where>
+        ORDER BY
+        Evt_Time DESC LIMIT #{tjq.start},
+        #{tjq.length}) aa
+        LEFT JOIN station_site b ON aa.Station_IP = b.Station_Port
+        LEFT JOIN license_plate c ON aa.Plate_Color = c.License_Plate_No
+        LEFT JOIN vehicle_type d ON aa.Class_Index = d.Vehicle_Type_No
+
     </select>
 
     <select id="getMeiRiCheLiuLiangByStationPort" resultType="int">
@@ -132,7 +165,58 @@
 
 
     <select id="getCountByTableName" resultType="int">
-        SELECT COUNT(*) from t_vehicle_msg
+        SELECT COUNT(*) from t_vehicle_msg a
+        <where>
+            <if test="tjq.startTime!=null and tjq.startTime!='' ">
+                and #{tjq.startTime} &lt; msg_time
+            </if>
+            <if test="tjq.endTime!=null and tjq.endTime!='' ">
+                and  msg_time &lt; #{tjq.endTime}
+            </if>
+            <if test="tjq.startWeight!=null and tjq.startWeight!='' ">
+                and  #{tjq.startWeight} &lt; total_weight
+            </if>
+            <if test="tjq.endWeight!=null and tjq.endWeight!='' ">
+                and   total_weight &lt; #{tjq.endWeight}
+            </if>
+
+            <if test="tjq.chesuStart!=null and tjq.chesuStart!='' ">
+                and  #{tjq.chesuStart} &lt; speed
+            </if>
+            <if test="tjq.chesuEnd!=null and tjq.chesuEnd!='' ">
+                and   speed &lt; #{tjq.chesuEnd}
+            </if>
+
+            <if test="tjq.roadTmpStart!=null and tjq.roadTmpStart!='' ">
+                and  #{tjq.roadTmpStart} &lt; Temperature
+            </if>
+            <if test="tjq.roadTmpEnd!=null and tjq.roadTmpEnd!='' ">
+                and   Temperature &lt; #{tjq.roadTmpEnd}
+            </if>
+
+            <if test="tjq.chaozhongStart!=null and tjq.chaozhongStart!='' ">
+                and  #{tjq.chaozhongStart} &lt; Over_Weight_Ratio
+            </if>
+            <if test="tjq.chaozhongEnd!=null and tjq.chaozhongEnd!='' ">
+                and   Over_Weight_Ratio &lt; #{tjq.chaozhongEnd}
+            </if>
+
+            <if test="tjq.chepai!=null and tjq.chepai!='' ">
+                and  Plate like CONCAT('%',#{tjq.chepai},'%')
+            </if>
+
+            <if test="tjq.zhoushu!=null and tjq.zhoushu!='' ">
+                and  Axles_Count = #{tjq.zhoushu}
+            </if>
+
+
+
+            <include refid="CheXing_IP_sql_tongji">
+            </include>
+            <include refid="StationIP_sql_tongji">
+            </include>
+
+        </where>
     </select>
 
     <select id="getMeiRiGuanJianCheLiangByStationPort" resultType="int">

@@ -7,7 +7,8 @@
     <title>Document</title>
     <link href="../style/bootstrap.min.css" rel="stylesheet"/>
     <!--<link href="../font3/bootstrap-select.css" rel="stylesheet">-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
     <link href="../font2/iconfont.css" rel="stylesheet">
     <link rel="stylesheet" href="../style/jquery.dataTables.min.css">
     <link href="../style/style.css" rel="stylesheet">
@@ -26,11 +27,12 @@
         .xian {
             margin-top: 3.5%;
         }
+
         @media screen and (max-width: 1400px) {
-		   .mask-loading{
-		       top:40% !important;
-		   }
-		}
+            .mask-loading {
+                top: 40% !important;
+            }
+        }
     </style>
 </head>
 <body style="background-image: none;">
@@ -73,88 +75,104 @@
         250%;margin-left: 30px;border:1px solid #DDD;">
         </div>
         <label class="col-sm-1	 control-label" style="margin-left: 9%; width: 70px; line-height: 30px;">车型:</label>
-        
+
         <div class="col-sm-2" style="margin-left: 1%;">
             <div class="xian2"
                  style="width: 10px; height: 2px; background-color: rgb(222, 222, 222); position: absolute; margin-left: 5%; margin-top: 15%;"></div>
-            <select  value="请选择" class="selectpicker" multiple data-max-options="1" data-live-search="true" id="chexing"
-                   style="height: 34px; border-radius: 5px; box-shadow: none; margin-left: 30px; border: 1px solid rgb(221, 221, 221);"></select>
+            <select value="请选择" class="selectpicker" multiple data-max-options="1" data-live-search="true" id="chexing"
+                    style="height: 34px; border-radius: 5px; box-shadow: none; margin-left: 30px; border: 1px solid rgb(221, 221, 221);"></select>
         </div>
 
         <div class="sele">
             <label for="" class="col-sm-2 control-label">筛选站点</label>
             <div class="col-sm-2" style="width: 29%">
                 <!-- 样式1 -->
-                <select class="form-control selectpicker" multiple data-actions-box="true" data-max-options="2" data-live-search="true"
+                <select class="form-control selectpicker" multiple data-actions-box="true" data-max-options="2"
+                        data-live-search="true"
                         id="zhandian" style="width:80%;">
                 </select>
             </div>
             <div class="jiance">
                 <button type="button" class="btn btn-primary" @click="searchInit"
-                        style="width: 110px; background-image: linear-gradient(#1F62C8,#262E9F);float:right;margin-right:13%;">确定
+                        style="width: 110px; background-image: linear-gradient(#1F62C8,#262E9F);float:right;margin-right:13%;">
+                    确定
                 </button>
 
             </div>
         </div>
-         <div style="position:relative;">
-             <label for="" class="col-sm-2 control-label" style="margin-left:-5px;">车牌号</label>
-              <div class="col-sm-2" style="width: 29%">
+        <div style="position:relative;">
+            <label for="" class="col-sm-2 control-label" style="margin-left:-5px;">车牌号</label>
+            <div class="col-sm-2" style="width: 29%">
                 <!-- 样式1 -->
-                <input type="text" value="请输入" style="border-radius: 5px;box-shadow: none;border:1px solid #DDD;padding:3px; margin-left:-9%;height:34px;">
+                <input type="text" value="请输入" v-model="chepai"
+                       style="border-radius: 5px;box-shadow: none;border:1px solid #DDD;padding:3px; margin-left:-9%;height:34px;">
             </div>
-         </div>
-         <input type="button" id="but" onclick="but2()" class="button" value="更多条件" style="right:8%;position:absolute;background-color:white;height:34px;border:1px solid #DEDEDE;">
-         
-        
-    </div>
-     <div class="mydiv"  style="clear:both;margin-top:10px;display:none;">
-    
-        <div class="sele">
-               <label for="" class="col-sm-2 control-label" style="margin-left:1%;">车速</label>
-            <div class="col-sm-2" >
-                <!-- 样式1 -->
-                <input type="text" value="请输入" 
-                       style="height: 34px;border-radius: 5px;box-shadow: none;width: 120%;border:1px solid #DDD;padding:3px;">
-            </div>
+        </div>
+        <input type="button" id="but" onclick="but2()" class="button" value="更多条件"
+               style="right:8%;position:absolute;background-color:white;height:34px;border:1px solid #DEDEDE;">
 
-            <div class="col-sm-2">
-                <div class="xian2"
-                     style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: -5%;margin-top: 15%;">
+
+        <div class="mydiv" style="clear:both;margin-top:10px;display:none;">
+
+            <div class="sele">
+                <label for="" class="col-sm-2 control-label" style="margin-left:1%;">车速</label>
+                <div class="col-sm-2">
+                    <!-- 样式1 -->
+                    <input type="text" value="请输入" v-model="chesuStart" @input="checknum('chesuStart')"
+                           style="height: 34px;border-radius: 5px;box-shadow: none;width: 120%;border:1px solid #DDD;padding:3px;">
                 </div>
-                <input type="text" value="请输入"  style="height: 34px;border-radius: 5px;box-shadow: none;width:
-        120%;margin-left: 30px;border:1px solid #DDD;padding:3px;">
+
+                <div class="col-sm-2">
+                    <div class="xian2"
+                         style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: -5%;margin-top: 15%;">
+                    </div>
+                    <input type="text" value="请输入" v-model="chesuEnd" @input="checknum('chesuEnd')" style="height: 34px;border-radius: 5px;box-shadow: none;width:
+            120%;margin-left: 30px;border:1px solid #DDD;padding:3px;">
+                </div>
             </div>
-        </div>
             <!-- 轴数 -->
-        <label for="" class="col-sm-2 control-label" style="margin-left:3%;width:5%;">轴数</label>
-         <div class="col-sm-2" >
-                <input type="text" value="请输入" style="border-radius: 5px;box-shadow: none;border:1px solid #DDD;padding:3px; ;height:34px;margin-left:-20px;">
+            <label for="" class="col-sm-2 control-label" style="margin-left:3%;width:5%;">轴数</label>
+            <div class="col-sm-2">
+                <input type="text" value="请输入" v-model="zhoushu" @input="checknum('zhoushu')"
+                       style="border-radius: 5px;box-shadow: none;border:1px solid #DDD;padding:3px; ;height:34px;margin-left:-20px;">
             </div>
-           <!--  路面温度 -->
-           <div class="sele">
+            <!--  路面温度 -->
+            <div class="sele">
                 <label for="" class="col-sm-2 control-label" style="margin-left:3%;">路面温度</label>
-               <div class="col-sm-2" >
-                   <!-- 样式1 -->
-                   <input type="text" value="请输入"
-                          style="height: 34px;border-radius: 5px;box-shadow: none;width: 120%;border:1px solid #DDD;padding:3px;">
-               </div>
+                <div class="col-sm-2">
+                    <!-- 样式1 -->
+                    <input type="text" value="请输入" v-model="roadTmpStart" @input="checknum('roadTmpStart')"
+                           style="height: 34px;border-radius: 5px;box-shadow: none;width: 120%;border:1px solid #DDD;padding:3px;">
+                </div>
 
-               <div class="col-sm-2">
-                   <div class="xian2"
-                        style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: -5%;margin-top: 15%;">
-                   </div>
-                   <input type="text" value="请输入"  style="height: 34px;border-radius: 5px;box-shadow: none;width:
-        120%;margin-left: 30px;border:1px solid #DDD;padding:3px;">
+                <div class="col-sm-2">
+                    <div class="xian2"
+                         style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: -5%;margin-top: 15%;">
+                    </div>
+                    <input type="text"  v-model="roadTmpEnd" value="请输入" @input="checknum('roadTmpEnd')" style="height: 34px;border-radius: 5px;box-shadow: none;width:
+            120%;margin-left: 30px;border:1px solid #DDD;padding:3px;">
+                </div>
+            </div>
+            <div class="sele">
+                <!-- 超重比例 -->
+                <label for="" class="col-sm-2 control-label" style="margin-left:3%;">超重比例</label>
+                <div class="col-sm-2" style="width: 10%">
+                    <input type="text" value="请输入" v-model="chaozhongStart" @input="checknum('chaozhongStart')"
+                           style="border-radius: 5px;box-shadow: none;border:1px solid #DDD;padding:3px; ;height:34px;margin-left:-40px;">
+                </div>
+
+                <div class="col-sm-2">
+                    <div class="xian2"
+                         style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: -5%;margin-top: 15%;">
+                    </div>
+                    <input type="text"  v-model="chaozhongEnd" value="请输入"  @input="checknum('chaozhongEnd')" style="height: 34px;border-radius: 5px;box-shadow: none;width:
+            120%;margin-left: 30px;border:1px solid #DDD;padding:3px;">
+                </div>
+
             </div>
         </div>
-
-            <!-- 超重比例 -->
-              <label for="" class="col-sm-2 control-label" style="margin-left:3%;">超重比例</label>
-         <div class="col-sm-2" style="width: 10%">
-                <input type="text" value="请输入" style="border-radius: 5px;box-shadow: none;border:1px solid #DDD;padding:3px; ;height:34px;margin-left:-40px;">
-            </div>
     </div>
-     <div class="xian" style="position:relative;"></div> 
+    <div class="xian" style="position:relative;"></div>
     <!--表格-->
     <table class="table table-striped table-hover" id="mainContent"
            style="width: 90%;margin: 0 auto; margin-top: 20px;">
@@ -223,7 +241,7 @@
 <script src="js/toastr.js"></script>
 <script src="../js/myTool.js"></script>
 <script>
-	
+
 
     $(document).ready(function () {
         initzhandian();
@@ -231,23 +249,22 @@
     });
 
 
-
     let user;
 
     /* $(function(){
 	    $('input:button').click(function(){ $('div').fadeToggle() })
 	});  */
-	
-	function but2(){
-		/* $(document).ready(function(e) {
-		    $("#but").click(function(e) {
-		        $("#mydiv").toggle();
-		    });
-		}); */
-		$(".mydiv").toggle();
 
-	}
-	    
+    function but2() {
+        /* $(document).ready(function(e) {
+            $("#but").click(function(e) {
+                $("#mydiv").toggle();
+            });
+        }); */
+        $(".mydiv").toggle();
+
+    }
+
     function initzhandian() {
         $.ajax({
             type: 'POST',
@@ -289,6 +306,7 @@
             }
         });
     }
+
     function initchexing() {
         $.ajax({
             type: 'POST',
@@ -301,9 +319,9 @@
             success: function (json) {
                 $("#chexing").html('');
                 if (json != null) {
-                        for (let i in json) {
-                            $("#chexing").append("<option  value='" + json[i].vehicleTypeId + "'>" + json[i].vehicleTypeName + "</option>");
-                        }
+                    for (let i in json) {
+                        $("#chexing").append("<option  value='" + json[i].vehicleTypeId + "'>" + json[i].vehicleTypeName + "</option>");
+                    }
                     $(".selectpicker").selectpicker({
                         noneSelectedText: '请选择',
                     });
@@ -325,7 +343,16 @@
             endTime: "",
             endWeight: "",
             startWeight: "",
-            chexing:"",
+            chexing: "",
+            chepai:"",
+            chesuStart:"",
+            chesuEnd:"",
+            zhoushu:"",
+            roadTmpStart:"",
+            roadTmpEnd:"",
+            chaozhongStart:"",
+            chaozhongEnd:"",
+
         },
         methods: {
             //新建生产计划保存按钮事件
@@ -334,15 +361,15 @@
                 this.stationPort = $("#zhandian").val() == null ? "" : $("#zhandian").val().toString();
                 this.chexing = $("#chexing").val() == null ? "" : $("#chexing").val().toString();
                 //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
-/*                this.$http.post('/tWimMsg/getAlltWimMsgByCondiTion', this._data, {emulateJSON: true}).then((res) => {
+                /*                this.$http.post('/tWimMsg/getAlltWimMsgByCondiTion', this._data, {emulateJSON: true}).then((res) => {
 
-                    $('#mainContent').dataTable().fnClearTable();
-                    $('#mainContent').dataTable().fnServerData()
-                    hidMask();
+                                    $('#mainContent').dataTable().fnClearTable();
+                                    $('#mainContent').dataTable().fnServerData()
+                                    hidMask();
 
-                }, (res) => {
+                                }, (res) => {
 
-                });*/
+                                });*/
 
                 let table = $('#mainContent').dataTable({
                     "deferRender": true,
@@ -362,6 +389,14 @@
                             param.endTime = mainVm.endTime;
                             param.endWeight = mainVm.endWeight;
                             param.startWeight = mainVm.startWeight;
+                            param.chepai= mainVm.chepai;
+                            param.chesuStart= mainVm.chesuStart;
+                            param.chesuEnd= mainVm.chesuEnd;
+                            param.zhoushu= mainVm.zhoushu;
+                            param.roadTmpStart= mainVm.roadTmpStart;
+                            param.roadTmpEnd= mainVm.roadTmpEnd;
+                            param.chaozhongStart= mainVm.chaozhongStart;
+                            param.chaozhongEnd= mainVm.chaozhongEnd;
                             return param;
                         },
                         //用于处理服务器端返回的数据。 dataSrc是DataTable特有的
@@ -404,7 +439,7 @@
                         "render": function (data, type, full) {
                             return "<marquee scrollAmount=3>" + data + "</marquee>";
                         }
-                    },{
+                    }, {
                         "class": "tcenter",
                         "targets": 13,
                         "searchable": true,
@@ -466,25 +501,25 @@
         }
     })
 
-    function nowJianceSite(){
+    function nowJianceSite() {
         $("#jianceTable tbody").empty('')
-        if($("#zhandian").val()!=""&&$("#zhandian").val()!=undefined&&$("#zhandian").val()!=null){
-            var text=[];
+        if ($("#zhandian").val() != "" && $("#zhandian").val() != undefined && $("#zhandian").val() != null) {
+            var text = [];
             var checkParam = $('#zhandian').find('option:selected');
-            for (var i=0;i<checkParam.length;i++) {
+            for (var i = 0; i < checkParam.length; i++) {
                 text.push(checkParam[i].textContent);
             }
-            for(i in text){
-                $("#jianceTable tbody").append("<tr><td colspan='2'>"+text[i]+"<td></tr>")
+            for (i in text) {
+                $("#jianceTable tbody").append("<tr><td colspan='2'>" + text[i] + "<td></tr>")
                 $("#jianceTable tbody").find("td:last").hide()
             }
-        }else{
-            $("#zhandian option").each(function(){
+        } else {
+            $("#zhandian option").each(function () {
                 //遍历所有option
                 var value = $(this).val();   //获取option值
                 var text = $(this).text();
-                if(text!=''){
-                    $("#jianceTable tbody").append("<tr><td colspan='2'>"+text+"<td></tr>")
+                if (text != '') {
+                    $("#jianceTable tbody").append("<tr><td colspan='2'>" + text + "<td></tr>")
                     $("#jianceTable tbody").find("td:last").hide()
                 }
             })
@@ -495,12 +530,13 @@
     function showMask() {
         myTool.mask.show('查询中...');
     }
+
     function hidMask() {
         myTool.mask.hide();
     }
 
     mainVm.searchInit();
-  
+
 </script>
 
 
