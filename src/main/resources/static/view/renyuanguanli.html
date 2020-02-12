@@ -10,8 +10,8 @@
     <link href="../style/style.css" rel="stylesheet">
     <link rel="stylesheet" href="../style/jquery.dataTables.min.css">
     <link rel="stylesheet" href="../style/jquery-editable-select.css">
-
     <link href="../font3/bootstrap-select.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
     <link rel="stylesheet"  href="css/layui.css" />
     <link rel="stylesheet"  href="css/toastr.css"/>
 
@@ -86,13 +86,13 @@
                     <form class="form-inline">
                         <table class="table table-bordered table-condensed">
                             <tr>
-                                <td>姓名</td>
-                                <td><input type="text" id="UsrName"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
-                                <td>密码</td>
-                                <td><input type="text" id="UsrPwd"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+                                <td  style="width: 20%;">姓名</td>
+                                <td  style="width: 30%;"><input type="text" id="UsrName"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+                                <td  style="width: 20%;">密码</td>
+                                <td  style="width: 30%;"><input type="text" id="UsrPwd"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
                             </tr>
                             <tr>
-                                <td style="width: 20%;">性别</td>
+                                <td>性别</td>
                                 <td>
                                     <select class="form-control" id="UsrSex"  style="width:100%;">
                                         <option value="男">男</option>
@@ -110,11 +110,13 @@
                                         <option>普通员工</option>
                                     </select>
                                 </td>-->
-                                <td style="width: 20%;">站点</td>
+                                <td>站点</td>
                                 <td>
-                                    <select class="form-control selectpicker" multiple   data-live-search="true"  id="StationName"  style="width:100%;">
+                                    <select class="form-control selectpicker" multiple data-actions-box="true"  data-live-search="true"  id="StationName"  style="width:100%;">
                                     </select>
                                 </td>
+                                <td></td>
+                                <td></td>
                             </tr>
 
                         </table>
@@ -169,7 +171,7 @@
                                 </td>-->
                                 <td style="width: 20%;">站点</td>
                                 <td>
-                                    <select class="form-control selectpicker" multiple  data-live-search="true"  id="xg_StationName"  style="width:100%;">
+                                    <select class="form-control selectpicker" multiple data-actions-box="true" data-live-search="true"  id="xg_StationName"  style="width:100%;">
                                     </select>
                                 </td>
                             </tr>
@@ -249,7 +251,9 @@
 </body>
 <script src="../js/jquery.js"></script>
 <script src="../js/bootstrap.min.js"></script>
-<script src="../js/bootstrap-select.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+<!--<script src="../js/bootstrap-select.js" ></script>-->
+<script src="../js/common-scripts.js"></script>
 <script src="js/datatables/jquery.dataTables.min.js"></script>
 <script src="../js/jquery-editable-select.js" ></script>
 <script src="js/toastr.js" ></script>
@@ -346,6 +350,8 @@
                     $(".selectpicker").selectpicker({
                         noneSelectedText: '请选择',
                     });
+                    $("#StationName").selectpicker("refresh");
+                    $('#StationName').selectpicker('render');
                 }
             }
         });
