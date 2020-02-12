@@ -49,7 +49,7 @@ public class tWimMsgController {
         if(stationPort!=null&&stationPort!=""){
             zhandianduankouhao=stationPort;
             if(user!=null){
-                updlastMonitoringSiteById(stationPort,user.getUsrId());
+                this.updlastMonitoringSiteById(stationPort,user.getUsrId());
             }
         }else{
             if(user!=null){

@@ -8,11 +8,11 @@ import java.util.List;
 
 public interface tWimMsgDao {
 
-    List<tWimMsgVo> getAlltWimMsg(String stationPort);
+    List<tWimMsgVo> getAlltWimMsg(@Param("stationPort")String stationPort);
 
     List<tWimMsgVo> getAlltWimMsgByCondition(@Param("tjq") TongJiTableQuery tongJiTableQuery);
 
-    int getMeiRiCheLiuLiangByStationPort(String stationPort);
+    int getMeiRiCheLiuLiangByStationPort(@Param("stationPort")String stationPort);
 
     int getMeiRiCheLiuLiangMaxByStationPort();
 
@@ -20,15 +20,15 @@ public interface tWimMsgDao {
 
     int getCountByTableName(@Param("tjq") TongJiTableQuery tongJiTableQuery);
 
-    int getMeiRiChaoZhongByStationPort(String stationPort);
+    int getMeiRiChaoZhongByStationPort(@Param("stationPort")String stationPort);
 
-    int getMeiRiGuanJianCheLiangByStationPort(String stationPort);
+    int getMeiRiGuanJianCheLiangByStationPort(@Param("stationPort")String stationPort);
 
-    List<tWimMsgVo> getMeiRiChaoZaiShujuByStationPort(String stationPort);
+    List<tWimMsgVo> getMeiRiChaoZaiShujuByStationPort(@Param("stationPort")String stationPort);
 
-    List<tWimMsgVo> getMeiRiGuanJianChaoZHongShujuByStationPort(String stationPort);
+    List<tWimMsgVo> getMeiRiGuanJianChaoZHongShujuByStationPort(@Param("stationPort")String stationPort);
 
-    List<tWimMsgVo> getMeiRiCheLiuLiangShujuByStationPort(String stationPort);
+    List<tWimMsgVo> getMeiRiCheLiuLiangShujuByStationPort(@Param("stationPort")String stationPort);
 
     tWimMsgVo gettWimMsgById(String idLocal);
 }

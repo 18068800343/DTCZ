@@ -26,5 +26,5 @@ public interface tUserInfoDao {
 
     tUserInfoVo selectUserById(String usrId);
 
-    int updlastMonitoringSiteById(String lastMonitoringSite,String usrId);
+    int updlastMonitoringSiteById(@Param("lastMonitoringSite")String lastMonitoringSite,@Param("usrId")String usrId);
 }
