@@ -199,7 +199,7 @@ public class tWimMsgController {
                 int num=service.getMeiRiCheLiuLiangByStationPort(sport);
                 /*if(i>0){*/
                     chaoZaiVo.setValue(i);
-                    chaoZaiVo.setName(stationSites.get(0).getStationName()+"+"+stationSites.get(0).getRouteName());
+                    chaoZaiVo.setName(stationSites.get(0).getStationName());
                     chaoZaiVo.setNum(num);
                     list.add(chaoZaiVo);
                 /*}*/

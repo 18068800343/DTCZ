@@ -390,7 +390,7 @@
 			setLeftEcharts()
 			setRightEcharts()
 			setBottomEcharts()
-			setInterval(refresh, 6000);
+			setInterval(refresh, 15000);
 
 		});
 		var table=$('#mainContent').dataTable({
@@ -405,7 +405,7 @@
 				"sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
 			},
 			"columns": [
-				{ "data": "stationNameRouteName"},
+				{ "data": "stationName"},
 				{ "data": "laneNo"},
 				{ "data": "plate"},
 				{ "data": "licensePlateColor"},
@@ -426,7 +426,7 @@
 				"targets": 13,
 				"searchable": true,
 				"render": function(data, type, full) {
-					return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="'+full.idLocal+'" onclick="lookMsg(this)" data-toggle="modal" data-target="#allMsg1" id="lookDetall"></i>';
+					return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="'+full.idLocal+'" onclick="lookMsg(this)" id="lookDetall"></i>';
 				}
 			},{
 				"class": "tcenter",
@@ -474,7 +474,7 @@
 				"sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
 			},
 			"columns": [
-				{ "data": "stationNameRouteName"},
+				{ "data": "stationName"},
 				{ "data": "laneNo"},
 				{ "data": "plate"},
 				{ "data": "licensePlateColor"},
@@ -502,7 +502,7 @@
 					"targets": 13,
 					"searchable": true,
 					"render": function(data, type, full) {
-						return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="'+full.idLocal+'" onclick="lookMsg(this)" data-toggle="modal" data-target="#allMsg1" id="lookDetall"></i>';
+						return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="'+full.idLocal+'" onclick="lookMsg(this)"  id="lookDetall"></i>';
 					}
 				}],
 
@@ -541,7 +541,7 @@
 				"sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
 			},
 			"columns": [
-				{ "data": "stationNameRouteName"},
+				{ "data": "stationName"},
 				{ "data": "laneNo"},
 				{ "data": "plate"},
 				{ "data": "licensePlateColor"},
@@ -569,7 +569,7 @@
 					"targets": 13,
 					"searchable": true,
 					"render": function(data, type, full) {
-						return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="'+full.idLocal+'" onclick="lookMsg(this)" data-toggle="modal" data-target="#allMsg1" id="lookDetall"></i>';
+						return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="'+full.idLocal+'" onclick="lookMsg(this)"  id="lookDetall"></i>';
 					}
 				}],
 
@@ -608,7 +608,7 @@
 				"sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
 			},
 			"columns": [
-				{ "data": "stationNameRouteName"},
+				{ "data": "stationName"},
 				{ "data": "laneNo"},
 				{ "data": "plate"},
 				{ "data": "licensePlateColor"},
@@ -636,7 +636,7 @@
 					"targets": 13,
 					"searchable": true,
 					"render": function(data, type, full) {
-						return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="'+full.idLocal+'" onclick="lookMsg(this)" data-toggle="modal" data-target="#allMsg1" id="lookDetall"></i>';
+						return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="'+full.idLocal+'" onclick="lookMsg(this)"  id="lookDetall"></i>';
 					}
 				}],
 
@@ -1106,6 +1106,7 @@
 		})
 
 		var lookMsg = (e)=>{
+			showMask()
 			$.ajax({
 				type: 'POST',
 				url: '/tWimMsg/gettWimMsgById',
@@ -1118,6 +1119,8 @@
 				},
 				success: function (json) {
 					lookxiangqing(json);
+					hidMask()
+					$("#allMsg1").modal('show');
 				}
 			});
 		}

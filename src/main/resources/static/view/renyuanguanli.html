@@ -340,8 +340,8 @@
                     $("#StationName").html('');
                     $("#xg_StationName").html('');
                     for(var i=0;i<json.length;i++){
-                        $("#StationName").append("<option  value='"+json[i].stationPort+"'>"+(json[i].stationName+"+"+json[i].routeName)+"</option>");
-                        $("#xg_StationName").append("<option  value='"+json[i].stationPort+"'>"+(json[i].stationName+"+"+json[i].routeName)+"</option>");
+                        $("#StationName").append("<option  value='"+json[i].stationPort+"'>"+(json[i].stationName)+"</option>");
+                        $("#xg_StationName").append("<option  value='"+json[i].stationPort+"'>"+(json[i].stationName)+"</option>");
                     }
                     $(".selectpicker").selectpicker({
                         noneSelectedText: '请选择',
@@ -422,7 +422,7 @@
                 if(json!=null){
                     $("#xg_StationName").html('');
                     for(var i=0;i<json.length;i++){
-                        $("#xg_StationName").append("<option  value='"+json[i].stationPort+"'>"+(json[i].stationName+"+"+json[i].routeName)+"</option>");
+                        $("#xg_StationName").append("<option  value='"+json[i].stationPort+"'>"+(json[i].stationName)+"</option>");
                     }
                     $(".selectpicker").selectpicker({
                         noneSelectedText: '请选择',
