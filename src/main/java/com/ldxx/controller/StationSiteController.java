@@ -1,16 +1,20 @@
 package com.ldxx.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.ldxx.bean.CompanySite;
 import com.ldxx.bean.StationSite;
 import com.ldxx.bean.tUserInfo;
+import com.ldxx.dao.StationSiteDao;
 import com.ldxx.service.StationSiteService;
 import com.ldxx.util.LDXXUtils;
 import com.ldxx.util.MsgFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -21,6 +25,9 @@ public class StationSiteController {
     @Autowired
     private StationSiteService service;
 
+    @Resource
+    private StationSiteDao stationSiteDao;
+
     @RequestMapping("/getAllStationSite")
     public List<StationSite> getAllStationSite(){
         List<StationSite> list = service.getAllStationSite();
@@ -30,6 +37,11 @@ public class StationSiteController {
     @RequestMapping("/getStationSiteById")
     public StationSite getStationSiteById(String id) {
         return service.getStationSiteById(id);
+    }
+
+    @RequestMapping("/getCompanyStationSite")
+    public List<CompanySite> getCompanyStationSite() {
+        return stationSiteDao.getCompanyStation();
     }
 
     @RequestMapping("/addStationSite")
@@ -91,6 +103,25 @@ public class StationSiteController {
     @RequestMapping("/delStationSite")
     public int delStationSite(String id) {
         return service.delStationSite(id);
+    }
+
+
+    @RequestMapping("/delCompaySite")
+    public int delCompaySite(String id) {
+        return stationSiteDao.delCompanySite(id);
+    }
+
+    @RequestMapping("/addCompanySite")
+    public String addCompanySite(@RequestBody CompanySite companySite) {
+        JSONObject jsonObject=new JSONObject();
+        String id = LDXXUtils.getUUID12();
+        int i=stationSiteDao.addCompanySite(companySite);
+        companySite.setStationName("");
+        String daoMsg = MsgFormatUtils.getMsgByResult(i, "新增");
+        jsonObject.put("resultMsg",daoMsg);
+        jsonObject.put("daoMsg",i);
+        jsonObject.put("obj",companySite);
+        return jsonObject.toString();
     }
 
     /**

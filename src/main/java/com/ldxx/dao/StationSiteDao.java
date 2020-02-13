@@ -1,6 +1,8 @@
 package com.ldxx.dao;
 
+import com.ldxx.bean.CompanySite;
 import com.ldxx.bean.StationSite;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -18,6 +20,10 @@ public interface StationSiteDao {
 
     int delStationSite(String id);
 
+    int delCompanySite(String id);
+
+    int addCompanySite(CompanySite companySite);
+
     int iscountStationIp(String stationIp);
 
     int iscountStationPort(String stationPort);
@@ -28,4 +34,6 @@ public interface StationSiteDao {
     int xg_iscountStationPort(String stationPort,String id);
 
     List<StationSite> getStationSiteByPort(String stationPort);
+
+    List<CompanySite> getCompanyStation();
 }

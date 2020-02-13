@@ -26,6 +26,10 @@
 			values(#{sId},#{stationId},#{stationName},#{stationIp},#{stationPort},#{stationLongitude},#{stationLatitude},#{delState},#{routeName})
 	</insert>
 
+	<insert id="addCompanySite" keyProperty="id" useGeneratedKeys="true" parameterType="companySite" >
+		insert into t_dic_company values(null,#{companyName},'')
+	</insert>
+
 	<update id="updStationSite" parameterType="StationSite">
 		update Station_Site set
 		Station_Id=#{stationId},
@@ -42,12 +46,20 @@
 		update Station_Site set Del_State=0 where S_Id=#{id}
 	</update>
 
+	<update id="delCompanySite">
+		delete from t_dic_company  where id=#{id}
+	</update>
+
 
 	<select id="iscountStationIp" resultType="int">
 		select count(Station_Ip) from Station_Site where Station_Ip=#{stationIp} and Del_State=1
 	</select>
 	<select id="iscountStationPort" resultType="int">
 		select count(Station_Port) from Station_Site where Station_Port=#{stationPort} and Del_State=1
+	</select>
+
+	<select id="getCompanyStation" resultType="CompanySite">
+		select a.*,GROUP_CONCAT(b.Route_Name) stationName from t_dic_company a LEFT JOIN station_site b on FIND_IN_SET(b.Station_Port,a.station_port) GROUP BY a.id
 	</select>
 
 	<select id="xg_iscountStationIp" resultType="int">
