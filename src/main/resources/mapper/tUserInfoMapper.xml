@@ -53,7 +53,7 @@
 		LEFT JOIN station_site ss
 		on FIND_IN_SET(ss.Station_Port,tdc.station_port)
 		WHERE
-		Usr_Name = #{name}  and tui.Del_State=1
+		tui.Usr_Name = #{name} and tui.Del_State=1
 	</select>
 
     <select id="selectUserById" resultType="tUserInfoVo">
