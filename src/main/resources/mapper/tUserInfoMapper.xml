@@ -30,7 +30,9 @@
 	</update>
 
     <select id="getAlltUserInfo" resultType="tUserInfoVo">
-		select  * from t_user_info where Del_State=1
+		select  a.*,b.company_name from t_user_info a
+		 left join t_dic_company  b on a.Usr_Role=b.id
+		 where Del_State=1
 	</select>
 
     <select id="iscountName" resultType="int">
@@ -42,14 +44,16 @@
 	</select>
 
     <select id="selectUserByUsrName" resultType="tUserInfoVo">
+
 		SELECT
-		tui.*,GROUP_CONCAT(CONCAT(ss.Station_Longitude,"-",ss.Station_Latitude)) as lnglat
+		tui.*,GROUP_CONCAT(CONCAT(ss.Station_Longitude,"-",ss.Station_Latitude)) as lnglat,tdc.station_port as stationPort,GROUP_CONCAT(ss.Route_Name) stationName
 		FROM
 			t_user_info tui
+		LEFT JOIN t_dic_company tdc on tui.Usr_Role=tdc.id
 		LEFT JOIN station_site ss
-		on FIND_IN_SET(ss.Station_Port,tui.Station_Port)
+		on FIND_IN_SET(ss.Station_Port,tdc.station_port)
 		WHERE
-		Usr_Name = #{name} and tui.Del_State=1
+		Usr_Name = #{name}  and tui.Del_State=1
 	</select>
 
     <select id="selectUserById" resultType="tUserInfoVo">

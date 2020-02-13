@@ -689,11 +689,12 @@
 		function initzhandian(){
 			$.ajax({
 				type: 'POST',
-				url: '/tUserInfo/selectUserById',
+				//url: '/tUserInfo/selectUserById',
+				url: '/login/getUser',
 				dataType: 'json',
 				async:false,
 				data: {
-					id:user.usrId,
+					//id:user.usrId,
 				},
 				error: function (msg) {
 					errMessage("请求UserController失败");

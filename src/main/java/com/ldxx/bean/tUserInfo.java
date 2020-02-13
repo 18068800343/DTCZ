@@ -9,7 +9,7 @@ public class tUserInfo {
     private String usrPwd;
     private String usrSex;
     private String usrPhone;
-    //用户角色
+    //用户公司单位
     private String usrRole;
     //站点名字
     private String stationPort;

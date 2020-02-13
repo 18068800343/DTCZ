@@ -61,7 +61,7 @@
                         <th>姓名</th>
                         <th>性别</th>
                         <th>联系方式</th>
-                        <th>站点</th>
+                        <th>公司</th>
                         <th style="width:75px;">操作</th>
                     </tr>
                     </thead>
@@ -110,10 +110,11 @@
                                         <option>普通员工</option>
                                     </select>
                                 </td>-->
-                                <td>站点</td>
+                                <td>公司</td>
                                 <td>
-                                    <select class="form-control selectpicker" multiple data-actions-box="true"  data-live-search="true"  id="StationName"  style="width:100%;">
-                                    </select>
+                                    <!--<select class="form-control selectpicker" multiple data-actions-box="true"  data-live-search="true"  id="StationName"  style="width:100%;">
+                                    </select>-->
+                                    <select class="form-control" id="UserRole"  style="width:100%;"></select>
                                 </td>
                                 <td></td>
                                 <td></td>
@@ -169,10 +170,11 @@
                                         <option>普通员工</option>
                                     </select>
                                 </td>-->
-                                <td style="width: 20%;">站点</td>
+                                <td style="width: 20%;">公司</td>
                                 <td>
-                                    <select class="form-control selectpicker" multiple data-actions-box="true" data-live-search="true"  id="xg_StationName"  style="width:100%;">
-                                    </select>
+                                    <!--<select class="form-control selectpicker" multiple data-actions-box="true" data-live-search="true"  id="xg_StationName"  style="width:100%;">
+                                    </select>-->
+                                    <select class="form-control" id="xg_UsrRole"  style="width:100%;"></select>
                                 </td>
                             </tr>
                         </table>
@@ -263,7 +265,8 @@
     $(document).ready( function () {
 
         initTable()
-        initzhandian()
+        //initzhandian()
+        initDanwei()
     });
     var table=$('#mainContent').dataTable({
         "deferRender": true,
@@ -279,7 +282,7 @@
             { "data": "usrName"},
             { "data": "usrSex"},
             { "data": "usrPhone"},
-            { "data": "stationName"},
+            { "data": "companyName"},
             { "data": null},
         ],
         "columnDefs": [{
@@ -329,7 +332,7 @@
             }
         });
     }
-    function initzhandian(){
+    /*function initzhandian(){
         $.ajax({
             type: 'POST',
             url: '/StationSite/getAllStationSite',
@@ -355,21 +358,43 @@
                 }
             }
         });
+    }*/
+    function initDanwei(){
+        $.ajax({
+            type: 'POST',
+            url: '/StationSite/getCompanyStationSite',
+            dataType: 'json',
+            data: {
+            },
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                if(json!=null){
+                    $("#UserRole").empty('');
+                    $("#xg_UsrRole").empty('');
+                    for(var i=0;i<json.length;i++){
+                        $("#UserRole").append("<option  value='"+json[i].id+"'>"+(json[i].companyName)+"</option>");
+                        $("#xg_UsrRole").append("<option  value='"+json[i].id+"'>"+(json[i].companyName)+"</option>");
+                    }
+                }
+            }
+        });
     }
-
 
     $("#baocun").click(function(){
         var UsrName=$("#UsrName").val();
         var UsrPwd=$("#UsrPwd").val();
         var UsrSex=$("#UsrSex").val();
         var UsrPhone=$("#UsrPhone").val();
-        var checkParam = $('#StationName').find('option:selected');
+        /*var checkParam = $('#StationName').find('option:selected');
         var checkText=[];
         for (var i=0;i<checkParam.length;i++) {
             checkText.push(checkParam[i].textContent);
         }
         var StationName = checkText.join(',');
-        var stationPort=$("#StationName").val().toString();
+        var stationPort=$("#StationName").val().toString();*/
+        var usrRole=$("#UserRole").val();
         $.ajax({
             type: 'POST',
             url: '/tUserInfo/addtUserInfo',
@@ -379,8 +404,9 @@
                 usrPwd:UsrPwd,
                 usrSex:UsrSex,
                 usrPhone:UsrPhone,
-                stationPort:stationPort,
-                stationName:StationName,
+                usrRole:usrRole,
+                /*stationPort:stationPort,
+                stationName:StationName,*/
 
             },
             error: function (msg) {
@@ -389,6 +415,7 @@
             success: function (json) {
                 if(json.result>0){
                     toastr.success("添加成功");
+                    json.user.companyName=$("#UserRole").find("option:selected").text();
                     $('#mainContent').DataTable().row.add(json.user).draw(false);     //新增行立即显示
                     $("#myModal").modal('hide');
                 }else if(json.result==-1){
@@ -412,9 +439,10 @@
         $("#xg_UsrPwd").val(data.usrPwd);
         $("#xg_UsrSex").val(data.usrSex);
         $("#xg_UsrPhone").val(data.usrPhone);
-        xg_initzhandian(data.stationPort.split(","))
+        //xg_initzhandian(data.stationPort.split(","))
+        $("#xg_UsrRole").val(data.usrRole);
     })
-    function xg_initzhandian(obj){
+    /*function xg_initzhandian(obj){
         $.ajax({
             type: 'POST',
             url: '/StationSite/getAllStationSite',
@@ -440,20 +468,21 @@
                 }
             }
         });
-    }
+    }*/
 
     $("#xg_baocun").click(function(){
         var UsrName=$("#xg_UsrName").val();
         var UsrPwd=$("#xg_UsrPwd").val();
         var UsrSex=$("#xg_UsrSex").val();
         var UsrPhone=$("#xg_UsrPhone").val();
-        var checkParam = $('#xg_StationName').find('option:selected');
+        /*var checkParam = $('#xg_StationName').find('option:selected');
         var checkText=[];
         for (var i=0;i<checkParam.length;i++) {
             checkText.push(checkParam[i].textContent);
         }
         var StationName = checkText.join(',');
-        var stationPort=$("#xg_StationName").val().toString();
+        var stationPort=$("#xg_StationName").val().toString();*/
+        var usrRole=$("#xg_UsrRole").val()
         $.ajax({
             type: 'POST',
             url: '/tUserInfo/updatetUserInfo',
@@ -464,8 +493,9 @@
                 usrPwd:UsrPwd,
                 usrSex:UsrSex,
                 usrPhone:UsrPhone,
-                stationPort:stationPort,
-                stationName:StationName,
+                usrRole:usrRole,
+                /*stationPort:stationPort,
+                stationName:StationName,*/
 
             },
             error: function (msg) {
@@ -474,6 +504,7 @@
             success: function (json) {
                 if(json.result>0){
                     toastr.success("修改成功");
+                    json.user.companyName=$("#xg_UsrRole").find("option:selected").text();
                     $('#mainContent').DataTable().row(tr).data(json.user);
                     $("#change").modal('hide');
                 }else if(json.result==-1){
