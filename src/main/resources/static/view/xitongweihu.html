@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <link rel="stylesheet" href="../font2/iconfont.css">
+    <link href="../style/bootstrap.min.css" rel="stylesheet">
+    <link href="../style/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="../style/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="../style/jquery-editable-select.css">
+    <link href="../font3/bootstrap-select.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+    <link rel="stylesheet"  href="css/layui.css" />
+    <link rel="stylesheet"  href="css/toastr.css"/>
+    <style lang="">
+        body{
+            background: #fff;
+        }
+        .UpperPart{
+            display: flex;
+            justify-content:space-between;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 12px;
+        }
+        .selected{
+            background: rgba(247, 161, 3,0.2);
+        }
+        #mainContent th{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body style="background-image: none;width: 90%;margin-left: 10%;">
+<!-- 面包屑 -->
+<!--<div class="mianbao">
+    <ul class="breadcrumb">
+        <li><i class="iconfont icon-knowledgebase"></i></li>
+        <li>系统管理</li>
+        <li class="active">人员管理</li>
+    </ul>
+</div>-->
+
+<div>
+    <!-- Tab panes -->
+    <div role="tabpanel" class="tab-pane active" id="home">
+        <div class="zhuti-content">
+            <div class="UpperPart">
+                <div class="UpperPartL">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin: 5PX;float: left;">录入系统维护日志 </button>
+                </div>
+                <div class="UpperPartR">
+                </div>
+            </div>
+            <div class="LowerPart" style="margin-top:3px;">
+                <table class="table table-bordered table-condensed table-hover" id="mainContent">
+                    <thead>
+                    <tr>
+                        <th>维护人</th>
+                        <th>维护时间</th>
+                        <th>维护内容</th>
+                        <th style="width:75px;">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"><b>录入系统维护</b></h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <form class="form-inline" method="post" id="new_form" enctype="multipart/form-data">
+                        <table class="table table-bordered table-condensed">
+                            <tr>
+                                <td  style="width: 20%;">时间</td>
+                                <td  style="width: 30%;"><input type="text" id="shijian"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+                            </tr>
+
+                            <tr>
+                                <td  style="width: 20%;">维护内容</td>
+                                <td colspan="3">
+                                    <textarea  class="text" id="weihuContent" rows="4" cols="100"></textarea>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="table table-bordered table-condensed" id="new_accessory">
+                            <thead>
+                            <tr>
+                                <td style="width:13%;">附件:  <i class="iconfont icon-xingxing-copy" style="color:red;"></i></td>
+                                <td colspan="2">
+                                    <button type="button" class="btn btn-primary" onclick="new_accessory()">增加附件</button>
+                                </td>
+                            </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-default" id="baocun">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- model结束 -->
+
+<!-- 修改Modal -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="change">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><b>修改系统维护</b></h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <form class="form-inline" method="post" id="edit_form" enctype="multipart/form-data">
+                        <table class="table table-bordered table-condensed">
+                            <tr>
+                                <td  style="width: 20%;">时间</td>
+                                <td  style="width: 30%;"><input type="text" id="xg_shijian"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+                            </tr>
+
+                            <tr>
+                                <td  style="width: 20%;">维护内容</td>
+                                <td colspan="3">
+                                    <textarea  class="text" id="xg_weihuContent" rows="4" cols="100"></textarea>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="table table-bordered table-condensed" id="edit_accessory">
+                            <thead>
+                            <tr>
+                                <td style="width:20%;">附件:<i class="iconfont icon-xingxing-copy" style="color:red;"></i></td>
+                                <td colspan="3"><button type="button" class="btn btn-primary" onclick="editAccessory()">添加附件</button></td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                            <tfoot></tfoot>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-success" id="xg_baocun" >保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 修改model结束 -->
+
+
+
+<!-- allMsg -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg1">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" ><b>详细信息</b></h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <form class="form-inline">
+                        <table class="table table-bordered table-condensed" style="height: auto;">
+                            <tr>
+                                <td  style="width: 20%;">时间</td>
+                                <td  style="width: 30%;" id="look_shijian"></td>
+                                <td  style="width: 20%;">维护人</td>
+                                <td  style="width: 30%;" id="look_weihuren"></td>
+                            </tr>
+
+                            <tr>
+                                <td  style="width: 20%;">维护内容</td>
+                                <td colspan="3"  id="look_weihuContent"></td>
+                            </tr>
+                        </table>
+                        <table class="table table-bordered table-condensed" id="look_accessory">
+                            <thead>
+                            <tr>
+                                <td  style="width:20%;">附件  <i class="iconfont icon-xingxing-copy" style="color:red;"></i></td>
+                                <td colspan="3"></td>
+                            </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="../js/jquery.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+<!--<script src="../js/bootstrap-select.js" ></script>-->
+<script src="js/laydate/laydate.js"></script>
+<script src="../js/common-scripts.js"></script>
+<script src="js/datatables/jquery.dataTables.min.js"></script>
+<script src="../js/jquery-editable-select.js" ></script>
+<script src="js/toastr.js" ></script>
+<script src="../js/jquery-form.min.js"></script>
+<script>
+
+    $(document).ready( function () {
+        laydate.render({
+            elem: '#shijian', //指定元素
+            type: 'datetime'
+        });
+        laydate.render({
+            elem: '#xg_shijian', //指定元素
+            type: 'datetime'
+        });
+        initTable()
+
+    });
+    var table=$('#mainContent').dataTable({
+        "deferRender": true,
+        "processing": true,
+        "bDestroy": true,
+        "iDisplayLength": 10,
+        "searching": true,
+        "lengthChange": false,
+        "oLanguage": {
+            "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+        },
+        "columns": [
+            { "data": "usrName"},
+            { "data": "logTime"},
+            { "data": "logContent"},
+            { "data": null},
+        ],
+        "columnDefs": [{
+            "class": "tcenter",
+            "targets": 3,
+            "searchable": true,
+            "render": function(data, type, full) {
+                var xiugai='<i class="iconfont icon-xiugai" style="font-size:20px;cursor:pointer;" id="upd" title="修改" data-toggle="modal" data-target="#change"></i>';
+                var shanchu='<i class="iconfont icon-shanchu" style="font-size:20px;cursor:pointer;" id="del"  title="删除"></i>';
+                var look='<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" onclick="lookMs(this)" data-toggle="modal" data-target="#allMsg1" id="lookDetall"></i>'
+                return xiugai+shanchu+look;
+            }
+        }],
+        "order": [[0, 'asc']],
+        "oLanguage": { //国际化配置
+            "sProcessing": "正在获取数据，请稍后...",
+            "sLengthMenu": "显示 _MENU_ 条",
+            "sZeroRecords": "查询不到相关数据",
+            "sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
+            "sInfoEmpty": "记录数为0",
+            "sInfoFiltered": "(全部记录数 _MAX_ 条)",
+            "sInfoPostFix": "",
+            "sSearch": "搜索",
+            "sUrl": "",
+            "oPaginate": {
+                "sFirst": "第一页",
+                "sPrevious": "上一页",
+                "sNext": "下一页",
+                "sLast": "最后一页"
+            }},
+
+    });
+
+    function initTable(){
+        $.ajax({
+            type: 'POST',
+            url: '/tMaintenanceLog/getAlltMaintenanceLog',
+            dataType: 'json',
+            data: {
+            },
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                $('#mainContent').dataTable().fnClearTable();
+                $('#mainContent').DataTable().rows.add(json).draw(false);
+            }
+        });
+    }
+
+
+
+    $("#baocun").click(function(){
+        var shijian=$("#shijian").val();
+        var weihuContent=$("#weihuContent").val();
+
+        var options={
+            type: 'POST',
+            url: '/tMaintenanceLog/addtMaintenanceLog',
+            dataType: 'json',
+            data: {
+                logTime:shijian,
+                logContent:weihuContent,
+            },
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                if(json.result>0){
+                    toastr.success("添加成功");
+                    $('#mainContent').DataTable().row.add(json.tMaintenanceLog).draw(false);     //新增行立即显示
+                    $("#myModal").modal('hide');
+                }else{
+                    toastr.error("添加失败");
+                }
+            }
+        }
+        $("#new_form").ajaxSubmit(options);
+    })
+
+    var xgId;
+    var tr;
+    $("#mainContent").delegate("#upd","click",function(){
+        var dom = $(this).parents('tr');
+        tr = $(this).closest('tr');
+        var data=$('#mainContent').DataTable().row(dom).data();
+        xgId=data.logId
+
+        $("#xg_shijian").val(data.logTime);
+        $("#xg_weihuContent").val(data.logContent);
+        $.ajax({
+            type:"post",
+            url:"/accessory/selectAccessoryById",
+            dataType:"json",
+            data:{
+                id:xgId
+            },
+            success:function(json){
+                $("#edit_accessory thead").siblings().empty();
+                for(var i=0;i<json.length;i++){
+                    $("#edit_accessory tbody").append("<tr>"+
+                        "<td style='width:20%;'>附件</td>"+
+                        "<td><a href='"+getLocalPath()+"/dtcz_file/"+json[i].acUrl+"' target='view_window' style='color:blue'>"+json[i].acName+"</a></td>"+
+                        /* "<td colspan='2'><input type='text' class='form-control' style='width:100%;' value='"+json[i].acName+"' disabled></td>"+*/
+                        "<td style='width:150px;'><button type='button' class='btn btn-danger' data1='"+json[i].acUrl+"' data2='"+json[i].aId+"' data3='"+json[i].acName+"' onclick='delete_file(this)'>删除附件</button></td>"+
+                        "</tr>");
+                }
+            }
+        })
+    })
+
+    function getLocalPath(){
+        var pathArray = window.location.pathname.split('/');
+        var secondLevelLocation = pathArray[1];
+        var loginUrl = window.location.protocol + "//"  + window.location.host ;
+        return loginUrl;
+    }
+
+    function delete_file(obj){
+        var url=$(obj).attr("data1");
+        var id=$(obj).attr("data2");
+        var name=$(obj).attr("data3");
+        var msg = "您真的确定要删除吗？\n\n请确认！";
+        if (confirm(msg)==true){
+            $.ajax({
+                type: 'POST',
+                url: '/accessory/deleteAccessoryByIdAndName',
+                dataType: 'json',
+                data: {
+                    aId:id,
+                    acName:name,
+                    acUrl:url
+                },
+                success: function (json) {
+                    if(json==0){
+                        toastr.error("删除失败");
+                    }else{
+                        toastr.success("删除成功");
+                        $(obj).parent().parent().remove();
+                        //$("#myModal2").modal("hide")
+                    }
+                }
+            });
+        }
+    }
+
+    $("#xg_baocun").click(function(){
+        var shijian=$("#xg_shijian").val();
+        var weihuContent=$("#xg_weihuContent").val();
+
+        var options={
+            type: 'POST',
+            url: '/tMaintenanceLog/updtMaintenanceLog',
+            dataType: 'json',
+            data: {
+                logId:xgId,
+                logTime:shijian,
+                logContent:weihuContent,
+            },
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                if(json.result>0){
+                    toastr.success("修改成功");
+                    $('#mainContent').DataTable().row(tr).data(json.tMaintenanceLog);
+                    $("#change").modal('hide');
+                }else{
+                    toastr.error("修改失败");
+                }
+            }
+        }
+        $("#edit_form").ajaxSubmit(options);
+    })
+
+
+
+    //删除
+    $('#mainContent').delegate('#del','click', function () {
+        var dom = $(this).parents('tr');
+        var data=$('#mainContent').DataTable().row(dom).data();
+        var msg = "您真的确定要删除吗？\n\n请确认！";
+        if (confirm(msg)==true){
+            $.ajax({
+                type: 'POST',
+                url:'/tMaintenanceLog/deltMaintenanceLog',
+                dataType: 'json',
+                data: {
+                    id:data.logId
+                },
+                success: function (json) {
+
+                    if(json!=0){
+                        $('#mainContent').DataTable().row(dom).remove().draw(false); //删除行立即显示
+                        toastr.success('删除成功');
+                    }else{
+                        toastr.error('删除失败');
+                    }
+                }
+            });
+        }else{
+            return false;
+        }
+    })
+
+
+    function lookMs(obj){
+        var dom = $(obj).parents('tr');
+        var data=$('#mainContent').DataTable().row(dom).data();
+        $("#look_shijian").text(data.logTime);
+        $("#look_weihuren").text(data.usrName);
+        $("#look_weihuContent").text(data.logContent);
+        $.ajax({
+            type:"post",
+            url:"/accessory/selectAccessoryById",
+            dataType:"json",
+            data:{
+                id:data.logId
+            },
+            success:function(json){
+                $("#look_accessory tbody").empty();
+                for(var i=0;i<json.length;i++){
+                    $("#look_accessory tbody").append("<tr>"+
+                        "<td style='width:20%;'>附件</td>"+
+                        "<td colspan='3'><a href='"+getLocalPath()+"/dtcz_file/"+json[i].acUrl+"' target='view_window' style='color:blue'>"+json[i].acName+"</a></td>"+
+                        /* "<td colspan='2'><input type='text' class='form-control' style='width:100%;' value='"+json[i].acName+"' disabled></td>"+
+                        "<td style='width:150px;'><button type='button' class='btn btn-primary' data1='"+json[i].acUrl+"' data2='"+json[i].aId+"' data3='"+json[i].acName+"' onclick='delete_file(this)'>删除附件</button></td>"+*/
+                        "</tr>");
+                }
+            }
+        })
+    }
+
+
+
+
+    function new_accessory(){
+        $("#new_accessory tbody").append("<tr><td>新附件</td><td><input type='file' onchange='showImg(this)'  name='file' class='form-control'><a target='_blank' style='color:blue;overflow:hidden;' download='下载预览'>预览</a></td><td style='width:150px;'><button type='button' class='btn btn-primary' onclick='removeFile(this)'>移除附件</button></td></tr>")
+    }
+    function editAccessory(){
+        $("#edit_accessory tfoot").append("<tr><td>新附件</td><td><input type='file' onchange='showImg(this)'  name='file' class='form-control'><a target='_blank' style='color:blue;overflow:hidden;' download='下载预览'>预览</a></td><td style='width:150px;'><button type='button' class='btn btn-primary' onclick='removeFile(this)'>移除附件</button></td></tr>")
+    }
+    function removeFile(obj){
+        var tr=$(obj).parents("tr");
+        $(tr).remove();
+    }
+
+    function showImg(dom) {
+        var file = dom.files[0];//获取文件信息
+        var dom = $(dom);
+        if (window.FileReader)
+        {
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            //监听文件读取结束后事件    
+            reader.onloadend = function (e) {
+
+                var url = encodeURI(e.target.result);
+
+                $(dom).next().attr("href",e.target.result);
+                //$(".img").attr("src",e.target.result);
+            };
+        }
+    }
+
+</script>
+</html>
