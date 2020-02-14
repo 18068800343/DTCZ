@@ -13,11 +13,28 @@ public class tWimMsgVo extends tWimMsg {
     private String routeName;//路线名称
     private String licensePlateColor;//车牌颜色
     private String vehicleTypeName;//车型
-
+    private String laneNoName;//车道名称  1:超车道 ，2:行车道,3:应急车道
+    private  String overWeightRatioName;//是否超重 如果 >0显示 超重 else  不超重
     private Integer totalCount;
 
     private List<Integer> count;//车流量数量
     private List<String> name;
+
+    public String getOverWeightRatioName() {
+        return overWeightRatioName;
+    }
+
+    public void setOverWeightRatioName(String overWeightRatioName) {
+        this.overWeightRatioName = overWeightRatioName;
+    }
+
+    public String getLaneNoName() {
+        return laneNoName;
+    }
+
+    public void setLaneNoName(String laneNoName) {
+        this.laneNoName = laneNoName;
+    }
 
     public Integer getTotalCount() {
         return totalCount;

@@ -50,6 +50,7 @@
                background-color:white;
                margin-top:0% !important;
             }
+
 }
 		</style>
 	</head>
@@ -76,13 +77,10 @@
 						<th>车道号</th>
 						<th>车牌号</th>
 						<th>车牌颜色</th>
-						<th>车型</th>
 						<th>长</th>
 						<th>车速(Km/h)</th>
-						<th>行驶方向</th>
 						<th>轴数</th>
 						<th>总重量(Kg)</th>
-						<th>是否跨道</th>
 						<th>路面温度</th>
 						<th>超重比率</th>
 						<th>操作</th>
@@ -114,13 +112,10 @@
 									<th>车道号</th>
 									<th>车牌号</th>
 									<th>车牌颜色</th>
-									<th>车型</th>
 									<th>长</th>
 									<th>车速(Km/h)</th>
-									<th>行驶方向</th>
 									<th>轴数</th>
 									<th>总重量(Kg)</th>
-									<th>是否跨道</th>
 									<th>路面温度</th>
 									<th>超重比率</th>
 									<th>操作</th>
@@ -154,13 +149,10 @@
 										<th>车道号</th>
 										<th>车牌号</th>
 										<th>车牌颜色</th>
-										<th>车型</th>
 										<th>长</th>
 										<th>车速(Km/h)</th>
-										<th>行驶方向</th>
 										<th>轴数</th>
 										<th>总重量(Kg)</th>
-										<th>是否跨道</th>
 										<th>路面温度</th>
 										<th>超重比率</th>
 										<th>操作</th>
@@ -194,13 +186,10 @@
 								   <th>车道号</th>
 								   <th>车牌号</th>
 								   <th>车牌颜色</th>
-								   <th>车型</th>
 								   <th>长</th>
 								   <th>车速(Km/h)</th>
-								   <th>行驶方向</th>
 								   <th>轴数</th>
 								   <th>总重量(Kg)</th>
-								   <th>是否跨道</th>
 								   <th>路面温度</th>
 								   <th>超重比率</th>
 								   <th>操作</th>
@@ -414,35 +403,24 @@
 			},
 			"columns": [
 				{ "data": "stationName"},
-				{ "data": "laneNo"},
+				{ "data": "laneNoName"},
 				{ "data": "plate"},
 				{ "data": "licensePlateColor"},
-				{ "data": "vehicleTypeName"},
 				{ "data": "length"},
 				{ "data": "speed"},
-				{ "data": "directionName"},
 				{ "data": "axlesCount"},
 				{ "data": "totalWeight"},
-				{ "data": "isStraddleName"},
 				{ "data": "temperature"},
-				{ "data": "overWeightRatio"},
+				{ "data": "overWeightRatioName"},
 				{ "data": null},
 
 			],
 			"columnDefs": [{
 				"class": "tcenter",
-				"targets": 13,
+				"targets": 10,
 				"searchable": true,
 				"render": function(data, type, full) {
 					return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="'+full.idLocal+'" onclick="lookMsg(this)" id="lookDetall"></i>';
-				}
-			},{
-				"class": "tcenter",
-				"targets": 12,
-				"searchable": true,
-				"render": function(data, type, full) {
-
-					return data+"%";
 				}
 			}],
 			"fnDrawCallback" : function() {
@@ -483,31 +461,22 @@
 			},
 			"columns": [
 				{ "data": "stationName"},
-				{ "data": "laneNo"},
+				{ "data": "laneNoName"},
 				{ "data": "plate"},
 				{ "data": "licensePlateColor"},
-				{ "data": "vehicleTypeName"},
 				{ "data": "length"},
 				{ "data": "speed"},
-				{ "data": "directionName"},
 				{ "data": "axlesCount"},
 				{ "data": "totalWeight"},
-				{ "data": "isStraddleName"},
 				{ "data": "temperature"},
-				{ "data": "overWeightRatio"},
+				{ "data": "overWeightRatioName"},
+				{ "data": null},
 
 			],
-			"columnDefs": [{
-				"class": "tcenter",
-				"targets": 12,
-				"searchable": true,
-				"render": function(data, type, full) {
-					return data+"%";
-				}
-			},
+			"columnDefs": [
 				{
 					"class": "tcenter",
-					"targets": 13,
+					"targets": 10,
 					"searchable": true,
 					"render": function(data, type, full) {
 						return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="'+full.idLocal+'" onclick="lookMsg(this)"  id="lookDetall"></i>';
@@ -550,31 +519,22 @@
 			},
 			"columns": [
 				{ "data": "stationName"},
-				{ "data": "laneNo"},
+				{ "data": "laneNoName"},
 				{ "data": "plate"},
 				{ "data": "licensePlateColor"},
-				{ "data": "vehicleTypeName"},
 				{ "data": "length"},
 				{ "data": "speed"},
-				{ "data": "directionName"},
 				{ "data": "axlesCount"},
 				{ "data": "totalWeight"},
-				{ "data": "isStraddleName"},
 				{ "data": "temperature"},
-				{ "data": "overWeightRatio"},
+				{ "data": "overWeightRatioName"},
+				{ "data": null},
 
 			],
-			"columnDefs": [{
-				"class": "tcenter",
-				"targets": 12,
-				"searchable": true,
-				"render": function(data, type, full) {
-					return data+"%";
-				}
-			},
+			"columnDefs": [
 				{
 					"class": "tcenter",
-					"targets": 13,
+					"targets": 10,
 					"searchable": true,
 					"render": function(data, type, full) {
 						return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="'+full.idLocal+'" onclick="lookMsg(this)"  id="lookDetall"></i>';
@@ -617,31 +577,22 @@
 			},
 			"columns": [
 				{ "data": "stationName"},
-				{ "data": "laneNo"},
+				{ "data": "laneNoName"},
 				{ "data": "plate"},
 				{ "data": "licensePlateColor"},
-				{ "data": "vehicleTypeName"},
 				{ "data": "length"},
 				{ "data": "speed"},
-				{ "data": "directionName"},
 				{ "data": "axlesCount"},
 				{ "data": "totalWeight"},
-				{ "data": "isStraddleName"},
 				{ "data": "temperature"},
-				{ "data": "overWeightRatio"},
+				{ "data": "overWeightRatioName"},
+				{ "data": null},
 
 			],
-			"columnDefs": [{
-				"class": "tcenter",
-				"targets": 12,
-				"searchable": true,
-				"render": function(data, type, full) {
-					return data+"%";
-				}
-			},
+			"columnDefs": [
 				{
 					"class": "tcenter",
-					"targets": 13,
+					"targets": 10,
 					"searchable": true,
 					"render": function(data, type, full) {
 						return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="'+full.idLocal+'" onclick="lookMsg(this)"  id="lookDetall"></i>';

@@ -25,7 +25,7 @@ function setjiancezhandianLeft(list,stationName,max){
         },
         xAxis: {
             type: 'value',
-            max: max,
+            //max: max,
             boundaryGap: [0, 0.01]
         },
         yAxis: {
@@ -168,7 +168,7 @@ function setjiancezhandianBottom(list,stationName,max){
         yAxis : [
             {
                 type : 'value',
-                max: max
+                //max: max
             }
         ],
         series : [

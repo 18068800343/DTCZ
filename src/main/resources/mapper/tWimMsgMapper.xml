@@ -57,6 +57,13 @@
         CASE a.Is_Straddle WHEN 0 THEN '否'
         ELSE '是'
         end as isStraddleName,
+        CASE a.Lane_No WHEN 1 THEN '超车道'
+        WHEN 2 THEN '行车道'
+        ELSE '应急车道'
+        end as  laneNoName,
+        CASE  WHEN a.Over_Weight_Ratio>0  THEN '超重'
+        ELSE '不超重'
+        end as overWeightRatioName,
         a.*,b.Station_Name,b.Route_Name,concat_ws("+",b.Station_Name,b.Route_Name) as stationNameRouteName,
         c.License_Plate_Color,d.Vehicle_Type_Name
         from t_vehicle_msg a
@@ -81,6 +88,13 @@
         ELSE
         '是'
         END AS isStraddleName,
+        CASE aa.Lane_No WHEN 1 THEN '超车道'
+        WHEN 2 THEN '行车道'
+        ELSE '应急车道'
+        end as  laneNoName,
+        CASE  WHEN aa.Over_Weight_Ratio>0  THEN '超重'
+        ELSE '不超重'
+        end as overWeightRatioName,
         aa.*, b.Station_Name,
         b.Route_Name,
         concat_ws(
@@ -235,6 +249,13 @@
         CASE a.Is_Straddle WHEN 0 THEN '否'
         ELSE '是'
         end as isStraddleName,
+        CASE a.Lane_No WHEN 1 THEN '超车道'
+        WHEN 2 THEN '行车道'
+        ELSE '应急车道'
+        end as  laneNoName,
+        CASE  WHEN a.Over_Weight_Ratio>0  THEN '超重'
+        ELSE '不超重'
+        end as overWeightRatioName,
         a.*,b.Station_Name,b.Route_Name,concat_ws("+",b.Station_Name,b.Route_Name) as stationNameRouteName,
         c.License_Plate_Color,d.Vehicle_Type_Name
         from t_vehicle_msg a
@@ -252,6 +273,13 @@
         CASE a.Is_Straddle WHEN 0 THEN '否'
         ELSE '是'
         end as isStraddleName,
+        CASE a.Lane_No WHEN 1 THEN '超车道'
+        WHEN 2 THEN '行车道'
+        ELSE '应急车道'
+        end as  laneNoName,
+        CASE  WHEN a.Over_Weight_Ratio>0  THEN '超重'
+        ELSE '不超重'
+        end as overWeightRatioName,
         a.*,b.Station_Name,b.Route_Name,concat_ws("+",b.Station_Name,b.Route_Name) as stationNameRouteName,
         c.License_Plate_Color,d.Vehicle_Type_Name
         from t_vehicle_msg a
@@ -270,6 +298,13 @@
         CASE a.Is_Straddle WHEN 0 THEN '否'
         ELSE '是'
         end as isStraddleName,
+        CASE a.Lane_No WHEN 1 THEN '超车道'
+        WHEN 2 THEN '行车道'
+        ELSE '应急车道'
+        end as  laneNoName,
+        CASE  WHEN a.Over_Weight_Ratio>0  THEN '超重'
+        ELSE '不超重'
+        end as overWeightRatioName,
         a.*,b.Station_Name,b.Route_Name,concat_ws("+",b.Station_Name,b.Route_Name) as stationNameRouteName,
         c.License_Plate_Color,d.Vehicle_Type_Name
         from t_vehicle_msg a
@@ -287,6 +322,13 @@
         CASE a.Is_Straddle WHEN 0 THEN '否'
         ELSE '是'
         end as isStraddleName,
+         CASE a.Lane_No WHEN 1 THEN '超车道'
+        WHEN 2 THEN '行车道'
+        ELSE '应急车道'
+        end as  laneNoName,
+        CASE  WHEN a.Over_Weight_Ratio>0  THEN '超重'
+        ELSE '不超重'
+        end as overWeightRatioName,
         a.*,b.Station_Name,b.Route_Name,concat_ws("+",b.Station_Name,b.Route_Name) as stationNameRouteName,
         c.License_Plate_Color,d.Vehicle_Type_Name
         from t_vehicle_msg a
