@@ -18,6 +18,8 @@ public interface StationSiteDao {
 
     int updStationSite(StationSite StationSite);
 
+    int updateCompanySite(CompanySite companySite);
+
     int delStationSite(String id);
 
     int delCompanySite(String id);

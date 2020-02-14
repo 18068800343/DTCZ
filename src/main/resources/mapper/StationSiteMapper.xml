@@ -42,6 +42,13 @@
 		where S_Id=#{sId}
 	</update>
 
+	<update id="updateCompanySite" parameterType="companySite">
+		update t_dic_company set
+		company_name=#{companyName},
+		station_port=#{stationPort}
+		where id=#{id}
+	</update>
+
 	<update id="delStationSite">
 		update Station_Site set Del_State=0 where S_Id=#{id}
 	</update>

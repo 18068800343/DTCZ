@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("StationSite")
@@ -109,6 +111,16 @@ public class StationSiteController {
     @RequestMapping("/delCompaySite")
     public int delCompaySite(String id) {
         return stationSiteDao.delCompanySite(id);
+    }
+
+    @RequestMapping("/updateCompanySite")
+    public Map<String,Object> updateCompanySite(CompanySite companySite) {
+        Map<String,Object> map=new HashMap<>();
+
+        int i = stationSiteDao.updateCompanySite(companySite);
+        map.put("result",i);
+        map.put("companySite",companySite);
+        return map;
     }
 
     @RequestMapping("/addCompanySite")

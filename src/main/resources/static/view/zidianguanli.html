@@ -10,8 +10,10 @@
     <link href="../style/style.css" rel="stylesheet">
     <link rel="stylesheet" href="../style/jquery.dataTables.min.css">
     <link rel="stylesheet" href="../style/jquery-editable-select.css">
+    <!--<link href="../font3/bootstrap-select.css" rel="stylesheet">-->
 
-    <link href="../font3/bootstrap-select.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+
     <link rel="stylesheet"  href="css/layui.css" />
     <link rel="stylesheet"  href="css/toastr.css"/>
 
@@ -384,15 +386,23 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel"><b>修改关键重量</b></h4>
+                <h4 class="modal-title" id="myModalLabel"><b>修改公司信息</b></h4>
             </div>
             <div class="modal-body">
                 <div>
                     <form class="form-inline" id="">
                         <table class="table table-bordered table-condensed" >
                             <tr>
-                                <td style="width: 20%;">关键重量</td>
-                                <td style="width: 30%;"><input type="text" style="width: 70%;" v-model="cruxWeight" /></td>
+                                <td style="width: 20%;">公司名称</td>
+                                <td style="width: 30%;"><input type="text" style="width: 70%;" id="xg_companyName" /></td>
+                            </tr>
+
+                            <tr>
+                                <td style="width: 20%;">站点</td>
+                                <td>
+                                    <select class="form-control selectpicker" multiple data-actions-box="true" data-live-search="true"  id="xg_StationName"  style="width:100%;">
+                                    </select>
+                                </td>
                             </tr>
                         </table>
                     </form>
@@ -400,7 +410,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-success" @click="baocun3" >保存</button>
+                <button type="button" class="btn btn-success" id="baocun4" >保存</button>
             </div>
         </div>
     </div>
@@ -415,6 +425,7 @@
 <script src="../js/bootstrap-select.js" ></script>
 <script src="../js/jquery-editable-select.js" ></script>
 <script src="js/toastr.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
 <script>
@@ -424,7 +435,38 @@
         initTable2()
         initTable3()
         initTable4()
+        initzhandian()
     });
+
+
+    function initzhandian(){
+        $.ajax({
+            type: 'POST',
+            url: '/StationSite/getAllStationSite',
+            dataType: 'json',
+            data: {
+            },
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                if(json!=null){
+                    $("#xg_StationName").html('');
+                    for(var i=0;i<json.length;i++){
+                        $("#xg_StationName").append("<option  value='"+json[i].stationPort+"'>"+(json[i].stationName)+"</option>");
+                    }
+                    $(".selectpicker").selectpicker({
+                        noneSelectedText: '请选择',
+                    });
+                    $("#xg_StationName").selectpicker("refresh");
+                    $('#xg_StationName').selectpicker('render');
+                }
+            }
+        });
+    }
+
+
+
     var table=$('#mainContent').dataTable({
         "deferRender": true,
         "processing": true,
@@ -1072,7 +1114,80 @@
         }
     });
 
+    let xgId;
+    let tr;
+    $("#mainContent4").delegate("#upd4","click",function(){
+        let dom = $(this).parents('tr');
+        tr = $(this).closest('tr');
+        let data=$('#mainContent4').DataTable().row(dom).data();
+        xgId=data.id
 
+        $("#xg_companyName").val(data.companyName);
+        xg_initzhandian(data.stationPort.split(","))
+    })
+
+    function xg_initzhandian(obj){
+        $.ajax({
+            type: 'POST',
+            url: '/StationSite/getAllStationSite',
+            dataType: 'json',
+            data: {
+            },
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                if(json!=null){
+                    $("#xg_StationName").html('');
+                    for(var i=0;i<json.length;i++){
+                        $("#xg_StationName").append("<option  value='"+json[i].stationPort+"'>"+(json[i].stationName)+"</option>");
+                    }
+                    $(".selectpicker").selectpicker({
+                        noneSelectedText: '请选择',
+                    });
+                    $("#xg_StationName").val(obj);
+                    $('#xg_StationName').selectpicker('val', obj);
+                    $("#xg_StationName").selectpicker("refresh");
+                    $('#xg_StationName').selectpicker('render');
+                }
+            }
+        });
+    }
+
+
+    $("#baocun4").click(function(){
+        let companyName=$("#xg_companyName").val();
+        let checkParam = $('#xg_StationName').find('option:selected');
+        let checkText=[];
+        for (let i=0;i<checkParam.length;i++) {
+            checkText.push(checkParam[i].textContent);
+        }
+        let StationName = checkText.join(',');
+        let stationPort=$("#xg_StationName").val().toString();
+        $.ajax({
+            type: 'POST',
+            url: '/StationSite/updateCompanySite',
+            dataType: 'json',
+            data: {
+                id:xgId,
+                companyName:companyName,
+                stationPort:stationPort,
+                stationName:StationName,
+            },
+            error: function (msg) {
+                errMessage("请求失败");
+            },
+            success: function (json) {
+                if(json.result>0){
+                    toastr.success("修改成功");
+                    $('#mainContent4').DataTable().row(tr).data(json.companySite);
+                    $("#change4").modal('hide');
+                }else{
+                    toastr.error("修改失败");
+                }
+            }
+        });
+    })
 
 </script>
 </html>
