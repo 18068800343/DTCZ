@@ -49,7 +49,6 @@ function initLeftOption(list, stationname,max) {
                     return res;
                 }
             },
-            max:max,
 
         },
         yAxis: {
@@ -208,7 +207,6 @@ function initDownOption(list,stationName,max){
                     color: '#999'
                 }
             },
-            max:max,
         },
         dataZoom: [{
             type: 'inside'
