@@ -46,7 +46,7 @@
     <select id="selectUserByUsrName" resultType="tUserInfoVo">
 
 		SELECT
-		tui.*,GROUP_CONCAT(CONCAT(ss.Station_Longitude,"-",ss.Station_Latitude)) as lnglat,tdc.station_port as stationPort,GROUP_CONCAT(ss.Route_Name) stationName
+		tui.*,GROUP_CONCAT(CONCAT(ss.Station_Longitude,"-",ss.Station_Latitude)) as lnglat,tdc.station_port as stationPort,GROUP_CONCAT(ss.station_Name) stationName
 		FROM
 			t_user_info tui
 		LEFT JOIN t_dic_company tdc on tui.Usr_Role=tdc.id
