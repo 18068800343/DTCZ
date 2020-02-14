@@ -33,92 +33,118 @@
                 top: 40% !important;
             }
         }
-          @media screen and (max-width: 1366px) {
+
+        @media screen and (max-width: 1366px) {
             .zhongliang {
-                width:8%;
-                margin-left:3%;
+                width: 8%;
+                margin-left: 3%;
             }
-            .text1{
-                width:100px !important;
+
+            .text1 {
+                width: 100px !important;
             }
-            .text2{
-                width:100px;
+
+            .text2 {
+                width: 100px;
             }
-            .col1{
-                margin-left:2%  !important;
+
+            .col1 {
+                margin-left: 2% !important;
             }
-            .riqi{
-                margin-left:5%  !important;
+
+            .riqi {
+                margin-left: 5% !important;
             }
-            .chexing{
-                margin-left:10% !important;
+
+            .chexing {
+                margin-left: 10% !important;
             }
-            .shaixuan{
-                margin-left:3%;
-                width:8%;
+
+            .shaixuan {
+                margin-left: 3%;
+                width: 8%;
             }
-            .chepai{
-                width:10% !important;
+
+            .chepai {
+                width: 10% !important;
             }
-            .jiancezhandian{
-                right:18% !important;
-                position:relative;
+
+            .jiancezhandian {
+                right: 18% !important;
+                position: relative;
             }
-            .queding{
-               margin-right:15% !important;
+
+            .queding {
+                margin-right: 15% !important;
             }
-            .xian{
-               margin-top:4.5%;
+
+            .xian {
+                margin-top: 4.5%;
             }
-            .chesu{
-               margin-left:3% !important;
-               width:8% !important;
+
+            .chesu {
+                margin-left: 3% !important;
+                width: 8% !important;
             }
-              .text3{
-                width:100px !important;
+
+            .text3 {
+                width: 100px !important;
             }
-            .text4{
-                width:100px  !important;
+
+            .text4 {
+                width: 100px !important;
             }
-            .xian2{
-                margin-left:13%  !important;
+
+            .xian2 {
+                margin-left: 13% !important;
             }
-            .zhousu{
-                margin-left:5%  !important;
+
+            .zhousu {
+                margin-left: 5% !important;
             }
-             .text5{
-                width:100px !important;
+
+            .text5 {
+                width: 100px !important;
             }
-            .lumianwendu{
-                margin-left:1%  !important;
-                width:8% !important;
+
+            .lumianwendu {
+                margin-left: 1% !important;
+                width: 8% !important;
             }
-            .text6{
-               width:100px  !important;
-               margin-left:-2%  !important;
+
+            .text6 {
+                width: 100px !important;
+                margin-left: -2% !important;
             }
-             .text7{
-               width:100px  !important;
+
+            .text7 {
+                width: 100px !important;
             }
-            .lmwd{
-               margin-left:-1.5%;
+
+            .lmwd {
+                margin-left: -1.5%;
             }
-            .chaozhongbili{
-               margin-left:5% !important;
-               width:8% !important;
+
+            .chaozhongbili {
+                margin-left: 5% !important;
+                width: 8% !important;
             }
-              .text8{
-               width:100px  !important;
-              
+
+            .text8 {
+                width: 100px !important;
+
             }
-             .text9{
-               width:100px  !important;
+
+            .text9 {
+                width: 100px !important;
             }
-            .czbl{
-               width:4%  !important;
+
+            .czbl {
+                width: 4% !important;
             }
-            .bl{
-               margin-left:1% !important;
+
+            .bl {
+                margin-left: 1% !important;
             }
         }
     </style>
@@ -143,7 +169,8 @@
             </div>
         </div>
 
-        <label class="col-sm-1	 control-label riqi" style="margin-left: 9%;width: 70px;line-height: 30px;">日期:</label>
+        <label class="col-sm-1	 control-label riqi"
+               style="margin-left: 9%;width: 70px;line-height: 30px;">日期:</label>
         <div class="col-sm-2">
             <!-- 样式1 -->
             <input type="date" v-model="startTime" value="请选择"
@@ -162,7 +189,8 @@
             <input type="date" v-model="endTime" value="请选择" style="height: 34px;border-radius: 5px;box-shadow: none;width:
         250%;margin-left: 30px;border:1px solid #DDD;">
         </div>
-        <label class="col-sm-1	 control-label chexing" style="margin-left: 9%; width: 70px; line-height: 30px;">车型:</label>
+        <label class="col-sm-1	 control-label chexing"
+               style="margin-left: 9%; width: 70px; line-height: 30px;">车型:</label>
 
         <div class="col-sm-2" style="margin-left: 1%;">
             <div class="xian2"
@@ -214,7 +242,8 @@
                     <div class="xian2"
                          style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: -5%;margin-top: 15%;">
                     </div>
-                    <input type="text" class="text4"  value="请输入" v-model="chesuEnd" @input="checknum('chesuEnd')" style="height: 34px;border-radius: 5px;box-shadow: none;width:120%;margin-left: 30px;border:1px solid #DDD;padding:3px;">
+                    <input type="text" class="text4" value="请输入" v-model="chesuEnd" @input="checknum('chesuEnd')"
+                           style="height: 34px;border-radius: 5px;box-shadow: none;width:120%;margin-left: 30px;border:1px solid #DDD;padding:3px;">
                 </div>
             </div>
             <!-- 轴数 -->
@@ -228,7 +257,8 @@
                 <label for="" class="col-sm-2 control-label lumianwendu" style="margin-left:3%;">路面温度</label>
                 <div class="col-sm-2 lmwd">
                     <!-- 样式1 -->
-                    <input type="text" class="text6" value="请输入" v-model="roadTmpStart" @input="checknum('roadTmpStart')"
+                    <input type="text" class="text6" value="请输入" v-model="roadTmpStart"
+                           @input="checknum('roadTmpStart')"
                            style="height: 34px;border-radius: 5px;box-shadow: none;width: 120%;border:1px solid #DDD;padding:3px;">
                 </div>
 
@@ -236,14 +266,16 @@
                     <div class="xian2"
                          style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: -5%;margin-top: 15%;">
                     </div>
-                    <input type="text" class="text7"  v-model="roadTmpEnd" value="请输入" @input="checknum('roadTmpEnd')" style="height: 34px;border-radius: 5px;box-shadow: none;width:120%;margin-left: 30px;border:1px solid #DDD;padding:3px;">
+                    <input type="text" class="text7" v-model="roadTmpEnd" value="请输入" @input="checknum('roadTmpEnd')"
+                           style="height: 34px;border-radius: 5px;box-shadow: none;width:120%;margin-left: 30px;border:1px solid #DDD;padding:3px;">
                 </div>
             </div>
             <div class="sele">
                 <!-- 超重比例 -->
                 <label for="" class="col-sm-2 control-label chaozhongbili" style="margin-left:3%;">超重比例</label>
                 <div class="col-sm-2 czbl" style="width: 10%">
-                    <input type="text" class="text8" value="请输入" v-model="chaozhongStart" @input="checknum('chaozhongStart')"
+                    <input type="text" class="text8" value="请输入" v-model="chaozhongStart"
+                           @input="checknum('chaozhongStart')"
                            style="border-radius: 5px;box-shadow: none;border:1px solid #DDD;padding:3px; ;height:34px;margin-left:-40px;">
                 </div>
 
@@ -251,7 +283,8 @@
                     <div class="xian2"
                          style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: -5%;margin-top: 15%;">
                     </div>
-                    <input type="text" class="text9"  v-model="chaozhongEnd" value="请输入"  @input="checknum('chaozhongEnd')" style="height: 34px;border-radius: 5px;box-shadow: none;width:
+                    <input type="text" class="text9" v-model="chaozhongEnd" value="请输入"
+                           @input="checknum('chaozhongEnd')" style="height: 34px;border-radius: 5px;box-shadow: none;width:
             120%;margin-left: 30px;border:1px solid #DDD;padding:3px;">
                 </div>
 
@@ -268,16 +301,14 @@
             <th>车道号</th>
             <th>车牌号</th>
             <th>车牌颜色</th>
-            <th>车型</th>
             <th>长</th>
             <th>车速(Km/h)</th>
-            <th>行驶方向</th>
             <th>轴数</th>
             <th>总重量(Kg)</th>
-            <th>是否跨道</th>
             <th>路面温度</th>
             <th>超重比率</th>
             <th>时间</th>
+            <th>详情</th>
         </tr>
         </thead>
         <tbody>
@@ -312,6 +343,137 @@
         </div>
     </div>
 </div>
+
+<!-- allMsg1 -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg1">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content"  id="lookWimMsgDiv">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" ><b>详细信息</b></h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <form class="form-inline">
+                        <table class="table table-bordered table-condensed" style="height: auto;" id="">
+                            <tr>
+                                <td>站点</td>
+                                <td>{{stationNameRouteName}}</td>
+                                <td>通行时间</td>
+                                <td>{{evtTime}}</td>
+                            </tr>
+                            <tr>
+                                <td>打包时间</td>
+                                <td>{{msgTime}}</td>
+                                <td>车道号</td>
+                                <td>{{laneNo}}</td>
+                            </tr>
+                            <tr>
+                                <td>车牌号</td>
+                                <td>{{plate}}</td>
+                                <td>车牌颜色</td>
+                                <td>{{licensePlateColor}}</td>
+                            </tr>
+                            <tr>
+                                <td>车型</td>
+                                <td>{{vehicleTypeName}}</td>
+                                <td>车长</td>
+                                <td>{{length}}</td>
+                            </tr>
+                            <tr>
+                                <td>车速</td>
+                                <td>{{speed}}</td>
+                                <td>行驶方向</td>
+                                <td>{{directionName}}</td>
+                            </tr>
+                            <tr>
+                                <td>轴数</td>
+                                <td>{{axlesCount}}</td>
+                                <td>总重量</td>
+                                <td>{{totalWeight}}</td>
+                            </tr>
+                            <tr>
+                                <td>轴1重</td>
+                                <td>{{axle1}}</td>
+                                <td>轴2重</td>
+                                <td>{{axle2}}</td>
+                            </tr>
+                            <tr>
+                                <td>轴3重</td>
+                                <td>{{axle3}}</td>
+                                <td>轴4重</td>
+                                <td>{{axle4}}</td>
+                            </tr>
+                            <tr>
+                                <td>轴5重</td>
+                                <td>{{axle5}}</td>
+                                <td>轴5重</td>
+                                <td>{{axle5}}</td>
+                            </tr>
+                            <tr>
+                                <td>轴6重</td>
+                                <td>{{axle6}}</td>
+                                <td>轴8重</td>
+                                <td>{{axle8}}</td>
+                            </tr>
+                            <tr>
+                                <td>轴9重</td>
+                                <td>{{axle9}}</td>
+                                <td>轴10重</td>
+                                <td>{{axle10}}</td>
+                            </tr>
+                            <tr>
+                                <td>轴间距1</td>
+                                <td>{{axleSpace1}}</td>
+                                <td>轴间距2</td>
+                                <td>{{axleSpace2}}</td>
+                            </tr>
+                            <tr>
+                                <td>轴间距3</td>
+                                <td>{{axleSpace3}}</td>
+                                <td>轴间距4</td>
+                                <td>{{axleSpace4}}</td>
+                            </tr>
+                            <tr>
+                                <td>轴间距5</td>
+                                <td>{{axleSpace5}}</td>
+                                <td>轴间距6</td>
+                                <td>{{axleSpace6}}</td>
+                            </tr>
+                            <tr>
+                                <td>轴间距7</td>
+                                <td>{{axleSpace7}}</td>
+                                <td>轴间距8</td>
+                                <td>{{axleSpace8}}</td>
+                            </tr>
+                            <tr>
+                                <td>轴间距9</td>
+                                <td>{{axleSpace9}}</td>
+                                <td>是否跨道</td>
+                                <td>{{isStraddleName}}</td>
+                            </tr>
+                            <tr>
+                                <td>路面温度</td>
+                                <td>{{temperature}}</td>
+                                <td>超重量</td>
+                                <td>{{overWeight}}</td>
+                            </tr>
+                            <tr>
+                                <td>超重比率</td>
+                                <td>{{overWeightRatio}}</td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <!--<button type="button" class="btn btn-success" id="xgup_baocun">保存</button>-->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- allMsg1 -->
 
 </body>
 <script src="../js/jquery.js"></script>
@@ -430,14 +592,14 @@
             endWeight: "",
             startWeight: "",
             chexing: "",
-            chepai:"",
-            chesuStart:"",
-            chesuEnd:"",
-            zhoushu:"",
-            roadTmpStart:"",
-            roadTmpEnd:"",
-            chaozhongStart:"",
-            chaozhongEnd:"",
+            chepai: "",
+            chesuStart: "",
+            chesuEnd: "",
+            zhoushu: "",
+            roadTmpStart: "",
+            roadTmpEnd: "",
+            chaozhongStart: "",
+            chaozhongEnd: "",
 
         },
         methods: {
@@ -475,14 +637,14 @@
                             param.endTime = mainVm.endTime;
                             param.endWeight = mainVm.endWeight;
                             param.startWeight = mainVm.startWeight;
-                            param.chepai= mainVm.chepai;
-                            param.chesuStart= mainVm.chesuStart;
-                            param.chesuEnd= mainVm.chesuEnd;
-                            param.zhoushu= mainVm.zhoushu;
-                            param.roadTmpStart= mainVm.roadTmpStart;
-                            param.roadTmpEnd= mainVm.roadTmpEnd;
-                            param.chaozhongStart= mainVm.chaozhongStart;
-                            param.chaozhongEnd= mainVm.chaozhongEnd;
+                            param.chepai = mainVm.chepai;
+                            param.chesuStart = mainVm.chesuStart;
+                            param.chesuEnd = mainVm.chesuEnd;
+                            param.zhoushu = mainVm.zhoushu;
+                            param.roadTmpStart = mainVm.roadTmpStart;
+                            param.roadTmpEnd = mainVm.roadTmpEnd;
+                            param.chaozhongStart = mainVm.chaozhongStart;
+                            param.chaozhongEnd = mainVm.chaozhongEnd;
                             return param;
                         },
                         //用于处理服务器端返回的数据。 dataSrc是DataTable特有的
@@ -503,18 +665,18 @@
                     },
                     "columns": [
                         {"data": "stationName"},
-                        {"data": "laneNo"},
+                        {"data": "laneNoName"},
                         {"data": "plate"},
                         {"data": "licensePlateColor"},
-                        {"data": "vehicleTypeName"},
+                        //{"data": "vehicleTypeName"},
                         {"data": "length"},
                         {"data": "speed"},
-                        {"data": "directionName"},
+                        //{"data": "directionName"},
                         {"data": "axlesCount"},
                         {"data": "totalWeight"},
-                        {"data": "isStraddleName"},
+                        //{"data": "isStraddleName"},
                         {"data": "temperature"},
-                        {"data": "overWeightRatio"},
+                        {"data": "overWeightRatioName"},
                         {"data": "evtTime"},
 
                     ],
@@ -527,12 +689,21 @@
                         }
                     }, {
                         "class": "tcenter",
-                        "targets": 13,
+                        "targets": 10,
                         "searchable": true,
                         "render": function (data, type, full) {
                             return "<marquee scrollAmount=3>" + data + "</marquee>";
                         }
-                    },],
+                    },
+                        {
+                            "class": "tcenter",
+                            "targets": 11,
+                            "searchable": true,
+                            "render": function (data, type, full) {
+                                return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="' + full.idLocal + '" onclick="lookMsg(this)" id="lookDetall"></i>';
+                            }
+                        }
+                    ],
                     "order": [],
                     "ordering": false,
                     "oLanguage": { //国际化配置
@@ -612,6 +783,137 @@
         }
 
     }
+
+    var looktWimMsg = new Vue({
+        el: '#lookWimMsgDiv',
+        //表单数据
+        data: {
+            idLocal:"",
+            id:"",
+            stationId:"",
+            evtTime:"",
+            msgTime:"",
+            laneNo:"",
+            plate:"",
+            plateColor:"",
+            classIndex:"",
+            length:"",
+            speed:"",
+            direction:"",
+            axlesCount:"",
+            totalWeight:'',
+            wetmixingtimedeviation:'',
+            axle1:'',
+            axle2:'',
+            axle3:'',
+            axle4:'',
+            axle5:'',
+            axle6:'',
+            axle7:'',
+            axle8:'',
+            axle9:'',
+            axle10:'',
+            axleSpace1:'',
+            axleSpace2:'',
+            axleSpace3:'',
+            axleSpace4:'',
+            axleSpace5:'',
+            axleSpace6:'',
+            axleSpace7:'',
+            axleSpace8:'',
+            axleSpace9:'',
+            isStraddle:'',
+            temperature:'',
+            overWeight:'',
+            overWeightRatio:'',
+            wIMId:'',
+            lPRId:'',
+            stationIP:'',
+            stationNameRouteName:'',
+            directionName:'',
+            isStraddleName:'',
+            stationName:'',
+            routeName:'',
+            licensePlateColor:'',
+            vehicleTypeName:'',
+        },
+        methods: {
+        }
+    })
+
+    var lookMsg = (e)=>{
+        showMask()
+        $.ajax({
+            type: 'POST',
+            url: '/tWimMsg/gettWimMsgById',
+            dataType: 'json',
+            data: {
+                idLocal:$(e).attr("data-id")
+            },
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                lookxiangqing(json);
+                hidMask()
+                $("#allMsg1").modal('show');
+            }
+        });
+    }
+
+    var lookxiangqing = (data) =>{
+        looktWimMsg.id=data.id;
+        looktWimMsg.idLocal=data.idLocal;
+        looktWimMsg.stationNameRouteName=data.stationNameRouteName;
+        looktWimMsg.stationId=data.stationId;
+        looktWimMsg.evtTime=data.evtTime;
+        looktWimMsg.msgTime=data.msgTime;
+        looktWimMsg.laneNo=data.laneNo;
+        looktWimMsg.plate=data.plate;
+        looktWimMsg.plateColor=data.plateColor;
+        looktWimMsg.classIndex=data.classIndex;
+        looktWimMsg.length=data.length;
+        looktWimMsg.speed=data.speed;
+        looktWimMsg.direction=data.direction;
+        looktWimMsg.axlesCount=data.axlesCount;
+        looktWimMsg.totalWeight=data.totalWeight;
+        looktWimMsg.wetmixingtimedeviation=data.wetmixingtimedeviation;
+        looktWimMsg.axle1=data.axle1;
+        looktWimMsg.axle2=data.axle2;
+        looktWimMsg.axle3=data.axle3;
+        looktWimMsg.axle4=data.axle4;
+        looktWimMsg.axle5=data.axle5;
+        looktWimMsg.axle6=data.axle6;
+        looktWimMsg.axle7=data.axle7;
+        looktWimMsg.axle8=data.axle8;
+        looktWimMsg.axle9=data.axle9;
+        looktWimMsg.axle10=data.axle10;
+        looktWimMsg.axleSpace1=data.axleSpace1;
+        looktWimMsg.axleSpace2=data.axleSpace2;
+        looktWimMsg.axleSpace3=data.axleSpace3;
+        looktWimMsg.axleSpace4=data.axleSpace4;
+        looktWimMsg.axleSpace5=data.axleSpace5;
+        looktWimMsg.axleSpace6=data.axleSpace6;
+        looktWimMsg.axleSpace7=data.axleSpace7;
+        looktWimMsg.axleSpace8=data.axleSpace8;
+        looktWimMsg.axleSpace9=data.axleSpace9;
+        looktWimMsg.isStraddle=data.isStraddle;
+        looktWimMsg.temperature=data.temperature;
+        looktWimMsg.overWeight=data.overWeight;
+        looktWimMsg.overWeightRatio=data.overWeightRatio+'%';
+        looktWimMsg.wIMId=data.wIMId;
+        looktWimMsg.lPRId=data.lPRId;
+        looktWimMsg.stationIP=data.stationIP;
+        looktWimMsg.stationNameRouteName=data.stationNameRouteName;
+        looktWimMsg.directionName=data.directionName;
+        looktWimMsg.isStraddleName=data.isStraddleName;
+        looktWimMsg.stationName=data.stationName;
+        looktWimMsg.routeName=data.routeName;
+        looktWimMsg.licensePlateColor=data.licensePlateColor;
+        looktWimMsg.vehicleTypeName=data.vehicleTypeName;
+
+    }
+
 
     function showMask() {
         myTool.mask.show('查询中...');
