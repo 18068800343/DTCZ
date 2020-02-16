@@ -31,6 +31,11 @@
         #mainContent th{
             cursor: pointer;
         }
+          @media screen and (max-width: 1366px) {
+                .renyuanzhanghu{
+                  margin-left:14% !important;
+                }
+        }
     </style>
 </head>
 <body style="background-image: none;width: 90%;margin-left: 10%;">
@@ -49,13 +54,13 @@
         <div class="zhuti-content">
             <div class="UpperPart">
                 <div class="UpperPartL">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin: 5PX;float: left;">录入人员账户</button>
+                    <button type="button" class="btn btn-primary  renyuanzhanghu" data-toggle="modal" data-target="#myModal" style="margin: 5PX;float: left;">录入人员账户</button>
                 </div>
                 <div class="UpperPartR">
                 </div>
             </div>
             <div class="LowerPart" style="margin-top:3px;">
-                <table class="table table-bordered table-condensed table-hover" id="mainContent">
+                <table class="table table-bordered table-condensed table-hover layui-table" id="mainContent">
                     <thead>
                     <tr>
                         <th>姓名</th>

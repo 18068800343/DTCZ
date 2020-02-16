@@ -10,13 +10,27 @@
     <link href="../style/style.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/home.css"/>
     <link rel="stylesheet" href="css/toastr.css"/>
+    <style>
+        @media screen and (max-width: 1366px) {
+             .tongjifenxi{
+                 margin-left:4%;
+                 margin-top:0.5%;
+             }
+             .xian{
+                margin-top:2.4%;
+             }
+             #mainContent_info{
+                margin-left:5%;
+             }
+        }
+    </style>
 </head>
 
 <body style="background-image: none;">
 <div class="form-group" id="rightTab">
     <div id="mainVm">
         <div>
-            <label class="col-sm-1 control-label">统计分析</label>
+            <label class="col-sm-1 control-label tongjifenxi">统计分析</label>
             <div class="col-sm-3">
                 <!-- 样式1 -->
                 <select class="form-control selectpicker" multiple data-max-options="2" data-live-search="true"
@@ -126,7 +140,7 @@
         <div class="col-md-6 column">
             <p>
                 <div class="blue">
-                    <h4>超载车辆统计</h4>
+                    <h4 style="line-height:40px; margin-left:1%;font-size:15px;">超载车辆统计</h4>
                     <div class="left col-xs-4 ">
                         <div id="czaicl" style="width:600px;height: 400px;">
                         </div>
@@ -138,7 +152,7 @@
         <div class="col-md-6 column">
             <p>
             <div class="blue">
-                <h4>超重车辆统计</h4>
+                <h4  style="line-height:40px; margin-left:1%;font-size:15px;" >超重车辆统计</h4>
                 <div class="left col-xs-4 ">
                     <div id="czhongcl" style="width:600px;height: 400px;">
                     </div>
@@ -174,7 +188,7 @@
         <div class="col-md-12 column">
             <p>
             <div class="blue">
-                <h4>上行交通量统计</h4>
+                <h4  style="line-height:40px; margin-left:1%;font-size:15px;">上行交通量统计</h4>
                 <div class="left col-xs-4 ">
                     <div id="_bottom" style="width:1300px;height: 400px;">
                     </div>
