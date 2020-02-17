@@ -64,7 +64,7 @@
 					</select>
 				</div>
 			</div>
-			<button type="button" class="btn btn-primary" onclick="queding()" style="margin-left: 80px;width: 100px; background-image: linear-gradient(#1F62C8,#262E9F);">确定</button>
+			<button type="button" class="btn btn-primary" onclick="quedingDianJi()" style="margin-left: 80px;width: 100px; background-image: linear-gradient(#1F62C8,#262E9F);">确定</button>
 			<div class="jiance">
 				<button type="button" class="btn btn-primary" onclick="nowJianceSite()" data-toggle="modal" data-target="#jianceDiv" style="width: 150px; background-image: linear-gradient(#1F62C8,#262E9F);">当前监测站点</button>
 			</div>
@@ -387,7 +387,8 @@
 			setLeftEcharts()
 			setRightEcharts()
 			setBottomEcharts()
-			setInterval(refresh, 15000);
+
+			setInterval(refresh, 6000);
 
 		});
 		var table=$('#mainContent').dataTable({
@@ -714,6 +715,38 @@
 				}
 			});
 		}
+
+		function quedingDianJi(){
+			showMask()
+			var stationPort;
+			if($("#zhandian").val()!=""&&$("#zhandian").val()!=undefined&&$("#zhandian").val()!=null){
+				stationPort=$("#zhandian").val().toString();
+			}else{
+				stationPort=""
+			}
+			$.ajax({
+				type: 'POST',
+				url: '/tWimMsg/getAlltWimMsg',
+				dataType: 'json',
+				data: {
+					stationPort:stationPort,
+
+				},
+				error: function (msg) {
+					errMessage("请求UserController失败");
+				},
+				success: function (json) {
+					$('#mainContent').dataTable().fnClearTable();
+					$('#mainContent').DataTable().rows.add(json).draw(false);
+					setLeftEcharts()
+					setRightEcharts()
+					setBottomEcharts()
+					hidMask()
+				}
+			});
+		}
+
+
 
 		function nowJianceSite(){
 			$("#jianceTable tbody").empty('')

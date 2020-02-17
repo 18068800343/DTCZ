@@ -49,12 +49,12 @@ public class tWimMsgController {
         if(stationPort!=null&&stationPort!=""){
             zhandianduankouhao=stationPort;
             if(user!=null){
-                this.updlastMonitoringSiteById(stationPort,user.getUsrId());
+                this.updlastMonitoringSiteById(stationPort,user.getUsrId(),session);
             }
         }else{
             if(user!=null){
                 zhandianduankouhao = user.getStationPort();
-                updlastMonitoringSiteById(user.getStationPort(),user.getUsrId());
+                updlastMonitoringSiteById(user.getStationPort(),user.getUsrId(),session);
             }
         }
         List<tWimMsgVo> list= service.getAlltWimMsg(zhandianduankouhao);
@@ -71,8 +71,14 @@ public class tWimMsgController {
         return list;
     }
 
-    private int  updlastMonitoringSiteById(String stationPort,String usrId){
+    private int  updlastMonitoringSiteById(String stationPort,String usrId,HttpSession session){
         int i=tUserInfoDao.updlastMonitoringSiteById(stationPort,usrId);
+        if(i>0){
+            tUserInfo user = (tUserInfo) session.getAttribute("user");
+            user.setLastMonitoringSite(stationPort);
+            session.removeAttribute("user");
+            session.setAttribute("user",user);
+        }
         return i;
     }
 
@@ -90,12 +96,12 @@ public class tWimMsgController {
            if(stationPort!=null&&stationPort!=""){
             zhandianduankouhao=stationPort;
             if(user!=null){
-                updlastMonitoringSiteById(stationPort,user.getUsrId());
+                updlastMonitoringSiteById(stationPort,user.getUsrId(),session);
             }
         }else{
              if(user!=null){
                 zhandianduankouhao = user.getStationPort();
-                updlastMonitoringSiteById(user.getStationPort(),user.getUsrId());
+                updlastMonitoringSiteById(user.getStationPort(),user.getUsrId(),session);
             }
         }
            //格式化重量范围s
@@ -247,7 +253,7 @@ public class tWimMsgController {
         }else{
             if(user!=null){
                 zhandianduankouhao = user.getStationPort();
-                updlastMonitoringSiteById(user.getStationPort(),user.getUsrId());
+                //updlastMonitoringSiteById(user.getStationPort(),user.getUsrId(),session);
             }
         }
         return service.getMeiRiCheLiuLiangShujuByStationPort(stationPort);
@@ -262,7 +268,7 @@ public class tWimMsgController {
         }else{
             if(user!=null){
                 zhandianduankouhao = user.getStationPort();
-                updlastMonitoringSiteById(user.getStationPort(),user.getUsrId());
+                //updlastMonitoringSiteById(user.getStationPort(),user.getUsrId(),session);
             }
         }
         return service.getMeiRiChaoZaiShujuByStationPort(stationPort);
@@ -286,7 +292,7 @@ public class tWimMsgController {
         }else{
             if(user!=null){
                 zhandianduankouhao = user.getStationPort();
-                updlastMonitoringSiteById(user.getStationPort(),user.getUsrId());
+                //updlastMonitoringSiteById(user.getStationPort(),user.getUsrId(),session);
             }
         }
         return service.getMeiRiGuanJianChaoZHongShujuByStationPort(stationPort);
