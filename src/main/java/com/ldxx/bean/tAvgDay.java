@@ -21,7 +21,7 @@ public class tAvgDay {
     private double avgOverloadRatio2;
     private double avgOverloadRatio3;
     private double avgOverloadRatio4;
-    private double avgOverload_Ratio5;
+    private double avgOverloadRatio5;
     private double avgOverloadRatio6;
     private String stationIP;
 
@@ -185,12 +185,12 @@ public class tAvgDay {
         this.avgOverloadRatio4 = avgOverloadRatio4;
     }
 
-    public double getAvgOverload_Ratio5() {
-        return avgOverload_Ratio5;
+    public double getAvgOverloadRatio5() {
+        return avgOverloadRatio5;
     }
 
-    public void setAvgOverload_Ratio5(double avgOverload_Ratio5) {
-        this.avgOverload_Ratio5 = avgOverload_Ratio5;
+    public void setAvgOverloadRatio5(double avgOverloadRatio5) {
+        this.avgOverloadRatio5 = avgOverloadRatio5;
     }
 
     public double getAvgOverloadRatio6() {
