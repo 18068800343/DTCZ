@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldxx.dao.tAvgDayDao" >
+
+  		
+  		<select id="gettAvgDayByIpAndTime" resultType="tAvgDay">
+  			select * from t_avg_day where Station_IP=#{stationIP} and Avg_Time=#{avgTime} and Avg_LaneNo=#{avgLaneNo}
+  		</select>
+  		
+
+</mapper>

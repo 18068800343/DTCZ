@@ -2,269 +2,327 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title></title>
-    <link href="../font2/iconfont.css" rel="stylesheet">
-    <link href="../style/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../font3/bootstrap-select.css" rel="stylesheet">
-    <link rel="stylesheet" href="../style/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="../font2/iconfont.css">
+    <link href="../style/bootstrap.min.css" rel="stylesheet">
     <link href="../style/style.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/home.css"/>
-    <link rel="stylesheet" href="css/toastr.css"/>
-    <style>
-        @media screen and (max-width: 1366px) {
-             .tongjifenxi{
-                 margin-left:4%;
-                 margin-top:0.5%;
-             }
-             .xian{
-                margin-top:2.4%;
-             }
-             #mainContent_info{
-                margin-left:5%;
-             }
+    <link rel="stylesheet" href="../style/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="../style/jquery-editable-select.css">
+    <link href="../font3/bootstrap-select.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+    <link rel="stylesheet" type="text/css" href="css/home.css" />
+    <link rel="stylesheet"  href="css/layui.css" />
+    <link rel="stylesheet"  href="css/toastr.css"/>
+
+    <style lang="">
+        body{
+            background: #fff;
+        }
+        #mainContent_info{
+            margin-left: 5%;
+        }
+        #mainContent_paginate{
+            margin-right: 5%;
+        }
+        .UpperPart{
+            display: flex;
+            justify-content:space-between;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 12px;
+        }
+        .selected{
+            background: rgba(247, 161, 3,0.2);
+        }
+        #mainContent th{
+            cursor: pointer;
+        }
+
+        .jiance{
+            float: right;
+            margin-right: 5%;
+
         }
     </style>
 </head>
-
 <body style="background-image: none;">
+
 <div class="form-group" id="rightTab">
-    <div id="mainVm">
-        <div>
-            <label class="col-sm-1 control-label tongjifenxi">统计分析</label>
-            <div class="col-sm-3">
-                <!-- 样式1 -->
-                <select class="form-control selectpicker" multiple data-max-options="2" data-live-search="true"
-                        v-model="zhandian"
-                        id="zhandian" style="width:60%;">
-                </select>
-            </div>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist" style="background:#fff;">
+        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">车牌颜色</a></li>
+        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">车型编码</a></li>
 
-        </div>
-        <label class="col-sm-1	 control-label" style="margin-left: 50px;width: 70px;line-height: 30px;">日期:</label>
-        <div class="col-sm-2">
-            <!-- 样式1 -->
-            <input type="date" v-model="startTime" value="请选择"
-                   style="height: 34px;border-radius: 5px;box-shadow: none;width: 250%;">
-        </div>
-
-        <div class="col-sm-2" style="margin-left: 6%;">
-            <div class="xian2"
-                 style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: 8%;margin-top: 15%;">
-            </div>
-            <input type="date" v-model="endTime" value="请选择" style="height: 34px;border-radius: 5px;box-shadow: none;width:
-        250%;margin-left: 30px;">
-        </div>
-        <button type="button" class="btn btn-primary" @click="searchInit"
-                style="margin-left: 80px;width: 100px; background-image: linear-gradient(#1F62C8,#262E9F);margin-left: 20%;">
-            确定
-        </button>
-        <a href="javascript:;"
-           style="float: right;color: #262E9F;text-decoration: underline;margin-right: 5%;line-height: 40px;"
-           id="less">详细筛选</a>
-    </div>
-    <div id="Two" style="display: block;width: 100%;height: 30px;display: none;">
-        <label class="col-sm-1	 control-label"
-               style="margin-left: -45.8%;width: 100px;line-height: 30px;">统计内容:</label>
-        <input type="checkbox" name="" value="" style="margin-top: 10px;margin-left: -39%;">
-        <span>交通量统计</span>
-        <input type="checkbox" name="" value="" style="margin-top: 10px;margin-left: 2%;">
-        <span>超重统计</span>
-        <input type="text" name="" value="超重阈值" style="width: 100px;color: #666666;"/>
-        <input type="checkbox" name="" value="" style="margin-top: 10px;margin-left: 2%;">
-        <span>超载统计</span>
-        <label class="control-label" style="margin-left: 3%;">统计方式:</label>
-        <!-- <input type="radio" name=""  value=""  style="margin-top: 12px;">
-         <span>逐日</span>
-         <input type="radio" name=""  value=""  style="margin-top: 12px;margin-left: 10px;">
-         <span>逐月</span>-->
-        <input type="checkbox" name="" value="" style="margin-top: 10px;margin-left: 3%;">
-        <span>区分车型</span>
-        <input type="checkbox" name="" value="" style="margin-top: 10px;margin-left: 3%;">
-        <span>区分方向</span>
-    </div>
-
-    <div class="xian"></div>
-
-
-    <!--表格-->
-    <table class="table table-striped " id="mainContent" style="width: 90%;">
-        <thead style="background-color: #DDE6F7;">
-        <tr>
-            <th>站点</th>
-            <th>车道号</th>
-            <th>车牌号</th>
-            <th>车牌颜色</th>
-            <th>车型</th>
-            <th>长</th>
-            <th>车速(Km/h)</th>
-            <th>行驶方向</th>
-            <th>轴数</th>
-            <th>总重量(Kg)</th>
-            <th>是否跨道</th>
-            <th>路面温度</th>
-            <th>超重比率</th>
-        </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
-
-    <!--    <div class="tujitu" style="width: 100%;">
-            <div class="bright" style="margin-top: 70px;">
-                <div class="blue">
-                    <p>当日超载车辆统计</p>
-                    <div class="left col-xs-4 ">
-                        <div id="_top" style="width:600px;height: 400px;margin-left: 50px;">
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="home">
+            <div class="zhuti-content">
+                <div class="UpperPart">
+                    <div class="UpperPartL" style="width: 90%;margin-left: 5%;">
+                        <div class="sele" >
+                            <label class="col-sm-2 control-label shaixuan" >筛选站点</label>
+                            <div class="col-sm-2" style="width: 20%;margin-left: 50px;">
+                                <!-- 样式1 -->
+                                <select class="form-control"  id="stationPort" style="width:80%;">
+                                </select>
+                            </div>
                         </div>
-                        &lt;!&ndash;左边&ndash;&gt;
-                    </div>
-                </div>
-            </div>
-            <div class="bleft" style="margin-top: 70px;margin-right: -4%;">
-                <div class="blue">
-                    <p>当日超重车辆统计</p>
-                    <div id="_right" style="width:60%;height: 400px;">
-                        &lt;!&ndash;右边&ndash;&gt;
-                    </div>
-                </div>
-            </div>
-        </div>-->
-    <!--左上半部分结束-->
-    <div class="bottom">
-        <!--        <div id="bottom_" style="width:97%;margin-left: 15px;">
-                </div>-->
-    </div>
-
-    <div class="row clearfix" style="margin-left: 2%;">
-        <!--超载车辆-->
-        <div class="col-md-6 column">
-            <p>
-                <div class="blue">
-                    <h4 style="line-height:40px; margin-left:1%;font-size:15px;">超载车辆统计</h4>
-                    <div class="left col-xs-4 ">
-                        <div id="czaicl" style="width:600px;height: 400px;">
+                        <label class="col-sm-1	 control-label riqi"
+                               style="margin-left: 3%;width: 70px;line-height: 30px;">日期:</label>
+                        <div class="col-sm-2" style="width: 20%">
+                            <!-- 样式1 -->
+                            <input type="date" id="startTime" value="请选择"
+                                   style="height: 34px;border-radius: 5px;box-shadow: none;width: 60%;border:1px solid #DDD;">
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="queding()" style="margin-left: 50px;width: 100px; background-image: linear-gradient(#1F62C8,#262E9F);">确定</button>
+                        <div class="jiance">
+                            <button type="button" class="btn btn-primary" onclick="nowJianceSite()" data-toggle="modal" data-target="#jianceDiv" style="width: 150px; background-image: linear-gradient(#1F62C8,#262E9F);">当前车道图</button>
                         </div>
                     </div>
-                 </div>
-            </p>
-        </div>
-        <!--超重车辆统计-->
-        <div class="col-md-6 column">
-            <p>
-            <div class="blue">
-                <h4  style="line-height:40px; margin-left:1%;font-size:15px;" >超重车辆统计</h4>
-                <div class="left col-xs-4 ">
-                    <div id="czhongcl" style="width:600px;height: 400px;">
+                    <div class="UpperPartR">
+
                     </div>
+
                 </div>
-            </div>
-            </p>
-        </div>
-        <!--//下行超载车辆统计-->
-        <div class="col-md-6 column" style="display: none;">
-            <p>
-                <div class="blue">
-                    <h4>下行超载车辆统计</h4>
-                    <div class="left col-xs-4 ">
-                        <div id="sxczaicl" style="width:600px;height: 400px;">
+                <div class="LowerPart" style="margin-top:3px;">
+                    <table class="table table-striped table-hover" id="mainContent" style="width: 90%;margin: 0 auto; margin-top: 20px;">
+                        <thead style="background-color: #DDE6F7;">
+                        <tr>
+                            <th style="width: 15%">站点</th>
+                            <th>车道号</th>
+                            <th>车牌号</th>
+                            <th>车牌颜色</th>
+                            <th>长</th>
+                            <th>车速(Km/h)</th>
+                            <th>轴数</th>
+                            <th>总重量(Kg)</th>
+                            <th>路面温度</th>
+                            <th>超重比率</th>
+                            <th>操作</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <div>
+                    <li class="layui-this">当日超载车辆统计</li>
+                    <div class="layui-tab-item layui-show">
+                        <p class="errorMsg1" style="display: inline-block;"></p>
+                        <div id="_top" style="width:700px;height: 400px;margin-top: -50px;margin:0 auto">
                         </div>
                     </div>
-                 </div>
-            </p>
-        </div>
-        <!--//下行超重车辆统计-->
-        <div class="col-md-6 column" style="display: none;">
-            <p>
-            <div class="blue">
-                <h4>下行超重车辆统计</h4>
-                <div class="left col-xs-4 ">
-                    <div id="_right1" style="width:600px;height: 400px;">
+                </div>
+
+                <div>
+                    <li class="layui-this">当日超重车辆统计</li>
+                    <div class="layui-tab-item layui-show" style="margin-top: 70px;">
+                        <p class="errorMsg1" style="display: inline-block;"></p>
+                        <div id="_right" style="width:700px;height: 400px;margin-top: -50px;margin:0 auto">
+                            <!--右边-->
+                        </div>
                     </div>
                 </div>
-            </div>
-            </p>
-        </div>
-        <!--//上行交通量-->
-        <div class="col-md-12 column">
-            <p>
-            <div class="blue">
-                <h4  style="line-height:40px; margin-left:1%;font-size:15px;">上行交通量统计</h4>
-                <div class="left col-xs-4 ">
-                    <div id="_bottom" style="width:1300px;height: 400px;">
+                <!--左上半部分结束-->
+                <div>
+                    <li class="layui-this">当日关键超重车辆统计</li>
+                    <div class="layui-tab-item layui-show">
+                        <p class="errorMsg1" style="display: inline-block;"></p>
+                        <div id="bottom_" style="width:700px;height: 400px;margin-top: -50px;margin:0 auto">
+                        </div>
                     </div>
                 </div>
+
             </div>
-            </p>
         </div>
-        <!--//下行交通量-->
-        <div class="col-md-12 column" style="display: none;">
-            <p>
-            <div class="blue">
-                <h4>下行交通量统计</h4>
-                <div class="left col-xs-4 ">
-                    <div id="_bottom1" style="width:1400px;height: 400px;">
+
+        <div role="tabpanel" class="tab-pane" id="profile">
+            <div class="zhuti-content">
+                <div class="UpperPart">
+                    <div class="UpperPartL">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2" style="margin: 5PX;float: left;">车型编码</button>
                     </div>
+                    <div class="UpperPartR">
+
+                    </div>
+
+                </div>
+                <div class="LowerPart" style="margin-top:3px;">
+                    <table class="table table-striped table-hover" id="mainContent" style="width: 90%;margin: 0 auto; margin-top: 20px;">
+                        <thead style="background-color: #DDE6F7;">
+                        <tr>
+                            <th style="width: 15%">站点</th>
+                            <th>车道号</th>
+                            <th>车牌号</th>
+                            <th>车牌颜色</th>
+                            <th>长</th>
+                            <th>车速(Km/h)</th>
+                            <th>轴数</th>
+                            <th>总重量(Kg)</th>
+                            <th>路面温度</th>
+                            <th>超重比率</th>
+                            <th>操作</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
                 </div>
             </div>
-            </p>
         </div>
+
+
+
     </div>
 </div>
-</body>
 
+
+
+
+</body>
 <script src="../js/jquery.js"></script>
 <script src="../js/bootstrap.min.js"></script>
-<script src="../js/bootstrap-select.js"></script>
-<script src="js/echarts.min(1).js" type="text/javascript" charset="utf-8"></script>
 <script src="js/datatables/jquery.dataTables.min.js"></script>
+<script src="../js/bootstrap-select.js" ></script>
+<script src="../js/jquery-editable-select.js" ></script>
+<script src="js/toastr.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
-<script src="../js/common-scripts.js"></script>
-<script src="../js/echartsOptionInit.js"></script>
-<script src="js/toastr.js"></script>
+<script src="js/echarts.min(1).js" type="text/javascript" charset="utf-8"></script>
+<script>
 
-<!--======================================================================================左边柱状图===============================================================================-->
-<script type="text/javascript">
-    $(document).ready(function () {
-        initzhandian();
+    $(document).ready( function () {
+        getTime()
+        initzhandian()
+        queding()
     });
 
 
-    let table = $('#mainContent').dataTable({
+    function initzhandian(){
+        $.ajax({
+            type: 'POST',
+            url: '/StationSite/getAllStationSite',
+            dataType: 'json',
+            data: {
+            },
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                if(json!=null){
+                    $("#stationPort").html('');
+                    for(var i=0;i<json.length;i++){
+                        $("#stationPort").append("<option  value='"+json[i].stationPort+"'>"+(json[i].stationName)+"</option>");
+                    }
+
+                }
+            }
+        });
+    }
+
+
+
+    var table=$('#mainContent').dataTable({
         "deferRender": true,
         "processing": true,
         "bDestroy": true,
         "iDisplayLength": 10,
-        "searching": false,
-        "bLengthChange": false,
-        'paging': true,
+        "sDom":
+            "t"+
+            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+        "searching": true,
+        "lengthChange": false,
         "oLanguage": {
             "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
         },
         "columns": [
-            {"data": "stationNameRouteName"},
-            {"data": "laneNo"},
-            {"data": "plate"},
-            {"data": "licensePlateColor"},
-            {"data": "vehicleTypeName"},
-            {"data": "length"},
-            {"data": "speed"},
-            {"data": "directionName"},
-            {"data": "axlesCount"},
-            {"data": "totalWeight"},
-            {"data": "isStraddleName"},
-            {"data": "temperature"},
-            {"data": "overWeightRatio"},
-
+            { "data": null},
+            { "data": "licensePlateColor"},
+            { "data": "licensePlateNo"},
         ],
         "columnDefs": [{
             "class": "tcenter",
-            "targets": 0,
+            "targets": 3,
             "searchable": true,
-            "render": function (data, type, full) {
-                return "<marquee scrollAmount=3>" + data + "</marquee>";
+            "render": function(data, type, full) {
+                var xiugai='<i class="iconfont icon-xiugai" style="font-size:20px;cursor:pointer;" id="upd" title="修改" data-toggle="modal" data-target="#change1"></i>';
+                var shanchu='<i class="iconfont icon-shanchu" style="font-size:20px;cursor:pointer;" id="del"  title="删除"></i>';
+                //var look='<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" onclick="lookMs(this)" data-toggle="modal" data-target="#allMsg1" id="lookDetall"></i>'
+                return xiugai+shanchu;
             }
+
         }],
+        "fnDrawCallback" : function() {
+            this.api().column(0).nodes().each(function(cell, i){
+                cell.innerHTML=i+1;
+            });
+        },
+        "order": [[1, 'asc']],
+        "oLanguage": { //国际化配置
+            "sProcessing": "正在获取数据，请稍后...",
+            "sLengthMenu": "显示 _MENU_ 条",
+            "sZeroRecords": "查询不到相关数据",
+            "sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
+            "sInfoEmpty": "记录数为0",
+            "sInfoFiltered": "(全部记录数 _MAX_ 条)",
+            "sInfoPostFix": "",
+            "sSearch": "搜索",
+            "sUrl": "",
+            "oPaginate": {
+                "sFirst": "第一页",
+                "sPrevious": "上一页",
+                "sNext": "下一页",
+                "sLast": "最后一页"
+            }},
+
+    });
+
+
+    var table2=$('#mainContent2').dataTable({
+        "deferRender": true,
+        "processing": true,
+        "bDestroy": true,
+        "iDisplayLength": 10,
+        "sDom":
+            "t"+
+            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+        "searching": true,
+        "lengthChange": false,
+        "oLanguage": {
+            "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+        },
+        "columns": [
+            { "data": null},
+            { "data": "vehicleTypeName"},
+            { "data": "vehicleTypeNo"},
+            { "data": "vehicleTypeMaxWeight"},
+        ],
+        "columnDefs": [{
+            "class": "tcenter",
+            "targets": 4,
+            "searchable": true,
+            "render": function(data, type, full) {
+                var xiugai='<i class="iconfont icon-xiugai" style="font-size:20px;cursor:pointer;" id="upd2" title="修改" data-toggle="modal" data-target="#change2"></i>';
+                var shanchu='<i class="iconfont icon-shanchu" style="font-size:20px;cursor:pointer;" id="del2"  title="删除"></i>';
+                //var look='<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" onclick="lookMs(this)" data-toggle="modal" data-target="#allMsg1" id="lookDetall"></i>'
+                return xiugai+shanchu;
+            }
+
+        }],
+        "fnDrawCallback" : function() {
+            this.api().column(0).nodes().each(function(cell, i){
+                cell.innerHTML=i+1;
+            });
+        },
         "order": [[0, 'asc']],
         "oLanguage": { //国际化配置
             "sProcessing": "正在获取数据，请稍后...",
@@ -281,73 +339,246 @@
                 "sPrevious": "上一页",
                 "sNext": "下一页",
                 "sLast": "最后一页"
-            }
-        },
+            }},
 
     });
+    function getNow(s) {
+        return s < 10 ? '0' + s: s;
+    }
 
-    function initzhandian() {
+    function getTime(){
+        var myDate = new Date;
+        var year = myDate.getFullYear(); //获取当前年
+        var mon = myDate.getMonth() + 1; //获取当前月
+        var date = myDate.getDate(); //获取当前日
+        //var h = myDate.getHours();//获取当前小时数(0-23)
+        //var m = myDate.getMinutes();//获取当前分钟数(0-59)
+        //var s = myDate.getSeconds();//获取当前秒
+        //var week = myDate.getDay();
+        //var weeks = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+        var now=getNow(year) + "-" + getNow(mon) + "-" + getNow(date);
+        $("#startTime").val(now);
+        return now;
+    }
+
+
+
+    function queding(){
+        var stationPort=$("#stationPort").val();
+        var startTime=$("#startTime").val();
+        if(startTime==null||startTime==''||startTime==undefined){
+            startTime=getTime();
+        }
         $.ajax({
             type: 'POST',
-            url: '/StationSite/getAllStationSite',
+            url: '/tAvgDay/gettAvgDayByIpAndTime',
             dataType: 'json',
-            data: {},
+            async:false,
+            data: {
+                stationIP:stationPort,
+                avgTime:startTime,
+                avgLaneNo:0,
+            },
             error: function (msg) {
+                $(".errorMsg1").html('无数据').css({
+                    "margin-left":"30px",
+                    "color":"red",
+                })
                 errMessage("请求UserController失败");
             },
             success: function (json) {
-                if (json != null) {
-                    $("#zhandian").html('');
-                    for (var i = 0; i < json.length; i++) {
-                        $("#zhandian").append("<option  value='" + json[i].stationPort + "'>" + (json[i].stationName + "+" + json[i].routeName) + "</option>");
-                    }
-                    $(".selectpicker").selectpicker({
-                        noneSelectedText: '请选择',
-                    });
+                if(json!=null){
+                    $(".errorMsg1").html('')
+                    var CheXingNum=[];
+                    CheXingNum.push(json.axlesCount2)
+                    CheXingNum.push(json.axlesCount3)
+                    CheXingNum.push(json.axlesCount4)
+                    CheXingNum.push(json.axlesCount5)
+                    CheXingNum.push(json.axlesCount6)
+                    setCheXingNumEChars(CheXingNum);
+
+                    var ChaoZaiNum=[];
+                    ChaoZaiNum.push(json.avgOverloadCount2)
+                    ChaoZaiNum.push(json.avgOverloadCount3)
+                    ChaoZaiNum.push(json.avgOverloadCount4)
+                    ChaoZaiNum.push(json.avgOverloadCount5)
+                    ChaoZaiNum.push(json.avgOverloadCount6)
+                    setChaoZaiNumEChars(ChaoZaiNum);
+
+                    var ChaoZaiLvNum=[];
+                    ChaoZaiLvNum.push(json.avgOverloadRatio2)
+                    ChaoZaiLvNum.push(json.avgOverloadRatio3)
+                    ChaoZaiLvNum.push(json.avgOverloadRatio4)
+                    ChaoZaiLvNum.push(json.avgOverloadRatio5)
+                    ChaoZaiLvNum.push(json.avgOverloadRatio6)
+                    setChaoZaiLvNumEChars(ChaoZaiLvNum);
+                }else{
+                    toastr.error("w無數據")
                 }
             }
         });
     }
-
-    //新建生产计划
-    let mainVm = new Vue({
-        el: '#mainVm',
-        //表单数据
-        data: {
-            zhandian: [],
-            stationPort: "",
-            startTime: "",
-            endTime: "",
-        },
-        methods: {
-            //新建生产计划保存按钮事件
-            searchInit: function () {
-                this.stationPort = this.zhandian.toString();
-                //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
-                this.$http.post('/tWimMsg/getAlltWimMsgByCondiTion', this._data, {emulateJSON: true}).then((res) => {
-
-                    $('#mainContent').dataTable().fnClearTable();
-                    $('#mainContent').DataTable().rows.add(res.body).draw(false);
-                }, (res) => {
-
-                });
-            },
-            init: function () {
-
-            },
+    function setCheXingNumEChars(CheXingNum){
+        var myChart = echarts.init(document.getElementById('_top'));
+        var seriesLabel = {
+            normal: {
+                show: true,
+                textBorderColor: '#336666',
+                color:'black',
+                textBorderWidth: 1
+            }
         }
-    });
+        var option = {
+            color: ['#3398DB'],
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: ['2轴车', '3轴车', '4轴车', '5轴车', '6轴车'],
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value'
+                }
+            ],
+            series: [
+                {
+                    name: '直接访问',
+                    type: 'bar',
+                    label: seriesLabel,
+                    barWidth: '60%',
+                    data: CheXingNum
+                }
+            ]
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    }
 
 
-
-    $("#less").click(function () {
-        let divV = document.getElementById("Two");
-        if (divV.style.display == "none") {
-            divV.style.display = "block";
-            //$("#Two").attr("style","display:block;");//显示div
-        } else {
-            divV.style.display = "none";
+    function setChaoZaiNumEChars(ChaoZaiNum){
+        var myChart2 = echarts.init(document.getElementById('_right'));
+        var seriesLabel = {
+            normal: {
+                show: true,
+                textBorderColor: '#336666',
+                color:'black',
+                textBorderWidth: 1
+            }
         }
-    })
+        var option2 = {
+            color: ['#3398DB'],
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: ['2轴车', '3轴车', '4轴车', '5轴车', '6轴车'],
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value'
+                }
+            ],
+            series: [
+                {
+                    name: '直接访问',
+                    type: 'bar',
+                    label: seriesLabel,
+                    barWidth: '60%',
+                    data: ChaoZaiNum
+                }
+            ]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart2.setOption(option2);
+    }
+
+
+    function setChaoZaiLvNumEChars(ChaoZaiLvNum){
+        var myChart3 = echarts.init(document.getElementById('bottom_'));
+        var seriesLabel = {
+            normal: {
+                show: true,
+                textBorderColor: '#336666',
+                color:'black',
+                textBorderWidth: 1
+            }
+        }
+        var option3 = {
+            color: ['#3398DB'],
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: ['2轴车', '3轴车', '4轴车', '5轴车', '6轴车'],
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value'
+                }
+            ],
+            series: [
+                {
+                    name: '直接访问',
+                    type: 'bar',
+                    label: seriesLabel,
+                    barWidth: '60%',
+                    data: ChaoZaiLvNum
+                }
+            ]
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        myChart3.setOption(option3);
+    }
+
+
+
+
 </script>
 </html>
