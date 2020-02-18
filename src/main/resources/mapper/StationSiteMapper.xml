@@ -3,10 +3,10 @@
 <mapper namespace="com.ldxx.dao.StationSiteDao" >
 
     <select id="getAllStationSite" resultType="StationSite">
-		select  S_Id,Station_Id,Station_Name,Station_Ip,Station_Port,Station_Longitude,Station_Latitude,Del_State,Route_Name from Station_Site where Del_State=1
+		select  * from Station_Site where Del_State=1
 	</select>
 	<select id="getStationSiteByStationNameAndRouteName" resultType="StationSite">
-		select  S_Id,Station_Id,Station_Name,Station_Ip,Station_Port,Station_Longitude,Station_Latitude,Del_State,Route_Name from Station_Site
+		select  * from Station_Site
 		where Del_State=1
 		<if test="stationName!=null and stationName!=''">
 		and Station_Name = #{stationName}
@@ -18,12 +18,14 @@
 	</select>
 
 	<select id="getStationSiteById" resultType="StationSite">
-		select  S_Id,Station_Id,Station_Name,Station_Ip,Station_Port,Station_Longitude,Station_Latitude,Del_State,Route_Name from Station_Site where S_Id=#{id} and Del_State=1
+		select  * from Station_Site where S_Id=#{id} and Del_State=1
 	</select>
 
 	<insert id="addStationSite" parameterType="StationSite">
-		insert into Station_Site (S_Id,Station_Id,Station_Name,Station_Ip,Station_Port,Station_Longitude,Station_Latitude,Del_State,Route_Name)
-			values(#{sId},#{stationId},#{stationName},#{stationIp},#{stationPort},#{stationLongitude},#{stationLatitude},#{delState},#{routeName})
+		insert into Station_Site (S_Id,Station_Id,Station_Name,Station_Ip,Station_Port,Station_Longitude,Station_Latitude,Del_State,Route_Name,
+		company,province_station_name,mask,gateway,lanes,province_station_stake_mark,System_Location_stake_mark,Completion_date,station_info)
+			values(#{sId},#{stationId},#{stationName},#{stationIp},#{stationPort},#{stationLongitude},#{stationLatitude},#{delState},#{routeName},
+			#{company},#{provinceStationName},#{mask},#{gateway},#{lanes},#{provinceStationStakeMark},#{systemLocationStakeMark},#{completionDate},#{stationInfo})
 	</insert>
 
 	<insert id="addCompanySite" keyProperty="id" useGeneratedKeys="true" parameterType="companySite" >
@@ -38,7 +40,16 @@
 		Station_Port=#{stationPort},
 		Station_Longitude=#{stationLongitude},
 		Station_Latitude=#{stationLatitude},
-		Route_Name=#{routeName}
+		Route_Name=#{routeName},
+		company=#{company},
+		province_station_name=#{provinceStationName},
+		mask=#{mask},
+		gateway=#{gateway},
+		lanes=#{lanes},
+		province_station_stake_mark=#{provinceStationStakeMark},
+		System_Location_stake_mark=#{systemLocationStakeMark},
+		Completion_date=#{completionDate},
+		station_info=#{stationInfo}
 		where S_Id=#{sId}
 	</update>
 

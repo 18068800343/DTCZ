@@ -1,6 +1,6 @@
 package com.ldxx.controller;
 
-import com.alibaba.fastjson.JSONObject;
+import com.ldxx.bean.Accessory;
 import com.ldxx.bean.CompanySite;
 import com.ldxx.bean.StationSite;
 import com.ldxx.bean.tUserInfo;
@@ -8,14 +8,19 @@ import com.ldxx.dao.StationSiteDao;
 import com.ldxx.service.StationSiteService;
 import com.ldxx.util.LDXXUtils;
 import com.ldxx.util.MsgFormatUtils;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,9 +52,37 @@ public class StationSiteController {
     }
 
     @RequestMapping("/addStationSite")
-    public String addStationSite(@RequestBody StationSite StationSite) {
+    public String addStationSite(String stationSite,@RequestParam("file") MultipartFile file) throws IOException {
         JSONObject jsonObject = new JSONObject();
+        Map<String,Class> map=new HashMap<>();
+        JSONObject jsonObject2=JSONObject.fromObject(stationSite);
+        StationSite StationSite=(StationSite)JSONObject.toBean(jsonObject2, StationSite.class,map);
+
         String id = LDXXUtils.getUUID12();
+
+        String webApps=LDXXUtils.getWebAppFile();
+        String path=webApps+id;
+        File f=new File(path);
+        if(!f.exists()){
+            f.mkdirs();
+        }
+        if(file!=null){
+            //List<Accessory> list=new ArrayList<>();
+            //for(int i=0;i<file.length;i++){
+                Accessory accessory=new Accessory();
+                String fileName=file.getOriginalFilename();
+                String filePath=path+File.separator+fileName;
+                File f2=new File(filePath);
+                file.transferTo(f2);
+                accessory.setaId(id);
+                accessory.setAcName(fileName);
+                accessory.setAcUrl(id+File.separator+fileName);
+                accessory.setaType("测点车道图");
+                //list.add(accessory);
+           // }
+            StationSite.setFile(accessory);
+        }
+
         int i;
         int iscountStationIp=0;
         if(StationSite.getStationIp()!=""&&StationSite.getStationIp()!=null){
@@ -72,14 +105,40 @@ public class StationSiteController {
         jsonObject.put("resultMsg",daoMsg);
         jsonObject.put("daoMsg",i);
         jsonObject.put("obj",StationSite);
-        return jsonObject.toJSONString();
+        return jsonObject.toString();
     }
 
     @RequestMapping("/updStationSite")
-    public String updStationSite(@RequestBody StationSite StationSite) {
+    public String updStationSite(String stationSite,@RequestParam("file") MultipartFile file) throws IOException {
         JSONObject jsonObject = new JSONObject();
-        int i;
+        Map<String,Class> map=new HashMap<>();
+        JSONObject jsonObject2=JSONObject.fromObject(stationSite);
+        StationSite StationSite=(StationSite)JSONObject.toBean(jsonObject2, StationSite.class,map);
+        String id=StationSite.getsId();
+        String webApps=LDXXUtils.getWebAppFile();
+        String path=webApps+id;;
+        File f=new File(path);
+        if(!f.exists()){
+            f.mkdirs();
+        }
+        if(file!=null){
+            //List<Accessory> list=new ArrayList<>();
+            //for(int i=0;i<file.length;i++){
+                Accessory accessory=new Accessory();
+                String fileName=file.getOriginalFilename();
+                String filePath=path+File.separator+fileName;
+                File f2=new File(filePath);
+                file.transferTo(f2);
+                accessory.setaId(id);
+                accessory.setAcName(fileName);
+                accessory.setAcUrl(id+File.separator+fileName);
+                accessory.setaType("测点车道图");
+               // list.add(accessory);
+            //}
+            StationSite.setFile(accessory);
+        }
 
+        int i;
         int iscountStationIp=0;
         if(StationSite.getStationIp()!=""&&StationSite.getStationIp()!=null){
             iscountStationIp=service.xg_iscountStationIp(StationSite.getStationIp(),StationSite.getsId());
@@ -99,7 +158,7 @@ public class StationSiteController {
         jsonObject.put("resultMsg",daoMsg);
         jsonObject.put("daoMsg",i);
         jsonObject.put("obj",StationSite);
-        return jsonObject.toJSONString();
+        return jsonObject.toString();
     }
 
     @RequestMapping("/delStationSite")

@@ -47,16 +47,25 @@
                 </div>
             </div>
             <div class="LowerPart" style="margin-top:3px;">
-                <table class="table table-bordered table-condensed table-hover" id="mainContent">
+                <table class="table table-bordered table-condensed table-hover" id="mainContent" style="white-space: nowrap;">
                     <thead>
                     <tr>
                         <th>站点ID</th>
+                        <th>单位</th>
                         <th>站点名称</th>
-                        <th>路线名称</th>
+                        <th>路线及编号</th>
+                        <th>省界站名称</th>
                         <th>IP地址</th>
                         <th>端口号</th>
                         <th>经度</th>
                         <th>纬度</th>
+                        <th>掩码</th>
+                        <th>网关</th>
+                        <th>车道数</th>
+                        <th>省界站桩号</th>
+                        <th>系统位置桩号</th>
+                        <th>建成日期</th>
+                        <th>站点信息</th>
                         <th style="width:75px;">操作</th>
                     </tr>
                     </thead>
@@ -81,7 +90,7 @@
                     <form class="form-inline">
                         <table class="table table-bordered table-condensed">
                             <tr>
-                                <td>站点Id</td>
+                                <td style='width:10%;'>站点Id</td>
                                 <td><input type="text" v-model="stationId"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
                                 <td>站点名称</td>
                                 <td><input type="text" v-model="stationName"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
@@ -101,10 +110,57 @@
                             <tr>
                                 <td>路线名称</td>
                                 <td><input type="text" v-model="routeName"   class="form-control" placeholder="请输入" style="width:100%;"></td>
-                                <td style="width: 20%;"></td>
+                                <td style="width: 20%;">单位</td>
+                                <td>
+                                    <select class="form-control"  v-model="company=companySelected" style="width: 100%;" >
+                                        <option :value="company.companyName" v-for="company in companyList">{{company.companyName}}</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>省界站名称</td>
+                                <td><input type="text" v-model="provinceStationName"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+                                <td>掩码</td>
+                                <td><input type="text" v-model="mask"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+                            </tr>
+                            <tr>
+                                <td>网关</td>
+                                <td><input type="text" v-model="gateway"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+                                <td>车道数</td>
+                                <td><input type="text" v-model="lanes"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+                            </tr>
+                            <tr>
+                                <td>省界站桩号</td>
+                                <td><input type="text" v-model="provinceStationStakeMark"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+                                <td>系统位置桩号</td>
+                                <td><input type="text" v-model="systemLocationStakeMark"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+                            </tr>
+                            <tr>
+                                <td>建成日期</td>
+                                <td><input type="text"  id="jianchengDate" class="form-control" placeholder="请输入" style="width: 100%;"></td>
+                                <td></td>
                                 <td></td>
                             </tr>
+                            <tr>
+                                <td>站点信息</td>
+                                <td colspan="3">
+                                    <textarea  class="text" v-model="stationInfo" rows="4" cols="100"></textarea>
+                                </td>
+                            </tr>
 
+
+                        </table>
+                        <table class="table table-bordered table-condensed" id="new_accessory">
+                            <thead>
+                            <tr>
+                                <td style="width:10%;">附件:</td>
+                                <td colspan="2">
+                                    <!--<button type="button" class="btn btn-primary" onclick="new_accessory()">增加附件</button>-->
+                                    <input type="file" @change="getFile($event,'file_thumb')">
+                                </td>
+                            </tr>
+                            </thead>
+                            <tbody></tbody>
                         </table>
                     </form>
                 </div>
@@ -131,7 +187,7 @@
                     <form class="form-inline">
                         <table class="table table-bordered table-condensed" style="height: auto;">
                             <tr>
-                                <td>站点Id</td>
+                                <td style='width:10%;'>站点Id</td>
                                 <td><input type="text" v-model="stationId"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
                                 <td>站点名称</td>
                                 <td><input type="text" v-model="stationName"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
@@ -151,9 +207,59 @@
                             <tr>
                                 <td>路线名称</td>
                                 <td><input type="text" v-model="routeName"   class="form-control" placeholder="请输入" style="width:100%;"></td>
-                                <td style="width: 20%;"></td>
+                                <td style="width: 20%;">单位</td>
+                                <td>
+                                    <select class="form-control"  v-model="company=companySelected" style="width: 100%;" >
+                                        <option :value="company.companyName" v-for="company in companyList">{{company.companyName}}</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>省界站名称</td>
+                                <td><input type="text" v-model="provinceStationName"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+                                <td>掩码</td>
+                                <td><input type="text" v-model="mask"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+                            </tr>
+                            <tr>
+                                <td>网关</td>
+                                <td><input type="text" v-model="gateway"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+                                <td>车道数</td>
+                                <td><input type="text" v-model="lanes"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+                            </tr>
+                            <tr>
+                                <td>省界站桩号</td>
+                                <td><input type="text" v-model="provinceStationStakeMark"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+                                <td>系统位置桩号</td>
+                                <td><input type="text" v-model="systemLocationStakeMark"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+                            </tr>
+                            <tr>
+                                <td>建成日期</td>
+                                <td><input type="text"  id="xg_jianchengDate"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+                                <td></td>
                                 <td></td>
                             </tr>
+                            <tr>
+                                <td>站点信息</td>
+                                <td colspan="3">
+                                    <textarea  class="text" v-model="stationInfo" rows="4" cols="100"></textarea>
+                                </td>
+                            </tr>
+
+                        </table>
+                        <table class="table table-bordered table-condensed" id="edit_accessory">
+                            <thead style="display: none">
+                            <tr>
+                                <td style="width:10%;">附件:</td>
+                                <td colspan="3">
+                                    <!--<button type="button" class="btn btn-primary" onclick="editAccessory()">添加附件</button>-->
+                                    <input type="file" @change="getFile($event,'file_thumb')">
+                                </td>
+                            </tr>
+
+                            </thead>
+                            <tbody>
+                            </tbody>
+                            <tfoot></tfoot>
                         </table>
                     </form>
                 </div>
@@ -203,12 +309,20 @@
 <script src="../js/bootstrap-select.js" ></script>
 <script src="../js/jquery-editable-select.js" ></script>
 <script src="js/toastr.js" ></script>
+<script src="js/laydate/laydate.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
 <script>
 
     $(document).ready( function () {
-
+        laydate.render({
+            elem: '#jianchengDate', //指定元素
+            type: 'month'
+        });
+        laydate.render({
+            elem: '#xg_jianchengDate', //指定元素
+            type: 'month'
+        });
         initTable()
 
     });
@@ -224,17 +338,29 @@
         },
         "columns": [
             { "data": "stationId"},
+            { "data": "company"},
             { "data": "stationName"},
             { "data": "routeName"},
+            { "data": "provinceStationName"},
             { "data": "stationIp"},
             { "data": "stationPort"},
             { "data": "stationLongitude"},
             { "data": "stationLatitude"},
+
+
+
+            { "data": "mask"},
+            { "data": "gateway"},
+            { "data": "lanes"},
+            { "data": "provinceStationStakeMark"},
+            { "data": "systemLocationStakeMark"},
+            { "data": "completionDate"},
+            { "data": "stationInfo"},
             { "data": null},
         ],
         "columnDefs": [{
             "class": "tcenter",
-            "targets": 7,
+            "targets": 16,
             "searchable": true,
             "render": function(data, type, full) {
                 var xiugai='<i class="iconfont icon-xiugai" style="font-size:20px;cursor:pointer;" id="upd" title="修改" data-toggle="modal" data-target="#change"></i>';
@@ -243,6 +369,11 @@
                 return xiugai+shanchu;
             }
         }],
+        //让表格出横向滚动条 ，此时 表头和 表中数据将分为两个部分
+        "sScrollX":true,
+        // 让表格的宽度不自适应 ，固定宽度。 如果不设置 表头和表中数据会分离
+        //表中的数据自适应 ，表头的宽度固定
+        "bAutoWidth":false,
         "order": [[0, 'asc']],
         "oLanguage": { //国际化配置
             "sProcessing": "正在获取数据，请稍后...",
@@ -313,10 +444,36 @@
             stationLongitude:"",
             stationLatitude:"",
             routeName:"",
+            company:'',
+            provinceStationName:'',
+            mask:'',
+            gateway:'',
+            lanes:'',
+            provinceStationStakeMark:'',
+            systemLocationStakeMark:'',
+            completionDate:'',
+            stationInfo:'',
+            companySelected:'',
+            companyList:'',
+            file:'',
         },
         methods:{
-            baocun:function(){
-                this.$http.post('/StationSite/addStationSite',this._data,{}).then((res)=>{
+            getFile(event) {
+                this.file = event.target.files[0];
+                console.log(this.file);
+            },
+            baocun:function(event){
+                this.completionDate=$("#jianchengDate").val();
+                event.preventDefault();//取消默认行为
+                let formData = new FormData();
+                formData.append('stationSite', JSON.stringify(this._data));
+                formData.append('file', this.file);
+                let config = {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }
+                this.$http.post('/StationSite/addStationSite',formData,config).then((res)=>{
                     var resMsg = res.body;
                     if(resMsg.daoMsg>0){
                         $('#mainContent').DataTable().row.add(resMsg.obj).draw();
@@ -343,9 +500,19 @@
                         toastr.error(errMsg[id]);
                     }
                 }
-            }
+            },
+            companyInit:function(){
+                //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
+                this.$http.post('/StationSite/getCompanyStationSite',{},{emulateJSON:true}).then((res)=>{
+                    this.companyList=res.body;
+                    this.companySelected=addzhandian.companyList[0].companyName;
+                },(res)=>{
+                    console.log("初始化失败");
+                });
+            },
         }
     });
+    addzhandian.companyInit();
 
     //删除
     $('#mainContent').delegate('#del','click', function () {
@@ -381,7 +548,7 @@
         var dom = $(this).parents('tr');
         trr=$(this).closest('tr');
         var data=$('#mainContent').DataTable().row(dom).data();
-        xgId=data.usrId
+        xgId=data.sId
 
         xgzhandian.sId=data.sId
         xgzhandian.stationId=data.stationId
@@ -391,8 +558,84 @@
         xgzhandian.stationLongitude=data.stationLongitude
         xgzhandian.stationLatitude=data.stationLatitude
         xgzhandian.routeName=data.routeName
+        xgzhandian.company=data.company,
+        xgzhandian.provinceStationName=data.provinceStationName;
+        xgzhandian.mask=data.mask;
+        xgzhandian.gateway=data.gateway;
+        xgzhandian.lanes=data.lanes;
+        xgzhandian.provinceStationStakeMark=data.provinceStationStakeMark;
+        xgzhandian.systemLocationStakeMark=data.systemLocationStakeMark;
+        xgzhandian.completionDate=data.completionDate;
+        $("#xg_jianchengDate").val(data.completionDate)
+        xgzhandian.stationInfo=data.stationInfo;
+        xgzhandian.companySelected=data.company;
 
+        $.ajax({
+            type:"post",
+            url:"/accessory/selectAccessoryById",
+            dataType:"json",
+            data:{
+                id:xgId
+            },
+            success:function(json){
+                $("#edit_accessory tbody").empty('');
+                if(json!=null&&json!=''&&json.length!=0){
+                    $("#edit_accessory thead").hide()
+                    for(var i=0;i<json.length;i++){
+                        $("#edit_accessory tbody").append("<tr>"+
+                            "<td style='width:10%;'>附件</td>"+
+                            "<td><a href='"+getLocalPath()+"/dtcz_file/"+json[i].acUrl+"' target='view_window' style='color:blue'>"+json[i].acName+"</a></td>"+
+                            /* "<td colspan='2'><input type='text' class='form-control' style='width:100%;' value='"+json[i].acName+"' disabled></td>"+*/
+                            "<td style='width:150px;'><button type='button' class='btn btn-danger' data1='"+json[i].acUrl+"' data2='"+json[i].aId+"' data3='"+json[i].acName+"' onclick='delete_file(this)'>移除附件</button></td>"+
+                            "</tr>");
+                    }
+                }else{
+                    $("#edit_accessory thead").show()
+                        /*.append("<td>附件</td>"+
+                        "<td colspan=\"3\"><input type=\"file\" @change=\"getFile2($event,'file_thumb')\">"+
+                        "</td>")*/
+                }
+            }
+        })
     })
+
+    function getLocalPath(){
+        var pathArray = window.location.pathname.split('/');
+        var secondLevelLocation = pathArray[1];
+        var loginUrl = window.location.protocol + "//"  + window.location.host ;
+        return loginUrl;
+    }
+
+    function delete_file(obj){
+        var url=$(obj).attr("data1");
+        var id=$(obj).attr("data2");
+        var name=$(obj).attr("data3");
+        var msg = "您真的确定要删除吗？\n\n请确认！";
+        if (confirm(msg)==true){
+            $.ajax({
+                type: 'POST',
+                url: '/accessory/deleteAccessoryByIdAndName',
+                dataType: 'json',
+                data: {
+                    aId:id,
+                    acName:name,
+                    acUrl:url
+                },
+                success: function (json) {
+                    if(json==0){
+                        toastr.error("删除失败");
+                    }else{
+                        $("#edit_accessory thead").show()
+                        toastr.success("删除成功");
+                        $(obj).parent().parent().remove();
+                        //$("#myModal2").modal("hide")
+
+                    }
+                }
+            });
+        }
+    }
+
     var xgzhandian = new Vue({
         el:"#change",
         data:{
@@ -404,10 +647,36 @@
             stationLongitude:"",
             stationLatitude:"",
             routeName:"",
+            company:'',
+            provinceStationName:'',
+            mask:'',
+            gateway:'',
+            lanes:'',
+            provinceStationStakeMark:'',
+            systemLocationStakeMark:'',
+            completionDate:'',
+            stationInfo:'',
+            companySelected:'',
+            companyList:'',
+            file:'',
         },
         methods:{
+            getFile(event) {
+                this.file = event.target.files[0];
+                console.log(this.file);
+            },
             baocun:function(){
-                this.$http.post('/StationSite/updStationSite',this._data,{}).then((res)=>{
+                this.completionDate=$("#xg_jianchengDate").val();
+                event.preventDefault();//取消默认行为
+                let formData = new FormData();
+                formData.append('stationSite', JSON.stringify(this._data));
+                formData.append('file', this.file);
+                let config = {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }
+                this.$http.post('/StationSite/updStationSite',formData,config).then((res)=>{
                     var resMsg = res.body;
                     if(resMsg.daoMsg>0){
                         $('#mainContent').DataTable().row(trr).data(resMsg.obj);
@@ -434,10 +703,19 @@
                         toastr.error(errMsg[id]);
                     }
                 }
-            }
+            },
+            companyInit:function(){
+                //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
+                this.$http.post('/StationSite/getCompanyStationSite',{},{emulateJSON:true}).then((res)=>{
+                    this.companyList=res.body;
+                    this.companySelected=addzhandian.companyList[0].companyName;
+                },(res)=>{
+                    console.log("初始化失败");
+                });
+            },
         }
     });
-
+    xgzhandian.companyInit();
 
 
 </script>
