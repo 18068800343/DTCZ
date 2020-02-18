@@ -265,11 +265,11 @@
 									<tr>
 										<td>车型</td>
 										<td>{{vehicleTypeName}}</td>
-										<td>车长</td>
+										<td>车长(cm)</td>
 										<td>{{length}}</td>
 									</tr>
 									<tr>
-										<td>车速</td>
+										<td>车速(Km/h)</td>
 										<td>{{speed}}</td>
 										<td>行驶方向</td>
 										<td>{{directionName}}</td>
@@ -277,65 +277,65 @@
 									<tr>
 										<td>轴数</td>
 										<td>{{axlesCount}}</td>
-										<td>总重量</td>
+										<td>总重量(kg)</td>
 										<td>{{totalWeight}}</td>
 									</tr>
 									<tr>
-										<td>轴1重</td>
+										<td>轴1重(kg)</td>
 										<td>{{axle1}}</td>
-										<td>轴2重</td>
+										<td>轴2重(kg)</td>
 										<td>{{axle2}}</td>
 									</tr>
 									<tr>
-										<td>轴3重</td>
+										<td>轴3重(kg)</td>
 										<td>{{axle3}}</td>
-										<td>轴4重</td>
+										<td>轴4重(kg)</td>
 										<td>{{axle4}}</td>
 									</tr>
 									<tr>
-										<td>轴5重</td>
+										<td>轴5重(kg)</td>
 										<td>{{axle5}}</td>
-										<td>轴5重</td>
-										<td>{{axle5}}</td>
+										<td>轴6重(kg)</td>
+										<td>{{axle6}}</td>
 									</tr>
 									<tr>
-										<td>轴6重</td>
-										<td>{{axle6}}</td>
-										<td>轴8重</td>
+										<td>轴7重(kg)</td>
+										<td>{{axle7}}</td>
+										<td>轴8重(kg)</td>
 										<td>{{axle8}}</td>
 									</tr>
 									<tr>
-										<td>轴9重</td>
+										<td>轴9重(kg)</td>
 										<td>{{axle9}}</td>
-										<td>轴10重</td>
+										<td>轴10重(kg)</td>
 										<td>{{axle10}}</td>
 									</tr>
 									<tr>
-										<td>轴间距1</td>
+										<td>轴间距1(cm)</td>
 										<td>{{axleSpace1}}</td>
-										<td>轴间距2</td>
+										<td>轴间距2(cm)</td>
 										<td>{{axleSpace2}}</td>
 									</tr>
 									<tr>
-										<td>轴间距3</td>
+										<td>轴间距3(cm)</td>
 										<td>{{axleSpace3}}</td>
-										<td>轴间距4</td>
+										<td>轴间距4(cm)</td>
 										<td>{{axleSpace4}}</td>
 									</tr>
 									<tr>
-										<td>轴间距5</td>
+										<td>轴间距5(cm)</td>
 										<td>{{axleSpace5}}</td>
-										<td>轴间距6</td>
+										<td>轴间距6(cm)</td>
 										<td>{{axleSpace6}}</td>
 									</tr>
 									<tr>
-										<td>轴间距7</td>
+										<td>轴间距7(cm)</td>
 										<td>{{axleSpace7}}</td>
-										<td>轴间距8</td>
+										<td>轴间距8(cm)</td>
 										<td>{{axleSpace8}}</td>
 									</tr>
 									<tr>
-										<td>轴间距9</td>
+										<td>轴间距9(cm)</td>
 										<td>{{axleSpace9}}</td>
 										<td>是否跨道</td>
 										<td>{{isStraddleName}}</td>
@@ -343,12 +343,12 @@
 									<tr>
 										<td>路面温度</td>
 										<td>{{temperature}}</td>
-										<td>超重量</td>
-										<td>{{overWeight}}</td>
+										<td>超重量( Kg)</td>
+										<td>{{overWeightRatio}}</td>
 									</tr>
 									<tr>
 										<td>超重比率</td>
-										<td>{{overWeightRatio}}</td>
+										<td>{{overWeightRatioName}}</td>
 									</tr>
 								</table>
 							</form>
@@ -1157,7 +1157,7 @@
 			looktWimMsg.isStraddle=data.isStraddle;
 			looktWimMsg.temperature=data.temperature;
 			looktWimMsg.overWeight=data.overWeight;
-			looktWimMsg.overWeightRatio=data.overWeightRatio+'%';
+			looktWimMsg.overWeightRatio=data.overWeightRatio;
 			looktWimMsg.wIMId=data.wIMId;
 			looktWimMsg.lPRId=data.lPRId;
 			looktWimMsg.stationIP=data.stationIP;
@@ -1168,7 +1168,7 @@
 			looktWimMsg.routeName=data.routeName;
 			looktWimMsg.licensePlateColor=data.licensePlateColor;
 			looktWimMsg.vehicleTypeName=data.vehicleTypeName;
-
+			looktWimMsg.overWeightRatioName=data.overWeightRatioName;
 		}
 
     </script>
