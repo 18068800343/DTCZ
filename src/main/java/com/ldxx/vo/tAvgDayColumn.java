@@ -24,6 +24,61 @@ public class tAvgDayColumn {
     private double column20;
     private double column21;
     private double column22;
+    private double column23;
+    private double column24;
+    private double column25;
+    private double column26;
+    private double column27;
+    private double column28;
+
+
+    public double getColumn23() {
+        return column23;
+    }
+
+    public void setColumn23(double column23) {
+        this.column23 = column23;
+    }
+
+    public double getColumn24() {
+        return column24;
+    }
+
+    public void setColumn24(double column24) {
+        this.column24 = column24;
+    }
+
+    public double getColumn25() {
+        return column25;
+    }
+
+    public void setColumn25(double column25) {
+        this.column25 = column25;
+    }
+
+    public double getColumn26() {
+        return column26;
+    }
+
+    public void setColumn26(double column26) {
+        this.column26 = column26;
+    }
+
+    public double getColumn27() {
+        return column27;
+    }
+
+    public void setColumn27(double column27) {
+        this.column27 = column27;
+    }
+
+    public double getColumn28() {
+        return column28;
+    }
+
+    public void setColumn28(double column28) {
+        this.column28 = column28;
+    }
 
     public String getId() {
         return id;

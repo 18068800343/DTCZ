@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RequestMapping("tAvgDay")
 @RestController
 public class tAvgDayController {
@@ -22,8 +24,8 @@ public class tAvgDayController {
 
 
     @RequestMapping("/gettAvgDayColumnByIpAndTime")
-    public tAvgDayColumn  gettAvgDayColumnByIpAndTime(String stationIP, String avgTime,int avgLaneNo){
-        tAvgDayColumn tAvgDayColumn=service.gettAvgDayColumnByIpAndTime(stationIP,avgTime,avgLaneNo);
+    public List<tAvgDayColumn>  gettAvgDayColumnByIpAndTime(String stationIP, String avgTime, int avgLaneNo){
+        List<tAvgDayColumn> tAvgDayColumn=service.gettAvgDayColumnByIpAndTime(stationIP,avgTime,avgLaneNo);
         return tAvgDayColumn;
     }
 

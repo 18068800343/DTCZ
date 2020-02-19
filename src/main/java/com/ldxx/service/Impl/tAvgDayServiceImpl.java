@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class tAvgDayServiceImpl implements tAvgDayService {
@@ -21,7 +23,7 @@ public class tAvgDayServiceImpl implements tAvgDayService {
     }
 
     @Override
-    public tAvgDayColumn gettAvgDayColumnByIpAndTime(String stationIP, String avgTime, int avgLaneNo) {
+    public List<tAvgDayColumn> gettAvgDayColumnByIpAndTime(String stationIP, String avgTime, int avgLaneNo) {
         return dao.gettAvgDayColumnByIpAndTime(stationIP, avgTime,avgLaneNo);
     }
 }
