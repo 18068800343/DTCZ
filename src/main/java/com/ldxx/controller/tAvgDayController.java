@@ -1,6 +1,7 @@
 package com.ldxx.controller;
 
 import com.ldxx.bean.tAvgDay;
+import com.ldxx.vo.tAvgDayColumn;
 import com.ldxx.service.tAvgDayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,13 @@ public class tAvgDayController {
     public tAvgDay gettAvgDayByIpAndTime(String stationIP, String avgTime,int avgLaneNo){
         tAvgDay tAvgDay=service.gettAvgDayByIpAndTime(stationIP,avgTime,avgLaneNo);
         return tAvgDay;
+    }
+
+
+    @RequestMapping("/gettAvgDayColumnByIpAndTime")
+    public tAvgDayColumn  gettAvgDayColumnByIpAndTime(String stationIP, String avgTime,int avgLaneNo){
+        tAvgDayColumn tAvgDayColumn=service.gettAvgDayColumnByIpAndTime(stationIP,avgTime,avgLaneNo);
+        return tAvgDayColumn;
     }
 
 

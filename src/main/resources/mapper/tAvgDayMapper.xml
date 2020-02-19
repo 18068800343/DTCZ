@@ -6,6 +6,42 @@
   		<select id="gettAvgDayByIpAndTime" resultType="tAvgDay">
   			select * from t_avg_day where Station_IP=#{stationIP} and Avg_Time=#{avgTime} and Avg_LaneNo=#{avgLaneNo}
   		</select>
+
+
+		<select id="gettAvgDayColumnByIpAndTime" resultType="tAvgDayColumn">
+			SELECT
+			ID,
+			Avg_Time,
+			Avg_LaneNo,
+			Avg_Max,
+			Avg_Count column5,
+			Axles_Count_2 column6,
+			Axles_Count_3 column7,
+			Axles_Count_4 column8,
+			Axles_Count_5 column9,
+			Axles_Count_6 column10,
+			Avg_Overload_Count column11,
+			Avg_Overload_Count_2 column12,
+			Avg_Overload_Count_3 column13,
+			Avg_Overload_Count_4 column14,
+			Avg_Overload_Count_5 column15,
+			Avg_Overload_Count_6 column16,
+			Avg_Overload_Ratio column17,
+			Avg_Overload_Ratio_2 column18,
+			Avg_Overload_Ratio_3 column19,
+			Avg_Overload_Ratio_4 column20,
+			Avg_Overload_Ratio_5 column21,
+			Avg_Overload_Ratio_6 column22,
+			Station_IP
+			FROM
+			t_avg_day
+  			 <where>
+  			 Station_IP=#{stationIP} and Avg_Time=#{avgTime}
+				 <if test="avgLaneNo !=null and avgLaneNo !='' ">
+					 and Avg_LaneNo=#{avgLaneNo}
+				 </if>
+			 </where>
+  		</select>
   		
 
 </mapper>

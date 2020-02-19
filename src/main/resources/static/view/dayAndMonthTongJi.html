@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="../style/bootstrap.min.css" rel="stylesheet"/>
+    <!--<link href="../font3/bootstrap-select.css" rel="stylesheet">-->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+    <link href="../font2/iconfont.css" rel="stylesheet">
+    <link rel="stylesheet" href="../style/jquery.dataTables.min.css">
+    <link href="../style/style.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/home.css"/>
+    <!--<link rel="stylesheet" type="text/css" href="css/layui.css" />-->
+    <link rel="stylesheet" href="css/toastr.css"/>
+</head>
+<body style="background-image: none;">
+<div style="height: 500px" id="dataTable">
+</div>
+</body>
+<script src="../js/jquery.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<!--<script src="../js/bootstrap-select.js"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+<script src="js/echarts.min(1).js" type="text/javascript" charset="utf-8"></script>
+<script src="js/datatables/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+<script src="../js/common-scripts.js"></script>
+<script src="../js/echartsOptionInit.js"></script>
+<script src="js/toastr.js"></script>
+<script src="../js/myTool.js"></script>
+<script>
+
+
+    $(document).ready(function () {
+        initTable();
+        initTableBodyAjax();
+    });
+    let initTable = () => {
+        $("#dataTable").append("<div id='title'><ul   class='nav nav-tabs pull-left'>"
+            + " <li class='active'><a href='#s1' data-toggle='tab' id='tab1'>交通量</a></li>"
+            + " <li><a href='#s2' data-toggle='tab' id='tab2'>最大车重(KG)</a></li>"
+            + " <li><a href='#s3' data-toggle='tab' id='tab3'>超载车辆数</a></li>"
+            + " <li ><a href='#s4' data-toggle='tab' id='tab4'>超载比例</a></li>"
+            + " <li ><a href='#s5' data-toggle='tab' id='tab5'>平均超载率</a></li>"
+            + " <li '><a href='#s6' data-toggle='tab' id='tab6'>荷载效应比</a></li>"
+            + "</ul></div>"
+            + "<div id='myTabContent1' class='tab-content bg-color-white no-padding' style='overflow-x: auto; overflow-y: auto; height:450px; width:1040px;'>"
+            + " <div class='tab-pane fade in active' id='s1'>"
+            + " <table id='myTabOne1' data-type='交通量' class='table table-bordered table-hover' border='2'  bordercolor='black' cellspacing='0' cellpadding='0'></table></div>"
+            + "<div class='tab-pane fade in' id='s2'><table id='myTabOne2' data-type='超载车辆数'  class='table table-bordered table-hover' border='2'  bordercolor='black' cellspacing='0' cellpadding='0'></table></div>"
+            + "<div class='tab-pane fade in' id='s3'><table id='myTabOne3' data-type='平均超载率'  class='table table-bordered table-hover' border='2' bordercolor='black' cellspacing='0' cellpadding='0'></table></div>"
+            + " <div class='tab-pane fade in' id='s4'>"
+            + " <table id='myTabOne4' data-type='最大车重' class='table table-bordered table-hover' border='2'  bordercolor='black' cellspacing='0' cellpadding='0'></table></div>"
+            + "  <div class='tab-pane fade in' id='s4'><table id='myTabOne5' data-type='超载比例' class='table table-bordered table-hover' border='2' bordercolor='black' cellspacing='0' cellpadding='0'></table></div>"
+            + " </div>")
+    }
+
+    let initTableBodyAjax = ()=>{
+        $.ajax({
+            type: 'POST',
+            url: '/tAvgDay/gettAvgDayColumnByIpAndTime',
+            dataType: 'json',
+            data: {
+                stationIP:'10001',
+                avgTime:'2020-02-17'
+            },
+            error: function (msg) {
+            },
+            success: function (json) {
+                initTableTbody(json)
+            }
+        });
+    }
+    let initTableTbody = () => {
+        for (let i = 0; i <= 2; i++) {
+            let tableDom = $("#myTabOne" + i).html('');
+            let tdDom = "";
+            let k = 5*(i+1)+i;
+            for (let j = k; j <= j+5; i++) {
+                tdDom += "<td data-type='column'><a>" + json[i]['column'+j] + "</a></td>";
+            }
+            tableDom.append("<thead>" + "</thead>" + "<tfoot>" +
+                "<tr align='center'>" +
+                "<td>" + "车道编号" + "</td>" +
+                "<td>" + "车道名" + "</td>" +
+                "<td>" + "2轴车" + "</td>" +
+                "<td>" + "3轴车" + "</td>" +
+                "<td>" + "4轴车" + "</td>" +
+                "<td>" + "5轴车" + "</td>" +
+                "<td>" + "6轴车及以上" + "</td>" +
+                "<td>" + "合计" + "</td>" +
+                "</tr>" +
+                "<tr align='center'>" +
+                "<td>" + "1" + "</td>" +
+                "<td>" + "停车道" + "</td>" +
+                tdDom +
+                "</tr>" +
+                "</tfoot>");
+        }
+    }
+
+</script>
+
+
+</html>
