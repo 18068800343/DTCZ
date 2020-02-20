@@ -32,8 +32,8 @@ public class tAvgDayController {
 
 
     @RequestMapping("/getEchartsListByLaneNoAndColumn")
-    public Map getEchartsListByLaneNoAndColumn(String stationIP, String laneNo, String column){
-        Map tAvgDayColumn=service.getEchartsListByLaneNoAndColumn(stationIP,laneNo,column);
+    public Map getEchartsListByLaneNoAndColumn(String stationIP, String column, String laneNo){
+        Map tAvgDayColumn=service.getEchartsListByLaneNoAndColumn(stationIP,column,laneNo);
         return tAvgDayColumn;
     }
 

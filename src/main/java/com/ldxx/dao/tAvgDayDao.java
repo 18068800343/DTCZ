@@ -11,9 +11,9 @@ public interface tAvgDayDao {
 
     List<tAvgDayColumn> gettAvgDayColumnByIpAndTime(String stationIP, String avgTime, int avgLaneNo);
 
-    List<String> getEchartsListByLaneNoAndColumnX(String stationIP, String column, String laneNo);
+    List<String> getEchartsListByLaneNoAndColumnX(String stationIP, String columnName, String laneNo);
 
-    List<String> getEchartsListByLaneNoAndColumnY(String stationIP, String column, String laneNo);
+    List<String> getEchartsListByLaneNoAndColumnY(String stationIP, String columnName, String laneNo);
 
     String getColumnNameStrByTableName(String tableName);
 }

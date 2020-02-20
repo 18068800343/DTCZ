@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +17,7 @@ import java.util.Map;
 @Transactional
 public class tAvgDayServiceImpl implements tAvgDayService {
 
-    @Autowired
+    @Resource
     private tAvgDayDao dao;
 
     @Override
@@ -32,14 +33,12 @@ public class tAvgDayServiceImpl implements tAvgDayService {
     @Override
     public Map<String,List<String>> getEchartsListByLaneNoAndColumn(String stationIP, String column, String laneNo) {
         Map map = new HashMap();
-
-        String columnName = dao.getColumnNameStrByTableName("");
-
-        List listX = dao.getEchartsListByLaneNoAndColumnX(stationIP,column,laneNo);
-        List listY = dao.getEchartsListByLaneNoAndColumnY(stationIP,column,laneNo);
-
-        map.put("x",listX);
-        map.put("y",listY);
+        Integer columnIndex = Integer.parseInt(column);
+        String columnName = dao.getColumnNameStrByTableName("t_avg_day").split(",")[columnIndex-1];
+        List listX = dao.getEchartsListByLaneNoAndColumnX(stationIP,columnName,laneNo);
+        List listY = dao.getEchartsListByLaneNoAndColumnY(stationIP,columnName,laneNo);
+        map.put("y",listX);
+        map.put("x",listY);
 
         return map;
     }
