@@ -33,6 +33,7 @@ dayAndMonthTongjiDom.initTableBodyAjax = (stationIp,avgTime) => {
         },
         success: function (json) {
             initTableTbody(json)
+            dayAndMonthTongjiDom.bindClick();
         }
     });
 }
@@ -52,7 +53,7 @@ let initTableTbody = (json) => {
                 if (n == json.length) {
                     //车道0即总计的一行的td
                     let tdDom = "";
-                    tdDom =  "<td data-type='column'><a>" + json[1].avgMax + "</a></td>";
+                    tdDom =  "<td data-id='"+json[1].avgLaneNo+",4'><a >" + json[1].avgMax + "</a></td>";
                     let dom = tableDom.find("tfoot");
                     $(dom).append("<tr align='center'>" +
                         "<td colspan='2'>" + formatLaneName(json[0].avgLaneNo) + "</td>" +
@@ -61,7 +62,7 @@ let initTableTbody = (json) => {
                     break;
                 }
                 let tdDom = "";
-                tdDom = "<td data-type='column'><a>" + json[n].avgMax + "</a></td>";
+                tdDom = "<td data-id='"+json[1].avgLaneNo+",4'><a >" + json[n].avgMax + "</a></td>";
                 let dom = tableDom.find("tfoot");
                 $(dom).append("<tr align='center'>" +
                     "<td>" + json[n].avgLaneNo + "</td>" +
@@ -90,9 +91,9 @@ let initTableTbody = (json) => {
                     //车道0即总计的一行的td
                     let tdDom = "";
                     for (let j = k + 1; j <= k + 5; j++) {
-                        tdDom = tdDom + "<td data-type='column'><a>" + json[1]['column' + j] + "</a></td>";
+                        tdDom = tdDom + "<td data-id='"+json[1].avgLaneNo+","+j+"'><a >" + json[1]['column' + j] + "</a></td>";
                     }
-                    tdDom = tdDom + "<td data-type='column'><a>" + json[1]['column' + k] + "</a></td>";
+                    tdDom = tdDom + "<td data-id='"+json[1].avgLaneNo+","+k+"'><a >" + json[1]['column' + k] + "</a></td>";
                     let dom = tableDom.find("tfoot");
                     $(dom).append("<tr align='center'>" +
                         "<td colspan='2'>" + formatLaneName(json[0].avgLaneNo) + "</td>" +
@@ -102,9 +103,9 @@ let initTableTbody = (json) => {
                 }
                 let tdDom = "";
                 for (let j = k + 1; j <= k + 5; j++) {
-                    tdDom = tdDom + "<td data-type='column'+j+'><a>" + json[n]['column' + j] + "</a></td>";
+                    tdDom = tdDom + "<td data-id='"+json[n].avgLaneNo+","+j+"'><a >" + json[n]['column' + j] + "</a></td>";
                 }
-                tdDom = tdDom + "<td data-type='column'><a>" + json[n]['column' + k] + "</a></td>";
+                tdDom = tdDom + "<td data-id='"+json[n].avgLaneNo+","+k+"'><a >" + json[n]['column' + k] + "</a></td>";
                 let dom = tableDom.find("tfoot");
                 $(dom).append("<tr align='center'>" +
                     "<td>" + json[n].avgLaneNo + "</td>" +
@@ -131,4 +132,34 @@ let formatLaneName = (e) => {
     } else {
         return '车道';
     }
+}
+
+dayAndMonthTongjiDom.bindClick = (e)=>{
+    $("#dataTable").find("td").each(function () {
+        let str = $(this).attr("data-id");
+        if(str!=undefined){
+            $(this).on('click',function () {
+                let strIn = $(this).attr("data-id");
+                let laneNo = strIn.split(",")[0];
+                let column = strIn.split(",")[1];
+                $.ajax({
+                    type: 'POST',
+                    url: '/tAvgDay/getEchartsListByLaneNoAndColumn',
+                    dataType: 'json',
+                    data: {
+                        stationIP: e,
+                        laneNo:laneNo,
+                        column: column,
+                    },
+                    error: function (msg) {
+                    },
+                    success: function (json) {
+                        initTableTbody(json)
+                        dayAndMonthTongjiDom.bindClick();
+                    }
+                });
+            })
+
+        }
+    })
 }
