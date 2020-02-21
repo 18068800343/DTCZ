@@ -22,6 +22,16 @@
 			WHERE  Station_IP=#{stationIP}	and Avg_LaneNo=#{laneNo} order by Avg_Time
   		</select>
 
+        <select id="getEchartsListByLaneNoAndColumnXMonth" resultType="string">
+  			SELECT ${columnName} FROM t_avg_month
+			WHERE  Station_IP=#{stationIP}	and Avg_LaneNo=#{laneNo}	order by Avg_Time
+		</select>
+
+    	<select id="getEchartsListByLaneNoAndColumnYMonth" resultType="string">
+  			SELECT Avg_Time	FROM t_avg_month
+			WHERE  Station_IP=#{stationIP}	and Avg_LaneNo=#{laneNo} order by Avg_Time
+  		</select>
+
 
     <select id="gettAvgDayColumnByIpAndTime" resultType="tAvgDayColumn">
         SELECT
@@ -59,6 +69,45 @@
         <where>
             Station_IP=#{stationIP} and Avg_Time=#{avgTime}
 
+        </where>
+    </select>
+
+    <select id="gettAvgDayColumnByIpAndTimeMonth" resultType="tAvgDayColumn">
+        SELECT
+        ID,
+        Avg_Time,
+        Avg_LaneNo,
+        Avg_Max,
+        Avg_Count column5,
+        Axles_Count_2 column6,
+        Axles_Count_3 column7,
+        Axles_Count_4 column8,
+        Axles_Count_5 column9,
+        Axles_Count_6 column10,
+        Avg_Overload_Count column11,
+        Avg_Overload_Count_2 column12,
+        Avg_Overload_Count_3 column13,
+        Avg_Overload_Count_4 column14,
+        Avg_Overload_Count_5 column15,
+        Avg_Overload_Count_6 column16,
+        Avg_Overload_Ratio column17,
+        Avg_Overload_Ratio_2 column18,
+        Avg_Overload_Ratio_3 column19,
+        Avg_Overload_Ratio_4 column20,
+        Avg_Overload_Ratio_5 column21,
+        Avg_Overload_Ratio_6 column22,
+        ROUND(Avg_Overload_Count/Avg_Count*100,2) column23,
+        ROUND(Avg_Overload_Count_2/Axles_Count_2*100,2) column24,
+        ROUND(Avg_Overload_Count_3/Axles_Count_3*100,2) column25,
+        ROUND(Avg_Overload_Count_4/Axles_Count_4*100,2) column26,
+        ROUND(Avg_Overload_Count_5/Axles_Count_5*100,2) column27,
+        ROUND(Avg_Overload_Count_6/Axles_Count_6*100,2) column28,
+        Station_IP,
+        Avg_Days
+        FROM
+        t_avg_month
+        <where>
+            Station_IP=#{stationIP} and Avg_Time=#{avgTime}
         </where>
     </select>
 

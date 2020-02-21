@@ -31,6 +31,15 @@ public class tAvgDayColumn {
     private double column27;
     private double column28;
 
+    private int avgDays;
+
+    public int getAvgDays() {
+        return avgDays;
+    }
+
+    public void setAvgDays(int avgDays) {
+        this.avgDays = avgDays;
+    }
 
     public double getColumn23() {
         return column23;

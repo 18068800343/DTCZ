@@ -31,6 +31,12 @@ public class tAvgDayController {
         return tAvgDayColumn;
     }
 
+    @RequestMapping("/gettAvgDayColumnByIpAndTimeMonth")
+    public List<tAvgDayColumn>  gettAvgDayColumnByIpAndTimeMonth(String stationIP, String avgTime, int avgLaneNo){
+        List<tAvgDayColumn> tAvgDayColumn=service.gettAvgDayColumnByIpAndTimeMonth(stationIP,avgTime,avgLaneNo);
+        return tAvgDayColumn;
+    }
+
 
     @RequestMapping("/getEchartsListByLaneNoAndColumn")
     public Map getEchartsListByLaneNoAndColumn(String stationIP, String column, String laneNo){

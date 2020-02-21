@@ -14,7 +14,12 @@ public interface tAvgDayService {
     List<tAvgDayColumn> gettAvgDayColumnByIpAndTime(String stationIP, String avgTime, int avgLaneNo);
 
 
+    List<tAvgDayColumn> gettAvgDayColumnByIpAndTimeMonth(String stationIP, String avgTime, int avgLaneNo);
+
+
     Map<String,List<String>> getEchartsListByLaneNoAndColumn(String stationIP, String column, String laneNo);
+
+    Map<String,List<String>> getEchartsListByLaneNoAndColumnMonth(String stationIP, String column, String laneNo);
 
     tAvgMonth gettAvgMonthByIpAndTime(String stationIP, String avgTime, int avgLaneNo);
 }

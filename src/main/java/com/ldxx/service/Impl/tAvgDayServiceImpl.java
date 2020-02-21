@@ -32,12 +32,30 @@ public class tAvgDayServiceImpl implements tAvgDayService {
     }
 
     @Override
+    public List<tAvgDayColumn> gettAvgDayColumnByIpAndTimeMonth(String stationIP, String avgTime, int avgLaneNo) {
+        return dao.gettAvgDayColumnByIpAndTimeMonth(stationIP, avgTime,avgLaneNo);
+    }
+
+    @Override
     public Map<String,List<String>> getEchartsListByLaneNoAndColumn(String stationIP, String column, String laneNo) {
         Map map = new HashMap();
         Integer columnIndex = Integer.parseInt(column);
         String columnName = dao.getColumnNameStrByTableName("t_avg_day").split(",")[columnIndex-1];
         List listX = dao.getEchartsListByLaneNoAndColumnX(stationIP,columnName,laneNo);
         List listY = dao.getEchartsListByLaneNoAndColumnY(stationIP,columnName,laneNo);
+        map.put("y",listX);
+        map.put("x",listY);
+
+        return map;
+    }
+
+    @Override
+    public Map<String,List<String>> getEchartsListByLaneNoAndColumnMonth(String stationIP, String column, String laneNo) {
+        Map map = new HashMap();
+        Integer columnIndex = Integer.parseInt(column);
+        String columnName = dao.getColumnNameStrByTableName("t_avg_month").split(",")[columnIndex-1];
+        List listX = dao.getEchartsListByLaneNoAndColumnXMonth(stationIP,columnName,laneNo);
+        List listY = dao.getEchartsListByLaneNoAndColumnYMonth(stationIP,columnName,laneNo);
         map.put("y",listX);
         map.put("x",listY);
 

@@ -12,9 +12,16 @@ public interface tAvgDayDao {
 
     List<tAvgDayColumn> gettAvgDayColumnByIpAndTime(String stationIP, String avgTime, int avgLaneNo);
 
+
+    List<tAvgDayColumn> gettAvgDayColumnByIpAndTimeMonth(String stationIP, String avgTime, int avgLaneNo);
+
     List<String> getEchartsListByLaneNoAndColumnX(String stationIP, String columnName, String laneNo);
 
     List<String> getEchartsListByLaneNoAndColumnY(String stationIP, String columnName, String laneNo);
+
+    List<String> getEchartsListByLaneNoAndColumnXMonth(String stationIP, String columnName, String laneNo);
+
+    List<String> getEchartsListByLaneNoAndColumnYMonth(String stationIP, String columnName, String laneNo);
 
     String getColumnNameStrByTableName(String tableName);
 

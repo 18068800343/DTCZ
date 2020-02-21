@@ -41,8 +41,8 @@
 
 
     $(document).ready(function () {
-        initTable();
-        initTableBodyAjax();
+        dayAndMonthTongjiDom.initTable();
+        dayAndMonthTongjiDom.initTableBodyAjax('100001','2020-02');
     });
 
     let dayAndMonthTongjiDom={};
@@ -57,19 +57,19 @@
             + "</ul></div>"
             + "<div id='myTabContent1' class='tab-content bg-color-white no-padding' style='overflow-x: auto; overflow-y: auto; height:450px; width:1040px;'>"
             + " <div class='tab-pane fade in active' id='s1'>"
-            + " <table id='myTabOne1' data-type='交通量' class='table table-bordered table-hover' border='2'  bordercolor='black' cellspacing='0' cellpadding='0'></table></div>"
-            + "<div class='tab-pane fade in' id='s2'><table id='myTabOne2' data-type='超载车辆数'  class='table table-bordered table-hover' border='2'  bordercolor='black' cellspacing='0' cellpadding='0'></table></div>"
-            + "<div class='tab-pane fade in' id='s3'><table id='myTabOne3' data-type='平均超载率'  class='table table-bordered table-hover' border='2' bordercolor='black' cellspacing='0' cellpadding='0'></table></div>"
+            + " <table id='myTabOne1' data-id='交通量' class='table table-bordered table-hover' border='2'  bordercolor='black' cellspacing='0' cellpadding='0'></table></div>"
+            + "<div class='tab-pane fade in' id='s2'><table id='myTabOne2' data-id='超载车辆数'  class='table table-bordered table-hover' border='2'  bordercolor='black' cellspacing='0' cellpadding='0'></table></div>"
+            + "<div class='tab-pane fade in' id='s3'><table id='myTabOne3' data-id='平均超载率'  class='table table-bordered table-hover' border='2' bordercolor='black' cellspacing='0' cellpadding='0'></table></div>"
             + " <div class='tab-pane fade in' id='s4'>"
-            + " <table id='myTabOne4' data-type='超载比例' class='table table-bordered table-hover' border='2'  bordercolor='black' cellspacing='0' cellpadding='0'></table></div>"
-            + "  <div class='tab-pane fade in' id='s5'><table id='myTabOne5' data-type='最大车重' class='table table-bordered table-hover' border='2' bordercolor='black' cellspacing='0' cellpadding='0'></table></div>"
+            + " <table id='myTabOne4' data-id='超载比例' class='table table-bordered table-hover' border='2'  bordercolor='black' cellspacing='0' cellpadding='0'></table></div>"
+            + "  <div class='tab-pane fade in' id='s5'><table id='myTabOne5' data-id='最大车重' class='table table-bordered table-hover' border='2' bordercolor='black' cellspacing='0' cellpadding='0'></table></div>"
             + " </div>")
     }
 
     dayAndMonthTongjiDom.initTableBodyAjax = (stationIp,avgTime) => {
         $.ajax({
             type: 'POST',
-            url: '/tAvgDay/gettAvgDayColumnByIpAndTime',
+            url: '/tAvgDay/gettAvgDayColumnByIpAndTimeMonth',
             dataType: 'json',
             data: {
                 stationIP: stationIp,
@@ -80,6 +80,7 @@
             },
             success: function (json) {
                 initTableTbody(json)
+                dayAndMonthTongjiDom.bindClick(stationIp);
             }
         });
     }
@@ -99,7 +100,7 @@
                     if (n == json.length) {
                         //车道0即总计的一行的td
                         let tdDom = "";
-                        tdDom =  "<td data-type='column'><a>" + json[1].avgMax + "</a></td>";
+                        tdDom =  "<td data-id='column'><a>" + json[1].avgMax + "</a></td>";
                         let dom = tableDom.find("tfoot");
                         $(dom).append("<tr align='center'>" +
                             "<td colspan='2'>" + formatLaneName(json[0].avgLaneNo) + "</td>" +
@@ -108,7 +109,7 @@
                         break;
                     }
                     let tdDom = "";
-                    tdDom = "<td data-type='column'><a>" + json[n].avgMax + "</a></td>";
+                    tdDom = "<td data-id='column'><a>" + json[n].avgMax + "</a></td>";
                     let dom = tableDom.find("tfoot");
                     $(dom).append("<tr align='center'>" +
                         "<td>" + json[n].avgLaneNo + "</td>" +
@@ -137,9 +138,9 @@
                         //车道0即总计的一行的td
                         let tdDom = "";
                         for (let j = k + 1; j <= k + 5; j++) {
-                            tdDom = tdDom + "<td data-type='column'><a>" + json[1]['column' + j] + "</a></td>";
+                            tdDom = tdDom + "<td data-id='column'><a>" + json[1]['column' + j] + "</a></td>";
                         }
-                        tdDom = tdDom + "<td data-type='column'><a>" + json[1]['column' + k] + "</a></td>";
+                        tdDom = tdDom + "<td data-id='column'><a>" + json[1]['column' + k] + "</a></td>";
                         let dom = tableDom.find("tfoot");
                         $(dom).append("<tr align='center'>" +
                             "<td colspan='2'>" + formatLaneName(json[0].avgLaneNo) + "</td>" +
@@ -149,9 +150,9 @@
                     }
                     let tdDom = "";
                     for (let j = k + 1; j <= k + 5; j++) {
-                        tdDom = tdDom + "<td data-type='column'+j+'><a>" + json[n]['column' + j] + "</a></td>";
+                        tdDom = tdDom + "<td data-id='column'+j+'><a>" + json[n]['column' + j] + "</a></td>";
                     }
-                    tdDom = tdDom + "<td data-type='column'><a>" + json[n]['column' + k] + "</a></td>";
+                    tdDom = tdDom + "<td data-id='column'><a>" + json[n]['column' + k] + "</a></td>";
                     let dom = tableDom.find("tfoot");
                     $(dom).append("<tr align='center'>" +
                         "<td>" + json[n].avgLaneNo + "</td>" +
@@ -178,6 +179,93 @@
         } else {
             return '车道';
         }
+    }
+
+
+    dayAndMonthTongjiDom.bindClick = (stationIp)=>{
+        $("#dataTable").find("td").each(function () {
+            let str = $(this).attr("data-id");
+            if(str!=undefined){
+                $(this).on('click',function () {
+                    let strIn = $(this).attr("data-id");
+                    let laneNo = strIn.split(",")[0];
+                    let column = strIn.split(",")[1];
+                    $.ajax({
+                        type: 'POST',
+                        url: '/tAvgDay/getEchartsListByLaneNoAndColumnMonth',
+                        dataType: 'json',
+                        data: {
+                            stationIP: stationIp,
+                            laneNo:laneNo,
+                            column: column,
+                        },
+                        error: function (msg) {
+                        },
+                        success: function (json) {
+                            dayAndMonthTongjiDom.makeLineChart(json);
+                        }
+                    });
+                })
+
+            }
+        })
+    }
+    dayAndMonthTongjiDom.makeLineChart = (data)=>{
+        $("#modalEcharts").modal("show");
+        initMyChart(data);
+    }
+
+    let initMyChart = (data)=>{
+        let myChart = echarts.init(document.getElementById('myChart'));
+        let option = {
+            title: {
+                text: ''
+            },
+            toolbox: {
+                feature: {
+                    dataZoom: {
+                        yAxisIndex: 'none'
+                    },
+                    restore: {},
+                    saveAsImage: {},
+                    dataView:{}
+                }
+            },
+            tooltip: {},
+            xAxis: {
+                type: 'category',
+                data: data.x,
+                name: "日期",
+                boundaryGap: false
+            },
+            yAxis: {
+                type: 'value',
+                boundaryGap: [0, '100%']
+            },
+            dataZoom: [{
+                type: 'inside',
+                start: 0,
+                end: 100
+            }, {
+                start: 0,
+                end: 100,
+                handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+                handleSize: '80%',
+                handleStyle: {
+                    color: '#fff',
+                    shadowBlur: 3,
+                    shadowColor: 'rgba(0, 0, 0, 0.6)',
+                    shadowOffsetX: 2,
+                    shadowOffsetY: 2
+                }
+            }],
+            series: [{
+                name: '',
+                type: 'line',
+                data: data.y
+            }]
+        };
+        myChart.setOption(option);
     }
 </script>
 
