@@ -1,6 +1,7 @@
 package com.ldxx.dao;
 
 import com.ldxx.bean.tAvgDay;
+import com.ldxx.bean.tAvgMonth;
 import com.ldxx.vo.tAvgDayColumn;
 
 import java.util.List;
@@ -16,4 +17,6 @@ public interface tAvgDayDao {
     List<String> getEchartsListByLaneNoAndColumnY(String stationIP, String columnName, String laneNo);
 
     String getColumnNameStrByTableName(String tableName);
+
+    tAvgMonth gettAvgMonthByIpAndTime(String stationIP, String avgTime, int avgLaneNo);
 }

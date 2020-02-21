@@ -1,6 +1,7 @@
 package com.ldxx.service;
 
 import com.ldxx.bean.tAvgDay;
+import com.ldxx.bean.tAvgMonth;
 import com.ldxx.vo.tAvgDayColumn;
 
 import java.util.List;
@@ -14,4 +15,6 @@ public interface tAvgDayService {
 
 
     Map<String,List<String>> getEchartsListByLaneNoAndColumn(String stationIP, String column, String laneNo);
+
+    tAvgMonth gettAvgMonthByIpAndTime(String stationIP, String avgTime, int avgLaneNo);
 }

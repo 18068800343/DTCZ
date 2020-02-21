@@ -63,4 +63,9 @@
     </select>
 
 
+
+    <select id="gettAvgMonthByIpAndTime" resultType="tAvgMonth">
+  			select * from t_avg_month where Station_IP=#{stationIP} and Avg_Time=#{avgTime} and Avg_LaneNo=#{avgLaneNo}
+  	</select>
+
 </mapper>

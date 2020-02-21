@@ -1,6 +1,7 @@
 package com.ldxx.controller;
 
 import com.ldxx.bean.tAvgDay;
+import com.ldxx.bean.tAvgMonth;
 import com.ldxx.vo.tAvgDayColumn;
 import com.ldxx.service.tAvgDayService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,12 @@ public class tAvgDayController {
     public Map getEchartsListByLaneNoAndColumn(String stationIP, String column, String laneNo){
         Map tAvgDayColumn=service.getEchartsListByLaneNoAndColumn(stationIP,column,laneNo);
         return tAvgDayColumn;
+    }
+
+    @RequestMapping("/gettAvgMonthByIpAndTime")
+    public tAvgMonth gettAvgMonthByIpAndTime(String stationIP, String avgTime, int avgLaneNo){
+        tAvgMonth tAvgMonth=service.gettAvgMonthByIpAndTime(stationIP,avgTime,avgLaneNo);
+        return tAvgMonth;
     }
 
 

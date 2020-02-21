@@ -1,6 +1,7 @@
 package com.ldxx.service.Impl;
 
 import com.ldxx.bean.tAvgDay;
+import com.ldxx.bean.tAvgMonth;
 import com.ldxx.dao.tAvgDayDao;
 import com.ldxx.service.tAvgDayService;
 import com.ldxx.vo.tAvgDayColumn;
@@ -41,5 +42,10 @@ public class tAvgDayServiceImpl implements tAvgDayService {
         map.put("x",listY);
 
         return map;
+    }
+
+    @Override
+    public tAvgMonth gettAvgMonthByIpAndTime(String stationIP, String avgTime, int avgLaneNo) {
+        return dao.gettAvgMonthByIpAndTime(stationIP,avgTime,avgLaneNo);
     }
 }
