@@ -103,4 +103,10 @@
 			</if>
 		</if>
 	</sql>
+
+
+	<select id="getAccessoryByPort" resultType="Accessory">
+		select * from accessory where a_id=(select S_Id from station_site where Station_Port=#{stationPort})
+	</select>
+
 </mapper>

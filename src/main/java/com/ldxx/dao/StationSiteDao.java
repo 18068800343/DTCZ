@@ -1,5 +1,6 @@
 package com.ldxx.dao;
 
+import com.ldxx.bean.Accessory;
 import com.ldxx.bean.CompanySite;
 import com.ldxx.bean.StationSite;
 import org.apache.ibatis.annotations.Param;
@@ -38,4 +39,6 @@ public interface StationSiteDao {
     List<StationSite> getStationSiteByPort(String stationPort);
 
     List<CompanySite> getCompanyStation();
+
+    List<Accessory> getAccessoryByPort(String stationPort);
 }

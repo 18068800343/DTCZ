@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../style/jquery.dataTables.min.css">
     <link rel="stylesheet" href="../style/jquery-editable-select.css">
     <link href="../font3/bootstrap-select.css" rel="stylesheet">
+    <link href="js/bootstrap-datepicker/bootstrap-datepicker3.min.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
     <link rel="stylesheet" type="text/css" href="css/home.css" />
@@ -79,7 +80,7 @@
                         </div>
                         <button type="button" class="btn btn-primary" onclick="queding()" style="margin-left: 50px;width: 100px; background-image: linear-gradient(#1F62C8,#262E9F);">确定</button>
                         <div class="jiance">
-                            <button type="button" class="btn btn-primary" onclick="nowJianceSite()" data-toggle="modal" data-target="#jianceDiv" style="width: 150px; background-image: linear-gradient(#1F62C8,#262E9F);">当前车道图</button>
+                            <button type="button" class="btn btn-primary" onclick="nowJianceSite()" data-toggle="modal" data-target="#allMsg1" style="width: 150px; background-image: linear-gradient(#1F62C8,#262E9F);">当前车道图</button>
                         </div>
                     </div>
                     <div class="UpperPartR">
@@ -128,8 +129,26 @@
         <div role="tabpanel" class="tab-pane" id="profile">
             <div class="zhuti-content">
                 <div class="UpperPart">
-                    <div class="UpperPartL">
-                        <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2" style="margin: 5PX;float: left;">车型编码</button>-->
+                    <div class="UpperPartL" style="width: 90%;margin-left: 5%;">
+                        <div class="sele" >
+                            <label class="col-sm-2 control-label shaixuan" >筛选站点</label>
+                            <div class="col-sm-2" style="width: 20%;margin-left: 50px;">
+                                <!-- 样式1 -->
+                                <select class="form-control"  id="stationPort2" style="width:80%;">
+                                </select>
+                            </div>
+                        </div>
+                        <label class="col-sm-1	 control-label riqi"
+                               style="margin-left: 3%;width: 70px;line-height: 30px;">日期:</label>
+                        <div class="col-sm-2" style="width: 20%">
+                            <!-- 样式1 -->
+                            <input type="text" id="startTime2" value="请选择"
+                                   style="height: 34px;border-radius: 5px;box-shadow: none;width: 60%;border:1px solid #DDD;">
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="queding2()" style="margin-left: 50px;width: 100px; background-image: linear-gradient(#1F62C8,#262E9F);">确定</button>
+                        <div class="jiance">
+                            <button type="button" class="btn btn-primary" onclick="nowJianceSite2()" data-toggle="modal" data-target="#allMsg2" style="width: 150px; background-image: linear-gradient(#1F62C8,#262E9F);">当前车道图</button>
+                        </div>
                     </div>
                     <div class="UpperPartR">
 
@@ -137,28 +156,40 @@
 
                 </div>
                 <div class="LowerPart" style="margin-top:3px;">
-                    <table class="table table-striped table-hover" id="mainContent" style="width: 90%;margin: 0 auto; margin-top: 20px;">
-                        <thead style="background-color: #DDE6F7;">
-                        <tr>
-                            <th style="width: 15%">站点</th>
-                            <th>车道号</th>
-                            <th>车牌号</th>
-                            <th>车牌颜色</th>
-                            <th>长</th>
-                            <th>车速(Km/h)</th>
-                            <th>轴数</th>
-                            <th>总重量(Kg)</th>
-                            <th>路面温度</th>
-                            <th>超重比率</th>
-                            <th>操作</th>
 
-                        </tr>
-                        </thead>
-                        <tbody>
+                    <div style="height: 300px;width:1050px;margin-left: 200px;" id="dataTable2">
+                    </div>
 
-                        </tbody>
-                    </table>
                 </div>
+
+                <div style="width: 90%;margin-left: 5%;">
+                    <li class="layui-this">各车型车辆数及比例</li>
+                    <div class="layui-tab-item layui-show">
+                        <p class="errorMsg2" style="display: inline-block;"></p>
+                        <div id="_top2" style="width:700px;height: 400px;margin-top: -50px;margin:0 auto">
+                        </div>
+                    </div>
+                </div>
+
+                <div style="width: 90%;margin-left: 5%;">
+                    <li class="layui-this">超载车辆数及比例</li>
+                    <div class="layui-tab-item layui-show" style="margin-top: 70px;">
+                        <p class="errorMsg2" style="display: inline-block;"></p>
+                        <div id="_right2" style="width:700px;height: 400px;margin-top: -50px;margin:0 auto">
+                            <!--右边-->
+                        </div>
+                    </div>
+                </div>
+                <!--左上半部分结束-->
+                <div style="width: 90%;margin-left: 5%;">
+                    <li class="layui-this">平均超载率</li>
+                    <div class="layui-tab-item layui-show">
+                        <p class="errorMsg2" style="display: inline-block;"></p>
+                        <div id="bottom_2" style="width:700px;height: 400px;margin-top: -50px;margin:0 auto">
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -188,11 +219,67 @@
     </div>
 </div>
 
+
+<!-- allMsg -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg1">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" ><b>车道图</b></h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <form class="form-inline">
+                        <table class="table table-bordered table-condensed" id="look_accessory">
+                            <thead>
+
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- allMsg -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg2">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" ><b>车道图</b></h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <form class="form-inline">
+                        <table class="table table-bordered table-condensed" id="look_accessory2">
+                            <thead>
+
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 <script src="../js/jquery.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 <script src="js/datatables/jquery.dataTables.min.js"></script>
 <script src="../js/bootstrap-select.js" ></script>
+<script src="js/bootstrap-datepicker/bootstrap-datepicker.js" ></script>
+<script src="js/bootstrap-datepicker/bootstrap-datepicker.zh-CN.js" ></script>
 <script src="../js/jquery-editable-select.js" ></script>
 <script src="js/toastr.js" ></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
@@ -203,6 +290,18 @@
 <script>
 
     $(document).ready( function () {
+        $("#startTime2").datepicker({
+            startView: 'years',  //起始选择范围
+            maxViewMode:'years', //最大选择范围
+            minViewMode:'months', //最小选择范围
+            todayHighlight : true,// 当前时间高亮显示
+            autoclose : 'true',// 选择时间后弹框自动消失
+            format : 'yyyy-mm',// 时间格式
+            language : 'zh-CN',// 汉化
+            // todayBtn:"linked",//显示今天 按钮
+            clearBtn : true,// 清除按钮，和今天 按钮只能显示一个
+        });
+
         dayAndMonthTongjiDom.initTable();
         getTime()
         initzhandian()
@@ -223,8 +322,10 @@
             success: function (json) {
                 if(json!=null){
                     $("#stationPort").html('');
+                    $("#stationPort2").html('');
                     for(var i=0;i<json.length;i++){
                         $("#stationPort").append("<option  value='"+json[i].stationPort+"'>"+(json[i].stationName)+"</option>");
+                        $("#stationPort2").append("<option  value='"+json[i].stationPort+"'>"+(json[i].stationName)+"</option>");
                     }
 
                 }
@@ -249,7 +350,9 @@
         //var week = myDate.getDay();
         //var weeks = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
         var now=getNow(year) + "-" + getNow(mon) + "-" + getNow(date);
+        var now2=getNow(year) + "-" + getNow(mon);
         $("#startTime").val(now);
+        $("#startTime2").val(now2);
         return now;
     }
 
@@ -263,6 +366,9 @@
         if(startTime==null||startTime==''||startTime==undefined){
             startTime=getTime();
         }
+        $("#_top").empty('')
+        $("#_right").empty('')
+        $("#bottom_").empty('')
         $.ajax({
             type: 'POST',
             url: '/tAvgDay/gettAvgDayByIpAndTime',
@@ -307,7 +413,7 @@
                     ChaoZaiLvNum.push(json.avgOverloadRatio6)
                     setChaoZaiLvNumEChars(ChaoZaiLvNum);
                 }else{
-                    toastr.error("w無數據")
+                    toastr.error("無數據")
                 }
             }
         });
@@ -472,7 +578,306 @@
     }
 
 
+    function nowJianceSite(){
+        $.ajax({
+            type: 'POST',
+            url: '/StationSite/getAccessoryByPort',
+            dataType: 'json',
+            async:false,
+            data: {
+                stationPort:$("#stationPort").val(),
+            },
+            error: function (msg) {
+                $(".errorMsg2").html('无数据').css({
+                    "margin-left":"30px",
+                    "color":"red",
+                })
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                $("#look_accessory tbody").empty();
+                if(json!=null&&json!=''&&json.length!=0){
+                    for(var i=0;i<json.length;i++){
+                        $("#look_accessory tbody").append("<tr>"+
+                            "<td style='width:20%;'>附件</td>"+
+                            "<td colspan='3'><a href='"+getLocalPath()+"/dtcz_file/"+json[i].acUrl+"' target='view_window' style='color:blue'>"+json[i].acName+"</a></td>"+
+                            "</tr>");
+                    }
+                }else{
+                    $("#look_accessory tbody").append("<tr>"+
+                        "<td style='width:20%;'>附件</td>"+
+                        "<td colspan='3' style='color: red'>无附件</td>"+
+                        "</tr>");
+                }
+            }
+        });
+    }
 
+    function getLocalPath(){
+        var pathArray = window.location.pathname.split('/');
+        var secondLevelLocation = pathArray[1];
+        var loginUrl = window.location.protocol + "//"  + window.location.host ;
+        return loginUrl;
+    }
+    <!--====================================================月交通量统计=========================================================================-->
+    function queding2(){
+        var stationPort=$("#stationPort2").val();
+        var startTime=$("#startTime2").val();
+        dayAndMonthTongjiDom.initTableBodyAjax(stationPort,startTime);
+
+        if(startTime==null||startTime==''||startTime==undefined){
+            startTime=getTime();
+        }
+        $("#_top2").empty('')
+        $("#_right2").empty('')
+        $("#bottom_2").empty('')
+        $.ajax({
+            type: 'POST',
+            url: '/tAvgDay/gettAvgMonthByIpAndTime',
+            dataType: 'json',
+            async:false,
+            data: {
+                stationIP:stationPort,
+                avgTime:startTime,
+                avgLaneNo:0,
+            },
+            error: function (msg) {
+                $(".errorMsg2").html('无数据').css({
+                    "margin-left":"30px",
+                    "color":"red",
+                })
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                if(json!=null){
+                    $(".errorMsg2").html('')
+                    var CheXingNum=[];
+                    CheXingNum.push(json.axlesCount2)
+                    CheXingNum.push(json.axlesCount3)
+                    CheXingNum.push(json.axlesCount4)
+                    CheXingNum.push(json.axlesCount5)
+                    CheXingNum.push(json.axlesCount6)
+                    setCheXingNumEChars2(CheXingNum);
+
+                    var ChaoZaiNum=[];
+                    ChaoZaiNum.push(json.avgOverloadCount2)
+                    ChaoZaiNum.push(json.avgOverloadCount3)
+                    ChaoZaiNum.push(json.avgOverloadCount4)
+                    ChaoZaiNum.push(json.avgOverloadCount5)
+                    ChaoZaiNum.push(json.avgOverloadCount6)
+                    setChaoZaiNumEChars2(ChaoZaiNum);
+
+                    var ChaoZaiLvNum=[];
+                    ChaoZaiLvNum.push(json.avgOverloadRatio2)
+                    ChaoZaiLvNum.push(json.avgOverloadRatio3)
+                    ChaoZaiLvNum.push(json.avgOverloadRatio4)
+                    ChaoZaiLvNum.push(json.avgOverloadRatio5)
+                    ChaoZaiLvNum.push(json.avgOverloadRatio6)
+                    setChaoZaiLvNumEChars2(ChaoZaiLvNum);
+                }else{
+                    toastr.error("無數據")
+                }
+            }
+        });
+    }
+
+
+    function setCheXingNumEChars2(CheXingNum){
+        var myChart = echarts.init(document.getElementById('_top2'));
+        var seriesLabel = {
+            normal: {
+                show: true,
+                textBorderColor: '#336666',
+                color:'black',
+                textBorderWidth: 1
+            }
+        }
+        var option = {
+            color: ['#3398DB'],
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: ['2轴车', '3轴车', '4轴车', '5轴车', '6轴车'],
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value'
+                }
+            ],
+            series: [
+                {
+                    name: '直接访问',
+                    type: 'bar',
+                    label: seriesLabel,
+                    barWidth: '60%',
+                    data: CheXingNum
+                }
+            ]
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    }
+
+
+    function setChaoZaiNumEChars2(ChaoZaiNum){
+        var myChart2 = echarts.init(document.getElementById('_right2'));
+        var seriesLabel = {
+            normal: {
+                show: true,
+                textBorderColor: '#336666',
+                color:'black',
+                textBorderWidth: 1
+            }
+        }
+        var option2 = {
+            color: ['#3398DB'],
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: ['2轴车', '3轴车', '4轴车', '5轴车', '6轴车'],
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value'
+                }
+            ],
+            series: [
+                {
+                    name: '直接访问',
+                    type: 'bar',
+                    label: seriesLabel,
+                    barWidth: '60%',
+                    data: ChaoZaiNum
+                }
+            ]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart2.setOption(option2);
+    }
+
+
+    function setChaoZaiLvNumEChars2(ChaoZaiLvNum){
+        var myChart3 = echarts.init(document.getElementById('bottom_2'));
+        var seriesLabel = {
+            normal: {
+                show: true,
+                textBorderColor: '#336666',
+                color:'black',
+                textBorderWidth: 1
+            }
+        }
+        var option3 = {
+            color: ['#3398DB'],
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: ['2轴车', '3轴车', '4轴车', '5轴车', '6轴车'],
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value'
+                }
+            ],
+            series: [
+                {
+                    name: '直接访问',
+                    type: 'bar',
+                    label: seriesLabel,
+                    barWidth: '60%',
+                    data: ChaoZaiLvNum
+                }
+            ]
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        myChart3.setOption(option3);
+    }
+
+
+    function nowJianceSite2(){
+        $.ajax({
+            type: 'POST',
+            url: '/StationSite/getAccessoryByPort',
+            dataType: 'json',
+            async:false,
+            data: {
+                stationPort:$("#stationPort2").val(),
+            },
+            error: function (msg) {
+                $(".errorMsg2").html('无数据').css({
+                    "margin-left":"30px",
+                    "color":"red",
+                })
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                $("#look_accessory2 tbody").empty();
+                if(json!=null&&json!=''&&json.length!=0){
+                    for(var i=0;i<json.length;i++){
+                        $("#look_accessory2 tbody").append("<tr>"+
+                            "<td style='width:20%;'>附件</td>"+
+                            "<td colspan='3'><a href='"+getLocalPath()+"/dtcz_file/"+json[i].acUrl+"' target='view_window' style='color:blue'>"+json[i].acName+"</a></td>"+
+                            /* "<td colspan='2'><input type='text' class='form-control' style='width:100%;' value='"+json[i].acName+"' disabled></td>"+
+                            "<td style='width:150px;'><button type='button' class='btn btn-primary' data1='"+json[i].acUrl+"' data2='"+json[i].aId+"' data3='"+json[i].acName+"' onclick='delete_file(this)'>删除附件</button></td>"+*/
+                            "</tr>");
+                    }
+                }else{
+                    $("#look_accessory2 tbody").append("<tr>"+
+                        "<td style='width:20%;'>附件</td>"+
+                        "<td colspan='3' style='color: red'>无附件</td>"+
+                        "</tr>");
+                }
+            }
+        });
+    }
 
 </script>
 </html>

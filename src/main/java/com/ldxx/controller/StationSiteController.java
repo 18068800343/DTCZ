@@ -211,4 +211,9 @@ public class StationSiteController {
         }
         return service.getStationSiteByPort(stationPort);
     }
+
+    @RequestMapping("/getAccessoryByPort")
+    public List<Accessory> getAccessoryByPort(String stationPort) {
+        return stationSiteDao.getAccessoryByPort(stationPort);
+    }
 }
