@@ -41,7 +41,7 @@
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist" style="background:#fff;">
 <!--    -->
-        <li role="presentation"><a href="#gongsicedian" aria-controls="danwei" role="tab" data-toggle="tab">公司测点</a></li>
+        <!--<li role="presentation"><a href="#gongsicedian" aria-controls="danwei" role="tab" data-toggle="tab">公司测点</a></li>-->
     </ul>
 <!-- Modal -->
 
@@ -50,7 +50,7 @@
         <div class="zhuti-content">
             <div class="UpperPart">
                 <div class="UpperPartL">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal4" style="margin: 5PX;float: left;">录入公司名称</button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal4" style="margin: 5PX;float: left;">录入单位名称</button>
                 </div>
                 <div class="UpperPartR">
 
@@ -62,7 +62,7 @@
                     <thead>
                     <tr>
                         <th>序号</th>
-                        <th>公司名称</th>
+                        <th>单位名称</th>
                         <th>下辖测点</th>
                         <th style="width:75px;">操作</th>
                     </tr>
@@ -79,14 +79,14 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel"><b>录入公司名称</b></h4>
+                <h4 class="modal-title" id="myModalLabel"><b>录入单位名称</b></h4>
             </div>
             <div class="modal-body">
                 <div>
                     <form class="form-inline" id="add_form">
                         <table class="table table-bordered table-condensed" >
                             <tr>
-                                <td style="width: 20%;">公司名称</td>
+                                <td style="width: 20%;">单位名称</td>
                                 <td style="width: 30%;"><input type="text" style="width: 70%;" v-model="companyName" /></td>
                             </tr>
                         </table>
@@ -138,7 +138,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel"><b>修改公司信息</b></h4>
+                <h4 class="modal-title" id="myModalLabel"><b>修改单位信息</b></h4>
             </div>
             <div class="modal-body">
                 <div>
