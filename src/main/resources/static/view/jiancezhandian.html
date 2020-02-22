@@ -41,7 +41,7 @@
         <div class="zhuti-content">
             <div class="UpperPart">
                 <div class="UpperPartL">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin: 5PX;float: left;">录入监测站点</button>
+                    <button type="button" class="btn btn-primary Pha" data-toggle="modal" data-target="#myModal" style="margin: 5PX;float: left;">录入监测站点</button>
                 </div>
                 <div class="UpperPartR">
                 </div>
@@ -312,6 +312,7 @@
 <script src="js/laydate/laydate.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+<script src="js/quanxian.js"></script>
 <script>
 
     $(document).ready( function () {
@@ -363,12 +364,14 @@
             "targets": 16,
             "searchable": true,
             "render": function(data, type, full) {
-                var xiugai='<i class="iconfont icon-xiugai" style="font-size:20px;cursor:pointer;" id="upd" title="修改" data-toggle="modal" data-target="#change"></i>';
-                var shanchu='<i class="iconfont icon-shanchu" style="font-size:20px;cursor:pointer;" id="del"  title="删除"></i>';
+                var xiugai='<i class="iconfont icon-xiugai Phb" style="font-size:20px;cursor:pointer;display: none;" id="upd" title="修改" data-toggle="modal" data-target="#change"></i>';
+                var shanchu='<i class="iconfont icon-shanchu Phc" style="font-size:20px;cursor:pointer;display: none;" id="del"  title="删除"></i>';
                 //var look='<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" onclick="lookMs(this)" data-toggle="modal" data-target="#allMsg1" id="lookDetall"></i>'
                 return xiugai+shanchu;
             }
-        }],
+        }],"fnDrawCallback" : function() {
+            initTableQuanxian()
+        },
         //让表格出横向滚动条 ，此时 表头和 表中数据将分为两个部分
         "sScrollX":true,
         // 让表格的宽度不自适应 ，固定宽度。 如果不设置 表头和表中数据会分离
@@ -394,6 +397,34 @@
 
     });
     $.fn.dataTable.ext.errMode = 'none';       //屏蔽掉报错弹窗
+
+    function initTableQuanxian(){
+        $.ajax({
+            type:"post",
+            url:"/login/getUser",
+            async:false,
+            data:{
+            },
+            success:function(json){
+                if(json!=null &&json!=""){
+                    var arr = json.usrPersmissionCoding.split(',');
+                    for(var i=0;i<arr.length;i++){
+                        if(arr[i].indexOf("Pha") >= 0 ){
+                            $(".Pha").show();
+                        }
+                        if(arr[i].indexOf("Phb") >= 0 ){
+                            $(".Phb").show();
+                        }
+                        if(arr[i].indexOf("Phc") >= 0 ){
+                            $(".Phc").show();
+                        }
+                    }
+
+                }
+
+            }
+        });
+    }
 
     function initTable(){
         $.ajax({

@@ -19,6 +19,16 @@ public class tUserInfo {
     private String lastMonitoringSite;
     //1:在编人员；0：已删人员
     private Integer delState;
+    //权限编码
+    private String UsrPersmissionCoding;
+
+    public String getUsrPersmissionCoding() {
+        return UsrPersmissionCoding;
+    }
+
+    public void setUsrPersmissionCoding(String usrPersmissionCoding) {
+        UsrPersmissionCoding = usrPersmissionCoding;
+    }
 
     public String getLastMonitoringSite() {
         return lastMonitoringSite;

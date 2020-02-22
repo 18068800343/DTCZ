@@ -51,7 +51,7 @@
             <div class="zhuti-content">
                 <div class="UpperPart">
                     <div class="UpperPartL">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal1" style="margin: 5PX;float: left;">录入车牌颜色</button>
+                        <button type="button" class="btn btn-primary Pia" data-toggle="modal" data-target="#myModal1" style="margin: 5PX;float: left;">录入车牌颜色</button>
                     </div>
                     <div class="UpperPartR">
 
@@ -78,7 +78,7 @@
             <div class="zhuti-content">
                 <div class="UpperPart">
                     <div class="UpperPartL">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2" style="margin: 5PX;float: left;">车型编码</button>
+                        <button type="button" class="btn btn-primary Pie" data-toggle="modal" data-target="#myModal2" style="margin: 5PX;float: left;">录入车型编码</button>
                     </div>
                     <div class="UpperPartR">
 
@@ -105,7 +105,7 @@
             <div class="zhuti-content">
                 <div class="UpperPart">
                     <div class="UpperPartL">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal3" style="margin: 5PX;float: left;">录入关键重量</button>
+                        <button type="button" class="btn btn-primary Pii" data-toggle="modal" data-target="#myModal3" style="margin: 5PX;float: left;">录入关键重量</button>
                     </div>
                     <div class="UpperPartR">
 
@@ -428,6 +428,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+<script src="js/quanxian.js"></script>
 <script>
 
     $(document).ready( function () {
@@ -490,8 +491,8 @@
             "targets": 3,
             "searchable": true,
             "render": function(data, type, full) {
-                var xiugai='<i class="iconfont icon-xiugai" style="font-size:20px;cursor:pointer;" id="upd" title="修改" data-toggle="modal" data-target="#change1"></i>';
-                var shanchu='<i class="iconfont icon-shanchu" style="font-size:20px;cursor:pointer;" id="del"  title="删除"></i>';
+                var xiugai='<i class="iconfont icon-xiugai Pib" style="font-size:20px;cursor:pointer;display: none;" id="upd" title="修改" data-toggle="modal" data-target="#change1"></i>';
+                var shanchu='<i class="iconfont icon-shanchu Pic" style="font-size:20px;cursor:pointer;display: none;" id="del"  title="删除"></i>';
                 //var look='<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" onclick="lookMs(this)" data-toggle="modal" data-target="#allMsg1" id="lookDetall"></i>'
                 return xiugai+shanchu;
             }
@@ -501,6 +502,7 @@
             this.api().column(0).nodes().each(function(cell, i){
                 cell.innerHTML=i+1;
             });
+            initTableQuanxian1()
         },
         "order": [[1, 'asc']],
         "oLanguage": { //国际化配置
@@ -522,7 +524,51 @@
 
     });
 
+    function initTableQuanxian1(){
+        $.ajax({
+            type:"post",
+            url:"/login/getUser",
+            async:false,
+            data:{
+            },
+            success:function(json){
+                if(json!=null &&json!=""){
+                    var arr = json.usrPersmissionCoding.split(',');
+                    for(var i=0;i<arr.length;i++){
+                        if(arr[i].indexOf("Pia") >= 0 ){
+                            $(".Pia").show();
+                        }
+                        if(arr[i].indexOf("Pib") >= 0 ){
+                            $(".Pib").show();
+                        }
+                        if(arr[i].indexOf("Pic") >= 0 ){
+                            $(".Pic").show();
+                        }
+                        if(arr[i].indexOf("Pie") >= 0 ){
+                            $(".Pie").show();
+                        }
+                        if(arr[i].indexOf("Pif") >= 0 ){
+                            $(".Pif").show();
+                        }
+                        if(arr[i].indexOf("Pig") >= 0 ){
+                            $(".Pig").show();
+                        }
+                        if(arr[i].indexOf("Pii") >= 0 ){
+                            $(".Pii").show();
+                        }
+                        if(arr[i].indexOf("Pij") >= 0 ){
+                            $(".Pij").show();
+                        }
+                        if(arr[i].indexOf("Pik") >= 0 ){
+                            $(".Pik").show();
+                        }
+                    }
 
+                }
+
+            }
+        });
+    }
     var table2=$('#mainContent2').dataTable({
         "deferRender": true,
         "processing": true,
@@ -547,8 +593,8 @@
             "targets": 4,
             "searchable": true,
             "render": function(data, type, full) {
-                var xiugai='<i class="iconfont icon-xiugai" style="font-size:20px;cursor:pointer;" id="upd2" title="修改" data-toggle="modal" data-target="#change2"></i>';
-                var shanchu='<i class="iconfont icon-shanchu" style="font-size:20px;cursor:pointer;" id="del2"  title="删除"></i>';
+                var xiugai='<i class="iconfont icon-xiugai Pif" style="font-size:20px;cursor:pointer;display: none;" id="upd2" title="修改" data-toggle="modal" data-target="#change2"></i>';
+                var shanchu='<i class="iconfont icon-shanchu Pig" style="font-size:20px;cursor:pointer;display: none;" id="del2"  title="删除"></i>';
                 //var look='<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" onclick="lookMs(this)" data-toggle="modal" data-target="#allMsg1" id="lookDetall"></i>'
                 return xiugai+shanchu;
             }
@@ -558,6 +604,7 @@
             this.api().column(0).nodes().each(function(cell, i){
                 cell.innerHTML=i+1;
             });
+
         },
         "order": [[0, 'asc']],
         "oLanguage": { //国际化配置
@@ -578,6 +625,7 @@
             }},
 
     });
+
 
     var table3=$('#mainContent3').dataTable({
         "deferRender": true,
@@ -601,8 +649,8 @@
             "targets": 2,
             "searchable": true,
             "render": function(data, type, full) {
-                var xiugai='<i class="iconfont icon-xiugai" style="font-size:20px;cursor:pointer;" id="upd3" title="修改" data-toggle="modal" data-target="#change3"></i>';
-                var shanchu='<i class="iconfont icon-shanchu" style="font-size:20px;cursor:pointer;" id="del3"  title="删除"></i>';
+                var xiugai='<i class="iconfont icon-xiugai Pij" style="font-size:20px;cursor:pointer;display: none;" id="upd3" title="修改" data-toggle="modal" data-target="#change3"></i>';
+                var shanchu='<i class="iconfont icon-shanchu Pik" style="font-size:20px;cursor:pointer;display: none;" id="del3"  title="删除"></i>';
                 //var look='<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" onclick="lookMs(this)" data-toggle="modal" data-target="#allMsg1" id="lookDetall"></i>'
                 return xiugai+shanchu;
             }
@@ -612,6 +660,7 @@
             this.api().column(0).nodes().each(function(cell, i){
                 cell.innerHTML=i+1;
             });
+
         },
         "order": [[0, 'asc']],
         "oLanguage": { //国际化配置
@@ -632,6 +681,7 @@
             }},
 
     });
+
     <!--=====================================关键重量=====================================-->
 
     function initTable3(){

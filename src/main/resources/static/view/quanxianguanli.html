@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <link rel="stylesheet" href="../font2/iconfont.css">
+    <link href="../style/bootstrap.min.css" rel="stylesheet">
+    <link href="../style/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="../style/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="../style/jquery-editable-select.css">
+    <link href="../font3/bootstrap-select.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+    <link rel="stylesheet"  href="css/layui.css" />
+    <link rel="stylesheet"  href="css/toastr.css"/>
+    <link rel="stylesheet" href="css/zTreeStyle.css" />
+
+    <style lang="">
+        body{
+            background: #fff;
+        }
+        .UpperPart{
+            display: flex;
+            justify-content:space-between;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 12px;
+        }
+        .selected{
+            background: rgba(247, 161, 3,0.2);
+        }
+        #mainContent th{
+            cursor: pointer;
+        }
+          @media screen and (max-width: 1366px) {
+                .renyuanzhanghu{
+                  margin-left:14% !important;
+                }
+        }
+    </style>
+</head>
+<body style="background-image: none;width: 90%;margin-left: 10%;">
+<!-- 面包屑 -->
+<!--<div class="mianbao">
+    <ul class="breadcrumb">
+        <li><i class="iconfont icon-knowledgebase"></i></li>
+        <li>系统管理</li>
+        <li class="active">人员管理</li>
+    </ul>
+</div>-->
+
+<div>
+    <!-- Tab panes -->
+    <div role="tabpanel" class="tab-pane active" id="home">
+        <div class="zhuti-content">
+            <div class="UpperPart">
+                <div class="UpperPartL">
+
+                </div>
+                <div class="UpperPartR">
+                </div>
+            </div>
+            <div class="LowerPart" style="margin-top:3px;">
+                <table class="table table-bordered table-condensed table-hover layui-table" id="mainContent">
+                    <thead>
+                    <tr>
+                        <th>姓名</th>
+                        <th>性别</th>
+                        <th>联系方式</th>
+                        <th>单位</th>
+                        <th style="width:75px;">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 修改Modal -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="change">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"><b>修改</b></h4>
+            </div>
+            <!-- <div class="modal-body" style="display:flex;justify-content: space-around;" >
+                   <div class="f-tree"></div>
+                   <div class="f-tree2"></div>
+            </div>  -->
+            <div class="zTreeDemoBackground left">
+                <ul id="checkboxTree" class="ztree"></ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-success" id="savePermissions">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 修改model结束 -->
+
+
+
+
+
+</body>
+<script src="../js/jquery.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+<!--<script src="../js/bootstrap-select.js" ></script>-->
+<script src="../js/common-scripts.js"></script>
+<script src="js/datatables/jquery.dataTables.min.js"></script>
+<script src="../js/jquery-editable-select.js" ></script>
+<script src="js/jquery.ztree.core.js"></script>
+<script src="js/jquery.ztree.excheck.js"></script>
+<script src="js/toastr.js" ></script>
+<script src="js/quanxian.js"></script>
+<script>
+
+    $(document).ready( function () {
+
+        initTable()
+
+    });
+
+    var setting = {
+        view: { selectedMulti: true , showIcon:false },
+        check: { enable: true,  chkStyle: "checkbox" /* chkboxType :{ "Y" : "p", "N" : "s" } */ },
+        data : { simpleData : { enable : true},
+            keep: {parent: false,leaf:false}
+        },
+        async: { enable: true},
+        callback:{
+            beforeCheck:true,
+            onCheck:onCheck
+        }
+    },zTree;
+
+    var table=$('#mainContent').dataTable({
+        "deferRender": true,
+        "processing": true,
+        "bDestroy": true,
+        "iDisplayLength": 10,
+        "searching": true,
+        "lengthChange": false,
+        "oLanguage": {
+            "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+        },
+        "columns": [
+            { "data": "usrName"},
+            { "data": "usrSex"},
+            { "data": "usrPhone"},
+            { "data": "companyName"},
+            { "data": null},
+        ],
+        "columnDefs": [{
+            "class": "tcenter",
+            "targets": 4,
+            "searchable": true,
+            "render": function(data, type, full) {
+                return ' <i class="iconfont icon-xiugai Pga" style="font-size:18px;cursor:pointer;display: none" title="修改权限" onclick="updateQuanxian(this)" data-toggle="modal" data-target="#change"></i>'
+            }
+        }],"fnDrawCallback" : function() {
+            initTableQuanxian()
+        },
+        "order": [[0, 'asc']],
+        "oLanguage": { //国际化配置
+            "sProcessing": "正在获取数据，请稍后...",
+            "sLengthMenu": "显示 _MENU_ 条",
+            "sZeroRecords": "查询不到相关数据",
+            "sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
+            "sInfoEmpty": "记录数为0",
+            "sInfoFiltered": "(全部记录数 _MAX_ 条)",
+            "sInfoPostFix": "",
+            "sSearch": "搜索",
+            "sUrl": "",
+            "oPaginate": {
+                "sFirst": "第一页",
+                "sPrevious": "上一页",
+                "sNext": "下一页",
+                "sLast": "最后一页"
+            }},
+
+    });
+
+    function initTable(){
+        $.ajax({
+            type: 'POST',
+            url: '/tUserInfo/getAlltUserInfo',
+            dataType: 'json',
+            data: {
+            },
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                $('#mainContent').dataTable().fnClearTable();
+                $('#mainContent').DataTable().rows.add(json).draw(false);
+            }
+        });
+    }
+
+    function initTableQuanxian(){
+        $.ajax({
+            type:"post",
+            url:"/login/getUser",
+            async:false,
+            data:{
+            },
+            success:function(json){
+                if(json!=null &&json!=""){
+                    var arr = json.usrPersmissionCoding.split(',');
+                    for(var i=0;i<arr.length;i++){
+                        if(arr[i].indexOf("Pga") >= 0 ){
+                            $(".Pga").show();
+                        }
+
+                    }
+
+                }
+
+            }
+        });
+    }
+
+
+    var xgId;
+    function updateQuanxian(obj){
+
+        $.ajax({
+            type: 'POST',
+            url: '/tPermissions/getAlltPermissions',
+            dataType: 'json',
+            data: {
+            },
+            success: function (json) {
+                zNodes=[];
+                var arr1 = json.list1;
+                var pId1=[];
+                if(arr1!=null&&arr1.length>0){
+                    for(var i in arr1){
+                        pId1[i]=arr1[i].coding;
+                        var a  = {};
+                        a.id=arr1[i].coding;
+                        a.pId = 0;
+                        a.name=arr1[i].name;
+                        a.open=false
+                        zNodes.push(a);
+                    }
+                }
+                var arr2 = json.list2;
+                var pId2=[];
+                for(var j in pId1){
+                    if(arr2!=null&&arr2.length>0){
+                        for(var k in arr2){
+                            if(arr2[k].coding.substr(0,2)==pId1[j].substr(0,2)){
+                                pId2[k]=arr2[k].coding;
+                                var b  = {};
+                                b.id=arr2[k].coding;
+                                b.pId = pId1[j];
+                                b.name=arr2[k].name;
+                                zNodes.push(b);
+
+                            }
+                        }
+                    }
+                }
+                var arr3 = json.list3;
+                var pId3=[];
+                for(var n in pId2){
+                    if(arr3!=null&&arr3.length>0){
+                        for(var m in arr3){
+                            var cal=arr3[m].coding;
+                            if(cal.substr(0,3)==pId2[n].substr(0,3)){
+                                pId3[m]=arr3[m].coding;
+                                var c  = {};
+                                c.id=arr3[m].coding;
+                                c.pId = pId2[n];
+                                c.name=arr3[m].name;
+                                zNodes.push(c);
+                            }
+                        }
+
+                    }
+                }
+                var arr4 = json.list4;
+                var pId4=[];
+                for(var ii in pId3){
+                    if(arr4!=null&&arr4.length>0){
+                        for(var jj in arr4){
+                            var val=arr4[jj].coding
+                            if(val.substr(0,4)==pId3[ii].substr(0,4)){
+                                pId4[jj]=arr4[jj].coding;
+                                var d = {};
+                                d.id=arr4[jj].coding;
+                                d.pId = pId3[ii];
+                                d.name=arr4[jj].name;
+                                zNodes.push(d);
+
+                            }
+                        }
+                    }
+                }
+                var arr5 = json.list5;
+                var pId5=[];
+                for(var mm in pId4){
+                    if(arr5!=null&&arr5.length>0){
+                        for(var nn in arr5){
+                            if(arr5[nn].coding.substr(0,5)==pId4[mm].substr(0,5)){
+                                pId5[nn]=arr5[nn].coding;
+                                var e = {};
+                                e.id=arr5[nn].coding;
+                                e.pId = pId4[mm];
+                                e.name=arr5[nn].name;
+                                zNodes.push(e);
+
+                            }
+                        }
+                    }
+                }
+                $.fn.zTree.init($("#checkboxTree"),setting, zNodes);
+
+                var dom=$(obj).parents("tr");
+                var data=$("#mainContent").DataTable().row(dom).data();
+                xgId=data.usrId;
+                var roleCode=data.usrPersmissionCoding;
+                var zTree = $.fn.zTree.getZTreeObj("checkboxTree");//treeDemo界面中加载ztree的div
+                zTree.cancelSelectedNode();//先取消所有的选中状态
+                if(roleCode!=null&&roleCode!=''){
+                    var arr=roleCode.split(',');
+                    for(var i=0;i<arr.length;i++){
+                        zTree.checkAllNodes(false);
+                        var id = arr[i];
+                        var node = zTree.getNodeByParam("id",id);
+                        if(node!=null){
+                            zTree.checkNode(node,false);//将指定ID的节点取消选中
+                        }
+                    }
+                    for(var i=0;i<arr.length;i++){
+                        var id = arr[i];
+                        var node = zTree.getNodeByParam("id",id);
+                        if(node!=null){
+                            zTree.checkNode(node,true);//将指定ID的节点选中
+                        }
+                        //zTree.expandNode(node, true, false);//将指定ID节点展开
+
+                    }
+
+                }else{
+                    zTree.checkAllNodes(false);
+                }
+            }
+        });
+
+    }
+
+    var roleCode;//选中的编码
+    function onCheck(e,treeId,treeNode){
+        var treeObj=$.fn.zTree.getZTreeObj("checkboxTree"),
+            nodes=treeObj.getCheckedNodes(true),
+            v="";
+        var arr = [];
+        for(var i=0;i<nodes.length;i++){
+            v+=nodes[i].name + ",";
+            arr[i]=nodes[i].id;
+            //console.log("节点id:"+nodes[i].id+"节点名称"+v); //获取选中节点的值
+        }
+        roleCode = arr.join(',');
+        //console.log(permissions)
+    }
+
+    $("#savePermissions").bind("click",function(){
+
+        $.ajax({
+            type: 'POST',
+            url: '/tPermissions/updUsrPersmissionCodingById',
+            dataType: 'json',
+            data: {
+                usrId:xgId,
+                UsrPersmissionCoding:roleCode
+            },
+            error: function (msg) {
+                alert("请求失败");
+            },
+            success: function (json) {
+                if(json>0){
+                    toastr.success("修改成功")
+                    $("#change").modal('hide');
+                    initTable();
+                }else{
+                    toastr.error("修改失败")
+                }
+            }
+        });
+    })
+
+
+
+
+</script>
+</html>
