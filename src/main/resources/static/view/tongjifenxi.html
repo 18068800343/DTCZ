@@ -157,7 +157,7 @@
                 </div>
                 <div class="LowerPart" style="margin-top:3px;">
 
-                    <div style="height: 300px;width:1050px;margin-left: 200px;" id="dataTable2">
+                    <div style="height: 300px;width:1050px;margin-left: 200px;" id="dataTableMonth">
                     </div>
 
                 </div>
@@ -197,6 +197,27 @@
 
     </div>
 </div>
+
+<!-- allMsg -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     id="modalEchartsMonth">
+    <div class="modal-dialog modal-lg" role="document" style="width:60%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title"><b>趋势图</b></h4>
+            </div>
+            <div class="modal-body">
+                <div id="myChartMonth" style="width: 1000px;height:500px;"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end allMsg content -->
 
 
 <!-- allMsg -->
@@ -303,6 +324,7 @@
         });
 
         dayAndMonthTongjiDom.initTable();
+        dayAndMonthTongjiDomMonth.initTableMonth();
         getTime()
         initzhandian()
         queding();
@@ -362,6 +384,7 @@
         var stationPort=$("#stationPort").val();
         var startTime=$("#startTime").val();
         dayAndMonthTongjiDom.initTableBodyAjax(stationPort,startTime);
+
 
         if(startTime==null||startTime==''||startTime==undefined){
             startTime=getTime();
@@ -623,8 +646,7 @@
     function queding2(){
         var stationPort=$("#stationPort2").val();
         var startTime=$("#startTime2").val();
-        dayAndMonthTongjiDom.initTableBodyAjax(stationPort,startTime);
-
+        dayAndMonthTongjiDomMonth.initTableBodyAjaxMonth(stationPort,startTime);
         if(startTime==null||startTime==''||startTime==undefined){
             startTime=getTime();
         }

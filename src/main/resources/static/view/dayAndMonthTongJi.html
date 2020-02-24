@@ -20,10 +20,31 @@
 <!-- widget content -->
 <div class="widget-body" style="margin-top: 10px;">
 
-    <div style="height: 500px" id="dataTable">
+    <div style="height: 500px" id="dataTableMonth">
     </div>
 </div>
-<!-- end widget content -->
+
+
+<!-- allMsg -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     id="modalEchartsMonth">
+    <div class="modal-dialog modal-lg" role="document" style="width:60%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title"><b>趋势图</b></h4>
+            </div>
+            <div class="modal-body">
+                <div id="myChartMonth" style="width: 1000px;height:500px;"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end allMsg content -->
 </body>
 <script src="../js/jquery.js"></script>
 <script src="../js/bootstrap.min.js"></script>
@@ -41,32 +62,32 @@
 
 
     $(document).ready(function () {
-        dayAndMonthTongjiDom.initTable();
-        dayAndMonthTongjiDom.initTableBodyAjax('10001','2020-02');
+        dayAndMonthTongjiDomMonth.initTableMonth();
+        dayAndMonthTongjiDomMonth.initTableBodyAjaxMonth('10001','2020-02');
     });
 
-    let dayAndMonthTongjiDom={};
+    let dayAndMonthTongjiDomMonth={};
 
-    dayAndMonthTongjiDom.initTable = () => {
-        $("#dataTable").append("<div id='title'><ul   class='nav nav-tabs pull-left'>"
-            + " <li class='active'><a href='#s1' data-toggle='tab' id='tab1'>交通量</a></li>"
-            + " <li><a href='#s2' data-toggle='tab' id='tab2'>超载车辆数</a></li>"
-            + " <li><a href='#s3' data-toggle='tab' id='tab3'>平均超载率</a></li>"
-            + " <li ><a href='#s4' data-toggle='tab' id='tab4'>超载比例(%)</a></li>"
-            + " <li ><a href='#s5' data-toggle='tab' id='tab5'>最大车重(KG)</a></li>"
+    dayAndMonthTongjiDomMonth.initTableMonth = () => {
+        $("#dataTableMonth").append("<div id='title'><ul   class='nav nav-tabs pull-left'>"
+            + " <li class='active'><a href='#s1Month' data-toggle='tab' id='tab1Month'>交通量</a></li>"
+            + " <li><a href='#s2Month' data-toggle='tab' id='tab2Month'>超载车辆数</a></li>"
+            + " <li><a href='#s3Month' data-toggle='tab' id='tab3Month'>平均超载率</a></li>"
+            + " <li ><a href='#s4Month' data-toggle='tab' id='tab4Month'>超载比例(%)</a></li>"
+            + " <li ><a href='#s5Month' data-toggle='tab' id='tab5Month'>最大车重(KG)</a></li>"
             + "</ul></div>"
-            + "<div id='myTabContent1' class='tab-content bg-color-white no-padding' style='overflow-x: auto; overflow-y: auto; height:450px; width:1040px;'>"
-            + " <div class='tab-pane fade in active' id='s1'>"
-            + " <table id='myTabOne1' data-id='交通量' class='table table-bordered table-hover' border='2'  bordercolor='black' cellspacing='0' cellpadding='0'></table></div>"
-            + "<div class='tab-pane fade in' id='s2'><table id='myTabOne2' data-id='超载车辆数'  class='table table-bordered table-hover' border='2'  bordercolor='black' cellspacing='0' cellpadding='0'></table></div>"
-            + "<div class='tab-pane fade in' id='s3'><table id='myTabOne3' data-id='平均超载率'  class='table table-bordered table-hover' border='2' bordercolor='black' cellspacing='0' cellpadding='0'></table></div>"
-            + " <div class='tab-pane fade in' id='s4'>"
-            + " <table id='myTabOne4' data-id='超载比例' class='table table-bordered table-hover' border='2'  bordercolor='black' cellspacing='0' cellpadding='0'></table></div>"
-            + "  <div class='tab-pane fade in' id='s5'><table id='myTabOne5' data-id='最大车重' class='table table-bordered table-hover' border='2' bordercolor='black' cellspacing='0' cellpadding='0'></table></div>"
+            + "<div id='myTabContent1Month' class='tab-content bg-color-white no-padding' style='overflow-x: auto; overflow-y: auto; height:450px; width:1040px;'>"
+            + " <div class='tab-pane fade in active' id='s1Month'>"
+            + " <table id='myTabOne1Month' data-id='交通量' class='table table-bordered table-hover' border='2'  bordercolor='black' cellspacing='0' cellpadding='0'></table></div>"
+            + "<div class='tab-pane fade in' id='s2Month'><table id='myTabOne2Month' data-id='超载车辆数'  class='table table-bordered table-hover' border='2'  bordercolor='black' cellspacing='0' cellpadding='0'></table></div>"
+            + "<div class='tab-pane fade in' id='s3Month'><table id='myTabOne3Month' data-id='平均超载率'  class='table table-bordered table-hover' border='2' bordercolor='black' cellspacing='0' cellpadding='0'></table></div>"
+            + " <div class='tab-pane fade in' id='s4Month'>"
+            + " <table id='myTabOne4Month' data-id='超载比例' class='table table-bordered table-hover' border='2'  bordercolor='black' cellspacing='0' cellpadding='0'></table></div>"
+            + "  <div class='tab-pane fade in' id='s5Month'><table id='myTabOne5Month' data-id='最大车重' class='table table-bordered table-hover' border='2' bordercolor='black' cellspacing='0' cellpadding='0'></table></div>"
             + " </div>")
     }
 
-    dayAndMonthTongjiDom.initTableBodyAjax = (stationIp,avgTime) => {
+    dayAndMonthTongjiDomMonth.initTableBodyAjaxMonth = (stationIp,avgTime) => {
         $.ajax({
             type: 'POST',
             url: '/tAvgDay/gettAvgDayColumnByIpAndTimeMonth',
@@ -79,15 +100,15 @@
             error: function (msg) {
             },
             success: function (json) {
-                initTableTbody(json)
-                dayAndMonthTongjiDom.bindClick(stationIp);
+                initTableTbodyMonth(json)
+                dayAndMonthTongjiDomMonth.bindClick(stationIp);
             }
         });
     }
-    let initTableTbody = (json) => {
+    let initTableTbodyMonth = (json) => {
         for (let i = 1; i <= 5; i++) {
             if (i == 5) {
-                let tableDom = $("#myTabOne" + i).html('');
+                let tableDom = $("#myTabOne" + i+"Month").html('');
                 tableDom.append("<thead>" + "</thead>" + "<tfoot>" +
                     "<tr align='center'>" +
                     "<td>" + "车道编号" + "</td>" +
@@ -118,7 +139,7 @@
                         "</tr>")
                 }
             } else {
-                let tableDom = $("#myTabOne" + i).html('');
+                let tableDom = $("#myTabOne" + i+"Month").html('');
                 let k = 5 * (i) + i - 1;
                 tableDom.append("<thead>" + "</thead>" + "<tfoot>" +
                     "<tr align='center'>" +
@@ -182,8 +203,8 @@
     }
 
 
-    dayAndMonthTongjiDom.bindClick = (stationIp)=>{
-        $("#dataTable").find("td").each(function () {
+    dayAndMonthTongjiDomMonth.bindClick = (stationIp)=>{
+        $("#dataTableMonth").find("td").each(function () {
             let str = $(this).attr("data-id");
             if(str!=undefined){
                 $(this).on('click',function () {
@@ -202,7 +223,7 @@
                         error: function (msg) {
                         },
                         success: function (json) {
-                            dayAndMonthTongjiDom.makeLineChart(json);
+                            dayAndMonthTongjiDomMonth.makeLineChartMonth(json);
                         }
                     });
                 })
@@ -210,13 +231,13 @@
             }
         })
     }
-    dayAndMonthTongjiDom.makeLineChart = (data)=>{
-        $("#modalEcharts").modal("show");
-        initMyChart(data);
+    dayAndMonthTongjiDomMonth.makeLineChartMonth = (data)=>{
+        $("#modalEchartsMonth").modal("show");
+        initMyChartMonth(data);
     }
 
-    let initMyChart = (data)=>{
-        let myChart = echarts.init(document.getElementById('myChart'));
+    let initMyChartMonth = (data)=>{
+        let myChart = echarts.init(document.getElementById('myChartMonth'));
         let option = {
             title: {
                 text: ''
