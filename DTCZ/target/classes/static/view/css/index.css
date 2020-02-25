@@ -1,77 +1,60 @@
 body{
 	background-image: url(../img/bg.png);
-	background-size: 100%;
+	background-size: 100% 100% ;
 	background-repeat: no-repeat;
 }
-.head{
-	width: 100%;
-	/*text-align: center;*/
-	margin-left: 5%;
+.leftdiv{
+	margin-left: 12%;
 }
-.left{
-	margin-left: 1%;
-	margin-top: 3%;
-	height: 23%;
-	width: 33%;
-	background-size: 100%;
-	background-repeat: no-repeat;
-	background-image: url(../img/border_chaozhong.png);
+.jianceh{
+	 background-image: -webkit-linear-gradient(bottom, rgb(0, 122, 255), rgb(0, 250, 255));
+	 -webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
 }
-.k{
-	width: 75%;
+.leftp{
+	display: inline-block;
+	background-image: -webkit-linear-gradient(bottom, rgb(227, 227, 211), rgb(143, 240, 249));
+	 -webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	font-size: 35px;
+	font-weight: bolder;
+	margin-left: 3%;
 }
-.tt{
-	position: absolute;
-	top: 4%;
-	margin-left: 5%;
-}
-.center{
+.leftsj span{
+	color: #A4A5B0;
 	margin-left: 2%;
-	margin-top: 2%;
-	margin-right: 2%;
-	height: 41%;
-	position: absolute;
-	width: 30%;
-	right: 30%;
-	top: 3%;
-	background-size: 100%;
-	background-repeat: no-repeat;
-	background-image: url(../img/border_map.png);
+	font-weight: bolder;
 }
-.right{
-	margin-left: 1%;
-	margin-top: 3%;
-	height: 21%;
-	position: absolute;
-	right: 80px;
-	top: 3%;
-	width:23%;
-	background-size: 100%;
-	background-repeat: no-repeat;
-	background-image: url(../img/border_chaozhong.png)	
+.centerdiv{
+	margin-left: -5%;
 }
-.right_text{
-	position: absolute;
-    right:8%;
-    top: 8%;
+.topcenter{
+	background-image:url(../img/left_angle.png),url(../img/right_angle.png);
+	background-repeat: no-repeat no-repeat; 
+	background-position:0 90%, 100% 90%; 
 }
-/*右上角日期*/
-.text{
-	color: white;
-	font-size: 14px;
-	position: absolute;
-	right:1%;
-	top:4%;
+.bg{
+ /* width: 75%; */
+ background-image: linear-gradient(to right, rgb(5, 33, 137), transparent), url("bg.png");
 }
-/*下半部分*/
-.bottom{
-	background-image: url(../img/border_jiaotongliang.png);
-	width: 122%;
-	height: 500px;
-	margin-left: 1%;
-	margin-top: 5%;
-	background-repeat: no-repeat;
-	background-size: 100%;
-	
-	
+.dangqianche{
+	background-image: -webkit-linear-gradient(top, rgb(0, 122, 255), rgb(143, 240, 249));
+	 -webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+.bz span{
+	color: #14427D;
+	font-size:15px;
+	font-weight: bolder;
+}
+#xian{
+	border: 1px solid #09185C;
+	border-top: none;
+	padding:10px;
+	z-index: -1;
+}
+.bottomcenter{
+	background-image:url(../img/left_angle.png),url(../img/right_angle.png);
+	background-repeat: no-repeat no-repeat; 
+	background-position:0 100%, 100% 100%; 
 }

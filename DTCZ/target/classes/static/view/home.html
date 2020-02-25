@@ -1,509 +1,1619 @@
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<meta charset="utf-8" />
 		<title>首页</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-		<meta name="keywords" content="百度地图,百度地图API，百度地图自定义工具，百度地图所见即所得工具" />
-		<meta name="description" content="百度地图API自定义地图，帮助用户在可视化操作下生成百度地图" />
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="./css/bootstrap-theme.css" />
 		<link rel="stylesheet" type="text/css" href="css/index.css" />
-		<!--引用百度地图API-->
-		<style type="text/css">
-			html,
-			body {
-				margin: 0;
-				padding: 0;
-			}
+		<style>
+			.main-table tr td{padding:3px;}
+			.main-table .red{color:red;}
 			
-			.iw_poi_title {
-				color: #CC5522;
-				font-size: 14px;
-				font-weight: bold;
-				overflow: hidden;
-				padding-right: 13px;
-				white-space: nowrap
-			}
-			
-			.iw_poi_content {
-				font: 12px arial, sans-serif;
-				overflow: visible;
-				padding-top: 4px;
-				white-space: -moz-pre-wrap;
-				word-wrap: break-word
+			@media screen and (min-width: 1920px) {
+			   .righttop{
+				   margin-top: -20% !important;
+			   }
+			   .righttop{
+				   top:200px !important;
+			   }
+			   .rightbottom span{
+				   margin-top: 1% !important;
+			   }
 			}
 		</style>
-		<script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
 	</head>
-
-	<body style="width: 70%;margin-left: 10%;text-align: center;">
-		<div class="head col-xs-12">
-			<img src="img/header.png" />
-			<div class="text">
-				<p>2019年11月21日 17:40</p>
-				<!--<p >17:40</p>-->
+	<body class="jd">
+		<div class="head" style="height: 100px;width: 100%;"></div>
+		<div class="leftdiv col-xs-3">
+			<h2 class="jianceh" style="font-size: 19px;color:#007AFF;font-weight: bolder;">监测站点实时统计</h2>
+			<div class="leftsj">
+				<div class="leftfirst">
+					<img src="img/first_img.png" style="height: 40px;">
+					<p class="leftp">12345689</p><span>辆</span>
+					<p style="color: #A4A5B0;margin-left: 11%;font-weight: bolder;margin-top: -2%;">当前总流量</p>
+				</div>
+				<div class="leftsec">
+					<img src="./img/second_img.png" style="height: 40px;">
+					<p class="leftp">12345</p><span>辆</span>
+					<p style="color: #A4A5B0;margin-left: 11%;font-weight: bolder;margin-top: -2%;">当前超载车辆数</p>
+				</div>
+				<div class="leftth">
+					<img src="img/third_img.png" style="height: 40px;">
+					<p class="leftp">109</p><span>吨</span>
+					<p style="color: #A4A5B0;margin-left: 11%;font-weight: bolder;margin-top: -2%;">当前最大车重</p>
+				</div>
+				<div class="leftfou">
+					<img src="img/first_img.png" style="height: 40px;">
+					<p class="leftp">6</p><span>个</span>
+					<p style="color: #A4A5B0;margin-left: 11%;font-weight: bolder;margin-top: -2%;">当前监测站点</p>
+				</div>
+				<div class="y-span10 y-last">
+					<div class="table">
+						<div class="bj_nav y-clearfix">
+							<div>
+								<div id="main" style="height:500px;width:100%;margin:0 15px;float:left;margin-left: -28%;"></div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-		<!--主体结构-->
-		<div class="body">
-			<div class="tt">
-				<img src="img/title_chaozai.png" />
-			</div>
-			<div class="left col-xs-4 ">
-				<div id="_top" style="width:90%;height: 400px;margin-top: -30px;">
+		<!-- 左边结束 -->
+		<div class="centerdiv col-xs-4">
+			<div class="topcenter">
+				<div class="bg">
+					<h2 class="dangqianche" style="font-size: 17px;color:#007AFF;font-weight: bolder; padding: 10px;">当前车流量统计</h2>
 				</div>
-				<!--左边-->
-			</div>
-			<div class="center col-xs-4">
-				<div style="width:100%;height:55%;border:#ccc solid 1px;margin-top: 20px;border-radius: 10px;" id="dituContent"></div>
-				<div class="center_text">
-					<!--中间-->
+				<div class="bz">
+					<span style="float: left; margin-left: 2%;">站点排名</span>
+					<span style="float: right;margin-right: 3%;">流量统计</span>
+				</div>
+				<div id="xian" style="height:380px;top: -45px;">
 				</div>
 			</div>
-			<div class="right_text">
-				<img src="img/title_chaozai.png" />
-			</div>
-			<div class="right col-xs-4 ">
-				<div id="_right" style="width:400px;height: 300px;margin-left: -50px;margin-top: 20px;">
-					<!--右边-->
+			<div class="bottomcenter">
+				<div class="bg" style="margin-top: -8%;">
+					<h2 class="dangqianche" style="font-size: 16px;font-weight: bolder; padding: 10px;">当前车辆超载比例统计</h2>
+				</div>
+				<div id="xian" style="height:360px;top: -45px;">
+					<div id="huan" class="col-xs-4" style="height: 160px;position: absolute;"></div>
+					<div id="huanf" class="col-xs-4" style="height: 160px;position: absolute; margin-left: 30%;"></div>
+					<div id="huans" class="col-xs-4" style="height: 160px;float: right;position: absolute;right: 0;">
+					</div>
+					<div class="ecs" style="margin-top: 30%;">
+						<div id="huant" class="col-xs-4" style="height: 160px;position: absolute;"></div>
+						<div id="huanfo" class="col-xs-4" style="height: 160px;position: absolute; margin-left: 30%;"></div>
+						<div id="huanfi" class="col-xs-4" style="height: 160px;position: absolute;right: 0"></div>
+					</div>
 				</div>
 			</div>
-			<div class="bottom col-xs-12">
-				<div id="bottom_" style="width:110%;height: 400px;margin-left: -50px;margin-top: 20px;">
-				</div>
+		</div>
+		<!-- 中间结束 -->
+		<div class="right col-xs-3">
+			<div class="bg">
+				<h2 class="dangqianche" style="font-size: 17px;color:#007AFF;font-weight: bolder;padding: 10px;">当前车辆预警统计</h2>
+			</div>
+			<div class="righttop" style="margin-top: -10%;position: relative;">
+				<div id="by" class="col-xs-4" style="height:200px;position: absolute;float: left;"></div>
+				<div id="byf" class="col-xs-4" style="height:200px;margin-left:30%;position: absolute;"></div>
+				<div id="by2" class="col-xs-4" style="height:200px;float: right;"></div>
+			</div>
+			<div class="ert" style="margin-top: 40%;position: relative;">
+				<div id="by3" class="col-xs-4" style="height:200px;position: absolute;"></div>
+				<div id="by4"  class="col-xs-4"style="height:200px;position: absolute;margin-left: 30%;"></div>
+				<div id="by5"  class="col-xs-4"style="height:200px;position: absolute;right: 0;"></div>
+			</div>
+			<div class="rightbottom" style="clear: both; position: relative;top: 140px;">
+			<p style="font-size: 17px;color: #FFF;" class="col-xs-8">当前最大车重<span style="color: #FE545E;font-size: 25px;background-color:#131A50;padding: 1.5%;margin: 1%;">109</span>吨</p>
+			<span style="float: right;margin-top: -10%;color:#16427C;">二级预警（≥80吨）</span>
+			<span style="float: right;margin-top: -5%;color:#16427C;">三级预警（≥100吨）</span>
+		  
+			</div>
+			<div id="liti" class="col-xs-12" style="height: 400px;margin-top: 40%;">
+			</div>
+		</div>
 	</body>
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/build/dist/echarts.js" type="text/javascript" charset="utf-8"></script>
 
-	<!--======================================================================================下方柱状图==========================================================-->
 
-	<script src="js/echarts.min(1).js" type="text/javascript" charset="utf-8"></script>
-	<!--	======================================================================================右边饼状图==========================================================================================-->
 	<script type="text/javascript">
-		var myChart = echarts.init(document.getElementById('_right'));
+		require.config({
+			paths: {
+				echarts: 'js/build/dist'
+			}
+		});
 
-		var option = {
-			title: {
-				x: 'center'
-			},
-			tooltip: {
-				trigger: 'item',
-				formatter: "{a} <br/>{b} : {c} ({d}%)"
-			},
-			legend: {
-				orient: 'vertical',
-				right: 'right',
-				data: ['24', '38', '52', '31', '21', '11', '33', '42'],
-				color: '#FFFFFF',
-			},
-			series: [{
-				name: '访问来源',
-				type: 'pie',
-				radius: '55%',
-				center: ['50%', '60%'],
-				color: ['#06d3c4', '#ffbb32', '#2ccc44', "#0278fe", "#FF3976", "#6058E1", "#e569ff", "#00d6fb"],
-				data: [{
-						value: 335,
-						name: '24'
-					},
-					{
-						value: 310,
-						name: '38'
-					},
-					{
-						value: 234,
-						name: '52'
-					},
-					{
-						value: 135,
-						name: '31'
-					},
-					{
-						value: 200,
-						name: '21'
-					},
-					{
-						value: 120,
-						name: '11'
-					},
-					{
-						value: 120,
-						name: '33'
-					},
-					{
-						value: 120,
-						name: '42'
-					}
-				],
-				itemStyle: {
-					emphasis: {
-						shadowBlur: 10,
-						shadowOffsetX: 0,
-						shadowColor: 'rgba(0, 0, 0, 0.5)'
+		// 使用
+		require(
+			[
+				'echarts',
+				'echarts/chart/map'
+			],
+			function(ec) {
+				require('echarts/util/mapData/params').params.anhui = {
+
+					getGeoJson: function(callback) {
+						$.getJSON('geoJson/anhui.json', function(data) {
+							// 压缩后的地图数据必须使用 decode 函数转换
+							callback(require('echarts/util/mapData/params').decode(data));
+						});
 					}
 				}
-			}]
-		};
+				var myChart = ec.init(document.getElementById('main'));
+				var ecConfig = require('echarts/config');
+				var zrEvent = require('zrender/tool/event');
+				var curIndx = 0;
+				var mapType = ["安徽"];
 
-		// 使用刚指定的配置项和数据显示图表。
-		myChart.setOption(option);
-	</script>
 
-	<!--======================================================================================左边柱状图===============================================================================-->
-	<script type="text/javascript">
-		// 基于准备好的dom，初始化echarts实例
-		var myChart = echarts.init(document.getElementById('_top'));
+				myChart.on(ecConfig.EVENT.MAP_SELECTED, function(param) {});
+				option = {
+
+					tooltip: {
+						trigger: 'item',
+						//formatter:'dede{b}'
+						formatter: function(param) {}
+					},
+					legend: {
+						orient: 'vertical',
+						x: '',
+						data: [' ']
+					},
+
+					series: [{
+						name: '',
+						type: 'map',
+						mapType: 'anhui',
+						selectedMode: false,
+						itemStyle: {
+							normal: {
+								label: {
+									show: true
+								},
+								borderColor: 'rgb(71,160,192)',
+								borderWidth: 1
+							},
+							emphasis: {
+								label: {
+									show: true
+								}
+							}
+						},
+						data: [{
+								name: '六安市',
+								value: Math.round(Math.random() * 500)
+							},
+							{
+								name: '安庆市',
+								value: Math.round(Math.random() * 500)
+							},
+							{
+								name: '滁州市',
+								value: Math.round(Math.random() * 500)
+							},
+							{
+								name: '宣城市',
+								value: Math.round(Math.random() * 500)
+							},
+							{
+								name: '阜阳市',
+								value: Math.round(Math.random() * 500)
+							},
+							{
+								name: '宿州市',
+								value: Math.round(Math.random() * 500)
+							},
+							{
+								name: '黄山市',
+								value: Math.round(Math.random() * 500)
+							},
+							{
+								name: '亳州市',
+								value: Math.round(Math.random() * 500)
+							},
+							{
+								name: '池州市',
+								value: Math.round(Math.random() * 500)
+							},
+							{
+								name: '合肥市',
+								value: Math.round(Math.random() * 500)
+							},
+							{
+								name: '蚌埠市',
+								value: Math.round(Math.random() * 500)
+							},
+							{
+								name: '芜湖市',
+								value: Math.round(Math.random() * 500)
+							},
+							{
+								name: '淮北市',
+								value: Math.round(Math.random() * 500)
+							},
+							{
+								name: '淮南市',
+								value: Math.round(Math.random() * 500)
+							},
+							{
+								name: '马鞍山市',
+								value: Math.round(Math.random() * 500)
+							},
+							{
+								name: '铜陵市',
+								value: Math.round(Math.random() * 500)
+							}
+						],
+						geoCoord: {
+							'合肥市': [117.22, 31.79],
+							'蚌埠市': [117.33, 33.03],
+							'芜湖市': [118.34, 31.05],
+							'淮南市': [116.78, 32.62],
+							'铜陵市': [117.82, 30.93],
+							'宿州市': [117.29, 33.64],
+							'宣城市': [118.95, 30.64],
+							'亳州市': [115.76, 33.80],
+							'池州市': [117.47, 30.37],
+							'马鞍山市': [118.53, 31.50],
+							'淮北市': [116.70, 33.78],
+							'安庆市': [116.55, 30.52],
+							'黄山市': [118.01, 29.98],
+							'滁州市': [118.32, 32.27],
+							'阜阳市': [115.82, 32.85],
+							'六安市': [116.22, 31.92]
+						},
+						markPoint: {
+							symbol: 'emptyCircle',
+							symbolSize: 15,
+							itemStyle: {
+								normal: {
+									borderColor: '#f34010',
+									borderWidth: 1, // 标注边线线宽，单位px，默认为1
+									label: {
+										show: true
+									}
+								},
+								emphasis: {
+									borderColor: '#bc2e08',
+									borderWidth: 5,
+									label: {
+										show: true
+									}
+								}
+							},
+							effect: {
+								show: true,
+								shadowBlur: 0,
+								loop: true
+							},
+							data: [{
+									name: '合肥市',
+									value: 95
+								},
+								{
+									name: '蚌埠市',
+									value: 2
+								},
+								{
+									name: '芜湖市'
+								},
+								{
+									name: '淮南市'
+								},
+								{
+									name: '铜陵市'
+								}
+							]
+						}
+
+					}]
+				}
+				myChart.setOption(option);
+			}
+		);
+
+
+		var myChart = echarts.init(document.getElementById('xian'));
+
+		//初始化数据
+		var category = ['G1516-宿杨苏皖', 'S68栗芜高速苏', 'S69济徐苏鲁省', 'G3-京福苏鲁省界', 'G25-苏鲁临连省', 'G15苏鲁省界'];
+		var barData = [2142, 1218, 581, 431, 383, 163];
+		var yMax = 4000;
+		var dataShadow = [];
+
+		for (var i = 0; i < barData.length; i++) {
+			dataShadow.push(yMax)
+		}
+
 		var option = {
-
-			dataset: {
-				source: [
-					['score', 'amount', 'product'],
-					[1500, 300, 'A'],
-					[89.3, 900, 'B'],
-					[57.1, 700, 'C'],
-					[74.4, 320, 'D'],
-					[50.1, 500, 'E'],
-					[89.7, 800, 'F'],
-					[68.1, 120, 'J'],
-					[19.6, 650, 'G'],
-					[10.6, 420, 'H'],
-					[32.7, 1200, 'L']
-				]
+			tooltip: {
+				trigger: 'axis',
+				axisPointer: {
+					type: 'shadow'
+				}
 			},
 			grid: {
+				left: '20%',
+				right: '4%',
+				bottom: '3%',
 				containLabel: true
 			},
 			xAxis: {
-				name: 'amount',
+				type: 'value',
+				axisLine: {
+					show: true
+				},
+				axisTick: {
+					show: false
+				},
 				axisLabel: {
-					show: true,
-					textStyle: {
-						color: '#fff'
-					}
+					show: false
+				},
+				splitLine: {
+					show: false
 				}
 			},
 			yAxis: {
 				type: 'category',
-				axisLabel: {
-					show: true,
-					textStyle: {
-						color: '#fff'
-					}
-				}
-
-			},
-			visualMap: {
-
-				orient: 'horizontal',
-				left: 'center',
-				min: 10,
-				max: 100,
-				text: ['High Score', 'Low Score'],
-				axisLabel: {
-					show: true,
-					textStyle: {
-						color: '#fff'
-					}
-				},
-				// Map the score column to color
-				dimension: 0,
-				inRange: {
-					color: ['#D7DA8B', '#E15457']
-				}
-
-			},
-			series: [{
-				type: 'bar',
-				encode: {
-					// Map the "amount" column to X axis.
-					x: 'amount',
-					// Map the "product" column to Y axis
-					y: 'product'
-				}
-			}]
-		};
-
-		// 使用刚指定的配置项和数据显示图表。
-		myChart.setOption(option);
-	</script>
-<!--=================================================================================================中间地图==============================================================-->
-	<script type="text/javascript">
-		//创建和初始化地图函数：
-		function initMap() {
-			createMap(); //创建地图
-			setMapEvent(); //设置地图事件
-			addMapControl(); //向地图添加控件
-			addMarker(); //向地图中添加marker
-		}
-
-		//创建地图函数：
-		function createMap() {
-			var map = new BMap.Map("dituContent"); //在百度地图容器中创建一个地图
-			var point = new BMap.Point(118.064214, 36.811252); //定义一个中心点坐标
-			map.centerAndZoom(point, 18); //设定地图的中心点和坐标并将地图显示在地图容器中
-			window.map = map; //将map变量存储在全局
-		}
-
-		//地图事件设置函数：
-		function setMapEvent() {
-			map.enableDragging(); //启用地图拖拽事件，默认启用(可不写)
-			map.enableScrollWheelZoom(); //启用地图滚轮放大缩小
-			map.enableDoubleClickZoom(); //启用鼠标双击放大，默认启用(可不写)
-			map.enableKeyboard(); //启用键盘上下左右键移动地图
-		}
-
-		//地图控件添加函数：
-		function addMapControl() {
-			//向地图中添加缩放控件
-			var ctrl_nav = new BMap.NavigationControl({
-				anchor: BMAP_ANCHOR_TOP_LEFT,
-				type: BMAP_NAVIGATION_CONTROL_LARGE
-			});
-			map.addControl(ctrl_nav);
-			//向地图中添加缩略图控件
-			var ctrl_ove = new BMap.OverviewMapControl({
-				anchor: BMAP_ANCHOR_BOTTOM_RIGHT,
-				isOpen: 1
-			});
-			map.addControl(ctrl_ove);
-			//向地图中添加比例尺控件
-			var ctrl_sca = new BMap.ScaleControl({
-				anchor: BMAP_ANCHOR_BOTTOM_LEFT
-			});
-			map.addControl(ctrl_sca);
-		}
-
-		//标注点数组
-		var markerArr = [{
-			//			title: "淄博汉企",
-			//			content: "0533-3113118",
-			//			point: "118.063086|36.811338",
-			isOpen: 0,
-			icon: {
-				w: 21,
-				h: 21,
-				l: 0,
-				t: 0,
-				x: 6,
-				lb: 5
-			}
-		}];
-		//创建marker
-		function addMarker() {
-			for(var i = 0; i < markerArr.length; i++) {
-				var json = markerArr[i];
-				var p0 = json.point.split("|")[0];
-				var p1 = json.point.split("|")[1];
-				var point = new BMap.Point(p0, p1);
-				var iconImg = createIcon(json.icon);
-				var marker = new BMap.Marker(point, {
-					icon: iconImg
-				});
-				var iw = createInfoWindow(i);
-				var label = new BMap.Label(json.title, {
-					"offset": new BMap.Size(json.icon.lb - json.icon.x + 10, -20)
-				});
-				marker.setLabel(label);
-				map.addOverlay(marker);
-				label.setStyle({
-					borderColor: "#808080",
-					color: "#333",
-					cursor: "pointer"
-				});
-
-				(function() {
-					var index = i;
-					var _iw = createInfoWindow(i);
-					var _marker = marker;
-					_marker.addEventListener("click", function() {
-						this.openInfoWindow(_iw);
-					});
-					_iw.addEventListener("open", function() {
-						_marker.getLabel().hide();
-					})
-					_iw.addEventListener("close", function() {
-						_marker.getLabel().show();
-					})
-					label.addEventListener("click", function() {
-						_marker.openInfoWindow(_iw);
-					})
-					if(!!json.isOpen) {
-						label.hide();
-						_marker.openInfoWindow(_iw);
-					}
-				})()
-			}
-		}
-		//创建InfoWindow
-		function createInfoWindow(i) {
-			var json = markerArr[i];
-			var iw = new BMap.InfoWindow("<b class='iw_poi_title' title='" + json.title + "'>" + json.title + "</b><div class='iw_poi_content'>" + json.content + "</div>");
-			return iw;
-		}
-		//创建一个Icon
-		function createIcon(json) {
-			var icon = new BMap.Icon("http://app.baidu.com/map/images/us_mk_icon.png", new BMap.Size(json.w, json.h), {
-				imageOffset: new BMap.Size(-json.l, -json.t),
-				infoWindowOffset: new BMap.Size(json.lb + 5, 1),
-				offset: new BMap.Size(json.x, json.h)
-			})
-			return icon;
-		}
-
-		initMap(); //创建和初始化地图
-	</script>
-
-	<!--========================================================================= 下方柱状图==========================================================-->
-	<script type="text/javascript">
-		var myChart = echarts.init(document.getElementById('bottom_'));
-
-		var dataAxis = ['0', '击', '柱', '子', '或', '者', '两', '指', '在', '触', '屏', '上', '滑', '动', '能', '够', '自', '动', '缩', '放'];
-		var data = [220, 182, 191, 234, 290, 330, 310, 123, 442, 321, 90, 149, 210, 122, 133, 334, 198, 123, 125, 220];
-		var yMax = 500;
-		var dataShadow = [];
-
-		for(var i = 0; i < data.length; i++) {
-			dataShadow.push(yMax);
-		}
-
-		var option = {
-			xAxis: {
-				data: dataAxis,
+				data: category,
 				splitLine: {
-					show: false
-				},
-				axisLabel: {
-					inside: true,
-					textStyle: {
-						color: '#fff'
-					}
-				},
-				axisTick: {
 					show: false
 				},
 				axisLine: {
 					show: false
 				},
-				z: 10
-			},
-			yAxis: {
 				axisTick: {
 					show: false
 				},
 				axisLabel: {
-					textStyle: {
-						color: '#999'
-					}
-				}
+					show: false,
+				},
+				offset: 10,
+				nameTextStyle: {
+					fontSize: 15
+				},
+				splitLine: {
+					show: false
+				},
+				data: category
 			},
-			dataZoom: [{
-				type: 'inside'
-			}],
 			series: [{ // For shadow
+					name: '数量',
 					type: 'bar',
 					itemStyle: {
 						normal: {
-							color: 'rgba(0,0,0,0.05)'
-						}
+							barBorderRadius: 40,
+							color: 'rgba(11,21,90)'
+						},
+						emphasis: {
+							barBorderRadius: 40
+						},
+
 					},
 					barGap: '-100%',
-					barCategoryGap: '40%',
+					barCategoryGap: '70%',
+					// barCategoryGap:'40%',
 					data: dataShadow,
 					animation: false
 				},
 				{
 					type: 'bar',
-					itemStyle: {
+					data: barData,
+					smooth: true,
+					label: {
 						normal: {
-							color: new echarts.graphic.LinearGradient(
-								0, 0, 0, 1, [{
-										offset: 0,
-										color: '#83bff6'
-									},
-									{
-										offset: 0.5,
-										color: '#188df0'
-									},
-									{
-										offset: 1,
-										color: '#188df0'
+							show: true,
+							position: 'left',
+							distance: 10,
+
+							textStyle: {
+								color: '#FFF',
+								fontSize: 12
+							},
+							formatter: function(param) {
+								for (let i = 0; i < category.length; i++) {
+									if (param.dataIndex == i) {
+										return category[i];
 									}
-								]
-							)
-						},
-						emphasis: {
-							color: new echarts.graphic.LinearGradient(
-								0, 0, 0, 1, [{
-										offset: 0,
-										color: '#2378f7'
-									},
-									{
-										offset: 0.7,
-										color: '#2378f7'
-									},
-									{
-										offset: 1,
-										color: '#83bff6'
-									}
-								]
-							)
+								}
+							}
 						}
 					},
-					data: data
+					itemStyle: {
+						emphasis: {
+							barBorderRadius: 40
+						},
+						normal: {
+							barBorderRadius: 20,
+							color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+								offset: 0,
+								color: 'rgb(12,81,226)'
+							}, {
+								offset: 1,
+								color: '#3fa7dc'
+							}]),
+
+						}
+					}
 				}
 			]
 		};
-
-		// Enable data zoom when user click bar.
-		var zoomSize = 6;
-		myChart.on('click', function(params) {
-			console.log(dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)]);
-			myChart.dispatchAction({
-				type: 'dataZoom',
-				startValue: dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)],
-				endValue: dataAxis[Math.min(params.dataIndex + zoomSize / 2, data.length - 1)]
-			});
-		});
-		// 使用刚指定的配置项和数据显示图表。
 		myChart.setOption(option);
-	</script>
-	<!--下方柱状图-->
-	<script type="text/javascript">
-		app.title = '坐标轴刻度与标签对齐';
 
+		// 环形图
+		var myChart = echarts.init(document.getElementById("huan"));
 		var option = {
-			color: ['#3398DB'],
+			// 标题组件，包含主标题和副标题
+			title: {
+				text: 'G15-苏鲁省界',
+				show: true,
+				x: "center",
+				y: "bottom",
+				textStyle: {
+					fontSize: "13",
+					color: "#a3a6b4",
+				}
+
+
+			},
+			color: ['#FF8F63', '#152364'],
 			tooltip: {
-				trigger: 'axis',
-				axisPointer: { // 坐标轴指示器，坐标轴触发有效
-					type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-				}
+				show: false,
+				// 触发类型: item:数据项触发，axis：坐标轴触发
+				trigger: 'item',
+				formatter: "{a} <br/>{b}: {c} ({d}%)"
 			},
-			grid: {
-				left: '3%',
-				right: '4%',
-				bottom: '3%',
-				containLabel: true
-			},
-			xAxis: [{
-				type: 'category',
-				data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-				axisTick: {
-					alignWithLabel: true
-				}
-			}],
-			yAxis: [{
-				type: 'value'
-			}],
 			series: [{
-				name: '直接访问',
-				type: 'bar',
-				barWidth: '60%',
-				data: [10, 52, 200, 334, 390, 330, 220]
+				name: '任务进度',
+				type: 'pie',
+				// 饼图的半径，数组的第一项是内半径，第二项是外半径
+				radius: ['50%', '70%'],
+				// 是否启用防止标签重叠策略，默认开启
+				avoidLabelOverlap: false,
+				hoverAnimation: false,
+				labelLine: {
+					normal: {
+						show: false
+					}
+				},
+				data: [{ // 数据值
+						value: 20,
+						selected: false,
+						// 单个扇区的标签配置
+						label: {
+							normal: {
+								// 是显示标签
+								show: true,
+								color: "#FFF",
+								position: 'center',
+								fontSize: 14,
+								// 标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 \n 换行
+								formatter: '{b}\n{d}%',
+							}
+
+						},
+
+					},
+					{
+						value: 100,
+						label: {
+							normal: {
+								show: false,
+
+							}
+						}
+
+					},
+
+				]
 			}]
 		};
-		// 使用刚指定的配置项和数据显示图表。
+		myChart.setOption(option)
+
+		// 环形图
+		var myChart = echarts.init(document.getElementById("huanf"));
+		var option = {
+			// 标题组件，包含主标题和副标题
+			title: {
+				text: 'G25-苏鲁临连省',
+				show: true,
+				x: "center",
+				y: "bottom",
+				textStyle: {
+					fontSize: "13",
+					color: "#a3a6b4",
+				}
+
+
+			},
+			color: ['#FF8F63', '#152364'],
+			tooltip: {
+				show: false,
+				// 触发类型: item:数据项触发，axis：坐标轴触发
+				trigger: 'item',
+				formatter: "{a} <br/>{b}: {c} ({d}%)"
+			},
+			series: [{
+				name: '任务进度',
+				type: 'pie',
+				// 饼图的半径，数组的第一项是内半径，第二项是外半径
+				radius: ['50%', '70%'],
+				// 是否启用防止标签重叠策略，默认开启
+				avoidLabelOverlap: false,
+				hoverAnimation: false,
+				labelLine: {
+					normal: {
+						show: false
+					}
+				},
+				data: [{ // 数据值
+						value: 20,
+						selected: false,
+						// 单个扇区的标签配置
+						label: {
+							normal: {
+								// 是显示标签
+								show: true,
+								color: "#FFF",
+								position: 'center',
+								fontSize: 14,
+								// 标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 \n 换行
+								formatter: '{b}\n{d}%',
+							}
+
+						},
+
+					},
+					{
+						value: 100,
+						label: {
+							normal: {
+								show: false,
+
+							}
+						}
+
+					},
+
+				]
+			}]
+		};
+		myChart.setOption(option)
+
+		// 环形图3
+		var myChart = echarts.init(document.getElementById("huans"));
+		var option = {
+			// 标题组件，包含主标题和副标题
+			title: {
+				text: 'G3-京福苏鲁省界',
+				show: true,
+				x: "center",
+				y: "bottom",
+				textStyle: {
+					fontSize: "13",
+					color: "#a3a6b4",
+				}
+
+
+			},
+			color: ['#FF8F63', '#152364'],
+			tooltip: {
+				show: false,
+				// 触发类型: item:数据项触发，axis：坐标轴触发
+				trigger: 'item',
+				formatter: "{a} <br/>{b}: {c} ({d}%)"
+			},
+			series: [{
+				name: '任务进度',
+				type: 'pie',
+				// 饼图的半径，数组的第一项是内半径，第二项是外半径
+				radius: ['50%', '70%'],
+				// 是否启用防止标签重叠策略，默认开启
+				avoidLabelOverlap: false,
+				hoverAnimation: false,
+				labelLine: {
+					normal: {
+						show: false
+					}
+				},
+				data: [{ // 数据值
+						value: 20,
+						selected: false,
+						// 单个扇区的标签配置
+						label: {
+							normal: {
+								// 是显示标签
+								show: true,
+								color: "#FFF",
+								position: 'center',
+								fontSize: 14,
+								// 标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 \n 换行
+								formatter: '{b}\n{d}%',
+							}
+
+						},
+
+					},
+					{
+						value: 100,
+						label: {
+							normal: {
+								show: false,
+
+							}
+						}
+
+					},
+
+				]
+			}]
+		};
+		myChart.setOption(option)
+
+		// 环形图
+		var myChart = echarts.init(document.getElementById("huant"));
+		var option = {
+			// 标题组件，包含主标题和副标题
+			title: {
+				text: 'G69-济徐苏鲁省',
+				show: true,
+				x: "center",
+				y: "bottom",
+				textStyle: {
+					fontSize: "13",
+					color: "#a3a6b4",
+				}
+
+
+			},
+			color: ['#FF8F63', '#152364'],
+			tooltip: {
+				show: false,
+				// 触发类型: item:数据项触发，axis：坐标轴触发
+				trigger: 'item',
+				formatter: "{a} <br/>{b}: {c} ({d}%)"
+			},
+			series: [{
+				name: '任务进度',
+				type: 'pie',
+				// 饼图的半径，数组的第一项是内半径，第二项是外半径
+				radius: ['50%', '70%'],
+				// 是否启用防止标签重叠策略，默认开启
+				avoidLabelOverlap: false,
+				hoverAnimation: false,
+				labelLine: {
+					normal: {
+						show: false
+					}
+				},
+				data: [{ // 数据值
+						value: 20,
+						selected: false,
+						// 单个扇区的标签配置
+						label: {
+							normal: {
+								// 是显示标签
+								show: true,
+								color: "#FFF",
+								position: 'center',
+								fontSize: 14,
+								// 标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 \n 换行
+								formatter: '{b}\n{d}%',
+							}
+
+						},
+
+					},
+					{
+						value: 100,
+						label: {
+							normal: {
+								show: false,
+
+							}
+						}
+
+					},
+
+				]
+			}]
+		};
+		myChart.setOption(option)
+
+		// 环形图
+		var myChart = echarts.init(document.getElementById("huanfo"));
+		var option = {
+			// 标题组件，包含主标题和副标题
+			title: {
+				text: 'G68-栗芜高速苏',
+				show: true,
+				x: "center",
+				y: "bottom",
+				textStyle: {
+					fontSize: "13",
+					color: "#a3a6b4",
+				}
+
+
+			},
+			color: ['#FF8F63', '#152364'],
+			tooltip: {
+				show: false,
+				// 触发类型: item:数据项触发，axis：坐标轴触发
+				trigger: 'item',
+				formatter: "{a} <br/>{b}: {c} ({d}%)"
+			},
+			series: [{
+				name: '任务进度',
+				type: 'pie',
+				// 饼图的半径，数组的第一项是内半径，第二项是外半径
+				radius: ['50%', '70%'],
+				// 是否启用防止标签重叠策略，默认开启
+				avoidLabelOverlap: false,
+				hoverAnimation: false,
+				labelLine: {
+					normal: {
+						show: false
+					}
+				},
+				data: [{ // 数据值
+						value: 20,
+						selected: false,
+						// 单个扇区的标签配置
+						label: {
+							normal: {
+								// 是显示标签
+								show: true,
+								color: "#FFF",
+								position: 'center',
+								fontSize: 14,
+								// 标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 \n 换行
+								formatter: '{b}\n{d}%',
+							}
+
+						},
+
+					},
+					{
+						value: 100,
+						label: {
+							normal: {
+								show: false,
+
+							}
+						}
+
+					},
+
+				]
+			}]
+		};
+		myChart.setOption(option)
+
+		// 环形图3
+		var myChart = echarts.init(document.getElementById("huanfi"));
+		var option = {
+			// 标题组件，包含主标题和副标题
+			title: {
+				text: 'S1516-宿扬苏皖',
+				show: true,
+				x: "center",
+				y: "bottom",
+				textStyle: {
+					fontSize: "13",
+					color: "#a3a6b4",
+				}
+
+
+			},
+			color: ['#FF8F63', '#152364'],
+			tooltip: {
+				show: false,
+				// 触发类型: item:数据项触发，axis：坐标轴触发
+				trigger: 'item',
+				formatter: "{a} <br/>{b}: {c} ({d}%)"
+			},
+			series: [{
+				name: '任务进度',
+				type: 'pie',
+				// 饼图的半径，数组的第一项是内半径，第二项是外半径
+				radius: ['50%', '70%'],
+				// 是否启用防止标签重叠策略，默认开启
+				avoidLabelOverlap: false,
+				hoverAnimation: false,
+				labelLine: {
+					normal: {
+						show: false
+					}
+				},
+				data: [{ // 数据值
+						value: 20,
+						selected: false,
+						// 单个扇区的标签配置
+						label: {
+							normal: {
+								// 是显示标签
+								show: true,
+								color: "#FFF",
+								position: 'center',
+								fontSize: 14,
+								// 标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 \n 换行
+								formatter: '{b}\n{d}%',
+							}
+
+						},
+
+					},
+					{
+						value: 100,
+						label: {
+							normal: {
+								show: false,
+
+							}
+						}
+
+					},
+
+				]
+			}]
+		};
+		myChart.setOption(option)
+		// 扇形
+
+		var myChart = echarts.init(document.getElementById("by"));
+		var option = {
+			title: {
+				text: 'G15-苏鲁省界',
+				show: true,
+				x: "center",
+				y: "bottom",
+				textStyle: {
+					color: '#a3a6b4',
+					fontSize: 13,
+					fontWeight: 'bold'
+				},
+				left: 'center',
+				top: '90%',
+				bottom: '69%',
+				itemGap: 60,
+			},
+			tooltip: {
+				show: false,
+			},
+			color: ['#B7DD7'],
+			legend: {
+				orient: 'vertical',
+				x: 690,
+				y: 120,
+				data: ['www'],
+
+			},
+			series: [{
+					type: 'pie',
+					//起始刻度的角度，默认为 90 度，即圆心的正上方。0 度为圆心的正右方。
+					startAngle: 0,
+					hoverAnimation: false,
+					tooltip: {},
+					radius: ["30%", "47%"],
+					center: ['50%', '80%'],
+					label: {
+						normal: {
+							show: true,
+							position: 'center',
+							color: '#fff',
+							formatter: function(params) {
+								return params.value
+							},
+						},
+					},
+					labelLine: {
+						normal: {
+							show: false
+						}
+					},
+					data: [{
+							value: 4,
+							itemStyle: {
+								normal: {
+									color: "rgba(80,150,224,0)"
+								}
+							}
+						},
+
+					]
+				},
+				{
+					type: 'pie',
+					startAngle: 0,
+					hoverAnimation: false,
+					radius: ["70%", "87%"],
+					center: ['50%', '80%'],
+					label: {
+						normal: {
+							show: false,
+							position: 'center'
+						},
+						emphasis: {
+							show: true,
+							textStyle: {
+								fontSize: '10',
+								fontWeight: 'bold'
+							}
+						}
+					},
+					labelLine: {
+						normal: {
+							show: false
+						}
+					},
+					data: [{
+							value: 300,
+							itemStyle: {
+								normal: {
+									color: "rgba(1,218,220,0)"
+								}
+							}
+						},
+						{
+							value: 240,
+							itemStyle: {
+								normal: {
+									color: "rgba(1,218,220,1)"
+								}
+							}
+
+						},
+						{
+							value: 60,
+							itemStyle: {
+								normal: {
+									color: "rgba(1,218,220,0.1)"
+								}
+							}
+						},
+					]
+				}
+			]
+		};
 		myChart.setOption(option);
+
+
+		var myChart = echarts.init(document.getElementById("byf"));
+		var option = {
+			title: {
+				text: 'G25-苏鲁临连省',
+				show: true,
+				x: "center",
+				y: "bottom",
+				textStyle: {
+					color: '#a3a6b4',
+					fontSize: 13,
+					fontWeight: 'bold'
+				},
+				left: 'center',
+				top: '90%',
+				bottom: '69%',
+				itemGap: 60,
+			},
+			tooltip: {
+				show: false,
+			},
+			color: ['#B7DD7'],
+			legend: {
+				orient: 'vertical',
+				x: 690,
+				y: 120,
+				data: ['www'],
+
+			},
+			series: [{
+					type: 'pie',
+					//起始刻度的角度，默认为 90 度，即圆心的正上方。0 度为圆心的正右方。
+					startAngle: 0,
+					hoverAnimation: false,
+					tooltip: {},
+					radius: ["30%", "47%"],
+					center: ['50%', '80%'],
+					label: {
+						normal: {
+							show: true,
+							position: 'center',
+							color: '#fff',
+							formatter: function(params) {
+								return params.value
+							},
+						},
+					},
+					labelLine: {
+						normal: {
+							show: false
+						}
+					},
+					data: [{
+							value: 3,
+							itemStyle: {
+								normal: {
+									color: "rgba(80,150,224,0)"
+								}
+							}
+						},
+
+					]
+				},
+				{
+					type: 'pie',
+					startAngle: 0,
+					hoverAnimation: false,
+					radius: ["70%", "87%"],
+					center: ['50%', '80%'],
+					label: {
+						normal: {
+							show: false,
+							position: 'center'
+						},
+						emphasis: {
+							show: true,
+							textStyle: {
+								fontSize: '10',
+								fontWeight: 'bold'
+							}
+						}
+					},
+					labelLine: {
+						normal: {
+							show: false
+						}
+					},
+					data: [{
+							value: 300,
+							itemStyle: {
+								normal: {
+									color: "rgba(1,218,220,0)"
+								}
+							}
+						},
+						{
+							value: 240,
+							itemStyle: {
+								normal: {
+									color: "rgba(1,218,220,1)"
+								}
+							}
+
+						},
+						{
+							value: 60,
+							itemStyle: {
+								normal: {
+									color: "rgba(1,218,220,0.1)"
+								}
+							}
+						},
+					]
+				}
+			]
+		};
+		myChart.setOption(option);
+
+		var myChart = echarts.init(document.getElementById("by2"));
+		var option = {
+			title: {
+				text: 'G25-苏鲁临连省',
+				show: true,
+				x: "center",
+				y: "bottom",
+				textStyle: {
+					color: '#a3a6b4',
+					fontSize: 13,
+					fontWeight: 'bold'
+				},
+				left: 'center',
+				top: '90%',
+				bottom: '69%',
+				itemGap: 60,
+			},
+			tooltip: {
+				show: false,
+			},
+			color: ['#B7DD7'],
+			legend: {
+				orient: 'vertical',
+				x: 690,
+				y: 120,
+				data: ['www'],
+
+			},
+			series: [{
+					type: 'pie',
+					//起始刻度的角度，默认为 90 度，即圆心的正上方。0 度为圆心的正右方。
+					startAngle: 0,
+					hoverAnimation: false,
+					tooltip: {},
+					radius: ["30%", "47%"],
+					center: ['50%', '80%'],
+					label: {
+						normal: {
+							show: true,
+							position: 'center',
+							color: '#fff',
+							formatter: function(params) {
+								return params.value
+							},
+						},
+					},
+					labelLine: {
+						normal: {
+							show: false
+						}
+					},
+					data: [{
+							value: 3,
+							itemStyle: {
+								normal: {
+									color: "rgba(80,150,224,0)"
+								}
+							}
+						},
+
+					]
+				},
+				{
+					type: 'pie',
+					startAngle: 0,
+					hoverAnimation: false,
+					radius: ["70%", "87%"],
+					center: ['50%', '80%'],
+					label: {
+						normal: {
+							show: false,
+							position: 'center'
+						},
+						emphasis: {
+							show: true,
+							textStyle: {
+								fontSize: '10',
+								fontWeight: 'bold'
+							}
+						}
+					},
+					labelLine: {
+						normal: {
+							show: false
+						}
+					},
+					data: [{
+							value: 300,
+							itemStyle: {
+								normal: {
+									color: "rgba(1,218,220,0)"
+								}
+							}
+						},
+						{
+							value: 240,
+							itemStyle: {
+								normal: {
+									color: "rgba(1,218,220,1)"
+								}
+							}
+
+						},
+						{
+							value: 60,
+							itemStyle: {
+								normal: {
+									color: "rgba(1,218,220,0.1)"
+								}
+							}
+						},
+					]
+				}
+			]
+		};
+		myChart.setOption(option);
+		
+		// 下排环形
+		var myChart = echarts.init(document.getElementById("by3"));
+		var option = {
+						title: {
+							text: 'G15-苏鲁省界',
+							show: true,
+							x: "center",
+							y: "bottom",
+							textStyle: {
+								color: '#a3a6b4',
+								fontSize: 13,
+								fontWeight: 'bold'
+						   },
+					left: 'center',
+					top:'90%',
+					bottom: '69%',
+					itemGap: 60,
+				},
+				tooltip: {
+					show: false,
+				},
+				color: ['#B7DD7'],
+				legend: {
+					orient: 'vertical',
+					x: 690,
+					y:120,
+					data:['www'],
+					
+				},
+				series: [{
+						type: 'pie',
+						//起始刻度的角度，默认为 90 度，即圆心的正上方。0 度为圆心的正右方。
+						startAngle: 0,
+						hoverAnimation: false,
+						tooltip: {
+						},
+						radius: ["30%", "47%"],
+						center: ['50%', '80%'],
+						label: {
+							normal: {
+								show: true,
+								position: 'center',
+								color: '#fff',
+								formatter: function(params) {
+									return params.value
+								},
+							},
+						},
+						labelLine: {
+							normal: {
+								show: false
+							}
+						},
+						data: [{
+								value: 4,
+								itemStyle: {
+									normal: {
+										color: "rgba(80,150,224,0)"
+									}
+								}
+							},
+		
+						]
+					},
+					{
+						type: 'pie',
+						startAngle: 0,
+						hoverAnimation: false,
+						radius: ["70%", "87%"],
+						center: ['50%', '80%'],
+						label: {
+							normal: {
+								show: false,
+								position: 'center'
+							},
+							emphasis: {
+								show: true,
+								textStyle: {
+									fontSize: '10',
+									fontWeight: 'bold'
+								}
+							}
+						},
+						labelLine: {
+							normal: {
+								show: false
+							}
+						},
+						data: [{
+								value: 300,
+								itemStyle: {
+									normal: {
+										color: "rgba(1,218,220,0)"
+									}
+								}
+							},
+							{
+								value: 240,
+								itemStyle: {
+									normal: {
+										color: "rgba(1,218,220,1)"
+									}
+								}
+		
+							},
+							{
+								value: 60,
+										itemStyle: {
+											normal: {
+												color: "rgba(1,218,220,0.1)"
+											}
+										}
+									},
+								]
+							}
+						]
+					};
+		myChart.setOption(option);
+		
+		var myChart = echarts.init(document.getElementById("by4"));
+		var option = {
+						title: {
+							text: 'G25-苏鲁临连省',
+							show: true,
+							x: "center",
+							y: "bottom",
+							textStyle: {
+								color: '#a3a6b4',
+								fontSize: 13,
+								fontWeight: 'bold'
+						   },
+					left: 'center',
+					top:'90%',
+					bottom: '69%',
+					itemGap: 60,
+				},
+				tooltip: {
+					show: false,
+				},
+				color: ['#B7DD7'],
+				legend: {
+					orient: 'vertical',
+					x: 690,
+					y:120,
+					data:['www'],
+					
+				},
+				series: [{
+						type: 'pie',
+						//起始刻度的角度，默认为 90 度，即圆心的正上方。0 度为圆心的正右方。
+						startAngle: 0,
+						hoverAnimation: false,
+						tooltip: {
+						},
+						radius: ["30%", "47%"],
+						center: ['50%', '80%'],
+						label: {
+							normal: {
+								show: true,
+								position: 'center',
+								color: '#fff',
+								formatter: function(params) {
+									return params.value
+								},
+							},
+						},
+						labelLine: {
+							normal: {
+								show: false
+							}
+						},
+						data: [{
+								value: 3,
+								itemStyle: {
+									normal: {
+										color: "rgba(80,150,224,0)"
+									}
+								}
+							},
+		
+						]
+					},
+					{
+						type: 'pie',
+						startAngle: 0,
+						hoverAnimation: false,
+						radius: ["70%", "87%"],
+						center: ['50%', '80%'],
+						label: {
+							normal: {
+								show: false,
+								position: 'center'
+							},
+							emphasis: {
+								show: true,
+								textStyle: {
+									fontSize: '10',
+									fontWeight: 'bold'
+								}
+							}
+						},
+						labelLine: {
+							normal: {
+								show: false
+							}
+						},
+						data: [{
+								value: 300,
+								itemStyle: {
+									normal: {
+										color: "rgba(1,218,220,0)"
+									}
+								}
+							},
+							{
+								value: 240,
+								itemStyle: {
+									normal: {
+										color: "rgba(1,218,220,1)"
+									}
+								}
+		
+							},
+							{
+								value: 60,
+										itemStyle: {
+											normal: {
+												color: "rgba(1,218,220,0.1)"
+											}
+										}
+									},
+								]
+							}
+						]
+					};
+		myChart.setOption(option);
+		
+		var myChart = echarts.init(document.getElementById("by5"));
+		var option = {
+						title: {
+							text: 'G25-苏鲁临连省',
+							show: true,
+							x: "center",
+							y: "bottom",
+							textStyle: {
+								color: '#a3a6b4',
+								fontSize: 13,
+								fontWeight: 'bold'
+						   },
+					left: 'center',
+					top:'90%',
+					bottom: '69%',
+					itemGap: 60,
+				},
+				tooltip: {
+					show: false,
+				},
+				color: ['#B7DD7'],
+				legend: {
+					orient: 'vertical',
+					x: 690,
+					y:120,
+					data:['www'],
+					
+				},
+				series: [{
+						type: 'pie',
+						//起始刻度的角度，默认为 90 度，即圆心的正上方。0 度为圆心的正右方。
+						startAngle: 0,
+						hoverAnimation: false,
+						tooltip: {
+						},
+						radius: ["30%", "47%"],
+						center: ['50%', '80%'],
+						label: {
+							normal: {
+								show: true,
+								position: 'center',
+								color: '#fff',
+								formatter: function(params) {
+									return params.value
+								},
+							},
+						},
+						labelLine: {
+							normal: {
+								show: false
+							}
+						},
+						data: [{
+								value: 3,
+								itemStyle: {
+									normal: {
+										color: "rgba(80,150,224,0)"
+									}
+								}
+							},
+		
+						]
+					},
+					{
+						type: 'pie',
+						startAngle: 0,
+						hoverAnimation: false,
+						radius: ["70%", "87%"],
+						center: ['50%', '80%'],
+						label: {
+							normal: {
+								show: false,
+								position: 'center'
+							},
+							emphasis: {
+								show: true,
+								textStyle: {
+									fontSize: '10',
+									fontWeight: 'bold'
+								}
+							}
+						},
+						labelLine: {
+							normal: {
+								show: false
+							}
+						},
+						data: [{
+								value: 300,
+								itemStyle: {
+									normal: {
+										color: "rgba(1,218,220,0)"
+									}
+								}
+							},
+							{
+								value: 240,
+								itemStyle: {
+									normal: {
+										color: "rgba(1,218,220,1)"
+									}
+								}
+		
+							},
+							{
+								value: 60,
+										itemStyle: {
+											normal: {
+												color: "rgba(1,218,220,0.1)"
+											}
+										}
+									},
+								]
+							}
+						]
+					};
+		myChart.setOption(option);
+		
+		var myChart = echarts.init(document.getElementById("liti"));
+		var option = {
+		    color: ['#3398DB'],
+		    tooltip: {
+		        trigger: 'axis',
+		        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+		            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+		        }
+		    },
+		    grid: {
+		        left: '3%',
+		        right: '4%',
+		        bottom: '3%',
+		        containLabel: true
+		    },
+		    xAxis: [
+		        {
+					show:false,
+		            type: 'category',
+		            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+		            axisTick: {
+		                alignWithLabel: true
+		            }
+		        }
+		    ],
+		    yAxis: [
+		        {
+					show:false,
+		            type: 'value'
+		        }
+		    ],
+		    series: [
+		        {
+		            name: '直接访问',
+		            type: 'bar',
+		            barWidth: '60%',
+		            data: [10, 52, 200, 334, 390, 330, 220]
+		        }
+		    ]
+		};
+	myChart.setOption(option);
+		
 	</script>
 
 </html>
