@@ -49,22 +49,21 @@
 <!--导航栏结束-->
 <!--左半部分开始-->
 <div id="leftTab">
-	<a href="home.html" target="iframe_a" class="Pa">首页</a>
-	<a href="shishijiance.html" target="iframe_a" class="Pb">实时监测</a>
-	<a href="tongjitable.html" target="iframe_a" class="Pc">数据查询</a>
-	<a href="tongjifenxi.html" target="iframe_a" class="Pd">统计分析</a>
-	<!-- <a href="tongjifenxi.html" target="iframe_a" >统计图表</a> -->
+	<a href="javascript:void(0);" lang="home" target="iframe_a" class="Pa">首页</a>
+	<a href="javascript:void(0);" lang='shishijiance' target="iframe_a" class="Pb" id="pb">实时监测</a>
+	<a href="javascript:void(0);" lang='tongjitable' target="iframe_a" class="Pc">数据查询</a>
+	<a href="javascript:void(0);" lang='tongjifenxi' target="iframe_a" class="Pd">统计分析</a>
 	<ul class="layui-nav layui-nav-tree liebiao" lay-filter="test" >
 	<li class="layui-nav-item layui-nav-itemed ">
 	
 	</ul>
 		<!-- <a href="javascript:;">系统管理</a> -->
-			<a href="renyuanguanli.html" target="iframe_a" class="Pe">人员账户</a>
-			<a href="danweiguanli.html" target="iframe_a" class="Pf">单位管理</a>
-			<a href="quanxianguanli.html" target="iframe_a" class="Pg">权限管理</a>
-			<a href="jiancezhandian.html" target="iframe_a" class="Ph">测点管理</a>
-			<a href="zidianguanli.html" target="iframe_a" class="Pi">字典管理</a>
-	<a href="xitongweihu.html" target="iframe_a" class="Pj">系统维护</a>
+	<a href="javascript:void(0);" lang='renyuanguanli' target="iframe_a" class="Pe">人员账户</a>
+	<a href="javascript:void(0);" lang='danweiguanli' target="iframe_a" class="Pf">单位管理</a>
+	<a href="javascript:void(0);" lang='quanxianguanli' target="iframe_a" class="Pg">权限管理</a>
+	<a href="javascript:void(0);" lang='jiancezhandian' target="iframe_a" class="Ph">测点管理</a>
+	<a href="javascript:void(0);" lang='zidianguanli' target="iframe_a" class="Pi">字典管理</a>
+	<a href="javascript:void(0);" lang='xitongweihu' target="iframe_a" class="Pj">系统维护</a>
 	<!--<a href="">系统管理</a>
     <a href="renyuanguanli.html" target="iframe_a" >人员账户管理</a>
     <a href="jiancezhandian.html" target="iframe_a" >监测站点管理</a>
@@ -122,7 +121,7 @@
 </div>
 <!-- 修改model结束 -->
 
-<iframe id="iframe-player" src="home.html"  name="iframe_a" width="100%" height="1000px;"></iframe>
+<iframe id="iframe-player" src="home.html" class="iframe" name="iframe_a" width="100%" style="overflow:visible;" scrolling="no" height="1000px"></iframe>
 <script src="../js/jquery.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 <script src="js/datatables/jquery.dataTables.min.js"></script>
@@ -132,6 +131,18 @@
 <!--<script src="js/layui.js" type="text/javascript" charset="utf-8"></script>-->
 <script src="js/quanxian.js"></script>
 <script type="text/javascript">
+$('#leftTab a').bind('click', function () {
+	let name = $(this).attr('lang');
+	$('#iframe-player').attr('src', name + '.html')
+	if (name != 'home') {
+		$('#leftTab').addClass('homeLeft')
+		$('.daohang').slideDown()
+	} else {
+		$('.daohang').slideUp();
+		$('#leftTab').removeClass('homeLeft')
+	}
+})
+
 var pagestyle = function () {
     var rframe = $("#iframe-player");
  
@@ -140,7 +151,7 @@ var pagestyle = function () {
 }
 $("#iframe-player").on('load', function () {
     pagestyle();
-
+this.style.height=Math.max(this.contentWindow.document.body.scrollHeight,this.contentWindow.document.documentElement.scrollHeight,200)+"px"; 
     document.getElementById('iframe-player').contentWindow.xxx();
 });
 //窗体改变大小事件
@@ -167,7 +178,9 @@ $(window).resize(pagestyle);
 			}
 		});
 	})
-
+	var js_method = function  (id, val) {
+		$('#iframe-player').attr('src', val + '.html')
+	}
 	function getNow(s) {
 		return s < 10 ? '0' + s: s;
 	}

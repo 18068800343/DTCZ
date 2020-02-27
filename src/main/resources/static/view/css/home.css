@@ -8,6 +8,7 @@ body{
 	background-color: #2142AF;
 	height:55px;
 	line-height: 55px;
+	display:none;
 	 background-image: linear-gradient(#262E9F, #1F62C8);
 }
 .daohang img{
@@ -38,8 +39,11 @@ body{
 	height:101%;
 	width: 160px;
 	position: absolute;
-    background-color: #232733;
+	background-color:rgba(0,0,0,0~1);    
     text-align: center;
+}
+.homeLeft {
+	 background-color: #232733; 
 }
 #leftTab a{
 	color: white;
