@@ -166,14 +166,14 @@
     </select>
 
     <select id="getMeiRiCheLiuLiangByStationPort" resultType="int">
-        SELECT COUNT(*) from t_vehicle_msg where  Station_IP=#{stationPort} AND date(Evt_Time) = curdate()
+        SELECT COUNT(*) from t_vehicle_msg_today where  Station_IP=#{stationPort} AND date(Evt_Time) = curdate()
     </select>
     <select id="getMeiRiCheLiuLiangMaxByStationPort" resultType="int">
-       SELECT max(a.cnt) FROM (SELECT COUNT(*) cnt FROM t_vehicle_msg WHERE date(Evt_Time) = curdate() GROUP BY Station_IP)a
+       SELECT IFNULL(max(a.cnt),0) FROM (SELECT COUNT(*) cnt FROM t_vehicle_msg_today WHERE date(Evt_Time) = curdate() GROUP BY Station_IP)a
     </select>
 
     <select id="getMeiRiChaoZhongByStationPort" resultType="int">
-        SELECT COUNT(*) from t_vehicle_msg where  Station_IP=#{stationPort} AND date(Evt_Time) = curdate() and Over_Weight>0
+        SELECT COUNT(*) from t_vehicle_msg_today where  Station_IP=#{stationPort} AND date(Evt_Time) = curdate() and Over_Weight>0
     </select>
 
 
@@ -233,11 +233,11 @@
     </select>
 
     <select id="getMeiRiGuanJianCheLiangByStationPort" resultType="int">
-        SELECT COUNT(*) from t_vehicle_msg
+        SELECT COUNT(*) from t_vehicle_msg_today
         where  Station_IP=#{stationPort} AND date(Evt_Time) = curdate() and Total_Weight>(SELECT Crux_Weight FROM crux_weight where Del_State=1)
     </select>
     <select id="getMeiRiGuanJianCheLiangMax" resultType="int">
-        SELECT max(a.cnt) FROM (SELECT COUNT(*) cnt from t_vehicle_msg
+        SELECT  IFNULL(max(a.cnt),0) FROM (SELECT COUNT(*) cnt from t_vehicle_msg_today
         where   date(Evt_Time) = curdate() and Total_Weight>(SELECT Crux_Weight FROM crux_weight where Del_State=1) GROUP BY Station_IP)a
     </select>
 
@@ -257,7 +257,7 @@
         end as overWeightRatioName,
         a.*,b.Station_Name,b.Route_Name,concat_ws("+",b.Station_Name,b.Route_Name) as stationNameRouteName,
         c.License_Plate_Color,d.Vehicle_Type_Name
-        from (select  a.*  from t_vehicle_msg a where date(Evt_Time) = curdate()  and
+        from (select  a.*  from t_vehicle_msg_today a where date(Evt_Time) = curdate()  and
         <include refid="StationIP_chaozaishuju_sql"></include> ) a
         LEFT JOIN station_site b on a.Station_IP=b.Station_Port
         LEFT JOIN license_plate c ON a.Plate_Color=c.License_Plate_No
@@ -281,7 +281,7 @@
         end as overWeightRatioName,
         a.*,b.Station_Name,b.Route_Name,concat_ws("+",b.Station_Name,b.Route_Name) as stationNameRouteName,
         c.License_Plate_Color,d.Vehicle_Type_Name
-        from (select  a.*  from t_vehicle_msg a where date(Evt_Time) = curdate() and Over_Weight>0  and
+        from (select  a.*  from t_vehicle_msg_today a where date(Evt_Time) = curdate() and Over_Weight>0  and
         <include refid="StationIP_chaozaishuju_sql"></include> ) a
         LEFT JOIN station_site b on a.Station_IP=b.Station_Port
         LEFT JOIN license_plate c ON a.Plate_Color=c.License_Plate_No
@@ -306,7 +306,7 @@
         end as overWeightRatioName,
         a.*,b.Station_Name,b.Route_Name,concat_ws("+",b.Station_Name,b.Route_Name) as stationNameRouteName,
         c.License_Plate_Color,d.Vehicle_Type_Name
-        from (select  a.*  from t_vehicle_msg a where date(Evt_Time) = curdate() and Total_Weight>(SELECT Crux_Weight FROM crux_weight where Del_State=1) and
+        from (select  a.*  from t_vehicle_msg_today a where date(Evt_Time) = curdate() and Total_Weight>(SELECT Crux_Weight FROM crux_weight where Del_State=1) and
         <include refid="StationIP_chaozaishuju_sql"></include> ) a
         LEFT JOIN station_site b on a.Station_IP=b.Station_Port
         LEFT JOIN license_plate c ON a.Plate_Color=c.License_Plate_No
