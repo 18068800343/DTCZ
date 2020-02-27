@@ -439,9 +439,11 @@
             },
             success: function (json) {
                 if(json.result>0){
+                    var oldNum=$(tr.children()[0]).text();
                     toastr.success("修改成功");
                     $('#mainContent4').DataTable().row(tr).data(json.companySite);
                     $("#change4").modal('hide');
+                    $(tr.children()[0]).text(oldNum);
                 }else{
                     toastr.error("修改失败");
                 }
