@@ -70,7 +70,7 @@
             <span style="float: left; margin-left: 2%;">站点排名</span>
             <span style="float: right;margin-right: 3%;">流量统计</span>
         </div>
-        <div id="xian" style="height:380px;top: -45px;">
+        <div id="xian1" style="height:380px;top: -45px;">
         </div>
     </div>
     <div class="bottomcenter">
@@ -116,6 +116,7 @@
 </div>
 </body>
 <script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/homeEcharts.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/echarts.min(1).js" type="text/javascript" charset="utf-8"></script>
 <script src="js/build/dist/echarts.js" type="text/javascript" charset="utf-8"></script>
 
@@ -317,132 +318,10 @@
     );
 
 
-    var myChart = echarts.init(document.getElementById('xian'));
+    //初始化车流量
 
-    //初始化数据
-    var category = ['G1516-宿杨苏皖', 'S68栗芜高速苏', 'S69济徐苏鲁省', 'G3-京福苏鲁省界', 'G25-苏鲁临连省', 'G15苏鲁省界'];
-    var barData = [2142, 1218, 581, 431, 383, 163];
-    var yMax = 4000;
-    var dataShadow = [];
+    homePageInit.initLeftEcharts('xian1');
 
-    for (var i = 0; i < barData.length; i++) {
-        dataShadow.push(yMax)
-    }
-
-    var option = {
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                type: 'shadow'
-            }
-        },
-        grid: {
-            left: '20%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
-        xAxis: {
-            type: 'value',
-            axisLine: {
-                show: true
-            },
-            axisTick: {
-                show: false
-            },
-            axisLabel: {
-                show: false
-            },
-            splitLine: {
-                show: false
-            }
-        },
-        yAxis: {
-            type: 'category',
-            data: category,
-            splitLine: {
-                show: false
-            },
-            axisLine: {
-                show: false
-            },
-            axisTick: {
-                show: false
-            },
-            axisLabel: {
-                show: false,
-            },
-            offset: 10,
-            nameTextStyle: {
-                fontSize: 15
-            },
-            splitLine: {
-                show: false
-            },
-            data: category
-        },
-        series: [{ // For shadow
-            name: '数量',
-            type: 'bar',
-            itemStyle: {
-                normal: {
-                    barBorderRadius: 40,
-                    color: 'rgba(11,21,90)'
-                },
-                emphasis: {
-                    barBorderRadius: 40
-                },
-
-            },
-            barGap: '-100%',
-            barCategoryGap: '70%',
-            // barCategoryGap:'40%',
-            data: dataShadow,
-            animation: false
-        },
-            {
-                type: 'bar',
-                data: barData,
-                smooth: true,
-                label: {
-                    normal: {
-                        show: true,
-                        position: 'left',
-                        distance: 10,
-
-                        textStyle: {
-                            color: '#FFF',
-                            fontSize: 12
-                        },
-                        formatter: function(param) {
-                            for (let i = 0; i < category.length; i++) {
-                                if (param.dataIndex == i) {
-                                    return category[i];
-                                }
-                            }
-                        }
-                    }
-                },
-                itemStyle: {
-                    emphasis: {
-                        barBorderRadius: 40
-                    },
-                    normal: {
-                        barBorderRadius: 20,
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                            offset: 0,
-                            color: 'rgb(12,81,226)'
-                        }, {
-                            offset: 1,
-                            color: '#3fa7dc'
-                        }]),
-
-                    }
-                }
-            }
-        ]
-    };
-    myChart.setOption(option);
 
     // 环形图
     var myChart = echarts.init(document.getElementById("huan"));
