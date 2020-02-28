@@ -78,14 +78,14 @@
             <h2 class="dangqianche" style="font-size: 16px;font-weight: bolder; padding: 10px;">当前车辆超载比例统计</h2>
         </div>
         <div id="xian" style="height:360px;top: -45px;">
-            <div id="huan" class="col-xs-4" style="height: 160px;position: absolute;"></div>
-            <div id="huanf" class="col-xs-4" style="height: 160px;position: absolute; margin-left: 30%;"></div>
-            <div id="huans" class="col-xs-4" style="height: 160px;float: right;position: absolute;right: 0;">
+            <div id="huan0" class="col-xs-4" style="height: 160px;position: absolute;"></div>
+            <div id="huan1" class="col-xs-4" style="height: 160px;position: absolute; margin-left: 30%;"></div>
+            <div id="huan2" class="col-xs-4" style="height: 160px;float: right;position: absolute;right: 0;">
             </div>
             <div class="ecs" style="margin-top: 30%;">
-                <div id="huant" class="col-xs-4" style="height: 160px;position: absolute;"></div>
-                <div id="huanfo" class="col-xs-4" style="height: 160px;position: absolute; margin-left: 30%;"></div>
-                <div id="huanfi" class="col-xs-4" style="height: 160px;position: absolute;right: 0"></div>
+                <div id="huan3" class="col-xs-4" style="height: 160px;position: absolute;"></div>
+                <div id="huan4" class="col-xs-4" style="height: 160px;position: absolute; margin-left: 30%;"></div>
+                <div id="huan5" class="col-xs-4" style="height: 160px;position: absolute;right: 0;"></div>
             </div>
         </div>
     </div>
@@ -324,7 +324,7 @@
 
 
     // 环形图
-    var myChart = echarts.init(document.getElementById("huan"));
+    var myChart = echarts.init(document.getElementById("huan0"));
     var option = {
         // 标题组件，包含主标题和副标题
         title: {
@@ -394,7 +394,7 @@
     myChart.setOption(option)
 
     // 环形图
-    var myChart = echarts.init(document.getElementById("huanf"));
+    var myChart = echarts.init(document.getElementById("huan1"));
     var option = {
         // 标题组件，包含主标题和副标题
         title: {
@@ -464,7 +464,7 @@
     myChart.setOption(option)
 
     // 环形图3
-    var myChart = echarts.init(document.getElementById("huans"));
+    var myChart = echarts.init(document.getElementById("huan2"));
     var option = {
         // 标题组件，包含主标题和副标题
         title: {
@@ -534,7 +534,7 @@
     myChart.setOption(option)
 
     // 环形图
-    var myChart = echarts.init(document.getElementById("huant"));
+    var myChart = echarts.init(document.getElementById("huan3"));
     var option = {
         // 标题组件，包含主标题和副标题
         title: {
@@ -604,7 +604,7 @@
     myChart.setOption(option)
 
     // 环形图
-    var myChart = echarts.init(document.getElementById("huanfo"));
+    var myChart = echarts.init(document.getElementById("huan4"));
     var option = {
         // 标题组件，包含主标题和副标题
         title: {
@@ -674,7 +674,7 @@
     myChart.setOption(option)
 
     // 环形图3
-    var myChart = echarts.init(document.getElementById("huanfi"));
+    var myChart = echarts.init(document.getElementById("huan5"));
     var option = {
         // 标题组件，包含主标题和副标题
         title: {
@@ -742,6 +742,8 @@
         }]
     };
     myChart.setOption(option)
+
+
     // 扇形
 
     var myChart = echarts.init(document.getElementById("by"));

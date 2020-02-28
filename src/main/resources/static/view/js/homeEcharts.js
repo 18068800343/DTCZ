@@ -170,9 +170,9 @@ homePageInit.initLeftEcharts = (id)=>{
 }
 //******************************************************************************环形图初始化***************************************************************************************
 
-homePageInit.initHuanEcharts = ()=>{
+homePageInit.initHuanEcharts = (id)=>{
     // 环形图
-    let myChart = echarts.init(document.getElementById("huan"));
+    let myChart = echarts.init(document.getElementById(id));
     let option = {
         // 标题组件，包含主标题和副标题
         title: {
