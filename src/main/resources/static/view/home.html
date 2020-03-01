@@ -324,7 +324,12 @@
     //初始化环形图0
     homePageInit.initDownEcharts();
 
+    setInterval(refresh, 1000);
 
+    function refresh() {
+        homePageInit.initLeftEcharts('xian1');
+        homePageInit.initDownEcharts();
+    }
 
     // 扇形
 
