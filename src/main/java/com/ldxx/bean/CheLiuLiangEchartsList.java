@@ -3,8 +3,8 @@ package com.ldxx.bean;
 public class CheLiuLiangEchartsList {
 
     private String nums;
-    private String station_ports;
-    private String station_names;
+    private String stationPorts;
+    private String stationNames;
 
     public String getNums() {
         return nums;
@@ -14,19 +14,19 @@ public class CheLiuLiangEchartsList {
         this.nums = nums;
     }
 
-    public String getStation_ports() {
-        return station_ports;
+    public String getStationPorts() {
+        return stationPorts;
     }
 
-    public void setStation_ports(String station_ports) {
-        this.station_ports = station_ports;
+    public void setStationPorts(String stationPorts) {
+        this.stationPorts = stationPorts;
     }
 
-    public String getStation_names() {
-        return station_names;
+    public String getStationNames() {
+        return stationNames;
     }
 
-    public void setStation_names(String station_names) {
-        this.station_names = station_names;
+    public void setStationNames(String stationNames) {
+        this.stationNames = stationNames;
     }
 }

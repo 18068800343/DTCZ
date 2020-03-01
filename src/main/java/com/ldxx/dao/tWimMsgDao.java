@@ -1,5 +1,6 @@
 package com.ldxx.dao;
 
+import com.ldxx.bean.CheLiuLiangEchartsList;
 import com.ldxx.bean.TongJiTableQuery;
 import com.ldxx.vo.tWimMsgVo;
 import org.apache.ibatis.annotations.Param;
@@ -11,6 +12,11 @@ public interface tWimMsgDao {
     List<tWimMsgVo> getAlltWimMsg(@Param("stationPort")String stationPort);
 
     List<tWimMsgVo> getAlltWimMsgByCondition(@Param("tjq") TongJiTableQuery tongJiTableQuery);
+
+    CheLiuLiangEchartsList getCheLiuLiangEchartsList(String stationPorts);
+
+
+    CheLiuLiangEchartsList getChaoZaiEchartsList(String stationPorts);
 
     int getMeiRiCheLiuLiangByStationPort(@Param("stationPort")String stationPort);
 

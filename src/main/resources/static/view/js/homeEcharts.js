@@ -1,29 +1,28 @@
 let homePageInit = {};
-homePageInit.initzhandian=()=>{
+homePageInit.initzhandian = () => {
     $.ajax({
         type: 'POST',
         url: '/login/getUser',
         dataType: 'json',
-        async:false,
-        data: {
-        },
+        async: false,
+        data: {},
         error: function (msg) {
         },
         success: function (json) {
-            homePageInit.user=json;
-            if(json!=null){
-                homePageInit.stationPort=json.stationPort.split(",");
-                homePageInit.stationName=json.stationName.split(",");
+            homePageInit.user = json;
+            if (json != null) {
+                homePageInit.stationPort = json.stationPort.split(",");
+                homePageInit.stationName = json.stationName.split(",");
             }
         }
     });
 }
 homePageInit.initzhandian();
-homePageInit.setLeftEcharts = (id,stationNames,nums) => {
+homePageInit.setLeftEcharts = (id, stationNames, nums) => {
 
     let myChart = echarts.init(document.getElementById(id));
     //初始化数据
-    let category =  stationNames;
+    let category = stationNames;
     let barData = nums;
     let dataShadow = [];
     for (let i = 0; i < barData.length; i++) {
@@ -88,8 +87,8 @@ homePageInit.setLeftEcharts = (id,stationNames,nums) => {
             label: {
                 normal: {
                     show: true,
-                    position:'right',
-                    color:'white',
+                    position: 'right',
+                    color: 'white',
                 }
             },
             itemStyle: {
@@ -153,30 +152,54 @@ homePageInit.setLeftEcharts = (id,stationNames,nums) => {
 }
 
 
-homePageInit.initLeftEcharts = (id)=>{
+homePageInit.initLeftEcharts = (id) => {
     $.ajax({
         type: 'POST',
-        url: '/tWimMsg/getMeiRiCheLiuLiangByStationPort',
+        url: '/tWimMsg/getCheLiuLiangEchartsList',
         dataType: 'json',
         data: {
-            stationPort: homePageInit.stationPort.toString(),
+            stationPorts: homePageInit.stationPort.toString(),
         },
         error: function (msg) {
         },
         success: function (json) {
-            homePageInit.setLeftEcharts(id,homePageInit.stationName,json.list);
+            homePageInit.stationName = json.stationNames.split(",");
+            homePageInit.nums = json.nums.split(",");
+            homePageInit.setLeftEcharts(id, homePageInit.stationName, homePageInit.nums);
         }
     });
 }
 //******************************************************************************环形图初始化***************************************************************************************
 
-homePageInit.initHuanEcharts = (id)=>{
+homePageInit.initDownEcharts = () => {
+    $.ajax({
+        type: 'POST',
+        url: '/tWimMsg/getChaoZaiEchartsList',
+        dataType: 'json',
+        data: {
+            stationPorts: homePageInit.stationPort.toString(),
+        },
+        error: function (msg) {
+        },
+        success: function (json) {
+            homePageInit.downStationName = json.stationNames.split(",");
+            homePageInit.downNums = json.nums.split(",");
+            for(let i in json.nums){
+                homePageInit.initHuanEcharts("huan"+i,i,homePageInit.downNums,homePageInit.downStationName[i]);
+            }
+        }
+    });
+}
+
+
+homePageInit.initHuanEcharts = (id,index,nums,stationName) => {
     // 环形图
     let myChart = echarts.init(document.getElementById(id));
+    let dataArray = getHuanDataByJson(index,nums);
     let option = {
         // 标题组件，包含主标题和副标题
         title: {
-            text: 'G15-苏鲁省界',
+            text: stationName,
             show: true,
             x: "center",
             y: "bottom",
@@ -207,37 +230,47 @@ homePageInit.initHuanEcharts = (id)=>{
                     show: false
                 }
             },
-            data: [{ // 数据值
-                value: 20,
-                selected: false,
-                // 单个扇区的标签配置
-                label: {
-                    normal: {
-                        // 是显示标签
-                        show: true,
-                        color: "#FFF",
-                        position: 'center',
-                        fontSize: 14,
-                        // 标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 \n 换行
-                        formatter: '{b}\n{d}%',
-                    }
-
-                },
-
-            },
-                {
-                    value: 100,
-                    label: {
-                        normal: {
-                            show: false,
-
-                        }
-                    }
-
-                },
-
-            ]
+            data: dataArray
         }]
     };
     myChart.setOption(option)
+    $("#huan"+index).show();
 }
+
+let getHuanDataByJson = (index,nums)=>{
+    let dataArray = [];
+    let nowIndexData = { // 数据值
+        selected: false,
+        // 单个扇区的标签配置
+        label: {
+            normal: {
+                // 是显示标签
+                show: true,
+                color: "#FFF",
+                position: 'center',
+                fontSize: 14,
+                // 标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 \n 换行
+                formatter: '{b}\n{d}%',
+            }
+        },
+    };
+
+    for(let i in nums){
+        let otherIndexData = {
+            label: {
+                normal: {
+                    show: false,
+                }
+            }
+        };
+       if(i==index){
+           nowIndexData.value = nums[i];
+           dataArray.push(nowIndexData);
+       }else{
+           otherIndexData.value = nums[i];
+           dataArray.push(otherIndexData);
+       }
+    }
+    return dataArray;
+}
+

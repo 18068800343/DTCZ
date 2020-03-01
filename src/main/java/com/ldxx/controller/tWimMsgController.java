@@ -4,10 +4,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.ldxx.Thread.PageCountCallable;
-import com.ldxx.bean.PageData;
-import com.ldxx.bean.StationSite;
-import com.ldxx.bean.TongJiTableQuery;
-import com.ldxx.bean.tUserInfo;
+import com.ldxx.bean.*;
 import com.ldxx.dao.StationSiteDao;
 import com.ldxx.dao.tUserInfoDao;
 import com.ldxx.dao.tWimMsgDao;
@@ -281,6 +278,18 @@ public class tWimMsgController {
         StationSite stationSite = sitedao.getStationSiteByStationNameAndRouteName(stationName,"");
         String port = stationSite.getStationPort();
         return service.getMeiRiChaoZaiShujuByStationPort(port);
+    }
+
+    @RequestMapping("/getCheLiuLiangEchartsList")
+    public CheLiuLiangEchartsList getCheLiuLiangEchartsList(String stationPorts, HttpSession session) {
+        tWimMsgDao.getCheLiuLiangEchartsList(stationPorts);
+        return tWimMsgDao.getCheLiuLiangEchartsList(stationPorts);
+    }
+
+    @RequestMapping("/getChaoZaiEchartsList")
+    public CheLiuLiangEchartsList getChaoZaiEchartsList(String stationPorts, HttpSession session) {
+        tWimMsgDao.getCheLiuLiangEchartsList(stationPorts);
+        return tWimMsgDao.getCheLiuLiangEchartsList(stationPorts);
     }
 
     @RequestMapping("/getMeiRiGuanJianChaoZHongShujuByStationPort")

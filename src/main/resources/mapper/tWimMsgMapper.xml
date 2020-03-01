@@ -176,6 +176,58 @@
     </select>
 
 
+
+    <select id="getChaoZaiEchartsList" resultType="CheLiuLiangEchartsList">
+        SELECT
+            group_concat(aa.cntc SEPARATOR ',') AS nums,
+            group_concat(
+                aa.Station_Port SEPARATOR ','
+            ) AS station_ports,
+            group_concat(
+                aa.station_name SEPARATOR ','
+            ) AS station_names
+        FROM
+            (
+                SELECT
+                    COUNT(
+                        CASE
+                        WHEN a.Station_IP IS NOT NULL THEN
+                            0
+                        END
+                    ) cntc,
+
+                    b.Station_Port,
+                    b.Station_Name
+                FROM
+                    t_vehicle_msg_today a
+                RIGHT JOIN station_site b ON a.Station_IP = b.Station_Port AND a.Over_Weight>0
+            RIGHT JOIN(
+                                    SELECT
+                                        COUNT(0) cntc
+                                    FROM
+                                        t_vehicle_msg_today
+
+                                    WHERE
+                                        Over_Weight>0 AND
+                                        FIND_IN_SET(
+                                            Station_IP,
+                                            '10001,10002,10003,10004,10005,10006'
+                                        )
+                                    ) c on 1=1
+                GROUP BY
+                    b.Station_Port
+                HAVING
+                    FIND_IN_SET(
+                        b.Station_Port,
+                        '10001,10002,10003,10004,10005,10006'
+                    )
+                ORDER BY
+                    cntc DESC
+                LIMIT 6
+            ) aa
+    </select>
+
+
     <select id="getCountByTableName" resultType="int">
         SELECT COUNT(*) from t_vehicle_msg a
         <where>
