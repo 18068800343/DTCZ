@@ -200,7 +200,7 @@
                     b.Station_Name
                 FROM
                     t_vehicle_msg_today a
-                RIGHT JOIN station_site b ON a.Station_IP = b.Station_Port AND a.Over_Weight>0
+                RIGHT JOIN station_site b ON a.Station_IP = b.Station_Port AND a.Over_Weight>0 AND date(a.Evt_Time) = curdate()
             RIGHT JOIN(
                                     SELECT
                                         COUNT(0) cntc
@@ -209,9 +209,10 @@
 
                                     WHERE
                                         Over_Weight>0 AND
+                                        date(Evt_Time) = curdate() AND
                                         FIND_IN_SET(
                                             Station_IP,
-                                            '10001,10002,10003,10004,10005,10006'
+                                            #{stationPorts}
                                         )
                                     ) c on 1=1
                 GROUP BY
@@ -219,7 +220,7 @@
                 HAVING
                     FIND_IN_SET(
                         b.Station_Port,
-                        '10001,10002,10003,10004,10005,10006'
+                         #{stationPorts}
                     )
                 ORDER BY
                     cntc DESC
@@ -305,7 +306,7 @@
 			b.Station_Name
 			FROM
 				t_vehicle_msg_today a
-			RIGHT JOIN station_site b ON a.Station_IP = b.Station_Port
+			RIGHT JOIN station_site b ON a.Station_IP = b.Station_Port AND date(a.Evt_Time) = curdate()
 			GROUP BY
 				b.Station_Port
 			HAVING FIND_IN_SET(b.Station_Port,#{stationPorts})

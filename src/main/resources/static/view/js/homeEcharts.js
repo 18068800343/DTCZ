@@ -196,6 +196,7 @@ homePageInit.initHuanEcharts = (id,index,nums,stationName) => {
     // 环形图
     let myChart = echarts.init(document.getElementById(id));
     let dataArray = getHuanDataByJson(index,nums);
+    let colorArray = getColor(index,nums);
     let option = {
         // 标题组件，包含主标题和副标题
         title: {
@@ -210,7 +211,7 @@ homePageInit.initHuanEcharts = (id,index,nums,stationName) => {
 
 
         },
-        color: ['#FF8F63', '#152364'],
+        color: colorArray,
         tooltip: {
             show: false,
             // 触发类型: item:数据项触发，axis：坐标轴触发
@@ -239,23 +240,24 @@ homePageInit.initHuanEcharts = (id,index,nums,stationName) => {
 
 let getHuanDataByJson = (index,nums)=>{
     let dataArray = [];
-    let nowIndexData = { // 数据值
-        selected: false,
-        // 单个扇区的标签配置
-        label: {
-            normal: {
-                // 是显示标签
-                show: true,
-                color: "#FFF",
-                position: 'center',
-                fontSize: 14,
-                // 标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 \n 换行
-                formatter: '{b}\n{d}%',
-            }
-        },
-    };
+
 
     for(let i in nums){
+        let nowIndexData = { // 数据值
+            selected: false,
+            // 单个扇区的标签配置
+            label: {
+                normal: {
+                    // 是显示标签
+                    show: true,
+                    color: "#FFF",
+                    position: 'center',
+                    fontSize: 14,
+                    // 标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 \n 换行
+                    formatter: '{b}\n{d}%',
+                }
+            },
+        };
         let otherIndexData = {
             label: {
                 normal: {
@@ -272,5 +274,20 @@ let getHuanDataByJson = (index,nums)=>{
        }
     }
     return dataArray;
+}
+
+let getColor = (index,nums)=>{
+    let colorArray = [];
+
+
+    for(let i in nums){
+        //['#FF8F63','#152364','#152364','#152364','#152364','#152364']
+       if(i==index){
+           colorArray.push('#FF8F63')
+       }else{
+           colorArray.push('#152364')
+       }
+    }
+    return colorArray;
 }
 

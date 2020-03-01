@@ -289,7 +289,7 @@ public class tWimMsgController {
     @RequestMapping("/getChaoZaiEchartsList")
     public CheLiuLiangEchartsList getChaoZaiEchartsList(String stationPorts, HttpSession session) {
         tWimMsgDao.getCheLiuLiangEchartsList(stationPorts);
-        return tWimMsgDao.getCheLiuLiangEchartsList(stationPorts);
+        return tWimMsgDao.getChaoZaiEchartsList(stationPorts);
     }
 
     @RequestMapping("/getMeiRiGuanJianChaoZHongShujuByStationPort")

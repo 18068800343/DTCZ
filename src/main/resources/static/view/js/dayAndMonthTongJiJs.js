@@ -53,7 +53,7 @@ let initTableTbody = (json) => {
                 if (n == json.length) {
                     //车道0即总计的一行的td
                     let tdDom = "";
-                    tdDom =  "<td data-id='"+json[1].avgLaneNo+",4'><a >" + json[1].avgMax + "</a></td>";
+                    tdDom =  "<td data-id='"+json[0].avgLaneNo+",4'><a >" + json[0].avgMax + "</a></td>";
                     let dom = tableDom.find("tfoot");
                     $(dom).append("<tr align='center'>" +
                         "<td colspan='2'>" + formatLaneName(json[0].avgLaneNo) + "</td>" +
@@ -91,9 +91,9 @@ let initTableTbody = (json) => {
                     //车道0即总计的一行的td
                     let tdDom = "";
                     for (let j = k + 1; j <= k + 5; j++) {
-                        tdDom = tdDom + "<td data-id='"+json[1].avgLaneNo+","+j+"'><a >" + json[1]['column' + j] + "</a></td>";
+                        tdDom = tdDom + "<td data-id='"+json[0].avgLaneNo+","+j+"'><a >" + json[0]['column' + j] + "</a></td>";
                     }
-                    tdDom = tdDom + "<td data-id='"+json[1].avgLaneNo+","+k+"'><a >" + json[1]['column' + k] + "</a></td>";
+                    tdDom = tdDom + "<td data-id='"+json[0].avgLaneNo+","+k+"'><a >" + json[0]['column' + k] + "</a></td>";
                     let dom = tableDom.find("tfoot");
                     $(dom).append("<tr align='center'>" +
                         "<td colspan='2'>" + formatLaneName(json[0].avgLaneNo) + "</td>" +
@@ -278,7 +278,7 @@ let initTableTbodyMonth = (json) => {
                 if (n == json.length) {
                     //车道0即总计的一行的td
                     let tdDom = "";
-                    tdDom =  "<td data-id='"+json[1].avgLaneNo+",4'><a >" + json[1].avgMax + "</a></td>";
+                    tdDom =  "<td data-id='"+json[0].avgLaneNo+",4'><a >" + json[0].avgMax + "</a></td>";
                     let dom = tableDom.find("tfoot");
                     $(dom).append("<tr align='center'>" +
                         "<td colspan='2'>" + formatLaneName(json[0].avgLaneNo) + "</td>" +
@@ -287,7 +287,7 @@ let initTableTbodyMonth = (json) => {
                     break;
                 }
                 let tdDom = "";
-                tdDom = "<td data-id='"+json[1].avgLaneNo+",4'><a >" + json[n].avgMax + "</a></td>";
+                tdDom = "<td data-id='"+json[n].avgLaneNo+",4'><a >" + json[n].avgMax + "</a></td>";
                 let dom = tableDom.find("tfoot");
                 $(dom).append("<tr align='center'>" +
                     "<td>" + json[n].avgLaneNo + "</td>" +
@@ -316,9 +316,9 @@ let initTableTbodyMonth = (json) => {
                     //车道0即总计的一行的td
                     let tdDom = "";
                     for (let j = k + 1; j <= k + 5; j++) {
-                        tdDom = tdDom + "<td data-id='"+json[1].avgLaneNo+","+j+"'><a >" + json[1]['column' + j] + "</a></td>";
+                        tdDom = tdDom + "<td data-id='"+json[0].avgLaneNo+","+j+"'><a >" + json[0]['column' + j] + "</a></td>";
                     }
-                    tdDom = tdDom + "<td data-id='"+json[1].avgLaneNo+","+k+"'><a >" + json[1]['column' + k] + "</a></td>";
+                    tdDom = tdDom + "<td data-id='"+json[0].avgLaneNo+","+k+"'><a >" + json[0]['column' + k] + "</a></td>";
                     let dom = tableDom.find("tfoot");
                     $(dom).append("<tr align='center'>" +
                         "<td colspan='2'>" + formatLaneName(json[0].avgLaneNo) + "</td>" +
