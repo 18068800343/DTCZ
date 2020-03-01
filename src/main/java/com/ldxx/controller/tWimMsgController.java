@@ -292,6 +292,30 @@ public class tWimMsgController {
         return tWimMsgDao.getChaoZaiEchartsList(stationPorts);
     }
 
+    @RequestMapping("/getHomeDataObject")
+    public HomeData getHomeDataObject(String stationPorts, HttpSession session) {
+        HomeData homeData = tWimMsgDao.getHomeData(stationPorts);
+        homeData.setStationNums(stationPorts.split(",").length);
+        ExecutorService threadPoolExecutor = Executors.newFixedThreadPool(1);
+        TongJiTableQuery tongJiTableQuery = new TongJiTableQuery();
+        tongJiTableQuery.setStationPort(stationPorts);
+
+        Callable callable = new PageCountCallable(tongJiTableQuery);
+        Future<Integer> res = null;
+        res = threadPoolExecutor.submit(callable);
+        try {
+            Integer count  = res.get();
+            homeData.setTotalCheLiu(count);
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        return homeData;
+    }
+
     @RequestMapping("/getMeiRiGuanJianChaoZHongShujuByStationPort")
     public List<tWimMsgVo> getMeiRiGuanJianChaoZHongShujuByStationPort(String stationPort,HttpSession session) {
         String zhandianduankouhao="";

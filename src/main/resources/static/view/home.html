@@ -31,22 +31,22 @@
     <div class="leftsj">
         <div class="leftfirst">
             <img src="img/first_img.png" style="height: 40px;">
-            <p class="leftp">12345689</p><span>辆</span>
+            <p class="leftp" id="leftTable1"></p><span>辆</span>
             <p style="color: #A4A5B0;margin-left: 11%;font-weight: bolder;margin-top: -2%;">当前总流量</p>
         </div>
         <div class="leftsec">
             <img src="./img/second_img.png" style="height: 40px;">
-            <p class="leftp">12345</p><span>辆</span>
+            <p class="leftp" id="leftTable2"></p><span>辆</span>
             <p style="color: #A4A5B0;margin-left: 11%;font-weight: bolder;margin-top: -2%;">当前超载车辆数</p>
         </div>
         <div class="leftth">
             <img src="img/third_img.png" style="height: 40px;">
-            <p class="leftp">109</p><span>吨</span>
+            <p class="leftp" id="leftTable3"></p><span>吨</span>
             <p style="color: #A4A5B0;margin-left: 11%;font-weight: bolder;margin-top: -2%;">当前最大车重</p>
         </div>
         <div class="leftfou">
             <img src="img/first_img.png" style="height: 40px;">
-            <p class="leftp">6</p><span>个</span>
+            <p class="leftp" id="leftTable4"></p><span>个</span>
             <p style="color: #A4A5B0;margin-left: 11%;font-weight: bolder;margin-top: -2%;">当前监测站点</p>
         </div>
         <div class="y-span10 y-last">
@@ -324,11 +324,19 @@
     //初始化环形图0
     homePageInit.initDownEcharts();
 
+    //初始化左侧总数据
+    homePageInit.initHomeData();
     setInterval(refresh, 1000);
+    setInterval(refreshLeft, 4000);
 
     function refresh() {
         homePageInit.initLeftEcharts('xian1');
         homePageInit.initDownEcharts();
+        //
+    }
+
+    function refreshLeft() {
+        homePageInit.initHomeData();
     }
 
     // 扇形

@@ -1,6 +1,7 @@
 package com.ldxx.dao;
 
 import com.ldxx.bean.CheLiuLiangEchartsList;
+import com.ldxx.bean.HomeData;
 import com.ldxx.bean.TongJiTableQuery;
 import com.ldxx.vo.tWimMsgVo;
 import org.apache.ibatis.annotations.Param;
@@ -17,6 +18,9 @@ public interface tWimMsgDao {
 
 
     CheLiuLiangEchartsList getChaoZaiEchartsList(String stationPorts);
+
+
+    HomeData getHomeData(String stationPorts);
 
     int getMeiRiCheLiuLiangByStationPort(@Param("stationPort")String stationPort);
 

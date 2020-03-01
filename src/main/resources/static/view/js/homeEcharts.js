@@ -290,4 +290,26 @@ let getColor = (index,nums)=>{
     }
     return colorArray;
 }
+homePageInit.initHomeData = ()=>{
+    $.ajax({
+        type: 'POST',
+        url: '/tWimMsg/getHomeDataObject',
+        dataType: 'json',
+        data: {
+            stationPorts: homePageInit.stationPort.toString(),
+        },
+        error: function (msg) {
+        },
+        success: function (json) {
+            $("#leftTable1").html('');
+            $("#leftTable1").html(json.totalCheLiu);
+            $("#leftTable2").html('');
+            $("#leftTable2").html(json.totalChaoZai);
+            $("#leftTable3").html('');
+            $("#leftTable3").html(json.maxWeight);
+            $("#leftTable4").html('');
+            $("#leftTable4").html(json.stationNums);
+        }
+    });
+}
 

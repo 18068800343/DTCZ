@@ -288,6 +288,15 @@
         where  Station_IP=#{stationPort} AND date(Evt_Time) = curdate() and Total_Weight>(SELECT Crux_Weight FROM crux_weight where Del_State=1)
     </select>
 
+
+    <select id="getHomeData" resultType="HomeData">
+        SELECT * from (
+        SELECT COUNT(*) totalChaoZai FROM t_vehicle_msg a WHERE a.Over_Weight>0 and FIND_IN_SET(a.Station_IP,#{stationPorts})
+        ) aa LEFT JOIN (
+        select MAX(a.Total_Weight) maxWeight FROM t_vehicle_msg a WHERE  FIND_IN_SET(a.Station_IP,#{stationPorts})
+        )bb on 1= 1
+    </select>
+
     <select id="getCheLiuLiangEchartsList" resultType="CheLiuLiangEchartsList">
         SELECT
         group_concat(aa.cnt SEPARATOR ',') AS nums,
