@@ -58,3 +58,8 @@ body{
 	background-repeat: no-repeat no-repeat; 
 	background-position:0 100%, 100% 100%; 
 }
+.right{
+    background-image:url(../img/left_angle.png),url(../img/right_angle.png);
+	background-repeat: no-repeat no-repeat; 
+	background-position:0 100%, 100% 100%; 
+}
