@@ -97,21 +97,19 @@
     </div>
     <div class="righttop" style="margin-top: -10%;position: relative;">
         <div id="by" class="col-xs-4" style="height:200px;position: absolute;float: left;"></div>
-        <div id="byf" class="col-xs-4" style="height:200px;margin-left:30%;position: absolute;"></div>
+        <div id="byf" class="col-xs-4" style="height:200px;margin-left:32%;position: absolute;"></div>
         <div id="by2" class="col-xs-4" style="height:200px;float: right;"></div>
     </div>
     <div class="ert" style="margin-top: 40%;position: relative;">
         <div id="by3" class="col-xs-4" style="height:200px;position: absolute;"></div>
-        <div id="by4"  class="col-xs-4"style="height:200px;position: absolute;margin-left: 30%;"></div>
+        <div id="by4"  class="col-xs-4"style="height:200px;position: absolute;margin-left: 32%;"></div>
         <div id="by5"  class="col-xs-4"style="height:200px;position: absolute;right: 0;"></div>
     </div>
     <div class="rightbottom" style="clear: both; position: relative;top: 140px;">
-        <p style="font-size: 17px;color: #FFF;" class="col-xs-8">当前最大车重<span style="color: #FE545E;font-size: 25px;background-color:#131A50;padding: 1.5%;margin: 1%;">109</span>吨</p>
-        <span style="float: right;margin-top: -10%;color:#16427C;">二级预警（≥80吨）</span>
-        <span style="float: right;margin-top: -5%;color:#16427C;">三级预警（≥100吨）</span>
+        <p style="font-size: 17px;color: #FFF;margin-top:10%;" class="col-xs-8">当前最大车重<span style="color: #FE545E;font-size: 25px;background-color:#131A50;padding: 1.5%;margin: 1%;">109</span>吨</p>
 
     </div>
-    <div id="liti" class="col-xs-12" style="height: 400px;margin-top: 40%;">
+    <div id="liti" class="col-xs-12" style="height: 400px; margin-top: 40%;">
     </div>
 </div>
 </body>
@@ -953,47 +951,63 @@
     myChart.setOption(option);
 
     var myChart = echarts.init(document.getElementById("liti"));
-    var option = {
-        color: ['#3398DB'],
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-            }
-        },
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
-        xAxis: [
-            {
-                show:false,
-                type: 'category',
-                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                axisTick: {
-                    alignWithLabel: true
-                }
-            }
-        ],
-        yAxis: [
-            {
-                show:false,
-                type: 'value'
-            }
-        ],
-        series: [
-            {
-                name: '直接访问',
-                type: 'bar',
-                barWidth: '60%',
-                data: [10, 52, 200, 334, 390, 330, 220]
-            }
-        ]
-    };
+    var option = {	
+    		color: ['#6154FD','#FE545E'],
+    		
+    		 textStyle: {
+                 color: '#fff',
+                 fontSize: 13
+             },
+    	    tooltip: {
+    	        trigger: 'axis',
+    	        axisPointer: {
+    	            type: 'cross'
+    	        }
+    	    },
+    	    
+    	    legend: {
+    	        data: ['二级预警(≥80吨)', '三级预警(≥100吨)'],
+    	        right: 10,
+    	        orient: 'vertical',  //垂直显示
+    	        textStyle: {
+                    color: '#17447E',
+                    fontSize: 13
+                },
+                
+    	    },
+    	    xAxis: [
+    	        {
+    	            type: 'category',
+    	            data: ['G25', 'G2115', 'G25苏鲁临连', 'G25苏鲁临连', 'G25苏鲁临连', 'G25苏鲁临连'],
+    	           
+    	        }
+    	    ],
+    	    yAxis: [
+    	        {
+    	            show:false,
+    	            type: 'value'
+    	        },
+    	        
+    	    ],
+    	    series: [
+    	        {
+    	            name: '二级预警(≥80吨)',
+    	            type: 'bar',
+    	            data: [122, 112, 7.0, 23.2, 25.6, 76.7],
+    	            barWidth : 20,//柱图宽度
+    	        },
+    	        {
+    	            name: '三级预警(≥100吨)',
+    	            type: 'bar',
+    	            data: [2.6, 5.9, 9.0, 26.4, 28.7,76.7],
+    	            barWidth : 20,//柱图宽度
+    	        }
+    	    ]
+    	};
+
+
     myChart.setOption(option);
 
-</script>
+</script> 
 
 </html>
