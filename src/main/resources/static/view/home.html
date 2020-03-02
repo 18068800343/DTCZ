@@ -109,7 +109,7 @@
         <p style="font-size: 17px;color: #FFF;margin-top:10%;" class="col-xs-8">当前最大车重<span style="color: #FE545E;font-size: 25px;background-color:#131A50;padding: 1.5%;margin: 1%;">109</span>吨</p>
 
     </div>
-    <div id="liti" class="col-xs-12" style="height: 400px; margin-top: 40%;">
+    <div id="liti" class="col-xs-12" style="height: 340px; margin-top: 43%;">
     </div>
 </div>
 </body>
@@ -978,8 +978,33 @@
     	    xAxis: [
     	        {
     	            type: 'category',
-    	            data: ['G25', 'G2115', 'G25苏鲁临连', 'G25苏鲁临连', 'G25苏鲁临连', 'G25苏鲁临连'],
-    	           
+    	            data: ['G25苏鲁临连省界', 'G25苏鲁临连省界', 'G25苏鲁临连省界', 'G25苏鲁临连省界', 'G25苏鲁临连省界', 'G25苏鲁临连省界'],
+    	            axisLabel : {
+    	                formatter : function(params){
+    	                   var newParamsName = "";
+    	                            var paramsNameNumber = params.length;
+    	                            var provideNumber = 3;
+    	                            var rowNumber = Math.ceil(paramsNameNumber / provideNumber);
+    	                            if (paramsNameNumber > provideNumber) {
+    	                                for (var p = 0; p < rowNumber; p++) {
+    	                                    var tempStr = "";
+    	                                    var start = p * provideNumber;
+    	                                    var end = start + provideNumber;
+    	                                    if (p == rowNumber - 1) {
+    	                                        tempStr = params.substring(start, paramsNameNumber);
+    	                                    } else {
+    	                                        tempStr = params.substring(start, end) + "\n";
+    	                                    }
+    	                                    newParamsName += tempStr;
+    	                                }
+
+    	                            } else {
+    	                                newParamsName = params;
+    	                            }
+    	                            return newParamsName
+    	                }
+
+    	            },
     	        }
     	    ],
     	    yAxis: [
