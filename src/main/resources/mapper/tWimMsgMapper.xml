@@ -178,30 +178,41 @@
 
 
     <select id="getChaoZaiEchartsList" resultType="CheLiuLiangEchartsList">
-        SELECT
-            group_concat(aa.cntc SEPARATOR ',') AS nums,
-            group_concat(
-                aa.Station_Port SEPARATOR ','
-            ) AS station_ports,
-            group_concat(
-                aa.station_name SEPARATOR ','
-            ) AS station_names
-        FROM
-            (
-                SELECT
-                    COUNT(
-                        CASE
-                        WHEN a.Station_IP IS NOT NULL THEN
-                            0
-                        END
-                    ) cntc,
 
-                    b.Station_Port,
-                    b.Station_Name
+            SELECT
+                    group_concat(aa.cntc SEPARATOR ',') AS nums,
+                    group_concat(
+                        aa.Station_Port SEPARATOR ','
+                    ) AS station_ports,
+                    group_concat(
+                        aa.station_name SEPARATOR ','
+                    ) AS station_names,
+                    group_concat(aa.cnta SEPARATOR ',') AS numCount,
+                    group_concat(aa.cntt SEPARATOR ',') AS nums2
                 FROM
-                    t_vehicle_msg_today a
-                RIGHT JOIN station_site b ON a.Station_IP = b.Station_Port AND a.Over_Weight>0 AND date(a.Evt_Time) = curdate()
-            RIGHT JOIN(
+                    (
+                        SELECT
+                            COUNT(
+                                CASE
+                                WHEN a.Station_IP IS NOT NULL THEN
+                                    0
+                                END
+                            ) cntc,
+                            b.Station_Port,
+                            b.Station_Name,
+                                                cc.cnt as cnta,
+                                                (cc.cnt - COUNT(
+                                CASE
+                                WHEN a.Station_IP IS NOT NULL THEN
+                                    0
+                                END
+                            )) as cntt
+
+
+                        FROM
+                            t_vehicle_msg_today a
+                        RIGHT JOIN station_site b ON a.Station_IP = b.Station_Port AND a.Over_Weight>0 AND date(a.Evt_Time) = curdate()
+                    RIGHT JOIN(
                                     SELECT
                                         COUNT(0) cntc
                                     FROM
@@ -215,17 +226,34 @@
                                             #{stationPorts}
                                         )
                                     ) c on 1=1
-                GROUP BY
-                    b.Station_Port
-                HAVING
-                    FIND_IN_SET(
-                        b.Station_Port,
-                         #{stationPorts}
-                    )
-                ORDER BY
-                    cntc DESC
-                LIMIT 6
-            ) aa
+                                RIGHT JOIN(SELECT
+                                            COUNT(
+                                                CASE
+                                                WHEN a.Station_IP IS NOT NULL THEN
+                                                    0
+                                                END
+                                            ) cnt,
+                                            bb.Station_Port,
+                                            bb.Station_Name
+                                            FROM
+                                                t_vehicle_msg_today a
+                                            RIGHT JOIN station_site bb ON a.Station_IP = bb.Station_Port AND date(a.Evt_Time) = curdate()
+                                            GROUP BY
+                                                bb.Station_Port
+                                            HAVING FIND_IN_SET(bb.Station_Port,#{stationPorts})
+                                            ORDER BY
+                                                cnt DESC) cc on cc.Station_Port = b.Station_Port
+                                                GROUP BY
+                                                    b.Station_Port
+                                                HAVING
+                                                    FIND_IN_SET(
+                                                        b.Station_Port,
+                                                         #{stationPorts}
+                                                    )
+                                                ORDER BY
+                                                    cntc DESC
+                                                LIMIT 6
+                                            ) aa
     </select>
 
 
@@ -291,10 +319,13 @@
 
     <select id="getHomeData" resultType="HomeData">
         SELECT * from (
-        SELECT COUNT(*) totalChaoZai FROM t_vehicle_msg a WHERE a.Over_Weight>0 and FIND_IN_SET(a.Station_IP,#{stationPorts})
+        SELECT COUNT(*) totalChaoZai FROM t_vehicle_msg_today a WHERE a.Over_Weight>0 and FIND_IN_SET(a.Station_IP,#{stationPorts}) and  date(a.Evt_Time) = curdate()
         ) aa LEFT JOIN (
-        select MAX(a.Total_Weight) maxWeight FROM t_vehicle_msg a WHERE  FIND_IN_SET(a.Station_IP,#{stationPorts})
+        select MAX(a.Total_Weight) maxWeight FROM t_vehicle_msg_today a WHERE  FIND_IN_SET(a.Station_IP,#{stationPorts}) and  date(a.Evt_Time) = curdate()
         )bb on 1= 1
+        LEFT JOIN (
+        select COUNT(*) totalCheLiu FROM t_vehicle_msg_today a WHERE  FIND_IN_SET(a.Station_IP,#{stationPorts}) and  date(a.Evt_Time) = curdate()
+        )cc on 1= 1
     </select>
 
     <select id="getCheLiuLiangEchartsList" resultType="CheLiuLiangEchartsList">
@@ -304,7 +335,7 @@
         group_concat(aa.station_name SEPARATOR ',') AS station_names
         FROM
 		(
-			SELECT
+			SELECT * FROM(SELECT
 			COUNT(
 				CASE
 				WHEN a.Station_IP IS NOT NULL THEN
@@ -321,8 +352,96 @@
 			HAVING FIND_IN_SET(b.Station_Port,#{stationPorts})
 			ORDER BY
 				cnt DESC
-			LIMIT 6
+			LIMIT 6)dd ORDER BY dd.cnt
 		) aa
+    </select>
+
+    <select id="getGuanJianChaoZhongCheLiangEchartsList" resultType="CheLiuLiangEchartsList">
+SELECT
+         group_concat(aaa.cnt SEPARATOR ',') AS cnt2,
+        group_concat(aaa.Station_Port SEPARATOR ',') AS stationPorts,
+        group_concat(aaa.Station_Name SEPARATOR ',') AS stationNames,
+        group_concat(aaa.cnt2 SEPARATOR ',') AS cnt3
+        FROM
+		(select aa.cnt ,
+aa.Station_Port ,
+aa.Station_Name ,
+IFNULL(bb.cnt ,0)cnt2
+         from (SELECT
+                    *
+                FROM
+            (
+                SELECT
+                    COUNT(
+                        CASE
+                        WHEN a.Station_IP IS NOT NULL THEN
+                            0
+                        END
+                    ) cnt,
+                    b.Station_Port,
+                    b.Station_Name
+                FROM
+                    t_vehicle_msg_today a
+                RIGHT JOIN station_site b ON a.Station_IP = b.Station_Port
+                AND date(a.Evt_Time) = curdate()
+                AND a.Total_Weight >= (
+                    SELECT
+                        Crux_Weight
+                    FROM
+                        crux_weight w
+                    WHERE
+                        Del_State = 1
+                    AND w.lv = #{lv1}
+
+                )
+                GROUP BY
+                    b.Station_Port
+                HAVING
+                    FIND_IN_SET(b.Station_Port ,#{stationPorts})
+                ORDER BY
+                    cnt DESC
+                LIMIT 6
+            ) dd
+        ORDER BY
+            dd.cnt) aa LEFT JOIN (SELECT
+            *
+        FROM
+            (
+                SELECT
+                    COUNT(
+                        CASE
+                        WHEN a.Station_IP IS NOT NULL THEN
+                            0
+                        END
+                    ) cnt,
+                    b.Station_Port,
+                    b.Station_Name
+                FROM
+                    t_vehicle_msg_today a
+                RIGHT JOIN station_site b ON a.Station_IP = b.Station_Port
+                AND date(a.Evt_Time) = curdate()
+                AND a.Total_Weight >= (
+                    SELECT
+                        Crux_Weight
+                    FROM
+                        crux_weight w
+                    WHERE
+                        Del_State = 1
+                    AND w.lv = #{lv2}
+
+                )
+                GROUP BY
+                    b.Station_Port
+                HAVING
+                    FIND_IN_SET(b.Station_Port ,'10001,10002,10003,10004,10005,10006,10007,10008,10009,10010')
+                ORDER BY
+                    cnt DESC
+                LIMIT 6
+            ) dd
+        ORDER BY
+            dd.cnt) bb on aa.Station_Port = bb.Station_Port
+		) aaa
+
     </select>
 
 

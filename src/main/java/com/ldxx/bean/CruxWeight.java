@@ -10,6 +10,16 @@ public class CruxWeight {
     //1:存在；0：已删除
     private Integer delState;
 
+    private  Integer lv;
+
+    public Integer getLv() {
+        return lv;
+    }
+
+    public void setLv(Integer lv) {
+        this.lv = lv;
+    }
+
     public Integer getDelState() {
         return delState;
     }

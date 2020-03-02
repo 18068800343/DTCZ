@@ -5,6 +5,42 @@ public class CheLiuLiangEchartsList {
     private String nums;
     private String stationPorts;
     private String stationNames;
+    private String numCount;//站点总车流量
+    private String nums2;//站点总车流量-站点超载数量
+    private String cnt2;//关键车辆二级预警数量
+    private String cnt3;//关键车辆三级预警数量
+
+    public String getCnt3() {
+        return cnt3;
+    }
+
+    public void setCnt3(String cnt3) {
+        this.cnt3 = cnt3;
+    }
+
+    public String getCnt2() {
+        return cnt2;
+    }
+
+    public void setCnt2(String cnt2) {
+        this.cnt2 = cnt2;
+    }
+
+    public String getNumCount() {
+        return numCount;
+    }
+
+    public void setNumCount(String numCount) {
+        this.numCount = numCount;
+    }
+
+    public String getNums2() {
+        return nums2;
+    }
+
+    public void setNums2(String nums2) {
+        this.nums2 = nums2;
+    }
 
     public String getNums() {
         return nums;

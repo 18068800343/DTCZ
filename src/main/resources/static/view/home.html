@@ -15,12 +15,12 @@
             .righttop{
                 margin-top: -20% !important;
             }
-            .righttop{
+           /* .righttop{
                 top:200px !important;
             }
             .rightbottom span{
                 margin-top: 1% !important;
-            }
+            }*/
         }
     </style>
 </head>
@@ -96,8 +96,8 @@
         <h2 class="dangqianche" style="font-size: 17px;color:#007AFF;font-weight: bolder;padding: 10px;">当前车辆预警统计</h2>
     </div>
     <div class="righttop" style="margin-top: -10%;position: relative;">
-        <div id="by" class="col-xs-4" style="height:200px;position: absolute;float: left;"></div>
-        <div id="byf" class="col-xs-4" style="height:200px;margin-left:32%;position: absolute;"></div>
+        <div id="by0" class="col-xs-4" style="height:200px;position: absolute;float: left;"></div>
+        <div id="by1" class="col-xs-4" style="height:200px;margin-left:32%;position: absolute;"></div>
         <div id="by2" class="col-xs-4" style="height:200px;float: right;"></div>
     </div>
     <div class="ert" style="margin-top: 40%;position: relative;">
@@ -106,10 +106,10 @@
         <div id="by5"  class="col-xs-4"style="height:200px;position: absolute;right: 0;"></div>
     </div>
     <div class="rightbottom" style="clear: both; position: relative;top: 140px;">
-        <p style="font-size: 17px;color: #FFF;margin-top:10%;" class="col-xs-8">当前最大车重<span style="color: #FE545E;font-size: 25px;background-color:#131A50;padding: 1.5%;margin: 1%;">109</span>吨</p>
+        <p style="font-size: 17px;color: #FFF;margin-top:10%;" class="col-xs-8">当前最大车重<span id="lastZuiDaCheZhong" style="color: #FE545E;font-size: 25px;background-color:#131A50;padding: 1.5%;margin: 1%;"></span>吨</p>
 
     </div>
-    <div id="liti" class="col-xs-12" style="height: 325px; margin-top: 45%;">
+    <div id="liti" class="col-xs-12" style="height: 325px; margin-top: 43%;">
     </div>
 </div>
 </body>
@@ -225,6 +225,7 @@
 
     //初始化环形图0
     homePageInit.initDownEcharts();
+    homePageInit.initLastEcharts()
 
     //初始化左侧总数据
     homePageInit.initHomeData();
@@ -235,6 +236,7 @@
         homePageInit.initLeftEcharts('xian1');
         homePageInit.initDownEcharts();
         //
+        homePageInit.initLastEcharts()
     }
 
     function refreshLeft() {
@@ -950,88 +952,7 @@
     };
     myChart.setOption(option);
 
-    var myChart = echarts.init(document.getElementById("liti"));
-    var option = {	
-    		color: ['#6154FD','#FE545E'],
-    		
-    		 textStyle: {
-                 color: '#fff',
-                 fontSize: 13
-             },
-    	    tooltip: {
-    	        trigger: 'axis',
-    	        axisPointer: {
-    	            type: 'cross'
-    	        }
-    	    },
-    	    
-    	    legend: {
-    	        data: ['二级预警(≥80吨)', '三级预警(≥100吨)'],
-    	        right: 10,
-    	        orient: 'vertical',  //垂直显示
-    	        textStyle: {
-                    color: '#17447E',
-                    fontSize: 13
-                },
-                
-    	    },
-    	    xAxis: [
-    	        {
-    	            type: 'category',
-    	            data: ['G25苏鲁临连省界', 'G25苏鲁临连省界', 'G25苏鲁临连省界', 'G25苏鲁临连省界', 'G25苏鲁临连省界', 'G25苏鲁临连省界'],
-    	            axisLabel : {
-    	                formatter : function(params){
-    	                   var newParamsName = "";
-    	                            var paramsNameNumber = params.length;
-    	                            var provideNumber = 3;
-    	                            var rowNumber = Math.ceil(paramsNameNumber / provideNumber);
-    	                            if (paramsNameNumber > provideNumber) {
-    	                                for (var p = 0; p < rowNumber; p++) {
-    	                                    var tempStr = "";
-    	                                    var start = p * provideNumber;
-    	                                    var end = start + provideNumber;
-    	                                    if (p == rowNumber - 1) {
-    	                                        tempStr = params.substring(start, paramsNameNumber);
-    	                                    } else {
-    	                                        tempStr = params.substring(start, end) + "\n";
-    	                                    }
-    	                                    newParamsName += tempStr;
-    	                                }
 
-    	                            } else {
-    	                                newParamsName = params;
-    	                            }
-    	                            return newParamsName
-    	                }
-
-    	            },
-    	        }
-    	    ],
-    	    yAxis: [
-    	        {
-    	            show:false,
-    	            type: 'value'
-    	        },
-    	        
-    	    ],
-    	    series: [
-    	        {
-    	            name: '二级预警(≥80吨)',
-    	            type: 'bar',
-    	            data: [122, 112, 7.0, 23.2, 25.6, 76.7],
-    	            barWidth : 20,//柱图宽度
-    	        },
-    	        {
-    	            name: '三级预警(≥100吨)',
-    	            type: 'bar',
-    	            data: [2.6, 5.9, 9.0, 26.4, 28.7,76.7],
-    	            barWidth : 20,//柱图宽度
-    	        }
-    	    ]
-    	};
-
-
-    myChart.setOption(option);
 
 </script> 
 

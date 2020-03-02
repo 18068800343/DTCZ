@@ -19,6 +19,8 @@ public interface tWimMsgDao {
 
     CheLiuLiangEchartsList getChaoZaiEchartsList(String stationPorts);
 
+    CheLiuLiangEchartsList getGuanJianChaoZhongCheLiangEchartsList(Integer lv1,Integer lv2,String stationPorts);
+
 
     HomeData getHomeData(String stationPorts);
 

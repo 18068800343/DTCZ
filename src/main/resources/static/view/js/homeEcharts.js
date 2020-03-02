@@ -184,19 +184,22 @@ homePageInit.initDownEcharts = () => {
         success: function (json) {
             homePageInit.downStationName = json.stationNames.split(",");
             homePageInit.downNums = json.nums.split(",");
+            homePageInit.downNums2 = json.nums2.split(",");
             for(let i in json.nums){
-                homePageInit.initHuanEcharts("huan"+i,i,homePageInit.downNums,homePageInit.downStationName[i]);
+                homePageInit.initHuanEcharts("huan"+i,i,homePageInit.downNums,homePageInit.downStationName[i], homePageInit.downNums2 );
+                homePageInit.initHuanEcharts2("by"+i,i,homePageInit.downNums[i],homePageInit.downStationName[i]);
             }
         }
     });
 }
 
 
-homePageInit.initHuanEcharts = (id,index,nums,stationName) => {
+
+homePageInit.initHuanEcharts = (id,index,nums,stationName,nums2) => {
     // 环形图
     let myChart = echarts.init(document.getElementById(id));
-    let dataArray = getHuanDataByJson(index,nums);
-    let colorArray = getColor(index,nums);
+    let dataArray = getHuanDataByJson(index,nums,nums2);
+    let colorArray = getColor(index,nums,nums2);
     let option = {
         // 标题组件，包含主标题和副标题
         title: {
@@ -236,13 +239,134 @@ homePageInit.initHuanEcharts = (id,index,nums,stationName) => {
     };
     myChart.setOption(option)
     $("#huan"+index).show();
+
+}
+homePageInit.initHuanEcharts2 = (id,index,nums,stationName) => {
+    // 环形图
+    var myChart = echarts.init(document.getElementById(id));
+    var option = {
+        title: {
+            text: stationName,
+            show: true,
+            x: "center",
+            y: "bottom",
+            textStyle: {
+                color: '#a3a6b4',
+                fontSize: 13,
+                fontWeight: 'bold'
+            },
+            left: 'center',
+            top: '90%',
+            bottom: '69%',
+            itemGap: 60,
+        },
+        tooltip: {
+            show: false,
+        },
+        color: ['#B7DD7'],
+        legend: {
+            orient: 'vertical',
+            x: 690,
+            y: 120,
+            data: ['www'],
+
+        },
+        series: [{
+            type: 'pie',
+            //起始刻度的角度，默认为 90 度，即圆心的正上方。0 度为圆心的正右方。
+            startAngle: 0,
+            hoverAnimation: false,
+            tooltip: {},
+            radius: ["30%", "47%"],
+            center: ['50%', '80%'],
+            label: {
+                normal: {
+                    show: true,
+                    position: 'center',
+                    color: '#fff',
+                    formatter: function(params) {
+                        return params.value
+                    },
+                },
+            },
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            data: [{
+                value: nums,
+                itemStyle: {
+                    normal: {
+                        color: "rgba(80,150,224,0)"
+                    }
+                }
+            },
+
+            ]
+        },
+            {
+                type: 'pie',
+                startAngle: 0,
+                hoverAnimation: false,
+                radius: ["70%", "87%"],
+                center: ['50%', '80%'],
+                label: {
+                    normal: {
+                        show: false,
+                        position: 'center'
+                    },
+                    emphasis: {
+                        show: true,
+                        textStyle: {
+                            fontSize: '10',
+                            fontWeight: 'bold'
+                        }
+                    }
+                },
+                labelLine: {
+                    normal: {
+                        show: false
+                    }
+                },
+                data: [{
+                    value: 300,
+                    itemStyle: {
+                        normal: {
+                            color: "rgba(1,218,220,0)"
+                        }
+                    }
+                },
+                    {
+                        value: 240,
+                        itemStyle: {
+                            normal: {
+                                color: "rgba(1,218,220,1)"
+                            }
+                        }
+
+                    },
+                    {
+                        value: 60,
+                        itemStyle: {
+                            normal: {
+                                color: "rgba(1,218,220,0.1)"
+                            }
+                        }
+                    },
+                ]
+            }
+        ]
+    };
+    myChart.setOption(option);
+    $("#by"+index).show();
+
 }
 
-let getHuanDataByJson = (index,nums)=>{
+let getHuanDataByJson = (index,nums,nums2)=>{
     let dataArray = [];
 
 
-    for(let i in nums){
         let nowIndexData = { // 数据值
             selected: false,
             // 单个扇区的标签配置
@@ -265,28 +389,21 @@ let getHuanDataByJson = (index,nums)=>{
                 }
             }
         };
-       if(i==index){
-           nowIndexData.value = nums[i];
+           nowIndexData.value = nums[index];
            dataArray.push(nowIndexData);
-       }else{
-           otherIndexData.value = nums[i];
+           otherIndexData.value = nums2[index];
            dataArray.push(otherIndexData);
-       }
-    }
+
     return dataArray;
 }
 
-let getColor = (index,nums)=>{
+let getColor = (index,nums,nums2)=>{
     let colorArray = [];
-
-
-    for(let i in nums){
-        //['#FF8F63','#152364','#152364','#152364','#152364','#152364']
-       if(i==index){
-           colorArray.push('#FF8F63')
-       }else{
-           colorArray.push('#152364')
-       }
+    if(nums[index]!=0&&nums2[index]!=0){
+       colorArray.push('#FF8F63')
+       colorArray.push('#152364')
+    }else{
+        colorArray.push('#152364')
     }
     return colorArray;
 }
@@ -306,10 +423,130 @@ homePageInit.initHomeData = ()=>{
             $("#leftTable2").html('');
             $("#leftTable2").html(json.totalChaoZai);
             $("#leftTable3").html('');
-            $("#leftTable3").html(json.maxWeight);
+            $("#leftTable3").html((json.maxWeight/1000).toFixed(2));
             $("#leftTable4").html('');
             $("#leftTable4").html(json.stationNums);
+            $("#lastZuiDaCheZhong").html('')
+            $("#lastZuiDaCheZhong").html((json.maxWeight/1000).toFixed(2))
         }
     });
 }
 
+//******************************************************************************柱状图初始化***************************************************************************************
+
+homePageInit.initLastEcharts = () => {
+    $.ajax({
+        type: 'POST',
+        url: '/tWimMsg/getGuanJianChaoZhongCheLiangEchartsList',
+        dataType: 'json',
+        data: {
+            stationPorts: homePageInit.stationPort.toString(),
+        },
+        error: function (msg) {
+        },
+        success: function (json) {
+            homePageInit.setLastEcharts(json);
+        }
+    });
+}
+
+homePageInit.setLastEcharts = (json) => {
+    var myChart = echarts.init(document.getElementById("liti"));
+    var option = {
+        color: ['#6154FD','#FE545E'],
+
+        textStyle: {
+            color: '#fff',
+            fontSize: 13
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'cross'
+            }
+        },
+
+        legend: {
+            data: ['二级预警(≥80吨)', '三级预警(≥100吨)'],
+            right: 10,
+            orient: 'vertical',  //垂直显示
+            textStyle: {
+                color: '#17447E',
+                fontSize: 13
+            },
+
+        },
+        xAxis: [
+            {
+                type: 'category',
+                data: json.stationNames.split(","),
+                axisLabel : {
+                    formatter : function(params){
+                        var newParamsName = "";
+                        var paramsNameNumber = params.length;
+                        var provideNumber = 3;
+                        var rowNumber = Math.ceil(paramsNameNumber / provideNumber);
+                        if (paramsNameNumber > provideNumber) {
+                            for (var p = 0; p < rowNumber; p++) {
+                                var tempStr = "";
+                                var start = p * provideNumber;
+                                var end = start + provideNumber;
+                                if (p == rowNumber - 1) {
+                                    tempStr = params.substring(start, paramsNameNumber);
+                                } else {
+                                    tempStr = params.substring(start, end) + "\n";
+                                }
+                                newParamsName += tempStr;
+                            }
+
+                        } else {
+                            newParamsName = params;
+                        }
+                        return newParamsName
+                    }
+
+                },
+            }
+        ],
+        yAxis: [
+            {
+                show:false,
+                type: 'value',
+            },
+
+        ],
+        series: [
+            {
+                name: '二级预警(≥80吨)',
+                type: 'bar',
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top',
+                        color: 'white',
+                    }
+                },
+                data: json.cnt2.split(","),
+                barWidth : 20,//柱图宽度
+
+            },
+            {
+                name: '三级预警(≥100吨)',
+                type: 'bar',
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top',
+                        color: 'white',
+                    }
+                },
+                data: json.cnt3.split(","),
+                barWidth : 20,//柱图宽度
+            }
+        ]
+    };
+
+
+    myChart.setOption(option);
+
+}
