@@ -135,10 +135,10 @@
             'echarts/chart/map'
         ],
         function(ec) {
-            require('echarts/util/mapData/params').params.anhui = {
+            require('echarts/util/mapData/params').params.jiangsu = {
 
                 getGeoJson: function(callback) {
-                    $.getJSON('geoJson/anhui.json', function(data) {
+                    $.getJSON('geoJson/jiangsu.json', function(data) {
                         // 压缩后的地图数据必须使用 decode 函数转换
                         callback(require('echarts/util/mapData/params').decode(data));
                     });
@@ -148,7 +148,7 @@
             var ecConfig = require('echarts/config');
             var zrEvent = require('zrender/tool/event');
             var curIndx = 0;
-            var mapType = ["安徽"];
+            var mapType = ["江苏"];
 
 
             myChart.on(ecConfig.EVENT.MAP_SELECTED, function(param) {});
@@ -168,7 +168,7 @@
                 series: [{
                     name: '',
                     type: 'map',
-                    mapType: 'anhui',
+                    mapType: 'jiangsu',
                     selectedMode: false,
                     itemStyle: {
                         normal: {
@@ -180,93 +180,13 @@
                         },
                         emphasis: {
                             label: {
-                                show: true
+                                show: false
                             }
                         }
                     },
-                    data: [{
-                        name: '六安市',
-                        value: Math.round(Math.random() * 500)
-                    },
-                        {
-                            name: '安庆市',
-                            value: Math.round(Math.random() * 500)
-                        },
-                        {
-                            name: '滁州市',
-                            value: Math.round(Math.random() * 500)
-                        },
-                        {
-                            name: '宣城市',
-                            value: Math.round(Math.random() * 500)
-                        },
-                        {
-                            name: '阜阳市',
-                            value: Math.round(Math.random() * 500)
-                        },
-                        {
-                            name: '宿州市',
-                            value: Math.round(Math.random() * 500)
-                        },
-                        {
-                            name: '黄山市',
-                            value: Math.round(Math.random() * 500)
-                        },
-                        {
-                            name: '亳州市',
-                            value: Math.round(Math.random() * 500)
-                        },
-                        {
-                            name: '池州市',
-                            value: Math.round(Math.random() * 500)
-                        },
-                        {
-                            name: '合肥市',
-                            value: Math.round(Math.random() * 500)
-                        },
-                        {
-                            name: '蚌埠市',
-                            value: Math.round(Math.random() * 500)
-                        },
-                        {
-                            name: '芜湖市',
-                            value: Math.round(Math.random() * 500)
-                        },
-                        {
-                            name: '淮北市',
-                            value: Math.round(Math.random() * 500)
-                        },
-                        {
-                            name: '淮南市',
-                            value: Math.round(Math.random() * 500)
-                        },
-                        {
-                            name: '马鞍山市',
-                            value: Math.round(Math.random() * 500)
-                        },
-                        {
-                            name: '铜陵市',
-                            value: Math.round(Math.random() * 500)
-                        }
+                    data: [
                     ],
-                    geoCoord: {
-                        '合肥市': [117.22, 31.79],
-                        '蚌埠市': [117.33, 33.03],
-                        '芜湖市': [118.34, 31.05],
-                        '淮南市': [116.78, 32.62],
-                        '铜陵市': [117.82, 30.93],
-                        '宿州市': [117.29, 33.64],
-                        '宣城市': [118.95, 30.64],
-                        '亳州市': [115.76, 33.80],
-                        '池州市': [117.47, 30.37],
-                        '马鞍山市': [118.53, 31.50],
-                        '淮北市': [116.70, 33.78],
-                        '安庆市': [116.55, 30.52],
-                        '黄山市': [118.01, 29.98],
-                        '滁州市': [118.32, 32.27],
-                        '阜阳市': [115.82, 32.85],
-                        '六安市': [116.22, 31.92]
-                    },
+                   
                     markPoint: {
                         symbol: 'emptyCircle',
                         symbolSize: 15,
@@ -291,23 +211,7 @@
                             shadowBlur: 0,
                             loop: true
                         },
-                        data: [{
-                            name: '合肥市',
-                            value: 95
-                        },
-                            {
-                                name: '蚌埠市',
-                                value: 2
-                            },
-                            {
-                                name: '芜湖市'
-                            },
-                            {
-                                name: '淮南市'
-                            },
-                            {
-                                name: '铜陵市'
-                            }
+                        data: [
                         ]
                     }
 

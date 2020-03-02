@@ -5,11 +5,11 @@ body{
 	background-size: 200%;
 }
 .daohang{
-	background-color: #2142AF;
+	background-color: #549CFD;
 	height:55px;
 	line-height: 55px;
 	display:none;
-	 background-image: linear-gradient(#262E9F, #1F62C8);
+	 /* background-image: linear-gradient(#262E9F, #1F62C8); */
 }
 .daohang img{
 	height: 35px;
@@ -53,7 +53,7 @@ body{
 	margin-top: 20px;
 	line-height: 50px;
 }
-.col-xs-12{
+.col-xs-12{                    
 	float: none;
 }
 #leftTab a:hover{
