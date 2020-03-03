@@ -390,9 +390,9 @@
         if(startTime==null||startTime==''||startTime==undefined){
             startTime=getTime();
         }
-        $("#_top").empty()
-        $("#_right").empty()
-        $("#bottom_").empty()
+        /*$("#_top").html()
+        $("#_right").html()
+        $("#bottom_").html()*/
         $.ajax({
             type: 'POST',
             url: '/tAvgDay/gettAvgDayByIpAndTime',
@@ -408,7 +408,14 @@
                     "margin-left":"30px",
                     "color":"red",
                 })
+                var CheXingNum=[0,0,0,0,0];
+                setCheXingNumEChars(CheXingNum);
 
+                var ChaoZaiNum=[0,0,0,0,0];
+                setChaoZaiNumEChars(ChaoZaiNum);
+
+                var ChaoZaiLvNum=[0,0,0,0,0];
+                setChaoZaiLvNumEChars(ChaoZaiLvNum);
             },
             success: function (json) {
                 if(json!=null){
@@ -436,8 +443,6 @@
                     ChaoZaiLvNum.push(json.avgOverloadRatio5)
                     ChaoZaiLvNum.push(json.avgOverloadRatio6)
                     setChaoZaiLvNumEChars(ChaoZaiLvNum);
-                }else{
-                    toastr.error("無數據")
                 }
             }
         });
@@ -651,9 +656,9 @@
         if(startTime==null||startTime==''||startTime==undefined){
             startTime=getTime();
         }
-        $("#_top2").empty('')
-        $("#_right2").empty('')
-        $("#bottom_2").empty('')
+        /*$("#_top2").empty()
+        $("#_right2").empty()
+        $("#bottom_2").empty()*/
         $.ajax({
             type: 'POST',
             url: '/tAvgDay/gettAvgMonthByIpAndTime',
@@ -669,7 +674,14 @@
                     "margin-left":"30px",
                     "color":"red",
                 })
-                errMessage("请求UserController失败");
+                var CheXingNum=[0,0,0,0,0];
+                setCheXingNumEChars2(CheXingNum);
+
+                var ChaoZaiNum=[0,0,0,0,0];
+                setChaoZaiNumEChars2(ChaoZaiNum);
+
+                var ChaoZaiLvNum=[0,0,0,0,0];
+                setChaoZaiLvNumEChars2(ChaoZaiLvNum);
             },
             success: function (json) {
                 if(json!=null){
@@ -697,8 +709,6 @@
                     ChaoZaiLvNum.push(json.avgOverloadRatio5)
                     ChaoZaiLvNum.push(json.avgOverloadRatio6)
                     setChaoZaiLvNumEChars2(ChaoZaiLvNum);
-                }else{
-                    toastr.error("無數據")
                 }
             }
         });
