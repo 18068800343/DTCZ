@@ -291,6 +291,12 @@ public class tWimMsgController {
         return tWimMsgDao.getGuanJianChaoZhongCheLiangEchartsList(2,3,stationPorts);
     }
 
+    //实时监测页面关键超重车辆
+    @RequestMapping("/getGuanJianChaoZhongCheLiangEchartsList2")
+    public CheLiuLiangEchartsList getGuanJianChaoZhongCheLiangEchartsList2(String stationPorts, HttpSession session) {
+        return tWimMsgDao.getGuanJianChaoZhongCheLiangEchartsList2(2,3,stationPorts);
+    }
+
     @RequestMapping("/getChaoZaiEchartsList")
     public CheLiuLiangEchartsList getChaoZaiEchartsList(String stationPorts, HttpSession session) {
         tWimMsgDao.getCheLiuLiangEchartsList(stationPorts);
@@ -305,7 +311,7 @@ public class tWimMsgController {
     }
 
     @RequestMapping("/getMeiRiGuanJianChaoZHongShujuByStationPort")
-    public List<tWimMsgVo> getMeiRiGuanJianChaoZHongShujuByStationPort(String stationPort,HttpSession session) {
+    public List<tWimMsgVo> getMeiRiGuanJianChaoZHongShujuByStationPort(String stationPort,Integer lv,HttpSession session) {
         String zhandianduankouhao="";
         tUserInfo user = (tUserInfo) session.getAttribute("user");
         if(stationPort!=null&&stationPort!=""){
@@ -316,17 +322,17 @@ public class tWimMsgController {
                 //updlastMonitoringSiteById(user.getStationPort(),user.getUsrId(),session);
             }
         }
-        return service.getMeiRiGuanJianChaoZHongShujuByStationPort(stationPort);
+        return service.getMeiRiGuanJianChaoZHongShujuByStationPort(stationPort,lv);
     }
 
     @RequestMapping("/getChaoZHongHomePage")
-    public List<tWimMsgVo> getChaoZHongHomePage(String roadName,HttpSession session) {
+    public List<tWimMsgVo> getChaoZHongHomePage(String roadName,Integer lv,HttpSession session) {
         boolean b = roadName != null && !"".equals(roadName);
         String stationName = roadName;
         String routeName = "";
         StationSite stationSite = sitedao.getStationSiteByStationNameAndRouteName(stationName,routeName);
         String port = stationSite.getStationPort();
-        return service.getMeiRiGuanJianChaoZHongShujuByStationPort(port);
+        return service.getMeiRiGuanJianChaoZHongShujuByStationPort(port,lv);
     }
 
     @RequestMapping("/gettWimMsgById")

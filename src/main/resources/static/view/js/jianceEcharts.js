@@ -121,8 +121,8 @@ function setjiancezhandianRight(list,stationName){
     return option;
 }
 
-function setjiancezhandianBottom(list,stationName,max){
-    var seriesLabel = {
+function setjiancezhandianBottom(json){
+    /*var seriesLabel = {
         normal: {
             show: true,
             textBorderColor: '#336666',
@@ -178,6 +178,99 @@ function setjiancezhandianBottom(list,stationName,max){
                 label: seriesLabel,
                 barWidth: '20%',
                 data:list
+            }
+        ]
+    };*/
+    var option = {
+        color: ['#6154FD','#FE545E'],
+
+        textStyle: {
+            color: '#fff',
+            fontSize: 13
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'cross'
+            }
+        },
+
+        legend: {
+            data: ['二级预警(≥80吨)', '三级预警(≥100吨)'],
+            right: 10,
+            orient: 'vertical',  //垂直显示
+            textStyle: {
+                color: '#17447E',
+                fontSize: 13
+            },
+
+        },
+        xAxis: [
+            {
+                type: 'category',
+                data: json.stationNames.split(","),
+                axisLabel : {
+                    formatter : function(params){
+                        var newParamsName = "";
+                        var paramsNameNumber = params.length;
+                        var provideNumber = 3;
+                        var rowNumber = Math.ceil(paramsNameNumber / provideNumber);
+                        if (paramsNameNumber > provideNumber) {
+                            for (var p = 0; p < rowNumber; p++) {
+                                var tempStr = "";
+                                var start = p * provideNumber;
+                                var end = start + provideNumber;
+                                if (p == rowNumber - 1) {
+                                    tempStr = params.substring(start, paramsNameNumber);
+                                } else {
+                                    tempStr = params.substring(start, end) + "\n";
+                                }
+                                newParamsName += tempStr;
+                            }
+
+                        } else {
+                            newParamsName = params;
+                        }
+                        return newParamsName
+                    }
+
+                },
+            }
+        ],
+        yAxis: [
+            {
+                show:false,
+                type: 'value',
+            },
+
+        ],
+        series: [
+            {
+                name: '二级预警(≥80吨)',
+                type: 'bar',
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top',
+                        color: 'black',
+                    }
+                },
+                data: json.cnt2.split(","),
+                barWidth : 20,//柱图宽度
+
+            },
+            {
+                name: '三级预警(≥100吨)',
+                type: 'bar',
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top',
+                        color: 'white',
+                    }
+                },
+                data: json.cnt3.split(","),
+                barWidth : 20,//柱图宽度
             }
         ]
     };

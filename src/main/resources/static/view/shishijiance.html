@@ -30,6 +30,9 @@
 			#mainContent4_paginate{
 				margin-right: -100%;
 			}
+			#mainContent5_paginate{
+				margin-right: -100%;
+			}
 			.selected{
 				background: rgba(247, 161, 3,0.2);
 			}
@@ -171,7 +174,8 @@
 			   <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
 				   <ul class="layui-tab-title">
 					   <li class="layui-this">当日关键超重车辆统计</li>
-					   <li onclick="initTables4()">当日关键超重车辆</li>
+					   <li onclick="initTables4()">当日关键超重车辆二级预警</li>
+					   <li onclick="initTables5()">当日关键超重车辆三级预警</li>
 				   </ul>
 				   <div class="layui-tab-content" style="height: 100px;">
 					   <div class="layui-tab-item layui-show">
@@ -199,6 +203,27 @@
 							   </tbody>
 						   </table>
 					   </div>
+					   <div class="layui-tab-item">
+					   <table class="layui-table" lay-skin="line" id="mainContent5" style="width: 100%">
+						   <thead style="background-color: #DDE6F7;">
+						   <tr>
+							   <th style="width: 15%">站点</th>
+							   <th>车道号</th>
+							   <th>车牌号</th>
+							   <th>车牌颜色</th>
+							   <th>长</th>
+							   <th>车速(Km/h)</th>
+							   <th>轴数</th>
+							   <th>总重量(Kg)</th>
+							   <th>路面温度</th>
+							   <th>超重比率</th>
+							   <th>操作</th>
+						   </tr>
+						   </thead>
+						   <tbody>
+						   </tbody>
+					   </table>
+				   </div>
 				   </div>
 			   </div>
 			</div>
@@ -619,6 +644,64 @@
 				}},
 
 		});
+		var table5=$('#mainContent5').dataTable({
+			"deferRender": true,
+			"processing": true,
+			"bDestroy": true,
+			"iDisplayLength": 10,
+			"sDom":
+					"t"+
+					"<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+			"searching": true,
+			"searching": false,
+			"bLengthChange": false,
+
+			"oLanguage": {
+				"sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+			},
+			"columns": [
+				{ "data": "stationName"},
+				{ "data": "laneNoName"},
+				{ "data": "plate"},
+				{ "data": "licensePlateColor"},
+				{ "data": "length"},
+				{ "data": "speed"},
+				{ "data": "axlesCount"},
+				{ "data": "totalWeight"},
+				{ "data": "temperature"},
+				{ "data": "overWeightRatioName"},
+				{ "data": null},
+
+			],
+			"columnDefs": [
+				{
+					"class": "tcenter",
+					"targets": 10,
+					"searchable": true,
+					"render": function(data, type, full) {
+						return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="'+full.idLocal+'" onclick="lookMsg(this)"  id="lookDetall"></i>';
+					}
+				}],
+
+			"order": [[0, 'asc']],
+			"oLanguage": { //国际化配置
+				"sProcessing": "正在获取数据，请稍后...",
+				"sLengthMenu": "显示 _MENU_ 条",
+				"sZeroRecords": "查询不到相关数据",
+				"sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
+				"sInfoEmpty": "记录数为0",
+				"sInfoFiltered": "(全部记录数 _MAX_ 条)",
+				"sInfoPostFix": "",
+				"sSearch": "搜索",
+				"sUrl": "",
+				"oPaginate": {
+					"sFirst": "第一页",
+					"sPrevious": "上一页",
+					"sNext": "下一页",
+					"sLast": "最后一页"
+				}},
+
+		});
 		var user;
 		function getLoginUser(){
 			$.ajax({
@@ -981,6 +1064,7 @@
 				dataType: 'json',
 				data: {
 					stationPort:stationPort,
+					lv:2
 				},
 				error: function (msg) {
 					errMessage("请求UserController失败");
@@ -992,6 +1076,32 @@
 				}
 			});
 		}
+		function initTables5(){
+			showMask()
+			var stationPort;
+			if($("#zhandian").val()!=""&&$("#zhandian").val()!=undefined&&$("#zhandian").val()!=null){
+				stationPort=$("#zhandian").val().toString();
+			}else{
+				stationPort=""
+			}
+			$.ajax({
+				type: 'POST',
+				url: '/tWimMsg/getMeiRiGuanJianChaoZHongShujuByStationPort',
+				dataType: 'json',
+				data: {
+					stationPort:stationPort,
+					lv:3
+				},
+				error: function (msg) {
+					errMessage("请求UserController失败");
+				},
+				success: function (json) {
+					hidMask()
+					$('#mainContent5').dataTable().fnClearTable();
+					$('#mainContent5').DataTable().rows.add(json).draw(false);
+				}
+			});
+		}
 		function setBottomEcharts(){
 			var user=getLoginUser();
 			var stationName=getstationName(user);
@@ -999,23 +1109,23 @@
 
 			$.ajax({
 				type: 'POST',
-				url: '/tWimMsg/getMeiRiGuanJianCheLiangByStationPort',
+				url: '/tWimMsg/getGuanJianChaoZhongCheLiangEchartsList2',
 				dataType: 'json',
 				data: {
-					stationPort: stationPort,
+					stationPorts: stationPort,
 				},
 				error: function (msg) {
 					errMessage("请求UserController失败");
 				},
 				success: function (json) {
-					setEcharts3(json,stationName)
+					setEcharts3(json)
 
 				}
 			});
 		}
-		function setEcharts3(list,stationName){
+		function setEcharts3(list){
 			var flag=0;
-			for(var i=0;i<list.list.length;i++){
+			/*for(var i=0;i<list.split(",").length;i++){
 				flag+=list[i];
 			}
 			if(flag==0){
@@ -1023,13 +1133,13 @@
 					"margin-left":"30px",
 					"color":"red",
 				})
-			}
+			}*/
 			var myChart3 = echarts.init(document.getElementById('bottom_'));
-			if(list!=null&&list.length!=0){
-				let option = setjiancezhandianBottom(list.list,stationName,list.max);
+			//if(list!=null&&list.length!=0){
+				let option = setjiancezhandianBottom(/*list.list,stationName,list.max*/list);
 				// 使用刚指定的配置项和数据显示图表。
 				myChart3.setOption(option);
-			}
+			//}
 
 		}
 

@@ -25,7 +25,7 @@ public interface tWimMsgService {
 
     List<tWimMsgVo> getMeiRiChaoZaiShujuByStationPort(String stationPort);
 
-    List<tWimMsgVo> getMeiRiGuanJianChaoZHongShujuByStationPort(String stationPort);
+    List<tWimMsgVo> getMeiRiGuanJianChaoZHongShujuByStationPort(String stationPort,Integer lv);
 
     List<tWimMsgVo> getMeiRiCheLiuLiangShujuByStationPort(String stationPort);
 

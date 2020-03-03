@@ -38,9 +38,11 @@ public interface tWimMsgDao {
 
     List<tWimMsgVo> getMeiRiChaoZaiShujuByStationPort(@Param("stationPort")String stationPort);
 
-    List<tWimMsgVo> getMeiRiGuanJianChaoZHongShujuByStationPort(@Param("stationPort")String stationPort);
+    List<tWimMsgVo> getMeiRiGuanJianChaoZHongShujuByStationPort(@Param("stationPort")String stationPort,@Param("lv")Integer lv);
 
     List<tWimMsgVo> getMeiRiCheLiuLiangShujuByStationPort(@Param("stationPort")String stationPort);
 
     tWimMsgVo gettWimMsgById(String idLocal);
+
+    CheLiuLiangEchartsList getGuanJianChaoZhongCheLiangEchartsList2(Integer lv1,Integer lv2,String stationPorts);
 }
