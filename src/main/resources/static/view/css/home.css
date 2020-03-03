@@ -125,3 +125,17 @@ body{
 .liebiao{
 	width: 160px !important;
 }
+.layui-this{
+    background-color:#549CFD !important;    
+    color:white !important;
+    border:none !important;
+}
+.layui-tab-title li{
+	border-radius: 50px !important;
+	background-color:white;
+	margin-left:2%;
+	padding:0px 20px !important;
+} 
+.layui-tab-title{
+	border:none !important;
+}

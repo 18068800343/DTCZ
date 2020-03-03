@@ -53,11 +53,50 @@
                background-color:white;
                margin-top:0% !important;
             }
+             
 
 }
 		</style>
 	</head>
 	<body style="background-image: none;">
+	<div class="layui-tab" style="margin-left:10%">
+			  <ul class="layui-tab-title">
+			    <li class="layui-this">综合信息统计</li>
+			    <li>当前车流量</li>
+			    <li>当前超载车辆</li>
+			    <li>当前关键超重车辆</li>
+			  </ul>
+			  <div class="layui-tab-content">
+			    <div class="layui-tab-item layui-show">
+			     <div class="zd col-xs-2" style="background-color:#549CFD;height:150px;color:white;border-radius:5px 5px 5px;margin-left:10%;">
+			        <p style="font-size:15px;margin-top:7%;">当前监测站点/个</p>
+			        <img alt="" src="./img/img.png" style="float:right;margin-top:10%;">
+			        <div style="margin-top:20%;"><span style="font-size:40px;">14</span><a style="margin-left:5px;color:#D6E4FE;">查看</a></div>
+			     </div>
+			      <div class="zd col-xs-2" style="background-color:#3ED75E;height:150px;color:white;border-radius:5px 5px 5px;margin-left:2%;">
+			        <p style="font-size:15px;margin-top:7%;">当前车流量/辆</p>
+			        <img alt="" src="./img/img.png" style="float:right;margin-top:10%;">
+			        <div style="margin-top:20%;"><span style="font-size:40px;">12345</span></div>
+			     </div>
+			      <div class="zd col-xs-2" style="background-color:#FDAF54;height:150px;color:white;border-radius:5px 5px 5px;margin-left:2%;">
+			        <p style="font-size:15px;margin-top:7%;">当前超载车辆/辆</p>
+			        <img alt="" src="./img/img.png" style="float:right;margin-top:10%;">
+			        <div style="margin-top:20%;"><span style="font-size:40px;">36</span></div>
+			     </div>
+			      <div class="zd col-xs-2" style="background-color:#FD6854;height:150px;color:white;border-radius:5px 5px 5px;margin-left:2%;">
+			        <p style="font-size:15px;margin-top:7%;">当前关键超重车辆/辆</p>
+			        <img alt="" src="./img/img.png" style="float:right;margin-top:10%;">
+			        <div style="margin-top:20%;"><span style="font-size:40px;">7</span></div>
+			     </div>
+			    </div>
+			    <div class="layui-tab-item">
+			    </div>
+			    <div class="layui-tab-item">内容3</div>
+			    <div class="layui-tab-item">内容4</div>
+			    <div class="layui-tab-item">内容5</div>
+			  </div>
+			</div>
+ 
 		<div class="form-group" id="rightTab">
 			<div class="sele">
 				<label for="" class="col-sm-2 control-label shaixuan" >筛选站点</label>
@@ -404,7 +443,12 @@
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 	<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
 	<script>
-
+	layui.use('element', function(){
+		  var element = layui.element;
+		  
+		  //…
+		});
+	
 		$(document).ready( function () {
 
 			initzhandian()
