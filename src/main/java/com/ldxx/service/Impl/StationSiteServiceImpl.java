@@ -35,11 +35,11 @@ public class StationSiteServiceImpl implements StationSiteService {
         int i= dao.addStationSite(StationSite);
         if(i>0){
             //List<Accessory> accessory=StationSite.getFile();
-            //if(accessory!=null){
-            List<Accessory> accessory=new ArrayList<Accessory>();
-            accessory.add(StationSite.getFile());
+            if(StationSite.getFile()!=null&&StationSite.getFile().getAcName()!=null){
+                List<Accessory> accessory=new ArrayList<Accessory>();
+                accessory.add(StationSite.getFile());
                 i=accessoryDao.addAccessory(accessory);
-            //}
+            }
         }
         return i;
     }
@@ -52,7 +52,7 @@ public class StationSiteServiceImpl implements StationSiteService {
             if(accessory!=null&&accessory.size()!=0){
                 i=accessoryDao.deleteAccessory(tMaintenanceLog.getLogId());
             }*/
-            if(StationSite.getFile()!=null){
+            if(StationSite.getFile()!=null&&StationSite.getFile().getAcName()!=null){
                 List<Accessory> accessory=new ArrayList<Accessory>();
                 accessory.add(StationSite.getFile());
                 i=accessoryDao.addAccessory(accessory);

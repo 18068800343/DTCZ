@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldxx.dao.OverloadStandardDao" >
+
+    <select id="getAllOverloadStandard" resultType="OverloadStandard">
+        select * from overload_standard
+    </select>
+
+    <insert id="addOverloadStandard" parameterType="OverloadStandard">
+        insert into overload_standard(id,Axle_Number,Overload_Standard) values (#{id},#{axleNumber},#{overloadStandard})
+    </insert>
+
+    <update id="updOverloadStandard" parameterType="OverloadStandard">
+        update overload_standard set
+        Axle_Number=#{axleNumber},
+        Overload_Standard=#{overloadStandard}
+        where id=#{id}
+    </update>
+
+    <delete id="delOverloadStandard">
+        delete from overload_standard where id=#{id}
+    </delete>
+
+    <select id="getOverloadStandardByNumber">
+        select * from overload_standard where Axle_Number=#{axleNumber}
+    </select>
+
+    <select id="countaxleNumber" resultType="int">
+        select count(*) from overload_standard where Axle_Number=#{axleNumber}
+    </select>
+    <select id="xgcountaxleNumber" resultType="int">
+        select count(*) from overload_standard where Axle_Number=#{axleNumber} and id!=#{id}
+    </select>
+
+</mapper>

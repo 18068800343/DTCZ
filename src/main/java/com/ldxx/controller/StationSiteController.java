@@ -52,7 +52,7 @@ public class StationSiteController {
     }
 
     @RequestMapping("/addStationSite")
-    public String addStationSite(String stationSite,@RequestParam("file") MultipartFile file) throws IOException {
+    public String addStationSite(String stationSite,@RequestParam(value="file",required=false) MultipartFile file) throws IOException {
         JSONObject jsonObject = new JSONObject();
         Map<String,Class> map=new HashMap<>();
         JSONObject jsonObject2=JSONObject.fromObject(stationSite);
@@ -109,7 +109,7 @@ public class StationSiteController {
     }
 
     @RequestMapping("/updStationSite")
-    public String updStationSite(String stationSite,@RequestParam("file") MultipartFile file) throws IOException {
+    public String updStationSite(String stationSite,@RequestParam(value="file",required=false) MultipartFile file) throws IOException {
         JSONObject jsonObject = new JSONObject();
         Map<String,Class> map=new HashMap<>();
         JSONObject jsonObject2=JSONObject.fromObject(stationSite);

@@ -541,6 +541,7 @@
                     json.user.companyName=$("#xg_UsrRole").find("option:selected").text();
                     $('#mainContent').DataTable().row(tr).data(json.user);
                     $("#change").modal('hide');
+                    initTableQuanxian()
                 }else if(json.result==-1){
                     toastr.error("姓名重复");
                 }else{

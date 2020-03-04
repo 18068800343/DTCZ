@@ -444,6 +444,7 @@
                     $('#mainContent4').DataTable().row(tr).data(json.companySite);
                     $("#change4").modal('hide');
                     $(tr.children()[0]).text(oldNum);
+                    initTableQuanxian()
                 }else{
                     toastr.error("修改失败");
                 }

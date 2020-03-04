@@ -713,6 +713,7 @@
                         $('#mainContent').DataTable().row(trr).data(resMsg.obj);
                         $("#change").modal("hide");
                         toastr.success(resMsg.resultMsg);
+                        initTableQuanxian()
                     }else if(resMsg.daoMsg==-3){
                         toastr.error("IP地址重复");
                     }else if(resMsg.daoMsg==-4){

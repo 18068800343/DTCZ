@@ -44,6 +44,7 @@
         <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">车型编码</a></li>
         <li role="presentation"><a href="#guanjianzhongliang" aria-controls="danwei" role="tab" data-toggle="tab">关键重量</a></li>
         <!--<li role="presentation"><a href="#gongsicedian" aria-controls="danwei" role="tab" data-toggle="tab">公司测点</a></li>-->
+        <li role="presentation"><a href="#chaozaibiaozhun" aria-controls="chaozaibiaozhun" role="tab" data-toggle="tab">超载标准</a></li>
     </ul>
     <!-- Tab panes -->
     <div class="tab-content">
@@ -144,6 +145,33 @@
                             <th>序号</th>
                             <th>公司名称</th>
                             <th>下辖测点</th>
+                            <th style="width:75px;">操作</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane active" id="chaozaibiaozhun">
+            <div class="zhuti-content">
+                <div class="UpperPart">
+                    <div class="UpperPartL">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal5" style="margin: 5PX;float: left;">录入车牌颜色</button>
+                    </div>
+                    <div class="UpperPartR">
+
+                    </div>
+
+                </div>
+                <div class="LowerPart" style="margin-top:3px;">
+                    <table class="table table-bordered table-condensed table-hover" style="width:100%;" id="mainContent5">
+                        <thead>
+                        <tr>
+                            <!-- <td>设备类型</td> -->
+                            <th style="width: 20%;">序号</th>
+                            <th>轴车</th>
+                            <th>超载标准(kg)</th>
                             <th style="width:75px;">操作</th>
                         </tr>
                         </thead>
@@ -417,6 +445,68 @@
 </div>
 <!-- 修改model结束 -->
 
+<!-- Modal -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal5">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"><b>录入超载标准</b></h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <form class="form-inline">
+                        <table class="table table-bordered table-condensed" >
+                            <tr>
+                                <td style="width: 20%;">轴车</td>
+                                <td style="width: 30%;"><input type="text" style="width: 70%;" v-model="axleNumber"  /></td>
+                                <td style="width: 20%;">超载标准(kg)</td>
+                                <td style="width: 30%;"><input type="text" style="width: 70%;" v-model="overloadStandard"  /></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-default" @click="baocun5">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- model结束 -->
+
+<!-- 修改Modal -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="change5">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"><b>修改超载标准</b></h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <form class="form-inline">
+                        <table class="table table-bordered table-condensed" >
+                            <tr>
+                                <td style="width: 20%;">轴车</td>
+                                <td style="width: 30%;"><input type="text" style="width: 70%;" v-model="axleNumber"  /></td>
+                                <td style="width: 20%;">超载标准(kg)</td>
+                                <td style="width: 30%;"><input type="text" style="width: 70%;" v-model="overloadStandard"  /></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-success" @click="baocun5">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 修改model结束 -->
+
 
 </body>
 <script src="../js/jquery.js"></script>
@@ -437,6 +527,7 @@
         initTable3()
         initTable4()
         initzhandian()
+        initTable5()
     });
 
 
@@ -604,7 +695,7 @@
             this.api().column(0).nodes().each(function(cell, i){
                 cell.innerHTML=i+1;
             });
-
+            initTableQuanxian1()
         },
         "order": [[0, 'asc']],
         "oLanguage": { //国际化配置
@@ -660,7 +751,7 @@
             this.api().column(0).nodes().each(function(cell, i){
                 cell.innerHTML=i+1;
             });
-
+            initTableQuanxian1()
         },
         "order": [[0, 'asc']],
         "oLanguage": { //国际化配置
@@ -737,6 +828,7 @@
             this.api().column(0).nodes().each(function(cell, i){
                 cell.innerHTML=i+1;
             });
+            initTableQuanxian1()
         },
         "order": [[0, 'asc']],
         "oLanguage": { //国际化配置
@@ -757,7 +849,7 @@
             }},
 
     });
-    <!--=====================================关键重量=====================================-->
+
 
     function initTable4(){
         $.ajax({
@@ -776,6 +868,176 @@
         });
     }
 
+    var table5=$('#mainContent5').dataTable({
+        "deferRender": true,
+        "processing": true,
+        "bDestroy": true,
+        "iDisplayLength": 10,
+        "sDom":
+            "t"+
+            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+        "searching": true,
+        "lengthChange": false,
+        "oLanguage": {
+            "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+        },
+        "columns": [
+            { "data": null},
+            { "data": "axleNumber"},
+            { "data": "overloadStandard"},
+        ],
+        "columnDefs": [{
+            "class": "tcenter",
+            "targets": 3,
+            "searchable": true,
+            "render": function(data, type, full) {
+                var xiugai='<i class="iconfont icon-xiugai Pib" style="font-size:20px;cursor:pointer;display: none;" id="upd5" title="修改" data-toggle="modal" data-target="#change5"></i>';
+                var shanchu='<i class="iconfont icon-shanchu Pic" style="font-size:20px;cursor:pointer;display: none;" id="del5"  title="删除"></i>';
+                //var look='<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" onclick="lookMs(this)" data-toggle="modal" data-target="#allMsg1" id="lookDetall"></i>'
+                return xiugai+shanchu;
+            }
+
+        }],
+        "fnDrawCallback" : function() {
+            this.api().column(0).nodes().each(function(cell, i){
+                cell.innerHTML=i+1;
+            });
+            initTableQuanxian1()
+        },
+        "order": [[1, 'asc']],
+        "oLanguage": { //国际化配置
+            "sProcessing": "正在获取数据，请稍后...",
+            "sLengthMenu": "显示 _MENU_ 条",
+            "sZeroRecords": "查询不到相关数据",
+            "sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
+            "sInfoEmpty": "记录数为0",
+            "sInfoFiltered": "(全部记录数 _MAX_ 条)",
+            "sInfoPostFix": "",
+            "sSearch": "搜索",
+            "sUrl": "",
+            "oPaginate": {
+                "sFirst": "第一页",
+                "sPrevious": "上一页",
+                "sNext": "下一页",
+                "sLast": "最后一页"
+            }},
+
+    });
+    <!--=====================超载标准=================================== -->
+    function initTable5(){
+        $.ajax({
+            type: 'POST',
+            url: '/OverloadStandard/getAllOverloadStandard',
+            dataType: 'json',
+            data: {
+            },
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                $('#mainContent5').dataTable().fnClearTable();
+                $('#mainContent5').DataTable().rows.add(json).draw(false);
+            }
+        });
+    }
+
+    var addchaozaibiaozhun = new Vue({
+        el:"#myModal5",
+        data:{
+            id:"",
+            axleNumber:"",
+            overloadStandard:"",
+        },
+        methods:{
+            baocun5:function(){
+                this.$http.post('/OverloadStandard/addOverloadStandard',this._data,{}).then((res)=>{
+                    var resMsg = res.body;
+                    if(resMsg.daoMsg>0){
+                        $('#mainContent5').DataTable().row.add(resMsg.obj).draw();
+                        $("#myModal5").modal("hide");
+                        toastr.success(resMsg.resultMsg);
+                    }else if(resMsg.daoMsg==-1){
+                        toastr.error("车轴已存在");
+                    }else{
+                        toastr.error(resMsg.resultMsg);
+                    }
+                },(res)=>{
+                    toastr.error("发生错误");
+                });
+            },
+
+        }
+    });
+
+    var trr5;
+    $("#mainContent5").delegate("#upd5","click",function(){
+        var dom = $(this).parents('tr');
+        trr5=$(this).closest('tr');
+        var data=$('#mainContent5').DataTable().row(dom).data();
+        xg_addchaozaibiaozhun.id=data.id
+        xg_addchaozaibiaozhun.axleNumber=data.axleNumber
+        xg_addchaozaibiaozhun.overloadStandard=data.overloadStandard
+    })
+    var xg_addchaozaibiaozhun = new Vue({
+        el:"#change5",
+        data:{
+            id:"",
+            axleNumber:"",
+            overloadStandard:"",
+        },
+        methods:{
+            baocun5:function(){
+                this.$http.post('/OverloadStandard/updOverloadStandard',this._data,{}).then((res)=>{
+                    var resMsg = res.body;
+                    if(resMsg.daoMsg>0){
+                        var oldNum=$(trr5.children()[0]).text();
+                        $('#mainContent5').DataTable().row(trr5).data(resMsg.obj);
+                        $("#change5").modal("hide");
+                        $(trr5.children()[0]).text(oldNum);
+                        toastr.success(resMsg.resultMsg);
+                        initTableQuanxian1()
+                    }else if(resMsg.daoMsg==-1){
+                        toastr.error("车轴已存在");
+                    }else{
+                        toastr.error(resMsg.resultMsg);
+                    }
+                },(res)=>{
+                    toastr.error("发生错误");
+                });
+            },
+
+        }
+    });
+
+    //删除
+    $('#mainContent5').delegate('#del5','click', function () {
+        var dom = $(this).parents('tr');
+        var data=$('#mainContent5').DataTable().row(dom).data();
+        var msg = "您真的确定要删除吗？\n\n请确认！";
+        if (confirm(msg)==true){
+            $.ajax({
+                type: 'POST',
+                url:'/OverloadStandard/delOverloadStandard',
+                dataType: 'json',
+                data: {
+                    id:data.id
+                },
+                success: function (json) {
+                    if(json!=0){
+                        $('#mainContent5').DataTable().row(dom).remove().draw(false); //删除行立即显示
+                        toastr.success('删除成功');
+                    }else{
+                        toastr.error('删除失败');
+                    }
+                }
+            });
+        }else{
+            return false;
+        }
+
+    })
+
+    <!--=====================================关键重量=====================================-->
     var addguanjianWeight = new Vue({
         el:"#myModal3",
         data:{
@@ -905,6 +1167,7 @@
                         $("#change3").modal("hide");
                         $(trr.children()[0]).text(oldNum);
                         toastr.success(resMsg.resultMsg);
+                        initTableQuanxian1()
                     }else{
                         toastr.error(resMsg.resultMsg);
                     }
@@ -1025,6 +1288,7 @@
                         $("#change2").modal("hide");
                         $(trr.children()[0]).text(oldNum);
                         toastr.success(resMsg.resultMsg);
+                        initTableQuanxian1()
                     }else if(resMsg.daoMsg==-1){
                         toastr.error("车型重复");
                     }else if(resMsg.daoMsg==-2){
@@ -1149,6 +1413,7 @@
 
                         $(trr.children()[0]).text(oldNum);
                         toastr.success(resMsg.resultMsg);
+                        initTableQuanxian1()
                     }else if(resMsg.daoMsg==-1){
                         toastr.error("车牌颜色重复");
                     }else if(resMsg.daoMsg==-2){

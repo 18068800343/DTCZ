@@ -445,6 +445,7 @@
                     toastr.success("修改成功");
                     $('#mainContent').DataTable().row(tr).data(json.tMaintenanceLog);
                     $("#change").modal('hide');
+                    initTableQuanxian()
                 }else{
                     toastr.error("修改失败");
                 }
