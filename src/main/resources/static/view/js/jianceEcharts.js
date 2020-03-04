@@ -24,13 +24,13 @@ function setjiancezhandianLeft(list,stationName,max){
             containLabel: true
         },
         xAxis: {
-            type: 'value',
+            type: 'category',
             //max: max,
-            boundaryGap: [0, 0.01]
+            data: stationName
         },
         yAxis: {
-            type: 'category',
-            data: stationName
+            type: 'value',
+            boundaryGap: [0, 0.01]
         },
 
         series: [{
@@ -41,7 +41,7 @@ function setjiancezhandianLeft(list,stationName,max){
             barWidth: 20,
             itemStyle: {
                 normal: {
-                    color: '#91FD63'
+                    color: '#80B6FE'
                 }
             },
 

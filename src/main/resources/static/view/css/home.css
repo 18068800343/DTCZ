@@ -130,12 +130,31 @@ body{
     color:white !important;
     border:none !important;
 }
-.layui-tab-title li{
+.labelli li{
 	border-radius: 50px !important;
 	background-color:white;
-	margin-left:2%;
+	margin-left:1%;
 	padding:0px 20px !important;
 } 
 .layui-tab-title{
 	border:none !important;
+}
+.zd{
+	width:22% !important;
+	margin-bottom:2% !important;
+}
+.labelfirst{
+	background-color:white;
+	margin-top:10%;
+	padding:2%;
+	clear:both;
+}
+.zddiv{
+	margin-bottom:5%;
+}
+.shaixuan{
+	margin-left:0% !important;
+}
+.labelright{
+	float:right;
 }

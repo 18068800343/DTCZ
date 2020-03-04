@@ -60,45 +60,36 @@
 	</head>
 	<body style="background-image: none;">
 	<div class="layui-tab" style="margin-left:10%">
-			  <ul class="layui-tab-title">
-			    <li class="layui-this">综合信息统计</li>
+			  <ul class="layui-tab-title labelli">
+			    <li class="layui-this labelthis">综合信息统计</li>
 			    <li>当前车流量</li>
 			    <li>当前超载车辆</li>
 			    <li>当前关键超重车辆</li>
 			  </ul>
 			  <div class="layui-tab-content">
 			    <div class="layui-tab-item layui-show">
-			     <div class="zd col-xs-2" style="background-color:#549CFD;height:150px;color:white;border-radius:5px 5px 5px;margin-left:10%;">
+			     <div class="zd col-xs-2" style="background-color:#549CFD;height:170px;color:white;border-radius:5px 5px 5px;width:20%;">
 			        <p style="font-size:15px;margin-top:7%;">当前监测站点/个</p>
 			        <img alt="" src="./img/img.png" style="float:right;margin-top:10%;">
 			        <div style="margin-top:20%;"><span style="font-size:40px;">14</span><a style="margin-left:5px;color:#D6E4FE;">查看</a></div>
 			     </div>
-			      <div class="zd col-xs-2" style="background-color:#3ED75E;height:150px;color:white;border-radius:5px 5px 5px;margin-left:2%;">
+			      <div class="zd col-xs-2" style="background-color:#3ED75E;height:170px;color:white;border-radius:5px 5px 5px;margin-left:2%;">
 			        <p style="font-size:15px;margin-top:7%;">当前车流量/辆</p>
 			        <img alt="" src="./img/img.png" style="float:right;margin-top:10%;">
 			        <div style="margin-top:20%;"><span style="font-size:40px;">12345</span></div>
 			     </div>
-			      <div class="zd col-xs-2" style="background-color:#FDAF54;height:150px;color:white;border-radius:5px 5px 5px;margin-left:2%;">
+			      <div class="zd col-xs-2" style="background-color:#FDAF54;height:170px;color:white;border-radius:5px 5px 5px;margin-left:2%;">
 			        <p style="font-size:15px;margin-top:7%;">当前超载车辆/辆</p>
 			        <img alt="" src="./img/img.png" style="float:right;margin-top:10%;">
 			        <div style="margin-top:20%;"><span style="font-size:40px;">36</span></div>
 			     </div>
-			      <div class="zd col-xs-2" style="background-color:#FD6854;height:150px;color:white;border-radius:5px 5px 5px;margin-left:2%;">
+			      <div class="zd col-xs-2" style="background-color:#FD6854;height:170px;color:white;border-radius:5px 5px 5px;margin-left:2%;">
 			        <p style="font-size:15px;margin-top:7%;">当前关键超重车辆/辆</p>
 			        <img alt="" src="./img/img.png" style="float:right;margin-top:10%;">
 			        <div style="margin-top:20%;"><span style="font-size:40px;">7</span></div>
 			     </div>
-			    </div>
-			    <div class="layui-tab-item">
-			    </div>
-			    <div class="layui-tab-item">内容3</div>
-			    <div class="layui-tab-item">内容4</div>
-			    <div class="layui-tab-item">内容5</div>
-			  </div>
-			</div>
- 
-		<div class="form-group" id="rightTab">
-			<div class="sele">
+			  <div class="labelfirst">
+			 <div class="sele" >
 				<label for="" class="col-sm-2 control-label shaixuan" >筛选站点</label>
 				<div class="col-sm-2" style="width: 20%">
 					<!-- 样式1 -->
@@ -106,13 +97,12 @@
 					</select>
 				</div>
 			</div>
-			<button type="button" class="btn btn-primary" onclick="quedingDianJi()" style="margin-left: 80px;width: 100px; background-image: linear-gradient(#1F62C8,#262E9F);">确定</button>
+			<button type="button" class="btn btn-primary" onclick="quedingDianJi()" style="margin-left: 80px;width: 100px;background-color:#549CFD;color:white;border:2px solid #549CFD;">确定</button>
 			<div class="jiance">
-				<button type="button" class="btn btn-primary" onclick="nowJianceSite()" data-toggle="modal" data-target="#jianceDiv" style="width: 150px; background-image: linear-gradient(#1F62C8,#262E9F);">当前监测站点</button>
+				<button type="button" class="btn btn-primary" onclick="nowJianceSite()" data-toggle="modal" data-target="#jianceDiv" style="width: 150px;background-color:#549CFD;color:white;border:2px solid #549CFD;">当前监测站点</button>
 			</div>
-			<div class="xian"></div>
 			<!--表格-->
-			<table class="table table-striped table-hover" id="mainContent" style="width: 90%;margin: 0 auto; margin-top: 20px;">
+			<table class="table table-striped table-hover" id="mainContent" style="width: 94%;margin: 0 auto; margin-top: 20px;margin-left:0%;">
 				<thead style="background-color: #DDE6F7;">
 					<tr>
 						<th style="width: 15%">站点</th>
@@ -133,17 +123,20 @@
 
 				</tbody>
 			</table>
-
+		</div>
+		</div>
+			    <div class="layui-tab-item">
+			    			
 			<div class="bright" style="width:90%;display: block;position: relative;margin-left: 5%;">
 				<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
-					<ul class="layui-tab-title">
+					<ul class="layui-tab-title labelright">
 						<li class="layui-this">当日车流量统计</li>
 						<li onclick="initTables2()">当日车流量</li>
 					</ul>
 					<div class="layui-tab-content" style="height: 100px;">
 						<div class="layui-tab-item layui-show">
 							<p id="errorMsg"  style="display: inline-block;"></p>
-							<div id="_top" style="width:700px;height: 400px;margin-top: -50px;margin:0 auto">
+							<div id="_top" class="col-xs-12" style="width:1500px;height:400px; margin-top: -50px;margin:0 auto">
 							</div>
 						</div>
 						<div class="layui-tab-item">
@@ -170,7 +163,9 @@
 					</div>
 				</div>
 			</div>
-			<div class="bleft" style="width:90%;display: block;position: relative;margin-left: 5%;">
+			    </div>
+			    <div class="layui-tab-item">
+			      <div class="bleft" style="width:90%;display: block;position: relative;margin-left: 5%;">
 				<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
 					<ul class="layui-tab-title">
 						<li class="layui-this">当日超载车辆统计</li>
@@ -207,8 +202,13 @@
 					</div>
 				</div>
 			</div>
+			    </div>
+			    <div class="layui-tab-item">
+			     <div class="form-group" id="rightTab">
+
+			
 			<!--左上半部分结束-->
-           <div class="bottom" style="margin-top: 35%;margin-left: 5%;width: 90%;height: 30%;">
+           <div class="bottom" style="width: 90%;height: 30%;">
 
 			   <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
 				   <ul class="layui-tab-title">
@@ -267,7 +267,11 @@
 			   </div>
 			</div>
            </div>
-          </div>
+			    </div>
+			  </div>
+			</div>
+ 
+		
 
 		<!-- allMsg -->
 		<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="jianceDiv">
