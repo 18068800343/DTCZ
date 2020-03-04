@@ -157,7 +157,7 @@
             <div class="zhuti-content">
                 <div class="UpperPart">
                     <div class="UpperPartL">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal5" style="margin: 5PX;float: left;">录入车牌颜色</button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal5" style="margin: 5PX;float: left;">录入超载标准</button>
                     </div>
                     <div class="UpperPartR">
 
@@ -168,7 +168,6 @@
                     <table class="table table-bordered table-condensed table-hover" style="width:100%;" id="mainContent5">
                         <thead>
                         <tr>
-                            <!-- <td>设备类型</td> -->
                             <th style="width: 20%;">序号</th>
                             <th>轴车</th>
                             <th>超载标准(kg)</th>
@@ -957,7 +956,7 @@
                         $("#myModal5").modal("hide");
                         toastr.success(resMsg.resultMsg);
                     }else if(resMsg.daoMsg==-1){
-                        toastr.error("车轴已存在");
+                        toastr.error("轴车已存在");
                     }else{
                         toastr.error(resMsg.resultMsg);
                     }
@@ -997,7 +996,7 @@
                         toastr.success(resMsg.resultMsg);
                         initTableQuanxian1()
                     }else if(resMsg.daoMsg==-1){
-                        toastr.error("车轴已存在");
+                        toastr.error("轴车已存在");
                     }else{
                         toastr.error(resMsg.resultMsg);
                     }
