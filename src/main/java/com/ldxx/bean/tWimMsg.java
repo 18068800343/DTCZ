@@ -73,9 +73,9 @@ public class tWimMsg {
     //超重比率 百分之X
     private Integer overWeightRatio;
     //称重数据ID
-    private Integer wIMId;
+    private String wIMId;
     //抓拍数据ID
-    private Integer lPRId;
+    private String lPRId;
     //测点IP地址
     private String stationIP;
 
@@ -375,19 +375,18 @@ public class tWimMsg {
         this.overWeightRatio = overWeightRatio;
     }
 
-    public Integer getwIMId() {
+    public String getwIMId() {
         return wIMId;
     }
 
-    public void setwIMId(Integer wIMId) {
+    public void setwIMId(String wIMId) {
         this.wIMId = wIMId;
     }
 
-    public Integer getlPRId() {
+    public String getlPRId() {
         return lPRId;
     }
-
-    public void setlPRId(Integer lPRId) {
+    public void setlPRId(String lPRId) {
         this.lPRId = lPRId;
     }
 
