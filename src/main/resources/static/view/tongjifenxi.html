@@ -385,7 +385,8 @@
         var stationPort=$("#stationPort").val();
         var startTime=$("#startTime").val();
         dayAndMonthTongjiDom.initTableBodyAjax(stationPort,startTime);
-
+        $("#stationPort2").val(stationPort);
+        queding2()
 
         if(startTime==null||startTime==''||startTime==undefined){
             startTime=getTime();
