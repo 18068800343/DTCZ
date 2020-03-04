@@ -5,6 +5,15 @@ public class HomeData {
     private Integer totalChaoZai;
     private Double maxWeight;
     private Integer stationNums;
+    private Integer totalGuanJian;
+
+    public Integer getTotalGuanJian() {
+        return totalGuanJian;
+    }
+
+    public void setTotalGuanJian(Integer totalGuanJian) {
+        this.totalGuanJian = totalGuanJian;
+    }
 
     public Integer getTotalCheLiu() {
         return totalCheLiu;

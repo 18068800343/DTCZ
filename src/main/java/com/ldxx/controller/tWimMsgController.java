@@ -291,11 +291,7 @@ public class tWimMsgController {
         return tWimMsgDao.getGuanJianChaoZhongCheLiangEchartsList(2,3,stationPorts);
     }
 
-    //实时监测页面关键超重车辆
-    @RequestMapping("/getGuanJianChaoZhongCheLiangEchartsList2")
-    public CheLiuLiangEchartsList getGuanJianChaoZhongCheLiangEchartsList2(String stationPorts, HttpSession session) {
-        return tWimMsgDao.getGuanJianChaoZhongCheLiangEchartsList2(2,3,stationPorts);
-    }
+
 
     @RequestMapping("/getChaoZaiEchartsList")
     public CheLiuLiangEchartsList getChaoZaiEchartsList(String stationPorts, HttpSession session) {
@@ -338,5 +334,49 @@ public class tWimMsgController {
     @RequestMapping("/gettWimMsgById")
     public tWimMsgVo gettWimMsgById(String idLocal) {
         return service.gettWimMsgById(idLocal);
+    }
+
+
+
+    /**
+     * 获取检测站点的车流量数，超载车辆数，关键超重数，监测站点数
+     * @param stationPorts
+     * @return
+     */
+    @RequestMapping("/getJianCeTotal")
+    public HomeData getJianCeTotal(String stationPorts) {
+        HomeData homeData = tWimMsgDao.getJianCeTotal(stationPorts);
+        homeData.setStationNums(stationPorts.split(",").length);
+        return homeData;
+    }
+
+    /**
+     * 监测站点的车流量统计图
+     * @param stationPorts
+     * @return
+     */
+    @RequestMapping("/getJianCeCheLiuLiangEchartsList")
+    public CheLiuLiangEchartsList getJianCeCheLiuLiangEchartsList(String stationPorts) {
+        return tWimMsgDao.getJianCeCheLiuLiangEchartsList(stationPorts);
+    }
+
+    /**
+     * 监测站点的超载车辆统计图
+     * @param stationPorts
+     * @return
+     */
+    @RequestMapping("/getJianCechaozaiEchartsList")
+    public CheLiuLiangEchartsList getJianCechaozaiEchartsList(String stationPorts) {
+        return tWimMsgDao.getJianCeCheLiuLiangEchartsList(stationPorts);
+    }
+
+    /**
+     * 实时监测页面关键超重车辆统计图
+     * @param stationPorts
+     * @return
+     */
+    @RequestMapping("/getGuanJianChaoZhongCheLiangEchartsList2")
+    public CheLiuLiangEchartsList getGuanJianChaoZhongCheLiangEchartsList2(String stationPorts) {
+        return tWimMsgDao.getGuanJianChaoZhongCheLiangEchartsList2(2,3,stationPorts);
     }
 }

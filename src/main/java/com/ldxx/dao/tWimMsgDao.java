@@ -45,4 +45,9 @@ public interface tWimMsgDao {
     tWimMsgVo gettWimMsgById(String idLocal);
 
     CheLiuLiangEchartsList getGuanJianChaoZhongCheLiangEchartsList2(Integer lv1,Integer lv2,String stationPorts);
+
+
+    HomeData getJianCeTotal(String stationPorts);
+    CheLiuLiangEchartsList getJianCeCheLiuLiangEchartsList(String stationPorts);
+    CheLiuLiangEchartsList getJianCechaozaiEchartsList(String stationPorts);
 }

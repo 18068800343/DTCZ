@@ -636,4 +636,74 @@
                 ) aaa
 
     </select>
+
+    <select id="getJianCeTotal" resultType="HomeData">
+        SELECT * from (
+        SELECT COUNT(*) totalChaoZai FROM t_vehicle_msg_today a WHERE a.Over_Weight>0 and FIND_IN_SET(a.Station_IP,#{stationPorts}) and  date(a.Evt_Time) = curdate()
+        ) aa LEFT JOIN (
+        select MAX(a.Total_Weight) maxWeight FROM t_vehicle_msg_today a WHERE  FIND_IN_SET(a.Station_IP,#{stationPorts}) and  date(a.Evt_Time) = curdate()
+        )bb on 1= 1
+        LEFT JOIN (
+        select COUNT(*) totalCheLiu FROM t_vehicle_msg_today a WHERE  FIND_IN_SET(a.Station_IP,#{stationPorts}) and  date(a.Evt_Time) = curdate()
+        )cc on 1= 1
+        LEFT JOIN (
+        select COUNT(*) totalGuanJian FROM t_vehicle_msg_today a WHERE a.Total_Weight >= (SELECT min(Crux_Weight) FROM crux_weight w WHERE Del_State = 1) AND FIND_IN_SET(a.Station_IP,#{stationPorts}) and  date(a.Evt_Time) = curdate()
+        )dd on 1= 1
+    </select>
+
+    <select id="getJianCeCheLiuLiangEchartsList" resultType="CheLiuLiangEchartsList">
+        SELECT
+        group_concat(aa.cnt SEPARATOR ',') AS nums,
+        group_concat(aa.Station_Port SEPARATOR ',') AS station_ports,
+        group_concat(aa.station_name SEPARATOR ',') AS station_names
+        FROM
+		(
+			SELECT * FROM(SELECT
+			COUNT(
+				CASE
+				WHEN a.Station_IP IS NOT NULL THEN
+					0
+				END
+			) cnt,
+			b.Station_Port,
+			b.Station_Name
+			FROM
+				t_vehicle_msg_today a
+			RIGHT JOIN station_site b ON a.Station_IP = b.Station_Port AND date(a.Evt_Time) = curdate()
+			GROUP BY
+				b.Station_Port
+			HAVING FIND_IN_SET(b.Station_Port,#{stationPorts})
+			ORDER BY
+				cnt DESC
+			)dd ORDER BY dd.cnt
+		) aa
+    </select>
+
+    <select id="getJianCechaozaiEchartsList" resultType="CheLiuLiangEchartsList">
+        SELECT
+        group_concat(aa.cnt SEPARATOR ',') AS nums,
+        group_concat(aa.Station_Port SEPARATOR ',') AS station_ports,
+        group_concat(aa.station_name SEPARATOR ',') AS station_names
+        FROM
+		(
+			SELECT * FROM(SELECT
+			COUNT(
+				CASE
+				WHEN a.Station_IP IS NOT NULL THEN
+					0
+				END
+			) cnt,
+			b.Station_Port,
+			b.Station_Name
+			FROM
+				t_vehicle_msg_today a
+			RIGHT JOIN station_site b ON a.Station_IP = b.Station_Port AND date(a.Evt_Time) = curdate() and a.Over_Weight>0
+			GROUP BY
+				b.Station_Port
+			HAVING FIND_IN_SET(b.Station_Port,#{stationPorts})
+			ORDER BY
+				cnt DESC
+			)dd ORDER BY dd.cnt
+		) aa
+    </select>
 </mapper>
