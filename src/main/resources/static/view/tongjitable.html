@@ -174,23 +174,18 @@
         <div class="col-sm-2">
             <!-- 样式1 -->
             <input type="date" v-model="startTime" value="请选择"
-                   style="height: 34px;border-radius: 5px;box-shadow: none;width: 250%;border:1px solid #DDD;">
+                   style="height: 34px;border-radius: 5px;box-shadow: none;width: 250%;border:1px solid #DDD; ">
         </div>
 
         <button type="button" class="btn btn-primary jiancezhandian" onclick="nowJianceSite()" data-toggle="modal"
                 data-target="#jianceDiv"
-                style="width: 110px; position:relative;top:43px;right:15%;background-image: linear-gradient(#1F62C8,#262E9F);">
+                style="width: 110px; position:relative;top:43px;right:5%;background-image: linear-gradient(#1F62C8,#262E9F);">
             当前监测站点
         </button>
         <div class="col-sm-2" style="margin-left: 6%;">
-            <div class="xian2"
-                 style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: 8%;margin-top: 15%;">
-            </div>
-            <input type="date" v-model="endTime" value="请选择" style="height: 34px;border-radius: 5px;box-shadow: none;width:
-        250%;margin-left: 30px;border:1px solid #DDD;">
         </div>
         <label class="col-sm-1	 control-label chexing"
-               style="margin-left: 9%; width: 70px; line-height: 30px;">车型:</label>
+               style=" width: 70px; line-height: 30px;">车型:</label>
 
         <div class="col-sm-2" style="margin-left: 1%;">
             <div class="xian2"
@@ -290,6 +285,19 @@
                         <option value="1">超重</option>
                     </select>
                 </div>
+    <label class="col-sm-1	 control-label riqi" style="width: 70px;line-height: 30px; margin-left:-6%;">日期:</label>
+        <div class="col-sm-2">
+            <!-- 样式1 -->
+            <input type="date" v-model="startTime" value="请选择"
+                   style="height: 34px;border-radius: 5px;box-shadow: none;width: 250%;border:1px solid #DDD;">
+        </div>
+
+        <div class="col-sm-2" style="margin-left: 6%;">
+            <div class="xian2"
+                 style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: 8%;margin-top: 15%;">
+            </div>
+            <input type="date" v-model="endTime" value="请选择" style="height: 34px;border-radius: 5px;box-shadow: none;width:
+        250%;margin-left: 30px;border:1px solid #DDD;">
 <!--                <div class="col-sm-2 bl" style="margin-left:-1%;">
                     <div class="xian2"
                          style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: -5%;margin-top: 15%;">
