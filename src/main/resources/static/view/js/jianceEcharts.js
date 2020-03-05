@@ -1,4 +1,4 @@
-function setjiancezhandianLeft(list,stationName,max){
+function setjiancezhandianLeft(list){
     var seriesLabel = {
         normal: {
             show: true,
@@ -26,7 +26,11 @@ function setjiancezhandianLeft(list,stationName,max){
         xAxis: {
             type: 'category',
             //max: max,
-            data: stationName
+            data: list.stationNames.split(","),
+            axisLabel : {//坐标轴刻度标签的相关设置。
+                interval:0,
+                rotate:"45"
+            }
         },
         yAxis: {
             type: 'value',
@@ -37,8 +41,8 @@ function setjiancezhandianLeft(list,stationName,max){
             name: '车流量',
             type: 'bar',
             label: seriesLabel,
-            data: list,
-            barWidth: 20,
+            data: list.nums.split(","),
+            barWidth: 40,
             itemStyle: {
                 normal: {
                     color: '#80B6FE'
@@ -50,7 +54,7 @@ function setjiancezhandianLeft(list,stationName,max){
     return option;
 }
 
-function setjiancezhandianRight(list,stationName){
+function setjiancezhandianRight(list){
     var seriesLabel = {
         normal: {
             show: true,
@@ -80,7 +84,11 @@ function setjiancezhandianRight(list,stationName){
     	        {
     	            type: 'category',
     	            boundaryGap: false,
-    	            data: ['G2京沪苏鲁界', 'G2京沪苏鲁界', 'G2京沪苏鲁界', 'G2京沪苏鲁界', 'G2京沪苏鲁界', 'G2京沪苏鲁界', 'G2京沪苏鲁界', 'G2京沪苏鲁界', 'G2京沪苏鲁界', 'G2京沪苏鲁界', 'G2京沪苏鲁界', 'G2京沪苏鲁界']
+    	            data: list.stationNames.split(","),
+                    axisLabel : {//坐标轴刻度标签的相关设置。
+                        interval:0,
+                        rotate:"45"
+                    }
     	        }
     	    ],
     	    yAxis: [
@@ -96,76 +104,17 @@ function setjiancezhandianRight(list,stationName){
     	            stack: '总量',
     	            color:'#BCD8FE',
     	            areaStyle: {},
-    	            data: [2, 1, 3, 2, 1, 6, 4,2, 1, 6, 4,1, 6, 4]
+    	            data: list.nums.split(",")
     	        }
     	    ]
     	};
     return option;
 }
 
-function setjiancezhandianBottom(json){
-    /*var seriesLabel = {
-        normal: {
-            show: true,
-            textBorderColor: '#336666',
-            color:'black',
-            textBorderWidth: 1
-        }
-    }
-    var option = {
-        color: ['#29DC93'],
-        tooltip : {
-            trigger: 'axis',
-            axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-                type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-            }
-        },
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
-        xAxis : [
-            {
-                triggerEvent: true,
-                type : 'category',
-                data :stationName,
-                axisTick: {
-                    alignWithLabel: true
-                },
-                //文字过长隐藏剩余部分
-                axisLabel: {
-                    formatter: function(value) {
-                        var res = value;
-                        if(res.length > 6) {
-                            res = res.substring(0, 5) + "..";
-                        }
-                        return res;
-                    }
-                }
+function setjiancezhandianBottom(list){
 
-            }
-        ],
-        yAxis : [
-            {
-                type : 'value',
-                //max: max
-            }
-        ],
-        series : [
-            {
-                name:'关键车辆超重统计',
-                type:'bar',
-                label: seriesLabel,
-                barWidth: '20%',
-                data:list
-            }
-        ]
-    };*/
     var option = {
         color: ['#6154FD','#FE545E'],
-
         textStyle: {
             color: '#fff',
             fontSize: 13
@@ -190,7 +139,7 @@ function setjiancezhandianBottom(json){
         xAxis: [
             {
                 type: 'category',
-                data: json.stationNames.split(","),
+                data: list.stationNames.split(","),
                 axisLabel : {
                     formatter : function(params){
                         var newParamsName = "";
@@ -237,7 +186,7 @@ function setjiancezhandianBottom(json){
                         color: 'black',
                     }
                 },
-                data: json.cnt2.split(","),
+                data: list.cnt2.split(","),
                 barWidth : 20,//柱图宽度
 
             },
@@ -251,7 +200,7 @@ function setjiancezhandianBottom(json){
                         color: 'white',
                     }
                 },
-                data: json.cnt3.split(","),
+                data: list.cnt3.split(","),
                 barWidth : 20,//柱图宽度
             }
         ]

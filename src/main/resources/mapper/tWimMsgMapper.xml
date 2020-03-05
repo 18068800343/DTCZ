@@ -439,7 +439,7 @@
                         LIMIT 6
                     ) dd
                 ORDER BY
-                    dd.cnt) bb on aa.Station_Port = bb.Station_Port
+                    dd.cnt) bb on aa.Station_Port = bb.Station_Port ORDER BY aa.cnt desc
                 ) aaa
 
     </select>
@@ -592,7 +592,7 @@
                         HAVING
                             FIND_IN_SET(b.Station_Port ,#{stationPorts})
                         ORDER BY
-                            cnt DESC
+                            cnt
 
                     ) dd
                 ORDER BY
@@ -628,11 +628,11 @@
                         HAVING
                             FIND_IN_SET(b.Station_Port ,#{stationPorts})
                         ORDER BY
-                            cnt DESC
+                            cnt
 
                     ) dd
                 ORDER BY
-                    dd.cnt) bb on aa.Station_Port = bb.Station_Port
+                    dd.cnt) bb on aa.Station_Port = bb.Station_Port ORDER BY aa.cnt desc
                 ) aaa
 
     </select>
@@ -674,8 +674,8 @@
 				b.Station_Port
 			HAVING FIND_IN_SET(b.Station_Port,#{stationPorts})
 			ORDER BY
-				cnt DESC
-			)dd ORDER BY dd.cnt
+				cnt
+			)dd ORDER BY dd.cnt DESC
 		) aa
     </select>
 
@@ -702,8 +702,8 @@
 				b.Station_Port
 			HAVING FIND_IN_SET(b.Station_Port,#{stationPorts})
 			ORDER BY
-				cnt DESC
-			)dd ORDER BY dd.cnt
+				cnt
+			)dd ORDER BY dd.cnt DESC
 		) aa
     </select>
 </mapper>

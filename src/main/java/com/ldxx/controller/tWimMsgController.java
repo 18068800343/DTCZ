@@ -367,7 +367,7 @@ public class tWimMsgController {
      */
     @RequestMapping("/getJianCechaozaiEchartsList")
     public CheLiuLiangEchartsList getJianCechaozaiEchartsList(String stationPorts) {
-        return tWimMsgDao.getJianCeCheLiuLiangEchartsList(stationPorts);
+        return tWimMsgDao.getJianCechaozaiEchartsList(stationPorts);
     }
 
     /**
