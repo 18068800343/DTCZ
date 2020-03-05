@@ -59,65 +59,47 @@ function setjiancezhandianRight(list,stationName){
         }
     }
     var option = {
-        title: {
-            x: 'center'
-        },
-        tooltip: {
-            trigger: 'item',
-            formatter: "{b} <br/>{a} : {c} ({d}%)"
-        },
-        /*legend: {
-            orient: 'vertical',
-            right: 'right',
-            data: stationName,
-            color: '#FFFFFF',
-
-        },*/
-        series: [{
-            name: '超载车辆',
-            type: 'pie',
-            radius: '55%',
-            center: ['50%', '60%'],
-            color: ['#06d3c4', '#ffbb32', '#2ccc44', "#0278fe", "#FF3976", "#6058E1", "#e569ff", "#00d6fb"],
-            data:list,
-            label: {
-                formatter: '{b}: {@2012} ({d}%)'
-            },
-            itemStyle: {
-                emphasis: {
-                    shadowBlur: 10,
-                    shadowOffsetX: 0,
-                    shadowColor: 'rgba(0, 0, 0, 0.5)'
-                }
-            }
-        },{
-                name: '超载车辆',
-                type: 'pie',
-                radius: '55%',
-                center: ['50%', '60%'],
-                color: ['#06d3c4', '#ffbb32', '#2ccc44', "#0278fe", "#FF3976", "#6058E1", "#e569ff", "#00d6fb"],
-                data:list,
-                label: {
-                    position: 'inner',
-                    color:'black',
-                    formatter: function (params) {
-                        if(params.data.num==0){
-                            return '';
-                        }else{
-                            return params.percent+"%";
-                        }
-                    },
-                },
-                itemStyle: {
-                    emphasis: {
-                        shadowBlur: 10,
-                        shadowOffsetX: 0,
-                        shadowColor: 'rgba(0, 0, 0, 0.5)'
-                    }
-                }
-            }
-            ]
-    };
+    	    tooltip: {
+    	        trigger: 'axis',
+    	        axisPointer: {
+    	            type: 'cross'
+    	        }
+    	    },
+    	    toolbox: {
+    	        feature: {
+    	            saveAsImage: {}
+    	        }
+    	    },
+    	    grid: {
+    	        left: '3%',
+    	        right: '4%',
+    	        bottom: '3%',
+    	        containLabel: true
+    	    },
+    	    xAxis: [
+    	        {
+    	            type: 'category',
+    	            boundaryGap: false,
+    	            data: ['G2京沪苏鲁界', 'G2京沪苏鲁界', 'G2京沪苏鲁界', 'G2京沪苏鲁界', 'G2京沪苏鲁界', 'G2京沪苏鲁界', 'G2京沪苏鲁界', 'G2京沪苏鲁界', 'G2京沪苏鲁界', 'G2京沪苏鲁界', 'G2京沪苏鲁界', 'G2京沪苏鲁界']
+    	        }
+    	    ],
+    	    yAxis: [
+    	        {
+    	            type: 'value'
+    	        }
+    	    ],
+    	    series: [
+    	        {
+    	            name: '邮件营销',
+    	            type: 'line',
+    	            smooth:true,
+    	            stack: '总量',
+    	            color:'#BCD8FE',
+    	            areaStyle: {},
+    	            data: [2, 1, 3, 2, 1, 6, 4,2, 1, 6, 4,1, 6, 4]
+    	        }
+    	    ]
+    	};
     return option;
 }
 

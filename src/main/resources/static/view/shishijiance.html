@@ -167,14 +167,22 @@
 			    <div class="layui-tab-item">
 			      <div class="bleft" style="width:90%;display: block;position: relative;margin-left: 5%;">
 				<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
-					<ul class="layui-tab-title">
-						<li class="layui-this">当日超载车辆统计</li>
+					<ul class="layui-tab-title " style="float:right;z-index:10;">
+						<li class="layui-this ">当日超载车辆统计</li>
 						<li onclick="initTables3()">当日超载车辆</li>
 					</ul>
+					 <div class="sele" >
+							<label for="" class="col-sm-2 control-label shaixuan" >筛选站点</label>
+							<div class="col-sm-2" style="width: 20%">
+								<!-- 样式1 -->
+								<select class="form-control selectpicker" multiple data-actions-box="true"   data-live-search="true" id="zhandian" style="width:80%;">
+								</select>
+							</div>
+						</div>
 					<div class="layui-tab-content" style="height: 100px;">
 						<div class="layui-tab-item layui-show">
 							<p id="errorMsg2" style="display: inline-block;"></p>
-							<div id="_right" style="height: 400px;margin-top: -50px;">
+							<div id="_right" class="col-xs-12" style="height: 500px;margin-top: -50px;">
 								<!--右边-->
 							</div>
 						</div>
@@ -219,7 +227,7 @@
 				   <div class="layui-tab-content" style="height: 100px;">
 					   <div class="layui-tab-item layui-show">
 						   <p id="errorMsg3" style="display: inline-block;"></p>
-						   <div id="bottom_" style="width:97%;margin-left: 15px;margin-top: -50px;"></div>
+						   <div id="bottom_" class="col-xs-12" style="height:500px; margin-left: 15px;margin-top: -50px;"></div>
 					   </div>
 					   <div class="layui-tab-item">
 						   <table class="layui-table" lay-skin="line" id="mainContent4" style="width: 100%">
