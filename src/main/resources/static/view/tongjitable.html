@@ -196,7 +196,14 @@
             <div class="xian2"
                  style="width: 10px; height: 2px; background-color: rgb(222, 222, 222); position: absolute; margin-left: 5%; margin-top: 15%;"></div>
             <select value="请选择" class="selectpicker" multiple data-max-options="1" data-live-search="true" id="chexing"
-                    style="height: 34px; border-radius: 5px; box-shadow: none; margin-left: 30px; border: 1px solid rgb(221, 221, 221);"></select>
+                    style="height: 34px; border-radius: 5px; box-shadow: none; margin-left: 30px; border: 1px solid rgb(221, 221, 221);">
+                <option value="">全部</option>
+                <option value="2">2轴车</option>
+                <option value="3">3轴车</option>
+                <option value="4">4轴车</option>
+                <option value="5">5轴车</option>
+                <option value="6">6轴车</option>
+            </select>
         </div>
 
         <div class="sele">
@@ -247,11 +254,11 @@
                 </div>
             </div>
             <!-- 轴数 -->
-            <label for="" class="col-sm-2 control-label zhousu" style="margin-left:3%;width:5%;">轴数</label>
-            <div class="col-sm-2">
+    <!--  <label for="" class="col-sm-2 control-label zhousu" style="margin-left:3%;width:5%;display: none;">轴数</label>
+            <div class="col-sm-2" style="display: none;">
                 <input type="text" class="text5" value="请输入" v-model="zhoushu" @input="checknum('zhoushu')"
                        style="border-radius: 5px;box-shadow: none;border:1px solid #DDD;padding:3px; ;height:34px;margin-left:-20px;">
-            </div>
+            </div>-->
             <!--  路面温度 -->
             <div class="sele">
                 <label for="" class="col-sm-2 control-label lumianwendu" style="margin-left:3%;">路面温度</label>
@@ -272,22 +279,25 @@
             </div>
             <div class="sele">
                 <!-- 超重比例 -->
-                <label for="" class="col-sm-2 control-label chaozhongbili" style="margin-left:3%;">超重比例</label>
+                <label for="" class="col-sm-2 control-label chaozhongbili" style="margin-left:3%;">是否超重</label>
                 <div class="col-sm-2 czbl" style="width: 10%">
-                    <input type="text" class="text8" value="请输入" v-model="chaozhongStart"
+<!--                    <input type="text" class="text8" value="请输入" v-model="chaozhongStart"
                            @input="checknum('chaozhongStart')"
-                           style="border-radius: 5px;box-shadow: none;border:1px solid #DDD;padding:3px; ;height:34px;margin-left:-40px;">
+                           style="border-radius: 5px;box-shadow: none;border:1px solid #DDD;padding:3px; ;height:34px;margin-left:-40px;">-->
+                    <select value="请选择" class="text8" data-live-search="true"  v-model="chaozhongStart"
+                            style="border-radius: 5px;box-shadow: none;border:1px solid #DDD;padding:3px; ;height:34px;margin-left:-40px;">
+                        <option value="">全部</option>
+                        <option value="1">超重</option>
+                    </select>
                 </div>
-
-                <div class="col-sm-2 bl" style="margin-left:-1%;">
+<!--                <div class="col-sm-2 bl" style="margin-left:-1%;">
                     <div class="xian2"
                          style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: -5%;margin-top: 15%;">
                     </div>
                     <input type="text" class="text9" v-model="chaozhongEnd" value="请输入"
                            @input="checknum('chaozhongEnd')" style="height: 34px;border-radius: 5px;box-shadow: none;width:
             120%;margin-left: 30px;border:1px solid #DDD;padding:3px;">
-                </div>
-
+                </div>-->
             </div>
         </div>
     </div>
@@ -555,7 +565,7 @@
         });
     }
 
-    function initchexing() {
+/*    function initchexing() {
         $.ajax({
             type: 'POST',
             url: '/VehicleType/getVehicleType',
@@ -578,7 +588,7 @@
                 }
             }
         });
-    }
+    }*/
 
     //新建生产计划
     let mainVm = new Vue({
@@ -607,7 +617,7 @@
             searchInit: function () {
                 showMask();
                 this.stationPort = $("#zhandian").val() == null ? "" : $("#zhandian").val().toString();
-                this.chexing = $("#chexing").val() == null ? "" : $("#chexing").val().toString();
+                this.zhoushu = $("#chexing").val() == null ? "" : $("#chexing").val().toString();
                 //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
                 /*                this.$http.post('/tWimMsg/getAlltWimMsgByCondiTion', this._data, {emulateJSON: true}).then((res) => {
 
@@ -632,7 +642,7 @@
                         // 传给服务器的数据，可以添加我们自己的查询参数
                         data: function (param) {
                             param.stationPort = mainVm.stationPort;
-                            param.chexing = mainVm.chexing;
+                            param.chexing = "";
                             param.startTime = mainVm.startTime;
                             param.endTime = mainVm.endTime;
                             param.endWeight = mainVm.endWeight;
