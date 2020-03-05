@@ -71,22 +71,22 @@
 			     <div class="zd col-xs-2" style="background-color:#549CFD;height:170px;color:white;border-radius:5px 5px 5px;width:20%;">
 			        <p style="font-size:15px;margin-top:7%;">当前监测站点/个</p>
 			        <img alt="" src="./img/img.png" style="float:right;margin-top:10%;">
-			        <div style="margin-top:20%;"><span style="font-size:40px;">14</span><a style="margin-left:5px;color:#D6E4FE;">查看</a></div>
+			        <div style="margin-top:20%;"><span style="font-size:40px;" id="jiancezhandianNum"></span><a style="margin-left:5px;color:#D6E4FE;background-color:#549CFD;color:white;border:2px solid #549CFD;cursor:pointer;" class="primary"  onclick="nowJianceSite()" data-toggle="modal" data-target="#jianceDiv">查看</a></div>
 			     </div>
 			      <div class="zd col-xs-2" style="background-color:#3ED75E;height:170px;color:white;border-radius:5px 5px 5px;margin-left:2%;">
 			        <p style="font-size:15px;margin-top:7%;">当前车流量/辆</p>
 			        <img alt="" src="./img/img.png" style="float:right;margin-top:10%;">
-			        <div style="margin-top:20%;"><span style="font-size:40px;">12345</span></div>
+			        <div style="margin-top:20%;"><span style="font-size:40px;" id="jiancecheliuliangNum"></span></div>
 			     </div>
 			      <div class="zd col-xs-2" style="background-color:#FDAF54;height:170px;color:white;border-radius:5px 5px 5px;margin-left:2%;">
 			        <p style="font-size:15px;margin-top:7%;">当前超载车辆/辆</p>
 			        <img alt="" src="./img/img.png" style="float:right;margin-top:10%;">
-			        <div style="margin-top:20%;"><span style="font-size:40px;">36</span></div>
+			        <div style="margin-top:20%;"><span style="font-size:40px;" id="jiancechaozaiNum"></span></div>
 			     </div>
 			      <div class="zd col-xs-2" style="background-color:#FD6854;height:170px;color:white;border-radius:5px 5px 5px;margin-left:2%;">
 			        <p style="font-size:15px;margin-top:7%;">当前关键超重车辆/辆</p>
 			        <img alt="" src="./img/img.png" style="float:right;margin-top:10%;">
-			        <div style="margin-top:20%;"><span style="font-size:40px;">7</span></div>
+			        <div style="margin-top:20%;"><span style="font-size:40px;" id="jianceguanjianchaozhongNum"></span></div>
 			     </div>
 			  <div class="labelfirst">
 			 <div class="sele" >
@@ -98,9 +98,9 @@
 				</div>
 			</div>
 			<button type="button" class="btn btn-primary" onclick="quedingDianJi()" style="margin-left: 80px;width: 100px;background-color:#549CFD;color:white;border:2px solid #549CFD;">确定</button>
-			<div class="jiance">
+			<!--<div class="jiance">
 				<button type="button" class="btn btn-primary" onclick="nowJianceSite()" data-toggle="modal" data-target="#jianceDiv" style="width: 150px;background-color:#549CFD;color:white;border:2px solid #549CFD;">当前监测站点</button>
-			</div>
+			</div>-->
 			<!--表格-->
 			<table class="table table-striped table-hover" id="mainContent" style="width: 94%;margin: 0 auto; margin-top: 20px;margin-left:0%;">
 				<thead style="background-color: #DDE6F7;">
@@ -468,7 +468,7 @@
 			setLeftEcharts()
 			setRightEcharts()
 			setBottomEcharts()
-
+			initTotalNumber();
 			setInterval(refresh, 6000);
 
 		});
@@ -851,6 +851,7 @@
 					setLeftEcharts()
 					setRightEcharts()
 					setBottomEcharts()
+					initTotalNumber()
 				}
 			});
 		}
@@ -880,6 +881,7 @@
 					setLeftEcharts()
 					setRightEcharts()
 					setBottomEcharts()
+					initTotalNumber()
 					hidMask()
 				}
 			});
@@ -919,9 +921,34 @@
 				setLeftEcharts()
 				setRightEcharts()
 				setBottomEcharts()
+				initTotalNumber()
 			}
 		}
 
+		function initTotalNumber(){
+			var stationPort=getstationPort(user);
+			$.ajax({
+				type: 'POST',
+				url: '/tWimMsg/getJianCeTotal',
+				dataType: 'json',
+				data: {
+					stationPorts:stationPort,
+				},
+				error: function (msg) {
+					errMessage("请求UserController失败");
+				},
+				success: function (json) {
+					$("#jiancezhandianNum").html('')
+					$("#jiancezhandianNum").html(json.stationNums);
+					$("#jiancecheliuliangNum").html('');
+					$("#jiancecheliuliangNum").html(json.totalCheLiu);
+					$("#jiancechaozaiNum").html('');
+					$("#jiancechaozaiNum").html(json.totalChaoZai);
+					$("#jianceguanjianchaozhongNum").html('');
+					$("#jianceguanjianchaozhongNum").html(json.totalGuanJian);
+				}
+			});
+		}
 
 	<!--======================================================================================左边柱状图（当日车流量）===============================================================================-->
 
