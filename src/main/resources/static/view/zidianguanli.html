@@ -157,7 +157,7 @@
             <div class="zhuti-content">
                 <div class="UpperPart">
                     <div class="UpperPartL">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal5" style="margin: 5PX;float: left;">录入超载标准</button>
+                        <button type="button" class="btn btn-primary Pil" data-toggle="modal" data-target="#myModal5" style="margin: 5PX;float: left;">录入超载标准</button>
                     </div>
                     <div class="UpperPartR">
 
@@ -652,6 +652,15 @@
                         if(arr[i].indexOf("Pik") >= 0 ){
                             $(".Pik").show();
                         }
+                        if(arr[i].indexOf("Pil") >= 0 ){
+                            $(".Pil").show();
+                        }
+                        if(arr[i].indexOf("Pim") >= 0 ){
+                            $(".Pim").show();
+                        }
+                        if(arr[i].indexOf("Pin") >= 0 ){
+                            $(".Pin").show();
+                        }
                     }
 
                 }
@@ -890,8 +899,8 @@
             "targets": 3,
             "searchable": true,
             "render": function(data, type, full) {
-                var xiugai='<i class="iconfont icon-xiugai Pib" style="font-size:20px;cursor:pointer;display: none;" id="upd5" title="修改" data-toggle="modal" data-target="#change5"></i>';
-                var shanchu='<i class="iconfont icon-shanchu Pic" style="font-size:20px;cursor:pointer;display: none;" id="del5"  title="删除"></i>';
+                var xiugai='<i class="iconfont icon-xiugai Pim" style="font-size:20px;cursor:pointer;display: none;" id="upd5" title="修改" data-toggle="modal" data-target="#change5"></i>';
+                var shanchu='<i class="iconfont icon-shanchu Pin" style="font-size:20px;cursor:pointer;display: none;" id="del5"  title="删除"></i>';
                 //var look='<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" onclick="lookMs(this)" data-toggle="modal" data-target="#allMsg1" id="lookDetall"></i>'
                 return xiugai+shanchu;
             }
