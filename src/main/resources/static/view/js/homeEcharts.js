@@ -1,4 +1,112 @@
 let homePageInit = {};
+
+let initHomeMap = (lngLats)=>{
+    let geoCoordData = {};
+    let markPointData = [];
+    for(let i in lngLats){
+        let lngLatArray = [];
+        let markPointItem = {};
+        markPointItem.name = i+"";
+        markPointData.push(markPointItem);
+        lngLatArray.push(lngLats[i].split("-")[0]);
+        lngLatArray.push(lngLats[i].split("-")[1]);
+        geoCoordData[i+""] =lngLatArray;
+    }
+
+    require.config({
+        paths: {
+            echarts: 'js/build/dist'
+        }
+    });
+    require(
+        [
+            'echarts',
+            'echarts/chart/map'
+        ],
+        function(ec) {
+            require('echarts/util/mapData/params').params.jiangsu = {
+
+                getGeoJson: function(callback) {
+                    $.getJSON('geoJson/jiangsu.json', function(data) {
+                        // 压缩后的地图数据必须使用 decode 函数转换
+                        callback(require('echarts/util/mapData/params').decode(data));
+                    });
+                }
+            }
+            let myChart = ec.init(document.getElementById('main'));
+            let ecConfig = require('echarts/config');
+            let zrEvent = require('zrender/tool/event');
+            let curIndx = 0;
+            let mapType = ["江苏"];
+
+            myChart.on(ecConfig.EVENT.MAP_SELECTED, function(param) {});
+            option = {
+
+                tooltip: {
+                    trigger: 'item',
+                    //formatter:'dede{b}'
+                    formatter: function(param) {}
+                },
+                legend: {
+                    orient: 'vertical',
+                    x: '',
+                    data: [' ']
+                },
+
+                series: [{
+                    name: '',
+                    type: 'map',
+                    symbolSize: 10,
+                    symbolRotate: 35,
+                    mapType: 'jiangsu',
+                    selectedMode: false,
+                    itemStyle: {
+                        normal: {
+                            label: {
+                                show: true
+                            },
+                            borderColor: 'rgb(71,160,192)',
+                            borderWidth: 1
+                        },
+                        emphasis: {
+                            label: {
+                                show: false
+                            }
+                        }
+                    },
+                    data: [],
+                    geoCoord: geoCoordData,
+
+                    markPoint: {
+                        symbol: 'emptyCircle',
+                        symbolSize: 15,
+                        itemStyle: {
+                            normal: {
+                                borderColor: '#f317eb',
+                                borderWidth: 1, // 标注边线线宽，单位px，默认为1
+                                label: {
+                                    show: true
+                                }
+                            }
+                        },
+                        effect: {
+                            show: true,
+                            shadowBlur: 0,
+                            loop: true
+                        },
+                        data : markPointData
+                    }
+
+                }]
+            }
+
+
+
+            myChart.setOption(option);
+        }
+    );
+}
+
 homePageInit.initzhandian = () => {
     $.ajax({
         type: 'POST',
@@ -13,6 +121,7 @@ homePageInit.initzhandian = () => {
             if (json != null) {
                 homePageInit.stationPort = json.stationPort.split(",");
                 homePageInit.stationName = json.stationName.split(",");
+                initHomeMap(json.lnglat.split(","));
             }
         }
     });
@@ -550,3 +659,4 @@ homePageInit.setLastEcharts = (json) => {
     myChart.setOption(option);
 
 }
+
