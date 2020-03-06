@@ -773,13 +773,14 @@
             formatTimeRange: function (msg) {
                 let timeRange = this.timeRange;
                 if(timeRange==""){
-                  return;
+                    this.startTime="";
+                    this.endTime = "";
                 }else{
                 const end = new Date();
                 const start = new Date();
                 start.setTime(start.getTime() - 3600 * 1000 * 24 * timeRange);
-
-                return [start, end];
+                this.startTime = start.Format("yyyy-MM-dd");
+                this.endTime = end.Format("yyyy-MM-dd");
                 }
             },
             init: function () {
