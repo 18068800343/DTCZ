@@ -188,7 +188,8 @@
                         aa.station_name SEPARATOR ','
                     ) AS station_names,
                     group_concat(aa.cnta SEPARATOR ',') AS numCount,
-                    group_concat(aa.cntt SEPARATOR ',') AS nums2
+                    group_concat(aa.cntt SEPARATOR ',') AS nums2,
+                    group_concat(aa.cntc/aa.cnta SEPARATOR ',') AS numsBili
                 FROM
                     (
                         SELECT
@@ -212,6 +213,9 @@
                         FROM
                             t_vehicle_msg_today a
                         RIGHT JOIN station_site b ON a.Station_IP = b.Station_Port AND a.Over_Weight>0 AND date(a.Evt_Time) = curdate()
+                        <if test="link!=null and link!=''">
+                            and b.link #{link}
+                        </if>
                     RIGHT JOIN(
                                     SELECT
                                         COUNT(0) cntc
@@ -252,7 +256,9 @@
                                                     )
                                                 ORDER BY
                                                     cntc DESC
-                                                LIMIT 6
+                                                <if test="limit!=null and limit!=''">
+                                                    LIMIT #{limit}
+                                                </if>
                                             ) aa
     </select>
 
@@ -390,6 +396,9 @@
                             t_vehicle_msg_today a
                         RIGHT JOIN station_site b ON a.Station_IP = b.Station_Port
                         AND date(a.Evt_Time) = curdate()
+                        <if test="link!=null and link!=''">
+                            and b.link #{link}
+                        </if>
                         AND a.Total_Weight >= (
                             SELECT
                                 Crux_Weight
@@ -406,7 +415,9 @@
                             FIND_IN_SET(b.Station_Port ,#{stationPorts})
                         ORDER BY
                             cnt DESC
-                        LIMIT 6
+                        <if test="limit!=null and limit!=''">
+                            LIMIT #{limit}
+                        </if>
                     ) dd
                 ORDER BY
                     dd.cnt) aa LEFT JOIN (SELECT

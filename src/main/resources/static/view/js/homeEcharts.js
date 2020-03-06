@@ -4,21 +4,10 @@ let bindChartClick = (e, d) => {
     e.off('click');
     e.on('click', function (params) {
         console.log(params);
-        let num;
-        switch (d) {
-            case 1:
-
-                initLeftChartDetail();
-                break;
-            case 2:
-                num = params.data.value;
-                break;
-            case 3:
-                num = params.value;
-                break;
-            case 4:
-                num = 0;
-                break;
+        if(d==4){
+        initLeftChartDetail4(d);
+        }else{
+        initLeftChartDetail(d);
         }
     });
 }
@@ -315,6 +304,7 @@ homePageInit.initDownEcharts = () => {
         dataType: 'json',
         data: {
             stationPorts: homePageInit.stationPort.toString(),
+            limit:6
         },
         error: function (msg) {
         },
@@ -578,6 +568,7 @@ homePageInit.initLastEcharts = () => {
         dataType: 'json',
         data: {
             stationPorts: homePageInit.stationPort.toString(),
+            limit:6
         },
         error: function (msg) {
         },
@@ -688,10 +679,25 @@ homePageInit.setLastEcharts = (json) => {
     bindChartClick(myChart,4)
 }
 
-let initLeftChartDetail=()=>{
+let initLeftChartDetail=(d)=>{
+    let url="";
+    switch (d) {
+        case 1:
+            url = '/tWimMsg/getCheLiuLiangEchartsList';
+            break;
+        case 2:
+            url = '/tWimMsg/getChaoZaiEchartsList';
+            break;
+        case 3:
+            url = '/tWimMsg/getChaoZaiEchartsList';
+            break;
+        case 4:
+            url = '/tWimMsg/getGuanJianChaoZhongCheLiangEchartsList';
+            break;
+    }
     $.ajax({
         type: 'POST',
-        url: '/tWimMsg/getCheLiuLiangEchartsList',
+        url: url,
         dataType: 'json',
         data: {
             stationPorts: homePageInit.stationPort.toString()
@@ -702,13 +708,61 @@ let initLeftChartDetail=()=>{
             $("#mainContent tbody").empty();
             let stationNames = json.stationNames.split(",")
             let nums = json.nums.split(",");
+
             let dom;
-            for(let i=stationNames.length-1;i>=0;i--){
-                let tr = "<tr><td>"+stationNames[i]+"</td><td>"+nums[i]+"</td></tr>";
-                dom+=tr;
+            if(d==1){
+                for(let i=stationNames.length-1;i>=0;i--){
+                    let tr = "<tr><td>"+stationNames[i]+"</td><td>"+nums[i]+"</td></tr>";
+                    dom+=tr;
+                }
+            }else{
+                if(d==2){
+                    let numsBili = json.numsBili.split(",");
+                    for(let i=0;i<stationNames.length;i++){
+                        let num = numsBili[i];
+                        if(undefined==num){
+                            num="0%";
+                        }else{
+                            num = num*100+"%"
+                        }
+                        let tr = "<tr><td>"+stationNames[i]+"</td><td>"+num+"</td></tr>";
+                        dom+=tr;
+                    }
+                }else{
+                    for(let i=0;i<stationNames.length;i++){
+                        let tr = "<tr><td>"+stationNames[i]+"</td><td>"+nums[i]+"</td></tr>";
+                        dom+=tr;
+                    }
+                }
             }
             $("#mainContent tbody").append(dom);
             $("#chart1Detail").modal("show");
+        }
+    });
+}
+
+let initLeftChartDetail4=(d)=>{
+    $.ajax({
+        type: 'POST',
+        url: '/tWimMsg/getGuanJianChaoZhongCheLiangEchartsList',
+        dataType: 'json',
+        data: {
+            stationPorts: homePageInit.stationPort.toString()
+        },
+        error: function (msg) {
+        },
+        success: function (json) {
+            $("#mainContent4 tbody").empty();
+            let stationNames = json.stationNames.split(",")
+            let cnt2 = json.cnt2.split(",");
+            let cnt3 = json.cnt3.split(",");
+            let dom;
+            for(let i=0;i<stationNames.length;i++){
+                let tr = "<tr><td>"+stationNames[i]+"</td><td>"+cnt2[i]+"</td><td>"+cnt3[i]+"</td></tr>";
+                dom+=tr;
+            }
+            $("#mainContent4 tbody").append(dom);
+            $("#chart4Detail").modal("show");
         }
     });
 }
