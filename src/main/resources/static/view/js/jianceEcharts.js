@@ -71,7 +71,7 @@ function setjiancezhandianRight(list){
     	    },
     	    toolbox: {
     	        feature: {
-    	            saveAsImage: {}
+    	            //saveAsImage: {}
     	        }
     	    },
     	    grid: {
@@ -98,7 +98,7 @@ function setjiancezhandianRight(list){
     	    ],
     	    series: [
     	        {
-    	            name: '邮件营销',
+    	            name: '超载车辆',
     	            type: 'line',
     	            smooth:true,
     	            stack: '总量',

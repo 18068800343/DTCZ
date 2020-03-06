@@ -71,7 +71,7 @@ public class tWimMsg {
     //超重量 Kg，0 为不超重
     private Integer overWeight;
     //超重比率 百分之X
-    private Integer overWeightRatio;
+    private Double overWeightRatio;
     //称重数据ID
     private String wIMId;
     //抓拍数据ID
@@ -367,11 +367,11 @@ public class tWimMsg {
         this.overWeight = overWeight;
     }
 
-    public Integer getOverWeightRatio() {
+    public Double getOverWeightRatio() {
         return overWeightRatio;
     }
 
-    public void setOverWeightRatio(Integer overWeightRatio) {
+    public void setOverWeightRatio(Double overWeightRatio) {
         this.overWeightRatio = overWeightRatio;
     }
 

@@ -16,7 +16,7 @@
 		<link rel="stylesheet"  href="css/toastr.css"/>
 		<style>
 			#mainContent_info{
-				margin-left: 5%;
+				margin-left: 0.5%;
 			}
 			#mainContent_paginate{
 				margin-right: 5%;
@@ -182,7 +182,7 @@
 					<div class="layui-tab-content" style="height: 100px;">
 						<div class="layui-tab-item layui-show">
 							<p id="errorMsg2" style="display: inline-block;"></p>
-							<div id="_right" class="col-xs-12" style="width:1300px;height: 500px;margin-top: -50px;">
+							<div id="_right" class="col-xs-12" style="width:1300px;height: 500px;margin-top: -50px;margin:0 auto">
 								<!--右边-->
 							</div>
 						</div>
@@ -504,6 +504,17 @@
 				"render": function(data, type, full) {
 					return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="'+full.idLocal+'" onclick="lookMsg(this)" id="lookDetall"></i>';
 				}
+			},{
+				"class": "tcenter",
+				"targets": 9,
+				"searchable": true,
+				"render": function(data, type, full) {
+					if(data=="超重"){
+						return full.overWeightRatio+"%";
+					}else{
+						return data;
+					}
+				}
 			}],
 			"fnDrawCallback" : function() {
 				getLoginUser()
@@ -563,6 +574,17 @@
 					"render": function(data, type, full) {
 						return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="'+full.idLocal+'" onclick="lookMsg(this)"  id="lookDetall"></i>';
 					}
+				},{
+					"class": "tcenter",
+					"targets": 9,
+					"searchable": true,
+					"render": function(data, type, full) {
+						if(data=="超重"){
+							return full.overWeightRatio+"%";
+						}else{
+							return data;
+						}
+					}
 				}],
 
 			"order": [[0, 'asc']],
@@ -609,7 +631,7 @@
 				{ "data": "axlesCount"},
 				{ "data": "totalWeight"},
 				{ "data": "temperature"},
-				{ "data": "overWeightRatioName"},
+				{ "data": "overWeightRatio"},
 				{ "data": null},
 
 			],
@@ -620,6 +642,14 @@
 					"searchable": true,
 					"render": function(data, type, full) {
 						return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="'+full.idLocal+'" onclick="lookMsg(this)"  id="lookDetall"></i>';
+					}
+				},{
+					"class": "tcenter",
+					"targets": 9,
+					"searchable": true,
+					"render": function(data, type, full) {
+							return data+"%";
+
 					}
 				}],
 
@@ -679,6 +709,17 @@
 					"render": function(data, type, full) {
 						return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="'+full.idLocal+'" onclick="lookMsg(this)"  id="lookDetall"></i>';
 					}
+				},{
+					"class": "tcenter",
+					"targets": 9,
+					"searchable": true,
+					"render": function(data, type, full) {
+						if(data=="超重"){
+							return full.overWeightRatio+"%";
+						}else{
+							return data;
+						}
+					}
 				}],
 
 			"order": [[0, 'asc']],
@@ -736,6 +777,17 @@
 					"searchable": true,
 					"render": function(data, type, full) {
 						return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="'+full.idLocal+'" onclick="lookMsg(this)"  id="lookDetall"></i>';
+					}
+				},{
+					"class": "tcenter",
+					"targets": 9,
+					"searchable": true,
+					"render": function(data, type, full) {
+						if(data=="超重"){
+							return full.overWeightRatio+"%";
+						}else{
+							return data;
+						}
 					}
 				}],
 
@@ -1361,7 +1413,7 @@
 			looktWimMsg.routeName=data.routeName;
 			looktWimMsg.licensePlateColor=data.licensePlateColor;
 			looktWimMsg.vehicleTypeName=data.vehicleTypeName;
-			looktWimMsg.overWeightRatioName=data.overWeightRatioName;
+			looktWimMsg.overWeightRatioName=data.overWeightRatioName=="超重"? data.overWeightRatio+"%":data.overWeightRatioName;
 		}
 
     </script>
