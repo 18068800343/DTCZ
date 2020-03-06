@@ -107,10 +107,10 @@
         (select * from t_vehicle_msg a
         <where>
             <if test="tjq.startTime!=null and tjq.startTime!='' ">
-                and #{tjq.startTime} &lt; msg_time
+                and #{tjq.startTime} &lt;= msg_time
             </if>
             <if test="tjq.endTime!=null and tjq.endTime!='' ">
-                and msg_time &lt; #{tjq.endTime}
+                and msg_time &lt;= #{tjq.endTime}
             </if>
             <if test="tjq.startWeight!=null and tjq.startWeight!='' ">
                 and #{tjq.startWeight} &lt; total_weight
@@ -261,10 +261,10 @@
         SELECT COUNT(*) from t_vehicle_msg a
         <where>
             <if test="tjq.startTime!=null and tjq.startTime!='' ">
-                and #{tjq.startTime} &lt; msg_time
+                and #{tjq.startTime} &lt;= msg_time
             </if>
             <if test="tjq.endTime!=null and tjq.endTime!='' ">
-                and msg_time &lt; #{tjq.endTime}
+                and msg_time &lt;= #{tjq.endTime}
             </if>
             <if test="tjq.startWeight!=null and tjq.startWeight!='' ">
                 and #{tjq.startWeight} &lt; total_weight
