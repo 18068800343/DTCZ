@@ -116,7 +116,7 @@ function setjiancezhandianBottom(list){
     var option = {
         color: ['#6154FD','#FE545E'],
         textStyle: {
-            color: '#fff',
+            color: '#black',
             fontSize: 13
         },
         tooltip: {
@@ -197,7 +197,7 @@ function setjiancezhandianBottom(list){
                     normal: {
                         show: true,
                         position: 'top',
-                        color: 'white',
+                        color: 'black',
                     }
                 },
                 data: list.cnt3.split(","),
