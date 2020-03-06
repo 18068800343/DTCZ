@@ -14,7 +14,7 @@ public interface tWimMsgDao {
 
     List<tWimMsgVo> getAlltWimMsgByCondition(@Param("tjq") TongJiTableQuery tongJiTableQuery);
 
-    CheLiuLiangEchartsList getCheLiuLiangEchartsList(String stationPorts);
+    CheLiuLiangEchartsList getCheLiuLiangEchartsList(String stationPorts,Integer link,Integer limit);
 
 
     CheLiuLiangEchartsList getChaoZaiEchartsList(String stationPorts);

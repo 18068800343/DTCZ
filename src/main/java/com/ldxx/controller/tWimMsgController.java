@@ -281,9 +281,8 @@ public class tWimMsgController {
     }
 
     @RequestMapping("/getCheLiuLiangEchartsList")
-    public CheLiuLiangEchartsList getCheLiuLiangEchartsList(String stationPorts, HttpSession session) {
-        tWimMsgDao.getCheLiuLiangEchartsList(stationPorts);
-        return tWimMsgDao.getCheLiuLiangEchartsList(stationPorts);
+    public CheLiuLiangEchartsList getCheLiuLiangEchartsList(String stationPorts,Integer link,Integer limit,HttpSession session) {
+        return tWimMsgDao.getCheLiuLiangEchartsList(stationPorts,link,limit);
     }
 
     @RequestMapping("/getGuanJianChaoZhongCheLiangEchartsList")
@@ -295,7 +294,6 @@ public class tWimMsgController {
 
     @RequestMapping("/getChaoZaiEchartsList")
     public CheLiuLiangEchartsList getChaoZaiEchartsList(String stationPorts, HttpSession session) {
-        tWimMsgDao.getCheLiuLiangEchartsList(stationPorts);
         return tWimMsgDao.getChaoZaiEchartsList(stationPorts);
     }
 

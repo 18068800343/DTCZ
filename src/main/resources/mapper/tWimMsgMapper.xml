@@ -347,12 +347,18 @@
 			FROM
 				t_vehicle_msg_today a
 			RIGHT JOIN station_site b ON a.Station_IP = b.Station_Port AND date(a.Evt_Time) = curdate()
+            <if test="link!=null and link!=''">
+               and b.link #{link}
+            </if>
 			GROUP BY
 				b.Station_Port
 			HAVING FIND_IN_SET(b.Station_Port,#{stationPorts})
 			ORDER BY
 				cnt DESC
-			LIMIT 6)dd ORDER BY dd.cnt
+			<if test="limit!=null and limit!=''">
+                LIMIT #{limit}
+            </if>
+			)dd ORDER BY dd.cnt
 		) aa
     </select>
 
