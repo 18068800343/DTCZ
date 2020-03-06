@@ -173,8 +173,16 @@
                style="margin-left: 9%;width: 70px;line-height: 30px;">日期:</label>
         <div class="col-sm-2">
             <!-- 样式1 -->
-            <input type="date" v-model="startTime" value="请选择"
-                   style="height: 34px;border-radius: 5px;box-shadow: none;width: 250%;border:1px solid #DDD; ">
+            <select value="请选择" class="selectpicker" multiple data-max-options="1" data-live-search="true" @change="formatTimeRange" v-model="timeRange" id="timeRange"
+                    style="height: 34px; border-radius: 5px; box-shadow: none; margin-left: 30px; border: 1px solid rgb(221, 221, 221);">
+                <option value="">全部</option>
+                <option value="7">最近一周</option>
+                <option value="30">最近一个月</option>
+                <option value="60">最近二个月</option>
+                <option value="90">最近三个月</option>
+                <option value="180">最近半年</option>
+                <option value="365">最近一年</option>
+            </select>
         </div>
 
         <button type="button" class="btn btn-primary jiancezhandian" onclick="nowJianceSite()" data-toggle="modal"
@@ -491,8 +499,8 @@
         </div>
     </div>
 </div>
+</div>
 <!-- allMsg1 -->
-
 </body>
 <script src="../js/jquery.js"></script>
 <script src="../js/bootstrap.min.js"></script>
@@ -505,6 +513,7 @@
 <script src="../js/common-scripts.js"></script>
 <script src="../js/echartsOptionInit.js"></script>
 <script src="js/toastr.js"></script>
+<script src="js/myUtil.js"></script>
 <script src="../js/myTool.js"></script>
 <script>
 
@@ -605,6 +614,7 @@
         data: {
             zhandian: [],
             stationPort: "",
+            timeRange: "",
             startTime: "",
             endTime: "",
             endWeight: "",
@@ -758,6 +768,18 @@
                 let str = this._data[msg].split('.');
                 if (str.length > 2) {
                     this._data[msg] = this._data[msg].substr(0, this._data[msg].length - 1);
+                }
+            },
+            formatTimeRange: function (msg) {
+                let timeRange = this.timeRange;
+                if(timeRange==""){
+                  return;
+                }else{
+                const end = new Date();
+                const start = new Date();
+                start.setTime(start.getTime() - 3600 * 1000 * 24 * timeRange);
+
+                return [start, end];
                 }
             },
             init: function () {
