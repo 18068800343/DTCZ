@@ -7,6 +7,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisCluster;
+import redis.clients.jedis.JedisPool;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -24,8 +27,17 @@ public class MybatisTest {
 		System.out.println(date);
 	}
 
-	public static void main(String[] args) {
-		Thread thread = new Thread();
+	@Autowired
+	private JedisPool jedisPool;
 
+	@Test
+	public void jedisTest(){
+		Jedis jedis = jedisPool.getResource();
+		jedis.set("color","red");
+		String color = jedis.get("color");
+		System.out.println(color);
+	}
+
+	public static void main(String[] args) {
 	}
 }
