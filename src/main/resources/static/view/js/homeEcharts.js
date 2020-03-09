@@ -14,13 +14,14 @@ let bindChartClick = (e, d) => {
 
 
 
-let initHomeMap = (lngLats)=>{
+let initHomeMap = (lngLats,stationNames)=>{
     let geoCoordData = {};
     let markPointData = [];
     for(let i in lngLats){
         let lngLatArray = [];
         let markPointItem = {};
         markPointItem.name = i+"";
+        markPointItem.value = stationNames[i];
         markPointData.push(markPointItem);
         lngLatArray.push(lngLats[i].split("-")[0]);
         lngLatArray.push(lngLats[i].split("-")[1]);
@@ -59,7 +60,13 @@ let initHomeMap = (lngLats)=>{
                 tooltip: {
                     trigger: 'item',
                     //formatter:'dede{b}'
-                    formatter: '{b}'
+                    formatter: '{b}',
+                    formatter: function (params,ticket,callback){
+                        let $pna = params.name;
+                        let res = '';
+                        console.log(params,ticket)
+                        return stationNames[$pna];
+                    }
                 },
                 legend: {
                     orient: 'vertical',
@@ -88,7 +95,7 @@ let initHomeMap = (lngLats)=>{
                             }
                         }
                     },
-                    data: [],
+                    data: markPointData,
                     geoCoord: geoCoordData,
                   
                     markPoint: {
@@ -113,11 +120,12 @@ let initHomeMap = (lngLats)=>{
 
                 }]
             },
-            
+
 
 
 
             myChart.setOption(option);
+
         }
     );
 }
@@ -136,7 +144,7 @@ homePageInit.initzhandian = () => {
             if (json != null) {
                 homePageInit.stationPort = json.stationPort.split(",");
                 homePageInit.stationName = json.stationName.split(",");
-                initHomeMap(json.lnglat.split(","));
+                initHomeMap(json.lnglat.split(","),homePageInit.stationName);
             }
         }
     });
