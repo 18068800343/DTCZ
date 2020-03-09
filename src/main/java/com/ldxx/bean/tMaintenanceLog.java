@@ -8,19 +8,58 @@ import java.util.List;
 public class tMaintenanceLog {
 
     private String logId;
-    private String logTime;
-    private String logUser;
-    private String logContent;
-    private String delState;//1存在0删除
+    private String faultTime;//故障时间
+    private String logTime;//维护时间
+    private String logUser;//维护人
+    private String logContent;//维护内容
+    private int delState;//1存在0删除
+    private String isChangeEquipment;//是否更换设备 1是，0否
+    private String isChangeEquipmentName;
+    private String logRemarks;//备注
 
     private List<Accessory> accessory;
     private String usrName;
 
-    public String getDelState() {
+
+    public String getIsChangeEquipmentName() {
+        return isChangeEquipmentName;
+    }
+
+    public void setIsChangeEquipmentName(String isChangeEquipmentName) {
+        this.isChangeEquipmentName = isChangeEquipmentName;
+    }
+
+    public String getFaultTime() {
+        return faultTime;
+    }
+
+    public void setFaultTime(String faultTime) {
+        this.faultTime = faultTime;
+    }
+
+    public String getIsChangeEquipment() {
+        return isChangeEquipment;
+    }
+
+    public void setIsChangeEquipment(String isChangeEquipment) {
+        this.isChangeEquipment = isChangeEquipment;
+    }
+
+    public String getLogRemarks() {
+        return logRemarks;
+    }
+
+    public void setLogRemarks(String logRemarks) {
+        this.logRemarks = logRemarks;
+    }
+
+
+
+    public int getDelState() {
         return delState;
     }
 
-    public void setDelState(String delState) {
+    public void setDelState(int delState) {
         this.delState = delState;
     }
 

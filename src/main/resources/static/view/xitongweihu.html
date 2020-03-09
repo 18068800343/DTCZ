@@ -33,33 +33,58 @@
     </style>
 </head>
 <body style="background-image: none;width: 90%;margin-left: 10%;">
-<!-- 面包屑 -->
-<!--<div class="mianbao">
-    <ul class="breadcrumb">
-        <li><i class="iconfont icon-knowledgebase"></i></li>
-        <li>系统管理</li>
-        <li class="active">人员管理</li>
-    </ul>
-</div>-->
 
-<div>
-    <!-- Tab panes -->
-    <div role="tabpanel" class="tab-pane active" id="home">
-        <div class="zhuti-content">
+<div class="layui-tab" >
+    <ul class="layui-tab-title labelli">
+        <li class="layui-this labelthis">系统维护日志</li>
+        <li>系统设备更换</li>
+    </ul>
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+                    <div class="UpperPart">
+                        <div class="UpperPartL">
+                            <button type="button" class="btn btn-primary Pja" data-toggle="modal" data-target="#myModal" style="margin: 5PX;float: left;">录入系统维护日志 </button>
+                        </div>
+                        <div class="UpperPartR">
+                            <div id="tabBtn" style="margin-left: 10px;"></div>
+                        </div>
+                    </div>
+                    <div class="LowerPart" style="margin-top:3px;">
+                        <table class="table table-bordered table-condensed table-hover" id="mainContent">
+                            <thead>
+                            <tr>
+                                <th>维护人</th>
+                                <th>故障日期</th>
+                                <th>维护日期</th>
+                                <th>维护内容</th>
+                                <th>是否更换设备</th>
+                                <th>备注</th>
+                                <th style="width:75px;">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+        </div>
+        <div class="layui-tab-item">
             <div class="UpperPart">
                 <div class="UpperPartL">
-                    <button type="button" class="btn btn-primary Pja" data-toggle="modal" data-target="#myModal" style="margin: 5PX;float: left;">录入系统维护日志 </button>
+                    <button type="button" class="btn btn-primary Pjd" data-toggle="modal" data-target="#myModal2" style="margin: 5PX;float: left;">录入系统设备更换日志 </button>
                 </div>
                 <div class="UpperPartR">
+                    <div id="tabBtn2" style="margin-left: 10px;"></div>
                 </div>
             </div>
             <div class="LowerPart" style="margin-top:3px;">
-                <table class="table table-bordered table-condensed table-hover" id="mainContent">
+                <table class="table table-bordered table-condensed table-hover" id="mainContent2" style="width: 100%">
                     <thead>
                     <tr>
                         <th>维护人</th>
-                        <th>维护时间</th>
-                        <th>维护内容</th>
+                        <th>设备名称</th>
+                        <th>设备位置/编号</th>
+                        <th>更换日期</th>
+                        <th>更换原因</th>
                         <th style="width:75px;">操作</th>
                     </tr>
                     </thead>
@@ -70,6 +95,8 @@
         </div>
     </div>
 </div>
+
+
 
 <!-- Modal -->
 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal">
@@ -84,14 +111,32 @@
                     <form class="form-inline" method="post" id="new_form" enctype="multipart/form-data">
                         <table class="table table-bordered table-condensed">
                             <tr>
-                                <td  style="width: 20%;">时间</td>
+                                <td  style="width: 20%;">故障日期</td>
+                                <td  style="width: 30%;"><input type="text" id="faultTime"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+                                <td  style="width: 20%;">维护日期</td>
                                 <td  style="width: 30%;"><input type="text" id="shijian"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
                             </tr>
-
+                            <tr>
+                                <td  style="width: 20%;">是否更换设备</td>
+                                <td  style="width: 30%;">
+                                    <select class="form-control" id="isChangeEquipment" style="width: 100%;">
+                                        <option value="1">是</option>
+                                        <option value="0">否</option>
+                                    </select>
+                                </td>
+                                <td  style="width: 20%;"></td>
+                                <td  style="width: 30%;"></td>
+                            </tr>
                             <tr>
                                 <td  style="width: 20%;">维护内容</td>
                                 <td colspan="3">
                                     <textarea  class="text" id="weihuContent" rows="4" cols="100"></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td  style="width: 20%;">备注</td>
+                                <td colspan="3">
+                                    <textarea  class="text" id="logRemarks" rows="4" cols="100"></textarea>
                                 </td>
                             </tr>
                         </table>
@@ -131,14 +176,32 @@
                     <form class="form-inline" method="post" id="edit_form" enctype="multipart/form-data">
                         <table class="table table-bordered table-condensed">
                             <tr>
-                                <td  style="width: 20%;">时间</td>
+                                <td  style="width: 20%;">故障日期</td>
+                                <td  style="width: 30%;"><input type="text" id="xg_faultTime"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+                                <td  style="width: 20%;">维护日期</td>
                                 <td  style="width: 30%;"><input type="text" id="xg_shijian"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
                             </tr>
-
+                            <tr>
+                                <td  style="width: 20%;">是否更换设备</td>
+                                <td  style="width: 30%;">
+                                    <select class="form-control" id="xg_isChangeEquipment" style="width: 100%;">
+                                        <option value="1">是</option>
+                                        <option value="0">否</option>
+                                    </select>
+                                </td>
+                                <td  style="width: 20%;"></td>
+                                <td  style="width: 30%;"></td>
+                            </tr>
                             <tr>
                                 <td  style="width: 20%;">维护内容</td>
                                 <td colspan="3">
                                     <textarea  class="text" id="xg_weihuContent" rows="4" cols="100"></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td  style="width: 20%;">备注</td>
+                                <td colspan="3">
+                                    <textarea  class="text" id="xg_logRemarks" rows="4" cols="100"></textarea>
                                 </td>
                             </tr>
                         </table>
@@ -180,8 +243,14 @@
                     <form class="form-inline">
                         <table class="table table-bordered table-condensed" style="height: auto;">
                             <tr>
-                                <td  style="width: 20%;">时间</td>
+                                <td  style="width: 20%;">故障时间</td>
+                                <td  style="width: 30%;" id="look_faultTime"></td>
+                                <td  style="width: 20%;">维护时间</td>
                                 <td  style="width: 30%;" id="look_shijian"></td>
+                            </tr>
+                            <tr>
+                                <td  style="width: 20%;">是否更换设备</td>
+                                <td  style="width: 30%;" id="look_isChangeEquipment"></td>
                                 <td  style="width: 20%;">维护人</td>
                                 <td  style="width: 30%;" id="look_weihuren"></td>
                             </tr>
@@ -189,6 +258,10 @@
                             <tr>
                                 <td  style="width: 20%;">维护内容</td>
                                 <td colspan="3"  id="look_weihuContent"></td>
+                            </tr>
+                            <tr>
+                                <td  style="width: 20%;">备注</td>
+                                <td colspan="3"  id="look_logRemarks"></td>
                             </tr>
                         </table>
                         <table class="table table-bordered table-condensed" id="look_accessory">
@@ -209,6 +282,136 @@
         </div>
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal2">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" ><b>录入系统设备更换日志</b></h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <form class="form-inline" >
+                        <table class="table table-bordered table-condensed">
+                            <tr>
+                                <td  style="width: 20%;">设备名称</td>
+                                <td  style="width: 30%;"><input type="text" id="equipmentName"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+                                <td  style="width: 20%;">设备位置/编号</td>
+                                <td  style="width: 30%;"><input type="text" id="equipmentPositionNumber"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+                            </tr>
+                            <tr>
+                                <td  style="width: 20%;">更换日期</td>
+                                <td  style="width: 30%;"><input type="text" id="replaceTime"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+                                <td  style="width: 20%;"></td>
+                                <td  style="width: 30%;"></td>
+                            </tr>
+                            <tr>
+                                <td  style="width: 20%;">更换原因</td>
+                                <td colspan="3">
+                                    <textarea  class="text" id="replaceReason"  rows="4" cols="100"></textarea>
+                                </td>
+                            </tr>
+
+                        </table>
+
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-default" id="baocun2">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- model结束 -->
+<!-- Modal -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="change2">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" ><b>修改系统设备更换日志</b></h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <form class="form-inline" >
+                        <table class="table table-bordered table-condensed">
+                            <tr>
+                                <td  style="width: 20%;">设备名称</td>
+                                <td  style="width: 30%;"><input type="text" id="xg_equipmentName"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+                                <td  style="width: 20%;">设备位置/编号</td>
+                                <td  style="width: 30%;"><input type="text" id="xg_equipmentPositionNumber"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+                            </tr>
+                            <tr>
+                                <td  style="width: 20%;">更换日期</td>
+                                <td  style="width: 30%;"><input type="text" id="xg_replaceTime"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+                                <td  style="width: 20%;"></td>
+                                <td  style="width: 30%;"></td>
+                            </tr>
+                            <tr>
+                                <td  style="width: 20%;">更换原因</td>
+                                <td colspan="3">
+                                    <textarea  class="text" id="xg_replaceReason"  rows="4" cols="100"></textarea>
+                                </td>
+                            </tr>
+
+                        </table>
+
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-default" id="xg_baocun2">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- model结束 -->
+<!-- Modal -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg2">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" ><b>修改系统设备更换日志</b></h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <form class="form-inline" >
+                        <table class="table table-bordered table-condensed">
+                            <tr>
+                                <td  style="width: 20%;">设备名称</td>
+                                <td  style="width: 30%;" id="look_equipmentName"></td>
+                                <td  style="width: 20%;">设备位置/编号</td>
+                                <td  style="width: 30%;" id="look_equipmentPositionNumber"></td>
+                            </tr>
+                            <tr>
+                                <td  style="width: 20%;">更换日期</td>
+                                <td  style="width: 30%;" id="look_replaceTime" ></td>
+                                <td  style="width: 20%;"></td>
+                                <td  style="width: 30%;"></td>
+                            </tr>
+                            <tr>
+                                <td  style="width: 20%;">更换原因</td>
+                                <td colspan="3" id="look_replaceReason"></td>
+                            </tr>
+
+                        </table>
+
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- model结束 -->
 </body>
 <script src="../js/jquery.js"></script>
 <script src="../js/bootstrap.min.js"></script>
@@ -216,11 +419,22 @@
 <!--<script src="../js/bootstrap-select.js" ></script>-->
 <script src="js/laydate/laydate.js"></script>
 <script src="../js/common-scripts.js"></script>
-<script src="js/datatables/jquery.dataTables.min.js"></script>
+<script src="js/layui.js" charset="utf-8"></script>
+<script src="js/element.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/jquery-editable-select.js" ></script>
 <script src="js/toastr.js" ></script>
 <script src="../js/jquery-form.min.js"></script>
 <script src="js/quanxian.js"></script>
+<!--导出CSV开始-->
+<script src="js/datatables/jquery.dataTables.min.js"></script>
+<script src="js/datatables/dataTables.colVis.min.js"></script>
+<script src="js/datatables/dataTables.tableTools.min.js"></script>
+<script src="js/datatables/datatables.responsive.min.js"></script>
+<script src="js/datatables/dataTables.buttons.min.js" ></script>
+<script src="js/datatables/buttons.html5.min.js" ></script>
+<script src="js/datatables/buttons.flash.min.js" ></script>
+<script src="js/datatables/jszip.min.js"></script>
+<!--导出CSV结束-->
 <script>
 
     $(document).ready( function () {
@@ -229,13 +443,30 @@
             type: 'datetime'
         });
         laydate.render({
+            elem: '#faultTime', //指定元素
+            type: 'datetime'
+        });
+        laydate.render({
             elem: '#xg_shijian', //指定元素
             type: 'datetime'
         });
+        laydate.render({
+            elem: '#xg_faultTime', //指定元素
+            type: 'datetime'
+        });
+        laydate.render({
+            elem: '#replaceTime', //指定元素
+            type: 'datetime'
+        });
+        laydate.render({
+            elem: '#xg_replaceTime', //指定元素
+            type: 'datetime'
+        });
         initTable()
+        initTable2()
 
     });
-    var table=$('#mainContent').dataTable({
+    var table=$('#mainContent').DataTable({
         "deferRender": true,
         "processing": true,
         "bDestroy": true,
@@ -247,13 +478,16 @@
         },
         "columns": [
             { "data": "usrName"},
+            { "data": "faultTime"},
             { "data": "logTime"},
             { "data": "logContent"},
+            { "data": "isChangeEquipmentName"},
+            { "data": "logRemarks"},
             { "data": null},
         ],
         "columnDefs": [{
             "class": "tcenter",
-            "targets": 3,
+            "targets": 6,
             "searchable": true,
             "render": function(data, type, full) {
                 var xiugai='<i class="iconfont icon-xiugai Pjb" style="font-size:20px;cursor:pointer;display: none;" id="upd" title="修改" data-toggle="modal" data-target="#change"></i>';
@@ -264,7 +498,7 @@
         }],"fnDrawCallback" : function() {
             initTableQuanxian()
         },
-        "order": [[0, 'asc']],
+        "order": [[2, 'desc']],
         "oLanguage": { //国际化配置
             "sProcessing": "正在获取数据，请稍后...",
             "sLengthMenu": "显示 _MENU_ 条",
@@ -281,8 +515,101 @@
                 "sNext": "下一页",
                 "sLast": "最后一页"
             }},
-
+        "buttons": [
+            {
+                extend: "csv",
+                text: "导出csv",
+                bom: true,
+                filename: '系统维护日志',
+                fieldSeparator: ',',
+                exportOptions: {
+                    format: {
+                        header: function ( data) {
+                            return data;
+                        },
+                        body: function ( data, columnIdx, rowIdx, code ) {
+                            return data;
+                        }
+                    },
+                    columns:[0,1,2,3,4,5]
+                }
+            }
+        ]
     });
+    table.buttons().container().appendTo( $('#tabBtn') );
+    $('.buttons-csv').addClass('btn btn-primary');
+
+    var table2=$('#mainContent2').DataTable({
+        "deferRender": true,
+        "processing": true,
+        "bDestroy": true,
+        "iDisplayLength": 10,
+        "searching": true,
+        "lengthChange": false,
+        "oLanguage": {
+            "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+        },
+        "columns": [
+            { "data": "usrName"},
+            { "data": "equipmentName"},
+            { "data": "equipmentPositionNumber"},
+            { "data": "replaceTime"},
+            { "data": "replaceReason"},
+            { "data": null},
+        ],
+        "columnDefs": [{
+            "class": "tcenter",
+            "targets": 5,
+            "searchable": true,
+            "render": function(data, type, full) {
+                var xiugai='<i class="iconfont icon-xiugai Pje" style="font-size:20px;cursor:pointer;display: none;" id="upd2" title="修改" data-toggle="modal" data-target="#change2"></i>';
+                var shanchu='<i class="iconfont icon-shanchu Pjf" style="font-size:20px;cursor:pointer;display: none;" id="del2"  title="删除"></i>';
+                var look='<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" onclick="lookMs2(this)" data-toggle="modal" data-target="#allMsg2"></i>'
+                return xiugai+shanchu+look;
+            }
+        }],"fnDrawCallback" : function() {
+            initTableQuanxian()
+        },
+        "order": [[2, 'desc']],
+        "oLanguage": { //国际化配置
+            "sProcessing": "正在获取数据，请稍后...",
+            "sLengthMenu": "显示 _MENU_ 条",
+            "sZeroRecords": "查询不到相关数据",
+            "sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
+            "sInfoEmpty": "记录数为0",
+            "sInfoFiltered": "(全部记录数 _MAX_ 条)",
+            "sInfoPostFix": "",
+            "sSearch": "搜索",
+            "sUrl": "",
+            "oPaginate": {
+                "sFirst": "第一页",
+                "sPrevious": "上一页",
+                "sNext": "下一页",
+                "sLast": "最后一页"
+            }},
+        "buttons": [
+            {
+                extend: "csv",
+                text: "导出csv",
+                bom: true,
+                filename: '系统设备更换日志',
+                fieldSeparator: ',',
+                exportOptions: {
+                    format: {
+                        header: function ( data) {
+                            return data;
+                        },
+                        body: function ( data, columnIdx, rowIdx, code ) {
+                            return data;
+                        }
+                    },
+                    columns:[0,1,2,3,4]
+                }
+            }
+        ]
+    });
+    table2.buttons().container().appendTo( $('#tabBtn2') );
+    $('.buttons-csv').addClass('btn btn-primary');
     function initTableQuanxian(){
         $.ajax({
             type:"post",
@@ -302,6 +629,15 @@
                         }
                         if(arr[i].indexOf("Pjc") >= 0 ){
                             $(".Pjc").show();
+                        }
+                        if(arr[i].indexOf("Pjd") >= 0 ){
+                            $(".Pjd").show();
+                        }
+                        if(arr[i].indexOf("Pje") >= 0 ){
+                            $(".Pje").show();
+                        }
+                        if(arr[i].indexOf("Pjf") >= 0 ){
+                            $(".Pjf").show();
                         }
                     }
 
@@ -331,8 +667,11 @@
 
 
     $("#baocun").click(function(){
+        var faultTime=$("#faultTime").val();
         var shijian=$("#shijian").val();
+        var isChangeEquipment=$("#isChangeEquipment").val();
         var weihuContent=$("#weihuContent").val();
+        var logRemarks=$("#logRemarks").val();
 
         var options={
             type: 'POST',
@@ -341,6 +680,9 @@
             data: {
                 logTime:shijian,
                 logContent:weihuContent,
+                faultTime:faultTime,
+                isChangeEquipment:isChangeEquipment,
+                logRemarks:logRemarks
             },
             error: function (msg) {
                 errMessage("请求UserController失败");
@@ -365,9 +707,11 @@
         tr = $(this).closest('tr');
         var data=$('#mainContent').DataTable().row(dom).data();
         xgId=data.logId
-
+        $("#xg_faultTime").val(data.faultTime);
         $("#xg_shijian").val(data.logTime);
+        $("#xg_isChangeEquipment").val(data.isChangeEquipment);
         $("#xg_weihuContent").val(data.logContent);
+        $("#xg_logRemarks").val(data.logRemarks);
         $.ajax({
             type:"post",
             url:"/accessory/selectAccessoryById",
@@ -425,8 +769,11 @@
     }
 
     $("#xg_baocun").click(function(){
+        var faultTime=$("#xg_faultTime").val();
         var shijian=$("#xg_shijian").val();
         var weihuContent=$("#xg_weihuContent").val();
+        var isChangeEquipment=$("#xg_isChangeEquipment").val();
+        var logRemarks=$("#xg_logRemarks").val();
 
         var options={
             type: 'POST',
@@ -436,6 +783,9 @@
                 logId:xgId,
                 logTime:shijian,
                 logContent:weihuContent,
+                faultTime:faultTime,
+                isChangeEquipment:isChangeEquipment,
+                logRemarks:logRemarks,
             },
             error: function (msg) {
                 errMessage("请求UserController失败");
@@ -488,9 +838,12 @@
     function lookMs(obj){
         var dom = $(obj).parents('tr');
         var data=$('#mainContent').DataTable().row(dom).data();
+        $("#look_faultTime").text(data.faultTime)
         $("#look_shijian").text(data.logTime);
+        $("#look_isChangeEquipment").text(data.isChangeEquipmentName)
         $("#look_weihuren").text(data.usrName);
         $("#look_weihuContent").text(data.logContent);
+        $("#look_logRemarks").text(data.logRemarks)
         $.ajax({
             type:"post",
             url:"/accessory/selectAccessoryById",
@@ -542,6 +895,141 @@
                 //$(".img").attr("src",e.target.result);
             };
         }
+    }
+
+    <!--=============================================================================== 设备更换日志 ====================================================-->
+
+    function initTable2(){
+        $.ajax({
+            type: 'POST',
+            url: '/tMaintenanceLog/getAlltMaintenanceReplaceLog',
+            dataType: 'json',
+            data: {
+            },
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                $('#mainContent2').dataTable().fnClearTable();
+                $('#mainContent2').DataTable().rows.add(json).draw(false);
+            }
+        });
+    }
+
+    $("#baocun2").click(function(){
+        var equipmentName=$("#equipmentName").val();
+        var equipmentPositionNumber=$("#equipmentPositionNumber").val();
+        var replaceTime=$("#replaceTime").val();
+        var replaceReason=$("#replaceReason").val();
+
+        $.ajax({
+            type: 'POST',
+            url: '/tMaintenanceLog/addtMaintenanceReplaceLog',
+            dataType: 'json',
+            data: {
+                equipmentName:equipmentName,
+                equipmentPositionNumber:equipmentPositionNumber,
+                replaceTime:replaceTime,
+                replaceReason:replaceReason,
+
+            },
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                if(json.result>0){
+                    toastr.success("添加成功");
+                    $('#mainContent2').DataTable().row.add(json.tMaintenanceReplaceLog).draw(false);     //新增行立即显示
+                    $("#myModal2").modal('hide');
+                }else{
+                    toastr.error("添加失败");
+                }
+            }
+        });
+
+    })
+    var xgId2;
+    var tr2;
+    $("#mainContent2").delegate("#upd2","click",function(){
+        var dom = $(this).parents('tr');
+        tr2 = $(this).closest('tr');
+        var data=$('#mainContent2').DataTable().row(dom).data();
+        xgId2=data.logReplaceId
+        $("#xg_equipmentName").val(data.equipmentName);
+        $("#xg_equipmentPositionNumber").val(data.equipmentPositionNumber);
+        $("#xg_replaceTime").val(data.replaceTime);
+        $("#xg_replaceReason").val(data.replaceReason);
+
+    })
+    $("#xg_baocun2").click(function(){
+        var equipmentName=$("#xg_equipmentName").val();
+        var equipmentPositionNumber=$("#xg_equipmentPositionNumber").val();
+        var replaceTime=$("#xg_replaceTime").val();
+        var replaceReason=$("#xg_replaceReason").val();
+
+        var options={
+            type: 'POST',
+            url: '/tMaintenanceLog/updtMaintenanceReplaceLog',
+            dataType: 'json',
+            data: {
+                logReplaceId:xgId2,
+                equipmentName:equipmentName,
+                equipmentPositionNumber:equipmentPositionNumber,
+                replaceTime:replaceTime,
+                replaceReason:replaceReason,
+            },
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                if(json.result>0){
+                    toastr.success("修改成功");
+                    $('#mainContent2').DataTable().row(tr2).data(json.tMaintenanceReplaceLog);
+                    $("#change2").modal('hide');
+                    initTableQuanxian()
+                }else{
+                    toastr.error("修改失败");
+                }
+            }
+        }
+        $("#edit_form").ajaxSubmit(options);
+    })
+
+    //删除
+    $('#mainContent2').delegate('#del2','click', function () {
+        var dom = $(this).parents('tr');
+        var data=$('#mainContent2').DataTable().row(dom).data();
+        var msg = "您真的确定要删除吗？\n\n请确认！";
+        if (confirm(msg)==true){
+            $.ajax({
+                type: 'POST',
+                url:'/tMaintenanceLog/deltMaintenanceReplaceLog',
+                dataType: 'json',
+                data: {
+                    id:data.logReplaceId
+                },
+                success: function (json) {
+                    if(json!=0){
+                        $('#mainContent2').DataTable().row(dom).remove().draw(false); //删除行立即显示
+                        toastr.success('删除成功');
+                    }else{
+                        toastr.error('删除失败');
+                    }
+                }
+            });
+        }else{
+            return false;
+        }
+    })
+
+    function lookMs2(obj){
+        var dom = $(obj).parents('tr');
+        var data=$('#mainContent2').DataTable().row(dom).data();
+        $("#look_equipmentName").text(data.equipmentName);
+        $("#look_equipmentPositionNumber").text(data.equipmentPositionNumber);
+        $("#look_replaceTime").text(data.replaceTime);
+        $("#look_replaceReason").text(data.replaceReason);
+
     }
 
 </script>

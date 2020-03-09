@@ -141,6 +141,7 @@
 							</div>
 						</div>
 						<div class="layui-tab-item">
+							<div id="tabBtn2" style="margin-left: 10px;margin-top: 20px;"></div>
 							<table class="layui-table" lay-skin="line" id="mainContent2" style="width: 100%">
 								<thead style="background-color: #DDE6F7;">
 								<tr>
@@ -189,6 +190,7 @@
 							</div>
 						</div>
 						<div class="layui-tab-item">
+							<div id="tabBtn3" style="margin-left: 10px;"></div>
 							<table class="layui-table" lay-skin="line" id="mainContent3" style="width: 100%">
 								<thead style="background-color: #DDE6F7;">
 									<tr>
@@ -233,6 +235,7 @@
 						   <div id="bottom_" class="col-xs-12" style="width:1300px;height:500px; margin-left: 15px;margin-top: -50px;"></div>
 					   </div>
 					   <div class="layui-tab-item">
+						   <div id="tabBtn4" style="margin-left: 10px;"></div>
 						   <table class="layui-table" lay-skin="line" id="mainContent4" style="width: 100%">
 							   <thead style="background-color: #DDE6F7;">
 							   <tr>
@@ -255,6 +258,7 @@
 						   </table>
 					   </div>
 					   <div class="layui-tab-item">
+						   <div id="tabBtn5" style="margin-left: 10px;"></div>
 					   <table class="layui-table" lay-skin="line" id="mainContent5" style="width: 100%">
 						   <thead style="background-color: #DDE6F7;">
 						   <tr>
@@ -453,12 +457,22 @@
 	<script src="js/element.js" type="text/javascript" charset="utf-8"></script>
 	<!--<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>-->
 	<script src="js/echarts.min(1).js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/datatables/jquery.dataTables.min.js"></script>
+	<!--<script src="js/datatables/jquery.dataTables.min.js"></script>-->
 	<script src="js/toastr.js" ></script>
 	<script src="js/jianceEcharts.js" ></script>
 	<script src="../js/myTool.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 	<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+	<!--导出CSV开始-->
+	<script src="js/datatables/jquery.dataTables.min.js"></script>
+	<script src="js/datatables/dataTables.colVis.min.js"></script>
+	<script src="js/datatables/dataTables.tableTools.min.js"></script>
+	<script src="js/datatables/datatables.responsive.min.js"></script>
+	<script src="js/datatables/dataTables.buttons.min.js" ></script>
+	<script src="js/datatables/buttons.html5.min.js" ></script>
+	<script src="js/datatables/buttons.flash.min.js" ></script>
+	<script src="js/datatables/jszip.min.js"></script>
+	<!--导出CSV结束-->
 	<script>
 	layui.use('element', function(){
 		  var element = layui.element;
@@ -544,7 +558,7 @@
 				}},
 
 		});
-		var table2=$('#mainContent2').dataTable({
+		var table2=$('#mainContent2').DataTable({
 			"deferRender": true,
 			"processing": true,
 			"bDestroy": true,
@@ -611,9 +625,31 @@
 					"sNext": "下一页",
 					"sLast": "最后一页"
 				}},
-
+			"buttons": [
+				{
+					extend: "csv",
+					text: "导出csv",
+					bom: true,
+					filename: '当日车流量',
+					fieldSeparator: ',',
+					exportOptions: {
+						format: {
+							header: function ( data) {
+								return data;
+							},
+							body: function ( data, columnIdx, rowIdx, code ) {
+								return data;
+							}
+						},
+						columns:[0,1,2,3,4,5,6,7,8,9,10]
+					}
+				}
+			]
 		});
-		var table3=$('#mainContent3').dataTable({
+	table2.buttons().container().appendTo( $('#tabBtn2') );
+	$('.buttons-csv').addClass('btn btn-primary');
+
+		var table3=$('#mainContent3').DataTable({
 			"deferRender": true,
 			"processing": true,
 			"bDestroy": true,
@@ -678,9 +714,31 @@
 					"sNext": "下一页",
 					"sLast": "最后一页"
 				}},
-
+			"buttons": [
+				{
+					extend: "csv",
+					text: "导出csv",
+					bom: true,
+					filename: '当日超载车辆',
+					fieldSeparator: ',',
+					exportOptions: {
+						format: {
+							header: function ( data) {
+								return data;
+							},
+							body: function ( data, columnIdx, rowIdx, code ) {
+								return data;
+							}
+						},
+						columns:[0,1,2,3,4,5,6,7,8,9,10]
+					}
+				}
+			]
 		});
-		var table4=$('#mainContent4').dataTable({
+	table3.buttons().container().appendTo( $('#tabBtn3') );
+	$('.buttons-csv').addClass('btn btn-primary');
+
+		var table4=$('#mainContent4').DataTable({
 			"deferRender": true,
 			"processing": true,
 			"bDestroy": true,
@@ -747,9 +805,31 @@
 					"sNext": "下一页",
 					"sLast": "最后一页"
 				}},
-
+			"buttons": [
+				{
+					extend: "csv",
+					text: "导出csv",
+					bom: true,
+					filename: '当日二级预警车辆',
+					fieldSeparator: ',',
+					exportOptions: {
+						format: {
+							header: function ( data) {
+								return data;
+							},
+							body: function ( data, columnIdx, rowIdx, code ) {
+								return data;
+							}
+						},
+						columns:[0,1,2,3,4,5,6,7,8,9,10]
+					}
+				}
+			]
 		});
-		var table5=$('#mainContent5').dataTable({
+	table4.buttons().container().appendTo( $('#tabBtn4') );
+	$('.buttons-csv').addClass('btn btn-primary');
+
+		var table5=$('#mainContent5').DataTable({
 			"deferRender": true,
 			"processing": true,
 			"bDestroy": true,
@@ -817,8 +897,29 @@
 					"sNext": "下一页",
 					"sLast": "最后一页"
 				}},
-
+			"buttons": [
+				{
+					extend: "csv",
+					text: "导出csv",
+					bom: true,
+					filename: '当日三级预警车辆',
+					fieldSeparator: ',',
+					exportOptions: {
+						format: {
+							header: function ( data) {
+								return data;
+							},
+							body: function ( data, columnIdx, rowIdx, code ) {
+								return data;
+							}
+						},
+						columns:[0,1,2,3,4,5,6,7,8,9,10]
+					}
+				}
+			]
 		});
+	table5.buttons().container().appendTo( $('#tabBtn5') );
+	$('.buttons-csv').addClass('btn btn-primary');
 		var user;
 		function getLoginUser(){
 			$.ajax({

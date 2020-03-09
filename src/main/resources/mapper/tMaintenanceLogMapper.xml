@@ -3,7 +3,8 @@
 <mapper namespace="com.ldxx.dao.tMaintenanceLogDao" >
 
     <insert id="addtMaintenanceLog" parameterType="tMaintenanceLog">
-        insert into t_maintenance_log(log_id,log_time,log_user,log_content,del_state) values (#{logId},#{logTime},#{logUser},#{logContent},#{delState})
+        insert into t_maintenance_log(log_id,log_time,log_user,log_content,del_state,fault_time,is_change_equipment,log_remarks)
+            values (#{logId},#{logTime},#{logUser},#{logContent},#{delState},#{faultTime},#{isChangeEquipment},#{logRemarks})
     </insert>
 
     <update id="deltMaintenanceLog">
@@ -11,13 +12,49 @@
     </update>
 
     <update id="updtMaintenanceLog" parameterType="tMaintenanceLog">
-        update t_maintenance_log set log_time=#{logTime},log_user=#{logUser},log_content=#{logContent} where log_id=#{logId}
+        update t_maintenance_log set
+        log_time=#{logTime},
+        log_user=#{logUser},
+        log_content=#{logContent},
+        fault_time=#{faultTime},
+        is_change_equipment=#{isChangeEquipment},
+        log_remarks=#{logRemarks}
+        where log_id=#{logId}
     </update>
 
     <select id="getAlltMaintenanceLog" resultType="tMaintenanceLog">
-        select a.log_id,a.log_time,a.log_user,a.log_content,a.del_state,b.Usr_Name from t_maintenance_log a
+        select case a.is_change_equipment when 0 then '否'
+        else '是'
+        end as isChangeEquipmentName,
+        a.*,b.Usr_Name from t_maintenance_log a
         left join t_user_info b on a.log_user=b.Usr_Id
         where a.del_state=1
     </select>
+
+
+
+
+    <insert id="addtMaintenanceReplaceLog" parameterType="tMaintenanceReplaceLog">
+         insert into t_maintenance_replace_log(log_replace_id,equipment_name,equipment_position_number,replace_time,replace_reason,log_replace_user,del_state)
+            values (#{logReplaceId},#{equipmentName},#{equipmentPositionNumber},#{replaceTime},#{replaceReason},#{logReplaceUser},#{delState})
+    </insert>
+    <update id="updtMaintenanceReplaceLog" parameterType="tMaintenanceReplaceLog">
+        update t_maintenance_replace_log set
+        equipment_name=#{equipmentName},
+        equipment_position_number=#{equipmentPositionNumber},
+        replace_time=#{replaceTime},
+        replace_reason=#{replaceReason},
+        log_replace_user=#{logReplaceUser}
+        where log_replace_id=#{logReplaceId}
+    </update>
+    <select id="getAlltMaintenanceReplaceLog" resultType="tMaintenanceReplaceLog">
+
+        select a.*,b.Usr_Name from t_maintenance_replace_log a
+        left join t_user_info b on a.log_replace_user=b.Usr_Id
+        where a.del_state=1
+    </select>
+    <update id="deltMaintenanceReplaceLog">
+        update t_maintenance_replace_log set del_state=0 where log_replace_id=#{id}
+    </update>
 
 </mapper>

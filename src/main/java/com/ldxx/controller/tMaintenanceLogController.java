@@ -2,7 +2,9 @@ package com.ldxx.controller;
 
 import com.ldxx.bean.Accessory;
 import com.ldxx.bean.tMaintenanceLog;
+import com.ldxx.bean.tMaintenanceReplaceLog;
 import com.ldxx.bean.tUserInfo;
+import com.ldxx.dao.tMaintenanceLogDao;
 import com.ldxx.service.tMaintenanceLogService;
 import com.ldxx.util.LDXXUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +28,15 @@ public class tMaintenanceLogController {
 
     @Autowired
     private tMaintenanceLogService service;
+    @Autowired
+    private tMaintenanceLogDao dao;
 
     @RequestMapping("/addtMaintenanceLog")
     public Map<String,Object> addtMaintenanceLog(tMaintenanceLog tMaintenanceLog, @RequestParam("file") MultipartFile[] file, HttpSession session) throws IOException {
         Map<String,Object> map=new HashMap<>();
         String id= LDXXUtils.getUUID12();
         tMaintenanceLog.setLogId(id);
-        tMaintenanceLog.setDelState(1+"");
+        tMaintenanceLog.setDelState(1);
         tUserInfo user = (tUserInfo) session.getAttribute("user");
         tMaintenanceLog.setLogUser(user.getUsrId());
         tMaintenanceLog.setUsrName(user.getUsrName());
@@ -76,6 +80,12 @@ public class tMaintenanceLogController {
         tUserInfo user = (tUserInfo) session.getAttribute("user");
         tMaintenanceLog.setLogUser(user.getUsrId());
         tMaintenanceLog.setUsrName(user.getUsrName());
+        if("0".equals(tMaintenanceLog.getIsChangeEquipment())){
+            tMaintenanceLog.setIsChangeEquipmentName("否");
+        }else{
+            tMaintenanceLog.setIsChangeEquipmentName("是");
+        }
+
         String id= tMaintenanceLog.getLogId();
         String webApps=LDXXUtils.getWebAppFile();
         String path=webApps+id;
@@ -109,5 +119,49 @@ public class tMaintenanceLogController {
     public List<tMaintenanceLog> getAlltMaintenanceLog(){
         List<tMaintenanceLog> tMaintenanceLog=service.getAlltMaintenanceLog();
         return tMaintenanceLog;
+    }
+
+
+    //---------------------------------------------------  设备更换记录表  -----------------------------------------------------------------------------
+
+    @RequestMapping("/addtMaintenanceReplaceLog")
+    public Map<String,Object> addtMaintenanceReplaceLog(tMaintenanceReplaceLog tMaintenanceReplaceLog, HttpSession session) {
+        Map<String,Object> map=new HashMap<>();
+        String id= LDXXUtils.getUUID12();
+        tMaintenanceReplaceLog.setLogReplaceId(id);
+        tMaintenanceReplaceLog.setDelState(1);
+        tUserInfo user = (tUserInfo) session.getAttribute("user");
+        tMaintenanceReplaceLog.setLogReplaceUser(user.getUsrId());
+        tMaintenanceReplaceLog.setUsrName(user.getUsrName());
+
+        int i=dao.addtMaintenanceReplaceLog(tMaintenanceReplaceLog);
+        map.put("result", i);
+        map.put("tMaintenanceReplaceLog", tMaintenanceReplaceLog);
+        return map;
+    }
+
+    @RequestMapping("/updtMaintenanceReplaceLog")
+    public Map<String,Object> updtMaintenanceReplaceLog(tMaintenanceReplaceLog tMaintenanceReplaceLog, HttpSession session) {
+        Map<String,Object> map=new HashMap<>();
+        tUserInfo user = (tUserInfo) session.getAttribute("user");
+        tMaintenanceReplaceLog.setLogReplaceUser(user.getUsrId());
+        tMaintenanceReplaceLog.setUsrName(user.getUsrName());
+
+        int i=dao.updtMaintenanceReplaceLog(tMaintenanceReplaceLog);
+        map.put("result", i);
+        map.put("tMaintenanceReplaceLog", tMaintenanceReplaceLog);
+        return map;
+    }
+
+    @RequestMapping("/getAlltMaintenanceReplaceLog")
+    public List<tMaintenanceReplaceLog> getAlltMaintenanceReplaceLog(){
+        List<tMaintenanceReplaceLog> tMaintenanceReplaceLog=dao.getAlltMaintenanceReplaceLog();
+        return tMaintenanceReplaceLog;
+    }
+
+    @RequestMapping("/deltMaintenanceReplaceLog")
+    public int deltMaintenanceReplaceLog(String id){
+        int i=dao.deltMaintenanceReplaceLog(id);
+        return i;
     }
 }
