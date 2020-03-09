@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class tWimMsgVo extends tWimMsg implements Serializable {
+public class tWimMsgVo extends tWimMsg  implements Serializable{
     private String stationNameRouteName;//站点名称+路线名称
     private String directionName;//行驶方向名称
     private String isStraddleName;//跨道

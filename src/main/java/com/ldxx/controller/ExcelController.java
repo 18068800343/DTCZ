@@ -1,12 +1,21 @@
 package com.ldxx.controller;
 
+import com.ldxx.bean.LicensePlate;
+import com.ldxx.service.Impl.RedisServiceImpl;
 import com.ldxx.util.ExportUtils;
 import com.ldxx.vo.ExcelData;
+import com.ldxx.vo.tWimMsgVo;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,5 +56,26 @@ public class ExcelController {
         rows.add(row2);
         data.setRows(rows);
         ExportUtils.exportExcel(response,"联系人表.xlsx",data);
+    }
+
+    @Autowired
+    private JedisPool jedisPool;
+
+    @Autowired
+    RedisServiceImpl redisServiceImpl;
+
+    @RequestMapping("/test")
+    public tWimMsgVo jedisTest(){
+        Jedis jedis = jedisPool.getResource();
+        jedis.set("color","red");
+        String color = jedis.get("color");
+        System.out.println(color);
+        tWimMsgVo tWimMsgVo = new tWimMsgVo();
+        tWimMsgVo.setDirection(1);
+        tWimMsgVo.setDirectionName("上行");
+        redisServiceImpl.set("vo1",tWimMsgVo);
+        tWimMsgVo tWimMsgVo1 = (com.ldxx.vo.tWimMsgVo) redisServiceImpl.get("vo1");
+        System.out.println(tWimMsgVo1.getDirectionName());
+        return tWimMsgVo1;
     }
 }
