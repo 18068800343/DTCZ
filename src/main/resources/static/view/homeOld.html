@@ -1,556 +1,323 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <title>首页</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=gb2312"/>
-    <meta name="keywords" content="百度地图,百度地图API，百度地图自定义工具，百度地图所见即所得工具"/>
-    <meta name="description" content="百度地图API自定义地图，帮助用户在可视化操作下生成百度地图"/>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
-    <link rel="stylesheet" type="text/css" href="css/index.css"/>
-    <link rel="stylesheet" href="../style/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="css/toastr.css"/>
-    <!--引用百度地图API-->
-    <style type="text/css">
-        html,
-        body {
-            margin: 0;
-            padding: 0;
-        }
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <style>
+        .main-table tr td{padding:3px;}
+        .main-table .red{color:red;}
 
-        .iw_poi_title {
-            color: #CC5522;
-            font-size: 14px;
-            font-weight: bold;
-            overflow: hidden;
-            padding-right: 13px;
-            white-space: nowrap
+        @media screen and (min-width: 1920px) {
+            .righttop{
+                margin-top: -20% !important;
+            }
+            /* .righttop{
+                 top:200px !important;
+             }
+             .rightbottom span{
+                 margin-top: 1% !important;
+             }*/
         }
-
-        .iw_poi_content {
-            font: 12px arial, sans-serif;
-            overflow: visible;
-            padding-top: 4px;
-            white-space: -moz-pre-wrap;
-            word-wrap: break-word
-        }
-        th,td{
-            white-space:nowrap;
-        }
-        .dataTables_scrollHead {
-            height: 50px;
-        }
-        @media screen and (max-width:1440px) {
-            #_top{
-                height:330px !important;
-                width:350px !important;
-                margin-left:-30px;
-            }
-            .left{
-                margin-left:3%;
-                width:38%;
-            }
-            .center{
-                margin-top:20px !important;
-                margin-right:-60px !important;
-            }
-            .right{
-                margin-top:4.5%;
-                width:27%;
-                height:40%;
-                margin-right:-5%;
-
-            }
-            #_right{
-                width:300px !important;
-                height:300px;
-            }
-            .head{
-                margin-left:50px;
-            }
-            .bottom{
-                margin-left:3%;
-                height:400px;
-            }
-            #bottom_{
-                left:-40px !important;
-            }
-        }
-
     </style>
-    <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=BmTwezCvWyGaH3KNYkc5P6uq&s=1"></script>
 </head>
-
-<body style="width: 70%;text-align: center; overflow-x:hidden; overflow-y:hidden;">
-<div class="head">
-    <img src="img/header.png" style="margin:0 auto;position:relative;left:3%;"/>
-</div>
-<!--主体结构-->
-<div class="body">
-
-    <div class="left col-xs-4 ">
-        <div class="tt">
-            <img src="img/title_first.png"/>
+<body class="jd">
+<div class="head" style="height: 100px;width: 100%;"></div>
+<div class="leftdiv col-xs-3">
+    <h2 class="jianceh" style="font-size: 19px;color:#007AFF;font-weight: bolder;">监测站点实时统计</h2>
+    <div class="leftsj">
+        <div class="leftfirst">
+            <img src="img/first_img.png" style="height: 40px;">
+            <p class="leftp" id="leftTable1"></p><span>辆</span>
+            <p style="color: #A4A5B0;margin-left: 11%;font-weight: bolder;margin-top: -2%;">当前总流量</p>
         </div>
-        <div id="_top" class="col-xs-5" style="width:90%;height: 400px;margin-top: -30px;">
+        <div class="leftsec">
+            <img src="./img/second_img.png" style="height: 40px;">
+            <p class="leftp" id="leftTable2"></p><span>辆</span>
+            <p style="color: #A4A5B0;margin-left: 11%;font-weight: bolder;margin-top: -2%;">当前超载车辆数</p>
         </div>
-        <!--左边-->
-    </div>
-    <div class="center col-xs-4">
-        <div style="width:100%;height:80%;border:#ccc solid 1px;margin-top: 20px;border-radius: 10px;"
-             id="dituContent"></div>
-        <div class="center_text">
-            <!--中间-->
+        <div class="leftth">
+            <img src="img/third_img.png" style="height: 40px;">
+            <p class="leftp" id="leftTable3"></p><span>吨</span>
+            <p style="color: #A4A5B0;margin-left: 11%;font-weight: bolder;margin-top: -2%;">当前最大车重</p>
         </div>
-    </div>
-
-    <div class="right col-xs-4 ">
-        <div class="right_text">
-            <img src="img/title_chaozai.png"/>
+        <div class="leftfou">
+            <img src="img/first_img.png" style="height: 40px;">
+            <p class="leftp" id="leftTable4"></p><span>个</span>
+            <p style="color: #A4A5B0;margin-left: 11%;font-weight: bolder;margin-top: -2%;">当前监测站点</p>
         </div>
-        <div id="_right" style="width:380px;height: 300px;margin-left: 20px;margin-top: -20px;">
-            <!--右边-->
-        </div>
-    </div>
-    <div class="bottom col-xs-12">
-        <div class="right_text">
-            <img src="img/title_third.png"/>
-        </div>
-        <div id="bottom_"
-             style="width:110%;height:85%;margin-left: -50px;margin-top: 20px;margin:0 auto;left:-70px;">
-        </div>
-    </div>
-</div>
-<!-- 修改Modal -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-     id="chart1Detail">
-    <div class="modal-dialog modal-lg" style="width:70%" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title"><b>详细信息</b></h4>
-            </div>
-
-
-            <div class="modal-body">
-                <div>
-                    <form class="form-inline">
-                        <!--表格-->
-                        <table class="table table-striped table-hover" id="mainContent"
-                               style="width: 100%;margin: 0 auto; margin-top: 20px;">
-                            <thead style="background-color: #DDE6F7;">
-                            <tr>
-                                <th style="width: 15%">站点</th>
-                                <th>车道号</th>
-                                <th>车牌号</th>
-                                <th>车牌颜色</th>
-                                <th>车型</th>
-                                <th>长</th>
-                                <th>车速(Km/h)</th>
-                                <th>行驶方向</th>
-                                <th>轴数</th>
-                                <th>总重量(Kg)</th>
-                                <th>是否跨道</th>
-                                <th>路面温度</th>
-                                <th>超重比率</th>
-
-
-                            </tr>
-                            </thead>
-                            <tbody>
-
-                            </tbody>
-                        </table>
-                    </form>
+        <div class="y-span10 y-last">
+            <div class="table">
+                <div class="bj_nav y-clearfix">
+                    <div>
+                        <div id="main" style="height:500px;width:100%;margin:0 15px;float:left;margin-left: -28%;"></div>
+                    </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        </div>
+    </div>
+</div>
+<!-- 左边结束 -->
+<div class="centerdiv col-xs-4">
+    <div class="topcenter">
+        <div class="bg">
+            <h2 class="dangqianche" style="font-size: 17px;color:#007AFF;font-weight: bolder; padding: 10px;">当前车流量统计</h2>
+        </div>
+        <div class="bz">
+            <span style="float: left; margin-left: 2%;">站点排名</span>
+            <span style="float: right;margin-right: 3%;">流量统计</span>
+        </div>
+        <div id="xian1" style="height:380px;top: -45px;">
+        </div>
+    </div>
+    <div class="bottomcenter">
+        <div class="bg" style="margin-top: -8%;">
+            <h2 class="dangqianche" style="font-size: 16px;font-weight: bolder; padding: 10px;">当前车辆超载比例统计</h2>
+        </div>
+        <div id="xian" style="height:360px;top: -45px;">
+            <div id="huan0" class="col-xs-4" style="height: 160px;position: absolute;"></div>
+            <div id="huan1" class="col-xs-4" style="height: 160px;position: absolute; margin-left: 30%;"></div>
+            <div id="huan2" class="col-xs-4" style="height: 160px;float: right;position: absolute;right: 0;">
+            </div>
+            <div class="ecs" style="margin-top: 30%;">
+                <div id="huan3" class="col-xs-4" style="height: 160px;position: absolute;"></div>
+                <div id="huan4" class="col-xs-4" style="height: 160px;position: absolute; margin-left: 30%;"></div>
+                <div id="huan5" class="col-xs-4" style="height: 160px;position: absolute;right: 0;"></div>
             </div>
         </div>
     </div>
 </div>
-<!-- 修改model结束 -->
+<!-- 中间结束 -->
+<div class="right col-xs-3">
+    <div class="bg">
+        <h2 class="dangqianche" style="font-size: 17px;color:#007AFF;font-weight: bolder;padding: 10px;">当前车辆预警统计</h2>
+    </div>
+    <div class="righttop" style="margin-top: -10%;position: relative;">
+        <div id="by0" class="col-xs-4" style="height:200px;position: absolute;float: left;"></div>
+        <div id="by1" class="col-xs-4" style="height:200px;margin-left:32%;position: absolute;"></div>
+        <div id="by2" class="col-xs-4" style="height:200px;float: right;"></div>
+    </div>
+    <div class="ert" style="margin-top: 40%;position: relative;">
+        <div id="by3" class="col-xs-4" style="height:200px;position: absolute;"></div>
+        <div id="by4"  class="col-xs-4"style="height:200px;position: absolute;margin-left: 32%;"></div>
+        <div id="by5"  class="col-xs-4"style="height:200px;position: absolute;right: 0;"></div>
+    </div>
+    <div class="rightbottom" style="clear: both; position: relative;top: 140px;">
+        <p style="font-size: 17px;color: #FFF;margin-top:10%;" class="col-xs-8">当前最大车重<span id="lastZuiDaCheZhong" style="color: #FE545E;font-size: 25px;background-color:#131A50;padding: 1.5%;margin: 1%;"></span>吨</p>
+
+    </div>
+    <div id="liti" class="col-xs-12" style="height: 325px; margin-top: 43%;">
+    </div>
+</div>
 </body>
-<script src="../js/jquery.js"></script>
-<script src="../js/bootstrap.min.js"></script>
+<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/homeEcharts.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/echarts.min(1).js" type="text/javascript" charset="utf-8"></script>
-<script src="../js/echartsOptionIndex.js"></script>
-<script src="js/datatables/jquery.dataTables.min.js"></script>
-<script src="js/toastr.js"></script>
-<script src="../js/myTool.js"></script>
+<script src="js/build/dist/echarts.js" type="text/javascript" charset="utf-8"></script>
+
+
 <script type="text/javascript">
-    setLeftEcharts();
-    setRightEcharts();
-    setBottomEcharts();
-    setInterval(refresh, 4000);
-    let page_flag = 0;
-    let page_flag1 = 0;
-    let page_flag2 = 0;
+    require.config({
+        paths: {
+            echarts: 'js/build/dist'
+        }
+    });
+
+    // 使用
+    require(
+        [
+            'echarts',
+            'echarts/chart/map'
+        ],
+        function(ec) {
+            require('echarts/util/mapData/params').params.jiangsu = {
+
+                getGeoJson: function(callback) {
+                    $.getJSON('geoJson/jiangsu.json', function(data) {
+                        // 压缩后的地图数据必须使用 decode 函数转换
+                        callback(require('echarts/util/mapData/params').decode(data));
+                    });
+                }
+            }
+            let myChart = ec.init(document.getElementById('main'));
+            let ecConfig = require('echarts/config');
+            let zrEvent = require('zrender/tool/event');
+            let curIndx = 0;
+            let mapType = ["江苏"];
+
+            myChart.on(ecConfig.EVENT.MAP_SELECTED, function(param) {});
+            option = {
+
+                tooltip: {
+                    trigger: 'item',
+                    //formatter:'dede{b}'
+                    formatter: function(param) {}
+                },
+                legend: {
+                    orient: 'vertical',
+                    x: '',
+                    data: [' ']
+                },
+
+                series: [{
+                    name: '',
+                    type: 'map',
+                    symbolSize: 10,
+                    symbolRotate: 35,
+                    mapType: 'jiangsu',
+                    selectedMode: false,
+                    itemStyle: {
+                        normal: {
+                            label: {
+                                show: true
+                            },
+                            borderColor: 'rgb(71,160,192)',
+                            borderWidth: 1
+                        },
+                        emphasis: {
+                            label: {
+                                show: false
+                            }
+                        }
+                    },
+                    data: [{
+                        name: '连云港市',
+                        value: Math.round(Math.random() * 500)
+                    },
+                        {
+                            name: '盐城市',
+                            value: Math.round(Math.random() * 500)
+                        },
+                        {
+                            name: '宿迁市',
+                            value: Math.round(Math.random() * 500)
+                        },
+                        {
+                            name: '徐州市',
+                            value: Math.round(Math.random() * 500)
+                        },
+                        {
+                            name: '南京市',
+                            value: Math.round(Math.random() * 500)
+                        },
+                        {
+                            name: '泰州市',
+                            value: Math.round(Math.random() * 500)
+                        },
+                        {
+                            name: '扬州市',
+                            value: Math.round(Math.random() * 500)
+                        },
+                        {
+                            name: '南通市',
+                            value: Math.round(Math.random() * 500)
+                        },
+                        {
+                            name: '苏州市',
+                            value: Math.round(Math.random() * 500)
+                        },
+                        {
+                            name: '无锡市',
+                            value: Math.round(Math.random() * 500)
+                        },
+                        {
+                            name: '镇江市',
+                            value: Math.round(Math.random() * 500)
+                        },
+                        {
+                            name: '常州市',
+                            value: Math.round(Math.random() * 500)
+                        },
+                        {
+                            name: '淮安市',
+                            value: Math.round(Math.random() * 500)
+                        }],
+                    geoCoord: {
+                        '南京市': [118.78	, 32.04],
+                        '南通市': [121.05	, 32.08],
+                        '无锡市': [120.29, 31.59],
+                        '镇江市': [119.44, 32.2],
+                        '常州市': [119.95, 31.79],
+                        '淮安市': [119.15, 33.5],
+                        '苏州市': [120.62, 31.32],
+                        '扬州市': [119.42, 32.39],
+                        '泰州市': [119.9, 32.49],
+                        '徐州市': [117.2, 34.26],
+                        '宿迁市': [118.3, 33.96],
+                        '盐城市': [120.13, 33.38],
+                        '连云港市': [119.16, 34.59]
+                    },
+
+                    markPoint: {
+                        symbol: 'emptyCircle',
+                        symbolSize: 15,
+                        itemStyle: {
+                            normal: {
+                                borderColor: '#f317eb',
+                                borderWidth: 1, // 标注边线线宽，单位px，默认为1
+                                label: {
+                                    show: true
+                                }
+                            }
+                        },
+                        effect: {
+                            show: true,
+                            shadowBlur: 0,
+                            loop: true
+                        },
+                        data : [
+                            {
+                                name: '南京市',
+                                value: 95
+                            },
+                            {
+                                name: '连云港市',
+                                value: 2
+                            },
+                            {
+                                name: '宿迁市'
+                            },
+                            {
+                                name: '徐州市'
+                            },
+                            {
+                                name: '无锡市'
+                            }
+                        ]
+                    }
+
+                }]
+            }
+            myChart.setOption(option);
+        }
+    );
+
+
+    //初始化车流量
+    homePageInit.initLeftEcharts('xian1');
+
+    //初始化环形图0
+    homePageInit.initDownEcharts();
+    homePageInit.initLastEcharts()
+
+    //初始化左侧总数据
+    homePageInit.initHomeData();
+    setInterval(refresh, 1000);
+    setInterval(refreshLeft, 4000);
 
     function refresh() {
-        if (user != null && user != "" && user != undefined) {
-            //queding();
-            setLeftEcharts();
-            setRightEcharts();
-            setBottomEcharts()
-        }
+        homePageInit.initLeftEcharts('xian1');
+        homePageInit.initDownEcharts();
+        //
+        homePageInit.initLastEcharts()
     }
 
-    function showMask() {
-        myTool.mask.show('查询中...');
+    function refreshLeft() {
+        homePageInit.initHomeData();
     }
-
-    function hidMask() {
-        myTool.mask.hide();
-    }
-
-    let initChatTable = (e, d) => {
-        showMask();
-        let url;
-        switch (d) {
-            case 1:
-                url = '/tWimMsg/getWimMsgHomePage';
-                break;
-            case 2:
-                url = '/tWimMsg/getChaoZaiHomePage';
-                break;
-            case 3:
-                url = '/tWimMsg/getChaoZHongHomePage';
-                break;
-            default:
-                url = '/tWimMsg/getWimMsgHomePage';
-        }
-        $('#mainContent').dataTable().fnClearTable();
-        $.ajax({
-            type: 'POST',
-            url: url,
-            dataType: 'json',
-            data: {
-                roadName: e,
-            },
-            error: function (msg) {
-            },
-            success: function (json) {
-                $('#mainContent').DataTable().rows.add(json).draw(false);
-                hidMask();
-            }
-        });
-    }
-
-    let bindChartClick = (e, d) => {
-        e.off('click');
-        e.on('click', function (params) {
-            console.log(params);
-            let num;
-            switch (d) {
-                case 1:
-                    num = params.data[0];
-                    break;
-                case 2:
-                    num = params.data.value;
-                    break;
-                case 3:
-                    num = params.value;
-                    break;
-                default:
-                    num = 0;
-            }
-            if (num > 0) {
-                $("#chart1Detail").modal('show');
-                initChatTable(params.name, d);
-            }
-        });
-    }
-
-    <!--==========================================================饼状图（当日超载车辆）===========================================-->
-    function setRightEcharts() {
-        var user = getLoginUser();
-        var stationName = getstationName(user);
-        var stationPort = getstationPort(user);
-
-        $.ajax({
-            type: 'POST',
-            url: '/tWimMsg/getMeiRiChaoZhongByStationPort',
-            dataType: 'json',
-            data: {
-                stationPort: stationPort,
-            },
-            error: function (msg) {
-                errMessage("请求UserController失败");
-            },
-            success: function (json) {
-                setEcharts2(json, stationName)
-
-            }
-        });
-    }
-
-    function setEcharts2(list, stationName) {
-        var flag = 0;
-        for (var i = 0; i < list.length; i++) {
-            flag += list[i].value;
-        }
-        if (flag == 0 && page_flag1 == 0) {
-            toastr.error('今日无超载车辆');
-            page_flag1++;
-        }
-        var myChart2 = echarts.init(document.getElementById('_right'));
-        if (list != null && list.length != 0) {
-            let option2 = initRightOption(list, stationName);
-            // 使用刚指定的配置项和数据显示图表。
-            myChart2.setOption(option2);
-
-        } else {
-            $("#_right").html('今日无超载车辆').css({
-                "margin-left": "30px"
-            })
-        }
-        bindChartClick(myChart2, 2);
-    }
-
-    var user;
-
-    function getLoginUser() {
-        $.ajax({
-            type: 'POST',
-            url: '/login/getUser',
-            dataType: 'json',
-            async: false,
-            data: {},
-            error: function (msg) {
-            },
-            success: function (json) {
-                user = json;
-            }
-        });
-        return user;
-    }
-
-    function getstationName(user) {
-        let stationName = user.stationName.split(",");
-        return stationName;
-    }
-
-    function getstationPort(user) {
-        let stationPort = user.stationPort;
-        return stationPort;
-    }
-
-    function setLeftEcharts() {
-        let user = getLoginUser();
-        let stationName = getstationName(user);
-        let stationPort = getstationPort(user);
-
-        $.ajax({
-            type: 'POST',
-            url: '/tWimMsg/getMeiRiCheLiuLiangByStationPort',
-            dataType: 'json',
-            data: {
-                stationPort: stationPort,
-            },
-            error: function (msg) {
-                errMessage("请求UserController失败");
-            },
-            success: function (json) {
-                let list = json.list;
-                let max = json.max;
-                setEcharts(list, stationName,max)
-            }
-        });
-    }
-
-    function setEcharts(list, stationName,max) {
-        var flag = 0;
-        for (var i = 0; i < list.length; i++) {
-            flag += list[i];
-        }
-        if (flag == 0 && page_flag == 0) {
-            page_flag++;
-            toastr.error('今日无车流量');
-        }
-        let myChart = echarts.init(document.getElementById('_top'));
-        let option = initLeftOption(list, stationName,max);
-        // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
-        bindChartClick(myChart, 1);
-    }
-
-
-    //创建和初始化地图函数：
-    function initMap() {
-        createMap(); //创建地图
-        setMapEvent(); //设置地图事件
-    }
-
-    function initMarker() {
-        let lnglatStr = user.lnglat;
-        let array = "" != lnglatStr && null != lnglatStr && lnglatStr.indexOf(",") > 0 == true ? lnglatStr.split(",") : lnglatStr;
-        for (let i in array) {
-            let lng = array[i] != "" && array[i] != null && array[i].indexOf("-") > 0 ? array[i].split("-")[0] : "";
-            let lat = array[i] != "" && array[i] != null && array[i].indexOf("-") > 0 ? array[i].split("-")[1] : "";
-            addMarker(lng, lat);
-        }
-    }
-
-    function addMarker(lng, lat) {
-        let point = new BMap.Point(lng, lat);
-        let marker = new BMap.Marker(point);
-        marker = new BMap.Marker(point);
-        let sContent =
-            "<h4 style='margin:0 0 5px 0;padding:0.2em 0'>" + "" + "</h4>" + "<br/>"
-            + "";
-        let infoWindow = new BMap.InfoWindow(sContent);
-        map.addOverlay(marker);
-        marker.addEventListener("click", function () {
-            this.openInfoWindow(infoWindow);
-        });
-    }
-
-
-    var page_map;
-
-    //创建地图函数：
-    function createMap() {
-        var map = new BMap.Map("dituContent"); //在百度地图容器中创建一个地图
-        page_map = map;
-        var x = 119.605720;
-        var y = 32.989924;
-        var ggPoint = new BMap.Point(x, y);
-        // 创建点坐标
-        map.centerAndZoom(ggPoint, 5);
-        map.setMapStyle({style: 'midnight'});
-        window.map = map; //将map变量存储在全局
-    }
-
-    //地图事件设置函数：
-    function setMapEvent() {
-        map.enableDragging(); //启用地图拖拽事件，默认启用(可不写)
-        map.enableScrollWheelZoom(); //启用地图滚轮放大缩小
-        map.enableDoubleClickZoom(); //启用鼠标双击放大，默认启用(可不写)
-        map.enableKeyboard(); //启用键盘上下左右键移动地图
-
-    }
-
-    initMap(); //创建和初始化地图
-    initMarker();
-
-    <!--==========================================================下面的柱状图（当日关键车辆）===========================================-->
-
-    function setBottomEcharts() {
-        var user = getLoginUser();
-        var stationName = getstationName(user);
-        var stationPort = getstationPort(user);
-
-        $.ajax({
-            type: 'POST',
-            url: '/tWimMsg/getMeiRiGuanJianCheLiangByStationPort',
-            dataType: 'json',
-            data: {
-                stationPort: stationPort,
-            },
-            error: function (msg) {
-            },
-            success: function (json) {
-                let list = json.list;
-                let max = json.max;
-                setEcharts3(list, stationName,max);
-
-            }
-        });
-    }
-
-    function setEcharts3(list, stationName,max) {
-        var flag = 0;
-        for (var i = 0; i < list.length; i++) {
-            flag += list[i];
-        }
-        if (flag == 0 && page_flag2 == 0) {
-            page_flag2++;
-            toastr.error('今日无关键超重车辆');
-        }
-        let myChart3 = echarts.init(document.getElementById('bottom_'));
-        if (list != null && list.length != 0) {
-            let option = initDownOption(list, stationName,max);
-            // 使用刚指定的配置项和数据显示图表。
-            myChart3.setOption(option);
-        }
-        bindChartClick(myChart3, 3);
-    }
-
-    let table = $('#mainContent').dataTable({
-        "deferRender": true,
-        "processing": true,
-        "bDestroy": true,
-        "iDisplayLength": 10,
-        "searching": true,
-        "bLengthChange": false,
-        "scrollX": true,
-        "autoWidth":true,
-        'paging': true,
-
-        "oLanguage": {
-            "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
-        },
-        "columns": [
-            {"data": "stationNameRouteName"},
-            {"data": "laneNo"},
-            {"data": "plate"},
-            {"data": "licensePlateColor"},
-            {"data": "vehicleTypeName"},
-            {"data": "length"},
-            {"data": "speed"},
-            {"data": "directionName"},
-            {"data": "axlesCount"},
-            {"data": "totalWeight"},
-            {"data": "isStraddleName"},
-            {"data": "temperature"},
-            {"data": "overWeightRatio"},
-
-        ],
-        "columnDefs": [/*{
-				"class": "tcenter",
-				"targets": 0,
-				"searchable": true,
-				"render": function(data, type, full) {
-					return "<marquee scrollAmount=4  behavior=\"scroll\">"+data+"</marquee>";
-				}
-			},*/{
-            "class": "tcenter",
-            "targets": 12,
-            "searchable": true,
-            "render": function (data, type, full) {
-
-                return (data * 100) + "%";
-            }
-        }],
-        "fnDrawCallback": function () {
-            getLoginUser()
-        },
-        "order": [[0, 'asc']],
-        "oLanguage": { //国际化配置
-            "sProcessing": "正在获取数据，请稍后...",
-            "sLengthMenu": "显示 _MENU_ 条",
-            "sZeroRecords": "查询不到相关数据",
-            "sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
-            "sInfoEmpty": "记录数为0",
-            "sInfoFiltered": "(全部记录数 _MAX_ 条)",
-            "sInfoPostFix": "",
-            "sSearch": "搜索",
-            "sUrl": "",
-            "oPaginate": {
-                "sFirst": "第一页",
-                "sPrevious": "上一页",
-                "sNext": "下一页",
-                "sLast": "最后一页"
-            }
-        },
-
-    });
-    $.fn.dataTable.ext.errMode = 'none';       //屏蔽掉报错弹窗
-
 
 </script>
 
