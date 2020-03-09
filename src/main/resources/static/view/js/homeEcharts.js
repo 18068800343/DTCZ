@@ -13,6 +13,7 @@ let bindChartClick = (e, d) => {
 }
 
 
+
 let initHomeMap = (lngLats)=>{
     let geoCoordData = {};
     let markPointData = [];
@@ -58,7 +59,7 @@ let initHomeMap = (lngLats)=>{
                 tooltip: {
                     trigger: 'item',
                     //formatter:'dede{b}'
-                    formatter: function(param) {}
+                    formatter: '{b}'
                 },
                 legend: {
                     orient: 'vertical',
@@ -89,7 +90,7 @@ let initHomeMap = (lngLats)=>{
                     },
                     data: [],
                     geoCoord: geoCoordData,
-
+                  
                     markPoint: {
                         symbol: 'emptyCircle',
                         symbolSize: 15,
@@ -111,7 +112,8 @@ let initHomeMap = (lngLats)=>{
                     }
 
                 }]
-            }
+            },
+            
 
 
 
