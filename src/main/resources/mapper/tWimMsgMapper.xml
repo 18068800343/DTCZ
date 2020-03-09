@@ -212,7 +212,7 @@
 
                         FROM
                             t_vehicle_msg_today a
-                        RIGHT JOIN station_site b ON a.Station_IP = b.Station_Port AND a.Over_Weight>0 AND date(a.Evt_Time) = curdate()
+                        RIGHT JOIN station_site b ON a.Station_IP = b.Station_Port AND a.Over_Weight>0 AND date(a.Evt_Time) = curdate() and a.Total_Weight &lt;(SELECT Crux_Weight FROM crux_weight  WHERE Del_State = 1 AND lv = 2)
                         <if test="link!=null and link!=''">
                             and b.link #{link}
                         </if>
@@ -399,16 +399,10 @@
                         <if test="link!=null and link!=''">
                             and b.link #{link}
                         </if>
-                        AND a.Total_Weight >= (
-                            SELECT
-                                Crux_Weight
-                            FROM
-                                crux_weight w
-                            WHERE
-                                Del_State = 1
-                            AND w.lv = #{lv1}
 
-                        )
+                        AND
+                            a.Total_Weight>=(SELECT Crux_Weight FROM crux_weight w  WHERE  Del_State = 1 AND w.lv = #{lv1} )
+                            and a.Total_Weight &lt; (SELECT Crux_Weight FROM crux_weight w  WHERE  Del_State = 1 AND w.lv = #{lv2} )
                         GROUP BY
                             b.Station_Port
                         HAVING
