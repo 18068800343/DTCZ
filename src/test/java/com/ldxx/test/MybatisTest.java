@@ -2,6 +2,8 @@ package com.ldxx.test;
 
 
 
+import com.ldxx.util.SerializeUtil;
+import com.ldxx.vo.tWimMsgVo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +38,16 @@ public class MybatisTest {
 		jedis.set("color","red");
 		String color = jedis.get("color");
 		System.out.println(color);
+		tWimMsgVo tWimMsgVo = new tWimMsgVo();
+		tWimMsgVo.setDirection(1);
+		tWimMsgVo.setDirectionName("上行");
+		jedis.set("key2".getBytes(), SerializeUtil.serialize(tWimMsgVo));
+		byte[] personbyte1 = jedis.get(("key2").getBytes());
+		tWimMsgVo p1 = (tWimMsgVo) SerializeUtil.unserialize(personbyte1);
+		System.out.println(p1.getDirectionName());
 	}
 
 	public static void main(String[] args) {
+
 	}
 }

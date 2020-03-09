@@ -4,13 +4,14 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.xml.crypto.Data;
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
 
 /**
  * 2.2.	动态称重信息表
  */
-public class tWimMsg {
+public class tWimMsg implements Serializable {
     private String idLocal;
     private String id;
     //站点Id
