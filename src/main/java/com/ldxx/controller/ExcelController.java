@@ -51,7 +51,7 @@ public class ExcelController {
         titles.add("时间");
         data.setTitles(titles);
 
-        TongJiTableQuery tongJiTableQuery = (TongJiTableQuery) redisServiceImpl.get("tongJiTableQuery");
+        TongJiTableQuery tongJiTableQuery = (TongJiTableQuery) session.getAttribute("tongJiTableQuery");
         tongJiTableQuery.setStart(null);
         tongJiTableQuery.setLength(null);
         List<tWimMsgVo> list = tWimMsgService.getAlltWimMsgByConditionByPage(tongJiTableQuery);

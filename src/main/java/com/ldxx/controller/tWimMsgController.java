@@ -155,8 +155,8 @@ public class tWimMsgController {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        session.setAttribute("vo2",tongJiTableQuery);
-        redisServiceImpl.set("tongJiTableQuery",tongJiTableQuery);
+        session.setAttribute("tongJiTableQuery",tongJiTableQuery);
+        /*redisServiceImpl.set("tongJiTableQuery",tongJiTableQuery);*/
         //TongJiTableQuery tongJiTableQuery1 = (TongJiTableQuery) redisServiceImpl.get("tongJiTableQuery");
         threadPoolExecutor.shutdown();
         return pd;
