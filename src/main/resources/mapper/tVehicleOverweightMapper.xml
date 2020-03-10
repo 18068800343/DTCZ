@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldxx.dao.tVehicleOverweightDao" >
+
+	<select id="getMeiRiChaoZaiShujuByStationPort" resultType="tWimMsgVo">
+		SELECT CASE a.Direction WHEN 0 THEN '正常行驶'
+		ELSE '逆行'
+		END as directionName,
+		CASE a.Is_Straddle WHEN 0 THEN '否'
+		ELSE '是'
+		end as isStraddleName,
+		CASE a.Lane_No WHEN 1 THEN '超车道'
+		WHEN 2 THEN '行车道'
+		ELSE '应急车道'
+		end as laneNoName,
+		CASE WHEN a.Over_Weight_Ratio>0 THEN '超重'
+		ELSE '不超重'
+		end as overWeightRatioName,
+		a.*,b.Station_Name,b.Route_Name,
+		c.License_Plate_Color,d.Vehicle_Type_Name
+		from (select a.* from t_vehicle_overweight_temp a where date(Evt_Time) = curdate() and Over_Weight>0 and  a.Total_Weight &lt;(SELECT Crux_Weight FROM crux_weight  WHERE Del_State = 1 AND lv = 2) and
+			FIND_IN_SET(a.Station_IP ,#{stationPorts}) ORDER BY a.Evt_Time desc
+		) a
+		LEFT JOIN station_site b on a.Station_IP=b.Station_Port
+		LEFT JOIN license_plate c ON a.Plate_Color=c.License_Plate_No
+		LEFT JOIN vehicle_type d ON a.Class_Index=d.Vehicle_Type_No
+
+	</select>
+
+
+	<select id="getMeiRiGuanJianChaoZHongShujuByStationPort" resultType="tWimMsgVo">
+		SELECT CASE a.Direction WHEN 0 THEN '正常行驶'
+		ELSE '逆行'
+		END as directionName,
+		CASE a.Is_Straddle WHEN 0 THEN '否'
+		ELSE '是'
+		end as isStraddleName,
+		CASE a.Lane_No WHEN 1 THEN '超车道'
+		WHEN 2 THEN '行车道'
+		ELSE '应急车道'
+		end as laneNoName,
+		CASE WHEN a.Over_Weight_Ratio>0 THEN '超重'
+		ELSE '不超重'
+		end as overWeightRatioName,
+		a.*,b.Station_Name,b.Route_Name,
+		c.License_Plate_Color,d.Vehicle_Type_Name
+		from (select a.* from t_vehicle_overweight_temp a
+		where date(Evt_Time) = curdate() and
+		<if test="lv==2">
+			Total_Weight>=(SELECT Crux_Weight FROM crux_weight where Del_State=1 AND lv = #{lv})and
+			Total_Weight &lt;(SELECT Crux_Weight FROM crux_weight where Del_State=1 AND lv = 3) and
+		</if>
+		<if test="lv==3">
+			Total_Weight >=(SELECT Crux_Weight FROM crux_weight where Del_State=1 AND lv = #{lv}) and
+		</if>
+		FIND_IN_SET(a.Station_IP ,#{stationPorts}) ORDER BY a.Evt_Time desc
+		) a
+		LEFT JOIN station_site b on a.Station_IP=b.Station_Port
+		LEFT JOIN license_plate c ON a.Plate_Color=c.License_Plate_No
+		LEFT JOIN vehicle_type d ON a.Class_Index=d.Vehicle_Type_No
+	</select>
+
+	
+	<insert id="addtVehicleOverweight" parameterType="tWimMsgVo">
+		insert into t_vehicle_overweight(id_local,Id,Station_Id, Evt_Time, Msg_Time, Lane_No, Plate, Plate_Color, Class_Index, Length, Speed,
+			Direction, Axles_Count, Total_Weight, Axle1, Axle2, Axle3, Axle4, Axle5, Axle6, Axle7, Axle8, Axle9, Axle10, Axle_space1, Axle_space2,
+			Axle_space3, Axle_space4, Axle_space5, Axle_space6, Axle_space7, Axle_space8, Axle_space9, Is_Straddle, Temperature, Over_Weight, Over_Weight_Ratio,
+		 	WIM_Id, LPR_id, Station_IP) values(#{idLocal},#{id},#{stationId},#{evtTime},#{msgTime},#{laneNo},#{plate},#{plateColor},#{classIndex},#{length},#{speed},
+		 	#{direction},#{axlesCount},#{totalWeight},#{axle1},#{axle2},#{axle3},#{axle4},#{axle5},#{axle6},#{axle7},#{axle8},#{axle9},#{axle10},#{axleSpace1},#{axleSpace2},
+		 	#{axleSpace3},#{axleSpace4},#{axleSpace5},#{axleSpace6},#{axleSpace7},#{axleSpace8},#{axleSpace9},#{isStraddle},#{temperature},#{overWeight},#{overWeightRatio},
+		 	#{wIMId},#{lPRId},#{stationIP})
+	</insert>
+
+	<select id="getidLocalBystationPorts" resultType="tWimMsgVo">
+		select a.id_local from t_vehicle_overweight_temp a where date(Evt_Time) = curdate() and Over_Weight>0 and  a.Total_Weight &lt;(SELECT Crux_Weight FROM crux_weight  WHERE Del_State = 1 AND lv = 2) and
+		FIND_IN_SET(a.Station_IP ,#{stationPorts}) ORDER BY a.Evt_Time desc
+	</select>
+
+	<!--<insert id="addtVehicleOverweightList" parameterType="java.util.List">
+		insert into t_vehicle_overweight(id_local,Id,Station_Id, Evt_Time, Msg_Time, Lane_No, Plate, Plate_Color, Class_Index, Length, Speed,
+		Direction, Axles_Count, Total_Weight, Axle1, Axle2, Axle3, Axle4, Axle5, Axle6, Axle7, Axle8, Axle9, Axle10, Axle_space1, Axle_space2,
+		Axle_space3, Axle_space4, Axle_space5, Axle_space6, Axle_space7, Axle_space8, Axle_space9, Is_Straddle, Temperature, Over_Weight, Over_Weight_Ratio,
+		WIM_Id, LPR_id, Station_IP) values
+		<foreach collection="tWimMsgVoList" item="item" index="index" separator=",">
+			(#{item.idLocal},#{item.id},#{item.stationId},#{item.evtTime},#{item.msgTime},#{item.laneNo},#{item.plate},#{item.plateColor},#{item.classIndex},#{item.length},#{item.speed},
+			#{item.direction},#{item.axlesCount},#{item.totalWeight},#{item.axle1},#{item.axle2},#{item.axle3},#{item.axle4},#{item.axle5},#{item.axle6},#{item.axle7},#{item.axle8},#{item.axle9},#{item.axle10},#{item.axleSpace1},#{item.axleSpace2},
+			#{item.axleSpace3},#{item.axleSpace4},#{item.axleSpace5},#{item.axleSpace6},#{item.axleSpace7},#{item.axleSpace8},#{item.axleSpace9},#{item.isStraddle},#{item.temperature},#{item.overWeight},#{item.overWeightRatio},
+			#{item.wIMId},#{item.lPRId},#{item.stationIP})
+		</foreach>
+	</insert>-->
+	<insert id="addtVehicleOverweightList" parameterType="String">
+		insert into t_vehicle_overweight select * from t_vehicle_overweight_temp a where date(a.Evt_Time) = curdate() and a.Over_Weight>0 and  a.Total_Weight &lt;(SELECT Crux_Weight FROM crux_weight  WHERE Del_State = 1 AND lv = 2) and
+		FIND_IN_SET(a.Station_IP ,#{stationPorts})
+	</insert>
+
+
+	<delete id="delVehicleOverweightTemp" parameterType="java.util.List" >
+		delete from t_vehicle_overweight_temp where id_local in
+		<foreach collection="tWimMsgVoList" item="item" index="index" open="(" separator="," close=")">
+			#{item.idLocal}
+		</foreach>
+	</delete>
+
+
+	<select id="getMeiRiChaoZaiShujuByStationPortAlreadychuli" resultType="tWimMsgVo">
+		SELECT CASE a.Direction WHEN 0 THEN '正常行驶'
+		ELSE '逆行'
+		END as directionName,
+		CASE a.Is_Straddle WHEN 0 THEN '否'
+		ELSE '是'
+		end as isStraddleName,
+		CASE a.Lane_No WHEN 1 THEN '超车道'
+		WHEN 2 THEN '行车道'
+		ELSE '应急车道'
+		end as laneNoName,
+		CASE WHEN a.Over_Weight_Ratio>0 THEN '超重'
+		ELSE '不超重'
+		end as overWeightRatioName,
+		a.*,b.Station_Name,b.Route_Name,
+		c.License_Plate_Color,d.Vehicle_Type_Name
+		from (select a.* from t_vehicle_overweight a where date(Evt_Time) = curdate() and Over_Weight>0 and  a.Total_Weight &lt;(SELECT Crux_Weight FROM crux_weight  WHERE Del_State = 1 AND lv = 2) and
+			FIND_IN_SET(a.Station_IP ,#{stationPorts}) ORDER BY a.Evt_Time desc
+		) a
+		LEFT JOIN station_site b on a.Station_IP=b.Station_Port
+		LEFT JOIN license_plate c ON a.Plate_Color=c.License_Plate_No
+		LEFT JOIN vehicle_type d ON a.Class_Index=d.Vehicle_Type_No
+
+	</select>
+
+
+	<select id="getMeiRiGuanJianChaoZHongShujuByStationPortAlreadychuli" resultType="tWimMsgVo">
+		SELECT CASE a.Direction WHEN 0 THEN '正常行驶'
+		ELSE '逆行'
+		END as directionName,
+		CASE a.Is_Straddle WHEN 0 THEN '否'
+		ELSE '是'
+		end as isStraddleName,
+		CASE a.Lane_No WHEN 1 THEN '超车道'
+		WHEN 2 THEN '行车道'
+		ELSE '应急车道'
+		end as laneNoName,
+		CASE WHEN a.Over_Weight_Ratio>0 THEN '超重'
+		ELSE '不超重'
+		end as overWeightRatioName,
+		a.*,b.Station_Name,b.Route_Name,
+		c.License_Plate_Color,d.Vehicle_Type_Name
+		from (select a.* from t_vehicle_overweight a
+		where date(Evt_Time) = curdate() and
+		<if test="lv==2">
+			Total_Weight>=(SELECT Crux_Weight FROM crux_weight where Del_State=1 AND lv = #{lv})and
+			Total_Weight &lt;(SELECT Crux_Weight FROM crux_weight where Del_State=1 AND lv = 3) and
+		</if>
+		<if test="lv==3">
+			Total_Weight >=(SELECT Crux_Weight FROM crux_weight where Del_State=1 AND lv = #{lv}) and
+		</if>
+		FIND_IN_SET(a.Station_IP ,#{stationPorts}) ORDER BY a.Evt_Time desc
+		) a
+		LEFT JOIN station_site b on a.Station_IP=b.Station_Port
+		LEFT JOIN license_plate c ON a.Plate_Color=c.License_Plate_No
+		LEFT JOIN vehicle_type d ON a.Class_Index=d.Vehicle_Type_No
+	</select>
+</mapper>

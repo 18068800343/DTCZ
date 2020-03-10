@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <link rel="stylesheet" href="../font2/iconfont.css">
+    <link href="../style/bootstrap.min.css" rel="stylesheet">
+    <link href="../style/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="../style/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="../style/jquery-editable-select.css">
+    <link href="../font3/bootstrap-select.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+    <link rel="stylesheet"  href="css/layui.css" />
+    <link rel="stylesheet"  href="css/toastr.css"/>
+    <style lang="">
+        body{
+            background: #fff;
+        }
+        .UpperPart{
+            display: flex;
+            justify-content:space-between;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 12px;
+        }
+        .selected{
+            background: rgba(247, 161, 3,0.2);
+        }
+        #mainContent th{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body style="background-image: none;width: 90%;margin-left: 10%;">
+
+<div class="layui-tab" >
+    <ul class="layui-tab-title labelli">
+        <li class="layui-this labelthis">一级预警</li>
+        <li onclick="initTable2()">二级预警</li>
+        <li onclick="initTable3()">三级预警</li>
+    </ul>
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+                    <div class="UpperPart">
+                        <div class="UpperPartL" style="width: 10%">
+                            <select class="form-control"  id="chuli_state" style="width:80%;">
+                                    <option value="0">未处理</option>
+                                    <option value="1">已处理</option>
+                                </select>
+                        </div>
+                        <div class="UpperPartR">
+                            <button type="button" class="btn btn-primary" style="float: right;margin-right: 10%;" onclick="pichuli()">批处理</button>
+                        </div>
+                    </div>
+                    <div class="LowerPart" style="margin-top:3px;">
+                        <table class="table  table-condensed table-hover" id="mainContent">
+                            <thead>
+                            <tr>
+                                <th style="width: 10%">站点</th>
+                                <th>车道号</th>
+                                <th>长(cm)</th>
+                                <th>车速(Km/h)</th>
+                                <th>轴数</th>
+                                <th>总重量(Kg)</th>
+                                <th>路面温度(°C)</th>
+                                <th>超重比率</th>
+                                <th style="width: 10%">时间</th>
+                                <th>图片</th>
+                                <th style="width: 5%">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                <div>
+                </div>
+        </div>
+
+        <div class="layui-tab-item">
+            <div class="UpperPart">
+                <div class="UpperPartL">
+                </div>
+                <div class="UpperPartR">
+                </div>
+            </div>
+            <div class="LowerPart" style="margin-top:3px;">
+                <table class="table  table-condensed table-hover" id="mainContent2" style="width: 100%">
+                    <thead>
+                    <tr>
+                        <th style="width: 10%">站点</th>
+                        <th>车道号</th>
+                        <th>长(cm)</th>
+                        <th>车速(Km/h)</th>
+                        <th>轴数</th>
+                        <th>总重量(Kg)</th>
+                        <th>路面温度(°C)</th>
+                        <th>超重比率</th>
+                        <th style="width: 10%">时间</th>
+                        <th>图片</th>
+                        <th style="width: 5%">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="layui-tab-item">
+            <div class="UpperPart">
+                <div class="UpperPartL">
+                </div>
+                <div class="UpperPartR">
+                </div>
+            </div>
+            <div class="LowerPart" style="margin-top:3px;">
+                <table class="table  table-condensed table-hover" id="mainContent3" style="width: 100%">
+                    <thead>
+                    <tr>
+                        <th style="width: 10%">站点</th>
+                        <th>车道号</th>
+                        <th>长(cm)</th>
+                        <th>车速(Km/h)</th>
+                        <th>轴数</th>
+                        <th>总重量(Kg)</th>
+                        <th>路面温度(°C)</th>
+                        <th>超重比率</th>
+                        <th style="width: 10%">时间</th>
+                        <th>图片</th>
+                        <th style="width: 5%">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- allMsg -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg1">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" ><b>详细信息</b></h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <form class="form-inline">
+                        <table class="table table-bordered table-condensed" style="height: auto;">
+                            <tr>
+                                <td>站点</td>
+                                <td>{{stationName}}</td>
+                                <td>通行时间</td>
+                                <td>{{evtTime}}</td>
+                            </tr>
+                            <tr>
+                                <td>打包时间</td>
+                                <td>{{msgTime}}</td>
+                                <td>车道号</td>
+                                <td>{{laneNo}}</td>
+                            </tr>
+                            <tr>
+                                <td>车牌号</td>
+                                <td>{{plate}}</td>
+                                <td>车牌颜色</td>
+                                <td>{{licensePlateColor}}</td>
+                            </tr>
+                            <tr>
+                                <td>车型</td>
+                                <td>{{vehicleTypeName}}</td>
+                                <td>车长(cm)</td>
+                                <td>{{length}}</td>
+                            </tr>
+                            <tr>
+                                <td>车速(Km/h)</td>
+                                <td>{{speed}}</td>
+                                <td>行驶方向</td>
+                                <td>{{directionName}}</td>
+                            </tr>
+                            <tr>
+                                <td>轴数</td>
+                                <td>{{axlesCount}}</td>
+                                <td>总重量(kg)</td>
+                                <td>{{totalWeight}}</td>
+                            </tr>
+                            <tr>
+                                <td>轴1重(kg)</td>
+                                <td>{{axle1}}</td>
+                                <td>轴2重(kg)</td>
+                                <td>{{axle2}}</td>
+                            </tr>
+                            <tr>
+                                <td>轴3重(kg)</td>
+                                <td>{{axle3}}</td>
+                                <td>轴4重(kg)</td>
+                                <td>{{axle4}}</td>
+                            </tr>
+                            <tr>
+                                <td>轴5重(kg)</td>
+                                <td>{{axle5}}</td>
+                                <td>轴6重(kg)</td>
+                                <td>{{axle6}}</td>
+                            </tr>
+                            <tr>
+                                <td>轴7重(kg)</td>
+                                <td>{{axle7}}</td>
+                                <td>轴8重(kg)</td>
+                                <td>{{axle8}}</td>
+                            </tr>
+                            <tr>
+                                <td>轴9重(kg)</td>
+                                <td>{{axle9}}</td>
+                                <td>轴10重(kg)</td>
+                                <td>{{axle10}}</td>
+                            </tr>
+                            <tr>
+                                <td>轴间距1(cm)</td>
+                                <td>{{axleSpace1}}</td>
+                                <td>轴间距2(cm)</td>
+                                <td>{{axleSpace2}}</td>
+                            </tr>
+                            <tr>
+                                <td>轴间距3(cm)</td>
+                                <td>{{axleSpace3}}</td>
+                                <td>轴间距4(cm)</td>
+                                <td>{{axleSpace4}}</td>
+                            </tr>
+                            <tr>
+                                <td>轴间距5(cm)</td>
+                                <td>{{axleSpace5}}</td>
+                                <td>轴间距6(cm)</td>
+                                <td>{{axleSpace6}}</td>
+                            </tr>
+                            <tr>
+                                <td>轴间距7(cm)</td>
+                                <td>{{axleSpace7}}</td>
+                                <td>轴间距8(cm)</td>
+                                <td>{{axleSpace8}}</td>
+                            </tr>
+                            <tr>
+                                <td>轴间距9(cm)</td>
+                                <td>{{axleSpace9}}</td>
+                                <td>是否跨道</td>
+                                <td>{{isStraddleName}}</td>
+                            </tr>
+                            <tr>
+                                <td>路面温度(°C)</td>
+                                <td>{{temperature}}</td>
+                                <td>超重量( Kg)</td>
+                                <td>{{overWeightRatio}}</td>
+                            </tr>
+                            <tr>
+                                <td>超重比率</td>
+                                <td>{{overWeightRatioName}}</td>
+                            </tr>
+                        </table>
+                        <div>
+                            <div>
+                                <!--<img id="chepaiImg" src="http://39.98.234.187:7777/port10002/89dd21e021724fe2b4a3d37df82e5ea9-PlateImg.jpg" class="popup" />-->
+                                <img id="chepaiImg" src="" />
+                            </div>
+                            <div id="chebodyDiv">
+                                <!--<img id="chebodyImg" src="http://39.98.234.187:7777/port10002/ea8a05a71b17401c8ea7018cf4e5d5bd-Image.jpg" class="popup" />-->
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" @click="querenchuli">确认处理</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<script src="../js/jquery.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+<!--<script src="../js/bootstrap-select.js" ></script>-->
+<script src="js/laydate/laydate.js"></script>
+<script src="../js/common-scripts.js"></script>
+<script src="js/layui.js" charset="utf-8"></script>
+<script src="js/element.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/jquery-editable-select.js" ></script>
+<script src="js/toastr.js" ></script>
+<script src="../js/jquery-form.min.js"></script>
+<script src="js/quanxian.js"></script>
+<script src="../js/myTool.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+<!--导出CSV开始-->
+<script src="js/datatables/jquery.dataTables.min.js"></script>
+<script src="js/datatables/dataTables.colVis.min.js"></script>
+<script src="js/datatables/dataTables.tableTools.min.js"></script>
+<script src="js/datatables/datatables.responsive.min.js"></script>
+<script src="js/datatables/dataTables.buttons.min.js" ></script>
+<script src="js/datatables/buttons.html5.min.js" ></script>
+<script src="js/datatables/buttons.flash.min.js" ></script>
+<script src="js/datatables/jszip.min.js"></script>
+<!--导出CSV结束-->
+<script>
+
+    $(document).ready( function () {
+
+        $("#chuli_state").trigger('change')
+    });
+    var table=$('#mainContent').dataTable({
+        "deferRender": true,
+        "processing": true,
+        "bDestroy": true,
+        "iDisplayLength": 10,
+        "searching": true,
+        "lengthChange": false,
+        "oLanguage": {
+            "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+        },
+        "columns": [
+            { "data": "stationName"},
+            { "data": "laneNoName"},
+            /*{ "data": "plate"},
+            { "data": "licensePlateColor"},*/
+            { "data": "length"},
+            { "data": "speed"},
+            { "data": "axlesCount"},
+            { "data": "totalWeight"},
+            { "data": "temperature"},
+            { "data": "overWeightRatio"},
+            {"data": "evtTime"},
+            { "data": null},
+            { "data": null},
+        ],
+        "columnDefs": [{
+            "class": "tcenter",
+            "targets": 10,
+            "searchable": true,
+            "render": function(data, type, full) {
+                var look='<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" onclick="lookMs(this)" data-toggle="modal" data-target="#allMsg1" id="lookDetall"></i>'
+                return look;
+                }
+            },{
+            "class": "tcenter",
+            "targets": 7,
+            "searchable": true,
+            "render": function(data, type, full) {
+                return (data*100)+"%";
+            }
+        },{
+            "class": "tcenter",
+            "targets": 9,
+            "searchable": true,
+            "render": function(data, type, full) {
+                var url
+                $.ajax({
+                    type: 'POST',
+                    url: '/tVehicleOverweight/getimgUrlPrefix',
+                    dataType: 'json',
+                    async:false,
+                    data: {
+                    },
+                    success: function (json) {
+                        url="<img src='http://"+json.imgUrlPrefix+"/port"+full.stationIP+"/"+full.idLocal+"-PlateImg.jpg'  width='50' height='40'/>"
+                    }
+                });
+                return url;
+            }
+        }
+        ],"fnDrawCallback" : function() {
+            initTableQuanxian()
+        },
+        "order": [[2, 'desc']],
+        "oLanguage": { //国际化配置
+            "sProcessing": "正在获取数据，请稍后...",
+            "sLengthMenu": "显示 _MENU_ 条",
+            "sZeroRecords": "查询不到相关数据",
+            "sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
+            "sInfoEmpty": "记录数为0",
+            "sInfoFiltered": "(全部记录数 _MAX_ 条)",
+            "sInfoPostFix": "",
+            "sSearch": "搜索",
+            "sUrl": "",
+            "oPaginate": {
+                "sFirst": "第一页",
+                "sPrevious": "上一页",
+                "sNext": "下一页",
+                "sLast": "最后一页"
+            }},
+
+    });
+
+
+    var table2=$('#mainContent2').dataTable({
+        "deferRender": true,
+        "processing": true,
+        "bDestroy": true,
+        "iDisplayLength": 10,
+        "searching": true,
+        "lengthChange": false,
+        "oLanguage": {
+            "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+        },
+        "columns": [
+            { "data": "stationName"},
+            { "data": "laneNoName"},
+            /*{ "data": "plate"},
+            { "data": "licensePlateColor"},*/
+            { "data": "length"},
+            { "data": "speed"},
+            { "data": "axlesCount"},
+            { "data": "totalWeight"},
+            { "data": "temperature"},
+            { "data": "overWeightRatio"},
+            {"data": "evtTime"},
+            { "data": null},
+            { "data": null},
+        ],
+        "columnDefs": [{
+            "class": "tcenter",
+            "targets": 10,
+            "searchable": true,
+            "render": function(data, type, full) {
+                var look='<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" onclick="lookMs2(this)" data-toggle="modal" data-target="#allMsg1"></i>'
+                return look;
+            }
+        },{
+            "class": "tcenter",
+            "targets": 7,
+            "searchable": true,
+            "render": function(data, type, full) {
+                return (data*100)+"%";
+            }
+        },{
+            "class": "tcenter",
+            "targets": 9,
+            "searchable": true,
+            "render": function(data, type, full) {
+                var url
+                $.ajax({
+                    type: 'POST',
+                    url: '/tVehicleOverweight/getimgUrlPrefix',
+                    dataType: 'json',
+                    async:false,
+                    data: {
+                    },
+                    success: function (json) {
+                        url="<img src='http://"+json.imgUrlPrefix+"/port"+full.stationIP+"/"+full.idLocal+"-PlateImg.jpg'  width='50' height='40'/>"
+                    }
+                });
+                return url;
+            }
+        }],"fnDrawCallback" : function() {
+            initTableQuanxian()
+        },
+        "order": [[2, 'desc']],
+        "oLanguage": { //国际化配置
+            "sProcessing": "正在获取数据，请稍后...",
+            "sLengthMenu": "显示 _MENU_ 条",
+            "sZeroRecords": "查询不到相关数据",
+            "sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
+            "sInfoEmpty": "记录数为0",
+            "sInfoFiltered": "(全部记录数 _MAX_ 条)",
+            "sInfoPostFix": "",
+            "sSearch": "搜索",
+            "sUrl": "",
+            "oPaginate": {
+                "sFirst": "第一页",
+                "sPrevious": "上一页",
+                "sNext": "下一页",
+                "sLast": "最后一页"
+            }},
+
+    });
+    var table3=$('#mainContent3').dataTable({
+        "deferRender": true,
+        "processing": true,
+        "bDestroy": true,
+        "iDisplayLength": 10,
+        "searching": true,
+        "lengthChange": false,
+        "oLanguage": {
+            "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+        },
+        "columns": [
+            { "data": "stationName"},
+            { "data": "laneNoName"},
+            /*{ "data": "plate"},
+            { "data": "licensePlateColor"},*/
+            { "data": "length"},
+            { "data": "speed"},
+            { "data": "axlesCount"},
+            { "data": "totalWeight"},
+            { "data": "temperature"},
+            { "data": "overWeightRatio"},
+            {"data": "evtTime"},
+            { "data": null},
+            { "data": null},
+        ],
+        "columnDefs": [{
+            "class": "tcenter",
+            "targets": 10,
+            "searchable": true,
+            "render": function(data, type, full) {
+                var look='<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" onclick="lookMs3(this)" data-toggle="modal" data-target="#allMsg1"></i>'
+                return look;
+            }
+        },{
+            "class": "tcenter",
+            "targets": 7,
+            "searchable": true,
+            "render": function(data, type, full) {
+                return (data*100)+"%";
+            }
+        },{
+            "class": "tcenter",
+            "targets": 9,
+            "searchable": true,
+            "render": function(data, type, full) {
+                var url
+                $.ajax({
+                    type: 'POST',
+                    url: '/tVehicleOverweight/getimgUrlPrefix',
+                    dataType: 'json',
+                    async:false,
+                    data: {
+                    },
+                    success: function (json) {
+                        url="<img src='http://"+json.imgUrlPrefix+"/port"+full.stationIP+"/"+full.idLocal+"-PlateImg.jpg'  width='50' height='40'/>"
+                    }
+                });
+                return url;
+            }
+        }],"fnDrawCallback" : function() {
+            initTableQuanxian()
+        },
+        "order": [[2, 'desc']],
+        "oLanguage": { //国际化配置
+            "sProcessing": "正在获取数据，请稍后...",
+            "sLengthMenu": "显示 _MENU_ 条",
+            "sZeroRecords": "查询不到相关数据",
+            "sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
+            "sInfoEmpty": "记录数为0",
+            "sInfoFiltered": "(全部记录数 _MAX_ 条)",
+            "sInfoPostFix": "",
+            "sSearch": "搜索",
+            "sUrl": "",
+            "oPaginate": {
+                "sFirst": "第一页",
+                "sPrevious": "上一页",
+                "sNext": "下一页",
+                "sLast": "最后一页"
+            }},
+
+    });
+
+    function showMask() {
+        myTool.mask.show('查询中...');
+    }
+    function hidMask() {
+        myTool.mask.hide();
+    }
+
+    function initTableQuanxian(){
+        $.ajax({
+            type:"post",
+            url:"/login/getUser",
+            async:false,
+            data:{
+            },
+            success:function(json){
+                if(json!=null &&json!=""){
+                    var arr = json.usrPersmissionCoding.split(',');
+                    for(var i=0;i<arr.length;i++){
+                        if(arr[i].indexOf("Pja") >= 0 ){
+                            $(".Pja").show();
+                        }
+                        if(arr[i].indexOf("Pjb") >= 0 ){
+                            $(".Pjb").show();
+                        }
+                        if(arr[i].indexOf("Pjc") >= 0 ){
+                            $(".Pjc").show();
+                        }
+                        if(arr[i].indexOf("Pjd") >= 0 ){
+                            $(".Pjd").show();
+                        }
+                        if(arr[i].indexOf("Pje") >= 0 ){
+                            $(".Pje").show();
+                        }
+                        if(arr[i].indexOf("Pjf") >= 0 ){
+                            $(".Pjf").show();
+                        }
+                    }
+
+                }
+
+            }
+        });
+    }
+
+
+    $("#chuli_state").change(function(){
+        if($("#chuli_state").val()==0){
+            url='/tVehicleOverweight/getMeiRiChaoZaiShujuByStationPort'
+            initTable(url)
+        }else{
+            url='/tVehicleOverweight/getMeiRiChaoZaiShujuByStationPortAlreadychuli'
+            initTable(url)
+        }
+    })
+    function initTable(url){
+        showMask()
+        $.ajax({
+            type: 'POST',
+            url: url,
+            dataType: 'json',
+            data: {
+            },
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                hidMask()
+                $('#mainContent').dataTable().fnClearTable();
+                $('#mainContent').DataTable().rows.add(json).draw(false);
+            }
+        });
+    }
+
+
+
+
+
+    function initTable2(){
+        $.ajax({
+            type: 'POST',
+            url: '/tVehicleOverweight/getMeiRiGuanJianChaoZHongShujuByStationPort',
+            dataType: 'json',
+            data: {
+                lv:2,
+            },
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                $('#mainContent2').dataTable().fnClearTable();
+                $('#mainContent2').DataTable().rows.add(json).draw(false);
+            }
+        });
+    }
+
+    function initTable3(){
+        $.ajax({
+            type: 'POST',
+            url: '/tVehicleOverweight/getMeiRiGuanJianChaoZHongShujuByStationPort',
+            dataType: 'json',
+            data: {
+                lv:3,
+            },
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                $('#mainContent3').dataTable().fnClearTable();
+                $('#mainContent3').DataTable().rows.add(json).draw(false);
+            }
+        });
+    }
+
+    var looktWimMsg = new Vue({
+        el: '#allMsg1',
+        //表单数据
+        data: {
+            idLocal:"",
+            id:"",
+            stationId:"",
+            evtTime:"",
+            msgTime:"",
+            laneNo:"",
+            plate:"",
+            plateColor:"",
+            classIndex:"",
+            length:"",
+            speed:"",
+            direction:"",
+            axlesCount:"",
+            totalWeight:'',
+            wetmixingtimedeviation:'',
+            axle1:'',
+            axle2:'',
+            axle3:'',
+            axle4:'',
+            axle5:'',
+            axle6:'',
+            axle7:'',
+            axle8:'',
+            axle9:'',
+            axle10:'',
+            axleSpace1:'',
+            axleSpace2:'',
+            axleSpace3:'',
+            axleSpace4:'',
+            axleSpace5:'',
+            axleSpace6:'',
+            axleSpace7:'',
+            axleSpace8:'',
+            axleSpace9:'',
+            isStraddle:'',
+            temperature:'',
+            overWeight:'',
+            overWeightRatio:'',
+            wIMId:'',
+            lPRId:'',
+            stationIP:'',
+            stationNameRouteName:'',
+            directionName:'',
+            isStraddleName:'',
+            stationName:'',
+            routeName:'',
+            licensePlateColor:'',
+            vehicleTypeName:'',
+        },
+        methods: {
+            querenchuli:function(){
+                this.$http.post('/tVehicleOverweight/addtVehicleOverweight',this._data,{}).then((res)=>{
+                    var resMsg = res.body;
+                    if(resMsg.daoMsg>0){
+                        $('#mainContent').DataTable().row(dom).remove().draw(false); //删除行立即显示
+                        $("#allMsg1").modal("hide");
+                        toastr.success(resMsg.resultMsg);
+                    }else{
+                        toastr.error(resMsg.resultMsg);
+                    }
+                },(res)=>{
+                    toastr.error("发生错误");
+                });
+            },
+        }
+    })
+    var dom ;
+    var lookMs = (e)=>{
+        dom = $(e).parents('tr');
+        let data=$('#mainContent').DataTable().row(dom).data();
+        lookxiangqing(data,1);
+    }
+    var lookMs2 = (e)=>{
+       dom = $(e).parents('tr');
+        let data=$('#mainContent2').DataTable().row(dom).data();
+        lookxiangqing(data,2);
+    }
+    var lookMs3 = (e)=>{
+        dom = $(e).parents('tr');
+        let data=$('#mainContent3').DataTable().row(dom).data();
+        lookxiangqing(data,3);
+    }
+
+    var lookxiangqing = (data,obj) =>{
+        looktWimMsg.id=data.id;
+        looktWimMsg.idLocal=data.idLocal;
+        //looktWimMsg.stationNameRouteName=data.stationNameRouteName;
+        looktWimMsg.stationId=data.stationId;
+        looktWimMsg.evtTime=data.evtTime;
+        looktWimMsg.msgTime=data.msgTime;
+        looktWimMsg.laneNo=data.laneNo;
+        looktWimMsg.plate=data.plate;
+        looktWimMsg.plateColor=data.plateColor;
+        looktWimMsg.classIndex=data.classIndex;
+        looktWimMsg.length=data.length;
+        looktWimMsg.speed=data.speed;
+        looktWimMsg.direction=data.direction;
+        looktWimMsg.axlesCount=data.axlesCount;
+        looktWimMsg.totalWeight=data.totalWeight;
+        looktWimMsg.wetmixingtimedeviation=data.wetmixingtimedeviation;
+        looktWimMsg.axle1=data.axle1;
+        looktWimMsg.axle2=data.axle2;
+        looktWimMsg.axle3=data.axle3;
+        looktWimMsg.axle4=data.axle4;
+        looktWimMsg.axle5=data.axle5;
+        looktWimMsg.axle6=data.axle6;
+        looktWimMsg.axle7=data.axle7;
+        looktWimMsg.axle8=data.axle8;
+        looktWimMsg.axle9=data.axle9;
+        looktWimMsg.axle10=data.axle10;
+        looktWimMsg.axleSpace1=data.axleSpace1;
+        looktWimMsg.axleSpace2=data.axleSpace2;
+        looktWimMsg.axleSpace3=data.axleSpace3;
+        looktWimMsg.axleSpace4=data.axleSpace4;
+        looktWimMsg.axleSpace5=data.axleSpace5;
+        looktWimMsg.axleSpace6=data.axleSpace6;
+        looktWimMsg.axleSpace7=data.axleSpace7;
+        looktWimMsg.axleSpace8=data.axleSpace8;
+        looktWimMsg.axleSpace9=data.axleSpace9;
+        looktWimMsg.isStraddle=data.isStraddle;
+        looktWimMsg.temperature=data.temperature;
+        looktWimMsg.overWeight=data.overWeight;
+        looktWimMsg.overWeightRatio=data.overWeightRatio;
+        looktWimMsg.wIMId=data.wIMId;
+        looktWimMsg.lPRId=data.lPRId;
+        looktWimMsg.stationIP=data.stationIP;
+
+        looktWimMsg.directionName=data.directionName;
+        looktWimMsg.isStraddleName=data.isStraddleName;
+        looktWimMsg.stationName=data.stationName;
+        looktWimMsg.routeName=data.routeName;
+        looktWimMsg.licensePlateColor=data.licensePlateColor;
+        looktWimMsg.vehicleTypeName=data.vehicleTypeName;
+        looktWimMsg.overWeightRatioName=data.overWeightRatio+"%";
+
+        $.ajax({
+            type: 'POST',
+            url: '/tVehicleOverweight/getimgUrlPrefix',
+            dataType: 'json',
+            data: {
+            },
+            success: function (json) {
+                var url="http://"+json.imgUrlPrefix+"/port"+data.stationIP+"/"+data.idLocal+"-PlateImg.jpg"
+                $("#chepaiImg").attr("src",url)
+                if(obj!=1){
+                    $("#chebodyDiv").html('')
+                    var url2="http://"+json.imgUrlPrefix+"/port"+data.stationIP+"/"+data.idLocal+"-Image.jpg"
+                    var img2='<img id="chebodyImg" src="'+url2+'" class="popup" style="width: 80%;" />'
+                    $("#chebodyDiv").append(img2)
+                }
+
+            }
+        });
+    }
+
+    function pichuli(){
+        $.ajax({
+            type: 'POST',
+            url: '/tVehicleOverweight/addtVehicleOverweightList',
+            dataType: 'json',
+            data: {
+            },
+            success: function (json) {
+                if(json.daoMsg>0){
+                    $('#mainContent').dataTable().fnClearTable();
+                    toastr.success(json.resultMsg);
+                }else{
+                    toastr.error(json.resultMsg);
+                }
+
+            }
+        });
+    }
+
+
+</script>
+</html>

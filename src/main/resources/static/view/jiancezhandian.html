@@ -153,9 +153,9 @@
                         <table class="table table-bordered table-condensed" id="new_accessory">
                             <thead>
                             <tr>
-                                <td style="width:10%;">附件:</td>
+                                <td style="width:10%;">车道图:</td>
                                 <td colspan="2">
-                                    <!--<button type="button" class="btn btn-primary" onclick="new_accessory()">增加附件</button>-->
+                                    <!--<button type="button" class="btn btn-primary" onclick="new_accessory()">增加车道图</button>-->
                                     <input type="file" @change="getFile($event,'file_thumb')">
                                 </td>
                             </tr>
@@ -249,9 +249,9 @@
                         <table class="table table-bordered table-condensed" id="edit_accessory">
                             <thead style="display: none">
                             <tr>
-                                <td style="width:10%;">附件:</td>
+                                <td style="width:10%;">车道图:</td>
                                 <td colspan="3">
-                                    <!--<button type="button" class="btn btn-primary" onclick="editAccessory()">添加附件</button>-->
+                                    <!--<button type="button" class="btn btn-primary" onclick="editAccessory()">添加车道图</button>-->
                                     <input type="file" @change="getFile($event,'file_thumb')">
                                 </td>
                             </tr>
@@ -614,15 +614,15 @@
                     $("#edit_accessory thead").hide()
                     for(var i=0;i<json.length;i++){
                         $("#edit_accessory tbody").append("<tr>"+
-                            "<td style='width:10%;'>附件</td>"+
+                            "<td style='width:10%;'>车道图</td>"+
                             "<td><a href='"+getLocalPath()+"/dtcz_file/"+json[i].acUrl+"' target='view_window' style='color:blue'>"+json[i].acName+"</a></td>"+
                             /* "<td colspan='2'><input type='text' class='form-control' style='width:100%;' value='"+json[i].acName+"' disabled></td>"+*/
-                            "<td style='width:150px;'><button type='button' class='btn btn-danger' data1='"+json[i].acUrl+"' data2='"+json[i].aId+"' data3='"+json[i].acName+"' onclick='delete_file(this)'>移除附件</button></td>"+
+                            "<td style='width:150px;'><button type='button' class='btn btn-danger' data1='"+json[i].acUrl+"' data2='"+json[i].aId+"' data3='"+json[i].acName+"' onclick='delete_file(this)'>移除车道图</button></td>"+
                             "</tr>");
                     }
                 }else{
                     $("#edit_accessory thead").show()
-                        /*.append("<td>附件</td>"+
+                        /*.append("<td>车道图</td>"+
                         "<td colspan=\"3\"><input type=\"file\" @change=\"getFile2($event,'file_thumb')\">"+
                         "</td>")*/
                 }
