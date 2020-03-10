@@ -1,7 +1,9 @@
 package com.ldxx.controller;
 
 import com.ldxx.bean.LicensePlate;
+import com.ldxx.bean.TongJiTableQuery;
 import com.ldxx.service.Impl.RedisServiceImpl;
+import com.ldxx.service.tWimMsgService;
 import com.ldxx.util.ExportUtils;
 import com.ldxx.vo.ExcelData;
 import com.ldxx.vo.tWimMsgVo;
@@ -18,20 +20,21 @@ import redis.clients.jedis.JedisPool;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("ExcelController")
 public class ExcelController {
-    @Autowired
-    private JedisPool jedisPool;
-
-    @Autowired
+    @Resource
     RedisServiceImpl redisServiceImpl;
 
+    @Autowired
+    tWimMsgService tWimMsgService;
+
     @RequestMapping(value = "/excel", method = RequestMethod.GET)
-    public void excel(HttpServletResponse response) throws Exception {
+    public void excel(HttpServletResponse response, HttpSession session) throws Exception {
         ExcelData data = new ExcelData();
         data.setName("hello");
         List<String> titles = new ArrayList();
@@ -47,13 +50,14 @@ public class ExcelController {
         titles.add("超重比率");
         titles.add("时间");
         data.setTitles(titles);
-        while (true){
-            List<tWimMsgVo> list = (List<tWimMsgVo>) redisServiceImpl.get("tWimMsgVos");
-            if(null!=list){
-                List<List<Object>> rows1 = new ExcelController().initRowsList(list);
-                data.setRows(rows1);
-                break;
-            }
+
+        TongJiTableQuery tongJiTableQuery = (TongJiTableQuery) redisServiceImpl.get("tongJiTableQuery");
+        tongJiTableQuery.setStart(null);
+        tongJiTableQuery.setLength(null);
+        List<tWimMsgVo> list = tWimMsgService.getAlltWimMsgByConditionByPage(tongJiTableQuery);
+        if(null!=list){
+            List<List<Object>> rows1 = new ExcelController().initRowsList(list);
+            data.setRows(rows1);
         }
         ExportUtils.exportExcel(response,"联系人表.xlsx",data);
     }
@@ -82,7 +86,6 @@ public class ExcelController {
 
     @RequestMapping("/test")
     public tWimMsgVo jedisTest(){
-        Jedis jedis = jedisPool.getResource();
 
         tWimMsgVo tWimMsgVo = new tWimMsgVo();
         tWimMsgVo.setDirection(1);

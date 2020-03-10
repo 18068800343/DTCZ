@@ -20,9 +20,6 @@ public class ExportExcelCallable implements Callable<Integer> {
     public tWimMsgService tWimMsgService;
 
     @Autowired
-    private JedisPool jedisPool;
-
-    @Autowired
     RedisServiceImpl redisServiceImpl;
 
     public static ExportExcelCallable pageCountCallable;
@@ -33,21 +30,20 @@ public class ExportExcelCallable implements Callable<Integer> {
     public void init(){
         pageCountCallable = this;
         pageCountCallable.tWimMsgService = this.tWimMsgService;
-        pageCountCallable.jedisPool = this.jedisPool;
         pageCountCallable.redisServiceImpl = this.redisServiceImpl;
     }
     public ExportExcelCallable() {
     }
 
-    public ExportExcelCallable(TongJiTableQuery tongJiTableQuery) {
+    public ExportExcelCallable(TongJiTableQuery tongJiTableQuery,RedisServiceImpl redisServiceImpl) {
         this.tongJiTableQuery = tongJiTableQuery;
+        this.redisServiceImpl = redisServiceImpl;
     }
 
     @Override
     public Integer call() throws Exception {
         synchronized (this){
-            List<tWimMsgVo> tWimMsgVos = pageCountCallable.tWimMsgService.getAlltWimMsgByConditionByPage(tongJiTableQuery);
-            redisServiceImpl.set("tWimMsgVos",tWimMsgVos);
+
         }
         return null;
     }

@@ -1,23 +1,19 @@
 package com.ldxx.controller;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import com.ldxx.Thread.ExportExcelCallable;
 import com.ldxx.Thread.PageCountCallable;
 import com.ldxx.bean.*;
 import com.ldxx.dao.StationSiteDao;
 import com.ldxx.dao.tUserInfoDao;
 import com.ldxx.dao.tWimMsgDao;
+import com.ldxx.service.Impl.RedisServiceImpl;
 import com.ldxx.service.tWimMsgService;
 import com.ldxx.util.FormatUtil;
 import com.ldxx.vo.ChaoZaiVo;
 import com.ldxx.vo.tWimMsgVo;
-import org.apache.catalina.Session;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import redis.clients.jedis.JedisPool;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -30,7 +26,11 @@ import java.util.concurrent.*;
 @RestController
 @RequestMapping("tWimMsg")
 public class tWimMsgController {
+    @Resource
+    private JedisPool jedisPool;
 
+    @Resource
+    RedisServiceImpl redisServiceImpl;
     @Autowired
     private tWimMsgService service;
     @Resource
@@ -39,6 +39,7 @@ public class tWimMsgController {
     private tUserInfoDao tUserInfoDao;
     @Resource
     private StationSiteDao sitedao;
+
 
     @RequestMapping("/getAlltWimMsg")
     public List<tWimMsgVo> getAlltWimMsg(HttpSession session,String  stationPort) {
@@ -82,6 +83,8 @@ public class tWimMsgController {
 
     @RequestMapping("/getAlltWimMsgByCondiTion")
     public PageData<tWimMsgVo> getAlltWimMsgByCondiTion(HttpSession session,  TongJiTableQuery tongJiTableQuery) {
+
+
 
         String zhandianduankouhao="";
         tUserInfo user = (tUserInfo) session.getAttribute("user");
@@ -140,10 +143,9 @@ public class tWimMsgController {
         pd.setData(list);
         ExecutorService threadPoolExecutor = Executors.newFixedThreadPool(2);
         Callable callable = new PageCountCallable(tongJiTableQuery);
-        Callable callable1 = new ExportExcelCallable(tongJiTableQuery);
+
         Future<Integer> res = null;
         res = threadPoolExecutor.submit(callable);
-              threadPoolExecutor.submit(callable1);
         try {
             Integer count  = res.get();
             pd.setiTotalRecords(count);
@@ -153,6 +155,9 @@ public class tWimMsgController {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+        session.setAttribute("vo2",tongJiTableQuery);
+        redisServiceImpl.set("tongJiTableQuery",tongJiTableQuery);
+        //TongJiTableQuery tongJiTableQuery1 = (TongJiTableQuery) redisServiceImpl.get("tongJiTableQuery");
         threadPoolExecutor.shutdown();
         return pd;
     }
@@ -379,5 +384,11 @@ public class tWimMsgController {
     @RequestMapping("/getGuanJianChaoZhongCheLiangEchartsList2")
     public CheLiuLiangEchartsList getGuanJianChaoZhongCheLiangEchartsList2(String stationPorts) {
         return tWimMsgDao.getGuanJianChaoZhongCheLiangEchartsList2(2,3,stationPorts);
+    }
+
+    @RequestMapping("/test")
+    public String setRedis(String value) {
+        redisServiceImpl.set("1","22222");
+        return "22222";
     }
 }

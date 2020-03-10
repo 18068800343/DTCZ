@@ -1,6 +1,8 @@
 package com.ldxx.bean;
 
-public class TongJiTableQuery {
+import java.io.Serializable;
+
+public class TongJiTableQuery implements Serializable {
     String stationPort;
     String startTime;
     String endTime;
@@ -15,8 +17,8 @@ public class TongJiTableQuery {
     Double roadTmpEnd;
     Double chaozhongStart;
     Double chaozhongEnd;
-    int start;
-    int length;
+    Integer start;
+    Integer length;
 
     public String getChepai() {
         return chepai;
@@ -130,19 +132,19 @@ public class TongJiTableQuery {
         this.chexing = chexing;
     }
 
-    public int getStart() {
+    public Integer getStart() {
         return start;
     }
 
-    public void setStart(int start) {
+    public void setStart(Integer start) {
         this.start = start;
     }
 
-    public int getLength() {
+    public Integer getLength() {
         return length;
     }
 
-    public void setLength(int length) {
+    public void setLength(Integer length) {
         this.length = length;
     }
 }

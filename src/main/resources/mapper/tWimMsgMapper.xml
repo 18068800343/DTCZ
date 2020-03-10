@@ -157,7 +157,7 @@
         </where>
         ORDER BY
         Evt_Time DESC
-        <if test="tjq.start!=null and tjq.start!='' ">
+        <if test="tjq.start !=null">
             LIMIT #{tjq.start},
             #{tjq.length}
         </if>
