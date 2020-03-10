@@ -24,6 +24,11 @@ import java.util.List;
 @RestController
 @RequestMapping("ExcelController")
 public class ExcelController {
+    @Autowired
+    private JedisPool jedisPool;
+
+    @Autowired
+    RedisServiceImpl redisServiceImpl;
 
     @RequestMapping(value = "/excel", method = RequestMethod.GET)
     public void excel(HttpServletResponse response) throws Exception {
@@ -42,24 +47,18 @@ public class ExcelController {
         titles.add("超重比率");
         titles.add("时间");
         data.setTitles(titles);
-        List<List<Object>> rows = new ArrayList();
-        List<Object> row1 = new ArrayList();
-        row1.add("张三");
-        row1.add("男");
-        row1.add("23");
-        row1.add("18612341234");
-        List<Object> row2 = new ArrayList();
-        row2.add("李四");
-        row2.add("女");
-        row2.add("24");
-        row2.add("15312341234");
-        rows.add(row1);
-        rows.add(row2);
-        data.setRows(rows);
+        while (true){
+            List<tWimMsgVo> list = (List<tWimMsgVo>) redisServiceImpl.get("tWimMsgVos");
+            if(null!=list){
+                List<List<Object>> rows1 = new ExcelController().initRowsList(list);
+                data.setRows(rows1);
+                break;
+            }
+        }
         ExportUtils.exportExcel(response,"联系人表.xlsx",data);
     }
 
-    private List<List<Object>> initRowsList(List<tWimMsgVo> list){
+    private  List<List<Object>> initRowsList(List<tWimMsgVo> list){
         List<List<Object>> rows1 = new ArrayList();
         for(tWimMsgVo tWimMsgVo : list){
             List<Object> rows = new ArrayList<>();
@@ -79,18 +78,12 @@ public class ExcelController {
         return rows1;
     }
 
-    @Autowired
-    private JedisPool jedisPool;
 
-    @Autowired
-    RedisServiceImpl redisServiceImpl;
 
     @RequestMapping("/test")
     public tWimMsgVo jedisTest(){
         Jedis jedis = jedisPool.getResource();
-        jedis.set("color","red");
-        String color = jedis.get("color");
-        System.out.println(color);
+
         tWimMsgVo tWimMsgVo = new tWimMsgVo();
         tWimMsgVo.setDirection(1);
         tWimMsgVo.setDirectionName("上行");

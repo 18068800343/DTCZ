@@ -156,8 +156,12 @@
 
         </where>
         ORDER BY
-        Evt_Time DESC LIMIT #{tjq.start},
-        #{tjq.length}) aa
+        Evt_Time DESC
+        <if test="tjq.start!=null and tjq.start!='' ">
+            LIMIT #{tjq.start},
+            #{tjq.length}
+        </if>
+        ) aa
         LEFT JOIN station_site b ON aa.Station_IP = b.Station_Port
         LEFT JOIN license_plate c ON aa.Plate_Color = c.License_Plate_No
         LEFT JOIN vehicle_type d ON aa.Class_Index = d.Vehicle_Type_No

@@ -3,6 +3,7 @@ package com.ldxx.controller;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.ldxx.Thread.ExportExcelCallable;
 import com.ldxx.Thread.PageCountCallable;
 import com.ldxx.bean.*;
 import com.ldxx.dao.StationSiteDao;
@@ -137,10 +138,12 @@ public class tWimMsgController {
         List<tWimMsgVo> list= service.getAlltWimMsgByConditionByPage(tongJiTableQuery);
         PageData<tWimMsgVo> pd = new PageData<>();
         pd.setData(list);
-        ExecutorService threadPoolExecutor = Executors.newFixedThreadPool(1);
+        ExecutorService threadPoolExecutor = Executors.newFixedThreadPool(2);
         Callable callable = new PageCountCallable(tongJiTableQuery);
+        Callable callable1 = new ExportExcelCallable(tongJiTableQuery);
         Future<Integer> res = null;
         res = threadPoolExecutor.submit(callable);
+              threadPoolExecutor.submit(callable1);
         try {
             Integer count  = res.get();
             pd.setiTotalRecords(count);
