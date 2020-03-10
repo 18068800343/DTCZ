@@ -5,6 +5,7 @@ import com.ldxx.service.Impl.RedisServiceImpl;
 import com.ldxx.util.ExportUtils;
 import com.ldxx.vo.ExcelData;
 import com.ldxx.vo.tWimMsgVo;
+import org.apache.poi.ss.formula.functions.T;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -56,6 +57,26 @@ public class ExcelController {
         rows.add(row2);
         data.setRows(rows);
         ExportUtils.exportExcel(response,"联系人表.xlsx",data);
+    }
+
+    private List<List<Object>> initRowsList(List<tWimMsgVo> list){
+        List<List<Object>> rows1 = new ArrayList();
+        for(tWimMsgVo tWimMsgVo : list){
+            List<Object> rows = new ArrayList<>();
+            rows.add(tWimMsgVo.getStationName());
+            rows.add(tWimMsgVo.getLaneNoName());
+            rows.add(tWimMsgVo.getPlate());
+            rows.add(tWimMsgVo.getLicensePlateColor());
+            rows.add(tWimMsgVo.getLength());
+            rows.add(tWimMsgVo.getSpeed());
+            rows.add(tWimMsgVo.getAxlesCount());
+            rows.add(tWimMsgVo.getTotalWeight());
+            rows.add(tWimMsgVo.getTemperature());
+            rows.add(tWimMsgVo.getOverWeightRatioName());
+            rows.add(tWimMsgVo.getEvtTime());
+            rows1.add(rows);
+        }
+        return rows1;
     }
 
     @Autowired
