@@ -10,20 +10,25 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 public class CallbackProcesser {
 
     private final HttpServletResponse response;
-
+    private OutputStreamWriter osw;
     public CallbackProcesser(HttpServletResponse response) {
         this.response = response;
         String fileName = "result.csv";
         this.response.addHeader("Content-Type", "application/csv");
         this.response.addHeader("Content-Disposition", "attachment; filename="+fileName);
-        this.response.setCharacterEncoding("UTF-8");
+        //this.response.setCharacterEncoding("utf-8");
         try {
-            this.response.getWriter().write(Const.CSV_HEAD);
-            this.response.getWriter().write("\n");
+            if(null==this.osw){
+            this.osw = new OutputStreamWriter(this.response.getOutputStream(), "UTF-8");
+            }
+            this.osw.write(new String(new byte[] { (byte) 0xEF, (byte) 0xBB,(byte) 0xBF }));
+            this.osw.write(Const.CSV_HEAD);
+            this.osw.write("\n");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -31,8 +36,10 @@ public class CallbackProcesser {
 
     public <E> void processData(E record) {
         try {
-            response.getWriter().write(record.toString()); //如果是要写入csv,需要重写toString,属性通过","分割
-            response.getWriter().write("\n");
+
+            this.osw.write(record.toString());
+            this.osw.write("\n");
+            //this.osw.flush();
         }catch (IOException e){
             e.printStackTrace();
         }
