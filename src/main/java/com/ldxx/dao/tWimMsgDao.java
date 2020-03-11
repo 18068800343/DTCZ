@@ -12,7 +12,7 @@ public interface tWimMsgDao {
 
     List<tWimMsgVo> getAlltWimMsg(@Param("stationPort")String stationPort);
 
-    List<tWimMsgVo> getAlltWimMsgByCondition(@Param("tjq") TongJiTableQuery tongJiTableQuery);
+    List<tWimMsgVo> getAlltWimMsgByCondition( TongJiTableQuery tongJiTableQuery);
 
     CheLiuLiangEchartsList getCheLiuLiangEchartsList(String stationPorts,Integer link,Integer limit);
 
@@ -30,7 +30,7 @@ public interface tWimMsgDao {
 
     int getMeiRiGuanJianCheLiangMax();
 
-    int getCountByTableName(@Param("tjq") TongJiTableQuery tongJiTableQuery);
+    int getCountByTableName(TongJiTableQuery tongJiTableQuery);
 
     int getMeiRiChaoZhongByStationPort(@Param("stationPort")String stationPort);
 
