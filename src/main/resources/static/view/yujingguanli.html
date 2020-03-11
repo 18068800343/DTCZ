@@ -36,21 +36,54 @@
 
 <div class="layui-tab" >
     <ul class="layui-tab-title labelli">
-        <li class="layui-this labelthis">一级预警</li>
-        <li onclick="initTable2()">二级预警</li>
-        <li onclick="initTable3()">三级预警</li>
+        <li class="layui-this labelthis">超载车辆预警</li>
+        <li>超载车辆二级预警</li>
+        <li>超载车辆三级预警</li>
     </ul>
     <div class="layui-tab-content">
         <div class="layui-tab-item layui-show">
                     <div class="UpperPart">
-                        <div class="UpperPartL" style="width: 10%">
-                            <select class="form-control"  id="chuli_state" style="width:80%;">
-                                    <option value="0">未处理</option>
-                                    <option value="1">已处理</option>
+                        <div class="UpperPartL"style="width: 50%" >
+                            <div style="width: 20%">
+                                <select class="form-control"  id="chuli_state" style="width:80%;">
+                                        <option value="0">未处理</option>
+                                        <option value="1">已处理</option>
                                 </select>
+                            </div>
+                            <div style="margin-left: 20%;width: 200px;margin-top: -32px;">
+                                <label class="col-sm-1	 control-label riqi"
+                                       style="margin-left: 5%;width: 70px;line-height: 30px;font-size:15px;font-weight:normal;">日期:</label>
+                                <div class="col-sm-2">
+                                    <!-- 样式1 -->
+                                    <select value="请选择" class="selectpicker" multiple data-max-options="1" data-live-search="true"  id="timeRange"
+                                            style="height: 34px; border-radius: 5px; box-shadow: none; margin-left: 30px; border: 1px solid rgb(221, 221, 221);">
+                                        <option value="">全部</option>
+                                        <option value="7">最近一周</option>
+                                        <option value="30">最近一个月</option>
+                                        <option value="60">最近二个月</option>
+                                        <option value="90">最近三个月</option>
+                                        <option value="180">最近半年</option>
+                                        <option value="365">最近一年</option>
+                                    </select>
+
+                                    <div class="col-sm-2" style="margin-left: 250px;width: 200px;margin-top: -45px;">
+                                        <input type="date" id="startTime" value="请选择"style="height: 34px;border-radius: 5px;box-shadow: none;border:1px solid #DDD;">
+                                    </div>
+
+                                    <div class="col-sm-2" style="margin-left: 400px;width: 200px;margin-top: -45px;">
+                                        <input type="date" id="endTime" value="请选择" style="height: 34px;border-radius: 5px;box-shadow: none;margin-left: 30px;border:1px solid #DDD;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="jiance">
+                                <button type="button" class="btn btn-primary queding" onclick="searchInit()"style="width: 110px; background-image: linear-gradient(#1F62C8,#262E9F);position:absolute;right:15%;">
+                                    确定
+                                </button>
+
+                            </div>
                         </div>
                         <div class="UpperPartR">
-                            <button type="button" class="btn btn-primary Pka" style="float: right;margin-right: 10%;" onclick="pichuli()">批处理</button>
+                            <button type="button" class="btn btn-primary Pka" id="pichuli1" style="float: right;margin-right: 10%;" onclick="pichuli()">批处理</button>
                         </div>
                     </div>
                     <div class="LowerPart" style="margin-top:3px;">
@@ -80,9 +113,46 @@
 
         <div class="layui-tab-item">
             <div class="UpperPart">
-                <div class="UpperPartL">
+                <div class="UpperPartL" style="width: 50%">
+                    <div style="width: 20%">
+                        <select class="form-control"  id="chuli_state2" style="width:80%;">
+                            <option value="0">未处理</option>
+                            <option value="1">已处理</option>
+                        </select>
+                    </div>
+                    <div style="margin-left: 20%;width: 200px;margin-top: -32px;">
+                        <label class="col-sm-1	 control-label riqi"
+                               style="margin-left: 5%;width: 70px;line-height: 30px;font-size:15px;font-weight:normal;">日期:</label>
+                        <div class="col-sm-2">
+                            <!-- 样式1 -->
+                            <select value="请选择" class="selectpicker" multiple data-max-options="1" data-live-search="true"  id="timeRange2"
+                                    style="height: 34px; border-radius: 5px; box-shadow: none; margin-left: 30px; border: 1px solid rgb(221, 221, 221);">
+                                <option value="">全部</option>
+                                <option value="7">最近一周</option>
+                                <option value="30">最近一个月</option>
+                                <option value="60">最近二个月</option>
+                                <option value="90">最近三个月</option>
+                                <option value="180">最近半年</option>
+                                <option value="365">最近一年</option>
+                            </select>
+
+                            <div class="col-sm-2" style="margin-left: 250px;width: 200px;margin-top: -45px;">
+                                <input type="date" id="startTime2" value="请选择"style="height: 34px;border-radius: 5px;box-shadow: none;border:1px solid #DDD;">
+                            </div>
+
+                            <div class="col-sm-2" style="margin-left: 400px;width: 200px;margin-top: -45px;">
+                                <input type="date" id="endTime2" value="请选择" style="height: 34px;border-radius: 5px;box-shadow: none;margin-left: 30px;border:1px solid #DDD;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="jiance">
+                        <button type="button" class="btn btn-primary" onclick="searchInit2()"style="width: 110px; background-image: linear-gradient(#1F62C8,#262E9F);position:absolute;right:15%;">
+                            确定
+                        </button>
+                    </div>
                 </div>
                 <div class="UpperPartR">
+                    <button type="button" class="btn btn-primary Pka" id="pichuli2" style="float: right;margin-right: 10%;" onclick="pichuli2()">批处理</button>
                 </div>
             </div>
             <div class="LowerPart" style="margin-top:3px;">
@@ -110,9 +180,46 @@
 
         <div class="layui-tab-item">
             <div class="UpperPart">
-                <div class="UpperPartL">
+                <div class="UpperPartL" style="width: 50%">
+                    <div style="width: 20%">
+                        <select class="form-control"  id="chuli_state3" style="width:80%;">
+                            <option value="0">未处理</option>
+                            <option value="1">已处理</option>
+                        </select>
+                    </div>
+                    <div style="margin-left: 20%;width: 200px;margin-top: -32px;">
+                        <label class="col-sm-1	 control-label riqi"
+                               style="margin-left: 5%;width: 70px;line-height: 30px;font-size:15px;font-weight:normal;">日期:</label>
+                        <div class="col-sm-2">
+                            <!-- 样式1 -->
+                            <select value="请选择" class="selectpicker" multiple data-max-options="1" data-live-search="true"  id="timeRange3"
+                                    style="height: 34px; border-radius: 5px; box-shadow: none; margin-left: 30px; border: 1px solid rgb(221, 221, 221);">
+                                <option value="">全部</option>
+                                <option value="7">最近一周</option>
+                                <option value="30">最近一个月</option>
+                                <option value="60">最近二个月</option>
+                                <option value="90">最近三个月</option>
+                                <option value="180">最近半年</option>
+                                <option value="365">最近一年</option>
+                            </select>
+
+                            <div class="col-sm-2" style="margin-left: 250px;width: 200px;margin-top: -45px;">
+                                <input type="date" id="startTime3" value="请选择"style="height: 34px;border-radius: 5px;box-shadow: none;border:1px solid #DDD;">
+                            </div>
+
+                            <div class="col-sm-2" style="margin-left: 400px;width: 200px;margin-top: -45px;">
+                                <input type="date" id="endTime3" value="请选择" style="height: 34px;border-radius: 5px;box-shadow: none;margin-left: 30px;border:1px solid #DDD;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="jiance">
+                        <button type="button" class="btn btn-primary" onclick="searchInit3()"style="width: 110px; background-image: linear-gradient(#1F62C8,#262E9F);position:absolute;right:15%;">
+                            确定
+                        </button>
+                    </div>
                 </div>
                 <div class="UpperPartR">
+                    <button type="button" class="btn btn-primary Pka" id="pichuli3" style="float: right;margin-right: 10%;" onclick="pichuli3()">批处理</button>
                 </div>
             </div>
             <div class="LowerPart" style="margin-top:3px;">
@@ -296,6 +403,7 @@
 <script src="../js/jquery-form.min.js"></script>
 <script src="js/quanxian.js"></script>
 <script src="../js/myTool.js"></script>
+<script src="js/myUtil.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
 <!--导出CSV开始-->
@@ -313,6 +421,9 @@
     $(document).ready( function () {
 
         $("#chuli_state").trigger('change')
+        $("#chuli_state2").trigger('change')
+        $("#chuli_state3").trigger('change')
+
     });
     var table=$('#mainContent').dataTable({
         "deferRender": true,
@@ -345,14 +456,15 @@
             "searchable": true,
             "render": function(data, type, full) {
                 var look='<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" onclick="lookMs(this)" data-toggle="modal" data-target="#allMsg1" id="lookDetall"></i>'
-                return look;
+                var queren='<i class="glyphicon glyphicon-arrow-right Pkb" style="margin-left:10px;font-size:18px;cursor:pointer;display: none" title="处理" onclick="querenchuli(this,1)" data-toggle="modal" data-target="#change"></i>'
+                return look+queren;
                 }
             },{
             "class": "tcenter",
             "targets": 7,
             "searchable": true,
             "render": function(data, type, full) {
-                return (data*100)+"%";
+                return ((data*100).toFixed(2))+"%";
             }
         },{
             "class": "tcenter",
@@ -368,7 +480,8 @@
                     data: {
                     },
                     success: function (json) {
-                        url="<img src='http://"+json.imgUrlPrefix+"/port"+full.stationIP+"/"+full.idLocal+"-PlateImg.jpg'  width='50' height='40'/>"
+                        //url="<img src='http://"+json.imgUrlPrefix+"/port"+full.stationIP+"/"+full.idLocal+"-PlateImg.jpg'  width='50' height='40'/>"
+                        url="<img src='http://"+json.imgUrlPrefix+"/port"+full.stationIP+"/"+full.idLocal+"-Image.jpg'  width='50' height='40'/>"
                     }
                 });
                 return url;
@@ -429,14 +542,15 @@
             "searchable": true,
             "render": function(data, type, full) {
                 var look='<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" onclick="lookMs2(this)" data-toggle="modal" data-target="#allMsg1"></i>'
-                return look;
+                var queren='<i class="glyphicon glyphicon-arrow-right Pkc" style="margin-left:10px;font-size:18px;cursor:pointer;display: none" title="处理" onclick="querenchuli(this,2)" data-toggle="modal" data-target="#change"></i>'
+                return look+queren;
             }
         },{
             "class": "tcenter",
             "targets": 7,
             "searchable": true,
             "render": function(data, type, full) {
-                return (data*100)+"%";
+                return ((data*100).toFixed(2))+"%";
             }
         },{
             "class": "tcenter",
@@ -452,7 +566,7 @@
                     data: {
                     },
                     success: function (json) {
-                        url="<img src='http://"+json.imgUrlPrefix+"/port"+full.stationIP+"/"+full.idLocal+"-PlateImg.jpg'  width='50' height='40'/>"
+                        url="<img src='http://"+json.imgUrlPrefix+"/port"+full.stationIP+"/"+full.idLocal+"-Image.jpg'  width='50' height='40'/>"
                     }
                 });
                 return url;
@@ -510,14 +624,15 @@
             "searchable": true,
             "render": function(data, type, full) {
                 var look='<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" onclick="lookMs3(this)" data-toggle="modal" data-target="#allMsg1"></i>'
-                return look;
+                var queren='<i class="glyphicon glyphicon-arrow-right Pkd" style="margin-left:10px;font-size:18px;cursor:pointer;display: none" title="处理" onclick="querenchuli(this,3)" data-toggle="modal" data-target="#change"></i>'
+                return look+queren;
             }
         },{
             "class": "tcenter",
             "targets": 7,
             "searchable": true,
             "render": function(data, type, full) {
-                return (data*100)+"%";
+                return ((data*100).toFixed(2))+"%";
             }
         },{
             "class": "tcenter",
@@ -533,7 +648,7 @@
                     data: {
                     },
                     success: function (json) {
-                        url="<img src='http://"+json.imgUrlPrefix+"/port"+full.stationIP+"/"+full.idLocal+"-PlateImg.jpg'  width='50' height='40'/>"
+                        url="<img src='http://"+json.imgUrlPrefix+"/port"+full.stationIP+"/"+full.idLocal+"-Image.jpg'  width='50' height='40'/>"
                     }
                 });
                 return url;
@@ -579,8 +694,20 @@
                 if(json!=null &&json!=""){
                     var arr = json.usrPersmissionCoding.split(',');
                     for(var i=0;i<arr.length;i++){
-                        if(arr[i].indexOf("Pka") >= 0 ){
-                            $(".Pka").show();
+                        if(arr[i].indexOf("Pkb") >= 0 ){
+                            if($("#chuli_state").val()==0){
+                                $(".Pkb").show();
+                            }
+                        }
+                        if(arr[i].indexOf("Pkc") >= 0 ){
+                            if($("#chuli_state2").val()==0){
+                                $(".Pkc").show();
+                            }
+                        }
+                        if(arr[i].indexOf("Pkd") >= 0 ){
+                            if($("#chuli_state3").val()==0){
+                                $(".Pkd").show();
+                            }
                         }
 
                     }
@@ -592,76 +719,181 @@
     }
 
 
+
     $("#chuli_state").change(function(){
+        searchInit()
+    })
+
+    function searchInit(){
+        var timeRange=$("#timeRange").val();
+        var startTime;
+        var endTime;
+        if(timeRange==""||timeRange==undefined){
+            startTime=$("#startTime").val();
+            endTime=$("#endTime").val();
+        }else{
+            const end = new Date();
+            const start = new Date();
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * timeRange);
+            end.setTime(end.getTime() + 3600 * 1000 * 24 * 1);
+            startTime = start.Format("yyyy-MM-dd");
+            endTime = end.Format("yyyy-MM-dd");
+        }
+        var url;
         if($("#chuli_state").val()==0){
-            url='/tVehicleOverweight/getMeiRiChaoZaiShujuByStationPort'
-            initTable(url)
-            $(".Pka").attr("style","display:block;");
+            url='/tVehicleOverweight/getMeiRiChaoZaiShujuByStationPortCondition'
+            initTable(url,startTime,endTime)
+            $("#pichuli1").attr("style","display:block;");
         }else{
             url='/tVehicleOverweight/getMeiRiChaoZaiShujuByStationPortAlreadychuli'
-            initTable(url)
-            $(".Pka").attr("style","display:none;");
+            initTable(url,startTime,endTime)
+            $("#pichuli1").attr("style","display:none;");
         }
-    })
-    function initTable(url){
+    }
+
+    function initTable(url,startTime,endTime){
         showMask()
         $.ajax({
             type: 'POST',
             url: url,
             dataType: 'json',
             data: {
+                startTime:startTime,
+                endTime:endTime,
             },
             error: function (msg) {
                 errMessage("请求UserController失败");
             },
             success: function (json) {
-                hidMask()
                 $('#mainContent').dataTable().fnClearTable();
                 $('#mainContent').DataTable().rows.add(json).draw(false);
+                hidMask()
             }
         });
     }
 
 
+    $("#chuli_state2").change(function(){
+        /*var url;
+        if($("#chuli_state2").val()==0){
+            url='/tVehicleOverweight/getMeiRiGuanJianChaoZHongShujuByStationPort'
+            initTable2(url)
+            $("#pichuli2").attr("style","display:block;");
+        }else{
+            url='/tVehicleOverweight/getMeiRiGuanJianChaoZHongShujuByStationPortAlreadychuli'
+            initTable2(url)
+            $("#pichuli2").attr("style","display:none;");
+        }*/
+        searchInit2()
+    })
+    function searchInit2(){
+        var timeRange=$("#timeRange2").val();
+        var startTime;
+        var endTime;
+        if(timeRange==""||timeRange==undefined){
+            startTime=$("#startTime2").val();
+            endTime=$("#endTime2").val();
+        }else{
+            const end = new Date();
+            const start = new Date();
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * timeRange);
+            end.setTime(end.getTime() + 3600 * 1000 * 24 * 1);
+            startTime = start.Format("yyyy-MM-dd");
+            endTime = end.Format("yyyy-MM-dd");
+        }
+        var url;
+        if($("#chuli_state2").val()==0){
+            url='/tVehicleOverweight/getMeiRiGuanJianChaoZHongShujuByStationPort'
+            initTable2(url,startTime,endTime)
+            $("#pichuli2").attr("style","display:block;");
+        }else{
+            url='/tVehicleOverweight/getMeiRiGuanJianChaoZHongShujuByStationPortAlreadychuli'
+            initTable2(url,startTime,endTime)
+            $("#pichuli2").attr("style","display:none;");
+        }
+    }
 
-
-
-    function initTable2(){
+    function initTable2(url,startTime,endTime){
         showMask()
         $.ajax({
             type: 'POST',
-            url: '/tVehicleOverweight/getMeiRiGuanJianChaoZHongShujuByStationPort',
+            url: url,
             dataType: 'json',
             data: {
                 lv:2,
+                startTime:startTime,
+                endTime:endTime,
             },
             error: function (msg) {
                 errMessage("请求UserController失败");
             },
             success: function (json) {
-                hidMask()
                 $('#mainContent2').dataTable().fnClearTable();
                 $('#mainContent2').DataTable().rows.add(json).draw(false);
+                hidMask()
             }
         });
     }
 
-    function initTable3(){
+    $("#chuli_state3").change(function(){
+        /*var url;
+        if($("#chuli_state3").val()==0){
+            url='/tVehicleOverweight/getMeiRiGuanJianChaoZHongShujuByStationPort'
+            initTable3(url)
+            $("#pichuli3").attr("style","display:block;");
+        }else{
+            url='/tVehicleOverweight/getMeiRiGuanJianChaoZHongShujuByStationPortAlreadychuli'
+            initTable3(url)
+            $("#pichuli3").attr("style","display:none;");
+        }*/
+        searchInit3()
+    })
+
+    function searchInit3(){
+        var timeRange=$("#timeRange3").val();
+        var startTime;
+        var endTime;
+        if(timeRange==""||timeRange==undefined){
+            startTime=$("#startTime3").val();
+            endTime=$("#endTime3").val();
+        }else{
+            const end = new Date();
+            const start = new Date();
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * timeRange);
+            end.setTime(end.getTime() + 3600 * 1000 * 24 * 1);
+            startTime = start.Format("yyyy-MM-dd");
+            endTime = end.Format("yyyy-MM-dd");
+        }
+        var url;
+        if($("#chuli_state3").val()==0){
+            url='/tVehicleOverweight/getMeiRiGuanJianChaoZHongShujuByStationPort'
+            initTable3(url,startTime,endTime)
+            $("#pichuli3").attr("style","display:block;");
+        }else{
+            url='/tVehicleOverweight/getMeiRiGuanJianChaoZHongShujuByStationPortAlreadychuli'
+            initTable3(url,startTime,endTime)
+            $("#pichuli3").attr("style","display:none;");
+        }
+    }
+
+    function initTable3(url,startTime,endTime){
         showMask()
         $.ajax({
             type: 'POST',
-            url: '/tVehicleOverweight/getMeiRiGuanJianChaoZHongShujuByStationPort',
+            url: url,
             dataType: 'json',
             data: {
                 lv:3,
+                startTime:startTime,
+                endTime:endTime,
             },
             error: function (msg) {
                 errMessage("请求UserController失败");
             },
             success: function (json) {
-                hidMask()
                 $('#mainContent3').dataTable().fnClearTable();
                 $('#mainContent3').DataTable().rows.add(json).draw(false);
+                hidMask()
             }
         });
     }
@@ -720,7 +952,7 @@
             vehicleTypeName:'',
         },
         methods: {
-            querenchuli:function(){
+            /*querenchuli:function(){
                 showMask()
                 this.$http.post('/tVehicleOverweight/addtVehicleOverweight',this._data,{}).then((res)=>{
                     hidMask()
@@ -735,7 +967,7 @@
                 },(res)=>{
                     toastr.error("发生错误");
                 });
-            },
+            },*/
         }
     })
     var dom ;
@@ -814,36 +1046,193 @@
             data: {
             },
             success: function (json) {
-                var url="http://"+json.imgUrlPrefix+"/port"+data.stationIP+"/"+data.idLocal+"-PlateImg.jpg"
+                /*var url="http://"+json.imgUrlPrefix+"/port"+data.stationIP+"/"+data.idLocal+"-PlateImg.jpg"
                 $("#chepaiImg").attr("src",url)
                 if(obj!=1){
+                }*/
                     $("#chebodyDiv").html('')
                     var url2="http://"+json.imgUrlPrefix+"/port"+data.stationIP+"/"+data.idLocal+"-Image.jpg"
                     var img2='<img id="chebodyImg" src="'+url2+'" class="popup" style="width: 80%;" />'
                     $("#chebodyDiv").append(img2)
-                }
 
             }
         });
     }
 
-    function pichuli(){
-        $.ajax({
-            type: 'POST',
-            url: '/tVehicleOverweight/addtVehicleOverweightList',
-            dataType: 'json',
-            data: {
-            },
-            success: function (json) {
-                if(json.daoMsg>0){
-                    $('#mainContent').dataTable().fnClearTable();
-                    toastr.success(json.resultMsg);
-                }else{
-                    toastr.error(json.resultMsg);
-                }
+    function querenchuli(obj,obj2){
+        var dom = $(obj).parents('tr');
+        let data;
+        if(obj2==1){
+            data=$('#mainContent').DataTable().row(dom).data();
+        }else if(obj2==2){
+            data=$('#mainContent2').DataTable().row(dom).data();
+        }else{
+            data=$('#mainContent3').DataTable().row(dom).data();
+        }
+        var msg = "您真的确定要处理吗？\n\n请确认！";
+        if (confirm(msg)==true){
+            $.ajax({
+                type: 'POST',
+                url: '/tVehicleOverweight/addtVehicleOverweight',
+                dataType: 'json',
+                data: {
+                    idLocal:data.idLocal
+                },
+                success: function (json) {
+                    if(json.daoMsg>0){
+                        if(obj2==1){
+                            $('#mainContent').DataTable().row(dom).remove().draw(false); //删除行立即显示
+                        }else if(obj2==2){
+                            $('#mainContent2').DataTable().row(dom).remove().draw(false); //删除行立即显示
+                        }else{
+                            $('#mainContent3').DataTable().row(dom).remove().draw(false); //删除行立即显示
+                        }
 
-            }
-        });
+                        toastr.success(json.resultMsg);
+                    }else{
+                        toastr.error(json.resultMsg);
+                    }
+
+                }
+            });
+
+        }else{
+            return false;
+        }
+    }
+
+
+
+    function pichuli(){
+        showMask()
+        var timeRange=$("#timeRange").val();
+        var startTime;
+        var endTime;
+        if(timeRange==""||timeRange==undefined){
+            startTime=$("#startTime").val();
+            endTime=$("#endTime").val();
+        }else{
+            const end = new Date();
+            const start = new Date();
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * timeRange);
+            end.setTime(end.getTime() + 3600 * 1000 * 24 * 1);
+            startTime = start.Format("yyyy-MM-dd");
+            endTime = end.Format("yyyy-MM-dd");
+        }
+        var msg = "您真的确定要处理吗？\n\n请确认！";
+        if (confirm(msg)==true){
+            $.ajax({
+                type: 'POST',
+                url: '/tVehicleOverweight/addtVehicleOverweightList',
+                dataType: 'json',
+                data: {
+                    startTime:startTime,
+                    endTime:endTime,
+                    lv:1
+                },
+                success: function (json) {
+                    hidMask()
+                    if(json.daoMsg>0){
+                        $('#mainContent').dataTable().fnClearTable();
+                        toastr.success(json.resultMsg);
+                    }else{
+                        toastr.error(json.resultMsg);
+                    }
+
+                }
+            });
+        }else{
+            return false;
+        }
+
+    }
+
+    function pichuli2(){
+        showMask()
+        var timeRange=$("#timeRange2").val();
+        var startTime;
+        var endTime;
+        if(timeRange==""||timeRange==undefined){
+            startTime=$("#startTime2").val();
+            endTime=$("#endTime2").val();
+        }else{
+            const end = new Date();
+            const start = new Date();
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * timeRange);
+            end.setTime(end.getTime() + 3600 * 1000 * 24 * 1);
+            startTime = start.Format("yyyy-MM-dd");
+            endTime = end.Format("yyyy-MM-dd");
+        }
+        var msg = "您真的确定要处理吗？\n\n请确认！";
+        if (confirm(msg)==true){
+            $.ajax({
+                type: 'POST',
+                url: '/tVehicleOverweight/addtVehicleOverweightList',
+                dataType: 'json',
+                data: {
+                    startTime:startTime,
+                    endTime:endTime,
+                    lv:2
+                },
+                success: function (json) {
+                    hidMask()
+                    if(json.daoMsg>0){
+                        $('#mainContent2').dataTable().fnClearTable();
+                        toastr.success(json.resultMsg);
+                    }else{
+                        toastr.error(json.resultMsg);
+                    }
+
+                }
+            });
+        }else{
+            return false;
+        }
+
+    }
+
+    function pichuli3(){
+        showMask()
+        var timeRange=$("#timeRange3").val();
+        var startTime;
+        var endTime;
+        if(timeRange==""||timeRange==undefined){
+            startTime=$("#startTime3").val();
+            endTime=$("#endTime3").val();
+        }else{
+            const end = new Date();
+            const start = new Date();
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * timeRange);
+            end.setTime(end.getTime() + 3600 * 1000 * 24 * 1);
+            startTime = start.Format("yyyy-MM-dd");
+            endTime = end.Format("yyyy-MM-dd");
+        }
+        var msg = "您真的确定要处理吗？\n\n请确认！";
+        if (confirm(msg)==true){
+            $.ajax({
+                type: 'POST',
+                url: '/tVehicleOverweight/addtVehicleOverweightList',
+                dataType: 'json',
+                data: {
+                    startTime:startTime,
+                    endTime:endTime,
+                    lv:3
+                },
+                success: function (json) {
+                    hidMask()
+                    if(json.daoMsg>0){
+                        $('#mainContent3').dataTable().fnClearTable();
+                        toastr.success(json.resultMsg);
+                    }else{
+                        toastr.error(json.resultMsg);
+                    }
+
+                }
+            });
+        }else{
+            return false;
+        }
+
     }
 
 

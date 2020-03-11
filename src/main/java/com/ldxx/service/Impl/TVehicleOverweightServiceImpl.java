@@ -19,29 +19,36 @@ public class TVehicleOverweightServiceImpl implements TVehicleOverweightService 
 
 
     @Override
-    public List<tWimMsgVo> getMeiRiChaoZaiShujuByStationPort(String stationPorts) {
-        return tdao.getMeiRiChaoZaiShujuByStationPort(stationPorts);
+    public List<tWimMsgVo> getMeiRiChaoZaiShujuByStationPortCondition(String stationPorts,String startTime,String endTime) {
+        return tdao.getMeiRiChaoZaiShujuByStationPortCondition(stationPorts,startTime,endTime);
     }
 
     @Override
-    public List<tWimMsgVo> getMeiRiGuanJianChaoZHongShujuByStationPort(String stationPorts, Integer lv) {
-        return tdao.getMeiRiGuanJianChaoZHongShujuByStationPort(stationPorts,lv);
+    public List<tWimMsgVo> getMeiRiGuanJianChaoZHongShujuByStationPort(String stationPorts, Integer lv,String startTime,String endTime) {
+        return tdao.getMeiRiGuanJianChaoZHongShujuByStationPort(stationPorts,lv,startTime,endTime);
     }
 
     @Override
-    public int addtVehicleOverweight(tWimMsgVo tWimMsgVo) {
-        int i=tdao.addtVehicleOverweight(tWimMsgVo);
+    public int addtVehicleOverweightByidLocal(String idLocal) {
+        int i=tdao.addtVehicleOverweightByidLocal(idLocal);
         if(i>0){
             List<tWimMsgVo> list=new ArrayList<>();
-            list.add(tWimMsgVo);
+            tWimMsgVo t=new tWimMsgVo();
+            t.setIdLocal(idLocal);
+            list.add(t);
             i=tdao.delVehicleOverweightTemp(list);
         }
         return i;
     }
 
     @Override
-    public int addtVehicleOverweightList(/*List<tWimMsgVo> tWimMsgVoList,*/String stationPorts) {
-        List<tWimMsgVo> tWimMsgVoList = tdao.getMeiRiChaoZaiShujuByStationPort(stationPorts);
+    public int addtVehicleOverweightList(String stationPorts,String startTime,String endTime,Integer lv) {
+        List<tWimMsgVo> tWimMsgVoList;
+        if(lv==1){
+            tWimMsgVoList = tdao.getMeiRiChaoZaiShujuByStationPortCondition(stationPorts,startTime,endTime);
+        }else{
+            tWimMsgVoList=tdao.getMeiRiGuanJianChaoZHongShujuByStationPort(stationPorts,lv,startTime,endTime);
+        }
         int i=0;
         if(tWimMsgVoList.size()!=0&&tWimMsgVoList!=null){
             i=tdao.addtVehicleOverweightList(tWimMsgVoList);
@@ -59,12 +66,12 @@ public class TVehicleOverweightServiceImpl implements TVehicleOverweightService 
     }
 
     @Override
-    public List<tWimMsgVo> getMeiRiChaoZaiShujuByStationPortAlreadychuli(String stationPorts) {
-        return tdao.getMeiRiChaoZaiShujuByStationPortAlreadychuli(stationPorts);
+    public List<tWimMsgVo> getMeiRiChaoZaiShujuByStationPortAlreadychuli(String stationPorts,String startTime,String endTime) {
+        return tdao.getMeiRiChaoZaiShujuByStationPortAlreadychuli(stationPorts,startTime,endTime);
     }
 
     @Override
-    public List<tWimMsgVo> getMeiRiGuanJianChaoZHongShujuByStationPortAlreadychuli(String stationPorts, Integer lv) {
-        return tdao.getMeiRiGuanJianChaoZHongShujuByStationPortAlreadychuli(stationPorts,lv);
+    public List<tWimMsgVo> getMeiRiGuanJianChaoZHongShujuByStationPortAlreadychuli(String stationPorts, Integer lv,String startTime,String endTime) {
+        return tdao.getMeiRiGuanJianChaoZHongShujuByStationPortAlreadychuli(stationPorts,lv,startTime,endTime);
     }
 }
