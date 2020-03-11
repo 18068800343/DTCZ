@@ -1,0 +1,124 @@
+package com.ldxx.controller;
+
+import com.alibaba.fastjson.JSONObject;
+import com.ldxx.bean.tUserInfo;
+import com.ldxx.dao.tVehicleOverweightDao;
+import com.ldxx.service.TVehicleOverweightService;
+import com.ldxx.util.MsgFormatUtils;
+import com.ldxx.vo.tWimMsgVo;
+import com.ldxx.vo.ImgUrlPrefixVo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
+
+@RequestMapping("tVehicleOverweight")
+@RestController
+public class TVehicleOverweightController {
+
+    @Autowired
+    ImgUrlPrefixVo imgUrlPrefixVo;
+    @Autowired
+    private TVehicleOverweightService service;
+
+    @RequestMapping("/getimgUrlPrefix")
+    public String getimgUrlPrefix(){
+        JSONObject jsonObject=new JSONObject();
+        String imgUrlPrefix=imgUrlPrefixVo.getImgUrlPrefix();
+        jsonObject.put("imgUrlPrefix",imgUrlPrefix);
+        return jsonObject.toString();
+    }
+
+    @RequestMapping("/getMeiRiChaoZaiShujuByStationPort")
+    public List<tWimMsgVo> getMeiRiChaoZaiShujuByStationPort(String stationPorts, HttpSession session){
+        String zhandianduankouhao="";
+        tUserInfo user = (tUserInfo) session.getAttribute("user");
+        if(stationPorts!=null&&stationPorts!=""){
+            zhandianduankouhao=stationPorts;
+        }else{
+            if(user!=null){
+                zhandianduankouhao = user.getStationPort();
+            }
+        }
+        return service.getMeiRiChaoZaiShujuByStationPort(zhandianduankouhao);
+    }
+
+    @RequestMapping("/getMeiRiGuanJianChaoZHongShujuByStationPort")
+    public List<tWimMsgVo> getMeiRiGuanJianChaoZHongShujuByStationPort(String stationPorts,Integer lv, HttpSession session){
+        String zhandianduankouhao="";
+        tUserInfo user = (tUserInfo) session.getAttribute("user");
+        if(stationPorts!=null&&stationPorts!=""){
+            zhandianduankouhao=stationPorts;
+        }else{
+            if(user!=null){
+                zhandianduankouhao = user.getStationPort();
+            }
+        }
+        return service.getMeiRiGuanJianChaoZHongShujuByStationPort(zhandianduankouhao,lv);
+    }
+
+    @RequestMapping("/addtVehicleOverweight")
+    public String addtVehicleOverweight(@RequestBody tWimMsgVo tWimMsgVo){
+        JSONObject jsonObject=new JSONObject();
+        int i=service.addtVehicleOverweight(tWimMsgVo);
+        String daoMsg = MsgFormatUtils.getMsgByResult(i, "处理");
+        jsonObject.put("resultMsg",daoMsg);
+        jsonObject.put("daoMsg",i);
+        jsonObject.put("obj",tWimMsgVo);
+        return jsonObject.toString();
+    }
+
+    @RequestMapping("/addtVehicleOverweightList")
+    public String addtVehicleOverweightList(/*@RequestBody List<tWimMsgVo> tWimMsgVoList,*/ HttpSession session){
+        JSONObject jsonObject=new JSONObject();
+        String zhandianduankouhao="";
+        tUserInfo user = (tUserInfo) session.getAttribute("user");
+        if(user!=null){
+            zhandianduankouhao = user.getStationPort();
+        }
+        int i=service.addtVehicleOverweightList(zhandianduankouhao);
+        String daoMsg = MsgFormatUtils.getMsgByResult(i, "处理");
+        jsonObject.put("resultMsg",daoMsg);
+        jsonObject.put("daoMsg",i);
+        return jsonObject.toString();
+    }
+
+    @RequestMapping("/delVehicleOverweightTemp")
+    public int delVehicleOverweightTemp(List<tWimMsgVo> tWimMsgVoList){
+        int i=service.delVehicleOverweightTemp(tWimMsgVoList);
+        return i;
+    }
+
+    @RequestMapping("/getMeiRiChaoZaiShujuByStationPortAlreadychuli")
+    public List<tWimMsgVo> getMeiRiChaoZaiShujuByStationPortAlreadychuli(String stationPorts, HttpSession session){
+        String zhandianduankouhao="";
+        tUserInfo user = (tUserInfo) session.getAttribute("user");
+        if(stationPorts!=null&&stationPorts!=""){
+            zhandianduankouhao=stationPorts;
+        }else{
+            if(user!=null){
+                zhandianduankouhao = user.getStationPort();
+            }
+        }
+        return service.getMeiRiChaoZaiShujuByStationPortAlreadychuli(zhandianduankouhao);
+    }
+
+    @RequestMapping("/getMeiRiGuanJianChaoZHongShujuByStationPortAlreadychuli")
+    public List<tWimMsgVo> getMeiRiGuanJianChaoZHongShujuByStationPortAlreadychuli(String stationPorts,Integer lv, HttpSession session){
+        String zhandianduankouhao="";
+        tUserInfo user = (tUserInfo) session.getAttribute("user");
+        if(stationPorts!=null&&stationPorts!=""){
+            zhandianduankouhao=stationPorts;
+        }else{
+            if(user!=null){
+                zhandianduankouhao = user.getStationPort();
+            }
+        }
+        return service.getMeiRiGuanJianChaoZHongShujuByStationPortAlreadychuli(zhandianduankouhao,lv);
+    }
+}
