@@ -17,22 +17,22 @@
         </if>
     </sql>
     <sql id="StationIP_sql_tongji">
-        <if test="tjq.stationPort!=null and tjq.stationPort!=''">
-            <if test="tjq.stationPort.indexOf(',')!=-1">
+        <if test="stationPort!=null and stationPort!=''">
+            <if test="stationPort.indexOf(',')!=-1">
                 and a.Station_IP in
-                <foreach collection="tjq.stationPort.split(',')" item="item" open="(" separator="," close=")">
+                <foreach collection="stationPort.split(',')" item="item" open="(" separator="," close=")">
                     #{item}
                 </foreach>
             </if>
-            <if test="tjq.stationPort.indexOf(',')==-1">
-                and a.Station_IP=#{tjq.stationPort}
+            <if test="stationPort.indexOf(',')==-1">
+                and a.Station_IP=#{stationPort}
             </if>
             /*ORDER BY a.Evt_Time desc*/
         </if>
     </sql>
     <sql id="CheXing_IP_sql_tongji">
-        <if test="tjq.chexing!=null and tjq.chexing!=''">
-            and FIND_IN_SET(a.Class_Index,#{tjq.chexing})
+        <if test="chexing!=null and chexing!=''">
+            and FIND_IN_SET(a.Class_Index,#{chexing})
         </if>
     </sql>
     <sql id="StationIP_chaozaishuju_sql">
@@ -73,7 +73,7 @@
 
     </select>
 
-    <select id="getAlltWimMsgByCondition" resultType="tWimMsgVo">
+    <select id="getAlltWimMsgByCondition" fetchSize="-2147483648" resultType="tWimMsgVo">
         SELECT
         CASE aa.Direction
         WHEN 0 THEN
@@ -106,46 +106,46 @@
         FROM
         (select * from t_vehicle_msg a
         <where>
-            <if test="tjq.startTime!=null and tjq.startTime!='' ">
-                and #{tjq.startTime} &lt;= msg_time
+            <if test="startTime!=null and startTime!='' ">
+                and #{startTime} &lt;= msg_time
             </if>
-            <if test="tjq.endTime!=null and tjq.endTime!='' ">
-                and msg_time &lt;= #{tjq.endTime}
+            <if test="endTime!=null and endTime!='' ">
+                and msg_time &lt;= #{endTime}
             </if>
-            <if test="tjq.startWeight!=null and tjq.startWeight!='' ">
-                and #{tjq.startWeight} &lt; total_weight
+            <if test="startWeight!=null and startWeight!='' ">
+                and #{startWeight} &lt; total_weight
             </if>
-            <if test="tjq.endWeight!=null and tjq.endWeight!='' ">
-                and total_weight &lt; #{tjq.endWeight}
-            </if>
-
-            <if test="tjq.chesuStart!=null and tjq.chesuStart!='' ">
-                and #{tjq.chesuStart} &lt; speed
-            </if>
-            <if test="tjq.chesuEnd!=null and tjq.chesuEnd!='' ">
-                and speed &lt; #{tjq.chesuEnd}
+            <if test="endWeight!=null and endWeight!='' ">
+                and total_weight &lt; #{endWeight}
             </if>
 
-            <if test="tjq.roadTmpStart!=null and tjq.roadTmpStart!='' ">
-                and #{tjq.roadTmpStart} &lt; Temperature
+            <if test="chesuStart!=null and chesuStart!='' ">
+                and #{chesuStart} &lt; speed
             </if>
-            <if test="tjq.roadTmpEnd!=null and tjq.roadTmpEnd!='' ">
-                and Temperature &lt; #{tjq.roadTmpEnd}
-            </if>
-
-            <if test="tjq.chaozhongStart!=null and tjq.chaozhongStart!='' ">
-                and #{tjq.chaozhongStart} &lt; Over_Weight_Ratio
-            </if>
-            <if test="tjq.chaozhongEnd!=null and tjq.chaozhongEnd!='' ">
-                and Over_Weight_Ratio &lt; #{tjq.chaozhongEnd}
+            <if test="chesuEnd!=null and chesuEnd!='' ">
+                and speed &lt; #{chesuEnd}
             </if>
 
-            <if test="tjq.chepai!=null and tjq.chepai!='' ">
-                and Plate like CONCAT('%',#{tjq.chepai},'%')
+            <if test="roadTmpStart!=null and roadTmpStart!='' ">
+                and #{roadTmpStart} &lt; Temperature
+            </if>
+            <if test="roadTmpEnd!=null and roadTmpEnd!='' ">
+                and Temperature &lt; #{roadTmpEnd}
             </if>
 
-            <if test="tjq.zhoushu!=null and tjq.zhoushu!='' ">
-                and Axles_Count = #{tjq.zhoushu}
+            <if test="chaozhongStart!=null and chaozhongStart!='' ">
+                and #{chaozhongStart} &lt; Over_Weight_Ratio
+            </if>
+            <if test="chaozhongEnd!=null and chaozhongEnd!='' ">
+                and Over_Weight_Ratio &lt; #{chaozhongEnd}
+            </if>
+
+            <if test="chepai!=null and chepai!='' ">
+                and Plate like CONCAT('%',#{chepai},'%')
+            </if>
+
+            <if test="zhoushu!=null and zhoushu!='' ">
+                and Axles_Count = #{zhoushu}
             </if>
 
 
@@ -157,9 +157,9 @@
         </where>
         ORDER BY
         Evt_Time DESC
-        <if test="tjq.start !=null">
-            LIMIT #{tjq.start},
-            #{tjq.length}
+        <if test="start !=null">
+            LIMIT #{start},
+            #{length}
         </if>
         ) aa
         LEFT JOIN station_site b ON aa.Station_IP = b.Station_Port
@@ -270,46 +270,46 @@
     <select id="getCountByTableName" resultType="int">
         SELECT COUNT(*) from t_vehicle_msg a
         <where>
-            <if test="tjq.startTime!=null and tjq.startTime!='' ">
-                and #{tjq.startTime} &lt;= msg_time
+            <if test="startTime!=null and startTime!='' ">
+                and #{startTime} &lt;= msg_time
             </if>
-            <if test="tjq.endTime!=null and tjq.endTime!='' ">
-                and msg_time &lt;= #{tjq.endTime}
+            <if test="endTime!=null and endTime!='' ">
+                and msg_time &lt;= #{endTime}
             </if>
-            <if test="tjq.startWeight!=null and tjq.startWeight!='' ">
-                and #{tjq.startWeight} &lt; total_weight
+            <if test="startWeight!=null and startWeight!='' ">
+                and #{startWeight} &lt; total_weight
             </if>
-            <if test="tjq.endWeight!=null and tjq.endWeight!='' ">
-                and total_weight &lt; #{tjq.endWeight}
-            </if>
-
-            <if test="tjq.chesuStart!=null and tjq.chesuStart!='' ">
-                and #{tjq.chesuStart} &lt; speed
-            </if>
-            <if test="tjq.chesuEnd!=null and tjq.chesuEnd!='' ">
-                and speed &lt; #{tjq.chesuEnd}
+            <if test="endWeight!=null and endWeight!='' ">
+                and total_weight &lt; #{endWeight}
             </if>
 
-            <if test="tjq.roadTmpStart!=null and tjq.roadTmpStart!='' ">
-                and #{tjq.roadTmpStart} &lt; Temperature
+            <if test="chesuStart!=null and chesuStart!='' ">
+                and #{chesuStart} &lt; speed
             </if>
-            <if test="tjq.roadTmpEnd!=null and tjq.roadTmpEnd!='' ">
-                and Temperature &lt; #{tjq.roadTmpEnd}
-            </if>
-
-            <if test="tjq.chaozhongStart!=null and tjq.chaozhongStart!='' ">
-                and #{tjq.chaozhongStart} &lt; Over_Weight_Ratio
-            </if>
-            <if test="tjq.chaozhongEnd!=null and tjq.chaozhongEnd!='' ">
-                and Over_Weight_Ratio &lt; #{tjq.chaozhongEnd}
+            <if test="chesuEnd!=null and chesuEnd!='' ">
+                and speed &lt; #{chesuEnd}
             </if>
 
-            <if test="tjq.chepai!=null and tjq.chepai!='' ">
-                and Plate like CONCAT('%',#{tjq.chepai},'%')
+            <if test="roadTmpStart!=null and roadTmpStart!='' ">
+                and #{roadTmpStart} &lt; Temperature
+            </if>
+            <if test="roadTmpEnd!=null and roadTmpEnd!='' ">
+                and Temperature &lt; #{roadTmpEnd}
             </if>
 
-            <if test="tjq.zhoushu!=null and tjq.zhoushu!='' ">
-                and Axles_Count = #{tjq.zhoushu}
+            <if test="chaozhongStart!=null and chaozhongStart!='' ">
+                and #{chaozhongStart} &lt; Over_Weight_Ratio
+            </if>
+            <if test="chaozhongEnd!=null and chaozhongEnd!='' ">
+                and Over_Weight_Ratio &lt; #{chaozhongEnd}
+            </if>
+
+            <if test="chepai!=null and chepai!='' ">
+                and Plate like CONCAT('%',#{chepai},'%')
+            </if>
+
+            <if test="zhoushu!=null and zhoushu!='' ">
+                and Axles_Count = #{zhoushu}
             </if>
 
 

@@ -4,6 +4,7 @@ import com.ldxx.bean.tWimMsg;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class tWimMsgVo extends tWimMsg  implements Serializable{
@@ -115,5 +116,14 @@ public class tWimMsgVo extends tWimMsg  implements Serializable{
 
     public void setVehicleTypeName(String vehicleTypeName) {
         this.vehicleTypeName = vehicleTypeName;
+    }
+
+    @Override
+    public String toString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String evtTime = sdf.format(getEvtTime());
+        return stationName+","+laneNoName+
+                ","+getPlate()+","+licensePlateColor+","+getLength()+","+getSpeed()+","+getAxlesCount()+
+                ","+getTotalWeight()+","+getTemperature()+","+overWeightRatioName+","+evtTime;
     }
 }

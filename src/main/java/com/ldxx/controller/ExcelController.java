@@ -21,6 +21,7 @@ import redis.clients.jedis.JedisPool;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,9 +75,11 @@ public class ExcelController {
             rows.add(tWimMsgVo.getSpeed());
             rows.add(tWimMsgVo.getAxlesCount());
             rows.add(tWimMsgVo.getTotalWeight());
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             rows.add(tWimMsgVo.getTemperature());
             rows.add(tWimMsgVo.getOverWeightRatioName());
-            rows.add(tWimMsgVo.getEvtTime());
+            String evtTime = sdf.format(tWimMsgVo.getEvtTime());
+            rows.add(evtTime);
             rows1.add(rows);
         }
         return rows1;
