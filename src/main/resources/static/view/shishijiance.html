@@ -436,6 +436,10 @@
 										<td>{{overWeightRatioName}}</td>
 									</tr>
 								</table>
+								<div>
+									<div id="chebodyDiv">
+									</div>
+								</div>
 							</form>
 						</div>
 					</div>
@@ -530,7 +534,7 @@
 				"searchable": true,
 				"render": function(data, type, full) {
 					if(data=="超重"){
-						return (full.overWeightRatio*100)+"%";
+						return ((full.overWeightRatio*100).toFixed(2))+"%";
 					}else{
 						return data;
 					}
@@ -601,7 +605,7 @@
 					"searchable": true,
 					"render": function(data, type, full) {
 						if(data=="超重"){
-							return (full.overWeightRatio*100)+"%";
+							return ((full.overWeightRatio*100).toFixed(2))+"%";
 						}else{
 							return data;
 						}
@@ -692,8 +696,7 @@
 					"targets": 9,
 					"searchable": true,
 					"render": function(data, type, full) {
-							return (data*100)+"%";
-
+							return (data*100).toFixed(2)+"%";
 					}
 				}],
 
@@ -782,7 +785,7 @@
 					"searchable": true,
 					"render": function(data, type, full) {
 						if(data=="超重"){
-							return (full.overWeightRatio*100)+"%";
+							return ((full.overWeightRatio*100).toFixed(2))+"%";
 						}else{
 							return data;
 						}
@@ -874,7 +877,7 @@
 					"searchable": true,
 					"render": function(data, type, full) {
 						if(data=="超重"){
-							return (full.overWeightRatio*100)+"%";
+							return ((full.overWeightRatio*100).toFixed(2))+"%";
 						}else{
 							return data;
 						}
@@ -1525,6 +1528,25 @@
 			looktWimMsg.licensePlateColor=data.licensePlateColor;
 			looktWimMsg.vehicleTypeName=data.vehicleTypeName;
 			looktWimMsg.overWeightRatioName=data.overWeightRatioName=="超重"? data.overWeightRatio+"%":data.overWeightRatioName;
+
+			$.ajax({
+				type: 'POST',
+				url: '/tVehicleOverweight/getimgUrlPrefix',
+				dataType: 'json',
+				data: {
+				},
+				success: function (json) {
+					/*var url="http://"+json.imgUrlPrefix+"/port"+data.stationIP+"/"+data.idLocal+"-PlateImg.jpg"
+                    $("#chepaiImg").attr("src",url)
+                    if(obj!=1){
+                    }*/
+					$("#chebodyDiv").html('')
+					var url2="http://"+json.imgUrlPrefix+"/port"+data.stationIP+"/"+data.idLocal+"-Image.jpg"
+					var img2='<a target="_blank" href="'+url2+'"><img id="chebodyImg" src="'+url2+'" class="popup" style="width: 100%;" /></a>'
+					$("#chebodyDiv").append(img2)
+
+				}
+			});
 		}
 
     </script>

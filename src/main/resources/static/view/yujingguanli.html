@@ -67,11 +67,11 @@
                                     </select>
 
                                     <div class="col-sm-2" style="margin-left: 250px;width: 200px;margin-top: -45px;">
-                                        <input type="date" id="startTime" value="请选择"style="height: 34px;border-radius: 5px;box-shadow: none;border:1px solid #DDD;">
+                                        <input type="text" id="startTime" style="height: 34px;border-radius: 5px;box-shadow: none;border:1px solid #DDD;">
                                     </div>
 
                                     <div class="col-sm-2" style="margin-left: 400px;width: 200px;margin-top: -45px;">
-                                        <input type="date" id="endTime" value="请选择" style="height: 34px;border-radius: 5px;box-shadow: none;margin-left: 30px;border:1px solid #DDD;">
+                                        <input type="text" id="endTime"  style="height: 34px;border-radius: 5px;box-shadow: none;margin-left: 30px;border:1px solid #DDD;">
                                     </div>
                                 </div>
                             </div>
@@ -137,11 +137,11 @@
                             </select>
 
                             <div class="col-sm-2" style="margin-left: 250px;width: 200px;margin-top: -45px;">
-                                <input type="date" id="startTime2" value="请选择"style="height: 34px;border-radius: 5px;box-shadow: none;border:1px solid #DDD;">
+                                <input type="text" id="startTime2" style="height: 34px;border-radius: 5px;box-shadow: none;border:1px solid #DDD;">
                             </div>
 
                             <div class="col-sm-2" style="margin-left: 400px;width: 200px;margin-top: -45px;">
-                                <input type="date" id="endTime2" value="请选择" style="height: 34px;border-radius: 5px;box-shadow: none;margin-left: 30px;border:1px solid #DDD;">
+                                <input type="text" id="endTime2"  style="height: 34px;border-radius: 5px;box-shadow: none;margin-left: 30px;border:1px solid #DDD;">
                             </div>
                         </div>
                     </div>
@@ -204,11 +204,11 @@
                             </select>
 
                             <div class="col-sm-2" style="margin-left: 250px;width: 200px;margin-top: -45px;">
-                                <input type="date" id="startTime3" value="请选择"style="height: 34px;border-radius: 5px;box-shadow: none;border:1px solid #DDD;">
+                                <input type="text" id="startTime3" style="height: 34px;border-radius: 5px;box-shadow: none;border:1px solid #DDD;">
                             </div>
 
                             <div class="col-sm-2" style="margin-left: 400px;width: 200px;margin-top: -45px;">
-                                <input type="date" id="endTime3" value="请选择" style="height: 34px;border-radius: 5px;box-shadow: none;margin-left: 30px;border:1px solid #DDD;">
+                                <input type="text" id="endTime3"  style="height: 34px;border-radius: 5px;box-shadow: none;margin-left: 30px;border:1px solid #DDD;">
                             </div>
                         </div>
                     </div>
@@ -423,7 +423,27 @@
         $("#chuli_state").trigger('change')
         $("#chuli_state2").trigger('change')
         $("#chuli_state3").trigger('change')
-
+        laydate.render({
+            elem: '#startTime', //指定元素
+            type: 'datetime'
+        });laydate.render({
+            elem: '#endTime', //指定元素
+            type: 'datetime'
+        });
+        laydate.render({
+            elem: '#startTime2', //指定元素
+            type: 'datetime'
+        });laydate.render({
+            elem: '#endTime2', //指定元素
+            type: 'datetime'
+        });
+        laydate.render({
+            elem: '#startTime3', //指定元素
+            type: 'datetime'
+        });laydate.render({
+            elem: '#endTime3', //指定元素
+            type: 'datetime'
+        });
     });
     var table=$('#mainContent').dataTable({
         "deferRender": true,
@@ -480,8 +500,8 @@
                     data: {
                     },
                     success: function (json) {
-                        //url="<img src='http://"+json.imgUrlPrefix+"/port"+full.stationIP+"/"+full.idLocal+"-PlateImg.jpg'  width='50' height='40'/>"
-                        url="<img src='http://"+json.imgUrlPrefix+"/port"+full.stationIP+"/"+full.idLocal+"-Image.jpg'  width='50' height='40'/>"
+                        var path="http://"+json.imgUrlPrefix+"/port"+full.stationIP+"/"+full.idLocal+"-Image.jpg"
+                        url="<a target='_blank' href="+path+"><img src="+path+"  width='50' height='40'/>"
                     }
                 });
                 return url;
@@ -566,7 +586,8 @@
                     data: {
                     },
                     success: function (json) {
-                        url="<img src='http://"+json.imgUrlPrefix+"/port"+full.stationIP+"/"+full.idLocal+"-Image.jpg'  width='50' height='40'/>"
+                        var path="http://"+json.imgUrlPrefix+"/port"+full.stationIP+"/"+full.idLocal+"-Image.jpg"
+                        url="<a target='_blank' href="+path+"><img src="+path+"  width='50' height='40'/>"
                     }
                 });
                 return url;
@@ -648,7 +669,8 @@
                     data: {
                     },
                     success: function (json) {
-                        url="<img src='http://"+json.imgUrlPrefix+"/port"+full.stationIP+"/"+full.idLocal+"-Image.jpg'  width='50' height='40'/>"
+                        var path="http://"+json.imgUrlPrefix+"/port"+full.stationIP+"/"+full.idLocal+"-Image.jpg"
+                        url="<a target='_blank' href="+path+"><img src="+path+"  width='50' height='40'/>"
                     }
                 });
                 return url;
@@ -1052,7 +1074,7 @@
                 }*/
                     $("#chebodyDiv").html('')
                     var url2="http://"+json.imgUrlPrefix+"/port"+data.stationIP+"/"+data.idLocal+"-Image.jpg"
-                    var img2='<img id="chebodyImg" src="'+url2+'" class="popup" style="width: 80%;" />'
+                    var img2='<a target="_blank" href="'+url2+'"><img id="chebodyImg" src="'+url2+'" class="popup" style="width: 100%;" /></a>'
                     $("#chebodyDiv").append(img2)
 
             }
