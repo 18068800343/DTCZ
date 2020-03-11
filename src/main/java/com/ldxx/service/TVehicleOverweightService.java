@@ -7,17 +7,17 @@ import java.util.List;
 
 public interface TVehicleOverweightService {
 
-    List<tWimMsgVo> getMeiRiChaoZaiShujuByStationPort(String stationPorts);
+    List<tWimMsgVo> getMeiRiChaoZaiShujuByStationPortCondition(String stationPorts,String startTime,String endTime);
 
-    List<tWimMsgVo> getMeiRiGuanJianChaoZHongShujuByStationPort(String stationPorts,Integer lv);
+    List<tWimMsgVo> getMeiRiGuanJianChaoZHongShujuByStationPort(String stationPorts,Integer lv,String startTime,String endTime);
 
-    int addtVehicleOverweight(tWimMsgVo tWimMsgVo);
+    int addtVehicleOverweightByidLocal(String idLocal);
 
-    int addtVehicleOverweightList(/*List<tWimMsgVo> tWimMsgVoList,*/String stationPorts);
+    int addtVehicleOverweightList(String stationPorts,String startTime,String endTime,Integer lv);
 
     int delVehicleOverweightTemp(List<tWimMsgVo> tWimMsgVoList);
 
-    List<tWimMsgVo> getMeiRiChaoZaiShujuByStationPortAlreadychuli(String stationPorts);
+    List<tWimMsgVo> getMeiRiChaoZaiShujuByStationPortAlreadychuli(String stationPorts,String startTime,String endTime);
 
-    List<tWimMsgVo> getMeiRiGuanJianChaoZHongShujuByStationPortAlreadychuli(String stationPorts,Integer lv);
+    List<tWimMsgVo> getMeiRiGuanJianChaoZHongShujuByStationPortAlreadychuli(String stationPorts,Integer lv,String startTime,String endTime);
 }

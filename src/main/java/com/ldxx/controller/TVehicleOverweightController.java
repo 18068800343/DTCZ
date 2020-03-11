@@ -34,8 +34,8 @@ public class TVehicleOverweightController {
         return jsonObject.toString();
     }
 
-    @RequestMapping("/getMeiRiChaoZaiShujuByStationPort")
-    public List<tWimMsgVo> getMeiRiChaoZaiShujuByStationPort(String stationPorts, HttpSession session){
+    @RequestMapping("/getMeiRiChaoZaiShujuByStationPortCondition")
+    public List<tWimMsgVo> getMeiRiChaoZaiShujuByStationPortCondition(String stationPorts,String startTime,String endTime, HttpSession session){
         String zhandianduankouhao="";
         tUserInfo user = (tUserInfo) session.getAttribute("user");
         if(stationPorts!=null&&stationPorts!=""){
@@ -45,11 +45,11 @@ public class TVehicleOverweightController {
                 zhandianduankouhao = user.getStationPort();
             }
         }
-        return service.getMeiRiChaoZaiShujuByStationPort(zhandianduankouhao);
+        return service.getMeiRiChaoZaiShujuByStationPortCondition(zhandianduankouhao,startTime,endTime);
     }
 
-    @RequestMapping("/getMeiRiGuanJianChaoZHongShujuByStationPort")
-    public List<tWimMsgVo> getMeiRiGuanJianChaoZHongShujuByStationPort(String stationPorts,Integer lv, HttpSession session){
+    @RequestMapping("/getMeiRiChaoZaiShujuByStationPortAlreadychuli")
+    public List<tWimMsgVo> getMeiRiChaoZaiShujuByStationPortAlreadychuli(String stationPorts,String startTime,String endTime, HttpSession session){
         String zhandianduankouhao="";
         tUserInfo user = (tUserInfo) session.getAttribute("user");
         if(stationPorts!=null&&stationPorts!=""){
@@ -59,34 +59,63 @@ public class TVehicleOverweightController {
                 zhandianduankouhao = user.getStationPort();
             }
         }
-        return service.getMeiRiGuanJianChaoZHongShujuByStationPort(zhandianduankouhao,lv);
+        return service.getMeiRiChaoZaiShujuByStationPortAlreadychuli(zhandianduankouhao,startTime,endTime);
+    }
+
+
+    @RequestMapping("/getMeiRiGuanJianChaoZHongShujuByStationPort")
+    public List<tWimMsgVo> getMeiRiGuanJianChaoZHongShujuByStationPort(String stationPorts,Integer lv,String startTime,String endTime, HttpSession session){
+        String zhandianduankouhao="";
+        tUserInfo user = (tUserInfo) session.getAttribute("user");
+        if(stationPorts!=null&&stationPorts!=""){
+            zhandianduankouhao=stationPorts;
+        }else{
+            if(user!=null){
+                zhandianduankouhao = user.getStationPort();
+            }
+        }
+        return service.getMeiRiGuanJianChaoZHongShujuByStationPort(zhandianduankouhao,lv,startTime,endTime);
+    }
+
+    @RequestMapping("/getMeiRiGuanJianChaoZHongShujuByStationPortAlreadychuli")
+    public List<tWimMsgVo> getMeiRiGuanJianChaoZHongShujuByStationPortAlreadychuli(String stationPorts,Integer lv,String startTime,String endTime, HttpSession session){
+        String zhandianduankouhao="";
+        tUserInfo user = (tUserInfo) session.getAttribute("user");
+        if(stationPorts!=null&&stationPorts!=""){
+            zhandianduankouhao=stationPorts;
+        }else{
+            if(user!=null){
+                zhandianduankouhao = user.getStationPort();
+            }
+        }
+        return service.getMeiRiGuanJianChaoZHongShujuByStationPortAlreadychuli(zhandianduankouhao,lv,startTime,endTime);
     }
 
     @RequestMapping("/addtVehicleOverweight")
-    public String addtVehicleOverweight(@RequestBody tWimMsgVo tWimMsgVo){
+    public String addtVehicleOverweight(String idLocal){
         JSONObject jsonObject=new JSONObject();
-        int i=service.addtVehicleOverweight(tWimMsgVo);
+        int i=service.addtVehicleOverweightByidLocal(idLocal);
         String daoMsg = MsgFormatUtils.getMsgByResult(i, "处理");
         jsonObject.put("resultMsg",daoMsg);
         jsonObject.put("daoMsg",i);
-        jsonObject.put("obj",tWimMsgVo);
         return jsonObject.toString();
     }
 
     @RequestMapping("/addtVehicleOverweightList")
-    public String addtVehicleOverweightList(/*@RequestBody List<tWimMsgVo> tWimMsgVoList,*/ HttpSession session){
+    public String addtVehicleOverweightList(String startTime,String endTime ,HttpSession session,Integer lv){
         JSONObject jsonObject=new JSONObject();
         String zhandianduankouhao="";
         tUserInfo user = (tUserInfo) session.getAttribute("user");
         if(user!=null){
             zhandianduankouhao = user.getStationPort();
         }
-        int i=service.addtVehicleOverweightList(zhandianduankouhao);
+        int i=service.addtVehicleOverweightList(zhandianduankouhao,startTime,endTime,lv);
         String daoMsg = MsgFormatUtils.getMsgByResult(i, "处理");
         jsonObject.put("resultMsg",daoMsg);
         jsonObject.put("daoMsg",i);
         return jsonObject.toString();
     }
+
 
     @RequestMapping("/delVehicleOverweightTemp")
     public int delVehicleOverweightTemp(List<tWimMsgVo> tWimMsgVoList){
@@ -94,31 +123,7 @@ public class TVehicleOverweightController {
         return i;
     }
 
-    @RequestMapping("/getMeiRiChaoZaiShujuByStationPortAlreadychuli")
-    public List<tWimMsgVo> getMeiRiChaoZaiShujuByStationPortAlreadychuli(String stationPorts, HttpSession session){
-        String zhandianduankouhao="";
-        tUserInfo user = (tUserInfo) session.getAttribute("user");
-        if(stationPorts!=null&&stationPorts!=""){
-            zhandianduankouhao=stationPorts;
-        }else{
-            if(user!=null){
-                zhandianduankouhao = user.getStationPort();
-            }
-        }
-        return service.getMeiRiChaoZaiShujuByStationPortAlreadychuli(zhandianduankouhao);
-    }
 
-    @RequestMapping("/getMeiRiGuanJianChaoZHongShujuByStationPortAlreadychuli")
-    public List<tWimMsgVo> getMeiRiGuanJianChaoZHongShujuByStationPortAlreadychuli(String stationPorts,Integer lv, HttpSession session){
-        String zhandianduankouhao="";
-        tUserInfo user = (tUserInfo) session.getAttribute("user");
-        if(stationPorts!=null&&stationPorts!=""){
-            zhandianduankouhao=stationPorts;
-        }else{
-            if(user!=null){
-                zhandianduankouhao = user.getStationPort();
-            }
-        }
-        return service.getMeiRiGuanJianChaoZHongShujuByStationPortAlreadychuli(zhandianduankouhao,lv);
-    }
+
+
 }

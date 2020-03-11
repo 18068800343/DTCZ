@@ -7,11 +7,13 @@ import java.util.List;
 
 public interface tVehicleOverweightDao {
 
+    List<tWimMsgVo> getMeiRiChaoZaiShujuByStationPortCondition(@Param("stationPorts")String stationPorts,@Param("startTime")String startTime,@Param("endTime")String endTime);
+
     List<tWimMsgVo> getMeiRiChaoZaiShujuByStationPort(@Param("stationPorts")String stationPorts);
 
-    List<tWimMsgVo> getMeiRiGuanJianChaoZHongShujuByStationPort(@Param("stationPorts")String stationPorts,@Param("lv")Integer lv);
+    List<tWimMsgVo> getMeiRiGuanJianChaoZHongShujuByStationPort(@Param("stationPorts")String stationPorts,@Param("lv")Integer lv,@Param("startTime")String startTime,@Param("endTime")String endTime);
 
-    int addtVehicleOverweight(tWimMsgVo tWimMsgVo);
+    int addtVehicleOverweightByidLocal(@Param("idLocal")String idLocal);
 
     List<tWimMsgVo> getidLocalBystationPorts(@Param("stationPorts")String stationPorts);
 
@@ -19,7 +21,7 @@ public interface tVehicleOverweightDao {
 
     int delVehicleOverweightTemp(@Param("tWimMsgVoList") List<tWimMsgVo> tWimMsgVoList);
 
-    List<tWimMsgVo> getMeiRiChaoZaiShujuByStationPortAlreadychuli(@Param("stationPorts")String stationPorts);
+    List<tWimMsgVo> getMeiRiChaoZaiShujuByStationPortAlreadychuli(@Param("stationPorts")String stationPorts,@Param("startTime")String startTime,@Param("endTime")String endTime);
 
-    List<tWimMsgVo> getMeiRiGuanJianChaoZHongShujuByStationPortAlreadychuli(@Param("stationPorts")String stationPorts,@Param("lv")Integer lv);
+    List<tWimMsgVo> getMeiRiGuanJianChaoZHongShujuByStationPortAlreadychuli(@Param("stationPorts")String stationPorts,@Param("lv")Integer lv,@Param("startTime")String startTime,@Param("endTime")String endTime);
 }
