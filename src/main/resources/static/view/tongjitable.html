@@ -335,6 +335,8 @@
         </div>
     </div>
         <div class="xian" style="position:relative;margin-top:5.5%;"></div>
+        <input type="button" id="export" onclick="exportA()" class="button" value="导出EXCEL"
+               >
     <!--表格-->
     <table class="table table-striped table-hover" id="mainContent"
            style="width: 90%;margin: 0 auto; margin-top: 20px;">
@@ -980,6 +982,10 @@
 
     function hidMask() {
         myTool.mask.hide();
+    }
+    function exportA() {
+        alert("即将开始下载...")
+       location.href= "/down/download_csv"
     }
 
     mainVm.searchInit();

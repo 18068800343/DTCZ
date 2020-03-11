@@ -24,7 +24,7 @@ public class TradingDetailsService {
         CustomResultHandler customResultHandler = new CustomResultHandler(new CallbackProcesser(httpServletResponse));
         sqlSessionTemplate.select(
                 "com.ldxx.dao.tWimMsgDao.getAlltWimMsgByCondition", tongJiTableQuery, customResultHandler);
-        httpServletResponse.getWriter().flush();
-        httpServletResponse.getWriter().close();
+        /*httpServletResponse.getWriter().flush();
+        httpServletResponse.getWriter().close();*/
     }
 }

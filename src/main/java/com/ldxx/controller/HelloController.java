@@ -13,16 +13,16 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("ExportCsvController")
-public class ExportCsvController {
+@RequestMapping("down")
+public class HelloController {
 
     private final TradingDetailsService tradingDetailsService;
 
-    public ExportCsvController(TradingDetailsService tradingDetailsService) {
+    public HelloController(TradingDetailsService tradingDetailsService) {
         this.tradingDetailsService = tradingDetailsService;
     }
 
-    @GetMapping("download_csv")
+    @GetMapping("/download_csv")
     public void downloadAsCsv(HttpServletResponse response, HttpSession session)
             throws IOException {
         TongJiTableQuery tongJiTableQuery = (TongJiTableQuery) session.getAttribute("tongJiTableQuery");

@@ -39,7 +39,7 @@ public class CallbackProcesser {
 
             this.osw.write(record.toString());
             this.osw.write("\n");
-            //this.osw.flush();
+            this.osw.flush();
         }catch (IOException e){
             e.printStackTrace();
         }
