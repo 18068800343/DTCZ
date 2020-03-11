@@ -377,7 +377,7 @@
         ],"fnDrawCallback" : function() {
             initTableQuanxian()
         },
-        "order": [[2, 'desc']],
+        "order": [[8, 'desc']],
         "oLanguage": { //国际化配置
             "sProcessing": "正在获取数据，请稍后...",
             "sLengthMenu": "显示 _MENU_ 条",
@@ -460,7 +460,7 @@
         }],"fnDrawCallback" : function() {
             initTableQuanxian()
         },
-        "order": [[2, 'desc']],
+        "order": [[8, 'desc']],
         "oLanguage": { //国际化配置
             "sProcessing": "正在获取数据，请稍后...",
             "sLengthMenu": "显示 _MENU_ 条",
@@ -541,7 +541,7 @@
         }],"fnDrawCallback" : function() {
             initTableQuanxian()
         },
-        "order": [[2, 'desc']],
+        "order": [[8, 'desc']],
         "oLanguage": { //国际化配置
             "sProcessing": "正在获取数据，请稍后...",
             "sLengthMenu": "显示 _MENU_ 条",
@@ -579,24 +579,10 @@
                 if(json!=null &&json!=""){
                     var arr = json.usrPersmissionCoding.split(',');
                     for(var i=0;i<arr.length;i++){
-                        if(arr[i].indexOf("Pja") >= 0 ){
-                            $(".Pja").show();
+                        if(arr[i].indexOf("Pka") >= 0 ){
+                            $(".Pka").show();
                         }
-                        if(arr[i].indexOf("Pjb") >= 0 ){
-                            $(".Pjb").show();
-                        }
-                        if(arr[i].indexOf("Pjc") >= 0 ){
-                            $(".Pjc").show();
-                        }
-                        if(arr[i].indexOf("Pjd") >= 0 ){
-                            $(".Pjd").show();
-                        }
-                        if(arr[i].indexOf("Pje") >= 0 ){
-                            $(".Pje").show();
-                        }
-                        if(arr[i].indexOf("Pjf") >= 0 ){
-                            $(".Pjf").show();
-                        }
+
                     }
 
                 }
@@ -610,9 +596,11 @@
         if($("#chuli_state").val()==0){
             url='/tVehicleOverweight/getMeiRiChaoZaiShujuByStationPort'
             initTable(url)
+            $(".Pka").attr("style","display:block;");
         }else{
             url='/tVehicleOverweight/getMeiRiChaoZaiShujuByStationPortAlreadychuli'
             initTable(url)
+            $(".Pka").attr("style","display:none;");
         }
     })
     function initTable(url){
@@ -639,6 +627,7 @@
 
 
     function initTable2(){
+        showMask()
         $.ajax({
             type: 'POST',
             url: '/tVehicleOverweight/getMeiRiGuanJianChaoZHongShujuByStationPort',
@@ -650,6 +639,7 @@
                 errMessage("请求UserController失败");
             },
             success: function (json) {
+                hidMask()
                 $('#mainContent2').dataTable().fnClearTable();
                 $('#mainContent2').DataTable().rows.add(json).draw(false);
             }
@@ -657,6 +647,7 @@
     }
 
     function initTable3(){
+        showMask()
         $.ajax({
             type: 'POST',
             url: '/tVehicleOverweight/getMeiRiGuanJianChaoZHongShujuByStationPort',
@@ -668,6 +659,7 @@
                 errMessage("请求UserController失败");
             },
             success: function (json) {
+                hidMask()
                 $('#mainContent3').dataTable().fnClearTable();
                 $('#mainContent3').DataTable().rows.add(json).draw(false);
             }
@@ -729,7 +721,9 @@
         },
         methods: {
             querenchuli:function(){
+                showMask()
                 this.$http.post('/tVehicleOverweight/addtVehicleOverweight',this._data,{}).then((res)=>{
+                    hidMask()
                     var resMsg = res.body;
                     if(resMsg.daoMsg>0){
                         $('#mainContent').DataTable().row(dom).remove().draw(false); //删除行立即显示

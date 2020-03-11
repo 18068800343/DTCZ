@@ -15,7 +15,7 @@ public interface tVehicleOverweightDao {
 
     List<tWimMsgVo> getidLocalBystationPorts(@Param("stationPorts")String stationPorts);
 
-    int addtVehicleOverweightList(/*@Param("tWimMsgVoList") List<tWimMsgVo> tWimMsgVoList*/@Param("stationPorts")String stationPorts);
+    int addtVehicleOverweightList(@Param("tWimMsgVoList") List<tWimMsgVo> tWimMsgVoList);
 
     int delVehicleOverweightTemp(@Param("tWimMsgVoList") List<tWimMsgVo> tWimMsgVoList);
 
