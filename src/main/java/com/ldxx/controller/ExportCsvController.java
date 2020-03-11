@@ -13,12 +13,12 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("down")
-public class HelloController {
+@RequestMapping("ExportCsvController")
+public class ExportCsvController {
 
     private final TradingDetailsService tradingDetailsService;
 
-    public HelloController(TradingDetailsService tradingDetailsService) {
+    public ExportCsvController(TradingDetailsService tradingDetailsService) {
         this.tradingDetailsService = tradingDetailsService;
     }
 
