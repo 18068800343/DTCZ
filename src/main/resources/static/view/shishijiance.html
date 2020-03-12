@@ -437,6 +437,8 @@
 									</tr>
 								</table>
 								<div>
+									<div id="chepaiImg">
+									</div>
 									<div id="chebodyDiv">
 									</div>
 								</div>
@@ -526,7 +528,7 @@
 				"targets": 11,
 				"searchable": true,
 				"render": function(data, type, full) {
-					return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="'+full.idLocal+'" onclick="lookMsg(this)" id="lookDetall"></i>';
+					return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="'+full.idLocal+'" onclick="lookMsg(this,1)" id="lookDetall"></i>';
 				}
 			},{
 				"class": "tcenter",
@@ -597,7 +599,7 @@
 					"targets": 11,
 					"searchable": true,
 					"render": function(data, type, full) {
-						return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="'+full.idLocal+'" onclick="lookMsg(this)"  id="lookDetall"></i>';
+						return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="'+full.idLocal+'" onclick="lookMsg(this,2)"  id="lookDetall"></i>';
 					}
 				},{
 					"class": "tcenter",
@@ -689,7 +691,7 @@
 					"targets": 11,
 					"searchable": true,
 					"render": function(data, type, full) {
-						return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="'+full.idLocal+'" onclick="lookMsg(this)"  id="lookDetall"></i>';
+						return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="'+full.idLocal+'" onclick="lookMsg(this,3)"  id="lookDetall"></i>';
 					}
 				},{
 					"class": "tcenter",
@@ -777,7 +779,7 @@
 					"targets": 11,
 					"searchable": true,
 					"render": function(data, type, full) {
-						return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="'+full.idLocal+'" onclick="lookMsg(this)"  id="lookDetall"></i>';
+						return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="'+full.idLocal+'" onclick="lookMsg(this,4)"  id="lookDetall"></i>';
 					}
 				},{
 					"class": "tcenter",
@@ -869,7 +871,7 @@
 					"targets": 11,
 					"searchable": true,
 					"render": function(data, type, full) {
-						return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="'+full.idLocal+'" onclick="lookMsg(this)"  id="lookDetall"></i>';
+						return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="'+full.idLocal+'" onclick="lookMsg(this,5)"  id="lookDetall"></i>';
 					}
 				},{
 					"class": "tcenter",
@@ -1457,7 +1459,15 @@
 			}
 		})
 
-		var lookMsg = (e)=>{
+		function lookMsg(e,obj){
+			var dom = $(e).parents('tr');
+			var main;
+			if(obj==1){
+				main='#mainContent';
+			}else{
+				main='#mainContent'+obj;
+			}
+			let data=$(main).DataTable().row(dom).data();
 			showMask()
 			$.ajax({
 				type: 'POST',
@@ -1470,14 +1480,14 @@
 					errMessage("请求UserController失败");
 				},
 				success: function (json) {
-					lookxiangqing(json);
+					lookxiangqing(json,obj);
 					hidMask()
 					$("#allMsg1").modal('show');
 				}
 			});
 		}
 
-		var lookxiangqing = (data) =>{
+		var lookxiangqing = (data,obj) =>{
 			looktWimMsg.id=data.id;
 			looktWimMsg.idLocal=data.idLocal;
 			looktWimMsg.stationNameRouteName=data.stationNameRouteName;
@@ -1536,14 +1546,18 @@
 				data: {
 				},
 				success: function (json) {
-					/*var url="http://"+json.imgUrlPrefix+"/port"+data.stationIP+"/"+data.idLocal+"-PlateImg.jpg"
-                    $("#chepaiImg").attr("src",url)
-                    if(obj!=1){
-                    }*/
+					$("#chepaiImg").html('')
 					$("#chebodyDiv").html('')
-					var url2="http://"+json.imgUrlPrefix+"/port"+data.stationIP+"/"+data.idLocal+"-Image.jpg"
-					var img2='<a target="_blank" href="'+url2+'"><img id="chebodyImg" src="'+url2+'" class="popup" style="width: 100%;" /></a>'
-					$("#chebodyDiv").append(img2)
+
+                    if(obj!=1&&obj!=2){
+						var url2="http://"+json.imgUrlPrefix+"/port"+data.stationIP+"/"+data.idLocal+"-Image.jpg"
+						var img2='<a target="_blank" href="'+url2+'"><img id="chebodyImg" src="'+url2+'" class="popup" style="width: 100%;" /></a>'
+						$("#chebodyDiv").append(img2)
+					}else{
+						var url="http://"+json.imgUrlPrefix+"/port"+data.stationIP+"/"+data.idLocal+"-PlateImg.jpg"
+						var img='<a target="_blank" href="'+url+'"><img id="" src="'+url+'" class="popup"  /></a>'
+						$("#chepaiImg").append(img)
+					}
 
 				}
 			});
