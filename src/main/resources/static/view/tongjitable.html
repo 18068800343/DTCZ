@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="../style/jquery.dataTables.min.css">
     <link href="../style/style.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/home.css"/>
-    <link rel="stylesheet" type="text/css" href="css/layui.css" />
+    <!--<link rel="stylesheet" type="text/css" href="css/layui.css" />-->
     <link rel="stylesheet" href="css/toastr.css"/>
     <style>
         #mainContent_info {
@@ -23,14 +23,90 @@
         #mainContent_paginate {
             margin-right: 5%;
         }
-
-        .xian {
-            margin-top: 3.5%;
+        .modal-header{
+            background-color:#549CDF;
+            color:white;
         }
-
+      .table.dataTable thead th, table.dataTable thead td{
+            border-bottom:0px solid #DEDEDE;
+        }
+       #mainContent th{
+            height:30px;
+            line-height:30px;
+        }
+        #mainContent td{
+            height:30px;
+            line-height:30px;
+        }
+        .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
+            border:0px solid #ddd;
+        }
+        .table.dataTable.no-footer{
+             border:0px solid #ddd;
+        }
+        #mainContent_info{
+            float:right;
+            margin-right:5%;
+        }
+        #mainContent_paginate{
+           margin-right:15%;
+        }
+        .current{
+           background-color:#549CFD;
+        }
         @media screen and (max-width: 1400px) {
             .mask-loading {
                 top: 40% !important;
+            }
+            .kaishiriqi,.jieshuriqi{
+                width:10% !important;  
+            }
+            .chepaihaoinput{
+                margin-left:-8% !important;
+                width:95%;
+            }
+            .kaishiriqi{
+                margin-left:-4.5% !important;
+            }
+            .kaishiriqidiv{
+                width:9.5%;
+                margin-left:-3% !important;
+            }
+            .jieshuriqidiv{
+                margin-left:-4% !important;
+                width:5.5% !important;
+            }
+            .jieshuriqi{
+                margin-left:10% !important;
+            }
+            .chongzhi{
+               position:absolute !important;
+               z-index:2 !important;
+               right:3% !important;
+               margin-top:3.6% !important;
+            }
+            .bottomsele{
+              top:18% !important;
+            }
+            .queding{
+             margin-top:4% !important;
+            }
+            .chesuk{
+             margin-left:-1% !important;
+             width:7% !important;
+            }
+            .chesukk{
+             width:7% !important;
+            }
+            .lumianwendu{
+             margin-left:1.2% !important;
+            }
+            .lmwd{
+             margin-left:-1% !important;
+             width:7% !important;
+            }
+            .lmwdt{
+            width:7% !important;
             }
         }
 
@@ -151,10 +227,17 @@
 </head>
 <body style="background-image: none;">
 <div class="form-group" id="rightTab">
-    <div id="mainVm">
+    <div id="mainVm" style="margin-left:1.5%;">
+     <button type="button" class="btn btn-primary jiancezhandian" onclick="nowJianceSite()" data-toggle="modal"
+                data-target="#jianceDiv"
+                style="width: 170px; top:43px;background-color:#549CFD; margin-left:1.5%;border:1px solid #549CFD;font-size:16px;">
+            当前监测站点
+        </button>
+          <input type="button" id="but" onclick="but2()" class="button" value="高级筛选"
+               style="height:34px;float:right;color:#549CFD;border:none;background-color:transparent;margin-right:5%;">
         <div class="sele" >
         <div class="top_main">
-            <label class="col-sm-2 control-label zhongliang" style="width:4%;font-weight:normal;">重量</label>
+            <label class="col-sm-2 control-label zhongliang" style="width:5%;font-weight:normal;">重量</label>
             <div class="col-sm-2">
                 <!-- 样式1 -->
                 <input type="text" class="text1 col-xs-12" value="请输入" v-model="startWeight" @input="checknum('startWeight')"
@@ -170,7 +253,7 @@
         </div>
 
         <label class="col-sm-1	 control-label riqi"
-               style="margin-left: 5%;width: 70px;line-height: 30px;font-size:15px;font-weight:normal;">日期:</label>
+               style="margin-left: 5%;width: 70px;line-height: 30px;font-size:15px;font-weight:normal;">日期</label>
         <div class="col-sm-2">
             <!-- 样式1 -->
             <select value="请选择" class="selectpicker" multiple data-max-options="1" data-live-search="true" @change="formatTimeRange" v-model="timeRange" id="timeRange"
@@ -185,15 +268,11 @@
             </select>
         </div>
 
-        <button type="button" class="btn btn-primary jiancezhandian" onclick="nowJianceSite()" data-toggle="modal"
-                data-target="#jianceDiv"
-                style="width: 110px; position:relative;top:43px;right:5%;background-image: linear-gradient(#1F62C8,#262E9F);">
-            当前监测站点
-        </button>
+     
         <div class="col-sm-2">
         </div>
         <label class="col-sm-1	 control-label chexing"
-               style=" width: 70px; line-height: 30px;font-weight:normal;margin-left:3.5%;">车型:</label>
+               style=" width: 70px; line-height: 30px;font-weight:normal;margin-left:3.5%;">车型</label>
 
         <div class="col-sm-2" style="margin-left: 1%;">
             <div class="xian2"
@@ -208,7 +287,7 @@
                 <option value="6">6轴车</option>
             </select>
         </div>
-         <label for="" class="col-sm-2 control-label chaozhongbili" style="margin-left:10%;font-weight:normal;">是否超重</label>
+         <label for="" class="col-sm-2 control-label chaozhongbili" style="margin-left:13%;font-weight:normal;width:8%;">是否超重</label>
                 <div class="col-sm-2 czbl" style="width: 10%">
 <!--                    <input type="text" class="text8" value="请输入" v-model="chaozhongStart"
                            @input="checknum('chaozhongStart')"
@@ -220,52 +299,50 @@
                     </select>
                 </div>
         <div class="sele">
-            <label for="" class="col-sm-2 control-label" style="width:4%;font-weight:normal;">站点</label>
-            <div class="col-sm-2" style="width: 17%">
+            <label for="" class="col-sm-2 control-label" style="width:5%;font-weight:normal;margin-left:18%;float:left;left:-17%;">站点</label>
+            <div class="col-sm-2" style="width: 17%;margin-left:-16%;">
                 <!-- 样式1 -->
                 <select class="form-control selectpicker" multiple data-actions-box="true" data-max-options="2"
                         data-live-search="true"
                         id="zhandian" style="width:80%;">
                 </select>
             </div>
-            <div class="jiance">
-                <button type="button" class="btn btn-primary queding" @click="searchInit"
-                        style="width: 110px; background-image: linear-gradient(#1F62C8,#262E9F);position:absolute;right:15%;">
-                    确定
-                </button>
 
-            </div>
         </div>
         <div style="position:relative;">
-            <label for="" class="col-sm-2 control-label" style="margin-left:3%;font-weight:normal;width:5%;">车牌号</label>
-            <div class="col-sm-2 chepai" style="width: 29%">
+            <label for="" class="col-sm-2 control-label" style="margin-left:3%;font-weight:normal;width:7%;">车牌号</label>
+            <div class="col-sm-2 chepai" style="width: 21.5%">
                 <!-- 样式1 -->
-                <input type="text" value="请输入" v-model="chepai"
-                       style="border-radius: 5px;box-shadow: none;border:1px solid #DDD;padding:3px; margin-left:-9%;height:34px;">
+                <input type="text" value="请输入" v-model="chepai" class="col-xs-8 chepaihaoinput"
+                       style="border-radius: 5px;box-shadow: none;border:1px solid #DDD;padding:3px; margin-left:-15%;height:34px;">
             </div>
         </div>
-        <input type="button" id="but" onclick="but2()" class="button" value="更多条件"
-               style="right:21%;position:absolute;background-color:white;height:34px;border:1px solid #DEDEDE;">
-
-
+      
+            <label class="col-sm-1	 control-label riqi kaishiriqi" style="width:7%;line-height: 30px; margin-left:-6%;font-weight:normal;">开始日期:</label>
+        <div class="col-sm-2 kaishiriqidiv" style="margin-left:-1.5%;">
+            <!-- 样式1 -->
+            <input type="date" v-model="startTime" value="请选择"
+                   style="height: 34px;border-radius: 5px;box-shadow: none;width: 250%;border:1px solid #DDD;">
+        </div>
+        <label class="col-sm-1	 control-label riqi jieshuriqi" style="width:7%; line-height: 30px;margin-left:13%;font-weight:normal; ">结束日期:</label>
+        <div class="col-sm-2 jieshuriqidiv" style="width:5%;margin-left:-0.5%;">
+            <!-- 样式1 -->
+            <input type="date" v-model="startTime" value="请选择"
+                   style="height: 34px;border-radius: 5px;box-shadow: none;width: 250%;border:1px solid #DDD;">
+        </div>
+         
+         <div class="jiance">
+                <button type="button" class="btn btn-primary queding" @click="searchInit"
+                        style="width: 110px;position:relative;right:11%;margin-top:3%;background-color:#549CFD;border:1px solid #549CFD;">
+                    确定
+                </button>
+          <button type="button" class="btn btn-primary chongzhi" @click="searchInit"
+                        style="width: 110px;  position:relative;right:10%;margin-top:3%;background-color:#CCCCCC;color:#666666;border:1px solid #CCCCCC;">
+                    重置
+                </button>
+            </div>
         <div class="mydiv" style="clear:both;margin-top:10px;display:none;">
 
-            <div class="sele">
-                <label for="" class="col-sm-2 control-label chesu" style="margin-left:1%;">车速</label>
-                <div class="col-sm-2">
-                    <!-- 样式1 -->
-                    <input type="text" class="text3" value="请输入" v-model="chesuStart" @input="checknum('chesuStart')"
-                           style="height: 34px;border-radius: 5px;box-shadow: none;width: 120%;border:1px solid #DDD;padding:3px;">
-                </div>
-
-                <div class="col-sm-2">
-                    <div class="xian2"
-                         style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: -5%;margin-top: 15%;">
-                    </div>
-                    <input type="text" class="text4" value="请输入" v-model="chesuEnd" @input="checknum('chesuEnd')"
-                           style="height: 34px;border-radius: 5px;box-shadow: none;width:120%;margin-left: 30px;border:1px solid #DDD;padding:3px;">
-                </div>
-            </div>
             <!-- 轴数 -->
     <!--  <label for="" class="col-sm-2 control-label zhousu" style="margin-left:3%;width:5%;display: none;">轴数</label>
             <div class="col-sm-2" style="display: none;">
@@ -274,38 +351,8 @@
             </div>-->
             <!--  路面温度 -->
             <div class="sele">
-                <label for="" class="col-sm-2 control-label lumianwendu" style="margin-left:3%;">路面温度</label>
-                <div class="col-sm-2 lmwd">
-                    <!-- 样式1 -->
-                    <input type="text" class="text6" value="请输入" v-model="roadTmpStart"
-                           @input="checknum('roadTmpStart')"
-                           style="height: 34px;border-radius: 5px;box-shadow: none;width: 120%;border:1px solid #DDD;padding:3px;">
-                </div>
-
-                <div class="col-sm-2">
-                    <div class="xian2"
-                         style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: -5%;margin-top: 15%;">
-                    </div>
-                    <input type="text" class="text7" v-model="roadTmpEnd" value="请输入" @input="checknum('roadTmpEnd')"
-                           style="height: 34px;border-radius: 5px;box-shadow: none;width:120%;margin-left: 30px;border:1px solid #DDD;padding:3px;">
-                </div>
-            </div>
-            <div class="sele">
                 <!-- 超重比例 -->
-               
-    <label class="col-sm-1	 control-label riqi" style="width: 70px;line-height: 30px; margin-left:-6%;">日期:</label>
-        <div class="col-sm-2">
-            <!-- 样式1 -->
-            <input type="text" v-model="startTime"  id="startTime"  value="请选择"
-                   style="height: 34px;border-radius: 5px;box-shadow: none;width: 250%;border:1px solid #DDD;">
-        </div>
-
         <div class="col-sm-2" style="margin-left: 6%;">
-            <div class="xian2"
-                 style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: 8%;margin-top: 15%;">
-            </div>
-            <input type="text" v-model="endTime" id="endTime" value="请选择" style="height: 34px;border-radius: 5px;box-shadow: none;width:
-        250%;margin-left: 30px;border:1px solid #DDD;">
 <!--                <div class="col-sm-2 bl" style="margin-left:-1%;">
                     <div class="xian2"
                          style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: -5%;margin-top: 15%;">
@@ -315,32 +362,52 @@
             120%;margin-left: 30px;border:1px solid #DDD;padding:3px;">
                 </div>-->
             </div>
-             <div class="sele" style="position:absolute;width:100%;top:9.5%;">
-                <label for="" class="col-sm-2 control-label chesu" style="margin-left:1%;">车长</label>
-                <div class="col-sm-2">
+             <div class="sele" class="bottomsele"style="position:absolute;width:100%;top:9.5%;">
+                <label for="" class="col-sm-2 control-label chesu" style="margin-left:1%;font-weight:normal;">车长</label>
+                <div class="col-sm-2" style="margin-left:-2%;width:13%;">
+                    <!-- 样式1 -->
+                    <input type="text" class="text3" value="请输入" v-model="chesuStart" @input="checknum('chesuStart')"
+                           style="height: 34px;border-radius: 5px;box-shadow: none;width: 120%;border:1px solid #DDD;padding:3px;">
+                </div> 
+                <label for="" class="col-sm-2 control-label chesu" style="margin-left:5%;font-weight:normal;">车速</label>
+                <div class="col-sm-2 chesuk" style="margin-left:-2.5%;width:5%;">
                     <!-- 样式1 -->
                     <input type="text" class="text3" value="请输入" v-model="chesuStart" @input="checknum('chesuStart')"
                            style="height: 34px;border-radius: 5px;box-shadow: none;width: 120%;border:1px solid #DDD;padding:3px;">
                 </div>
-
-                <div class="col-sm-2">
+                 
+                <div class="col-sm-2 chesukk" style="width:5%;">
                     <div class="xian2"
                          style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: -5%;margin-top: 15%;">
                     </div>
                     <input type="text" class="text4" value="请输入" v-model="chesuEnd" @input="checknum('chesuEnd')"
+                           style="height: 34px;border-radius: 5px;box-shadow: none;width:120%;margin-left: 30px;border:1px solid #DDD;padding:3px;">
+                </div>	
+                <label for="" class="col-sm-2 control-label lumianwendu" style="margin-left:5%;font-weight:normal;">路面温度</label>
+                <div class="col-sm-2 lmwd" style="margin-left:-2%;width:5%;">
+                    <!-- 样式1 -->
+                    <input type="text" class="text6" value="请输入" v-model="roadTmpStart"
+                           @input="checknum('roadTmpStart')"
+                           style="height: 34px;border-radius: 5px;box-shadow: none;width: 120%;border:1px solid #DDD;padding:3px;">
+                </div>
+
+                <div class="col-sm-2 lmwdt" style="width:5%;">
+                    <div class="xian2"
+                         style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: -5%;margin-top: 15%;">
+                    </div>
+                    <input type="text" class="text7" v-model="roadTmpEnd" value="请输入" @input="checknum('roadTmpEnd')"
                            style="height: 34px;border-radius: 5px;box-shadow: none;width:120%;margin-left: 30px;border:1px solid #DDD;padding:3px;">
                 </div>
             </div>
         </div>
         </div>
     </div>
-        <div class="xian" style="position:relative;margin-top:5.5%;"></div>
-        <input type="button" id="export" onclick="exportA()" class="button" value="导出EXCEL"
-               >
+        <div class="xian" style="position:relative;"></div>
+        <input type="button" id="export" onclick="exportA()" class="button" value="导出EXCEL" style="float:right;border:1px solid #549CFD;margin:0.5%;margin-right:5%;background-color:#549CFD;color:white;border-radius:5px 5px 5px;font-size:12px;padding:7px;">
     <!--表格-->
     <table class="table table-striped table-hover" id="mainContent"
            style="width: 90%;margin: 0 auto; margin-top: 20px;">
-        <thead style="background-color: #DDE6F7;">
+        <thead style="background-color: white;height:40px;">
         <tr>
             <th style="width: 15%">站点</th>
             <th>车道号</th>
@@ -524,8 +591,6 @@
 <script src="../js/jquery.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 <!--<script src="../js/bootstrap-select.js"></script>-->
-<script src="js/laydate/laydate.js"></script>
-<script src="js/layui.js" charset="utf-8"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
 <script src="js/echarts.min(1).js" type="text/javascript" charset="utf-8"></script>
 <script src="js/datatables/jquery.dataTables.min.js"></script>
@@ -541,14 +606,7 @@
 
     $(document).ready(function () {
         initzhandian();
-       /* initchexing();*/
-        laydate.render({
-            elem: '#startTime', //指定元素
-            type: 'datetime'
-        });laydate.render({
-            elem: '#endTime', //指定元素
-            type: 'datetime'
-        });
+        initchexing();
     });
 
 
@@ -808,8 +866,8 @@
                 const start = new Date();
                 start.setTime(start.getTime() - 3600 * 1000 * 24 * timeRange);
                 end.setTime(end.getTime() + 3600 * 1000 * 24 * 1);
-                this.startTime = start.Format("yyyy-MM-dd hh:mm:ss");
-                this.endTime = end.Format("yyyy-MM-dd hh:mm:ss");
+                this.startTime = start.Format("yyyy-MM-dd");
+                this.endTime = end.Format("yyyy-MM-dd");
                 }
             },
             init: function () {
