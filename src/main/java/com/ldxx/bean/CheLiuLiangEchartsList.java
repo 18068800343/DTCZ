@@ -2,7 +2,7 @@ package com.ldxx.bean;
 
 public class CheLiuLiangEchartsList {
 
-    private String nums;
+    private String nums;//站点超载数量
     private String stationPorts;
     private String stationNames;
     private String numCount;//站点总车流量
