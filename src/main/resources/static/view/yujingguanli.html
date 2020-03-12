@@ -419,31 +419,39 @@
 <script>
 
     $(document).ready( function () {
-
-        $("#chuli_state").trigger('change')
-        $("#chuli_state2").trigger('change')
-        $("#chuli_state3").trigger('change')
+        var date = new Date();
+        var nowdate=date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()+' 00:00:00';
+        $("#startTime").val(nowdate)
+        $("#startTime2").val(nowdate)
+        $("#startTime3").val(nowdate)
         laydate.render({
             elem: '#startTime', //指定元素
-            type: 'datetime'
-        });laydate.render({
+            type: 'datetime',
+        });
+        laydate.render({
             elem: '#endTime', //指定元素
             type: 'datetime'
         });
         laydate.render({
             elem: '#startTime2', //指定元素
-            type: 'datetime'
-        });laydate.render({
+            type: 'datetime',
+        });
+        laydate.render({
             elem: '#endTime2', //指定元素
             type: 'datetime'
         });
         laydate.render({
             elem: '#startTime3', //指定元素
-            type: 'datetime'
-        });laydate.render({
+            type: 'datetime',
+        });
+        laydate.render({
             elem: '#endTime3', //指定元素
             type: 'datetime'
         });
+
+        $("#chuli_state").trigger('change')
+        $("#chuli_state2").trigger('change')
+        $("#chuli_state3").trigger('change')
     });
     var table=$('#mainContent').dataTable({
         "deferRender": true,
