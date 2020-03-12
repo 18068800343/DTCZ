@@ -6,6 +6,24 @@ public class HomeData {
     private Double maxWeight;
     private Integer stationNums;
     private Integer totalGuanJian;
+    private String stationNames;
+    private String links;
+
+    public String getStationNames() {
+        return stationNames;
+    }
+
+    public void setStationNames(String stationNames) {
+        this.stationNames = stationNames;
+    }
+
+    public String getLinks() {
+        return links;
+    }
+
+    public void setLinks(String links) {
+        this.links = links;
+    }
 
     public Integer getTotalGuanJian() {
         return totalGuanJian;

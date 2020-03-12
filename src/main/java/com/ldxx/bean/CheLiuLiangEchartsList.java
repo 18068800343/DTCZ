@@ -11,6 +11,7 @@ public class CheLiuLiangEchartsList {
     private String cnt2;//关键车辆二级预警数量
     private String cnt3;//关键车辆三级预警数量
 
+    private Integer link;
     public String getNumsBili() {
         return numsBili;
     }

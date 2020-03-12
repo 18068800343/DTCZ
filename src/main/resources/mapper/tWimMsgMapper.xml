@@ -218,7 +218,7 @@
                             t_vehicle_overweight a
                         RIGHT JOIN station_site b ON a.Station_IP = b.Station_Port AND a.Over_Weight>0 AND date(a.Evt_Time) = curdate() and a.Total_Weight &lt;(SELECT Crux_Weight FROM crux_weight  WHERE Del_State = 1 AND lv = 2)
                         <if test="link!=null and link!=''">
-                            and b.link #{link}
+                            and b.link = #{link}
                         </if>
                     RIGHT JOIN(
                                     SELECT
@@ -336,6 +336,12 @@
         LEFT JOIN (
         select COUNT(*) totalCheLiu FROM t_vehicle_msg_today a WHERE  FIND_IN_SET(a.Station_IP,#{stationPorts}) and  date(a.Evt_Time) = curdate()
         )cc on 1= 1
+        LEFT JOIN (
+        select group_concat(b.link SEPARATOR ',') AS links FROM station_site b WHERE  FIND_IN_SET(b.Station_Port,#{stationPorts})
+        )dd on 1= 1
+        LEFT JOIN(
+        select group_concat(b.Station_Name SEPARATOR ',') AS stationNames FROM station_site b WHERE  FIND_IN_SET(b.Station_Port,#{stationPorts})
+        )ee on 1= 1
     </select>
 
     <select id="getCheLiuLiangEchartsList" resultType="CheLiuLiangEchartsList">

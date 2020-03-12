@@ -12,6 +12,23 @@ let bindChartClick = (e, d) => {
     });
 }
 
+let bindLeftLinks = (stationNames,links) => {
+    let dom;
+    $("#mainContent1 tbody").empty();
+    for(let i=0;i<stationNames.length;i++){
+        let link = links[i];
+        if(link==0){
+            link="<label style='color: #843534'>未接通</label>";
+        }else{
+            link = "<label style='color: #1B5ACB'>已接通</label>"
+        }
+        let tr = "<tr><td>"+stationNames[i]+"</td><td>"+link+"</td></tr>";
+        dom+=tr;
+    }
+    $("#mainContent1 tbody").append(dom);
+    $("#chart1Detail1").modal("show");
+}
+
 
 
 let initHomeMap = (lngLats,stationNames)=>{
@@ -281,7 +298,7 @@ homePageInit.setLeftEcharts = (id, stationNames, nums) => {
         ]
     };
     myChart.setOption(option);
-    bindChartClick(myChart,1);
+   /* bindChartClick(myChart,1);*/
 }
 
 
@@ -376,7 +393,7 @@ homePageInit.initHuanEcharts = (id,index,nums,stationName,nums2) => {
     };
     myChart.setOption(option)
     $("#huan"+index).show();
-    bindChartClick(myChart,2);
+    /*bindChartClick(myChart,2);*/
 }
 homePageInit.initHuanEcharts2 = (id,index,nums,stationName) => {
     // 环形图
@@ -497,7 +514,7 @@ homePageInit.initHuanEcharts2 = (id,index,nums,stationName) => {
     };
     myChart.setOption(option);
     $("#by"+index).show();
-    bindChartClick(myChart,3);
+    /*bindChartClick(myChart,3);*/
 }
 
 let getHuanDataByJson = (index,nums,nums2)=>{
@@ -565,6 +582,8 @@ homePageInit.initHomeData = ()=>{
             $("#leftTable4").html(json.stationNums);
             $("#lastZuiDaCheZhong").html('')
             $("#lastZuiDaCheZhong").html((json.maxWeight/1000).toFixed(2))
+            homePageInit.linkStationNames = json.stationNames.split(",");
+            homePageInit.links = json.links.split(",");
         }
     });
 }
@@ -686,7 +705,7 @@ homePageInit.setLastEcharts = (json) => {
 
 
     myChart.setOption(option);
-    bindChartClick(myChart,4)
+    /*bindChartClick(myChart,4)*/
 }
 
 let initLeftChartDetail=(d)=>{
