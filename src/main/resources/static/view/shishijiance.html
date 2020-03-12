@@ -33,6 +33,34 @@
 			#mainContent5_paginate{
 				margin-right: -100%;
 			}
+		.modal-header{
+            background-color:#549CDF;
+            color:white;
+        }
+      .table.dataTable thead th, table.dataTable thead td{
+            border-bottom:0px solid #DEDEDE;
+        }
+       #mainContent th{
+            height:30px;
+            line-height:30px;
+        }
+        #mainContent td{
+            height:30px;
+            line-height:30px;
+        }
+        .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
+            border:0px solid #ddd;
+        }
+        .table.dataTable.no-footer{
+             border:0px solid #ddd;
+        }
+        #mainContent_info{
+            float:right;
+            margin-right:5%;
+        }
+        #mainContent_paginate{
+           margin-right:15%;
+        }
 			.selected{
 				background: rgba(247, 161, 3,0.2);
 			}
@@ -103,7 +131,7 @@
 			</div>-->
 			<!--表格-->
 			<table class="table table-striped table-hover" id="mainContent" style="width: 94%;margin: 0 auto; margin-top: 20px;margin-left:0%;">
-				<thead style="background-color: #DDE6F7;">
+				<thead style="background-color: white;">
 					<tr>
 						<th style="width: 10%">站点</th>
 						<th>车道号</th>
@@ -117,7 +145,6 @@
 						<th>超重比率</th>
 						<th>时间</th>
 						<th>操作</th>
-
 					</tr>
 				</thead>
 				<tbody>
@@ -435,8 +462,10 @@
 										<td>超重比率</td>
 										<td>{{overWeightRatioName}}</td>
 									</tr>
+									
 								</table>
 								<div>
+								<span>查看图片</span>
 									<div id="chepaiImg">
 									</div>
 									<div id="chebodyDiv">
