@@ -383,7 +383,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" @click="querenchuli">确认处理</button>
+                <!--<button type="button" class="btn btn-primary" data-dismiss="modal" @click="querenchuli">确认处理</button>-->
             </div>
         </div>
     </div>
@@ -769,17 +769,7 @@
         var timeRange=$("#timeRange").val();
         var startTime=$("#startTime").val();
         var endTime=$("#endTime").val();
-        /*if(timeRange==""||timeRange==undefined){
-            startTime=$("#startTime").val();
-            endTime=$("#endTime").val();
-        }else{
-            const end = new Date();
-            const start = new Date();
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * timeRange);
-            end.setTime(end.getTime() + 3600 * 1000 * 24 * 1);
-            startTime = start.Format("yyyy-MM-dd");
-            endTime = end.Format("yyyy-MM-dd");
-        }*/
+
         var url;
         if($("#chuli_state").val()==0){
             url='/tVehicleOverweight/getMeiRiChaoZaiShujuByStationPortCondition'
