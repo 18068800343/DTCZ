@@ -746,11 +746,30 @@
         searchInit()
     })
 
+
+    $("#timeRange").change(function(){
+        var timeRange=$("#timeRange").val().toString()
+        if(timeRange==""||timeRange==undefined){
+            $("#startTime").val("")
+            $("#endTime").val("")
+        }else{
+            const end = new Date();
+            const start = new Date();
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * timeRange);
+            end.setTime(end.getTime() + 3600 * 1000 * 24 * 1);
+            var startTime = start.Format("yyyy-MM-dd hh:mm:ss");
+            var endTime = end.Format("yyyy-MM-dd hh:mm:ss");
+            $("#startTime").val(startTime)
+            $("#endTime").val(endTime)
+        }
+
+    })
+
     function searchInit(){
         var timeRange=$("#timeRange").val();
-        var startTime;
-        var endTime;
-        if(timeRange==""||timeRange==undefined){
+        var startTime=$("#startTime").val();
+        var endTime=$("#endTime").val();
+        /*if(timeRange==""||timeRange==undefined){
             startTime=$("#startTime").val();
             endTime=$("#endTime").val();
         }else{
@@ -760,7 +779,7 @@
             end.setTime(end.getTime() + 3600 * 1000 * 24 * 1);
             startTime = start.Format("yyyy-MM-dd");
             endTime = end.Format("yyyy-MM-dd");
-        }
+        }*/
         var url;
         if($("#chuli_state").val()==0){
             url='/tVehicleOverweight/getMeiRiChaoZaiShujuByStationPortCondition'
@@ -796,33 +815,32 @@
 
 
     $("#chuli_state2").change(function(){
-        /*var url;
-        if($("#chuli_state2").val()==0){
-            url='/tVehicleOverweight/getMeiRiGuanJianChaoZHongShujuByStationPort'
-            initTable2(url)
-            $("#pichuli2").attr("style","display:block;");
-        }else{
-            url='/tVehicleOverweight/getMeiRiGuanJianChaoZHongShujuByStationPortAlreadychuli'
-            initTable2(url)
-            $("#pichuli2").attr("style","display:none;");
-        }*/
         searchInit2()
     })
-    function searchInit2(){
-        var timeRange=$("#timeRange2").val();
-        var startTime;
-        var endTime;
+
+    $("#timeRange2").change(function(){
+        var timeRange=$("#timeRange2").val().toString()
         if(timeRange==""||timeRange==undefined){
-            startTime=$("#startTime2").val();
-            endTime=$("#endTime2").val();
+            $("#startTime2").val("")
+            $("#endTime2").val("")
         }else{
             const end = new Date();
             const start = new Date();
             start.setTime(start.getTime() - 3600 * 1000 * 24 * timeRange);
             end.setTime(end.getTime() + 3600 * 1000 * 24 * 1);
-            startTime = start.Format("yyyy-MM-dd");
-            endTime = end.Format("yyyy-MM-dd");
+            var startTime = start.Format("yyyy-MM-dd hh:mm:ss");
+            var endTime = end.Format("yyyy-MM-dd hh:mm:ss");
+            $("#startTime2").val(startTime)
+            $("#endTime2").val(endTime)
         }
+
+    })
+
+    function searchInit2(){
+        var timeRange=$("#timeRange2").val();
+        var startTime=$("#startTime2").val();;
+        var endTime=$("#endTime2").val();;
+
         var url;
         if($("#chuli_state2").val()==0){
             url='/tVehicleOverweight/getMeiRiGuanJianChaoZHongShujuByStationPort'
@@ -858,34 +876,32 @@
     }
 
     $("#chuli_state3").change(function(){
-        /*var url;
-        if($("#chuli_state3").val()==0){
-            url='/tVehicleOverweight/getMeiRiGuanJianChaoZHongShujuByStationPort'
-            initTable3(url)
-            $("#pichuli3").attr("style","display:block;");
-        }else{
-            url='/tVehicleOverweight/getMeiRiGuanJianChaoZHongShujuByStationPortAlreadychuli'
-            initTable3(url)
-            $("#pichuli3").attr("style","display:none;");
-        }*/
         searchInit3()
     })
 
-    function searchInit3(){
-        var timeRange=$("#timeRange3").val();
-        var startTime;
-        var endTime;
+    $("#timeRange3").change(function(){
+        var timeRange=$("#timeRange3").val().toString()
         if(timeRange==""||timeRange==undefined){
-            startTime=$("#startTime3").val();
-            endTime=$("#endTime3").val();
+            $("#startTime3").val("")
+            $("#endTime3").val("")
         }else{
             const end = new Date();
             const start = new Date();
             start.setTime(start.getTime() - 3600 * 1000 * 24 * timeRange);
             end.setTime(end.getTime() + 3600 * 1000 * 24 * 1);
-            startTime = start.Format("yyyy-MM-dd");
-            endTime = end.Format("yyyy-MM-dd");
+            var startTime = start.Format("yyyy-MM-dd hh:mm:ss");
+            var endTime = end.Format("yyyy-MM-dd hh:mm:ss");
+            $("#startTime3").val(startTime)
+            $("#endTime3").val(endTime)
         }
+
+    })
+
+    function searchInit3(){
+        var timeRange=$("#timeRange3").val();
+        var startTime=$("#startTime3").val();
+        var endTime=$("#endTime3").val();
+
         var url;
         if($("#chuli_state3").val()==0){
             url='/tVehicleOverweight/getMeiRiGuanJianChaoZHongShujuByStationPort'
