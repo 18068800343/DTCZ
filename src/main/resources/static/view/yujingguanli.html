@@ -709,6 +709,9 @@
     function showMask() {
         myTool.mask.show('查询中...');
     }
+    function showMask2() {
+        myTool.mask.show('处理中...');
+    }
     function hidMask() {
         myTool.mask.hide();
     }
@@ -1140,7 +1143,7 @@
 
 
     function pichuli(){
-        showMask()
+        showMask2()
         var timeRange=$("#timeRange").val();
         var startTime;
         var endTime;
@@ -1178,13 +1181,14 @@
                 }
             });
         }else{
+            hidMask()
             return false;
         }
 
     }
 
     function pichuli2(){
-        showMask()
+        showMask2()
         var timeRange=$("#timeRange2").val();
         var startTime;
         var endTime;
@@ -1222,13 +1226,14 @@
                 }
             });
         }else{
+            hidMask()
             return false;
         }
 
     }
 
     function pichuli3(){
-        showMask()
+        showMask2()
         var timeRange=$("#timeRange3").val();
         var startTime;
         var endTime;
@@ -1266,6 +1271,7 @@
                 }
             });
         }else{
+            hidMask()
             return false;
         }
 

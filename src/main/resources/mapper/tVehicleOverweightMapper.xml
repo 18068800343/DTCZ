@@ -112,7 +112,13 @@
 	</insert>
 
 	<insert id="addtVehicleOverweightByidLocal">
-		insert into t_vehicle_overweight select * from t_vehicle_overweight_temp  where id_local=#{idLocal}
+		insert into t_vehicle_overweight(id_local,Id,Station_Id, Evt_Time, Msg_Time, Lane_No, Plate, Plate_Color, Class_Index, Length, Speed,
+			Direction, Axles_Count, Total_Weight, Axle1, Axle2, Axle3, Axle4, Axle5, Axle6, Axle7, Axle8, Axle9, Axle10, Axle_space1, Axle_space2,
+			Axle_space3, Axle_space4, Axle_space5, Axle_space6, Axle_space7, Axle_space8, Axle_space9, Is_Straddle, Temperature, Over_Weight, Over_Weight_Ratio,
+		 	WIM_Id, LPR_id, Station_IP) select (id_local,Id,Station_Id, Evt_Time, Msg_Time, Lane_No, Plate, Plate_Color, Class_Index, Length, Speed,
+			Direction, Axles_Count, Total_Weight, Axle1, Axle2, Axle3, Axle4, Axle5, Axle6, Axle7, Axle8, Axle9, Axle10, Axle_space1, Axle_space2,
+			Axle_space3, Axle_space4, Axle_space5, Axle_space6, Axle_space7, Axle_space8, Axle_space9, Is_Straddle, Temperature, Over_Weight, Over_Weight_Ratio,
+		 	WIM_Id, LPR_id, Station_IP) from t_vehicle_overweight_temp  where id_local=#{idLocal}
 	</insert>
 
 	<select id="getidLocalBystationPorts" resultType="tWimMsgVo">
