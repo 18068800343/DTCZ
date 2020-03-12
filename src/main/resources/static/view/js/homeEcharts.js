@@ -204,7 +204,8 @@ homePageInit.setLeftEcharts = (id, stationNames, nums) => {
             },
             splitLine: {
                 show: false
-            }
+            },
+            boundaryGap: ['0%', '20%'],//留白大小，坐标轴两边留白
         },
         yAxis: {
             type: 'category',
