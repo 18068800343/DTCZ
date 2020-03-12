@@ -33,6 +33,27 @@
         #mainContent th{
             cursor: pointer;
         }
+        .modal-header{
+            background-color:#549CDF;
+            color:white;
+        }
+      .table.dataTable thead th, table.dataTable thead td{
+            border-bottom:0px solid #DEDEDE;
+        }
+          #mainContent th{
+            height:30px;
+            line-height:30px;
+        }
+          #mainContent td{
+            height:30px;
+            line-height:30px;
+        }
+          .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
+            border:0px solid #ddd;
+        }
+        .table.dataTable.no-footer{
+             border:0px solid #ddd;
+        }
     </style>
 </head>
 <body style="background-image: none;width: 90%;margin-left: 10%;">
@@ -60,7 +81,7 @@
 
                 </div>
                 <div class="LowerPart" style="margin-top:3px;">
-                    <table class="table table-bordered table-condensed table-hover" style="width:100%;" id="mainContent">
+                    <table class="table table-bordered table-condensed table-hover layui-table" lay-even lay-skin="nob" style="width:100%;" id="mainContent">
                         <thead>
                         <tr>
                             <!-- <td>设备类型</td> -->
@@ -87,7 +108,7 @@
 
                 </div>
                 <div class="LowerPart" style="margin-top:3px;">
-                    <table class="table table-bordered table-condensed table-hover" style="width:100%;" id="mainContent2">
+                    <table class="table table-bordered table-condensed table-hover layui-table"lay-even lay-skin="nob" style="width:100%;" id="mainContent2">
                         <thead>
                         <tr>
                             <th>序号</th>
@@ -114,7 +135,7 @@
 
                 </div>
                 <div class="LowerPart" style="margin-top:3px;">
-                    <table class="table table-bordered table-condensed table-hover" style="width:100%;" id="mainContent3">
+                    <table class="table table-bordered table-condensed table-hover layui-table" lay-even lay-skin="nob" style="width:100%;" id="mainContent3">
                         <thead>
                         <tr>
                             <th>序号</th>
@@ -139,7 +160,7 @@
 
                 </div>
                 <div class="LowerPart" style="margin-top:3px;">
-                    <table class="table table-bordered table-condensed table-hover" style="width:100%;" id="mainContent4">
+                    <table class="table table-bordered table-condensed table-hover layui-table" lay-even lay-skin="nob" style="width:100%;" id="mainContent4">
                         <thead>
                         <tr>
                             <th>序号</th>

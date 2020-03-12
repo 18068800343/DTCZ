@@ -81,8 +81,17 @@
                background-color:white;
                margin-top:0% !important;
             }
-             
-
+           }
+            @media screen and (max-width: 1400px) {
+               .marginl{
+                margin-left:2% !important;
+               }
+               .labelli{
+               margin-left:2% !important;
+               }
+               .shaixuan{
+                width:7% !important;
+               }
 }
 		</style>
 	</head>
@@ -94,7 +103,7 @@
 			    <li>当前超载车辆</li>
 			    <li>当前关键超重车辆</li>
 			  </ul>
-			  <div class="layui-tab-content">
+			  <div class="layui-tab-content marginl">
 			    <div class="layui-tab-item layui-show">
 			     <div class="zd col-xs-2" style="background-color:#549CFD;height:170px;color:white;border-radius:5px 5px 5px;width:20%;">
 			        <p style="font-size:15px;margin-top:7%;">当前监测站点/个</p>
@@ -130,7 +139,7 @@
 				<button type="button" class="btn btn-primary" onclick="nowJianceSite()" data-toggle="modal" data-target="#jianceDiv" style="width: 150px;background-color:#549CFD;color:white;border:2px solid #549CFD;">当前监测站点</button>
 			</div>-->
 			<!--表格-->
-			<table class="table table-striped table-hover" id="mainContent" style="width: 94%;margin: 0 auto; margin-top: 20px;margin-left:0%;">
+			<table class="table table-striped table-hover" id="mainContent" style="width: 100%;margin: 0 auto; margin-top: 20px;margin-left:0%;">
 				<thead style="background-color: white;">
 					<tr>
 						<th style="width: 10%">站点</th>

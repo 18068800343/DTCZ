@@ -1,10 +1,10 @@
 body{
 	background-image: url(../img/bg.png);
-	background-size: 100% 100% ;
+	background-size: 100% 110% ;
 	background-repeat: no-repeat;
 }
 .leftdiv{
-	margin-left: 12%;
+	margin-left: 16%;
 }
 .jianceh{
 	 background-image: -webkit-linear-gradient(bottom, rgb(0, 122, 255), rgb(0, 250, 255));

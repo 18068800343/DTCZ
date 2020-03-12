@@ -31,6 +31,27 @@
         #mainContent th{
             cursor: pointer;
         }
+            .modal-header{
+            background-color:#549CDF;
+            color:white;
+        }
+      .table.dataTable thead th, table.dataTable thead td{
+            border-bottom:0px solid #DEDEDE;
+        }
+         #mainContent th{
+            height:30px;
+            line-height:30px;
+        }
+          #mainContent td{
+            height:30px;
+            line-height:30px;
+        }
+          .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
+            border:0px solid #ddd;
+        }
+        .table.dataTable.no-footer{
+             border:0px solid #ddd;
+        }
     </style>
 </head>
 <body style="background-image: none;width: 90%;margin-left: 10%;">
@@ -47,7 +68,7 @@
                 </div>
             </div>
             <div class="LowerPart" style="margin-top:3px;">
-                <table class="table table-bordered table-condensed table-hover" id="mainContent" style="white-space: nowrap;">
+                <table class="table table-bordered table-condensed table-hover layui-table" lay-even lay-skin="nob" id="mainContent" style="white-space: nowrap;">
                     <thead>
                     <tr>
                         <th>站点ID</th>
