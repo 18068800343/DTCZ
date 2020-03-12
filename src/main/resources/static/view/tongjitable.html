@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="../style/jquery.dataTables.min.css">
     <link href="../style/style.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/home.css"/>
-    <!--<link rel="stylesheet" type="text/css" href="css/layui.css" />-->
+    <link rel="stylesheet" type="text/css" href="css/layui.css" />
     <link rel="stylesheet" href="css/toastr.css"/>
     <style>
         #mainContent_info {
@@ -296,7 +296,7 @@
     <label class="col-sm-1	 control-label riqi" style="width: 70px;line-height: 30px; margin-left:-6%;">日期:</label>
         <div class="col-sm-2">
             <!-- 样式1 -->
-            <input type="date" v-model="startTime" value="请选择"
+            <input type="text" v-model="startTime"  id="startTime"  value="请选择"
                    style="height: 34px;border-radius: 5px;box-shadow: none;width: 250%;border:1px solid #DDD;">
         </div>
 
@@ -304,7 +304,7 @@
             <div class="xian2"
                  style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: 8%;margin-top: 15%;">
             </div>
-            <input type="date" v-model="endTime" value="请选择" style="height: 34px;border-radius: 5px;box-shadow: none;width:
+            <input type="text" v-model="endTime" id="endTime" value="请选择" style="height: 34px;border-radius: 5px;box-shadow: none;width:
         250%;margin-left: 30px;border:1px solid #DDD;">
 <!--                <div class="col-sm-2 bl" style="margin-left:-1%;">
                     <div class="xian2"
@@ -524,6 +524,8 @@
 <script src="../js/jquery.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 <!--<script src="../js/bootstrap-select.js"></script>-->
+<script src="js/laydate/laydate.js"></script>
+<script src="js/layui.js" charset="utf-8"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
 <script src="js/echarts.min(1).js" type="text/javascript" charset="utf-8"></script>
 <script src="js/datatables/jquery.dataTables.min.js"></script>
@@ -539,7 +541,14 @@
 
     $(document).ready(function () {
         initzhandian();
-        initchexing();
+       /* initchexing();*/
+        laydate.render({
+            elem: '#startTime', //指定元素
+            type: 'datetime'
+        });laydate.render({
+            elem: '#endTime', //指定元素
+            type: 'datetime'
+        });
     });
 
 
@@ -799,8 +808,8 @@
                 const start = new Date();
                 start.setTime(start.getTime() - 3600 * 1000 * 24 * timeRange);
                 end.setTime(end.getTime() + 3600 * 1000 * 24 * 1);
-                this.startTime = start.Format("yyyy-MM-dd");
-                this.endTime = end.Format("yyyy-MM-dd");
+                this.startTime = start.Format("yyyy-MM-dd hh:mm:ss");
+                this.endTime = end.Format("yyyy-MM-dd hh:mm:ss");
                 }
             },
             init: function () {
