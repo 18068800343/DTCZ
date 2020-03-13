@@ -215,7 +215,7 @@
 
 
                         FROM
-                            t_vehicle_overweight a
+                            t_vehicle_msg_today a
                         RIGHT JOIN station_site b ON a.Station_IP = b.Station_Port AND a.Over_Weight>0 AND date(a.Evt_Time) = curdate() and a.Total_Weight &lt;(SELECT Crux_Weight FROM crux_weight  WHERE Del_State = 1 AND lv = 2)
                         <if test="link!=null and link!=''">
                             and b.link = #{link}
@@ -329,7 +329,7 @@
 
     <select id="getHomeData" resultType="HomeData">
         SELECT * from (
-        SELECT COUNT(*) totalChaoZai FROM t_vehicle_overweight a WHERE a.Over_Weight>0 and FIND_IN_SET(a.Station_IP,#{stationPorts}) and  date(a.Evt_Time) = curdate()
+        SELECT COUNT(*) totalChaoZai FROM t_vehicle_msg_today a WHERE a.Over_Weight>0 and FIND_IN_SET(a.Station_IP,#{stationPorts}) and  date(a.Evt_Time) = curdate()
         ) aa LEFT JOIN (
         select MAX(a.Total_Weight) maxWeight FROM t_vehicle_msg_today a WHERE  FIND_IN_SET(a.Station_IP,#{stationPorts}) and  date(a.Evt_Time) = curdate()
         )bb on 1= 1
@@ -512,7 +512,7 @@
         end as overWeightRatioName,
         a.*,b.Station_Name,b.Route_Name,concat_ws("+",b.Station_Name,b.Route_Name) as stationNameRouteName,
         c.License_Plate_Color,d.Vehicle_Type_Name
-        from (select a.* from t_vehicle_overweight a where date(Evt_Time) = curdate() and Over_Weight>0 and  a.Total_Weight &lt;(SELECT Crux_Weight FROM crux_weight  WHERE Del_State = 1 AND lv = 2) and
+        from (select a.* from t_vehicle_msg_today a where date(Evt_Time) = curdate() and Over_Weight>0 and  a.Total_Weight &lt;(SELECT Crux_Weight FROM crux_weight  WHERE Del_State = 1 AND lv = 2) and
         <include refid="StationIP_chaozaishuju_sql"></include>
         ) a
         LEFT JOIN station_site b on a.Station_IP=b.Station_Port
@@ -660,7 +660,7 @@
 
     <select id="getJianCeTotal" resultType="HomeData">
         SELECT * from (
-        SELECT COUNT(*) totalChaoZai FROM t_vehicle_overweight a WHERE a.Over_Weight>0 and FIND_IN_SET(a.Station_IP,#{stationPorts}) and  date(a.Evt_Time) = curdate() and a.Total_Weight &lt;(SELECT Crux_Weight FROM crux_weight  WHERE Del_State = 1 AND lv = 2)
+        SELECT COUNT(*) totalChaoZai FROM t_vehicle_msg_today a WHERE a.Over_Weight>0 and FIND_IN_SET(a.Station_IP,#{stationPorts}) and  date(a.Evt_Time) = curdate() and a.Total_Weight &lt;(SELECT Crux_Weight FROM crux_weight  WHERE Del_State = 1 AND lv = 2)
         ) aa LEFT JOIN (
         select MAX(a.Total_Weight) maxWeight FROM t_vehicle_msg_today a WHERE  FIND_IN_SET(a.Station_IP,#{stationPorts}) and  date(a.Evt_Time) = curdate()
         )bb on 1= 1
@@ -717,7 +717,7 @@
 			b.Station_Port,
 			b.Station_Name
 			FROM
-				t_vehicle_overweight a
+				t_vehicle_msg_today a
 			RIGHT JOIN station_site b ON a.Station_IP = b.Station_Port AND date(a.Evt_Time) = curdate() and a.Over_Weight>0 and a.Total_Weight &lt;(SELECT Crux_Weight FROM crux_weight  WHERE Del_State = 1 AND lv = 2)
 			GROUP BY
 				b.Station_Port

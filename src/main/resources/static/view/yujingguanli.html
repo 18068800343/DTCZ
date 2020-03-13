@@ -57,9 +57,8 @@
 
 <div class="layui-tab" >
     <ul class="layui-tab-title labelli">
-        <li class="layui-this labelthis">超载车辆预警</li>
-        <li>超载车辆二级预警</li>
-        <li>超载车辆三级预警</li>
+        <li class="layui-this labelthis">关键超载车辆预警</li>
+
     </ul>
     <div class="layui-tab-content">
         <div class="layui-tab-item layui-show">
@@ -132,7 +131,7 @@
                 </div>
         </div>
 
-        <div class="layui-tab-item">
+        <!--<div class="layui-tab-item">
             <div class="UpperPart">
                 <div class="UpperPartL" style="width: 50%">
                     <div style="width: 20%">
@@ -145,7 +144,7 @@
                         <label class="col-sm-1	 control-label riqi"
                                style="margin-left: 5%;width: 70px;line-height: 30px;font-size:15px;font-weight:normal;">日期:</label>
                         <div class="col-sm-2">
-                            <!-- 样式1 -->
+                            &lt;!&ndash; 样式1 &ndash;&gt;
                             <select value="请选择" class="selectpicker" multiple data-max-options="1" data-live-search="true"  id="timeRange2"
                                     style="height: 34px; border-radius: 5px; box-shadow: none; margin-left: 30px; border: 1px solid rgb(221, 221, 221);">
                                 <option value="">全部</option>
@@ -212,7 +211,7 @@
                         <label class="col-sm-1	 control-label riqi"
                                style="margin-left: 5%;width: 70px;line-height: 30px;font-size:15px;font-weight:normal;">日期:</label>
                         <div class="col-sm-2">
-                            <!-- 样式1 -->
+                            &lt;!&ndash; 样式1 &ndash;&gt;
                             <select value="请选择" class="selectpicker" multiple data-max-options="1" data-live-search="true"  id="timeRange3"
                                     style="height: 34px; border-radius: 5px; box-shadow: none; margin-left: 30px; border: 1px solid rgb(221, 221, 221);">
                                 <option value="">全部</option>
@@ -264,7 +263,7 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div>-->
 
     </div>
 </div>
@@ -440,11 +439,7 @@
 <script>
 
     $(document).ready( function () {
-        var date = new Date();
-        var nowdate=date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()+' 00:00:00';
-        $("#startTime").val(nowdate)
-        $("#startTime2").val(nowdate)
-        $("#startTime3").val(nowdate)
+
         laydate.render({
             elem: '#startTime', //指定元素
             type: 'datetime',
@@ -453,26 +448,10 @@
             elem: '#endTime', //指定元素
             type: 'datetime'
         });
-        laydate.render({
-            elem: '#startTime2', //指定元素
-            type: 'datetime',
-        });
-        laydate.render({
-            elem: '#endTime2', //指定元素
-            type: 'datetime'
-        });
-        laydate.render({
-            elem: '#startTime3', //指定元素
-            type: 'datetime',
-        });
-        laydate.render({
-            elem: '#endTime3', //指定元素
-            type: 'datetime'
-        });
+
 
         $("#chuli_state").trigger('change')
-        $("#chuli_state2").trigger('change')
-        $("#chuli_state3").trigger('change')
+
     });
     var table=$('#mainContent').dataTable({
         "deferRender": true,
@@ -505,7 +484,7 @@
             "searchable": true,
             "render": function(data, type, full) {
                 var look='<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" onclick="lookMs(this)" data-toggle="modal" data-target="#allMsg1" id="lookDetall"></i>'
-                var queren='<i class="glyphicon glyphicon-arrow-right Pkb" style="margin-left:10px;font-size:18px;cursor:pointer;display: none" title="处理" onclick="querenchuli(this,1)" data-toggle="modal" data-target="#change"></i>'
+                var queren='<i class="glyphicon glyphicon-arrow-right Pkb" style="margin-left:10px;font-size:18px;cursor:pointer;display: none" title="处理" onclick="querenchuli(this)" data-toggle="modal" data-target="#change"></i>'
                 return look+queren;
                 }
             },{
@@ -560,172 +539,6 @@
     });
 
 
-    var table2=$('#mainContent2').dataTable({
-        "deferRender": true,
-        "processing": true,
-        "bDestroy": true,
-        "iDisplayLength": 10,
-        "searching": true,
-        "lengthChange": false,
-        "oLanguage": {
-            "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
-        },
-        "columns": [
-            { "data": "stationName"},
-            { "data": "laneNoName"},
-            /*{ "data": "plate"},
-            { "data": "licensePlateColor"},*/
-            { "data": "length"},
-            { "data": "speed"},
-            { "data": "axlesCount"},
-            { "data": "totalWeight"},
-            { "data": "temperature"},
-            { "data": "overWeightRatio"},
-            {"data": "evtTime"},
-            { "data": null},
-            { "data": null},
-        ],
-        "columnDefs": [{
-            "class": "tcenter",
-            "targets": 10,
-            "searchable": true,
-            "render": function(data, type, full) {
-                var look='<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" onclick="lookMs2(this)" data-toggle="modal" data-target="#allMsg1"></i>'
-                var queren='<i class="glyphicon glyphicon-arrow-right Pkc" style="margin-left:10px;font-size:18px;cursor:pointer;display: none" title="处理" onclick="querenchuli(this,2)" data-toggle="modal" data-target="#change"></i>'
-                return look+queren;
-            }
-        },{
-            "class": "tcenter",
-            "targets": 7,
-            "searchable": true,
-            "render": function(data, type, full) {
-                return ((data*100).toFixed(2))+"%";
-            }
-        },{
-            "class": "tcenter",
-            "targets": 9,
-            "searchable": true,
-            "render": function(data, type, full) {
-                var url
-                $.ajax({
-                    type: 'POST',
-                    url: '/tVehicleOverweight/getimgUrlPrefix',
-                    dataType: 'json',
-                    async:false,
-                    data: {
-                    },
-                    success: function (json) {
-                        var path="http://"+json.imgUrlPrefix+"/port"+full.stationIP+"/"+full.idLocal+"-Image.jpg"
-                        url="<a target='_blank' href="+path+"><img src="+path+"  width='50' height='40'/>"
-                    }
-                });
-                return url;
-            }
-        }],"fnDrawCallback" : function() {
-            initTableQuanxian()
-        },
-        "order": [[8, 'desc']],
-        "oLanguage": { //国际化配置
-            "sProcessing": "正在获取数据，请稍后...",
-            "sLengthMenu": "显示 _MENU_ 条",
-            "sZeroRecords": "查询不到相关数据",
-            "sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
-            "sInfoEmpty": "记录数为0",
-            "sInfoFiltered": "(全部记录数 _MAX_ 条)",
-            "sInfoPostFix": "",
-            "sSearch": "搜索",
-            "sUrl": "",
-            "oPaginate": {
-                "sFirst": "第一页",
-                "sPrevious": "上一页",
-                "sNext": "下一页",
-                "sLast": "最后一页"
-            }},
-
-    });
-    var table3=$('#mainContent3').dataTable({
-        "deferRender": true,
-        "processing": true,
-        "bDestroy": true,
-        "iDisplayLength": 10,
-        "searching": true,
-        "lengthChange": false,
-        "oLanguage": {
-            "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
-        },
-        "columns": [
-            { "data": "stationName"},
-            { "data": "laneNoName"},
-            /*{ "data": "plate"},
-            { "data": "licensePlateColor"},*/
-            { "data": "length"},
-            { "data": "speed"},
-            { "data": "axlesCount"},
-            { "data": "totalWeight"},
-            { "data": "temperature"},
-            { "data": "overWeightRatio"},
-            {"data": "evtTime"},
-            { "data": null},
-            { "data": null},
-        ],
-        "columnDefs": [{
-            "class": "tcenter",
-            "targets": 10,
-            "searchable": true,
-            "render": function(data, type, full) {
-                var look='<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" onclick="lookMs3(this)" data-toggle="modal" data-target="#allMsg1"></i>'
-                var queren='<i class="glyphicon glyphicon-arrow-right Pkd" style="margin-left:10px;font-size:18px;cursor:pointer;display: none" title="处理" onclick="querenchuli(this,3)" data-toggle="modal" data-target="#change"></i>'
-                return look+queren;
-            }
-        },{
-            "class": "tcenter",
-            "targets": 7,
-            "searchable": true,
-            "render": function(data, type, full) {
-                return ((data*100).toFixed(2))+"%";
-            }
-        },{
-            "class": "tcenter",
-            "targets": 9,
-            "searchable": true,
-            "render": function(data, type, full) {
-                var url
-                $.ajax({
-                    type: 'POST',
-                    url: '/tVehicleOverweight/getimgUrlPrefix',
-                    dataType: 'json',
-                    async:false,
-                    data: {
-                    },
-                    success: function (json) {
-                        var path="http://"+json.imgUrlPrefix+"/port"+full.stationIP+"/"+full.idLocal+"-Image.jpg"
-                        url="<a target='_blank' href="+path+"><img src="+path+"  width='50' height='40'/>"
-                    }
-                });
-                return url;
-            }
-        }],"fnDrawCallback" : function() {
-            initTableQuanxian()
-        },
-        "order": [[8, 'desc']],
-        "oLanguage": { //国际化配置
-            "sProcessing": "正在获取数据，请稍后...",
-            "sLengthMenu": "显示 _MENU_ 条",
-            "sZeroRecords": "查询不到相关数据",
-            "sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
-            "sInfoEmpty": "记录数为0",
-            "sInfoFiltered": "(全部记录数 _MAX_ 条)",
-            "sInfoPostFix": "",
-            "sSearch": "搜索",
-            "sUrl": "",
-            "oPaginate": {
-                "sFirst": "第一页",
-                "sPrevious": "上一页",
-                "sNext": "下一页",
-                "sLast": "最后一页"
-            }},
-
-    });
 
     function showMask() {
         myTool.mask.show('查询中...');
@@ -753,16 +566,7 @@
                                 $(".Pkb").show();
                             }
                         }
-                        if(arr[i].indexOf("Pkc") >= 0 ){
-                            if($("#chuli_state2").val()==0){
-                                $(".Pkc").show();
-                            }
-                        }
-                        if(arr[i].indexOf("Pkd") >= 0 ){
-                            if($("#chuli_state3").val()==0){
-                                $(".Pkd").show();
-                            }
-                        }
+
 
                     }
 
@@ -804,11 +608,11 @@
 
         var url;
         if($("#chuli_state").val()==0){
-            url='/tVehicleOverweight/getMeiRiChaoZaiShujuByStationPortCondition'
+            url='/tVehicleOverweight/getMeiRiGuanJianChaoZHongShujuByStationPort'
             initTable(url,startTime,endTime)
             $("#pichuli1").attr("style","display:block;");
         }else{
-            url='/tVehicleOverweight/getMeiRiChaoZaiShujuByStationPortAlreadychuli'
+            url='/tVehicleOverweight/getMeiRiGuanJianChaoZHongShujuByStationPortAlreadychuli'
             initTable(url,startTime,endTime)
             $("#pichuli1").attr("style","display:none;");
         }
@@ -823,6 +627,7 @@
             data: {
                 startTime:startTime,
                 endTime:endTime,
+                lv:2,
             },
             error: function (msg) {
                 errMessage("请求UserController失败");
@@ -836,7 +641,7 @@
     }
 
 
-    $("#chuli_state2").change(function(){
+    /*$("#chuli_state2").change(function(){
         searchInit2()
     })
 
@@ -956,7 +761,7 @@
                 hidMask()
             }
         });
-    }
+    }*/
 
     var looktWimMsg = new Vue({
         el: '#allMsg1',
@@ -1034,20 +839,11 @@
     var lookMs = (e)=>{
         dom = $(e).parents('tr');
         let data=$('#mainContent').DataTable().row(dom).data();
-        lookxiangqing(data,1);
-    }
-    var lookMs2 = (e)=>{
-       dom = $(e).parents('tr');
-        let data=$('#mainContent2').DataTable().row(dom).data();
-        lookxiangqing(data,2);
-    }
-    var lookMs3 = (e)=>{
-        dom = $(e).parents('tr');
-        let data=$('#mainContent3').DataTable().row(dom).data();
-        lookxiangqing(data,3);
+        lookxiangqing(data);
     }
 
-    var lookxiangqing = (data,obj) =>{
+
+    var lookxiangqing = (data) =>{
         looktWimMsg.id=data.id;
         looktWimMsg.idLocal=data.idLocal;
         //looktWimMsg.stationNameRouteName=data.stationNameRouteName;
@@ -1106,10 +902,7 @@
             data: {
             },
             success: function (json) {
-                /*var url="http://"+json.imgUrlPrefix+"/port"+data.stationIP+"/"+data.idLocal+"-PlateImg.jpg"
-                $("#chepaiImg").attr("src",url)
-                if(obj!=1){
-                }*/
+
                     $("#chebodyDiv").html('')
                     var url2="http://"+json.imgUrlPrefix+"/port"+data.stationIP+"/"+data.idLocal+"-Image.jpg"
                     var img2='<a target="_blank" href="'+url2+'"><img id="chebodyImg" src="'+url2+'" class="popup" style="width: 100%;" /></a>'
@@ -1119,16 +912,10 @@
         });
     }
 
-    function querenchuli(obj,obj2){
+    function querenchuli(obj){
         var dom = $(obj).parents('tr');
-        let data;
-        if(obj2==1){
-            data=$('#mainContent').DataTable().row(dom).data();
-        }else if(obj2==2){
-            data=$('#mainContent2').DataTable().row(dom).data();
-        }else{
-            data=$('#mainContent3').DataTable().row(dom).data();
-        }
+        let data=$('#mainContent').DataTable().row(dom).data();;
+
         var msg = "您真的确定要处理吗？\n\n请确认！";
         if (confirm(msg)==true){
             $.ajax({
@@ -1140,14 +927,7 @@
                 },
                 success: function (json) {
                     if(json.daoMsg>0){
-                        if(obj2==1){
-                            $('#mainContent').DataTable().row(dom).remove().draw(false); //删除行立即显示
-                        }else if(obj2==2){
-                            $('#mainContent2').DataTable().row(dom).remove().draw(false); //删除行立即显示
-                        }else{
-                            $('#mainContent3').DataTable().row(dom).remove().draw(false); //删除行立即显示
-                        }
-
+                        $('#mainContent').DataTable().row(dom).remove().draw(false); //删除行立即显示
                         toastr.success(json.resultMsg);
                     }else{
                         toastr.error(json.resultMsg);
@@ -1188,7 +968,7 @@
                 data: {
                     startTime:startTime,
                     endTime:endTime,
-                    lv:1
+                    lv:2
                 },
                 success: function (json) {
                     hidMask()
@@ -1208,95 +988,7 @@
 
     }
 
-    function pichuli2(){
-        showMask2()
-        var timeRange=$("#timeRange2").val();
-        var startTime;
-        var endTime;
-        if(timeRange==""||timeRange==undefined){
-            startTime=$("#startTime2").val();
-            endTime=$("#endTime2").val();
-        }else{
-            const end = new Date();
-            const start = new Date();
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * timeRange);
-            end.setTime(end.getTime() + 3600 * 1000 * 24 * 1);
-            startTime = start.Format("yyyy-MM-dd");
-            endTime = end.Format("yyyy-MM-dd");
-        }
-        var msg = "您真的确定要处理吗？\n\n请确认！";
-        if (confirm(msg)==true){
-            $.ajax({
-                type: 'POST',
-                url: '/tVehicleOverweight/addtVehicleOverweightList',
-                dataType: 'json',
-                data: {
-                    startTime:startTime,
-                    endTime:endTime,
-                    lv:2
-                },
-                success: function (json) {
-                    hidMask()
-                    if(json.daoMsg>0){
-                        $('#mainContent2').dataTable().fnClearTable();
-                        toastr.success(json.resultMsg);
-                    }else{
-                        toastr.error(json.resultMsg);
-                    }
 
-                }
-            });
-        }else{
-            hidMask()
-            return false;
-        }
-
-    }
-
-    function pichuli3(){
-        showMask2()
-        var timeRange=$("#timeRange3").val();
-        var startTime;
-        var endTime;
-        if(timeRange==""||timeRange==undefined){
-            startTime=$("#startTime3").val();
-            endTime=$("#endTime3").val();
-        }else{
-            const end = new Date();
-            const start = new Date();
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * timeRange);
-            end.setTime(end.getTime() + 3600 * 1000 * 24 * 1);
-            startTime = start.Format("yyyy-MM-dd");
-            endTime = end.Format("yyyy-MM-dd");
-        }
-        var msg = "您真的确定要处理吗？\n\n请确认！";
-        if (confirm(msg)==true){
-            $.ajax({
-                type: 'POST',
-                url: '/tVehicleOverweight/addtVehicleOverweightList',
-                dataType: 'json',
-                data: {
-                    startTime:startTime,
-                    endTime:endTime,
-                    lv:3
-                },
-                success: function (json) {
-                    hidMask()
-                    if(json.daoMsg>0){
-                        $('#mainContent3').dataTable().fnClearTable();
-                        toastr.success(json.resultMsg);
-                    }else{
-                        toastr.error(json.resultMsg);
-                    }
-
-                }
-            });
-        }else{
-            hidMask()
-            return false;
-        }
-
-    }
 
 
 </script>

@@ -80,13 +80,8 @@
 		c.License_Plate_Color,d.Vehicle_Type_Name
 		from (select a.* from t_vehicle_overweight_temp a
 		where
-		<if test="lv==2">
 			Total_Weight>=(SELECT Crux_Weight FROM crux_weight where Del_State=1 AND lv = #{lv})and
-			Total_Weight &lt;(SELECT Crux_Weight FROM crux_weight where Del_State=1 AND lv = 3) and
-		</if>
-		<if test="lv==3">
-			Total_Weight >=(SELECT Crux_Weight FROM crux_weight where Del_State=1 AND lv = #{lv}) and
-		</if>
+
 		<if test="startTime!=null and startTime!='' ">
 			#{startTime} &lt;= a.Evt_Time and
 		</if>
@@ -202,14 +197,7 @@
 		a.*,b.Station_Name,b.Route_Name,
 		c.License_Plate_Color,d.Vehicle_Type_Name
 		from (select a.* from t_vehicle_overweight a
-		where
-		<if test="lv==2">
-			Total_Weight>=(SELECT Crux_Weight FROM crux_weight where Del_State=1 AND lv = #{lv})and
-			Total_Weight &lt;(SELECT Crux_Weight FROM crux_weight where Del_State=1 AND lv = 3) and
-		</if>
-		<if test="lv==3">
-			Total_Weight >=(SELECT Crux_Weight FROM crux_weight where Del_State=1 AND lv = #{lv}) and
-		</if>
+		where Total_Weight>=(SELECT Crux_Weight FROM crux_weight where Del_State=1 AND lv = #{lv}) and
 		<if test="startTime!=null and startTime!='' ">
 			#{startTime} &lt;= a.Evt_Time and
 		</if>
