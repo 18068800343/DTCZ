@@ -113,6 +113,12 @@
                         <table class="table  table-condensed table-hover layui-table" lay-even lay-skin="nob" id="mainContent">
                             <thead>
                             <tr>
+                                <th>
+                                    <label class="checkbox-inline" style="width: 100%;height: 100%;">
+                                        <input type="checkbox" class="checkbox style-0"  id="autoChk">
+                                        <span></span>
+                                    </label>
+                                </th>
                                 <th style="width: 10%">站点</th>
                                 <th>车道号</th>
                                 <th>长(cm)</th>
@@ -467,6 +473,7 @@
             "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
         },
         "columns": [
+            { "data": "state", 'orderable': false },
             { "data": "stationName"},
             { "data": "laneNoName"},
             /*{ "data": "plate"},
@@ -483,7 +490,7 @@
         ],
         "columnDefs": [{
             "class": "tcenter",
-            "targets": 10,
+            "targets": 11,
             "searchable": true,
             "render": function(data, type, full) {
                 var look='<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" onclick="lookMs(this)" data-toggle="modal" data-target="#allMsg1" id="lookDetall"></i>'
@@ -492,14 +499,14 @@
                 }
             },{
             "class": "tcenter",
-            "targets": 7,
+            "targets": 8,
             "searchable": true,
             "render": function(data, type, full) {
                 return ((data*100).toFixed(2))+"%";
             }
         },{
             "class": "tcenter",
-            "targets": 9,
+            "targets": 10,
             "searchable": true,
             "render": function(data, type, full) {
                 var url
@@ -516,6 +523,17 @@
                     }
                 });
                 return url;
+            }
+        },{
+            "class": "tcenter",
+            "targets": 0,
+            "searchable": true,
+            "render": function(data, type, full) {
+                if(data==false || data==undefined){
+                    return '<label class="checkbox-inline" style="width: 100%;height: 100%;"><input type="checkbox" data-id="'+full.stationIP+'" name="edit_mingzi2" class="checkbox style-0 cbox"><span></span></label>';
+                }else{
+                    return '<label class="checkbox-inline" style="width: 100%;height: 100%;"><input type="checkbox" data-id="'+full.stationIP+'" name="edit_mingzi2" class="checkbox style-0 cbox" checked><span></span></label>';
+                }
             }
         }
         ],"fnDrawCallback" : function() {
@@ -540,7 +558,6 @@
             }},
 
     });
-
 
 
     function showMask() {
@@ -622,6 +639,7 @@
     }
 
     function initTable(url,startTime,endTime){
+        arr=[];
         showMask()
         $.ajax({
             type: 'POST',
@@ -916,19 +934,22 @@
     }
 
     function querenchuli(obj){
+        showMask2()
         var dom = $(obj).parents('tr');
         let data=$('#mainContent').DataTable().row(dom).data();;
-
+        var base64 = new Base64();
         var msg = "您真的确定要处理吗？\n\n请确认！";
         if (confirm(msg)==true){
             $.ajax({
                 type: 'POST',
                 url: '/tVehicleOverweight/addtVehicleOverweight',
                 dataType: 'json',
-                data: {
-                    idLocal:data.idLocal
-                },
+                contentType: "application/json",
+                data: JSON.stringify(data),
                 success: function (json) {
+                    /*var arr = base64.decode(json);
+                    json = JSON.parse(arr);*/
+                    hidMask()
                     if(json.daoMsg>0){
                         $('#mainContent').DataTable().row(dom).remove().draw(false); //删除行立即显示
                         toastr.success(json.resultMsg);
@@ -940,6 +961,7 @@
             });
 
         }else{
+            hidMask()
             return false;
         }
     }
@@ -948,6 +970,20 @@
 
     function pichuli(){
         showMask2()
+
+        var arr=[];
+        var domArr=[]
+        var tbl = $("#mainContent").dataTable();
+        var trList = tbl.fnGetNodes();
+        for(i=0;i<trList.length;i++){
+            if (trList[i].firstElementChild.firstElementChild.firstChild.checked) {
+                var dom = $(trList[i].firstElementChild).parents('tr');
+                var data=$('#mainContent').DataTable().row(dom).data();
+                arr.push(data.idLocal);
+                domArr.push(dom)
+            }
+        }
+
         var timeRange=$("#timeRange").val();
         var startTime;
         var endTime;
@@ -971,12 +1007,15 @@
                 data: {
                     startTime:startTime,
                     endTime:endTime,
-                    lv:2
+                    lv:2,
+                    idLocals:arr.toString(),
                 },
                 success: function (json) {
                     hidMask()
                     if(json.daoMsg>0){
-                        $('#mainContent').dataTable().fnClearTable();
+                        for(i=0;i<domArr.length;i++){
+                            $('#mainContent').DataTable().row(domArr[i]).remove().draw(false); //删除行立即显示
+                        }
                         toastr.success(json.resultMsg);
                     }else{
                         toastr.error(json.resultMsg);
@@ -991,6 +1030,29 @@
 
     }
 
+    //全选
+    $('#autoChk').on('click', function(){
+        var s = $(this).prop('checked');
+        $('#mainContent .cbox').prop('checked', s).trigger('change');
+    });
+    $('#mainContent').delegate('.cbox', 'change', function(){
+        var state = $(this).prop('checked');
+        var tr = $(this).closest('tr');
+        autoChk();
+    });
+    $('#mainContent').on('draw.dt',function() {
+        autoChk();
+    });
+    function autoChk(){
+        var s = true;
+        $('#mainContent').find('.cbox').each(function(){
+            if($(this).prop('checked')==false){
+                s=false;
+                return false;
+            }
+        });
+        $('#autoChk').prop('checked', s);
+    }
 
 
 

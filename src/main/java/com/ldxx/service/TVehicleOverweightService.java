@@ -13,7 +13,7 @@ public interface TVehicleOverweightService {
 
     int addtVehicleOverweightByidLocal(String idLocal);
 
-    int addtVehicleOverweightList(String stationPorts,String startTime,String endTime,Integer lv);
+    int addtVehicleOverweightList(List<tWimMsgVo> tWimMsgVoList);
 
     int delVehicleOverweightTemp(List<tWimMsgVo> tWimMsgVoList);
 

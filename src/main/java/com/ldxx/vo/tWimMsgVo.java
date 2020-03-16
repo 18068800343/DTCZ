@@ -22,6 +22,17 @@ public class tWimMsgVo extends tWimMsg  implements Serializable{
     private List<Integer> count;//车流量数量
     private List<String> name;
 
+    private String imgprefixurl;//图片url
+
+
+    public String getImgprefixurl() {
+        return imgprefixurl;
+    }
+
+    public void setImgprefixurl(String imgprefixurl) {
+        this.imgprefixurl = imgprefixurl;
+    }
+
     public String getOverWeightRatioName() {
         return overWeightRatioName;
     }

@@ -24,4 +24,6 @@ public interface tVehicleOverweightDao {
     List<tWimMsgVo> getMeiRiChaoZaiShujuByStationPortAlreadychuli(@Param("stationPorts")String stationPorts,@Param("startTime")String startTime,@Param("endTime")String endTime);
 
     List<tWimMsgVo> getMeiRiGuanJianChaoZHongShujuByStationPortAlreadychuli(@Param("stationPorts")String stationPorts,@Param("lv")Integer lv,@Param("startTime")String startTime,@Param("endTime")String endTime);
+
+    List<tWimMsgVo> getMeiRiGuanJianChaoZaiShujuByidLocals(@Param("idLocals")String idLocals,@Param("lv")Integer lv);
 }

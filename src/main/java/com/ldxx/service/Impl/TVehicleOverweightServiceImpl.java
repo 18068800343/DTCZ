@@ -42,13 +42,14 @@ public class TVehicleOverweightServiceImpl implements TVehicleOverweightService 
     }
 
     @Override
-    public int addtVehicleOverweightList(String stationPorts,String startTime,String endTime,Integer lv) {
-        List<tWimMsgVo> tWimMsgVoList;
-        if(lv==1){
+    public int addtVehicleOverweightList(List<tWimMsgVo> tWimMsgVoList) {
+        //List<tWimMsgVo> tWimMsgVoList=tdao.getMeiRiGuanJianChaoZaiShujuByidLocals(idLocals,lv);;
+        /*if(lv==1){
             tWimMsgVoList = tdao.getMeiRiChaoZaiShujuByStationPortCondition(stationPorts,startTime,endTime);
         }else{
             tWimMsgVoList=tdao.getMeiRiGuanJianChaoZHongShujuByStationPort(stationPorts,lv,startTime,endTime);
-        }
+        }*/
+
         int i=0;
         if(tWimMsgVoList.size()!=0&&tWimMsgVoList!=null){
             i=tdao.addtVehicleOverweightList(tWimMsgVoList);
