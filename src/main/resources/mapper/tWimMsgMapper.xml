@@ -329,9 +329,9 @@
 
     <select id="getHomeData" resultType="HomeData">
         SELECT * from (
-        SELECT COUNT(*) totalChaoZai FROM t_vehicle_msg_today a WHERE a.Over_Weight>0 and FIND_IN_SET(a.Station_IP,#{stationPorts}) and  date(a.Evt_Time) = curdate()
+        SELECT COUNT(*) totalChaoZai FROM t_vehicle_overweight a WHERE a.Over_Weight>0 and FIND_IN_SET(a.Station_IP,#{stationPorts}) and  date(a.Evt_Time) = curdate()
         ) aa LEFT JOIN (
-        select MAX(a.Total_Weight) maxWeight FROM t_vehicle_msg_today a WHERE  FIND_IN_SET(a.Station_IP,#{stationPorts}) and  date(a.Evt_Time) = curdate()
+        select MAX(a.Total_Weight) maxWeight,id_local FROM t_vehicle_overweight a WHERE  FIND_IN_SET(a.Station_IP,#{stationPorts}) and  date(a.Evt_Time) = curdate()
         )bb on 1= 1
         LEFT JOIN (
         select COUNT(*) totalCheLiu FROM t_vehicle_msg_today a WHERE  FIND_IN_SET(a.Station_IP,#{stationPorts}) and  date(a.Evt_Time) = curdate()

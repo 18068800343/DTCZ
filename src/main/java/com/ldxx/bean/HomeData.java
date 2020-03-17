@@ -8,6 +8,15 @@ public class HomeData {
     private Integer totalGuanJian;
     private String stationNames;
     private String links;
+    private String idLocal;
+
+    public String getIdLocal() {
+        return idLocal;
+    }
+
+    public void setIdLocal(String idLocal) {
+        this.idLocal = idLocal;
+    }
 
     public String getStationNames() {
         return stationNames;

@@ -29,6 +29,23 @@ let bindLeftLinks = (stationNames,links) => {
     $("#chart1Detail1").modal("show");
 }
 
+let bindMaxWeight = (idLocal) => {
+    let dom;
+    $("#mainContent1 tbody").empty();
+    for(let i=0;i<stationNames.length;i++){
+        let link = links[i];
+        if(link==0){
+            link="<label style='color: #843534'>未接通</label>";
+        }else{
+            link = "<label style='color: #1B5ACB'>已接通</label>"
+        }
+        let tr = "<tr><td>"+stationNames[i]+"</td><td>"+link+"</td></tr>";
+        dom+=tr;
+    }
+    $("#mainContent1 tbody").append(dom);
+    $("#chart1Detail1").modal("show");
+}
+
 
 
 let initHomeMap = (lngLats,stationNames)=>{
@@ -577,6 +594,7 @@ homePageInit.initHomeData = ()=>{
             $("#leftTable1").html(json.totalCheLiu);
             $("#leftTable2").html('');
             $("#leftTable2").html(json.totalChaoZai);
+            homePageInit.idLocal = json.idLocal;
             $("#leftTable3").html('');
             $("#leftTable3").html((json.maxWeight/1000).toFixed(2));
             $("#leftTable4").html('');
