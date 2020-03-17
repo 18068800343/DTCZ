@@ -46,6 +46,13 @@
             margin-right: 5%;
 
         }
+        .nav-tabs{
+           border:0px solid #ddd;
+        }
+        .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
+           border:0px solid #ddd;
+        }
+        
     </style>
 </head>
 <body style="background-image: none;">
@@ -57,16 +64,6 @@
         <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">月交通量统计</a></li>
 
     </ul>
-    <div class="layui-tab layui-tab-card">
-  <ul class="layui-tab-title">
-    <li class="layui-this">日交通量统计</li>
-    <li>月交通量统计</li>
-  </ul>
-  <div class="layui-tab-content" style="height: 100px;">
-    <div class="layui-tab-item layui-show">1</div>
-    <div class="layui-tab-item">2</div>
-  </div>
-</div>
     <!-- Tab panes -->
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="home">
