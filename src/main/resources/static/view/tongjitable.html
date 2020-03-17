@@ -329,14 +329,14 @@
             <label class="col-sm-1	 control-label riqi kaishiriqi" style="width:7%;line-height: 30px; margin-left:2%;font-weight:normal;">开始日期</label>
         <div class="col-sm-2 kaishiriqidiv" style="margin-left:-1.5%;">
             <!-- 样式1 -->
-            <input type="date" v-model="startTime" value="请选择"
+            <input type="text" v-model="startTime" id="startTime" value="请选择"
                   style="height: 34px;border-radius: 5px;box-shadow: none;width: 250%;border:1px solid #DDD;">
         </div>
         <label class="col-sm-1	 control-label riqi jieshuriqi" style="width:7%; line-height: 30px;margin-left:13%;font-weight:normal; ">结束日期
 </label>
         <div class="col-sm-2 jieshuriqidiv" style="width:5%;margin-left:-0.5%;">
             <!-- 样式1 -->
-            <input type="date" v-model="startTime" value="请选择"
+            <input type="text" v-model="endTime" id="endTime" value="请选择"
                    style="height: 34px;border-radius: 5px;box-shadow: none;width: 250%;border:1px solid #DDD;">
         </div>
          
@@ -600,6 +600,7 @@
 <script src="../js/jquery.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 <!--<script src="../js/bootstrap-select.js"></script>-->
+<script src="js/laydate/laydate.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
 <script src="js/echarts.min(1).js" type="text/javascript" charset="utf-8"></script>
 <script src="js/datatables/jquery.dataTables.min.js"></script>
@@ -615,7 +616,15 @@
 
     $(document).ready(function () {
         initzhandian();
-        initchexing();
+        laydate.render({
+            elem: '#startTime', //指定元素
+            type: 'datetime',
+        });
+        laydate.render({
+            elem: '#endTime', //指定元素
+            type: 'datetime'
+        });
+        /*initchexing();*/
     });
 
 
@@ -875,8 +884,8 @@
                 const start = new Date();
                 start.setTime(start.getTime() - 3600 * 1000 * 24 * timeRange);
                 end.setTime(end.getTime() + 3600 * 1000 * 24 * 1);
-                this.startTime = start.Format("yyyy-MM-dd");
-                this.endTime = end.Format("yyyy-MM-dd");
+                this.startTime = start.Format("yyyy-MM-dd hh:mm:ss");
+                this.endTime = end.Format("yyyy-MM-dd hh:mm:ss");
                 }
             },
             init: function () {
