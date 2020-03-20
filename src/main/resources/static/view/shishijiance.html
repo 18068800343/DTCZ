@@ -1096,28 +1096,40 @@
 
 
 		function nowJianceSite(){
-			$("#jianceTable tbody").empty('')
+			var stationPort;
 			if($("#zhandian").val()!=""&&$("#zhandian").val()!=undefined&&$("#zhandian").val()!=null){
-				var text=[];
-				var checkParam = $('#zhandian').find('option:selected');
-				for (var i=0;i<checkParam.length;i++) {
-					text.push(checkParam[i].textContent);
-				}
-				for(i in text){
-					$("#jianceTable tbody").append("<tr><td colspan='2'>"+text[i]+"<td></tr>")
-					$("#jianceTable tbody").find("td:last").hide()
-				}
+				stationPort=$("#zhandian").val().toString();
 			}else{
-				$("#zhandian option").each(function(){
-					//遍历所有option
-					var value = $(this).val();   //获取option值
-					var text = $(this).text();
-					if(text!=''){
-						$("#jianceTable tbody").append("<tr><td colspan='2'>"+text+"<td></tr>")
-						$("#jianceTable tbody").find("td:last").hide()
-					}
-				})
+				stationPort=""
 			}
+			$.ajax({
+				type: 'POST',
+				url: '/tWimMsg/getHomeDataObject',
+				dataType: 'json',
+				data: {
+					stationPorts: stationPort,
+				},
+				error: function (msg) {
+				},
+				success: function (json) {
+
+					var stationNames = json.stationNames.split(",");
+					var links = json.links.split(",");
+					$("#jianceTable tbody").empty();
+					var dom;
+					for(let i=0;i<stationNames.length;i++){
+						let link = links[i];
+						if(link==0){
+							link="<label style='color: #843534'>未接通</label>";
+						}else{
+							link = "<label style='color: #1B5ACB'>已接通</label>"
+						}
+						let tr = "<tr><td>"+stationNames[i]+"</td><td>"+link+"</td></tr>";
+						dom+=tr;
+					}
+					$("#jianceTable tbody").append(dom);
+				}
+			});
 
 		}
 
