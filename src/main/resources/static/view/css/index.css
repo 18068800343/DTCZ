@@ -16,14 +16,14 @@ body{
 	background-image: -webkit-linear-gradient(bottom, rgb(227, 227, 211), rgb(143, 240, 249));
 	 -webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
-	font-size: 35px;
+	font-size: 22px;
 	font-weight: bolder;
 	margin-left: 3%;
 }
 .leftsj span{
 	color: #A4A5B0;
 	margin-left: 2%;
-	font-weight: bolder;
+	font-size:13px;
 }
 .centerdiv{
 	margin-left: -5%;
