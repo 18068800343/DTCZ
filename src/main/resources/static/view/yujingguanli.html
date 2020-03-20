@@ -389,8 +389,8 @@
                             <tr>
                                 <td>路面温度(°C)</td>
                                 <td>{{temperature}}</td>
-                                <td>超重量( Kg)</td>
-                                <td>{{overWeightRatio}}</td>
+                                <td>超重量(Kg)</td>
+                                <td>{{overWeight}}</td>
                             </tr>
                             <tr>
                                 <td>超重比率</td>
@@ -914,7 +914,7 @@
         looktWimMsg.routeName=data.routeName;
         looktWimMsg.licensePlateColor=data.licensePlateColor;
         looktWimMsg.vehicleTypeName=data.vehicleTypeName;
-        looktWimMsg.overWeightRatioName=data.overWeightRatio+"%";
+        looktWimMsg.overWeightRatioName=data.overWeightRatio*100+"%";
 
         $.ajax({
             type: 'POST',
