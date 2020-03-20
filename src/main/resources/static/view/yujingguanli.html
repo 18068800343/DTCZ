@@ -495,7 +495,8 @@
             "render": function(data, type, full) {
                 var look='<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" onclick="lookMs(this)" data-toggle="modal" data-target="#allMsg1" id="lookDetall"></i>'
                 var queren='<i class="glyphicon glyphicon-arrow-right Pkb" style="margin-left:10px;font-size:18px;cursor:pointer;display: none" title="处理" onclick="querenchuli(this)" data-toggle="modal" data-target="#change"></i>'
-                return look+queren;
+                var quxiaoqueren='<i class="glyphicon glyphicon-share-alt Pkc" style="margin-left:10px;font-size:18px;cursor:pointer;display: none" title="处理" onclick="quxiaochuli(this)" data-toggle="modal" data-target="#change"></i>'
+                return look+queren+quxiaoqueren;
                 }
             },{
             "class": "tcenter",
@@ -584,6 +585,11 @@
                         if(arr[i].indexOf("Pkb") >= 0 ){
                             if($("#chuli_state").val()==0){
                                 $(".Pkb").show();
+                            }
+                        }
+                        if(arr[i].indexOf("Pkc") >= 0 ){
+                            if($("#chuli_state").val()==1){
+                                $(".Pkc").show();
                             }
                         }
 
@@ -966,6 +972,37 @@
         }
     }
 
+    function quxiaochuli(obj){
+        showMask2()
+        var dom = $(obj).parents('tr');
+        let data=$('#mainContent').DataTable().row(dom).data();;
+
+        var msg = "您真的确定要处理吗？\n\n请确认！";
+        if (confirm(msg)==true){
+            $.ajax({
+                type: 'POST',
+                url: '/tVehicleOverweight/quxiaotVehicleOverweight',
+                dataType: 'json',
+                contentType: "application/json",
+                data: JSON.stringify(data),
+                success: function (json) {
+                    hidMask()
+                    if(json.daoMsg>0){
+                        $('#mainContent').DataTable().row(dom).remove().draw(false); //删除行立即显示
+                        toastr.success(json.resultMsg);
+                    }else{
+                        toastr.error(json.resultMsg);
+                    }
+
+                }
+            });
+
+        }else{
+            hidMask()
+            return false;
+        }
+    }
+
 
 
     function pichuli(){
@@ -975,7 +1012,7 @@
         var domArr=[]
         var tbl = $("#mainContent").dataTable();
         var trList = tbl.fnGetNodes();
-        for(i=0;i<trList.length;i++){
+        for(var i=0;i<trList.length;i++){
             if (trList[i].firstElementChild.firstElementChild.firstChild.checked) {
                 var dom = $(trList[i].firstElementChild).parents('tr');
                 var data=$('#mainContent').DataTable().row(dom).data();
@@ -1053,6 +1090,7 @@
         });
         $('#autoChk').prop('checked', s);
     }
+
 
 
 

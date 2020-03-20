@@ -115,6 +115,15 @@
 			Axle_space3, Axle_space4, Axle_space5, Axle_space6, Axle_space7, Axle_space8, Axle_space9, Is_Straddle, Temperature, Over_Weight, Over_Weight_Ratio,
 		 	WIM_Id, LPR_id, Station_IP from t_vehicle_overweight_temp  where id_local=#{idLocal}
 	</insert>
+	<insert id="addtVehicleOverweightTempByidLocal">
+		insert into t_vehicle_overweight_temp(id_local,Id,Station_Id, Evt_Time, Msg_Time, Lane_No, Plate, Plate_Color, Class_Index, Length, Speed,
+			Direction, Axles_Count, Total_Weight, Axle1, Axle2, Axle3, Axle4, Axle5, Axle6, Axle7, Axle8, Axle9, Axle10, Axle_space1, Axle_space2,
+			Axle_space3, Axle_space4, Axle_space5, Axle_space6, Axle_space7, Axle_space8, Axle_space9, Is_Straddle, Temperature, Over_Weight, Over_Weight_Ratio,
+		 	WIM_Id, LPR_id, Station_IP) select id_local,Id,Station_Id, Evt_Time, Msg_Time, Lane_No, Plate, Plate_Color, Class_Index, Length, Speed,
+			Direction, Axles_Count, Total_Weight, Axle1, Axle2, Axle3, Axle4, Axle5, Axle6, Axle7, Axle8, Axle9, Axle10, Axle_space1, Axle_space2,
+			Axle_space3, Axle_space4, Axle_space5, Axle_space6, Axle_space7, Axle_space8, Axle_space9, Is_Straddle, Temperature, Over_Weight, Over_Weight_Ratio,
+		 	WIM_Id, LPR_id, Station_IP from  t_vehicle_overweight where id_local=#{idLocal}
+	</insert>
 
 	<select id="getidLocalBystationPorts" resultType="tWimMsgVo">
 		select a.id_local from t_vehicle_overweight_temp a where date(Evt_Time) = curdate() and Over_Weight>0 and  a.Total_Weight &lt;(SELECT Crux_Weight FROM crux_weight  WHERE Del_State = 1 AND lv = 2) and
@@ -144,6 +153,9 @@
 		<foreach collection="tWimMsgVoList" item="item" index="index" open="(" separator="," close=")">
 			#{item.idLocal}
 		</foreach>
+	</delete>
+	<delete id="delVehicleOverweight">
+		delete from t_vehicle_overweight where id_local =#{idLocal}
 	</delete>
 
 

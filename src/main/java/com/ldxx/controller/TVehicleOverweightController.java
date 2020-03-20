@@ -139,7 +139,7 @@ public class TVehicleOverweightController {
         int i=service.addtVehicleOverweightList(tWimMsgVoList);
 
         List imgList=new ArrayList();
-        for (tWimMsgVo list:tWimMsgVoList){
+        /*for (tWimMsgVo list:tWimMsgVoList){
             String url="D:\\Program Files\\DTCZ\\DTCZimage\\port"+list.getStationIP()+"\\"+list.getIdLocal()+"-Image.jpg";
             //String url="http://"+jsonObject.get("imgUrlPrefix").toString()+"/port"+list.getStationIP()+"/"+list.getIdLocal()+"-Image.jpg";
             list.setImgprefixurl(url);
@@ -148,7 +148,7 @@ public class TVehicleOverweightController {
             byte[] buf=bytes.toString().getBytes("utf8");
             String bytes2 = org.apache.commons.codec.binary.Base64.encodeBase64String(buf);
             imgList.add(bytes2);
-        }
+        }*/
 
         String daoMsg = MsgFormatUtils.getMsgByResult(i, "处理");
         jsonObject.put("resultMsg",daoMsg);
@@ -164,6 +164,18 @@ public class TVehicleOverweightController {
         return i;
     }
 
+    @RequestMapping("/quxiaotVehicleOverweight")
+    public String quxiaotVehicleOverweight(@RequestBody tWimMsgVo tWimMsgVo) throws Exception {
+        String urlPrefix = getimgUrlPrefix();
+        net.sf.json.JSONObject jsonObject = net.sf.json.JSONObject.fromObject(urlPrefix);
+
+        int i=service.quxiaotVehicleOverweight(tWimMsgVo.getIdLocal());
+        String daoMsg = MsgFormatUtils.getMsgByResult(i, "取消");
+        jsonObject.put("resultMsg",daoMsg);
+        jsonObject.put("daoMsg",i);
+        jsonObject.put("obj",tWimMsgVo);
+        return jsonObject.toString();
+    }
 
 
     public byte[] readpicture(String  imgurl) throws Exception {

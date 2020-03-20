@@ -75,4 +75,13 @@ public class TVehicleOverweightServiceImpl implements TVehicleOverweightService 
     public List<tWimMsgVo> getMeiRiGuanJianChaoZHongShujuByStationPortAlreadychuli(String stationPorts, Integer lv,String startTime,String endTime) {
         return tdao.getMeiRiGuanJianChaoZHongShujuByStationPortAlreadychuli(stationPorts,lv,startTime,endTime);
     }
+
+    @Override
+    public int quxiaotVehicleOverweight(String idLocal) {
+        int i=tdao.addtVehicleOverweightTempByidLocal(idLocal);
+        if(i>0){
+            i=tdao.delVehicleOverweight(idLocal);
+        }
+        return i;
+    }
 }

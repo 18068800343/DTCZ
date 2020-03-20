@@ -20,4 +20,6 @@ public interface TVehicleOverweightService {
     List<tWimMsgVo> getMeiRiChaoZaiShujuByStationPortAlreadychuli(String stationPorts,String startTime,String endTime);
 
     List<tWimMsgVo> getMeiRiGuanJianChaoZHongShujuByStationPortAlreadychuli(String stationPorts,Integer lv,String startTime,String endTime);
+
+    int quxiaotVehicleOverweight(String idLocal);
 }
