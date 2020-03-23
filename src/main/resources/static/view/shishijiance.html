@@ -99,29 +99,29 @@
 	<div class="layui-tab" style="margin-left:10%">
 			  <ul class="layui-tab-title labelli">
 			    <li class="layui-this labelthis">综合信息统计</li>
-			    <li>当前车流量</li>
-			    <li>当前超载车辆</li>
-			    <li>当前关键超重车辆</li>
+			    <li>当日车流量</li>
+			    <li>当日超载车辆</li>
+			    <li>当日关键超重车辆</li>
 			  </ul>
 			  <div class="layui-tab-content marginl">
 			    <div class="layui-tab-item layui-show">
 			     <div class="zd col-xs-2" style="background-color:#549CFD;height:170px;color:white;border-radius:5px 5px 5px;width:20%;">
-			        <p style="font-size:15px;margin-top:7%;">当前监测站点/个</p>
+			        <p style="font-size:15px;margin-top:7%;">当日监测站点/个</p>
 			        <img alt="" src="./img/img.png" style="float:right;margin-top:10%;">
 			        <div style="margin-top:20%;"><span style="font-size:40px;" id="jiancezhandianNum"></span><a style="margin-left:5px;color:#D6E4FE;background-color:#549CFD;color:white;border:2px solid #549CFD;cursor:pointer;" class="primary"  onclick="nowJianceSite()" data-toggle="modal" data-target="#jianceDiv">查看</a></div>
 			     </div>
 			      <div class="zd col-xs-2" style="background-color:#3ED75E;height:170px;color:white;border-radius:5px 5px 5px;margin-left:2%;">
-			        <p style="font-size:15px;margin-top:7%;">当前车流量/辆</p>
+			        <p style="font-size:15px;margin-top:7%;">当日车流量/辆</p>
 			        <img alt="" src="./img/img.png" style="float:right;margin-top:10%;">
 			        <div style="margin-top:20%;"><span style="font-size:40px;" id="jiancecheliuliangNum"></span></div>
 			     </div>
 			      <div class="zd col-xs-2" style="background-color:#FDAF54;height:170px;color:white;border-radius:5px 5px 5px;margin-left:2%;">
-			        <p style="font-size:15px;margin-top:7%;">当前超载车辆/辆</p>
+			        <p style="font-size:15px;margin-top:7%;">当日超载车辆/辆</p>
 			        <img alt="" src="./img/img.png" style="float:right;margin-top:10%;">
 			        <div style="margin-top:20%;"><span style="font-size:40px;" id="jiancechaozaiNum"></span></div>
 			     </div>
 			      <div class="zd col-xs-2" style="background-color:#FD6854;height:170px;color:white;border-radius:5px 5px 5px;margin-left:2%;">
-			        <p style="font-size:15px;margin-top:7%;">当前关键超重车辆/辆</p>
+			        <p style="font-size:15px;margin-top:7%;">当日关键超重车辆/辆</p>
 			        <img alt="" src="./img/img.png" style="float:right;margin-top:10%;">
 			        <div style="margin-top:20%;"><span style="font-size:40px;" id="jianceguanjianchaozhongNum"></span></div>
 			     </div>
@@ -151,7 +151,7 @@
 						<th>轴数</th>
 						<th>总重量(Kg)</th>
 						<th>路面温度(°C)</th>
-						<th>超重比率</th>
+						<th>超载率</th>
 						<th>时间</th>
 						<th>操作</th>
 					</tr>
@@ -190,7 +190,7 @@
 									<th>轴数</th>
 									<th>总重量(Kg)</th>
 									<th>路面温度(°C)</th>
-									<th>超重比率</th>
+									<th>超载率</th>
 									<th>时间</th>
 									<th>操作</th>
 								</tr>
@@ -239,7 +239,7 @@
 										<th>轴数</th>
 										<th>总重量(Kg)</th>
 										<th>路面温度(°C)</th>
-										<th>超重比率</th>
+										<th>超载率</th>
 										<th>时间</th>
 										<th>操作</th>
 									</tr>
@@ -284,7 +284,7 @@
 								   <th>轴数</th>
 								   <th>总重量(Kg)</th>
 								   <th>路面温度(°C)</th>
-								   <th>超重比率</th>
+								   <th>超载率</th>
 								   <th>时间</th>
 								   <th>操作</th>
 							   </tr>
@@ -307,7 +307,7 @@
 							   <th>轴数</th>
 							   <th>总重量(Kg)</th>
 							   <th>路面温度(°C)</th>
-							   <th>超重比率</th>
+							   <th>超载率</th>
 							   <th>时间</th>
 							   <th>操作</th>
 						   </tr>
@@ -332,7 +332,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title" ><b>当前监测站点</b></h4>
+						<h4 class="modal-title" ><b>当日监测站点</b></h4>
 					</div>
 					<div class="modal-body">
 						<div>
@@ -367,7 +367,7 @@
 								<table class="table table-bordered table-condensed" style="height: auto;" id="">
 									<tr>
 										<td>站点</td>
-										<td>{{stationNameRouteName}}</td>
+										<td>{{stationName}}</td>
 										<td>通行时间</td>
 										<td>{{evtTime}}</td>
 									</tr>
@@ -468,7 +468,7 @@
 										<td>{{overWeight}}</td>
 									</tr>
 									<tr>
-										<td>超重比率</td>
+										<td>超载率</td>
 										<td>{{overWeightRatioName}}</td>
 									</tr>
 									
@@ -520,12 +520,17 @@
 	<script>
 	layui.use('element', function(){
 		  var element = layui.element;
-		  
+
 		  //…
 		});
 	
 		$(document).ready( function () {
-
+			$('#zhandian').selectpicker({
+				'selectedText': 'cat',
+				'noneSelectedText': '请选择',
+				'deselectAllText': '全不选',
+				'selectAllText': '全选'
+			});
 			initzhandian()
 			queding()
 			setLeftEcharts()
@@ -548,7 +553,7 @@
 			},
 			"columns": [
 				{ "data": "stationName"},
-				{ "data": "laneNoName"},
+				{ "data": "laneNo"},
 				{ "data": "plate"},
 				{ "data": "licensePlateColor"},
 				{ "data": "length"},
@@ -618,7 +623,7 @@
 			},
 			"columns": [
 				{ "data": "stationName"},
-				{ "data": "laneNoName"},
+				{ "data": "laneNo"},
 				{ "data": "plate"},
 				{ "data": "licensePlateColor"},
 				{ "data": "length"},
@@ -710,7 +715,7 @@
 			},
 			"columns": [
 				{ "data": "stationName"},
-				{ "data": "laneNoName"},
+				{ "data": "laneNo"},
 				{ "data": "plate"},
 				{ "data": "licensePlateColor"},
 				{ "data": "length"},
@@ -798,7 +803,7 @@
 			},
 			"columns": [
 				{ "data": "stationName"},
-				{ "data": "laneNoName"},
+				{ "data": "laneNo"},
 				{ "data": "plate"},
 				{ "data": "licensePlateColor"},
 				{ "data": "length"},
@@ -890,7 +895,7 @@
 			},
 			"columns": [
 				{ "data": "stationName"},
-				{ "data": "laneNoName"},
+				{ "data": "laneNo"},
 				{ "data": "plate"},
 				{ "data": "licensePlateColor"},
 				{ "data": "length"},
@@ -1026,6 +1031,7 @@
 						}
 						$("#zhandian").selectpicker("refresh");
 						$('#zhandian').selectpicker('render');
+
 					}
 				}
 			});
