@@ -80,6 +80,16 @@ public class tWimMsg implements Serializable {
     //测点IP地址
     private String stationIP;
 
+    private String imgData;//图片流
+
+    public String getImgData() {
+        return imgData;
+    }
+
+    public void setImgData(String imgData) {
+        this.imgData = imgData;
+    }
+
     public String getIdLocal() {
         return idLocal;
     }

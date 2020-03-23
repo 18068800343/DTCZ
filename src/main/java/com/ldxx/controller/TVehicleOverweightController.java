@@ -1,12 +1,19 @@
 package com.ldxx.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.ldxx.bean.tUserInfo;
+import com.ldxx.bean.tWimMsg;
 import com.ldxx.dao.tVehicleOverweightDao;
 import com.ldxx.service.TVehicleOverweightService;
+import com.ldxx.util.DateJsonValueProcessor;
 import com.ldxx.util.MsgFormatUtils;
+import com.ldxx.util.ToInterface;
 import com.ldxx.vo.tWimMsgVo;
 import com.ldxx.vo.ImgUrlPrefixVo;
+import net.sf.json.JSONArray;
+import net.sf.json.JsonConfig;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -16,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import sun.misc.BASE64Encoder;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -105,31 +113,41 @@ public class TVehicleOverweightController {
     }
 
     @RequestMapping("/addtVehicleOverweight")
-    public String addtVehicleOverweight(@RequestBody tWimMsgVo tWimMsgVo) throws Exception {
+    public String addtVehicleOverweight(@RequestBody tWimMsg tWimMsg) throws Exception {
         String urlPrefix = getimgUrlPrefix();
         net.sf.json.JSONObject jsonObject = net.sf.json.JSONObject.fromObject(urlPrefix);
 
-        String url="D:\\Program Files\\DTCZ\\DTCZimage\\port"+tWimMsgVo.getStationIP()+"\\"+tWimMsgVo.getIdLocal()+"-Image.jpg";
-        //String url="http://"+jsonObject.get("imgUrlPrefix").toString()+"/port"+tWimMsgVo.getStationIP()+"/"+tWimMsgVo.getIdLocal()+"-Image.jpg";
-        tWimMsgVo.setImgprefixurl(url);
+        String url="D:\\Program Files\\DTCZ\\DTCZimage\\port"+tWimMsg.getStationIP()+"\\"+tWimMsg.getIdLocal()+"-Image.jpg";
+        //String url="http://"+jsonObject.get("imgUrlPrefix").toString()+"/port"+tWimMsg.getStationIP()+"/"+tWimMsg.getIdLocal()+"-Image.jpg";
+
+        //预警动态称重接口
+        String yujingUrl = imgUrlPrefixVo.getYujingUrl();
+
         //读取图片
         byte[] bytes = readpicture(url);
-        byte[] buf=bytes.toString().getBytes("utf8");
-        String bytes2 = org.apache.commons.codec.binary.Base64.encodeBase64String(buf);
+        BASE64Encoder encoder = new BASE64Encoder();
+        String base64 = encoder.encode(bytes);//返回Base64编码过的字节数组字符串
+        //System.out.println(base64);
+        tWimMsg.setImgData(base64);
+        JsonConfig jsonConfig = new JsonConfig();
+        jsonConfig.registerJsonValueProcessor(java.util.Date.class, new DateJsonValueProcessor());
+        String data= JSONArray.fromObject(tWimMsg,jsonConfig).toString();
+        ToInterface toInterface=new ToInterface();
+        toInterface.interfaceUtil(yujingUrl,data);
 
-        int i=service.addtVehicleOverweightByidLocal(tWimMsgVo.getIdLocal());
+        int i=service.addtVehicleOverweightByidLocal(tWimMsg.getIdLocal());
         String daoMsg = MsgFormatUtils.getMsgByResult(i, "处理");
         jsonObject.put("resultMsg",daoMsg);
         jsonObject.put("daoMsg",i);
-        jsonObject.put("modelImage",bytes2);
-        jsonObject.put("obj",tWimMsgVo);
+        jsonObject.put("obj",tWimMsg);
         return jsonObject.toString();
     }
 
 
     @RequestMapping("/addtVehicleOverweightList")
     public String addtVehicleOverweightList(String startTime,String endTime ,HttpSession session,Integer lv,String idLocals) throws Exception {
-        JSONObject jsonObject=new JSONObject();
+        String urlPrefix = getimgUrlPrefix();
+        net.sf.json.JSONObject jsonObject = net.sf.json.JSONObject.fromObject(urlPrefix);
         /*String zhandianduankouhao="";
         tUserInfo user = (tUserInfo) session.getAttribute("user");
         if(user!=null){
@@ -138,22 +156,28 @@ public class TVehicleOverweightController {
         List<tWimMsgVo> tWimMsgVoList=tdao.getMeiRiGuanJianChaoZaiShujuByidLocals(idLocals,lv);
         int i=service.addtVehicleOverweightList(tWimMsgVoList);
 
-        List imgList=new ArrayList();
-        /*for (tWimMsgVo list:tWimMsgVoList){
+
+        //预警动态称重接口
+        String yujingUrl = imgUrlPrefixVo.getYujingUrl();
+        for (tWimMsgVo list:tWimMsgVoList){
             String url="D:\\Program Files\\DTCZ\\DTCZimage\\port"+list.getStationIP()+"\\"+list.getIdLocal()+"-Image.jpg";
             //String url="http://"+jsonObject.get("imgUrlPrefix").toString()+"/port"+list.getStationIP()+"/"+list.getIdLocal()+"-Image.jpg";
             list.setImgprefixurl(url);
             //读取图片
             byte[] bytes = readpicture(url);
-            byte[] buf=bytes.toString().getBytes("utf8");
-            String bytes2 = org.apache.commons.codec.binary.Base64.encodeBase64String(buf);
-            imgList.add(bytes2);
-        }*/
+            BASE64Encoder encoder = new BASE64Encoder();
+            String base64 = encoder.encode(bytes);//返回Base64编码过的字节数组字符串
+            list.setImgData(base64);
+            JsonConfig jsonConfig = new JsonConfig();
+            jsonConfig.registerJsonValueProcessor(java.util.Date.class, new DateJsonValueProcessor());
+            String data= JSONArray.fromObject(list,jsonConfig).toString();
+            ToInterface toInterface=new ToInterface();
+            toInterface.interfaceUtil(yujingUrl,data);
+        }
 
         String daoMsg = MsgFormatUtils.getMsgByResult(i, "处理");
         jsonObject.put("resultMsg",daoMsg);
         jsonObject.put("daoMsg",i);
-        jsonObject.put("modelImage",imgList);
         return jsonObject.toString();
     }
 

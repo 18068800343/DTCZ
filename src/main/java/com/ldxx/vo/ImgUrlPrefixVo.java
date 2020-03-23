@@ -7,7 +7,18 @@ import org.springframework.stereotype.Component;
 public class ImgUrlPrefixVo {
 
     @Value("${img.url.prefix}")
-    private String imgUrlPrefix;
+    private String imgUrlPrefix;//图片的前缀地址
+
+    @Value("${yujingUrl}")
+    private String yujingUrl;//预警称重数据接口
+
+    public String getYujingUrl() {
+        return yujingUrl;
+    }
+
+    public void setYujingUrl(String yujingUrl) {
+        this.yujingUrl = yujingUrl;
+    }
 
     public String getImgUrlPrefix() {
         return imgUrlPrefix;
