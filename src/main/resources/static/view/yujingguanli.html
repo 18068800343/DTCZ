@@ -80,7 +80,7 @@
                                     <!-- 样式1 -->
                                     <select value="请选择" class="selectpicker" multiple data-max-options="1" data-live-search="true"  id="timeRange"
                                             style="height: 34px; border-radius: 5px; box-shadow: none; margin-left: 30px; border: 1px solid rgb(221, 221, 221);">
-                                        <option value="">全部</option>
+                                        <option value="">自定义</option>
                                         <option value="7">最近一周</option>
                                         <option value="30">最近一个月</option>
                                         <option value="60">最近二个月</option>
@@ -540,7 +540,7 @@
         ],"fnDrawCallback" : function() {
             initTableQuanxian()
         },
-        "order": [[8, 'desc']],
+        "order": [[9, 'desc']],
         "oLanguage": { //国际化配置
             "sProcessing": "正在获取数据，请稍后...",
             "sLengthMenu": "显示 _MENU_ 条",
@@ -614,6 +614,8 @@
         if(timeRange==""||timeRange==undefined){
             $("#startTime").val("")
             $("#endTime").val("")
+            $("#startTime").attr("disabled",false)
+            $("#endTime").attr("disabled",false)
         }else{
             const end = new Date();
             const start = new Date();
@@ -623,6 +625,8 @@
             var endTime = end.Format("yyyy-MM-dd hh:mm:ss");
             $("#startTime").val(startTime)
             $("#endTime").val(endTime)
+            $("#startTime").attr("disabled",true)
+            $("#endTime").attr("disabled",true)
         }
 
     })
