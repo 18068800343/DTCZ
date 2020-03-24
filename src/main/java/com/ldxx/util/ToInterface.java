@@ -7,6 +7,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import sun.misc.BASE64Encoder;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -16,9 +17,12 @@ public class ToInterface {
     /**
      * 调用对方接口方法
      * @param url 对方或第三方提供的路径
-     * @param json 向对方或第三方发送的数据，大多数情况下给对方发送JSON数据让对方解析
+     * @param json2 向对方或第三方发送的数据，大多数情况下给对方发送JSON数据让对方解析
      */
-    public static  String interfaceUtil(String url, String json) {
+    public static  String interfaceUtil(String url, String json2) {
+
+        String encode = Base64Util.encode(json2);
+        String json = Base64Util.encode(encode);
 
         String returnValue = "这是默认返回值，接口调用失败";
         CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -34,6 +38,7 @@ public class ToInterface {
             StringEntity requestEntity = new StringEntity(json,"utf-8");
             requestEntity.setContentEncoding("UTF-8");
             httpPost.setHeader("Content-type", "application/json");
+            httpPost.setHeader("token", "bXpqbVI1clBUR1k1TGVoejVLOEVKTU01ek1yTWpPOVg=");
             httpPost.setEntity(requestEntity);
 
             //第四步：发送HttpPost请求，获取返回值

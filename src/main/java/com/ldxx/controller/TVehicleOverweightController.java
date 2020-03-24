@@ -131,14 +131,15 @@ public class TVehicleOverweightController {
         tWimMsg.setImgData(base64);
         JsonConfig jsonConfig = new JsonConfig();
         jsonConfig.registerJsonValueProcessor(java.util.Date.class, new DateJsonValueProcessor());
-        String data= JSONArray.fromObject(tWimMsg,jsonConfig).toString();
+        String data= net.sf.json.JSONObject.fromObject(tWimMsg,jsonConfig).toString();
+        //System.out.println(data);
         ToInterface toInterface=new ToInterface();
         toInterface.interfaceUtil(yujingUrl,data);
 
-        int i=service.addtVehicleOverweightByidLocal(tWimMsg.getIdLocal());
+       /* int i=service.addtVehicleOverweightByidLocal(tWimMsg.getIdLocal());
         String daoMsg = MsgFormatUtils.getMsgByResult(i, "处理");
         jsonObject.put("resultMsg",daoMsg);
-        jsonObject.put("daoMsg",i);
+        jsonObject.put("daoMsg",i);*/
         jsonObject.put("obj",tWimMsg);
         return jsonObject.toString();
     }
@@ -170,7 +171,7 @@ public class TVehicleOverweightController {
             list.setImgData(base64);
             JsonConfig jsonConfig = new JsonConfig();
             jsonConfig.registerJsonValueProcessor(java.util.Date.class, new DateJsonValueProcessor());
-            String data= JSONArray.fromObject(list,jsonConfig).toString();
+            String data= net.sf.json.JSONObject.fromObject(list,jsonConfig).toString();
             ToInterface toInterface=new ToInterface();
             toInterface.interfaceUtil(yujingUrl,data);
         }
