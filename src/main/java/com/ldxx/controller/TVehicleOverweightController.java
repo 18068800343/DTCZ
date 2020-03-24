@@ -136,10 +136,10 @@ public class TVehicleOverweightController {
         ToInterface toInterface=new ToInterface();
         toInterface.interfaceUtil(yujingUrl,data);
 
-       /* int i=service.addtVehicleOverweightByidLocal(tWimMsg.getIdLocal());
+        int i=service.addtVehicleOverweightByidLocal(tWimMsg.getIdLocal());
         String daoMsg = MsgFormatUtils.getMsgByResult(i, "处理");
         jsonObject.put("resultMsg",daoMsg);
-        jsonObject.put("daoMsg",i);*/
+        jsonObject.put("daoMsg",i);
         jsonObject.put("obj",tWimMsg);
         return jsonObject.toString();
     }
