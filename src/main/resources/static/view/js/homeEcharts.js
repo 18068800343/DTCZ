@@ -120,8 +120,11 @@ let initHomeMap = (lngLats,stationNames)=>{
                             label: {
                                 show: true
                             },
-                            borderColor: 'rgb(71,160,192)',
+                            borderColor: '#6F9BD5',
                             borderWidth: 1
+                        },
+                        areaStyle: {
+                            color: '#6F9BD5',//默认的地图板块颜色
                         },
                         emphasis: {
                             label: {
@@ -137,7 +140,7 @@ let initHomeMap = (lngLats,stationNames)=>{
                         symbolSize: 15,
                         itemStyle: {
                             normal: {
-                                borderColor: '#f317eb',
+                                borderColor: '#E5E324',
                                 borderWidth: 1, // 标注边线线宽，单位px，默认为1
                                 label: {
                                     show: true

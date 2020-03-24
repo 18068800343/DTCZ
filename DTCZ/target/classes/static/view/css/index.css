@@ -38,7 +38,7 @@ body{
  background-image: linear-gradient(to right, rgb(5, 33, 137), transparent), url("bg.png");
 }
 .dangqianche{
-	background-image: -webkit-linear-gradient(top, rgb(0, 122, 255), rgb(143, 240, 249));
+	background-image: -webkit-linear-gradient(top, 143, 240, 249), rgb(143, 240, 249));
 	 -webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 }
