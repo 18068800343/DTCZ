@@ -362,12 +362,43 @@ homePageInit.initDownEcharts = () => {
             homePageInit.downNums2 = json.nums2.split(",");
             for(let i in json.nums){
                 homePageInit.initHuanEcharts("huan"+i,i,homePageInit.downNums,homePageInit.downStationName[i], homePageInit.downNums2 );
-                homePageInit.initHuanEcharts2("by"+i,i,homePageInit.downNums[i],homePageInit.downStationName[i]);
+                homePageInit.initHuanEcharts2("by"+i,i,homePageInit.downNums,homePageInit.downStationName[i], homePageInit.downNums2);
             }
         }
     });
 }
 
+let getHuanDataByJson2 = (index,nums,nums2)=>{
+    let dataArray = [];
+    let nowIndexData = { // 数据值
+        selected: false,
+        // 单个扇区的标签配置
+        label: {
+            normal: {
+                // 是显示标签
+                show: true,
+                color: "#FFF",
+                position: 'center',
+                fontSize: 14,
+                // 标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 \n 换行
+                formatter: '{c}',
+            }
+        },
+    };
+    let otherIndexData = {
+        label: {
+            normal: {
+                show: false,
+            }
+        }
+    };
+    nowIndexData.value = nums[index];
+    dataArray.push(nowIndexData);
+    otherIndexData.value = nums2[index];
+    dataArray.push(otherIndexData);
+
+    return dataArray;
+}
 
 
 homePageInit.initHuanEcharts = (id,index,nums,stationName,nums2) => {
@@ -416,122 +447,49 @@ homePageInit.initHuanEcharts = (id,index,nums,stationName,nums2) => {
     $("#huan"+index).show();
     /*bindChartClick(myChart,2);*/
 }
-homePageInit.initHuanEcharts2 = (id,index,nums,stationName) => {
+homePageInit.initHuanEcharts2 = (id,index,nums,stationName,nums2) => {
     // 环形图
     var myChart = echarts.init(document.getElementById(id));
-    var option = {
+    let dataArray = getHuanDataByJson2(index,nums,nums2);
+    let colorArray = getColor(index,nums,nums2);
+    let option = {
+        // 标题组件，包含主标题和副标题
         title: {
             text: stationName,
             show: true,
             x: "center",
             y: "bottom",
             textStyle: {
-                color: '#a3a6b4',
-                fontSize: 13,
-                fontWeight: 'bold'
-            },
-            left: 'center',
-            top: '90%',
-            bottom: '69%',
-            itemGap: 60,
-        },
-        tooltip: {
-            show: false,
-        },
-        color: ['#B7DD7'],
-        legend: {
-            orient: 'vertical',
-            x: 690,
-            y: 120,
-            data: ['www'],
+                fontSize: "13",
+                color: "#a3a6b4",
+            }
+
 
         },
+        
+        
+        color: colorArray,
+        tooltip: {
+            show: false,
+            // 触发类型: item:数据项触发，axis：坐标轴触发
+            trigger: 'item',
+            formatter: "{a} <br/>{b}: {c} ({d}%)"
+        },
         series: [{
+            name: '任务进度',
             type: 'pie',
-            //起始刻度的角度，默认为 90 度，即圆心的正上方。0 度为圆心的正右方。
-            startAngle: 0,
+            // 饼图的半径，数组的第一项是内半径，第二项是外半径
+            radius: ['50%', '70%'],
+            // 是否启用防止标签重叠策略，默认开启
+            avoidLabelOverlap: false,
             hoverAnimation: false,
-            tooltip: {},
-            radius: ["30%", "47%"],
-            center: ['50%', '80%'],
-            label: {
-                normal: {
-                    show: true,
-                    position: 'center',
-                    color: '#fff',
-                    formatter: function(params) {
-                        return params.value
-                    },
-                },
-            },
             labelLine: {
                 normal: {
                     show: false
                 }
             },
-            data: [{
-                value: nums,
-                itemStyle: {
-                    normal: {
-                        color: "rgba(80,150,224,0)"
-                    }
-                }
-            },
-
-            ]
-        },
-            {
-                type: 'pie',
-                startAngle: 0,
-                hoverAnimation: false,
-                radius: ["70%", "87%"],
-                center: ['50%', '80%'],
-                label: {
-                    normal: {
-                        show: false,
-                        position: 'center'
-                    },
-                    emphasis: {
-                        show: true,
-                        textStyle: {
-                            fontSize: '10',
-                            fontWeight: 'bold'
-                        }
-                    }
-                },
-                labelLine: {
-                    normal: {
-                        show: false
-                    }
-                },
-                data: [{
-                    value: 300,
-                    itemStyle: {
-                        normal: {
-                            color: "rgba(1,218,220,0)"
-                        }
-                    }
-                },
-                    {
-                        value: 240,
-                        itemStyle: {
-                            normal: {
-                                color: "rgba(1,218,220,1)"
-                            }
-                        }
-
-                    },
-                    {
-                        value: 60,
-                        itemStyle: {
-                            normal: {
-                                color: "rgba(1,218,220,0.1)"
-                            }
-                        }
-                    },
-                ]
-            }
-        ]
+            data: dataArray
+        }]
     };
     myChart.setOption(option);
     $("#by"+index).show();

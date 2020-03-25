@@ -247,7 +247,7 @@
             当前监测站点
         </button>
           <input type="button" id="but" onclick="but2()" class="button" value="高级筛选"
-               style="height:34px;float:right;color:#549CFD;border:none;background-color:transparent;margin-right:5%;">
+               style="height:34px;float:right;color:#549CFD;border:none;background-color:transparent;margin-right:2.5%;">
         <div class="sele" >
         <div class="top_main">
             <label class="col-sm-2 control-label zhongliang" style="width:5%;font-weight:normal;">重量</label>
@@ -259,15 +259,15 @@
 
             <div class="col-sm-2 col1">
                 <div class="xian2"
-                     style="width: 20px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: -15%;margin-top: 15%;">
+                     style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: -30%;margin-top: 15%;">
                 </div>
-                <input type="text" class="text2 col-xs-12" value="请输入" v-model="endWeight" @input="checknum('endWeight')" style="height: 34px;border-radius: 5px;box-shadow: none;margin-left: 30px;border:1px solid #DDD;padding:3px;">
+                <input type="text" class="text2 col-xs-12" value="请输入" v-model="endWeight" @input="checknum('endWeight')" style="height: 34px;border-radius: 5px;box-shadow: none;margin-left: -10px;border:1px solid #DDD;padding:3px;width:103%;">
             </div>
         </div>
 
 
      
-        <div class="col-sm-2">
+        <div class="col-sm-2"  >
         </div>
         <label class="col-sm-1	 control-label chexing"
                style=" width: 70px; line-height: 30px;font-weight:normal;">车型</label>
@@ -338,21 +338,21 @@
             <!-- 样式1 -->
 
             <input type="text" v-model="endTime" id="endTime" value="请选择"
-                   style="height: 34px;border-radius: 5px;box-shadow: none;width: 400%;border:1px solid #DDD;">
+                   style="height: 34px;border-radius: 5px;box-shadow: none;width: 260%;border:1px solid #DDD;">
         </div>
-        <label for="" class="col-sm-2 control-label" style="margin-left:3%;font-weight:normal;width:5%;">车牌号</label>
-        <div class="col-sm-2 chepai" style="width: 29%">
+        <label for="" class="col-sm-2 control-label" style="margin-left:8.5%;font-weight:normal;width:5%;">车牌号</label>
+        <div class="col-sm-2 chepai">
             <!-- 样式1 -->
             <input type="text" value="请输入" v-model="chepai"
-                   style="border-radius: 5px;box-shadow: none;border:1px solid #DDD;padding:3px; margin-left:-9%;height:34px;">
+                   style="border-radius: 5px;box-shadow: none;border:1px solid #DDD;padding:3px; margin-left:0%;height:34px;width:290%;">
         </div>
          <div class="jiance">
                 <button type="button" class="btn btn-primary queding" @click="searchInit"
-                        style="width: 110px;z-index:50;position:relative;margin-left:17%;margin-top:3%;background-color:#549CFD;border:1px solid #549CFD;">
+                        style="width: 110px;z-index:50;position:relative;margin-left:84%;margin-top:0.5%;background-color:#549CFD;border:1px solid #549CFD;">
                     确定
                 </button>
           <button type="button" class="btn btn-primary chongzhi" @click="searchInit"
-                        style="width: 110px;  position:relative;margin-top:3%;background-color:#CCCCCC;color:#666666;border:1px solid #CCCCCC;">
+                        style="width: 110px;  position:relative;margin-top:0.5%;background-color:#CCCCCC;color:#666666;border:1px solid #CCCCCC;">
                     重置
                 </button>
             </div>
@@ -382,7 +382,7 @@
                 <div class="col-sm-2 " style="margin-left:-2%;width:13%;padding-left: 18px;">
                     <!-- 样式1 -->
                     <input type="text" class="text3" value="请输入" v-model="chesuStart" @input="checknum('chesuStart')"
-                           style="height: 34px;border-radius: 5px;box-shadow: none;width: 120%;border:1px solid #DDD;padding:3px;">
+                           style="height: 34px;border-radius: 5px;box-shadow: none;width: 101%;border:1px solid #DDD;padding:3px;">
                 </div> 
                 <label for="" class="col-sm-2 control-label chesu" style="margin-left:7.5%;font-weight:normal;">车速</label>
                 <div class="col-sm-2 chesuk" style="margin-left:-2.5%;width:5%;padding-left: 19px;">
@@ -403,15 +403,15 @@
                     <!-- 样式1 -->
                     <input type="text" class="text6" value="请输入" v-model="roadTmpStart"
                            @input="checknum('roadTmpStart')"
-                           style="height: 34px;border-radius: 5px;box-shadow: none;width: 120%;border:1px solid #DDD;padding:3px;">
+                           style="height: 34px;border-radius: 5px;box-shadow: none;width: 70%;border:1px solid #DDD;padding:3px;">
                 </div>
 
                 <div class="col-sm-2 lmwdt" style="width:5%;">
                     <div class="xian2"
-                         style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: -5%;margin-top: 15%;">
+                         style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: -35%;margin-top: 15%;">
                     </div>
                     <input type="text" class="text7" v-model="roadTmpEnd" value="请输入" @input="checknum('roadTmpEnd')"
-                           style="height: 34px;border-radius: 5px;box-shadow: none;width:120%;margin-left: 30px;border:1px solid #DDD;padding:3px;">
+                           style="height: 34px;border-radius: 5px;box-shadow: none;width:70%;margin-left: -10px;border:1px solid #DDD;padding:3px;">
                 </div>
             </div>
         </div>
