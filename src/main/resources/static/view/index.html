@@ -145,6 +145,13 @@ $('#leftTab a').bind('click', function () {
 	}
 
 	let gunDong = $(this).attr("data-gundong");
+	if(gunDong=='true'){
+		$("#mainHtml").removeAttr("style");
+	}else{
+		let cha=(document.body.scrollHeight-document.body.clientHeight)/2;
+		scroll(0,cha.toFixed(0));
+		$("#mainHtml").css({"overflow":"scroll" ,"overflow-y":"hidden"});
+	}
 })
 
 var pagestyle = function () {
