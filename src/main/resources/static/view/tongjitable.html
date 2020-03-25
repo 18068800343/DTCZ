@@ -472,8 +472,8 @@
 </div>
 
 <!-- allMsg1 -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg1">
-    <div class="modal-dialog modal-lg" role="document">
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg1" style="margin-top: 3%">
+    <div class="modal-dialog" role="document">
         <div class="modal-content"  id="lookWimMsgDiv">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -482,113 +482,127 @@
             <div class="modal-body">
                 <div>
                     <form class="form-inline">
-                        <table class="table table-bordered table-condensed" style="height: auto;" id="">
+                        <table class="table  table-condensed" style="">
                             <tr>
                                 <td>站点</td>
-                                <td>{{stationNameRouteName}}</td>
-                                <td>通行时间</td>
-                                <td>{{evtTime}}</td>
+                                <td>{{stationName}}</td>
+                                <td>轴数</td>
+                                <td>{{axlesCount}}</td>
                             </tr>
                             <tr>
-                                <td>打包时间</td>
-                                <td>{{msgTime}}</td>
+
+                                <td>车型</td>
+                                <td>{{vehicleTypeName}}</td>
                                 <td>车道号</td>
                                 <td>{{laneNo}}</td>
                             </tr>
                             <tr>
                                 <td>车牌号</td>
                                 <td>{{plate}}</td>
-                                <td>车牌颜色</td>
-                                <td>{{licensePlateColor}}</td>
-                            </tr>
-                            <tr>
-                                <td>车型</td>
-                                <td>{{vehicleTypeName}}</td>
-                                <td>车长</td>
-                                <td>{{length}}</td>
-                            </tr>
-                            <tr>
-                                <td>车速</td>
-                                <td>{{speed}}</td>
                                 <td>行驶方向</td>
                                 <td>{{directionName}}</td>
+
                             </tr>
                             <tr>
-                                <td>轴数</td>
-                                <td>{{axlesCount}}</td>
-                                <td>总重量</td>
-                                <td>{{totalWeight}}</td>
-                            </tr>
-                            <tr>
-                                <td>轴1重</td>
-                                <td>{{axle1}}</td>
-                                <td>轴2重</td>
-                                <td>{{axle2}}</td>
-                            </tr>
-                            <tr>
-                                <td>轴3重</td>
-                                <td>{{axle3}}</td>
-                                <td>轴4重</td>
-                                <td>{{axle4}}</td>
-                            </tr>
-                            <tr>
-                                <td>轴5重</td>
-                                <td>{{axle5}}</td>
-                                <td>轴5重</td>
-                                <td>{{axle5}}</td>
-                            </tr>
-                            <tr>
-                                <td>轴6重</td>
-                                <td>{{axle6}}</td>
-                                <td>轴8重</td>
-                                <td>{{axle8}}</td>
-                            </tr>
-                            <tr>
-                                <td>轴9重</td>
-                                <td>{{axle9}}</td>
-                                <td>轴10重</td>
-                                <td>{{axle10}}</td>
-                            </tr>
-                            <tr>
-                                <td>轴间距1</td>
-                                <td>{{axleSpace1}}</td>
-                                <td>轴间距2</td>
-                                <td>{{axleSpace2}}</td>
-                            </tr>
-                            <tr>
-                                <td>轴间距3</td>
-                                <td>{{axleSpace3}}</td>
-                                <td>轴间距4</td>
-                                <td>{{axleSpace4}}</td>
-                            </tr>
-                            <tr>
-                                <td>轴间距5</td>
-                                <td>{{axleSpace5}}</td>
-                                <td>轴间距6</td>
-                                <td>{{axleSpace6}}</td>
-                            </tr>
-                            <tr>
-                                <td>轴间距7</td>
-                                <td>{{axleSpace7}}</td>
-                                <td>轴间距8</td>
-                                <td>{{axleSpace8}}</td>
-                            </tr>
-                            <tr>
-                                <td>轴间距9</td>
-                                <td>{{axleSpace9}}</td>
+                                <td>超载率</td>
+                                <td>{{overWeightRatioName}}</td>
                                 <td>是否跨道</td>
                                 <td>{{isStraddleName}}</td>
                             </tr>
                             <tr>
-                                <td>路面温度</td>
-                                <td>{{temperature}}</td>
-                                <td>超载重量</td>
-                                <td>{{overWeight}}</td>
+                                <td>车长(cm)</td>
+                                <td>{{length}}</td>
+                                <td>车牌颜色</td>
+                                <td>{{licensePlateColor}}</td>
                             </tr>
                             <tr>
-                                <td>超载率</td>
-                                <td>{{overWeightRatio}}</td>
+                                <td>超重量(kg)</td>
+                                <td>{{overWeight}}</td>
+                                <td>通行时间</td>
+                                <td>{{evtTime}}</td>
                             </tr>
+                            <tr>
+                                <td>总重量(kg)</td>
+                                <td>{{totalWeight}}</td>
+                                <td>打包时间</td>
+                                <td>{{msgTime}}</td>
+                            </tr>
+
+                            <tr>
+                                <td>车速(km/h)</td>
+                                <td>{{speed}}</td>
+                                <td>查看图片</td>
+                                <td rowspan="2">
+                                    <div id="chepaiImg">
+                                    </div>
+                                    <div id="chebodyDiv">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>路面温度(°C)</td>
+                                <td>{{temperature}}</td>
+                            </tr>
+                        </table>
+                        <table class="table  table-condensed" style="height: auto; margin-top: -2%;">
+                            <thead>
+                            <td colspan="10">轴重(kg)</td>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td width="38px;">轴1:</td>
+                                <td>{{axle1}}</td>
+                                <td width="38px;">轴2:</td>
+                                <td>{{axle2}}</td>
+                                <td width="38px;">轴3:</td>
+                                <td>{{axle3}}</td>
+                                <td width="38px;">轴4:</td>
+                                <td>{{axle4}}</td>
+                                <td width="38px;" style="text-align:right">轴5:</td>
+                                <td>{{axle5}}</td>
+                            </tr>
+                            <tr>
+                                <td width="38px;">轴6:</td>
+                                <td>{{axle6}}</td>
+                                <td width="38px;">轴7:</td>
+                                <td>{{axle7}}</td>
+                                <td width="38px;">轴8:</td>
+                                <td>{{axle8}}</td>
+                                <td width="38px;">轴9:</td>
+                                <td>{{axle9}}</td>
+                                <td width="44px;">轴10:</td>
+                                <td>{{axle10}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <table class="table  table-condensed" style="height: auto; margin-top: -2%">
+                            <thead>
+                            <td colspan="10">轴间距(kg)</td>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td width="38px;">轴1:</td>
+                                <td>{{axleSpace1}}</td>
+                                <td width="38px;">轴2:</td>
+                                <td>{{axleSpace2}}</td>
+                                <td width="38px;">轴3:</td>
+                                <td>{{axleSpace3}}</td>
+                                <td width="38px;">轴4:</td>
+                                <td>{{axleSpace4}}</td>
+                                <td width="38px;">轴5:</td>
+                                <td>{{axleSpace5}}</td>
+                            </tr>
+                            <tr>
+                                <td width="38px;">轴6:</td>
+                                <td>{{axleSpace6}}</td>
+                                <td width="38px;">轴7:</td>
+                                <td>{{axleSpace7}}</td>
+                                <td width="38px;">轴8:</td>
+                                <td>{{axleSpace8}}</td>
+                                <td width="38px;">轴9:</td>
+                                <td>{{axleSpace9}}</td>
+                            </tr>
+                            </tbody>
                         </table>
                     </form>
                 </div>
@@ -840,6 +854,17 @@
                             "render": function (data, type, full) {
                                 return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="' + full.idLocal + '" onclick="lookMsg(this)" id="lookDetall"></i>';
                             }
+                        },{
+                            "class": "tcenter",
+                            "targets": 9,
+                            "searchable": true,
+                            "render": function(data, type, full) {
+                                if(data!="不超重"){
+                                    return ((full.overWeightRatio*100).toFixed(2))+"%";
+                                }else{
+                                    return data;
+                                }
+                            }
                         }
                     ],
                     "order": [],
@@ -1063,6 +1088,30 @@
         looktWimMsg.routeName=data.routeName;
         looktWimMsg.licensePlateColor=data.licensePlateColor;
         looktWimMsg.vehicleTypeName=data.vehicleTypeName;
+        looktWimMsg.overWeightRatioName=data.overWeightRatioName!="不超重"? (data.overWeightRatio*100)+"%":data.overWeightRatioName;
+
+        $.ajax({
+            type: 'POST',
+            url: '/tVehicleOverweight/getimgUrlPrefix',
+            dataType: 'json',
+            data: {
+            },
+            success: function (json) {
+                $("#chepaiImg").html('')
+                $("#chebodyDiv").html('')
+
+                if(data.overWeightRatioName!="不超重"){
+                    var url2="http://"+json.imgUrlPrefix+"/port"+data.stationIP+"/"+data.idLocal+"-Image.jpg"
+                    var img2='<a target="_blank" href="'+url2+'"><img id="chebodyImg" src="'+url2+'" class="popup" width=\'80\' height=\'60\';" /></a>'
+                    $("#chebodyDiv").append(img2)
+                }else{
+                    var url="http://"+json.imgUrlPrefix+"/port"+data.stationIP+"/"+data.idLocal+"-PlateImg.jpg"
+                    var img='<a target="_blank" href="'+url+'"><img id="" src="'+url+'" class="popup" width=\'80\' height=\'60\' /></a>'
+                    $("#chepaiImg").append(img)
+                }
+
+            }
+        });
 
     }
 
