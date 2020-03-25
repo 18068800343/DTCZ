@@ -333,14 +333,19 @@
                   style="height: 34px;border-radius: 5px;box-shadow: none;width: 250%;border:1px solid #DDD;">
         </div>
         <label class="col-sm-1	 control-label riqi jieshuriqi" style="width:7%; line-height: 30px;margin-left:13%;font-weight:normal; ">结束时间
-</label>
+        </label>
         <div class="col-sm-2 jieshuriqidiv" style="width:5%;margin-left:-0.5%;padding-left: 17px;">
             <!-- 样式1 -->
 
             <input type="text" v-model="endTime" id="endTime" value="请选择"
                    style="height: 34px;border-radius: 5px;box-shadow: none;width: 400%;border:1px solid #DDD;">
         </div>
-         
+        <label for="" class="col-sm-2 control-label" style="margin-left:3%;font-weight:normal;width:5%;">车牌号</label>
+        <div class="col-sm-2 chepai" style="width: 29%">
+            <!-- 样式1 -->
+            <input type="text" value="请输入" v-model="chepai"
+                   style="border-radius: 5px;box-shadow: none;border:1px solid #DDD;padding:3px; margin-left:-9%;height:34px;">
+        </div>
          <div class="jiance">
                 <button type="button" class="btn btn-primary queding" @click="searchInit"
                         style="width: 110px;z-index:50;position:relative;margin-left:17%;margin-top:3%;background-color:#549CFD;border:1px solid #549CFD;">
