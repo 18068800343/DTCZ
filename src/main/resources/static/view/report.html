@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html class="margin_top55">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title></title>
+	<link rel="stylesheet" href="../font2/iconfont.css">
+	<link href="../style/bootstrap.min.css" rel="stylesheet">
+	<link href="../style/style.css" rel="stylesheet">
+	<link rel="stylesheet" href="../style/jquery.dataTables.min.css">
+	<link rel="stylesheet" href="../style/jquery-editable-select.css">
+
+	<link href="../font3/bootstrap-select.css" rel="stylesheet">
+	<link rel="stylesheet"  href="css/layui.css" />
+	<link rel="stylesheet"  href="css/toastr.css"/>
+
+	<style lang="">
+		body{
+			background: #fff;
+		}
+		.UpperPart{
+			display: flex;
+			justify-content:space-between;
+			border-bottom: 1px solid #ccc;
+			padding-bottom: 12px;
+		}
+		.selected{
+			background: rgba(247, 161, 3,0.2);
+		}
+		#mainContent th{
+			cursor: pointer;
+		}
+		.modal-header{
+			background-color:#549CDF;
+			color:white;
+		}
+		.table.dataTable thead th, table.dataTable thead td{
+			border-bottom:0px solid #DEDEDE;
+		}
+		#mainContent th{
+			height:30px;
+			line-height:30px;
+		}
+		#mainContent td{
+			height:30px;
+			line-height:30px;
+		}
+		.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
+			border:0px solid #ddd;
+		}
+		.table.dataTable.no-footer{
+			border:0px solid #ddd;
+		}
+		.layui-table tbody tr:hover {
+			background-color: #F5F5F5;
+		}
+	</style>
+</head>
+<body style="background-image: none;width: 90%;margin-left: 10%;">
+
+<div>
+	<!-- Tab panes -->
+	<div role="tabpanel" class="tab-pane active" id="home">
+		<div class="zhuti-content">
+			<div class="UpperPart">
+				<div class="UpperPartL">
+					<lable style="margin: 5PX;float: left;">开始时间:</lable>
+					<input type="text" id="startTime" style="margin: 5PX;float: left;"/>
+					<lable style="margin: 5PX;float: left;">结束时间:</lable>
+					<input type="text" id="endTime" style="margin: 5PX;float: left;"/>
+				</div>
+				<div class="UpperPartR">
+				</div>
+			</div>
+			<div class="LowerPart" style="margin-top:3px;">
+				<table class="table table-bordered table-condensed table-hover layui-table" lay-even lay-skin="nob" id="mainContent" style="white-space: nowrap;">
+					<thead>
+					<tr>
+						<th>序号</th>
+						<th>单位</th>
+						<th>站点名称</th>
+						<th>车道数</th>
+						<th>省界站桩号</th>
+						<th>系统位置桩号</th>
+						<th style="width:75px;">操作</th>
+					</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel"><b>录入监测站点</b></h4>
+			</div>
+			<div class="modal-body">
+				<div>
+					<form class="form-inline">
+						<table class="table table-bordered table-condensed">
+							<tr>
+								<td style='width:10%;'>站点Id</td>
+								<td><input type="text" v-model="stationId"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+								<td>站点名称</td>
+								<td><input type="text" v-model="stationName"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+							</tr>
+							<tr>
+								<td>IP地址</td>
+								<td><input type="text"  @blur="reg(stationIp,'ip_zhengze','stationIp')"  v-model="stationIp" class="form-control" placeholder="请输入" style="width: 100%;"></td>
+								<td style="width: 20%;">端口号</td>
+								<td><input type="text" v-model="stationPort"  class="form-control" placeholder="请输入" style="width:100%;"></td>
+							</tr>
+							<tr>
+								<td>掩码</td>
+								<td><input type="text" v-model="mask"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+								<td>网关</td>
+								<td><input type="text" v-model="gateway"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+							</tr>
+							<tr>
+								<td>经度</td>
+								<td><input type="text" @blur="reg(stationLongitude,'stationLongitude_zhengze','stationLongitude')" v-model="stationLongitude"   class="form-control" placeholder="请输入" style="width:100%;"></td>
+								<td style="width: 20%;">纬度</td>
+								<td><input type="text" @blur="reg(stationLatitude,'stationLatitude_zhengze','stationLatitude')" v-model="stationLatitude"   class="form-control" placeholder="请输入" style="width:100%;"></td>
+							</tr>
+							<tr>
+								<td>路线名称</td>
+								<td><input type="text" v-model="routeName"   class="form-control" placeholder="请输入" style="width:100%;"></td>
+								<td>车道数</td>
+								<td><input type="text" v-model="lanes"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+							</tr>
+							<tr>
+								<td>省界站名称</td>
+								<td><input type="text" v-model="provinceStationName"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+								<td>省界站桩号</td>
+								<td><input type="text" v-model="provinceStationStakeMark"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+							</tr>
+							<tr>
+								<td>系统位置桩号</td>
+								<td><input type="text" v-model="systemLocationStakeMark"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+								<td style="width: 20%;">单位</td>
+								<td>
+									<select class="form-control"  v-model="company=companySelected" style="width: 100%;" >
+										<option :value="company.companyName" v-for="company in companyList">{{company.companyName}}</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td>建成日期</td>
+								<td><input type="text"  id="jianchengDate" class="form-control" placeholder="请输入" style="width: 100%;"></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>站点信息</td>
+								<td colspan="3">
+									<textarea  class="text" v-model="stationInfo" rows="4" cols="100"></textarea>
+								</td>
+							</tr>
+
+
+						</table>
+						<table class="table table-bordered table-condensed" id="new_accessory">
+							<thead>
+							<tr>
+								<td style="width:10%;">车道图:</td>
+								<td colspan="2">
+									<!--<button type="button" class="btn btn-primary" onclick="new_accessory()">增加车道图</button>-->
+									<input type="file" @change="getFile($event,'file_thumb')">
+								</td>
+							</tr>
+							</thead>
+							<tbody></tbody>
+						</table>
+					</form>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				<button type="button" class="btn btn-default" @click="baocun">保存</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- model结束 -->
+
+<!-- 修改Modal -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="change">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title"><b>修改监测站点</b></h4>
+			</div>
+			<div class="modal-body">
+				<div>
+					<form class="form-inline">
+						<table class="table table-bordered table-condensed" style="height: auto;">
+							<tr>
+								<td style='width:10%;'>站点Id</td>
+								<td><input type="text" v-model="stationId"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+								<td>站点名称</td>
+								<td><input type="text" v-model="stationName"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+							</tr>
+							<tr>
+								<td>IP地址</td>
+								<td><input type="text"  @blur="reg(stationIp,'ip_zhengze','stationIp')"  v-model="stationIp" class="form-control" placeholder="请输入" style="width: 100%;"></td>
+								<td style="width: 20%;">端口号</td>
+								<td><input type="text" v-model="stationPort"  class="form-control" placeholder="请输入" style="width:100%;"></td>
+							</tr>
+							<tr>
+								<td>掩码</td>
+								<td><input type="text" v-model="mask"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+								<td>网关</td>
+								<td><input type="text" v-model="gateway"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+							</tr>
+							<tr>
+								<td>经度</td>
+								<td><input type="text" @blur="reg(stationLongitude,'stationLongitude_zhengze','stationLongitude')" v-model="stationLongitude" class="form-control" placeholder="请输入" style="width:100%;"></td>
+								<td style="width: 20%;">纬度</td>
+								<td><input type="text" @blur="reg(stationLatitude,'stationLatitude_zhengze','stationLatitude')" v-model="stationLatitude"  class="form-control" placeholder="请输入" style="width:100%;"></td>
+							</tr>
+							<tr>
+								<td>路线名称</td>
+								<td><input type="text" v-model="routeName"   class="form-control" placeholder="请输入" style="width:100%;"></td>
+								<td>车道数</td>
+								<td><input type="text" v-model="lanes"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+							</tr>
+							<tr>
+								<td>省界站名称</td>
+								<td><input type="text" v-model="provinceStationName"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+								<td>省界站桩号</td>
+								<td><input type="text" v-model="provinceStationStakeMark"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+							</tr>
+							<tr>
+								<td>系统位置桩号</td>
+								<td><input type="text" v-model="systemLocationStakeMark"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+								<td style="width: 20%;">单位</td>
+								<td>
+									<select class="form-control"  v-model="company=companySelected" style="width: 100%;" >
+										<option :value="company.companyName" v-for="company in companyList">{{company.companyName}}</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td>建成日期</td>
+								<td><input type="text"  id="xg_jianchengDate"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>站点信息</td>
+								<td colspan="3">
+									<textarea  class="text" v-model="stationInfo" rows="4" cols="100"></textarea>
+								</td>
+							</tr>
+
+						</table>
+						<table class="table table-bordered table-condensed" id="edit_accessory">
+							<thead style="display: none">
+							<tr>
+								<td style="width:10%;">车道图:</td>
+								<td colspan="3">
+									<!--<button type="button" class="btn btn-primary" onclick="editAccessory()">添加车道图</button>-->
+									<input type="file" @change="getFile($event,'file_thumb')">
+								</td>
+							</tr>
+
+							</thead>
+							<tbody>
+							</tbody>
+							<tfoot></tfoot>
+						</table>
+					</form>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				<button type="button" class="btn btn-success" @click="baocun" >保存</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 修改model结束 -->
+
+<!-- allMsg -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg1">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" ><b>账户信息</b></h4>
+			</div>
+			<div class="modal-body">
+				<div>
+					<form class="form-inline">
+						<table class="table table-bordered table-condensed" style="height: auto;">
+							<tr>
+								<td style="width: 20%;">用户名</td>
+								<td><input type="text" id="xg_username" class="form-control" placeholder="请输入" style="width: 80%;"></td>
+								<td>密码</td>
+								<td><input type="password" id="xg_password" class="form-control" placeholder="请输入" style="width: 80%;"></td>
+							</tr>
+						</table>
+					</form>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				<button type="button" class="btn btn-success" id="xgup_baocun">保存</button>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+<script src="../js/jquery.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="js/datatables/jquery.dataTables.min.js"></script>
+<script src="../js/bootstrap-select.js" ></script>
+<script src="../js/jquery-editable-select.js" ></script>
+<script src="js/toastr.js" ></script>
+<script src="js/laydate/laydate.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+<script src="js/quanxian.js"></script>
+<script>
+
+	$(document).ready( function () {
+		laydate.render({
+			elem: '#jianchengDate', //指定元素
+			type: 'month'
+		});
+		laydate.render({
+			elem: '#xg_jianchengDate', //指定元素
+			type: 'month'
+		});
+		initTable()
+
+	});
+	var table=$('#mainContent').dataTable({
+		"deferRender": true,
+		"processing": true,
+		"bDestroy": true,
+		"iDisplayLength": 10,
+		"searching": true,
+		"lengthChange": false,
+		"oLanguage": {
+			"sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+		},
+		"columns": [
+			{ "data": "stationId"},
+			{ "data": "company"},
+			{ "data": "stationName"},
+			{ "data": "routeName"},
+			{ "data": "provinceStationName"},
+			{ "data": "stationIp"},
+			{ "data": null},
+		],
+		"columnDefs": [{
+			"class": "tcenter",
+			"targets": 6,
+			"searchable": true,
+			"render": function(data, type, full) {
+				var xiugai='<i class="iconfont icon-xiugai Phb" style="font-size:20px;cursor:pointer;display: none;" id="upd" title="修改" data-toggle="modal" data-target="#change"></i>';
+				var shanchu='<i class="iconfont icon-shanchu Phc" style="font-size:20px;cursor:pointer;display: none;" id="del"  title="删除"></i>';
+				//var look='<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" onclick="lookMs(this)" data-toggle="modal" data-target="#allMsg1" id="lookDetall"></i>'
+				return xiugai+shanchu;
+			}
+		}],"fnDrawCallback" : function() {
+			initTableQuanxian()
+		},
+		//让表格出横向滚动条 ，此时 表头和 表中数据将分为两个部分
+		"sScrollX":true,
+		// 让表格的宽度不自适应 ，固定宽度。 如果不设置 表头和表中数据会分离
+		//表中的数据自适应 ，表头的宽度固定
+		"bAutoWidth":false,
+		"order": [[0, 'asc']],
+		"oLanguage": { //国际化配置
+			"sProcessing": "正在获取数据，请稍后...",
+			"sLengthMenu": "显示 _MENU_ 条",
+			"sZeroRecords": "查询不到相关数据",
+			"sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
+			"sInfoEmpty": "记录数为0",
+			"sInfoFiltered": "(全部记录数 _MAX_ 条)",
+			"sInfoPostFix": "",
+			"sSearch": "搜索",
+			"sUrl": "",
+			"oPaginate": {
+				"sFirst": "第一页",
+				"sPrevious": "上一页",
+				"sNext": "下一页",
+				"sLast": "最后一页"
+			}},
+
+	});
+	$.fn.dataTable.ext.errMode = 'none';       //屏蔽掉报错弹窗
+
+	function initTableQuanxian(){
+		$.ajax({
+			type:"post",
+			url:"/login/getUser",
+			async:false,
+			data:{
+			},
+			success:function(json){
+				if(json!=null &&json!=""){
+					var arr = json.usrPersmissionCoding.split(',');
+					for(var i=0;i<arr.length;i++){
+						if(arr[i].indexOf("Pha") >= 0 ){
+							$(".Pha").show();
+						}
+						if(arr[i].indexOf("Phb") >= 0 ){
+							$(".Phb").show();
+						}
+						if(arr[i].indexOf("Phc") >= 0 ){
+							$(".Phc").show();
+						}
+					}
+
+				}
+
+			}
+		});
+	}
+
+	function initTable(){
+		$.ajax({
+			type: 'POST',
+			url: '/StationSite/getAllStationSite',
+			dataType: 'json',
+			data: {
+			},
+			error: function (msg) {
+				errMessage("请求UserController失败");
+			},
+			success: function (json) {
+				$('#mainContent').dataTable().fnClearTable();
+				$('#mainContent').DataTable().rows.add(json).draw(false);
+			}
+		});
+	}
+
+	//全局正则KV集合
+	var regMap = {
+		ip_zhengze: '^((2(5[0-5]|[0-4]\\d))|[0-1]?\\d{1,2})(\\.((2(5[0-5]|[0-4]\\d))|[0-1]?\\d{1,2})){3}$',
+		stationLongitude_zhengze:'^(\\-|\\+)?(((\\d|[1-9]\\d|1[0-7]\\d|0{1,3})\\.\\d{0,6})|(\\d|[1-9]\\d|1[0-7]\\d|0{1,3})|180\\.0{0,6}|180)$',
+		stationLatitude_zhengze:'^(\\-|\\+)?([0-8]?\\d{1}\\.\\d{0,6}|90\\.0{0,6}|[0-8]?\\d{1}|90)$',
+	}
+	//全局错误提示
+	var errMsg = {
+		stationIp:'IP地址格式错误，请重新检查',
+		stationLongitude:'经度格式错误，经度整数部分为0-180,小数部分为0到6位!',
+		stationLatitude:'纬度格式错误，纬度整数部分为0-90,小数部分为0到6位!',
+
+	}
+	function reg(str,re){
+		if (re.test(str)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	var addzhandian = new Vue({
+		el:"#myModal",
+		data:{
+			sId:"",
+			stationId:"",
+			stationName:"",
+			stationIp:"",
+			stationPort:"",
+			stationLongitude:"",
+			stationLatitude:"",
+			routeName:"",
+			company:'',
+			provinceStationName:'',
+			mask:'',
+			gateway:'',
+			lanes:'',
+			provinceStationStakeMark:'',
+			systemLocationStakeMark:'',
+			completionDate:'',
+			stationInfo:'',
+			companySelected:'',
+			companyList:'',
+			file:'',
+		},
+		methods:{
+			getFile(event) {
+				this.file = event.target.files[0];
+				console.log(this.file);
+			},
+			baocun:function(event){
+				this.completionDate=$("#jianchengDate").val();
+				event.preventDefault();//取消默认行为
+				let formData = new FormData();
+				formData.append('stationSite', JSON.stringify(this._data));
+				formData.append('file', this.file);
+				let config = {
+					headers: {
+						'Content-Type': 'multipart/form-data'
+					}
+				}
+				this.$http.post('/StationSite/addStationSite',formData,config).then((res)=>{
+					var resMsg = res.body;
+					if(resMsg.daoMsg>0){
+						$('#mainContent').DataTable().row.add(resMsg.obj).draw();
+						$("#myModal").modal("hide");
+						toastr.success(resMsg.resultMsg);
+					}else if(resMsg.daoMsg==-3){
+						toastr.error("IP地址重复");
+					}else if(resMsg.daoMsg==-4){
+						toastr.error("端口号重复");
+					}else{
+						toastr.error(resMsg.resultMsg);
+					}
+				},(res)=>{
+					toastr.error("发生错误");
+				});
+			},
+			reg:function(value,regType,id){
+				var re = new RegExp(regMap[regType]);
+				var flag;
+				flag = reg(value,re);
+				if(null!=value&&''!=value){
+					if(!flag){
+						addzhandian[id]="";
+						toastr.error(errMsg[id]);
+					}
+				}
+			},
+			companyInit:function(){
+				//发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
+				this.$http.post('/StationSite/getCompanyStationSite',{},{emulateJSON:true}).then((res)=>{
+					this.companyList=res.body;
+					this.companySelected=addzhandian.companyList[0].companyName;
+				},(res)=>{
+					console.log("初始化失败");
+				});
+			},
+		}
+	});
+	addzhandian.companyInit();
+
+	//删除
+	$('#mainContent').delegate('#del','click', function () {
+		var dom = $(this).parents('tr');
+		var data=$('#mainContent').DataTable().row(dom).data();
+		var msg = "您真的确定要删除吗？\n\n请确认！";
+		if (confirm(msg)==true){
+			$.ajax({
+				type: 'POST',
+				url:'/StationSite/delStationSite',
+				dataType: 'json',
+				data: {
+					id:data.sId
+				},
+				success: function (json) {
+
+					if(json!=0){
+						$('#mainContent').DataTable().row(dom).remove().draw(false); //删除行立即显示
+						toastr.success('删除成功');
+					}else{
+						toastr.error('删除失败');
+					}
+				}
+			});
+		}else{
+			return false;
+		}
+
+	})
+
+	var trr;
+	$("#mainContent").delegate("#upd","click",function(){
+		var dom = $(this).parents('tr');
+		trr=$(this).closest('tr');
+		var data=$('#mainContent').DataTable().row(dom).data();
+		xgId=data.sId
+
+		xgzhandian.sId=data.sId
+		xgzhandian.stationId=data.stationId
+		xgzhandian.stationName=data.stationName
+		xgzhandian.stationIp=data.stationIp
+		xgzhandian.stationPort=data.stationPort
+		xgzhandian.stationLongitude=data.stationLongitude
+		xgzhandian.stationLatitude=data.stationLatitude
+		xgzhandian.routeName=data.routeName
+		xgzhandian.company=data.company,
+				xgzhandian.provinceStationName=data.provinceStationName;
+		xgzhandian.mask=data.mask;
+		xgzhandian.gateway=data.gateway;
+		xgzhandian.lanes=data.lanes;
+		xgzhandian.provinceStationStakeMark=data.provinceStationStakeMark;
+		xgzhandian.systemLocationStakeMark=data.systemLocationStakeMark;
+		xgzhandian.completionDate=data.completionDate;
+		$("#xg_jianchengDate").val(data.completionDate)
+		xgzhandian.stationInfo=data.stationInfo;
+		xgzhandian.companySelected=data.company;
+
+		$.ajax({
+			type:"post",
+			url:"/accessory/selectAccessoryById",
+			dataType:"json",
+			data:{
+				id:xgId
+			},
+			success:function(json){
+				$("#edit_accessory tbody").empty('');
+				if(json!=null&&json!=''&&json.length!=0){
+					$("#edit_accessory thead").hide()
+					for(var i=0;i<json.length;i++){
+						$("#edit_accessory tbody").append("<tr>"+
+								"<td style='width:10%;'>车道图</td>"+
+								"<td><a href='"+getLocalPath()+"/dtcz_file/"+json[i].acUrl+"' target='view_window' style='color:blue'>"+json[i].acName+"</a></td>"+
+								/* "<td colspan='2'><input type='text' class='form-control' style='width:100%;' value='"+json[i].acName+"' disabled></td>"+*/
+								"<td style='width:150px;'><button type='button' class='btn btn-danger' data1='"+json[i].acUrl+"' data2='"+json[i].aId+"' data3='"+json[i].acName+"' onclick='delete_file(this)'>移除车道图</button></td>"+
+								"</tr>");
+					}
+				}else{
+					$("#edit_accessory thead").show()
+					/*.append("<td>车道图</td>"+
+                    "<td colspan=\"3\"><input type=\"file\" @change=\"getFile2($event,'file_thumb')\">"+
+                    "</td>")*/
+				}
+			}
+		})
+	})
+
+	function getLocalPath(){
+		var pathArray = window.location.pathname.split('/');
+		var secondLevelLocation = pathArray[1];
+		var loginUrl = window.location.protocol + "//"  + window.location.host ;
+		return loginUrl;
+	}
+
+	function delete_file(obj){
+		var url=$(obj).attr("data1");
+		var id=$(obj).attr("data2");
+		var name=$(obj).attr("data3");
+		var msg = "您真的确定要删除吗？\n\n请确认！";
+		if (confirm(msg)==true){
+			$.ajax({
+				type: 'POST',
+				url: '/accessory/deleteAccessoryByIdAndName',
+				dataType: 'json',
+				data: {
+					aId:id,
+					acName:name,
+					acUrl:url
+				},
+				success: function (json) {
+					if(json==0){
+						toastr.error("删除失败");
+					}else{
+						$("#edit_accessory thead").show()
+						toastr.success("删除成功");
+						$(obj).parent().parent().remove();
+						//$("#myModal2").modal("hide")
+
+					}
+				}
+			});
+		}
+	}
+
+	var xgzhandian = new Vue({
+		el:"#change",
+		data:{
+			sId:"",
+			stationId:"",
+			stationName:"",
+			stationIp:"",
+			stationPort:"",
+			stationLongitude:"",
+			stationLatitude:"",
+			routeName:"",
+			company:'',
+			provinceStationName:'',
+			mask:'',
+			gateway:'',
+			lanes:'',
+			provinceStationStakeMark:'',
+			systemLocationStakeMark:'',
+			completionDate:'',
+			stationInfo:'',
+			companySelected:'',
+			companyList:'',
+			file:'',
+		},
+		methods:{
+			getFile(event) {
+				this.file = event.target.files[0];
+				console.log(this.file);
+			},
+			baocun:function(){
+				this.completionDate=$("#xg_jianchengDate").val();
+				event.preventDefault();//取消默认行为
+				let formData = new FormData();
+				formData.append('stationSite', JSON.stringify(this._data));
+				formData.append('file', this.file);
+				let config = {
+					headers: {
+						'Content-Type': 'multipart/form-data'
+					}
+				}
+				this.$http.post('/StationSite/updStationSite',formData,config).then((res)=>{
+					var resMsg = res.body;
+					if(resMsg.daoMsg>0){
+						$('#mainContent').DataTable().row(trr).data(resMsg.obj);
+						$("#change").modal("hide");
+						toastr.success(resMsg.resultMsg);
+						initTableQuanxian()
+					}else if(resMsg.daoMsg==-3){
+						toastr.error("IP地址重复");
+					}else if(resMsg.daoMsg==-4){
+						toastr.error("端口号重复");
+					}else{
+						toastr.error(resMsg.resultMsg);
+					}
+				},(res)=>{
+					toastr.error("发生错误");
+				});
+			},
+			reg:function(value,regType,id){
+				var re = new RegExp(regMap[regType]);
+				var flag;
+				flag = reg(value,re);
+				if(null!=value&&''!=value){
+					if(!flag){
+						xgzhandian[id]="";
+						toastr.error(errMsg[id]);
+					}
+				}
+			},
+			companyInit:function(){
+				//发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
+				this.$http.post('/StationSite/getCompanyStationSite',{},{emulateJSON:true}).then((res)=>{
+					this.companyList=res.body;
+					this.companySelected=addzhandian.companyList[0].companyName;
+				},(res)=>{
+					console.log("初始化失败");
+				});
+			},
+		}
+	});
+	xgzhandian.companyInit();
+
+
+</script>
+</html>
