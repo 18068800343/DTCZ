@@ -91,7 +91,7 @@
         WHEN 2 THEN '行车道'
         ELSE '应急车道'
         end as laneNoName,
-        CASE WHEN aa.Over_Weight_Ratio>0 THEN '超重'
+        CASE WHEN aa.Over_Weight_Ratio>0 THEN aa.Over_Weight_Ratio
         ELSE '不超重'
         end as overWeightRatioName,
         aa.*, b.Station_Name,

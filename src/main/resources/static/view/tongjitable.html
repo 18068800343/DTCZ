@@ -285,7 +285,7 @@
                 <option value="6">6轴车</option>
             </select>
         </div>
-         <label for="" class="col-sm-2 control-label chaozhongbili" style="margin-left:13%;font-weight:normal;width:8%;">是否超重</label>
+         <label for="" class="col-sm-2 control-label chaozhongbili" style="margin-left:13%;font-weight:normal;width:8%;">是否超载</label>
                 <div class="col-sm-2 czbl" style="width: 10%">
 <!--                    <input type="text" class="text8" value="请输入" v-model="chaozhongStart"
                            @input="checknum('chaozhongStart')"
@@ -293,7 +293,7 @@
                     <select value="请选择" class="text8 col-xs-12	" data-live-search="true"  v-model="chaozhongStart"
                             style="border-radius: 5px;box-shadow: none;border:1px solid #DDD;padding:3px; ;height:34px;margin-left:-40px;">
                         <option value="">全部</option>
-                        <option value="1">超重</option>
+                        <option value="1">超载</option>
                     </select>
                 </div>
         <div class="sele">
@@ -311,7 +311,7 @@
         
            <label class="col-sm-1	 control-label riqi"
                style="margin-left: 1%;width: 70px;line-height: 30px;font-size:15px;font-weight:normal;">日期</label>
-            <div class="col-sm-2 chepai" style="width: 21.5%">
+            <div class="col-sm-2 chepai" style="width: 21.5%;padding-left: 29px;">
                 <!-- 样式1 -->
                          <select value="请选择" class="selectpicker" multiple data-max-options="1" data-live-search="true" @change="formatTimeRange" v-model="timeRange" id="timeRange"
                     style="height: 34px; border-radius: 5px; box-shadow: none; margin-left: 30px; border: 1px solid rgb(221, 221, 221);">
@@ -326,24 +326,24 @@
             </div>
         </div>
       
-            <label class="col-sm-1	 control-label riqi kaishiriqi" style="width:7%;line-height: 30px; margin-left:2%;font-weight:normal;">开始日期</label>
+            <label class="col-sm-1	 control-label riqi kaishiriqi" style="width:7%;line-height: 30px; margin-left:2%;font-weight:normal;">开始时间</label>
         <div class="col-sm-2 kaishiriqidiv" style="margin-left:-1.5%;">
             <!-- 样式1 -->
             <input type="text" v-model="startTime" id="startTime" value="请选择"
                   style="height: 34px;border-radius: 5px;box-shadow: none;width: 250%;border:1px solid #DDD;">
         </div>
-        <label class="col-sm-1	 control-label riqi jieshuriqi" style="width:7%; line-height: 30px;margin-left:13%;font-weight:normal; ">结束日期
+        <label class="col-sm-1	 control-label riqi jieshuriqi" style="width:7%; line-height: 30px;margin-left:13%;font-weight:normal; ">结束时间
 </label>
-        <div class="col-sm-2 jieshuriqidiv" style="width:5%;margin-left:-0.5%;">
+        <div class="col-sm-2 jieshuriqidiv" style="width:5%;margin-left:-0.5%;padding-left: 17px;">
             <!-- 样式1 -->
 
             <input type="text" v-model="endTime" id="endTime" value="请选择"
-                   style="height: 34px;border-radius: 5px;box-shadow: none;width: 250%;border:1px solid #DDD;">
+                   style="height: 34px;border-radius: 5px;box-shadow: none;width: 400%;border:1px solid #DDD;">
         </div>
          
          <div class="jiance">
                 <button type="button" class="btn btn-primary queding" @click="searchInit"
-                        style="width: 110px;position:relative;margin-left:17%;margin-top:3%;background-color:#549CFD;border:1px solid #549CFD;">
+                        style="width: 110px;z-index:50;position:relative;margin-left:17%;margin-top:3%;background-color:#549CFD;border:1px solid #549CFD;">
                     确定
                 </button>
           <button type="button" class="btn btn-primary chongzhi" @click="searchInit"
@@ -374,13 +374,13 @@
             </div>
              <div class="sele bts" style="position:absolute;width:100%;margin-top:-2.5%;">
                 <label for="" class="col-sm-2 control-label chesu" style="margin-left:1%;font-weight:normal;">车长</label>
-                <div class="col-sm-2 " style="margin-left:-2%;width:13%;">
+                <div class="col-sm-2 " style="margin-left:-2%;width:13%;padding-left: 18px;">
                     <!-- 样式1 -->
                     <input type="text" class="text3" value="请输入" v-model="chesuStart" @input="checknum('chesuStart')"
                            style="height: 34px;border-radius: 5px;box-shadow: none;width: 120%;border:1px solid #DDD;padding:3px;">
                 </div> 
                 <label for="" class="col-sm-2 control-label chesu" style="margin-left:7.5%;font-weight:normal;">车速</label>
-                <div class="col-sm-2 chesuk" style="margin-left:-2.5%;width:5%;">
+                <div class="col-sm-2 chesuk" style="margin-left:-2.5%;width:5%;padding-left: 19px;">
                     <!-- 样式1 -->
                     <input type="text" class="text3" value="请输入" v-model="chesuStart" @input="checknum('chesuStart')"
                            style="height: 34px;border-radius: 5px;box-shadow: none;width: 120%;border:1px solid #DDD;padding:3px;">
@@ -394,7 +394,7 @@
                            style="height: 34px;border-radius: 5px;box-shadow: none;width:120%;margin-left: 30px;border:1px solid #DDD;padding:3px;">
                 </div>	
                 <label for="" class="col-sm-2 control-label lumianwendu" style="margin-left:7%;font-weight:normal;">路面温度</label>
-                <div class="col-sm-2 lmwd" style="margin-left:-2%;width:5%;">
+                <div class="col-sm-2 lmwd" style="margin-left:-2%;width:5%;padding-right: 0px;padding-left: 28px;">
                     <!-- 样式1 -->
                     <input type="text" class="text6" value="请输入" v-model="roadTmpStart"
                            @input="checknum('roadTmpStart')"
@@ -428,7 +428,7 @@
             <th>轴数</th>
             <th>总重量(Kg)</th>
             <th>路面温度</th>
-            <th>超重比率</th>
+            <th>超载率</th>
             <th>时间</th>
             <th>详情</th>
         </tr>
@@ -577,11 +577,11 @@
                             <tr>
                                 <td>路面温度</td>
                                 <td>{{temperature}}</td>
-                                <td>超重量</td>
+                                <td>超载重量</td>
                                 <td>{{overWeight}}</td>
                             </tr>
                             <tr>
-                                <td>超重比率</td>
+                                <td>超载率</td>
                                 <td>{{overWeightRatio}}</td>
                             </tr>
                         </table>
@@ -766,7 +766,7 @@
                         data: function (param) {
                             param.stationPort = mainVm.stationPort;
                             param.chexing = "";
-                            param.startTime = mainVm.startTime;
+                            param.startTime = mainVm.startTime;400
                             param.endTime = mainVm.endTime;
                             param.endWeight = mainVm.endWeight;
                             param.startWeight = mainVm.startWeight;
