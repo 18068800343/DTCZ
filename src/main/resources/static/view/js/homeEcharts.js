@@ -197,6 +197,10 @@ homePageInit.setLeftEcharts = (id, stationNames, nums) => {
     for (let i = 0; i < barData.length; i++) {
         dataShadow.push(barData[i])
     }
+    var maxdataShadow=[]
+    for (let i = 0; i < barData.length; i++) {
+        maxdataShadow.push(barData[barData.length-1])
+    }
 
     let option = {
         tooltip: {
@@ -251,6 +255,7 @@ homePageInit.setLeftEcharts = (id, stationNames, nums) => {
             },
             data: category
         },
+
         series: [{ // For shadow
             name: '数量',
             type: 'bar',
@@ -258,6 +263,7 @@ homePageInit.setLeftEcharts = (id, stationNames, nums) => {
                 normal: {
                     show: true,
                     position: 'right',
+                    distance: 10,
                     color: 'white',
                 }
             },
@@ -275,7 +281,18 @@ homePageInit.setLeftEcharts = (id, stationNames, nums) => {
             barCategoryGap: '70%',
             data: dataShadow,
 
-        },
+        },// 背景条
+            {
+                type: 'bar',
+                barWidth: 12,
+                silent: true,
+                itemStyle: {
+                    normal: { color: '#003363', barBorderRadius: 45 }
+                },
+                barGap: '-100%', // 可以使两个条重叠
+                barCategoryGap: '50%',
+                data: maxdataShadow
+            },
             {
                 type: 'bar',
                 data: barData,
