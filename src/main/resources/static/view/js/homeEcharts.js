@@ -203,138 +203,160 @@ homePageInit.setLeftEcharts = (id, stationNames, nums) => {
     }
 
     let option = {
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                type: 'shadow'
-            }
-        },
-        grid: {
-            left: '20%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
-        xAxis: {
-            type: 'value',
-            axisLine: {
-                show: true
-            },
-            axisTick: {
-                show: false
-            },
-            axisLabel: {
-                show: false
-            },
-            splitLine: {
-                show: false
-            },
-            boundaryGap: ['0%', '20%'],//留白大小，坐标轴两边留白
-        },
-        yAxis: {
-            type: 'category',
-            data: category,
-            splitLine: {
-                show: false
-            },
-            axisLine: {
-                show: false
-            },
-            axisTick: {
-                show: false
-            },
-            axisLabel: {
-                show: false,
-            },
-            offset: 10,
-            nameTextStyle: {
-                fontSize: 15
-            },
-            splitLine: {
-                show: false
-            },
-            data: category
-        },
-
-        series: [{ // For shadow
-            name: '数量',
-            type: 'bar',
-            label: {
-                normal: {
-                    show: true,
-                    position: 'right',
-                    distance: 10,
-                    color: 'white',
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
                 }
             },
-            itemStyle: {
-                normal: {
-                    barBorderRadius: 20,
-                    color: 'rgb(43,82,226)'
-                },
-                emphasis: {
-                    barBorderRadius: 20
-                },
-
+            grid: {
+                left: '20%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
             },
-            barGap: '-100%',
-            barCategoryGap: '70%',
-            data: dataShadow,
-
-        },// 背景条
-            {
-                type: 'bar',
-                barWidth: 12,
-                silent: true,
-                itemStyle: {
-                    normal: { color: '#003363', barBorderRadius: 45 }
+            xAxis: {
+                type: 'value',
+                axisLine: {
+                    show: true
                 },
-                barGap: '-100%', // 可以使两个条重叠
-                barCategoryGap: '50%',
-                data: maxdataShadow
+                axisTick: {
+                    show: false
+                },
+                axisLabel: {
+                    show: false
+                },
+                splitLine: {
+                    show: false
+                },
+                boundaryGap: ['0%', '0%'],//留白大小，坐标轴两边留白
             },
-            {
+            yAxis: {
+                type: 'category',
+                data: category,
+                splitLine: {
+                    show: false
+                },
+                axisLine: {
+                    show: false
+                },
+                axisTick: {
+                    show: false
+                },
+                axisLabel: {
+                    show: false,
+                },
+                offset: 10,
+                nameTextStyle: {
+                    fontSize: 15
+                },
+                splitLine: {
+                    show: false
+                },
+                data: category
+            },
+
+            series: [{ // For shadow
+                name: '数量',
                 type: 'bar',
-                data: barData,
-                smooth: true,
                 label: {
                     normal: {
-                        show: true,
-                        position: 'left',
+                        show: false,
+                        position: 'right',
                         distance: 10,
+                        color: 'white',
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        barBorderRadius: 20,
+                        color: 'rgb(43,82,226)'
+                    },
+                    emphasis: {
+                        barBorderRadius: 20
+                    },
 
-                        textStyle: {
-                            color: '#FFF',
-                            fontSize: 12
-                        },
-                        formatter: function (param) {
-                            for (let i = 0; i < category.length; i++) {
-                                if (param.dataIndex == i) {
-                                    return category[i];
+                },
+                barGap: '-100%',
+                barCategoryGap: '70%',
+                data: dataShadow,
+
+            },// 背景条
+                {
+                    type: 'bar',
+                    barWidth: 12,
+                    silent: true,
+                    itemStyle: {
+                        normal: { color: '#DDDDDD', barBorderRadius: 45 }
+                    },
+                    barGap: '-100%', // 可以使两个条重叠
+                    barCategoryGap: '70%',
+                    data: maxdataShadow,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'right',
+                            distance: 10,
+                            color:'#white',
+                            formatter: function(data) {
+                                return dataShadow[data.dataIndex];
+                            },
+                        }
+                    }
+                },// 背景条2覆盖第一个背景
+                {
+                    type: 'bar',
+                    barWidth: 12,
+                    silent: true,
+                    itemStyle: {
+                        normal: { color: '#003363', barBorderRadius: 45 }
+                    },
+                    barGap: '-100%', // 可以使两个条重叠
+                    barCategoryGap: '30%',
+                    data: maxdataShadow,
+                },
+                {
+                    type: 'bar',
+                    data: barData,
+                    smooth: true,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'left',
+                            distance: 10,
+
+                            textStyle: {
+                                color: '#FFF',
+                                fontSize: 12
+                            },
+                            formatter: function (param) {
+                                for (let i = 0; i < category.length; i++) {
+                                    if (param.dataIndex == i) {
+                                        return category[i];
+                                    }
                                 }
                             }
                         }
-                    }
-                },
-                itemStyle: {
-                    emphasis: {
-                        barBorderRadius: 40
                     },
-                    normal: {
-                        barBorderRadius: 20,
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                            offset: 0,
-                            color: 'rgb(12,81,226)'
-                        }, {
-                            offset: 1,
-                            color: '#3fa7dc'
-                        }]),
+                    itemStyle: {
+                        emphasis: {
+                            barBorderRadius: 40
+                        },
+                        normal: {
+                            barBorderRadius: 20,
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                offset: 0,
+                                color: 'rgb(12,81,226)'
+                            }, {
+                                offset: 1,
+                                color: '#3fa7dc'
+                            }]),
 
+                        }
                     }
                 }
-            }
-        ]
-    };
+            ]
+        };
     myChart.setOption(option);
    /* bindChartClick(myChart,1);*/
 }
@@ -608,7 +630,6 @@ homePageInit.setLastEcharts = (json) => {
     var myChart = echarts.init(document.getElementById("liti"));
     var option = {
         color: ['#6154FD','#FE545E'],
-
         textStyle: {
             color: '#fff',
             fontSize: 13
@@ -619,19 +640,23 @@ homePageInit.setLastEcharts = (json) => {
                 type: 'cross'
             }
         },
-
+     // 背景条
+        
         legend: {
             data: ['二级预警(≥80吨)', '三级预警(≥100吨)'],
-            right: 10,
-            orient: 'vertical',  //垂直显示
             textStyle: {
-                color: '#17447E',
+                color: '#A3DCEC',
                 fontSize: 13
             },
 
         },
+        
         xAxis: [
             {
+            	 "axisLine":{       //y轴
+                     "show":false
+
+                },
                 type: 'category',
                 data: json.stationNames.split(","),
                 axisLabel : {
