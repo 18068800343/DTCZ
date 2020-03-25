@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html id="mainHtml">
 
 <head>
 	<meta charset="UTF-8">
@@ -49,10 +49,10 @@
 <!--导航栏结束-->
 <!--左半部分开始-->
 <div id="leftTab" style="position:fixed">
-	<a href="javascript:void(0);" lang="home" target="iframe_a" class="Pa" style="margin-top:40%;">首页</a>
-	<a href="javascript:void(0);" lang='shishijiance' target="iframe_a" class="Pb" id="pb">实时监测</a>
+	<a href="javascript:void(0);" lang="home" data-gundong="true" target="iframe_a" class="Pa" style="margin-top:40%;">首页</a>
+	<a href="javascript:void(0);" lang='shishijiance'  target="iframe_a" class="Pb" id="pb">实时监测</a>
 	<a href="javascript:void(0);" lang='tongjitable' target="iframe_a" class="Pc">数据查询</a>
-	<a href="javascript:void(0);" lang='tongjifenxi' target="iframe_a" class="Pd">统计分析</a>
+	<a href="javascript:void(0);" lang='tongjifenxi' data-gundong="true" target="iframe_a" class="Pd">统计分析</a>
 	<a href="javascript:void(0);" lang='yujingguanli' target="iframe_a" class="Pk">预警管理</a>
 	<ul class="layui-nav layui-nav-tree liebiao" lay-filter="test" >
 	<li class="layui-nav-item layui-nav-itemed ">
@@ -142,6 +142,13 @@ $('#leftTab a').bind('click', function () {
 	} else {
 		$('.daohang').slideUp();
 		$('#leftTab').removeClass('homeLeft')
+	}
+
+	let gunDong = $(this).attr("data-gundong");
+	if(gunDong=='true'){
+		$("#mainHtml").removeAttr("style");
+	}else{
+		$("#mainHtml").css({"overflow":"scroll" ,"overflow-y":"hidden"});
 	}
 })
 
