@@ -74,7 +74,7 @@
     </select>
 
     <select id="getAlltWimMsgByCondition" fetchSize="-2147483648" resultType="tWimMsgVo">
-        SELECT
+        SELECT * FROM (SELECT
         CASE aa.Direction
         WHEN 0 THEN
         '正常行驶'
@@ -155,8 +155,11 @@
             </include>
 
         </where>
-        ORDER BY
-        Evt_Time DESC
+        <if test="columnName !='' and columnName !=null ">
+            ORDER BY
+            ${columnName}
+            DESC
+        </if>
         <if test="start !=null">
             LIMIT #{start},
             #{length}
@@ -164,7 +167,12 @@
         ) aa
         LEFT JOIN station_site b ON aa.Station_IP = b.Station_Port
         LEFT JOIN license_plate c ON aa.Plate_Color = c.License_Plate_No
-        LEFT JOIN vehicle_type d ON aa.Class_Index = d.Vehicle_Type_No
+        LEFT JOIN vehicle_type d ON aa.Class_Index = d.Vehicle_Type_No)aaa
+        <if test="columnName !='' and columnName !=null ">
+            ORDER BY
+            aaa.${columnName}
+            DESC
+        </if>
 
     </select>
 

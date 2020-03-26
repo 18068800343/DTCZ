@@ -19,6 +19,15 @@ public class TongJiTableQuery implements Serializable {
     Double chaozhongEnd;
     Integer start;
     Integer length;
+    String columnName;
+
+    public String getColumnName() {
+        return columnName;
+    }
+
+    public void setColumnName(String columnName) {
+        this.columnName = columnName;
+    }
 
     public String getChepai() {
         return chepai;

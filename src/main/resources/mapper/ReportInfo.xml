@@ -20,4 +20,5 @@
 	<update id="deleteById">
 		delete from report_info where r_id = #{id}
 	</update>
+
 </mapper>

@@ -428,13 +428,13 @@
             <th>车道号</th>
             <th>车牌号</th>
             <th>车牌颜色</th>
-            <th>长</th>
-            <th>车速(Km/h)</th>
+            <th data-id="Length">长</th>
+            <th data-id="Speed">车速(Km/h)</th>
             <th>轴数</th>
-            <th>总重量(Kg)</th>
-            <th>路面温度</th>
-            <th>超载率</th>
-            <th>时间</th>
+            <th data-id="Total_Weight">总重量(Kg)</th>
+            <th data-id="Temperature">路面温度</th>
+            <th data-id="Over_Weight_Ratio">超载率</th>
+            <th data-id="Evt_Time">时间</th>
             <th>详情</th>
         </tr>
         </thead>
@@ -752,7 +752,7 @@
             roadTmpEnd: "",
             chaozhongStart: "",
             chaozhongEnd: "",
-
+            columnName:"",
         },
         methods: {
             //新建生产计划保存按钮事件
@@ -797,6 +797,7 @@
                             param.roadTmpEnd = mainVm.roadTmpEnd;
                             param.chaozhongStart = mainVm.chaozhongStart;
                             param.chaozhongEnd = mainVm.chaozhongEnd;
+                            param.columnName = mainVm.columnName;
                             return param;
                         },
                         //用于处理服务器端返回的数据。 dataSrc是DataTable特有的
@@ -1130,6 +1131,11 @@
 
     mainVm.searchInit();
 
+    $("#mainContent").find("th").on('click',function(){
+        let columnName = $(this).attr("data-id");
+        mainVm.columnName = columnName;
+        mainVm.searchInit();
+    });
 </script>
 
 
