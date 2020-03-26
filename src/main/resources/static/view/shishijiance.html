@@ -108,7 +108,7 @@
 			     <div class="zd col-xs-2" style="background-color:#549CFD;height:170px;color:white;border-radius:5px 5px 5px;width:20%;">
 			        <p style="font-size:15px;margin-top:7%;">当日监测站点/个</p>
 			        <img alt="" src="./img/img.png" style="float:right;margin-top:10%;">
-			        <div style="margin-top:20%;"><span style="font-size:40px;" id="jiancezhandianNum"></span><a style="margin-left:5px;color:#D6E4FE;background-color:#549CFD;color:white;border:2px solid #549CFD;cursor:pointer;" class="primary"  onclick="nowJianceSite()" data-toggle="modal" data-target="#jianceDiv">查看</a></div>
+			        <div style="margin-top:20%;"><span style="font-size:40px;" id="jiancezhandianNum"></span><a style="margin-left:5px;color:#D6E4FE;background-color:#549CFD;color:white;border:2px solid #549CFD;cursor:pointer;" class="primary"  onclick="nowJianceSite()" data-toggle="modal" data-target="">查看</a></div>
 			     </div>
 			      <div class="zd col-xs-2" style="background-color:#3ED75E;height:170px;color:white;border-radius:5px 5px 5px;margin-left:2%;">
 			        <p style="font-size:15px;margin-top:7%;">当日车流量/辆</p>
@@ -1115,6 +1115,7 @@
 
 
 		function nowJianceSite(){
+			showMask()
 			var stationPort;
 			if($("#zhandian").val()!=""&&$("#zhandian").val()!=undefined&&$("#zhandian").val()!=null){
 				stationPort=$("#zhandian").val().toString();
@@ -1131,7 +1132,8 @@
 				error: function (msg) {
 				},
 				success: function (json) {
-
+					hidMask()
+					$("#jianceDiv").modal('show');
 					var stationNames = json.stationNames.split(",");
 					var links = json.links.split(",");
 					$("#jianceTable tbody").empty();
