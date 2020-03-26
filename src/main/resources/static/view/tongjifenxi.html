@@ -31,7 +31,6 @@
         .UpperPart{
             display: flex;
             justify-content:space-between;
-            border-bottom: 1px solid #ccc;
             padding-bottom: 12px;
         }
         .selected{
@@ -52,14 +51,35 @@
         .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
            border:0px solid #ddd;
         }
-        
+        .nav-pills>li.active>a:focus{
+           background-color:#549CFD;
+        }
+        .nav-pills>li>a{
+           background-color:#FFF;
+           border-radius:50px 50px;
+           margin-left:10px;
+        }
+        #dataTable{
+          width:100% !important;
+          display:block;
+          margin-left:0px !important;
+        }
+        #myTabContent1{
+         width:100% !important;
+        }
+        .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
+          border-bottom:2px solid #549CFD;
+          color:#549CFD;
+          font-size:16px;
+        }
+      
     </style>
 </head>
-<body style="background-image: none;">
+<body style="background-image: none;background-color:#F5F5F5;">
 
 <div class="form-group" id="rightTab">
     <!-- Nav tabs -->
-    <ul class="nav nav-pills" role="tablist" style="background:#fff;">
+    <ul class="nav nav-pills" role="tablist" style="margin-bottom:20px;">
         <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">日交通量统计</a></li>
         <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">月交通量统计</a></li>
 
@@ -71,7 +91,7 @@
                 <div class="UpperPart">
                     <div class="UpperPartL" style="width: 90%;margin-left: 5%;">
                         <div class="sele" >
-                            <label class="col-sm-2 control-label shaixuan" >筛选站点</label>
+                            <label class="col-sm-2 control-label shaixuan" style="margin-left:-80px !important;font-size:16px;font-weight:500;" >筛选站点</label>
                             <div class="col-sm-2" style="width: 20%;margin-left: 50px;">
                                 <!-- 样式1 -->
                                 <select class="form-control"  id="stationPort" style="width:80%;">
@@ -79,13 +99,13 @@
                             </div>
                         </div>
                         <label class="col-sm-1	 control-label riqi"
-                               style="margin-left: 3%;width: 70px;line-height: 30px;">日期:</label>
+                               style="margin-left: -2%;width: 70px;line-height: 30px;font-size:16px;font-weight:500;">日期:</label>
                         <div class="col-sm-2" style="width: 20%">
                             <!-- 样式1 -->
                             <input type="date" id="startTime" value="请选择"
-                                   style="height: 34px;border-radius: 5px;box-shadow: none;width: 60%;border:1px solid #DDD;">
+                                   style="height: 34px;border-radius: 5px;box-shadow: none;width: 65%;border:1px solid #DDD;">
                         </div>
-                        <button type="button" class="btn btn-primary" onclick="queding()" style="margin-left: 50px;width: 100px; background-image: linear-gradient(#1F62C8,#262E9F);">确定</button>
+                        <button type="button" class="btn btn-primary" onclick="queding()" style="width: 100px;margin-left:-100px;background-color:#549CFD;border:none;">确定</button>
                         <div class="jiance">
                             <button type="button" class="btn btn-primary" onclick="nowJianceSite()" data-toggle="modal" data-target="#allMsg1" style="width: 150px; background-image: linear-gradient(#1F62C8,#262E9F);">当前车道图</button>
                         </div>
