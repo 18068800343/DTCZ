@@ -101,7 +101,7 @@
 			    <li class="layui-this labelthis">综合信息统计</li>
 			    <li>当日车流量</li>
 			    <li>当日超载车辆</li>
-			    <li>当日关键超重车辆</li>
+			    <li>当日关键超载车辆</li>
 			  </ul>
 			  <div class="layui-tab-content marginl">
 			    <div class="layui-tab-item layui-show">
@@ -121,7 +121,7 @@
 			        <div style="margin-top:20%;"><span style="font-size:40px;" id="jiancechaozaiNum"></span></div>
 			     </div>
 			      <div class="zd col-xs-2" style="background-color:#FD6854;height:170px;color:white;border-radius:5px 5px 5px;margin-left:2%;">
-			        <p style="font-size:15px;margin-top:7%;">当日关键超重车辆/辆</p>
+			        <p style="font-size:15px;margin-top:7%;">当日关键超载车辆/辆</p>
 			        <img alt="" src="./img/img.png" style="float:right;margin-top:10%;">
 			        <div style="margin-top:20%;"><span style="font-size:40px;" id="jianceguanjianchaozhongNum"></span></div>
 			     </div>
@@ -164,11 +164,11 @@
 		</div>
 			    <div class="layui-tab-item">
 			    			
-			<div class="bright" style="width:90%;display: block;position: relative;margin-left: 5%;">
+			<div class="bright" style="width:90%;display: block;position: relative;margin-left: 5%;height:800px;">
 				<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
-					<ul class="layui-tab-title labelright">
-						<li class="layui-this">当日车流量统计</li>
-						<li onclick="initTables2()" >当日车流量列表</li>
+					<ul class="layui-tab-title labelright" style="margin-top: 1%;">
+						<li class="layui-this">统计图</li>
+						<li onclick="initTables2()" >数据表</li>
 					</ul>
 					<div class="layui-tab-content" style="height: 100px;">
 						<div class="layui-tab-item layui-show">
@@ -177,8 +177,8 @@
 							</div>
 						</div>
 						<div class="layui-tab-item">
-							<div id="tabBtn2" style="margin-left: 10px;margin-top: 20px;"></div>
-							<table class="layui-table" lay-skin="line" id="mainContent2" style="width: 100%">
+							<div id="tabBtn2" style="margin-left: 10px;margin-top: 1%;"></div>
+							<table class="layui-table" lay-skin="line" id="mainContent2" style="width: 100%;white-space: nowrap;">
 								<thead style="background-color: #DDE6F7;">
 								<tr>
 									<th style="width: 15%">站点</th>
@@ -204,11 +204,11 @@
 			</div>
 			    </div>
 			    <div class="layui-tab-item">
-			      <div class="bleft" style="width:90%;display: block;position: relative;margin-left: 5%;">
+			      <div class="bleft" style="width:90%;height:800px;display: block;position: relative;margin-left: 5%;">
 				<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
-					<ul class="layui-tab-title " style="float:right;z-index:10;">
-						<li class="layui-this ">当日超载车辆统计</li>
-						<li onclick="initTables3()">当日超载车辆列表</li>
+					<ul class="layui-tab-title labelright" style="float:right;z-index:10;margin-top: 0.5%;">
+						<li class="layui-this ">统计图</li>
+						<li onclick="initTables3()">数据表</li>
 					</ul>
 					 <!--<div class="sele" >
 							<label for="" class="col-sm-2 control-label shaixuan" >筛选站点</label>
@@ -226,8 +226,8 @@
 							</div>
 						</div>
 						<div class="layui-tab-item">
-							<div id="tabBtn3" style="margin-left: 10px;"></div>
-							<table class="layui-table" lay-skin="line" id="mainContent3" style="width: 100%">
+							<div id="tabBtn3" style="margin-left: 10px;margin-top: 0.5%;"></div>
+							<table class="layui-table" lay-skin="line" id="mainContent3" style="width: 100%;white-space: nowrap;">
 								<thead style="background-color: #DDE6F7;">
 									<tr>
 										<th style="width: 15%">站点</th>
@@ -257,22 +257,22 @@
 
 			
 			<!--左上半部分结束-->
-           <div class="bottom" style="width: 90%;height: 30%;">
+           <div class="bottom" style="width: 100%;height:800px;display: block;position: relative;margin-left: -5%;background-color: #ffffff">
 
 			   <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
-				   <ul class="layui-tab-title">
-					   <li class="layui-this">当日关键超重车辆统计</li>
-					   <li onclick="initTables4()">二级预警列表</li>
-					   <li onclick="initTables5()">三级预警列表</li>
+				   <ul class="layui-tab-title labelright" style="float: right;margin-top: 1%;">
+					   <li class="layui-this">统计图</li>
+					   <li onclick="initTables4()">一级预警数据表</li>
+					   <li onclick="initTables5()">二级预警数据表</li>
 				   </ul>
 				   <div class="layui-tab-content" style="height: 100px;">
-					   <div class="layui-tab-item layui-show">
+					   <div class="layui-tab-item layui-show" style="margin-top: 5%;">
 						   <p id="errorMsg3" style="display: inline-block;"></p>
 						   <div id="bottom_" class="col-xs-12" style="width:1300px;height:500px; margin-left: 15px;margin-top: -50px;"></div>
 					   </div>
 					   <div class="layui-tab-item">
-						   <div id="tabBtn4" style="margin-left: 10px;"></div>
-						   <table class="layui-table" lay-skin="line" id="mainContent4" style="width: 100%">
+						   <div id="tabBtn4" style="margin-left: 10px;margin-top: 1%;"></div>
+						   <table class="layui-table" lay-skin="line" id="mainContent4" style="width: 100%;white-space: nowrap;">
 							   <thead style="background-color: #DDE6F7;">
 							   <tr>
 								   <th style="width: 15%">站点</th>
@@ -280,9 +280,9 @@
 								   <th>车牌号</th>
 								   <th>车牌颜色</th>
 								   <th>长(cm)</th>
-								   <th>车速(Km/h)</th>
+								   <th>车速(km/h)</th>
 								   <th>轴数</th>
-								   <th>总重量(Kg)</th>
+								   <th>总重量(kg)</th>
 								   <th>路面温度(°C)</th>
 								   <th>超载率</th>
 								   <th>时间</th>
@@ -294,8 +294,8 @@
 						   </table>
 					   </div>
 					   <div class="layui-tab-item">
-						   <div id="tabBtn5" style="margin-left: 10px;"></div>
-					   <table class="layui-table" lay-skin="line" id="mainContent5" style="width: 100%">
+						   <div id="tabBtn5" style="margin-left: 10px;margin-top: 1%;"></div>
+					   <table class="layui-table" lay-skin="line" id="mainContent5" style="width: 100%;white-space: nowrap;">
 						   <thead style="background-color: #DDE6F7;">
 						   <tr>
 							   <th style="width: 15%">站点</th>
@@ -303,7 +303,7 @@
 							   <th>车牌号</th>
 							   <th>车牌颜色</th>
 							   <th>长(cm)</th>
-							   <th>车速(Km/h)</th>
+							   <th>车速(km/h)</th>
 							   <th>轴数</th>
 							   <th>总重量(kg)</th>
 							   <th>路面温度(°C)</th>
@@ -591,7 +591,7 @@
 				"targets": 9,
 				"searchable": true,
 				"render": function(data, type, full) {
-					if(data=="超重"){
+					if(data=="超载"){
 						return ((full.overWeightRatio*100).toFixed(2))+"%";
 					}else{
 						return data;
@@ -662,7 +662,7 @@
 					"targets": 9,
 					"searchable": true,
 					"render": function(data, type, full) {
-						if(data=="超重"){
+						if(data=="超载"){
 							return ((full.overWeightRatio*100).toFixed(2))+"%";
 						}else{
 							return data;
@@ -842,7 +842,7 @@
 					"targets": 9,
 					"searchable": true,
 					"render": function(data, type, full) {
-						if(data=="超重"){
+						if(data=="超载"){
 							return ((full.overWeightRatio*100).toFixed(2))+"%";
 						}else{
 							return data;
@@ -872,7 +872,7 @@
 					extend: "csv",
 					text: "导出csv",
 					bom: true,
-					filename: '当日二级预警车辆',
+					filename: '当日一级预警车辆',
 					fieldSeparator: ',',
 					exportOptions: {
 						format: {
@@ -934,7 +934,7 @@
 					"targets": 9,
 					"searchable": true,
 					"render": function(data, type, full) {
-						if(data=="超重"){
+						if(data=="超载"){
 							return ((full.overWeightRatio*100).toFixed(2))+"%";
 						}else{
 							return data;
@@ -964,7 +964,7 @@
 					extend: "csv",
 					text: "导出csv",
 					bom: true,
-					filename: '当日三级预警车辆',
+					filename: '当日二级预警车辆',
 					fieldSeparator: ',',
 					exportOptions: {
 						format: {
@@ -1606,7 +1606,7 @@
 			looktWimMsg.routeName=data.routeName;
 			looktWimMsg.licensePlateColor=data.licensePlateColor;
 			looktWimMsg.vehicleTypeName=data.vehicleTypeName;
-			looktWimMsg.overWeightRatioName=data.overWeightRatioName=="超重"? (data.overWeightRatio*100)+"%":data.overWeightRatioName;
+			looktWimMsg.overWeightRatioName=data.overWeightRatioName=="超载"? (data.overWeightRatio*100)+"%":data.overWeightRatioName;
 
 			$.ajax({
 				type: 'POST',

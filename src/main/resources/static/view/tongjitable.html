@@ -860,7 +860,7 @@
                             "targets": 9,
                             "searchable": true,
                             "render": function(data, type, full) {
-                                if(data!="不超重"){
+                                if(data!="不超载"){
                                     return ((full.overWeightRatio*100).toFixed(2))+"%";
                                 }else{
                                     return data;
@@ -1089,7 +1089,7 @@
         looktWimMsg.routeName=data.routeName;
         looktWimMsg.licensePlateColor=data.licensePlateColor;
         looktWimMsg.vehicleTypeName=data.vehicleTypeName;
-        looktWimMsg.overWeightRatioName=data.overWeightRatioName!="不超重"? (data.overWeightRatio*100)+"%":data.overWeightRatioName;
+        looktWimMsg.overWeightRatioName=data.overWeightRatioName!="不超载"? (data.overWeightRatio*100)+"%":data.overWeightRatioName;
 
         $.ajax({
             type: 'POST',
@@ -1101,7 +1101,7 @@
                 $("#chepaiImg").html('')
                 $("#chebodyDiv").html('')
 
-                if(data.overWeightRatioName!="不超重"){
+                if(data.overWeightRatioName!="不超载"){
                     var url2="http://"+json.imgUrlPrefix+"/port"+data.stationIP+"/"+data.idLocal+"-Image.jpg"
                     var img2='<a target="_blank" href="'+url2+'"><img id="chebodyImg" src="'+url2+'" class="popup" width=\'80\' height=\'60\';" /></a>'
                     $("#chebodyDiv").append(img2)

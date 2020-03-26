@@ -61,8 +61,8 @@
         WHEN 2 THEN '行车道'
         ELSE '应急车道'
         end as laneNoName,
-        CASE WHEN a.Over_Weight_Ratio>0 THEN '超重'
-        ELSE '不超重'
+        CASE WHEN a.Over_Weight_Ratio>0 THEN '超载'
+        ELSE '不超载'
         end as overWeightRatioName,
         a.*,b.Station_Name,b.Route_Name,concat_ws("+",b.Station_Name,b.Route_Name) as stationNameRouteName,
         c.License_Plate_Color,d.Vehicle_Type_Name
@@ -92,7 +92,7 @@
         ELSE '应急车道'
         end as laneNoName,
         CASE WHEN aa.Over_Weight_Ratio>0 THEN aa.Over_Weight_Ratio
-        ELSE '不超重'
+        ELSE '不超载'
         end as overWeightRatioName,
         aa.*, b.Station_Name,
         b.Route_Name,
@@ -490,8 +490,8 @@
         WHEN 2 THEN '行车道'
         ELSE '应急车道'
         end as laneNoName,
-        CASE WHEN a.Over_Weight_Ratio>0 THEN '超重'
-        ELSE '不超重'
+        CASE WHEN a.Over_Weight_Ratio>0 THEN '超载'
+        ELSE '不超载'
         end as overWeightRatioName,
         a.*,b.Station_Name,b.Route_Name,concat_ws("+",b.Station_Name,b.Route_Name) as stationNameRouteName,
         c.License_Plate_Color,d.Vehicle_Type_Name
@@ -515,8 +515,8 @@
         WHEN 2 THEN '行车道'
         ELSE '应急车道'
         end as laneNoName,
-        CASE WHEN a.Over_Weight_Ratio>0 THEN '超重'
-        ELSE '不超重'
+        CASE WHEN a.Over_Weight_Ratio>0 THEN '超载'
+        ELSE '不超载'
         end as overWeightRatioName,
         a.*,b.Station_Name,b.Route_Name,concat_ws("+",b.Station_Name,b.Route_Name) as stationNameRouteName,
         c.License_Plate_Color,d.Vehicle_Type_Name
@@ -541,8 +541,8 @@
         WHEN 2 THEN '行车道'
         ELSE '应急车道'
         end as laneNoName,
-        CASE WHEN a.Over_Weight_Ratio>0 THEN '超重'
-        ELSE '不超重'
+        CASE WHEN a.Over_Weight_Ratio>0 THEN '超载'
+        ELSE '不超载'
         end as overWeightRatioName,
         a.*,b.Station_Name,b.Route_Name,concat_ws("+",b.Station_Name,b.Route_Name) as stationNameRouteName,
         c.License_Plate_Color,d.Vehicle_Type_Name
@@ -573,8 +573,8 @@
         WHEN 2 THEN '行车道'
         ELSE '应急车道'
         end as  laneNoName,
-        CASE  WHEN a.Over_Weight_Ratio>0  THEN '超重'
-        ELSE '不超重'
+        CASE  WHEN a.Over_Weight_Ratio>0  THEN '超载'
+        ELSE '不超载'
         end as overWeightRatioName,
         a.*,b.Station_Name,b.Route_Name,concat_ws("+",b.Station_Name,b.Route_Name) as stationNameRouteName,
         c.License_Plate_Color,d.Vehicle_Type_Name

@@ -603,7 +603,7 @@
         looktWimMsg.routeName=data.routeName;
         looktWimMsg.licensePlateColor=data.licensePlateColor;
         looktWimMsg.vehicleTypeName=data.vehicleTypeName;
-        looktWimMsg.overWeightRatioName=data.overWeightRatioName=="超重"? data.overWeightRatio*100+"%":data.overWeightRatioName;
+        looktWimMsg.overWeightRatioName=data.overWeightRatioName=="超载"? data.overWeightRatio*100+"%":data.overWeightRatioName;
 
         $.ajax({
             type: 'POST',
