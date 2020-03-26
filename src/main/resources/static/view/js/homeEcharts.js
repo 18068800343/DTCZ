@@ -201,6 +201,27 @@ homePageInit.setLeftEcharts = (id, stationNames, nums) => {
     for (let i = 0; i < barData.length; i++) {
         maxdataShadow.push(barData[barData.length-1])
     }
+    let barCategoryGap;
+    switch (barData.length) {
+        case 1:
+            barCategoryGap="80%";
+            break;
+        case 2:
+            barCategoryGap="70%";
+            break;
+        case 3:
+            barCategoryGap="60%";
+            break;
+        case 4:
+            barCategoryGap="50%";
+            break;
+        case 5:
+            barCategoryGap="40%";
+            break;
+        case 6:
+            barCategoryGap="30%";
+            break;
+    }
 
     let option = {
             tooltip: {
@@ -312,7 +333,7 @@ homePageInit.setLeftEcharts = (id, stationNames, nums) => {
                         normal: { color: '#003363', barBorderRadius: 45 }
                     },
                     barGap: '-100%', // 可以使两个条重叠
-                    barCategoryGap: '30%',
+                    barCategoryGap: barCategoryGap,
                     data: maxdataShadow,
                 },
                 {
@@ -824,6 +845,9 @@ homePageInit.setLastEcharts = (json) => {
                 },
                 data: json.cnt2.split(","),
                 barWidth : 20,//柱图宽度
+                itemStyle:{
+                    barBorderRadius:[50,50,0,0],//柱顶弧形
+                }
 
             },
             {
@@ -838,6 +862,9 @@ homePageInit.setLastEcharts = (json) => {
                 },
                 data: json.cnt3.split(","),
                 barWidth : 20,//柱图宽度
+                itemStyle:{
+                    barBorderRadius:[50,50,0,0],//柱顶弧形
+                }
             }
         ]
     };

@@ -128,8 +128,8 @@ function setjiancezhandianBottom(list){
 
         legend: {
             data: ['二级预警(≥80吨)', '三级预警(≥100吨)'],
-            right: 10,
-            orient: 'vertical',  //垂直显示
+            //right: 10,
+            //orient: 'vertical',  //垂直显示
             textStyle: {
                 color: '#17447E',
                 fontSize: 13
@@ -188,6 +188,9 @@ function setjiancezhandianBottom(list){
                 },
                 data: list.cnt2.split(","),
                 barWidth : 20,//柱图宽度
+                itemStyle:{
+                    barBorderRadius:[50,50,0,0],//柱顶弧形
+                }
 
             },
             {
@@ -202,6 +205,9 @@ function setjiancezhandianBottom(list){
                 },
                 data: list.cnt3.split(","),
                 barWidth : 20,//柱图宽度
+                itemStyle:{
+                    barBorderRadius:[50,50,0,0],
+                }
             }
         ]
     };
