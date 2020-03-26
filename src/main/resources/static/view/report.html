@@ -65,10 +65,19 @@
 		<div class="zhuti-content">
 			<div class="UpperPart">
 				<div class="UpperPartL">
-					<lable style="margin: 5PX;float: left;">开始时间:</lable>
-					<input type="text" id="startTime" style="margin: 5PX;float: left;"/>
-					<lable style="margin: 5PX;float: left;">结束时间:</lable>
-					<input type="text" id="endTime" style="margin: 5PX;float: left;"/>
+					<form class="form-horizontal" role="form">
+						<div>
+							<label class="form-inline" />开始时间:
+							<input type="text" class="form-control" id="startTime" /></label>
+							&nbsp;&nbsp;&nbsp;
+							<label class="form-inline" />结束时间:
+							<input type="text" class="form-control"  id="endTime"/></label>
+							&nbsp;&nbsp;&nbsp;
+							<button type="button" class="form-inline btn btn-primary"  onclick="queding()">
+								确定
+							</button>
+						</div>
+					</form>
 				</div>
 				<div class="UpperPartR">
 				</div>
@@ -77,12 +86,12 @@
 				<table class="table table-bordered table-condensed table-hover layui-table" lay-even lay-skin="nob" id="mainContent" style="white-space: nowrap;">
 					<thead>
 					<tr>
-						<th>序号</th>
-						<th>单位</th>
-						<th>站点名称</th>
-						<th>车道数</th>
-						<th>省界站桩号</th>
-						<th>系统位置桩号</th>
+						<th>id</th>
+						<th>单位名称</th>
+						<th>报告名称</th>
+						<th>报告路径</th>
+						<th>生成状态</th>
+						<th>生成时间</th>
 						<th style="width:75px;">操作</th>
 					</tr>
 					</thead>
@@ -321,12 +330,12 @@
 </div>
 </body>
 <script src="../js/jquery.js"></script>
+<script src="js/laydate/laydate.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 <script src="js/datatables/jquery.dataTables.min.js"></script>
 <script src="../js/bootstrap-select.js" ></script>
 <script src="../js/jquery-editable-select.js" ></script>
 <script src="js/toastr.js" ></script>
-<script src="js/laydate/laydate.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
 <script src="js/quanxian.js"></script>
@@ -334,17 +343,17 @@
 
 	$(document).ready( function () {
 		laydate.render({
-			elem: '#jianchengDate', //指定元素
-			type: 'month'
+			elem: '#startTime', //指定元素
+			type: 'datetime',
 		});
 		laydate.render({
-			elem: '#xg_jianchengDate', //指定元素
-			type: 'month'
+			elem: '#endTime', //指定元素
+			type: 'datetime'
 		});
 		initTable()
 
 	});
-	var table=$('#mainContent').dataTable({
+	let table=$('#mainContent').DataTable({
 		"deferRender": true,
 		"processing": true,
 		"bDestroy": true,
@@ -355,22 +364,22 @@
 			"sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
 		},
 		"columns": [
-			{ "data": "stationId"},
-			{ "data": "company"},
-			{ "data": "stationName"},
-			{ "data": "routeName"},
-			{ "data": "provinceStationName"},
-			{ "data": "stationIp"},
+			{ "data": "id",visible:false},
+			{ "data": "companyName"},
+			{ "data": "reportName"},
+			{ "data": "reportUrl"},
+			{ "data": "reportStatus"},
+			{ "data": "reportTime"},
 			{ "data": null},
 		],
 		"columnDefs": [{
 			"class": "tcenter",
-			"targets": 6,
+			"targets":6,
 			"searchable": true,
 			"render": function(data, type, full) {
-				var xiugai='<i class="iconfont icon-xiugai Phb" style="font-size:20px;cursor:pointer;display: none;" id="upd" title="修改" data-toggle="modal" data-target="#change"></i>';
-				var shanchu='<i class="iconfont icon-shanchu Phc" style="font-size:20px;cursor:pointer;display: none;" id="del"  title="删除"></i>';
-				//var look='<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" onclick="lookMs(this)" data-toggle="modal" data-target="#allMsg1" id="lookDetall"></i>'
+				let xiugai='<i class="glyphicon glyphicon-download-alt Phb" style="font-size:20px;cursor:pointer;display: none;" id="upd" title="下载" onclick="down(this)"></i>';
+				let shanchu='<i class="iconfont icon-shanchu Phc" style="font-size:20px;cursor:pointer;display: none;" id="del"  title="删除"></i>';
+				//let look='<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" onclick="lookMs(this)" data-toggle="modal" data-target="#allMsg1" id="lookDetall"></i>'
 				return xiugai+shanchu;
 			}
 		}],"fnDrawCallback" : function() {
@@ -411,8 +420,8 @@
 			},
 			success:function(json){
 				if(json!=null &&json!=""){
-					var arr = json.usrPersmissionCoding.split(',');
-					for(var i=0;i<arr.length;i++){
+					let arr = json.usrPersmissionCoding.split(',');
+					for(let i=0;i<arr.length;i++){
 						if(arr[i].indexOf("Pha") >= 0 ){
 							$(".Pha").show();
 						}
@@ -430,12 +439,23 @@
 		});
 	}
 
-	function initTable(){
+	function queding() {
+		let startTime = $("#startTime").val();
+		let endTime = $("#endTime").val();
+		if(endTime<=startTime){
+			toastr.error("结束时间必须大于开始时间!");
+			return;
+		}
+		initTable(startTime,endTime);
+	}
+	function initTable(startTime,endTime){
 		$.ajax({
 			type: 'POST',
-			url: '/StationSite/getAllStationSite',
+			url: '/ReportInfoController/getAllReportInfoByCompanyName',
 			dataType: 'json',
 			data: {
+				startTime:startTime,
+				endTime:endTime
 			},
 			error: function (msg) {
 				errMessage("请求UserController失败");
@@ -448,13 +468,13 @@
 	}
 
 	//全局正则KV集合
-	var regMap = {
+	let regMap = {
 		ip_zhengze: '^((2(5[0-5]|[0-4]\\d))|[0-1]?\\d{1,2})(\\.((2(5[0-5]|[0-4]\\d))|[0-1]?\\d{1,2})){3}$',
 		stationLongitude_zhengze:'^(\\-|\\+)?(((\\d|[1-9]\\d|1[0-7]\\d|0{1,3})\\.\\d{0,6})|(\\d|[1-9]\\d|1[0-7]\\d|0{1,3})|180\\.0{0,6}|180)$',
 		stationLatitude_zhengze:'^(\\-|\\+)?([0-8]?\\d{1}\\.\\d{0,6}|90\\.0{0,6}|[0-8]?\\d{1}|90)$',
 	}
 	//全局错误提示
-	var errMsg = {
+	let errMsg = {
 		stationIp:'IP地址格式错误，请重新检查',
 		stationLongitude:'经度格式错误，经度整数部分为0-180,小数部分为0到6位!',
 		stationLatitude:'纬度格式错误，纬度整数部分为0-90,小数部分为0到6位!',
@@ -468,7 +488,7 @@
 		}
 	}
 
-	var addzhandian = new Vue({
+	let addzhandian = new Vue({
 		el:"#myModal",
 		data:{
 			sId:"",
@@ -509,7 +529,7 @@
 					}
 				}
 				this.$http.post('/StationSite/addStationSite',formData,config).then((res)=>{
-					var resMsg = res.body;
+					let resMsg = res.body;
 					if(resMsg.daoMsg>0){
 						$('#mainContent').DataTable().row.add(resMsg.obj).draw();
 						$("#myModal").modal("hide");
@@ -526,8 +546,8 @@
 				});
 			},
 			reg:function(value,regType,id){
-				var re = new RegExp(regMap[regType]);
-				var flag;
+				let re = new RegExp(regMap[regType]);
+				let flag;
 				flag = reg(value,re);
 				if(null!=value&&''!=value){
 					if(!flag){
@@ -551,16 +571,16 @@
 
 	//删除
 	$('#mainContent').delegate('#del','click', function () {
-		var dom = $(this).parents('tr');
-		var data=$('#mainContent').DataTable().row(dom).data();
-		var msg = "您真的确定要删除吗？\n\n请确认！";
+		let dom = $(this).parents('tr');
+		let data=$('#mainContent').DataTable().row(dom).data();
+		let msg = "您真的确定要删除吗？\n\n请确认！";
 		if (confirm(msg)==true){
 			$.ajax({
 				type: 'POST',
-				url:'/StationSite/delStationSite',
+				url:'/ReportInfoController/deleteById',
 				dataType: 'json',
 				data: {
-					id:data.sId
+					id:data.rId
 				},
 				success: function (json) {
 
@@ -578,11 +598,11 @@
 
 	})
 
-	var trr;
+	let trr;
 	$("#mainContent").delegate("#upd","click",function(){
-		var dom = $(this).parents('tr');
+		let dom = $(this).parents('tr');
 		trr=$(this).closest('tr');
-		var data=$('#mainContent').DataTable().row(dom).data();
+		let data=$('#mainContent').DataTable().row(dom).data();
 		xgId=data.sId
 
 		xgzhandian.sId=data.sId
@@ -616,7 +636,7 @@
 				$("#edit_accessory tbody").empty('');
 				if(json!=null&&json!=''&&json.length!=0){
 					$("#edit_accessory thead").hide()
-					for(var i=0;i<json.length;i++){
+					for(let i=0;i<json.length;i++){
 						$("#edit_accessory tbody").append("<tr>"+
 								"<td style='width:10%;'>车道图</td>"+
 								"<td><a href='"+getLocalPath()+"/dtcz_file/"+json[i].acUrl+"' target='view_window' style='color:blue'>"+json[i].acName+"</a></td>"+
@@ -635,17 +655,17 @@
 	})
 
 	function getLocalPath(){
-		var pathArray = window.location.pathname.split('/');
-		var secondLevelLocation = pathArray[1];
-		var loginUrl = window.location.protocol + "//"  + window.location.host ;
+		let pathArray = window.location.pathname.split('/');
+		let secondLevelLocation = pathArray[1];
+		let loginUrl = window.location.protocol + "//"  + window.location.host ;
 		return loginUrl;
 	}
 
 	function delete_file(obj){
-		var url=$(obj).attr("data1");
-		var id=$(obj).attr("data2");
-		var name=$(obj).attr("data3");
-		var msg = "您真的确定要删除吗？\n\n请确认！";
+		let url=$(obj).attr("data1");
+		let id=$(obj).attr("data2");
+		let name=$(obj).attr("data3");
+		let msg = "您真的确定要删除吗？\n\n请确认！";
 		if (confirm(msg)==true){
 			$.ajax({
 				type: 'POST',
@@ -671,7 +691,7 @@
 		}
 	}
 
-	var xgzhandian = new Vue({
+	let xgzhandian = new Vue({
 		el:"#change",
 		data:{
 			sId:"",
@@ -712,7 +732,7 @@
 					}
 				}
 				this.$http.post('/StationSite/updStationSite',formData,config).then((res)=>{
-					var resMsg = res.body;
+					let resMsg = res.body;
 					if(resMsg.daoMsg>0){
 						$('#mainContent').DataTable().row(trr).data(resMsg.obj);
 						$("#change").modal("hide");
@@ -730,8 +750,8 @@
 				});
 			},
 			reg:function(value,regType,id){
-				var re = new RegExp(regMap[regType]);
-				var flag;
+				let re = new RegExp(regMap[regType]);
+				let flag;
 				flag = reg(value,re);
 				if(null!=value&&''!=value){
 					if(!flag){
@@ -753,6 +773,13 @@
 	});
 	xgzhandian.companyInit();
 
+	function down(obj){
+		let tr=$(obj).parents("tr");
+		let data=$("#mainContent").DataTable().row(tr).data();
+		let path=data.reportUrl;
+		let name=data.reportName;
+		window.location.href=encodeURI("../down/downloadReport?type=downloadFile&fileName="+name+"&filePath="+path);
+	}
 
 </script>
 </html>
