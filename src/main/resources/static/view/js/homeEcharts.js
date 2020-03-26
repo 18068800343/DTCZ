@@ -312,7 +312,7 @@ homePageInit.setLeftEcharts = (id, stationNames, nums) => {
                         normal: { color: '#003363', barBorderRadius: 45 }
                     },
                     barGap: '-100%', // 可以使两个条重叠
-                    barCategoryGap: '50%',
+                    barCategoryGap: '30%',
                     data: maxdataShadow,
                 },
                 {
