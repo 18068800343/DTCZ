@@ -401,7 +401,7 @@ homePageInit.initDownEcharts = () => {
             homePageInit.downNums2 = json.nums2.split(",");
             for(let i in json.nums){
                 homePageInit.initHuanEcharts("huan"+i,i,homePageInit.downNums,homePageInit.downStationName[i], homePageInit.downNums2 );
-                homePageInit.initHuanEcharts2("by"+i,i,homePageInit.downNums,homePageInit.downStationName[i], homePageInit.downNums2);
+                homePageInit.initHuanEcharts2("by"+i,i,homePageInit.downNums[i],homePageInit.downStationName[i], homePageInit.downNums2,homePageInit.downNums,homePageInit.downNums2[i]);
             }
         }
     });
@@ -486,12 +486,12 @@ homePageInit.initHuanEcharts = (id,index,nums,stationName,nums2) => {
     $("#huan"+index).show();
     /*bindChartClick(myChart,2);*/
 }
-homePageInit.initHuanEcharts2 = (id,index,nums,stationName,nums2) => {
+homePageInit.initHuanEcharts2 = (id,index,nums,stationName,nums2,nums3,num4) => {
     // 环形图
     var myChart = echarts.init(document.getElementById(id));
-    let dataArray = getHuanDataByJson2(index,nums,nums2);
-    let colorArray = getColor(index,nums,nums2);
-    let option = {
+    let dataArray = getHuanDataByJson2(index,nums3,nums2);
+    let colorArray = getColor(index,nums3,nums2);
+    /*let option = {
         // 标题组件，包含主标题和副标题
         title: {
             text: stationName,
@@ -515,6 +515,8 @@ homePageInit.initHuanEcharts2 = (id,index,nums,stationName,nums2) => {
             formatter: "{a} <br/>{b}: {c} ({d}%)"
         },
         series: [{
+            startAngle: 180, //开始角度 左侧角度
+            endAngle: 0, //结束角度 右侧
             name: '任务进度',
             type: 'pie',
             // 饼图的半径，数组的第一项是内半径，第二项是外半径
@@ -529,6 +531,121 @@ homePageInit.initHuanEcharts2 = (id,index,nums,stationName,nums2) => {
             },
             data: dataArray
         }]
+    };*/
+    var option = {
+        title: {
+            text: stationName,
+            show: true,
+            x: "center",
+            y: "bottom",
+            textStyle: {
+                color: '#a3a6b4',
+                fontSize: 13,
+                fontWeight: 'bold'
+            },
+            left: 'center',
+            top: '90%',
+            bottom: '69%',
+            itemGap: 60,
+        },
+        tooltip: {
+            show: false,
+        },
+        color: ['#B7DD7'],
+
+        legend: {
+            orient: 'vertical',
+            x: 690,
+            y: 120,
+            data: ['www'],
+
+        },
+        series: [{
+            type: 'pie',
+            //起始刻度的角度，默认为 90 度，即圆心的正上方。0 度为圆心的正右方。
+            startAngle: 0,
+            hoverAnimation: false,
+            tooltip: {},
+            radius: ["30%", "47%"],
+            center: ['50%', '80%'],
+            label: {
+                normal: {
+                    show: true,
+                    position: 'center',
+                    color: '#fff',
+                    formatter: function(params) {
+                        return params.value
+                    },
+                },
+            },
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            data: [{
+                value: nums,
+                itemStyle: {
+                    normal: {
+                        color: "rgba(80,150,224,0)"
+                    }
+                }
+            },
+
+            ]
+        },
+            {
+                type: 'pie',
+                startAngle: 0,
+                hoverAnimation: false,
+                radius: ["70%", "87%"],
+                center: ['50%', '80%'],
+                label: {
+                    normal: {
+                        show: false,
+                        position: 'center'
+                    },
+                    emphasis: {
+                        show: true,
+                        textStyle: {
+                            fontSize: '10',
+                            fontWeight: 'bold'
+                        }
+                    }
+                },
+                labelLine: {
+                    normal: {
+                        show: false
+                    }
+                },
+                data: [{
+                    value: num4==0?1:num4,
+                    itemStyle: {
+                        normal: {
+                            color: "rgba(1,218,220,0)"
+                        }
+                    }
+                },
+                    {
+                        value: nums,
+                        itemStyle: {
+                            normal: {
+                                color: "rgba(1,218,220,1)"
+                            }
+                        }
+
+                    },
+                    {
+                        value: (num4-nums)==0?1:(num4-nums),
+                        itemStyle: {
+                            normal: {
+                                color: "rgba(1,218,220,0.1)"
+                            }
+                        }
+                    },
+                ]
+            }
+        ]
     };
     myChart.setOption(option);
     $("#by"+index).show();
