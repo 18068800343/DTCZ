@@ -75,7 +75,7 @@
 							<input type="text" class="form-control"  id="endTime"/></label>
 							&nbsp;&nbsp;&nbsp;
 							<button type="button" class="form-inline btn btn-primary"  onclick="queding()">
-								确定
+								查询
 							</button>
 							<button type="button" class="form-inline btn btn-primary" data-toggle="modal" data-target="#myModal" >生成 </button>
 						</div>
@@ -207,6 +207,7 @@
 			type: 'month'
 		});
 		initTable()
+		getLoginUser()
 		initCompanySel();
 	});
 	let table=$('#mainContent').DataTable({
@@ -637,6 +638,27 @@
 		window.location.href=encodeURI("../down/downloadReport?type=downloadFile&fileName="+name+"&filePath="+path);
 	}
 
+	function getLoginUser(){
+		$.ajax({
+			type: 'POST',
+			url: '/login/getUser',
+			dataType: 'json',
+			async:false,
+			data: {
+			},
+			error: function (msg) {
+				errMessage("请求UserController失败");
+			},
+			success: function (json) {
+				if(json.groups!="控股"&&json.groups!="路公司"){
+					$("#companySel").show();
+				}else{
+					$("#companySel").hide();
+				}
+			}
+		});
+	}
+
 	function initCompanySel() {
 		$.ajax({
 			type: 'POST',
@@ -650,9 +672,11 @@
 				$("#zhandian").html('');
 				if (json != null) {
 						for (let i = 0; i < json.length; i++) {
-						let companyName = json[i].companyName;
-
-							$("#zhandian").append("<option  value='" + companyName + "'>" + companyName + "</option>");
+							let companyName = json[i].companyName;
+							let groups = json[i].groups;
+							if(groups == '控股' || groups == '路公司'){
+								$("#zhandian").append("<option data-id='groups'  value='" + companyName + "'>" + companyName + "</option>");
+							}
 						}
 
 					$(".selectpicker").selectpicker({

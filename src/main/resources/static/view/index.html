@@ -67,7 +67,7 @@
 	<a href="javascript:void(0);" lang='report' target="iframe_a" class="Po">报告管理</a>
 	 <ul class="layui-nav layui-nav-tree"  lay-filter="test">
 	  <li class="layui-nav-item">
-	    <a class="" href="javascript:;">系统管理</a>
+	    <a href="javascript:;">系统管理</a>
 	   <dl class="layui-nav-child" >
             <dd><a href="javascript:void(0);" lang='renyuanguanli' target="iframe_a" class="Pe">人员账户</a></dd>
             <dd><a href="javascript:void(0);" lang='danweiguanli' target="iframe_a" class="Pf">单位管理</a></dd>
@@ -147,7 +147,9 @@
 <script type="text/javascript">
 $('#leftTab a').bind('click', function () {
 	let name = $(this).attr('lang');
-	$('#iframe-player').attr('src', name + '.html')
+	if(undefined!=name&&null!=name){
+		$('#iframe-player').attr('src', name + '.html')
+	}
 	if (name != 'home') {
 		$('#leftTab').addClass('homeLeft')
 		$('.daohang').slideDown()

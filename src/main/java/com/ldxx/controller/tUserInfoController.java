@@ -52,10 +52,10 @@ public class tUserInfoController {
         }else{
             i= service.updatetUserInfo(tUserInfo);
         }
-        /*if(i>0){
+        if(i>0){
             tUserInfoVo tUserInfoVo= service.selectUserById(tUserInfo.getUsrId());
             session.setAttribute("user",tUserInfoVo);
-        }*/
+        }
         map.put("result",i);
         map.put("user",tUserInfo);
         return map;

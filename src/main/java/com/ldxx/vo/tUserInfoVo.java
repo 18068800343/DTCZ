@@ -8,6 +8,16 @@ public class tUserInfoVo extends tUserInfo {
 
     private  String companyName;
 
+    private String groups;
+
+    public String getGroups() {
+        return groups;
+    }
+
+    public void setGroups(String groups) {
+        this.groups = groups;
+    }
+
     public String getCompanyName() {
         return companyName;
     }
