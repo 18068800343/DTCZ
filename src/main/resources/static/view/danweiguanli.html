@@ -111,7 +111,22 @@
                         <table class="table table-bordered table-condensed" >
                             <tr>
                                 <td style="width: 20%;">单位名称</td>
-                                <td style="width: 30%;"><input type="text" style="width: 70%;" v-model="companyName" /></td>
+                                <td style="width: 30%;"><input type="text" style="width: 70%;" id="companyName" /></td>
+                                <td style="width: 20%;">单位类型</td>
+                                <td style="width: 30%;">
+                                    <select class="form-control" id="groups" style="width: 70%;" >
+                                        <option value="路公司">路公司</option>
+                                        <option value="控股">控股</option>
+                                        <option value="其他">其他</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">站点</td>
+                                <td colspan="3">
+                                    <select class="form-control selectpicker" multiple data-actions-box="true" data-live-search="true"  id="StationName"  style="width:100%;">
+                                    </select>
+                                </td>
                             </tr>
                         </table>
                     </form>
@@ -119,41 +134,14 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-default" @click="baocun4">保存</button>
+                <button type="button" class="btn btn-default" onclick="addbaocun4()">保存</button>
             </div>
         </div>
     </div>
 </div>
 <!-- model结束 -->
 
-<!-- 修改Modal -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="change3">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel"><b>修改关键重量</b></h4>
-            </div>
-            <div class="modal-body">
-                <div>
-                    <form class="form-inline" id="">
-                        <table class="table table-bordered table-condensed" >
-                            <tr>
-                                <td style="width: 20%;">关键重量</td>
-                                <td style="width: 30%;"><input type="text" style="width: 70%;" v-model="cruxWeight" /></td>
-                            </tr>
-                        </table>
-                    </form>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-success" @click="baocun3" >保存</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- 修改model结束 -->
+
 
 
 <!-- 修改Modal -->
@@ -171,11 +159,19 @@
                             <tr>
                                 <td style="width: 20%;">公司名称</td>
                                 <td style="width: 30%;"><input type="text" style="width: 70%;" id="xg_companyName" /></td>
+                                <td style="width: 20%;">单位类型</td>
+                                <td style="width: 30%;">
+                                    <select class="form-control" id="xg_groups" style="width: 70%;" >
+                                        <option value="路公司">路公司</option>
+                                        <option value="控股">控股</option>
+                                        <option value="其他">其他</option>
+                                    </select>
+                                </td>
                             </tr>
 
                             <tr>
                                 <td style="width: 20%;">站点</td>
-                                <td>
+                                <td colspan="3">
                                     <select class="form-control selectpicker" multiple data-actions-box="true" data-live-search="true"  id="xg_StationName"  style="width:100%;">
                                     </select>
                                 </td>
@@ -208,6 +204,19 @@
 <script>
 
     $(document).ready( function () {
+        $('#StationName').selectpicker({
+            'selectedText': 'cat',
+            'noneSelectedText': '请选择',
+            'deselectAllText': '全不选',
+            'selectAllText': '全选'
+        });
+        $('#xg_StationName').selectpicker({
+            'selectedText': 'cat',
+            'noneSelectedText': '请选择',
+            'deselectAllText': '全不选',
+            'selectAllText': '全选'
+        });
+
         initTable4()
         initzhandian()
     });
@@ -226,12 +235,16 @@
             success: function (json) {
                 if(json!=null){
                     $("#xg_StationName").html('');
+                    $("#StationName").html('');
                     for(var i=0;i<json.length;i++){
+                        $("#StationName").append("<option  value='"+json[i].stationPort+"'>"+(json[i].stationName)+"</option>");
                         $("#xg_StationName").append("<option  value='"+json[i].stationPort+"'>"+(json[i].stationName)+"</option>");
                     }
                     $(".selectpicker").selectpicker({
                         noneSelectedText: '请选择',
                     });
+                    $("#StationName").selectpicker("refresh");
+                    $('#StationName').selectpicker('render');
                     $("#xg_StationName").selectpicker("refresh");
                     $('#xg_StationName').selectpicker('render');
                 }
@@ -346,10 +359,11 @@
     }
 
 
-    let addCompanyName = new Vue({
+    /*let addCompanyName = new Vue({
         el:"#myModal4",
         data:{
-            companyName:""
+            companyName:"",
+            groups:'',
         },
         methods:{
             baocun4:function(){
@@ -368,7 +382,43 @@
             },
 
         }
-    });
+    });*/
+    function addbaocun4(){
+        let companyName=$("#companyName").val();
+        let groups=$("#groups").val();
+        let checkParam = $('#StationName').find('option:selected');
+        let checkText=[];
+        for (let i=0;i<checkParam.length;i++) {
+            checkText.push(checkParam[i].textContent);
+        }
+        let StationName = checkText.join(',');
+        let stationPort=$("#StationName").val().toString();
+        $.ajax({
+            type: 'POST',
+            url: '/StationSite/addCompanySite',
+            dataType: 'json',
+            data: {
+                companyName:companyName,
+                stationPort:stationPort,
+                stationName:StationName,
+                groups:groups,
+            },
+            error: function (msg) {
+                errMessage("请求失败");
+            },
+            success: function (json) {
+                if(json.daoMsg>0){
+                    $('#mainContent4').DataTable().row.add(json.obj).draw();
+                    $("#myModal4").modal("hide");
+                    toastr.success(json.resultMsg);
+                }else{
+                    toastr.error(json.resultMsg);
+                }
+            }
+        });
+    }
+
+
     //删除公司
     $('#mainContent4').delegate('#del4','click', function () {
         var dom = $(this).parents('tr');
@@ -407,6 +457,7 @@
         xgId=data.id
 
         $("#xg_companyName").val(data.companyName);
+        $("#xg_groups").val(data.groups);
         xg_initzhandian(data.stationPort.split(","))
     })
 
@@ -441,6 +492,7 @@
 
     $("#baocun4").click(function(){
         let companyName=$("#xg_companyName").val();
+        let groups=$("#xg_groups").val();
         let checkParam = $('#xg_StationName').find('option:selected');
         let checkText=[];
         for (let i=0;i<checkParam.length;i++) {
@@ -457,6 +509,7 @@
                 companyName:companyName,
                 stationPort:stationPort,
                 stationName:StationName,
+                groups:groups,
             },
             error: function (msg) {
                 errMessage("请求失败");

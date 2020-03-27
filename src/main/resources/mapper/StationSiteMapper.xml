@@ -29,7 +29,7 @@
 	</insert>
 
 	<insert id="addCompanySite" keyProperty="id" useGeneratedKeys="true" parameterType="companySite" >
-		insert into t_dic_company values(null,#{companyName},'')
+		insert into t_dic_company values(null,#{companyName},#{stationPort},#{groups})
 	</insert>
 
 	<update id="updStationSite" parameterType="StationSite">
@@ -56,7 +56,8 @@
 	<update id="updateCompanySite" parameterType="companySite">
 		update t_dic_company set
 		company_name=#{companyName},
-		station_port=#{stationPort}
+		station_port=#{stationPort},
+		groups=#{groups}
 		where id=#{id}
 	</update>
 

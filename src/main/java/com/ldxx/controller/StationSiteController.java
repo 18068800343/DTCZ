@@ -183,7 +183,7 @@ public class StationSiteController {
     }
 
     @RequestMapping("/addCompanySite")
-    public String addCompanySite(@RequestBody CompanySite companySite) {
+    public String addCompanySite( CompanySite companySite) {
         JSONObject jsonObject=new JSONObject();
         String id = LDXXUtils.getUUID12();
         int i=stationSiteDao.addCompanySite(companySite);
