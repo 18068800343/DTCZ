@@ -522,7 +522,7 @@
 <script type="text/javascript">
     var user;
     $(document).ready(function() {
-        getTime();
+       /*  getTime(); */
         $.ajax({
             type: "post",
             url: "/login/getUser",
@@ -532,7 +532,7 @@
                 if(json != null && json != "") {
                     $("#usrName").html(json.usrName)
                     $("#tuichu").text("退出")
-                    setInterval(getTime, 1000);
+                    /* setInterval(getTime, 1000); */
                 } else {
                     $("#tuichu").text("登录")
                 }

@@ -72,7 +72,16 @@
           color:#549CFD;
           font-size:16px;
         }
-      
+        .myTabOne1{
+          text-align:left;
+        }
+      .layui-this{
+         background-color:#EEF5FF !important;
+         color:#6FA9FD !important;
+      }
+      .layui-tab-title{
+         border:1px solid #EEF5FF !important;
+      }
     </style>
 </head>
 <body style="background-image: none;background-color:#F5F5F5;">
@@ -110,6 +119,13 @@
                             <button type="button" class="btn btn-primary" onclick="nowJianceSite()" data-toggle="modal" data-target="#allMsg1" style="width: 150px; background-image: linear-gradient(#1F62C8,#262E9F);">当前车道图</button>
                         </div>
                     </div>
+                    <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief" style="">
+						  <ul class="layui-tab-title">
+						    <li class="layui-this">网站设置</li>
+						    <li>用户管理</li>
+						  </ul>
+						  <div class="layui-tab-content"></div>
+						</div>    
                     <div class="UpperPartR">
 
                     </div>
