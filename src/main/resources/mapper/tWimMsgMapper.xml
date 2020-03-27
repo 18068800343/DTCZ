@@ -87,10 +87,7 @@
         ELSE
         '是'
         END AS isStraddleName,
-        CASE aa.Lane_No WHEN 1 THEN '超车道'
-        WHEN 2 THEN '行车道'
-        ELSE '应急车道'
-        end as laneNoName,
+        aa.Lane_No as laneNoName,
         CASE WHEN aa.Over_Weight_Ratio>0 THEN aa.Over_Weight_Ratio
         ELSE '不超载'
         end as overWeightRatioName,

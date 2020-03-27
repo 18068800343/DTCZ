@@ -15,6 +15,7 @@
 	<link rel="stylesheet"  href="css/layui.css" />
 	<link rel="stylesheet"  href="css/toastr.css"/>
 
+
 	<style lang="">
 		body{
 			background: #fff;
@@ -76,6 +77,7 @@
 							<button type="button" class="form-inline btn btn-primary"  onclick="queding()">
 								确定
 							</button>
+							<button type="button" class="form-inline btn btn-primary" data-toggle="modal" data-target="#myModal" >生成 </button>
 						</div>
 					</form>
 				</div>
@@ -102,202 +104,6 @@
 		</div>
 	</div>
 </div>
-
-<!-- Modal -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal">
-	<div class="modal-dialog modal-lg" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel"><b>录入监测站点</b></h4>
-			</div>
-			<div class="modal-body">
-				<div>
-					<form class="form-inline">
-						<table class="table table-bordered table-condensed">
-							<tr>
-								<td style='width:10%;'>站点Id</td>
-								<td><input type="text" v-model="stationId"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
-								<td>站点名称</td>
-								<td><input type="text" v-model="stationName"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
-							</tr>
-							<tr>
-								<td>IP地址</td>
-								<td><input type="text"  @blur="reg(stationIp,'ip_zhengze','stationIp')"  v-model="stationIp" class="form-control" placeholder="请输入" style="width: 100%;"></td>
-								<td style="width: 20%;">端口号</td>
-								<td><input type="text" v-model="stationPort"  class="form-control" placeholder="请输入" style="width:100%;"></td>
-							</tr>
-							<tr>
-								<td>掩码</td>
-								<td><input type="text" v-model="mask"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
-								<td>网关</td>
-								<td><input type="text" v-model="gateway"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
-							</tr>
-							<tr>
-								<td>经度</td>
-								<td><input type="text" @blur="reg(stationLongitude,'stationLongitude_zhengze','stationLongitude')" v-model="stationLongitude"   class="form-control" placeholder="请输入" style="width:100%;"></td>
-								<td style="width: 20%;">纬度</td>
-								<td><input type="text" @blur="reg(stationLatitude,'stationLatitude_zhengze','stationLatitude')" v-model="stationLatitude"   class="form-control" placeholder="请输入" style="width:100%;"></td>
-							</tr>
-							<tr>
-								<td>路线名称</td>
-								<td><input type="text" v-model="routeName"   class="form-control" placeholder="请输入" style="width:100%;"></td>
-								<td>车道数</td>
-								<td><input type="text" v-model="lanes"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
-							</tr>
-							<tr>
-								<td>省界站名称</td>
-								<td><input type="text" v-model="provinceStationName"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
-								<td>省界站桩号</td>
-								<td><input type="text" v-model="provinceStationStakeMark"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
-							</tr>
-							<tr>
-								<td>系统位置桩号</td>
-								<td><input type="text" v-model="systemLocationStakeMark"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
-								<td style="width: 20%;">单位</td>
-								<td>
-									<select class="form-control"  v-model="company=companySelected" style="width: 100%;" >
-										<option :value="company.companyName" v-for="company in companyList">{{company.companyName}}</option>
-									</select>
-								</td>
-							</tr>
-							<tr>
-								<td>建成日期</td>
-								<td><input type="text"  id="jianchengDate" class="form-control" placeholder="请输入" style="width: 100%;"></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>站点信息</td>
-								<td colspan="3">
-									<textarea  class="text" v-model="stationInfo" rows="4" cols="100"></textarea>
-								</td>
-							</tr>
-
-
-						</table>
-						<table class="table table-bordered table-condensed" id="new_accessory">
-							<thead>
-							<tr>
-								<td style="width:10%;">车道图:</td>
-								<td colspan="2">
-									<!--<button type="button" class="btn btn-primary" onclick="new_accessory()">增加车道图</button>-->
-									<input type="file" @change="getFile($event,'file_thumb')">
-								</td>
-							</tr>
-							</thead>
-							<tbody></tbody>
-						</table>
-					</form>
-				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-				<button type="button" class="btn btn-default" @click="baocun">保存</button>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- model结束 -->
-
-<!-- 修改Modal -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="change">
-	<div class="modal-dialog modal-lg" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title"><b>修改监测站点</b></h4>
-			</div>
-			<div class="modal-body">
-				<div>
-					<form class="form-inline">
-						<table class="table table-bordered table-condensed" style="height: auto;">
-							<tr>
-								<td style='width:10%;'>站点Id</td>
-								<td><input type="text" v-model="stationId"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
-								<td>站点名称</td>
-								<td><input type="text" v-model="stationName"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
-							</tr>
-							<tr>
-								<td>IP地址</td>
-								<td><input type="text"  @blur="reg(stationIp,'ip_zhengze','stationIp')"  v-model="stationIp" class="form-control" placeholder="请输入" style="width: 100%;"></td>
-								<td style="width: 20%;">端口号</td>
-								<td><input type="text" v-model="stationPort"  class="form-control" placeholder="请输入" style="width:100%;"></td>
-							</tr>
-							<tr>
-								<td>掩码</td>
-								<td><input type="text" v-model="mask"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
-								<td>网关</td>
-								<td><input type="text" v-model="gateway"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
-							</tr>
-							<tr>
-								<td>经度</td>
-								<td><input type="text" @blur="reg(stationLongitude,'stationLongitude_zhengze','stationLongitude')" v-model="stationLongitude" class="form-control" placeholder="请输入" style="width:100%;"></td>
-								<td style="width: 20%;">纬度</td>
-								<td><input type="text" @blur="reg(stationLatitude,'stationLatitude_zhengze','stationLatitude')" v-model="stationLatitude"  class="form-control" placeholder="请输入" style="width:100%;"></td>
-							</tr>
-							<tr>
-								<td>路线名称</td>
-								<td><input type="text" v-model="routeName"   class="form-control" placeholder="请输入" style="width:100%;"></td>
-								<td>车道数</td>
-								<td><input type="text" v-model="lanes"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
-							</tr>
-							<tr>
-								<td>省界站名称</td>
-								<td><input type="text" v-model="provinceStationName"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
-								<td>省界站桩号</td>
-								<td><input type="text" v-model="provinceStationStakeMark"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
-							</tr>
-							<tr>
-								<td>系统位置桩号</td>
-								<td><input type="text" v-model="systemLocationStakeMark"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
-								<td style="width: 20%;">单位</td>
-								<td>
-									<select class="form-control"  v-model="company=companySelected" style="width: 100%;" >
-										<option :value="company.companyName" v-for="company in companyList">{{company.companyName}}</option>
-									</select>
-								</td>
-							</tr>
-							<tr>
-								<td>建成日期</td>
-								<td><input type="text"  id="xg_jianchengDate"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>站点信息</td>
-								<td colspan="3">
-									<textarea  class="text" v-model="stationInfo" rows="4" cols="100"></textarea>
-								</td>
-							</tr>
-
-						</table>
-						<table class="table table-bordered table-condensed" id="edit_accessory">
-							<thead style="display: none">
-							<tr>
-								<td style="width:10%;">车道图:</td>
-								<td colspan="3">
-									<!--<button type="button" class="btn btn-primary" onclick="editAccessory()">添加车道图</button>-->
-									<input type="file" @change="getFile($event,'file_thumb')">
-								</td>
-							</tr>
-
-							</thead>
-							<tbody>
-							</tbody>
-							<tfoot></tfoot>
-						</table>
-					</form>
-				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-				<button type="button" class="btn btn-success" @click="baocun" >保存</button>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- 修改model结束 -->
 
 <!-- allMsg -->
 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg1">
@@ -328,6 +134,49 @@
 		</div>
 	</div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel"><b>主动生成报告</b></h4>
+			</div>
+			<div class="modal-body">
+				<div>
+						<table class="table table-bordered table-condensed" id="companySel">
+							<tr>
+								<td  style="width: 20%;">公司选择</td>
+								<td  style="width: 30%;">
+									<!-- 样式1 -->
+									<select class="form-control selectpicker" multiple data-actions-box="true" data-max-options="2"
+											data-live-search="true"
+											id="zhandian" style="width:80%;">
+									</select>
+								</td>
+								<td  style="width: 20%;"></td>
+								<td  style="width: 30%;"></td>
+							</tr>
+						</table>
+						<table class="table table-bordered table-condensed">
+							<tr>
+								<td  style="width: 20%;">日报告</td>
+								<td  style="width: 30%;"><input type="text" id="dayTime"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+								<td  style="width: 20%;">月报告</td>
+								<td  style="width: 30%;"><input type="text" id="monthTime"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+							</tr>
+						</table>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				<button type="button" class="btn btn-default" id="baocun">生成</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- model结束 -->
 </body>
 <script src="../js/jquery.js"></script>
 <script src="js/laydate/laydate.js"></script>
@@ -350,8 +199,15 @@
 			elem: '#endTime', //指定元素
 			type: 'datetime'
 		});
+		laydate.render({
+			elem: '#dayTime', //指定元素
+		});
+		laydate.render({
+			elem: '#monthTime', //指定元素
+			type: 'month'
+		});
 		initTable()
-
+		initCompanySel();
 	});
 	let table=$('#mainContent').DataTable({
 		"deferRender": true,
@@ -781,5 +637,32 @@
 		window.location.href=encodeURI("../down/downloadReport?type=downloadFile&fileName="+name+"&filePath="+path);
 	}
 
+	function initCompanySel() {
+		$.ajax({
+			type: 'POST',
+			url: '/StationSite/getCompanyStationSite',
+			dataType: 'json',
+			async: false,
+			data: {},
+			error: function (msg) {
+			},
+			success: function (json) {
+				$("#zhandian").html('');
+				if (json != null) {
+						for (let i = 0; i < json.length; i++) {
+						let companyName = json[i].companyName;
+
+							$("#zhandian").append("<option  value='" + companyName + "'>" + companyName + "</option>");
+						}
+
+					$(".selectpicker").selectpicker({
+						noneSelectedText: '请选择',
+					});
+					$("#zhandian").selectpicker("refresh");
+					$('#zhandian').selectpicker('render');
+				}
+			}
+		});
+	}
 </script>
 </html>

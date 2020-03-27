@@ -398,21 +398,21 @@
                     <input type="text" class="text4" value="请输入" v-model="chesuEnd" @input="checknum('chesuEnd')"
                            style="height: 34px;border-radius: 5px;box-shadow: none;width:120%;margin-left: 30px;border:1px solid #DDD;padding:3px;">
                 </div>	
-                <label for="" class="col-sm-2 control-label lumianwendu" style="margin-left:7%;font-weight:normal;">路面温度</label>
+               <!-- <label for="" class="col-sm-2 control-label lumianwendu" style="margin-left:7%;font-weight:normal;">路面温度</label>
                 <div class="col-sm-2 lmwd" style="margin-left:-2%;width:5%;padding-right: 0px;padding-left: 28px;">
-                    <!-- 样式1 -->
+                    &lt;!&ndash; 样式1 &ndash;&gt;
                     <input type="text" class="text6" value="请输入" v-model="roadTmpStart"
                            @input="checknum('roadTmpStart')"
                            style="height: 34px;border-radius: 5px;box-shadow: none;width: 70%;border:1px solid #DDD;padding:3px;">
-                </div>
+                </div>-->
 
-                <div class="col-sm-2 lmwdt" style="width:5%;">
+<!--                <div class="col-sm-2 lmwdt" style="width:5%;">
                     <div class="xian2"
                          style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: -35%;margin-top: 15%;">
                     </div>
                     <input type="text" class="text7" v-model="roadTmpEnd" value="请输入" @input="checknum('roadTmpEnd')"
                            style="height: 34px;border-radius: 5px;box-shadow: none;width:70%;margin-left: -10px;border:1px solid #DDD;padding:3px;">
-                </div>
+                </div>-->
             </div>
         </div>
         </div>
@@ -432,7 +432,6 @@
             <th data-id="Speed">车速(Km/h)</th>
             <th>轴数</th>
             <th data-id="Total_Weight">总重量(Kg)</th>
-            <th data-id="Temperature">路面温度</th>
             <th data-id="Over_Weight_Ratio">超载率</th>
             <th data-id="Evt_Time">时间</th>
             <th>详情</th>
@@ -828,7 +827,6 @@
                         {"data": "axlesCount"},
                         {"data": "totalWeight"},
                         //{"data": "isStraddleName"},
-                        {"data": "temperature"},
                         {"data": "overWeightRatioName"},
                         {"data": "evtTime"},
 
@@ -850,14 +848,14 @@
                     },*/
                         {
                             "class": "tcenter",
-                            "targets": 11,
+                            "targets": 10,
                             "searchable": true,
                             "render": function (data, type, full) {
                                 return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="' + full.idLocal + '" onclick="lookMsg(this)" id="lookDetall"></i>';
                             }
                         },{
                             "class": "tcenter",
-                            "targets": 9,
+                            "targets": 8,
                             "searchable": true,
                             "render": function(data, type, full) {
                                 if(data!="不超载"){
