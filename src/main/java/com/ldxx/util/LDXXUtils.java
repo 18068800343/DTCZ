@@ -11,9 +11,4 @@ public class LDXXUtils {
 	public static String getUUID12() {
         return UUID.randomUUID().toString().replace("-", "").substring(0,12);
 	}
-
-	public static String getWebAppFile(String fujianUrl){
-		String path=fujianUrl+"\\dtcz_file";
-		return path;
-	}
 }
