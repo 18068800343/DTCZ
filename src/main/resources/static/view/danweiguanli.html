@@ -87,6 +87,7 @@
                     <tr>
                         <th>序号</th>
                         <th>单位名称</th>
+                        <th>单位类型</th>
                         <th>下辖测点</th>
                         <th style="width:75px;">操作</th>
                     </tr>
@@ -272,12 +273,13 @@
         "columns": [
             { "data": null},
             { "data": "companyName"},
+            { "data": "groups"},
             { "data": "stationName"},
             { "data": "id"},
         ],
         "columnDefs": [{
             "class": "tcenter",
-            "targets": 3,
+            "targets": 4,
             "searchable": true,
             "render": function(data, type, full) {
                 var xiugai='<i class="iconfont icon-xiugai Pfb" style="font-size:20px;cursor:pointer;display: none;" id="upd4" title="修改" data-toggle="modal" data-target="#change4"></i>';
