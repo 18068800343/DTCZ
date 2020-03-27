@@ -27,6 +27,16 @@
 			cursor: pointer;
 			border-radius: 3px;
 		}
+		.layui-nav-tree{
+		  width:100%;
+		  background-color:transparent;
+		}
+		.layui-nav-tree .layui-nav-child dd.layui-this, .layui-nav-tree .layui-nav-child dd.layui-this a, .layui-nav-tree .layui-this, .layui-nav-tree .layui-this>a, .layui-nav-tree .layui-this>a:hover{
+		 background-color:#549CFD;
+		}
+		.layui-nav-child{
+		 margin-top:0px;
+		}
 	</style>
 </head>
 
@@ -54,19 +64,20 @@
 	<a href="javascript:void(0);" lang='tongjitable' target="iframe_a" class="Pc">数据查询</a>
 	<a href="javascript:void(0);" lang='tongjifenxi' data-gundong="true" target="iframe_a" class="Pd">统计分析</a>
 	<a href="javascript:void(0);" lang='yujingguanli' target="iframe_a" class="Pk">预警管理</a>
-	<ul class="layui-nav layui-nav-tree liebiao" lay-filter="test" >
-	<li class="layui-nav-item layui-nav-itemed ">
-	
-	</ul>
-		<!-- <a href="javascript:;">系统管理</a> -->
-	<a href="javascript:void(0);" lang='renyuanguanli' target="iframe_a" class="Pe">人员账户</a>
-	<a href="javascript:void(0);" lang='danweiguanli' target="iframe_a" class="Pf">单位管理</a>
-	<a href="javascript:void(0);" lang='quanxianguanli' target="iframe_a" class="Pg">权限管理</a>
-	<a href="javascript:void(0);" lang='jiancezhandian' target="iframe_a" class="Ph">测点管理</a>
-	<a href="javascript:void(0);" lang='zidianguanli' target="iframe_a" class="Pi">字典管理</a>
-	<a href="javascript:void(0);" lang='xitongweihu' target="iframe_a" class="Pj">系统维护</a>
 	<a href="javascript:void(0);" lang='report' target="iframe_a" class="Po">报告管理</a>
-
+	 <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+	  <li class="layui-nav-item">
+	    <a class="" href="javascript:;">系统管理</a>
+	   <dl class="layui-nav-child" >
+            <dd><a href="javascript:void(0);" lang='renyuanguanli' target="iframe_a" class="Pe">人员账户</a></dd>
+            <dd><a href="javascript:void(0);" lang='danweiguanli' target="iframe_a" class="Pf">单位管理</a></dd>
+            <dd><a href="javascript:void(0);" lang='quanxianguanli' target="iframe_a" class="Pg">权限管理</a></dd>
+            <dd><a href="javascript:void(0);" lang='jiancezhandian' target="iframe_a" class="Ph">测点管理</a></dd>
+            <dd><a href="javascript:void(0);" lang='zidianguanli' target="iframe_a" class="Pi">字典管理</a></dd>
+            <dd><a href="javascript:void(0);" lang='xitongweihu' target="iframe_a" class="Pj">系统维护</a></dd>
+          </dl>
+          </li>
+	</ul>
 	<!--<a href="">系统管理</a>
     <a href="renyuanguanli.html" target="iframe_a" >人员账户管理</a>
     <a href="jiancezhandian.html" target="iframe_a" >监测站点管理</a>
