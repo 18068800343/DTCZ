@@ -63,7 +63,7 @@ public class StationSiteController {
 
         String id = LDXXUtils.getUUID12();
 
-        String webApps=LDXXUtils.getWebAppFile(imgUrlPrefixVo.getFujianUrl());
+        String webApps=imgUrlPrefixVo.getFujianUrl();
         String path=webApps;
         File f=new File(path);
         if(!f.exists()){
@@ -118,7 +118,7 @@ public class StationSiteController {
         JSONObject jsonObject2=JSONObject.fromObject(stationSite);
         StationSite StationSite=(StationSite)JSONObject.toBean(jsonObject2, StationSite.class,map);
         String id=StationSite.getsId();
-        String webApps=LDXXUtils.getWebAppFile(imgUrlPrefixVo.getFujianUrl());
+        String webApps=imgUrlPrefixVo.getFujianUrl();
         String path=webApps;;
         File f=new File(path);
         if(!f.exists()){

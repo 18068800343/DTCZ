@@ -43,7 +43,7 @@ public class tMaintenanceLogController {
         tUserInfo user = (tUserInfo) session.getAttribute("user");
         tMaintenanceLog.setLogUser(user.getUsrId());
         tMaintenanceLog.setUsrName(user.getUsrName());
-        String webApps=LDXXUtils.getWebAppFile(imgUrlPrefixVo.getFujianUrl());
+        String webApps=imgUrlPrefixVo.getFujianUrl();
         String path=webApps;
         File f=new File(path);
         if(!f.exists()){
@@ -90,7 +90,7 @@ public class tMaintenanceLogController {
         }
 
         String id= tMaintenanceLog.getLogId();
-        String webApps=LDXXUtils.getWebAppFile(imgUrlPrefixVo.getFujianUrl());
+        String webApps=imgUrlPrefixVo.getFujianUrl();
         String path=webApps;
         File f=new File(path);
         if(!f.exists()){
