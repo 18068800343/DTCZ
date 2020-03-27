@@ -7,6 +7,7 @@ import com.ldxx.bean.tUserInfo;
 import com.ldxx.dao.tMaintenanceLogDao;
 import com.ldxx.service.tMaintenanceLogService;
 import com.ldxx.util.LDXXUtils;
+import com.ldxx.vo.ImgUrlPrefixVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +31,8 @@ public class tMaintenanceLogController {
     private tMaintenanceLogService service;
     @Autowired
     private tMaintenanceLogDao dao;
+    @Autowired
+    ImgUrlPrefixVo imgUrlPrefixVo;
 
     @RequestMapping("/addtMaintenanceLog")
     public Map<String,Object> addtMaintenanceLog(tMaintenanceLog tMaintenanceLog, @RequestParam("file") MultipartFile[] file, HttpSession session) throws IOException {
@@ -40,8 +43,8 @@ public class tMaintenanceLogController {
         tUserInfo user = (tUserInfo) session.getAttribute("user");
         tMaintenanceLog.setLogUser(user.getUsrId());
         tMaintenanceLog.setUsrName(user.getUsrName());
-        String webApps=LDXXUtils.getWebAppFile();
-        String path=webApps+id;
+        String webApps=LDXXUtils.getWebAppFile(imgUrlPrefixVo.getFujianUrl());
+        String path=webApps;
         File f=new File(path);
         if(!f.exists()){
             f.mkdirs();
@@ -56,7 +59,7 @@ public class tMaintenanceLogController {
                 file[i].transferTo(f2);
                 accessory.setaId(id);
                 accessory.setAcName(fileName);
-                accessory.setAcUrl(id+File.separator+fileName);
+                accessory.setAcUrl(fileName);
                 accessory.setaType("维护日志");
                 list.add(accessory);
             }
@@ -87,8 +90,8 @@ public class tMaintenanceLogController {
         }
 
         String id= tMaintenanceLog.getLogId();
-        String webApps=LDXXUtils.getWebAppFile();
-        String path=webApps+id;
+        String webApps=LDXXUtils.getWebAppFile(imgUrlPrefixVo.getFujianUrl());
+        String path=webApps;
         File f=new File(path);
         if(!f.exists()){
             f.mkdirs();
@@ -103,7 +106,7 @@ public class tMaintenanceLogController {
                 file[i].transferTo(f2);
                 accessory.setaId(id);
                 accessory.setAcName(fileName);
-                accessory.setAcUrl(id+File.separator+fileName);
+                accessory.setAcUrl(fileName);
                 accessory.setaType("维护日志");
                 list.add(accessory);
             }

@@ -12,6 +12,17 @@ public class ImgUrlPrefixVo {
     @Value("${yujingUrl}")
     private String yujingUrl;//预警称重数据接口
 
+    @Value("${fujianUrl}")
+    private String fujianUrl;//附件路径
+
+    public String getFujianUrl() {
+        return fujianUrl;
+    }
+
+    public void setFujianUrl(String fujianUrl) {
+        this.fujianUrl = fujianUrl;
+    }
+
     public String getYujingUrl() {
         return yujingUrl;
     }

@@ -8,6 +8,7 @@ import com.ldxx.dao.StationSiteDao;
 import com.ldxx.service.StationSiteService;
 import com.ldxx.util.LDXXUtils;
 import com.ldxx.util.MsgFormatUtils;
+import com.ldxx.vo.ImgUrlPrefixVo;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,6 +32,8 @@ public class StationSiteController {
 
     @Autowired
     private StationSiteService service;
+    @Autowired
+    ImgUrlPrefixVo imgUrlPrefixVo;
 
     @Resource
     private StationSiteDao stationSiteDao;
@@ -60,8 +63,8 @@ public class StationSiteController {
 
         String id = LDXXUtils.getUUID12();
 
-        String webApps=LDXXUtils.getWebAppFile();
-        String path=webApps+id;
+        String webApps=LDXXUtils.getWebAppFile(imgUrlPrefixVo.getFujianUrl());
+        String path=webApps;
         File f=new File(path);
         if(!f.exists()){
             f.mkdirs();
@@ -76,7 +79,7 @@ public class StationSiteController {
                 file.transferTo(f2);
                 accessory.setaId(id);
                 accessory.setAcName(fileName);
-                accessory.setAcUrl(id+File.separator+fileName);
+                accessory.setAcUrl(fileName);
                 accessory.setaType("测点车道图");
                 //list.add(accessory);
            // }
@@ -115,8 +118,8 @@ public class StationSiteController {
         JSONObject jsonObject2=JSONObject.fromObject(stationSite);
         StationSite StationSite=(StationSite)JSONObject.toBean(jsonObject2, StationSite.class,map);
         String id=StationSite.getsId();
-        String webApps=LDXXUtils.getWebAppFile();
-        String path=webApps+id;;
+        String webApps=LDXXUtils.getWebAppFile(imgUrlPrefixVo.getFujianUrl());
+        String path=webApps;;
         File f=new File(path);
         if(!f.exists()){
             f.mkdirs();
@@ -131,7 +134,7 @@ public class StationSiteController {
                 file.transferTo(f2);
                 accessory.setaId(id);
                 accessory.setAcName(fileName);
-                accessory.setAcUrl(id+File.separator+fileName);
+                accessory.setAcUrl(fileName);
                 accessory.setaType("测点车道图");
                // list.add(accessory);
             //}
