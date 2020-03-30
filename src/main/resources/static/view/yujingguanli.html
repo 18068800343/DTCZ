@@ -333,8 +333,10 @@
                             <tr>
                                 <td>总重量(kg)</td>
                                 <td>{{totalWeight}}</td>
-                                <td>打包时间</td>
-                                <td>{{msgTime}}</td>
+                                <!--<td>打包时间</td>
+                                <td>{{msgTime}}</td>-->
+                                <td>路面温度(°C)</td>
+                                <td>{{temperature}}</td>
                             </tr>
 
                             <tr>
@@ -348,8 +350,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>路面温度(°C)</td>
-                                <td>{{temperature}}</td>
+
                             </tr>
                         </table>
                         <table class="table  table-condensed" style="height: auto; margin-top: -2%;">
@@ -930,8 +931,8 @@
         looktWimMsg.stationName=data.stationName;
         looktWimMsg.routeName=data.routeName;
         looktWimMsg.licensePlateColor=data.licensePlateColor;
-        looktWimMsg.vehicleTypeName=data.vehicleTypeName;
-        looktWimMsg.overWeightRatioName=data.overWeightRatio*100+"%";
+        looktWimMsg.vehicleTypeName=data.axlesCount+"轴";;
+        looktWimMsg.overWeightRatioName=(data.overWeightRatio*100).toFixed(2)+"%";
 
         $.ajax({
             type: 'POST',
