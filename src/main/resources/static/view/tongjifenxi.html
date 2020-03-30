@@ -29,7 +29,6 @@
             margin-right: 5%;
         }
         .UpperPart{
-            display: flex;
             justify-content:space-between;
             padding-bottom: 12px;
         }
@@ -116,36 +115,41 @@
                         </div>
                         <button type="button" class="btn btn-primary" onclick="queding()" style="width: 100px;margin-left:-100px;background-color:#549CFD;border:none;">确定</button>
                         <div class="jiance">
-                            <button type="button" class="btn btn-primary" onclick="nowJianceSite()" data-toggle="modal" data-target="#allMsg1" style="width: 150px; background-image: linear-gradient(#1F62C8,#262E9F);">当前车道图</button>
+                            <button type="button" class="btn btn-primary" onclick="nowJianceSite()" data-toggle="modal" data-target="#allMsg1" style="width: 150px;background-color:#549CFD;border:1px solid #549CFD;">当前车道图</button>
                         </div>
                     </div>
                     <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief" style="">
-						  <ul class="layui-tab-title">
-						    <li class="layui-this">统计图</li>
-						    <li>数据表</li>
+						  <ul class="layui-tab-title" style="float:right;margin-top:-45px;">
+						    <li class="layui-this">数据表</li>
+						    <li>统计图</li>
 						  </ul>
-						  <div class="layui-tab-content"></div>
+						  <div class="layui-tab-content">
+						    <div class="layui-tab-item layui-show">
+						       <div class="LowerPart" style="margin-top:3px;">
+				                    <div style="height: 300px;width:1050px;margin-left: 200px;" id="dataTable">
+				                    </div>
+				                </div>
+						    </div>
+   							 <div class="layui-tab-item">
+   							    <div style="width: 90%;margin-left: 5%;">
+				                   <!--  <li class="layui-this">各车型车辆数及比例</li> -->
+				                    <div class="layui-tab-item layui-show">
+				                      <!--   <p class="errorMsg1" style="display: inline-block;"></p> -->
+				                        <div id="_top" style="width:700px;height: 400px;margin-top: -50px;margin:0 auto">
+				                        </div>
+				                    </div>
+                </div>
+   							 </div>
+						  </div>
 						</div>    
                     <div class="UpperPartR">
 
                     </div>
 
                 </div>
-                <div class="LowerPart" style="margin-top:3px;">
+                
 
-                    <div style="height: 300px;width:1050px;margin-left: 200px;" id="dataTable">
-                    </div>
-
-                </div>
-
-                <div style="width: 90%;margin-left: 5%;">
-                    <li class="layui-this">各车型车辆数及比例</li>
-                    <div class="layui-tab-item layui-show">
-                        <p class="errorMsg1" style="display: inline-block;"></p>
-                        <div id="_top" style="width:700px;height: 400px;margin-top: -50px;margin:0 auto">
-                        </div>
-                    </div>
-                </div>
+                
 
                 <div style="width: 90%;margin-left: 5%;">
                     <li class="layui-this">超载车辆数及比例</li>
@@ -345,6 +349,8 @@
 <script src="js/bootstrap-datepicker/bootstrap-datepicker.js" ></script>
 <script src="js/bootstrap-datepicker/bootstrap-datepicker.zh-CN.js" ></script>
 <script src="../js/jquery-editable-select.js" ></script>
+<script src="js/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/layui.all.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/toastr.js" ></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
