@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ldxx.dao.ReportInfoDao" >
+    <insert id="insertReport">
+		insert into report_info
+			values(#{rId},#{companyName},#{reportName},#{reportUrl},#{reportStatus},#{reportTime},#{timeType})
+	</insert>
 
-	<select id="getAllReportByCompanyName" resultType="com.ldxx.bean.Report">
+    <select id="getAllReportByCompanyName" resultType="com.ldxx.bean.Report">
         SELECT * FROM report_info
         <where>
 			<if test="companyName !='华通' ">
