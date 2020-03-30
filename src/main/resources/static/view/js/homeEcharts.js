@@ -396,8 +396,8 @@ homePageInit.initLeftEcharts = (id) => {
         error: function (msg) {
         },
         success: function (json) {
-            homePageInit.stationName = json.stationNames.split(",");
-            homePageInit.nums = json.nums.split(",");
+            homePageInit.stationName = json.stationNames.split(",").reverse()
+            homePageInit.nums = json.nums.split(",").reverse();
             homePageInit.setLeftEcharts(id, homePageInit.stationName, homePageInit.nums);
 
         }
@@ -906,7 +906,7 @@ let initLeftChartDetail=(d)=>{
 
             let dom;
             if(d==1){
-                for(let i=stationNames.length-1;i>=0;i--){
+                for(let i=0;i<stationNames.length;i++){
                     let tr = "<tr><td>"+stationNames[i]+"</td><td>"+nums[i]+"</td></tr>";
                     dom+=tr;
                 }
@@ -918,7 +918,8 @@ let initLeftChartDetail=(d)=>{
                         if(undefined==num){
                             num="0%";
                         }else{
-                            num = num*100+"%"
+                            num = num*100
+                            num = num.toFixed(2)+"%";
                         }
                         let tr = "<tr><td>"+stationNames[i]+"</td><td>"+num+"</td></tr>";
                         dom+=tr;
