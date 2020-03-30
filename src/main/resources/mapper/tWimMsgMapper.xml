@@ -461,7 +461,7 @@
                         HAVING
                             FIND_IN_SET(b.Station_Port ,#{stationPorts})
                         ORDER BY
-                            cnt DESC
+                            cnt DESC,b.Station_Name ASC
                         LIMIT 6
                     ) dd
                 ORDER BY
@@ -618,7 +618,7 @@
                         HAVING
                             FIND_IN_SET(b.Station_Port ,#{stationPorts})
                         ORDER BY
-                            cnt
+                            cnt desc,b.Station_Name ASC
 
                     ) dd
                 ORDER BY
@@ -654,7 +654,7 @@
                         HAVING
                             FIND_IN_SET(b.Station_Port ,#{stationPorts})
                         ORDER BY
-                            cnt
+                            cnt desc ,b.Station_Name ASC
 
                     ) dd
                 ORDER BY
@@ -700,7 +700,7 @@
 				b.Station_Port
 			HAVING FIND_IN_SET(b.Station_Port,#{stationPorts})
 			ORDER BY
-				cnt
+				cnt desc,b.Station_Name ASC
 			)dd ORDER BY dd.cnt DESC
 		) aa
     </select>
@@ -728,7 +728,7 @@
 				b.Station_Port
 			HAVING FIND_IN_SET(b.Station_Port,#{stationPorts})
 			ORDER BY
-				cnt
+				cnt desc,b.Station_Name ASC
 			)dd ORDER BY dd.cnt DESC
 		) aa
     </select>
