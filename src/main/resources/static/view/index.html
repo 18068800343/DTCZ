@@ -59,22 +59,22 @@
 <!--导航栏结束-->
 <!--左半部分开始-->
 <div id="leftTab" style="position:fixed">
-	<a href="javascript:void(0);" lang="home"  target="iframe_a" class="Pa" style="margin-top:40%;">首页</a>
-	<a href="javascript:void(0);" lang='shishijiance'  target="iframe_a" class="Pb" id="pb">实时监测</a>
-	<a href="javascript:void(0);" lang='tongjitable' target="iframe_a" class="Pc">数据查询</a>
-	<a href="javascript:void(0);" lang='tongjifenxi' data-gundong="true" target="iframe_a" class="Pd">统计分析</a>
-	<a href="javascript:void(0);" lang='yujingguanli' target="iframe_a" class="Pk">预警管理</a>
-	<a href="javascript:void(0);" lang='report' target="iframe_a" class="Po">报告管理</a>
+	<a href="javascript:void(0);" lang="home"  target="iframe_a" class="Pa yijicaidan" style="margin-top:40%;">首页</a>
+	<a href="javascript:void(0);" lang='shishijiance'  target="iframe_a" class="Pb yijicaidan" id="pb">实时监测</a>
+	<a href="javascript:void(0);" lang='tongjitable' target="iframe_a" class="Pc yijicaidan">数据查询</a>
+	<a href="javascript:void(0);" lang='tongjifenxi' data-gundong="true" target="iframe_a" class="Pd yijicaidan">统计分析</a>
+	<a href="javascript:void(0);" lang='yujingguanli' target="iframe_a" class="Pk yijicaidan">预警管理</a>
+	<a href="javascript:void(0);" lang='report' target="iframe_a" class="Po yijicaidan">报告管理</a>
 	 <ul class="layui-nav layui-nav-tree"  lay-filter="test">
 	  <li class="layui-nav-item">
 	    <a href="javascript:;">系统管理</a>
 	   <dl class="layui-nav-child" >
-            <dd><a href="javascript:void(0);" lang='renyuanguanli' target="iframe_a" class="Pe">人员账户</a></dd>
-            <dd><a href="javascript:void(0);" lang='danweiguanli' target="iframe_a" class="Pf">单位管理</a></dd>
-            <dd><a href="javascript:void(0);" lang='quanxianguanli' target="iframe_a" class="Pg">权限管理</a></dd>
-            <dd><a href="javascript:void(0);" lang='jiancezhandian' target="iframe_a" class="Ph">测点管理</a></dd>
-            <dd><a href="javascript:void(0);" lang='zidianguanli' target="iframe_a" class="Pi">字典管理</a></dd>
-            <dd><a href="javascript:void(0);" lang='xitongweihu' target="iframe_a" class="Pj">系统维护</a></dd>
+            <dd class="yijicaidan"><a href="javascript:void(0);" lang='renyuanguanli' target="iframe_a" class="Pe">人员账户</a></dd>
+            <dd class="yijicaidan"><a href="javascript:void(0);" lang='danweiguanli' target="iframe_a" class="Pf">单位管理</a></dd>
+            <dd class="yijicaidan"><a href="javascript:void(0);" lang='quanxianguanli' target="iframe_a" class="Pg">权限管理</a></dd>
+            <dd class="yijicaidan"><a href="javascript:void(0);" lang='jiancezhandian' target="iframe_a" class="Ph">测点管理</a></dd>
+            <dd class="yijicaidan"><a href="javascript:void(0);" lang='zidianguanli' target="iframe_a" class="Pi">字典管理</a></dd>
+            <dd class="yijicaidan"><a href="javascript:void(0);" lang='xitongweihu' target="iframe_a" class="Pj">系统维护</a></dd>
           </dl>
           </li>
 	</ul>
@@ -167,6 +167,13 @@ $('#leftTab a').bind('click', function () {
 		$("#mainHtml").css({"overflow":"scroll" ,"overflow-y":"hidden"});
 	}
 })
+$(".yijicaidan").click(function() {
+	$(".yijicaidan").removeClass("btn-primary");  // 删除其他兄弟元素的样式
+	$(".yijicaidan").removeClass("layui-this");  // 删除其他兄弟元素的样式
+	//$(".yijicaidan").addClass('yijicaidan');
+	$(this).addClass('btn-primary');                            // 添加当前元素的样式
+
+});
 
 var pagestyle = function () {
     var rframe = $("#iframe-player");
