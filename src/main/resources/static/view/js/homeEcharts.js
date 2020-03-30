@@ -906,12 +906,16 @@ let initLeftChartDetail=(d)=>{
 
             let dom;
             if(d==1){
+                $("#chart1Detail b").empty();
+                $("#chart1Detail b").append("当日车流量统计");
                 for(let i=0;i<stationNames.length;i++){
                     let tr = "<tr><td>"+stationNames[i]+"</td><td>"+nums[i]+"</td></tr>";
                     dom+=tr;
                 }
             }else{
                 if(d==2){
+                    $("#chart1Detail b").empty();
+                    $("#chart1Detail b").append("当日超载比例统计");
                     let numsBili = json.numsBili.split(",");
                     for(let i=0;i<stationNames.length;i++){
                         let num = numsBili[i];
@@ -925,6 +929,8 @@ let initLeftChartDetail=(d)=>{
                         dom+=tr;
                     }
                 }else{
+                    $("#chart1Detail b").empty();
+                    $("#chart1Detail b").append("当日超载数量统计");
                     for(let i=0;i<stationNames.length;i++){
                         let tr = "<tr><td>"+stationNames[i]+"</td><td>"+nums[i]+"</td></tr>";
                         dom+=tr;
