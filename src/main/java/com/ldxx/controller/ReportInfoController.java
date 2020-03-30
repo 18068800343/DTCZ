@@ -24,14 +24,14 @@ public class ReportInfoController {
     @Resource
     private ReportInfoDao dao;
     @RequestMapping("/getAllReportInfoByCompanyName")
-    public List<Report> getAllReportInfoByCompanyName(HttpSession session,String startTime,String endTime){
+    public List<Report> getAllReportInfoByCompanyName(HttpSession session,String startTime,String endTime,Integer timeType){
 
         tUserInfoVo user = (tUserInfoVo) session.getAttribute("user");
 
-        return dao.getAllReportByCompanyName(user.getCompanyName(),startTime,endTime);
+        return dao.getAllReportByCompanyName(user.getCompanyName(),startTime,endTime,timeType);
     }
     @RequestMapping("/deleteById")
-    public int getAllReportInfoByCompanyName(HttpSession session,String id){
+    public int deleteById(HttpSession session,String id){
         return dao.deleteById(id);
     }
 

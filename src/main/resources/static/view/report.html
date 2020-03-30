@@ -69,7 +69,7 @@
 					<form class="form-horizontal" role="form">
 						<div>
 							<select class="form-inline "  id="dayOrMonth">
-								<option value="0">全部</option>
+								<option value="%">全部</option>
 								<option value="1">日报告</option>
 								<option value="2">月报告</option>
 							</select>
@@ -98,6 +98,7 @@
 						<th>报告名称</th>
 						<th>报告路径</th>
 						<th>生成状态</th>
+						<th>报告类型</th>
 						<th>生成时间</th>
 						<th style="width:75px;">操作</th>
 					</tr>
@@ -231,18 +232,41 @@
 			{ "data": "reportName"},
 			{ "data": "reportUrl"},
 			{ "data": "reportStatus"},
+			{ "data": "timeType"},
 			{ "data": "reportTime"},
 			{ "data": null},
 		],
 		"columnDefs": [{
 			"class": "tcenter",
-			"targets":6,
+			"targets":7,
 			"searchable": true,
 			"render": function(data, type, full) {
 				let xiugai='<i class="glyphicon glyphicon-download-alt Phb" style="font-size:20px;cursor:pointer;display: none;" id="upd" title="下载" onclick="down(this)"></i>';
 				let shanchu='<i class="iconfont icon-shanchu Phc" style="font-size:20px;cursor:pointer;display: none;" id="del"  title="删除"></i>';
 				//let look='<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" onclick="lookMs(this)" data-toggle="modal" data-target="#allMsg1" id="lookDetall"></i>'
 				return xiugai+shanchu;
+			}
+		},{
+			"class": "tcenter",
+			"targets":5,
+			"searchable": true,
+			"render": function(data, type, full) {
+				if(data=='1'){
+					return '日报告'
+				}else{
+					return '月报告'
+				}
+			}
+		},{
+			"class": "tcenter",
+			"targets":4,
+			"searchable": true,
+			"render": function(data, type, full) {
+				if(data=='1'){
+					return '成功'
+				}else{
+					return '失败'
+				}
 			}
 		}],"fnDrawCallback" : function() {
 			initTableQuanxian()
@@ -304,20 +328,23 @@
 	function queding() {
 		let startTime = $("#startTime").val();
 		let endTime = $("#endTime").val();
+		let dayOrMonth = $("#dayOrMonth").val();
+
 		if(endTime<=startTime){
 			toastr.error("结束时间必须大于开始时间!");
 			return;
 		}
-		initTable(startTime,endTime);
+		initTable(startTime,endTime,dayOrMonth);
 	}
-	function initTable(startTime,endTime){
+	function initTable(startTime,endTime,dayOrMonth){
 		$.ajax({
 			type: 'POST',
 			url: '/ReportInfoController/getAllReportInfoByCompanyName',
 			dataType: 'json',
 			data: {
 				startTime:startTime,
-				endTime:endTime
+				endTime:endTime,
+				timeType:dayOrMonth
 			},
 			error: function (msg) {
 				errMessage("请求UserController失败");

@@ -15,11 +15,21 @@ public class Report {
     String reportUrl;
 
     Integer reportStatus;
+
+    Integer timeType;
     //通行时间
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private
     Date reportTime;
+
+    public Integer getTimeType() {
+        return timeType;
+    }
+
+    public void setTimeType(Integer timeType) {
+        this.timeType = timeType;
+    }
 
     public String getrId() {
         return rId;

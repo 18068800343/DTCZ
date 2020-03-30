@@ -54,6 +54,7 @@ public class tUserInfoController {
         }
         if(i>0){
             tUserInfoVo tUserInfoVo= service.selectUserById(tUserInfo.getUsrId());
+            session.removeAttribute("user");
             session.setAttribute("user",tUserInfoVo);
         }
         map.put("result",i);
