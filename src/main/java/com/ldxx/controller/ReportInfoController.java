@@ -28,7 +28,9 @@ public class ReportInfoController {
 
         tUserInfoVo user = (tUserInfoVo) session.getAttribute("user");
 
-        return dao.getAllReportByCompanyName(user.getCompanyName(),startTime,endTime,timeType);
+        List<Report> reports = dao.getAllReportByCompanyName(user.getCompanyName(),startTime,endTime,timeType);
+        return reports;
+
     }
     @RequestMapping("/deleteById")
     public int deleteById(HttpSession session,String id){
