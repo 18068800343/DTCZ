@@ -255,7 +255,7 @@
                                                 bb.Station_Port
                                             HAVING FIND_IN_SET(bb.Station_Port,#{stationPorts})
                                             ORDER BY
-                                                cnt DESC) cc on cc.Station_Port = b.Station_Port
+                                                cnt DESC,bb.Station_Name) cc on cc.Station_Port = b.Station_Port
                                                 GROUP BY
                                                     b.Station_Port
                                                 HAVING
@@ -375,7 +375,7 @@
 				b.Station_Port
 			HAVING FIND_IN_SET(b.Station_Port,#{stationPorts})
 			ORDER BY
-				cnt DESC
+				cnt DESC,b.Station_Name ASC
 			<if test="limit!=null and limit!=''">
                 LIMIT #{limit}
             </if>
@@ -385,7 +385,7 @@
 
     <select id="getGuanJianChaoZhongCheLiangEchartsList" resultType="CheLiuLiangEchartsList">
         SELECT
-                 group_concat(aaa.cnt SEPARATOR ',') AS cnt2,
+                group_concat(aaa.cnt SEPARATOR ',') AS cnt2,
                 group_concat(aaa.Station_Port SEPARATOR ',') AS stationPorts,
                 group_concat(aaa.Station_Name SEPARATOR ',') AS stationNames,
                 group_concat(aaa.cnt2 SEPARATOR ',') AS cnt3
@@ -423,7 +423,7 @@
                         HAVING
                             FIND_IN_SET(b.Station_Port ,#{stationPorts})
                         ORDER BY
-                            cnt DESC
+                            cnt DESC ,b.Station_Name ASC
                         <if test="limit!=null and limit!=''">
                             LIMIT #{limit}
                         </if>
