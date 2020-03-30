@@ -81,6 +81,15 @@ public class tWimMsg implements Serializable {
     private String stationIP;
 
     private String imgData;//图片流
+    private Integer maxWeight;//最大允许总质量 单位: 千克 数字类型,
+
+    public Integer getMaxWeight() {
+        return maxWeight;
+    }
+
+    public void setMaxWeight(Integer maxWeight) {
+        this.maxWeight = maxWeight;
+    }
 
     public String getImgData() {
         return imgData;

@@ -77,7 +77,7 @@
 		ELSE '不超载'
 		end as overWeightRatioName,
 		a.*,b.Station_Name,b.Route_Name,
-		c.License_Plate_Color,d.Vehicle_Type_Name
+		c.License_Plate_Color,d.Vehicle_Type_Name,IFNULL(e.Overload_Standard,49000) as maxWeight
 		from (select a.* from t_vehicle_overweight_temp a
 		where
 			Total_Weight>=(SELECT Crux_Weight FROM crux_weight where Del_State=1 AND lv = #{lv})and
@@ -93,6 +93,8 @@
 		LEFT JOIN station_site b on a.Station_IP=b.Station_Port
 		LEFT JOIN license_plate c ON a.Plate_Color=c.License_Plate_No
 		LEFT JOIN vehicle_type d ON a.Class_Index=d.Vehicle_Type_No
+		LEFT JOIN overload_standard e on a.Axles_Count=e.Axle_Number
+
 	</select>
 
 	
@@ -238,7 +240,7 @@
 		ELSE '不超载'
 		end as overWeightRatioName,
 		a.*,b.Station_Name,b.Route_Name,
-		c.License_Plate_Color,d.Vehicle_Type_Name
+		c.License_Plate_Color,d.Vehicle_Type_Name,IFNULL(e.Overload_Standard,49000) as maxWeight
 		from (select a.* from t_vehicle_overweight_temp a
 		where Total_Weight>=(SELECT Crux_Weight FROM crux_weight where Del_State=1 AND lv = #{lv}) and
 			FIND_IN_SET(a.id_local ,#{idLocals}) ORDER BY a.Evt_Time desc
@@ -246,5 +248,6 @@
 		LEFT JOIN station_site b on a.Station_IP=b.Station_Port
 		LEFT JOIN license_plate c ON a.Plate_Color=c.License_Plate_No
 		LEFT JOIN vehicle_type d ON a.Class_Index=d.Vehicle_Type_No
+		LEFT JOIN overload_standard e on a.Axles_Count=e.Axle_Number
 	</select>
 </mapper>

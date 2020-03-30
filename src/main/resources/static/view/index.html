@@ -170,6 +170,9 @@ $('#leftTab a').bind('click', function () {
 $(".yijicaidan").click(function() {
 	$(".yijicaidan").removeClass("btn-primary");  // 删除其他兄弟元素的样式
 	$(".yijicaidan").removeClass("layui-this");  // 删除其他兄弟元素的样式
+	if($(this).text()=="首页"){
+		$(".layui-nav-child").css("background-color","transparent",!important)
+	}
 	//$(".yijicaidan").addClass('yijicaidan');
 	$(this).addClass('btn-primary');                            // 添加当前元素的样式
 
