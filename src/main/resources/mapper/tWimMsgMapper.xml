@@ -667,14 +667,17 @@
         SELECT * from (
         SELECT COUNT(*) totalChaoZai FROM t_vehicle_msg_today a WHERE a.Over_Weight>0 and FIND_IN_SET(a.Station_IP,#{stationPorts}) and  date(a.Evt_Time) = curdate() and a.Total_Weight &lt;(SELECT Crux_Weight FROM crux_weight  WHERE Del_State = 1 AND lv = 2)
         ) aa LEFT JOIN (
-        select MAX(a.Total_Weight) maxWeight FROM t_vehicle_msg_today a WHERE  FIND_IN_SET(a.Station_IP,#{stationPorts}) and  date(a.Evt_Time) = curdate()
+        SELECT id_local,Total_Weight maxWeight FROM t_vehicle_overweight WHERE Total_Weight = (select MAX(a.Total_Weight) maxWeight FROM t_vehicle_overweight a  WHERE   date(a.Evt_Time) = curdate()) LIMIT 1
         )bb on 1= 1
         LEFT JOIN (
         select COUNT(*) totalCheLiu FROM t_vehicle_msg_today a WHERE  FIND_IN_SET(a.Station_IP,#{stationPorts}) and  date(a.Evt_Time) = curdate()
         )cc on 1= 1
+         LEFT JOIN (
+        select group_concat(b.link SEPARATOR ',') AS links FROM station_site b WHERE  FIND_IN_SET(b.Station_Port,#{stationPorts})
+        )dd on 1= 1
         LEFT JOIN (
         select COUNT(*) totalGuanJian FROM t_vehicle_overweight a WHERE a.Total_Weight >= (SELECT min(Crux_Weight) FROM crux_weight w WHERE Del_State = 1) AND FIND_IN_SET(a.Station_IP,#{stationPorts}) and  date(a.Evt_Time) = curdate()
-        )dd on 1= 1
+        )ee on 1= 1
     </select>
 
     <select id="getJianCeCheLiuLiangEchartsList" resultType="CheLiuLiangEchartsList">

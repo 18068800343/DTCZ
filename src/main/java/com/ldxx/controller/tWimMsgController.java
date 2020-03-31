@@ -359,7 +359,14 @@ public class tWimMsgController {
     @RequestMapping("/getJianCeTotal")
     public HomeData getJianCeTotal(String stationPorts) {
         HomeData homeData = tWimMsgDao.getJianCeTotal(stationPorts);
-        homeData.setStationNums(stationPorts.split(",").length);
+        String[] nums = homeData.getLinks().split(",");
+        int m=0;
+        for(String num:nums){
+            if("1".equals(num)){
+                m++;
+            }
+        }
+        homeData.setStationNums(m);
         return homeData;
     }
 
