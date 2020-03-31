@@ -108,7 +108,12 @@ public class ReportUtil {
 			for(int i =1;i<3;i++){
 				if(i==1){
 					for(String companyNameOut : companyNames){
-						String op = reportUtil.config.getReportCmd()+ File.separator+ cmdOp+" "+companyNameOut+" "+day;
+						String op = "";
+						if("控股".equals(companyNameOut)){
+							op= reportUtil.config.getReportCmd()+ File.separator+"CreateDayReport.exe 1 "+day;
+						}else{
+							op= reportUtil.config.getReportCmd()+ File.separator+ cmdOp+" "+companyNameOut+" "+day;
+						}
 						Process process = Runtime.getRuntime().exec(op);
 						InputStream is = process.getInputStream();
 						BufferedReader reader = new BufferedReader(new InputStreamReader(is, "GBK"));

@@ -308,7 +308,14 @@ public class tWimMsgController {
     @RequestMapping("/getHomeDataObject")
     public HomeData getHomeDataObject(String stationPorts, HttpSession session) {
         HomeData homeData = tWimMsgDao.getHomeData(stationPorts);
-        homeData.setStationNums(stationPorts.split(",").length);
+        String[] nums = homeData.getLinks().split(",");
+        int m=0;
+        for(String num:nums){
+            if("1".equals(num)){
+                m++;
+            }
+        }
+        homeData.setStationNums(m);
         return homeData;
     }
 

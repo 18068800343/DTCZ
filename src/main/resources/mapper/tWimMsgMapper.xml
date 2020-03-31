@@ -336,7 +336,7 @@
         SELECT * from (
         SELECT COUNT(*) totalChaoZai FROM t_vehicle_overweight a WHERE a.Over_Weight>0 and FIND_IN_SET(a.Station_IP,#{stationPorts}) and  date(a.Evt_Time) = curdate()
         ) aa LEFT JOIN (
-        select MAX(a.Total_Weight) maxWeight,id_local FROM t_vehicle_overweight a WHERE  FIND_IN_SET(a.Station_IP,#{stationPorts}) and  date(a.Evt_Time) = curdate()
+        SELECT id_local,Total_Weight maxWeight FROM t_vehicle_overweight WHERE Total_Weight = (select MAX(a.Total_Weight) maxWeight FROM t_vehicle_overweight a  WHERE   date(a.Evt_Time) = curdate()) LIMIT 1
         )bb on 1= 1
         LEFT JOIN (
         select COUNT(*) totalCheLiu FROM t_vehicle_msg_today a WHERE  FIND_IN_SET(a.Station_IP,#{stationPorts}) and  date(a.Evt_Time) = curdate()
