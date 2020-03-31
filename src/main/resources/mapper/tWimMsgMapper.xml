@@ -130,8 +130,8 @@
                 and Temperature &lt; #{roadTmpEnd}
             </if>
 
-            <if test="chaozhongStart!=null and chaozhongStart!='' ">
-                and #{chaozhongStart} &lt; Over_Weight_Ratio
+            <if test="chaozhongStart !=null and chaozhongStart!=''">
+                and Over_Weight_Ratio >0
             </if>
             <if test="chaozhongEnd!=null and chaozhongEnd!='' ">
                 and Over_Weight_Ratio &lt; #{chaozhongEnd}
@@ -302,8 +302,8 @@
                 and Temperature &lt; #{roadTmpEnd}
             </if>
 
-            <if test="chaozhongStart!=null and chaozhongStart!='' ">
-                and #{chaozhongStart} &lt; Over_Weight_Ratio
+            <if test="chaozhongStart !=null and chaozhongStart!=''">
+                and  Over_Weight_Ratio >0
             </if>
             <if test="chaozhongEnd!=null and chaozhongEnd!='' ">
                 and Over_Weight_Ratio &lt; #{chaozhongEnd}

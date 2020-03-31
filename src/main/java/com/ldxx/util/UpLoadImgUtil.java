@@ -9,7 +9,7 @@ import java.io.*;
 public class UpLoadImgUtil {
 
     public static void main(String[] args) {
-        String imgFile = "D:\\Desktop\\20180222134306_iL4Jf.png";// 待处理的图片
+        String imgFile = "D:\\Desktop\\2m.jpg";// 待处理的图片
         String imgbese = getImgStr(imgFile);
         System.out.println(imgbese.length());
         System.out.println(imgbese);
