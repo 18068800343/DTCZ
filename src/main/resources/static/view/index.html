@@ -59,12 +59,12 @@
 <!--导航栏结束-->
 <!--左半部分开始-->
 <div id="leftTab" style="position:fixed">
-	<a href="javascript:void(0);" lang="home"  target="iframe_a" class="Pa yijicaidan" style="margin-top:40%;">首页</a>
-	<a href="javascript:void(0);" lang='shishijiance'  target="iframe_a" class="Pb yijicaidan" id="pb">实时监测</a>
-	<a href="javascript:void(0);" lang='tongjitable' target="iframe_a" class="Pc yijicaidan">数据查询</a>
-	<a href="javascript:void(0);" lang='tongjifenxi' data-gundong="true" target="iframe_a" class="Pd yijicaidan">统计分析</a>
-	<a href="javascript:void(0);" lang='yujingguanli' target="iframe_a" class="Pk yijicaidan">预警管理</a>
-	<a href="javascript:void(0);" lang='report' target="iframe_a" class="Pl yijicaidan">报告管理</a>
+	<a href="javascript:void(0);" lang="home"  target="iframe_a" class="Pa yijicaidan" name="yi" style="margin-top:40%;">首页</a>
+	<a href="javascript:void(0);" lang='shishijiance'  target="iframe_a" class="Pb yijicaidan" name="yi" id="pb">实时监测</a>
+	<a href="javascript:void(0);" lang='tongjitable' target="iframe_a" class="Pc yijicaidan"name="yi">数据查询</a>
+	<a href="javascript:void(0);" lang='tongjifenxi' data-gundong="true" target="iframe_a" name="yi" class="Pd yijicaidan">统计分析</a>
+	<a href="javascript:void(0);" lang='yujingguanli' target="iframe_a" class="Pk yijicaidan" name="yi">预警管理</a>
+	<a href="javascript:void(0);" lang='report' target="iframe_a" class="Pl yijicaidan" name="yi">报告管理</a>
 	 <ul class="layui-nav layui-nav-tree"  lay-filter="test">
 	  <li class="layui-nav-item">
 	    <a href="javascript:;">系统管理</a>
@@ -153,6 +153,8 @@ $('#leftTab a').bind('click', function () {
 	if (name != 'home') {
 		$('#leftTab').addClass('homeLeft')
 		$('.daohang').slideDown()
+	}else if(name==undefined){
+		$('.daohang').slideUp();
 	} else {
 		$('.daohang').slideUp();
 		$('#leftTab').removeClass('homeLeft')
@@ -170,8 +172,8 @@ $('#leftTab a').bind('click', function () {
 $(".yijicaidan").click(function() {
 	$(".yijicaidan").removeClass("btn-primary");  // 删除其他兄弟元素的样式
 	$(".yijicaidan").removeClass("layui-this");  // 删除其他兄弟元素的样式
-	if($(this).text()=="首页"){
-		$(".layui-nav-child").css("background-color","transparent",!important)
+	if(this.name=="yi"){
+		$(".layui-nav-item").removeClass("layui-nav-itemed")
 	}
 	//$(".yijicaidan").addClass('yijicaidan');
 	$(this).addClass('btn-primary');                            // 添加当前元素的样式
