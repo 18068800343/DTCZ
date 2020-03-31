@@ -3,36 +3,36 @@
 <mapper namespace="com.ldxx.dao.LicensePlateDao" >
 
     <select id="getLicensePlate" resultType="LicensePlate">
-        select License_Plate_Id,License_Plate_No,License_Plate_Color,Del_State from license_Plate where Del_State=1
+        select License_Plate_Id,License_Plate_No,License_Plate_Color,Del_State from license_plate where Del_State=1
     </select>
 
     <insert id="addLicensePlate" parameterType="LicensePlate">
-        insert into license_Plate(License_Plate_Id,License_Plate_No,License_Plate_Color,Del_State)
+        insert into license_plate(License_Plate_Id,License_Plate_No,License_Plate_Color,Del_State)
         values(#{licensePlateId},#{licensePlateNo},#{licensePlateColor},#{delState})
     </insert>
 
     <update id="updLicensePlate" parameterType="LicensePlate">
-        update  license_Plate set
+        update  license_plate set
         License_Plate_Color=#{licensePlateColor},
         License_Plate_No=#{licensePlateNo}
         where License_Plate_Id=#{licensePlateId} and Del_State=1
     </update>
 
     <update id="delLicensePlate">
-        update license_Plate set Del_State=0 where License_Plate_Id=#{id}
+        update license_plate set Del_State=0 where License_Plate_Id=#{id}
     </update>
 
     <select id="iscountLicensePlateColor" resultType="int">
-        select count(License_Plate_Color) from license_Plate where License_Plate_Color=#{color} and Del_State=1
+        select count(License_Plate_Color) from license_plate where License_Plate_Color=#{color} and Del_State=1
     </select>
     <select id="iscountLicensePlateNo" resultType="int">
-        select count(License_Plate_No) from license_Plate where License_Plate_No=#{no} and Del_State=1
+        select count(License_Plate_No) from license_plate where License_Plate_No=#{no} and Del_State=1
     </select>
 
     <select id="xgiscountLicensePlateColor" resultType="int">
-        select count(License_Plate_Color) from license_Plate where License_Plate_Color=#{color} and Del_State=1 and License_Plate_Id!=#{id}
+        select count(License_Plate_Color) from license_plate where License_Plate_Color=#{color} and Del_State=1 and License_Plate_Id!=#{id}
     </select>
     <select id="xgiscountLicensePlateNo" resultType="int">
-        select count(License_Plate_No) from license_Plate where License_Plate_No=#{no} and Del_State=1 and License_Plate_Id!=#{id}
+        select count(License_Plate_No) from license_plate where License_Plate_No=#{no} and Del_State=1 and License_Plate_Id!=#{id}
     </select>
 </mapper>
