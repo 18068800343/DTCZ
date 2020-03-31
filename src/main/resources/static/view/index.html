@@ -153,8 +153,8 @@ $('#leftTab a').bind('click', function () {
 	if (name == 'home') {
 		$('.daohang').slideUp();
 		$('#leftTab').removeClass('homeLeft')
-	}else if(name==undefined&&this.text()=="首页"){
-		$('.daohang').slideUp();
+	}else if(name==undefined){
+
 	} else {
 		$('#leftTab').addClass('homeLeft')
 		$('.daohang').slideDown()
