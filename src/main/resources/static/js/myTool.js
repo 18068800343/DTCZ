@@ -191,3 +191,11 @@ function Base64() {
         return string;
     }
 }
+
+myTool.showMask = function showMask() {
+    myTool.mask.show('查询中...');
+}
+
+myTool.hidMask = function hidMask() {
+    myTool.mask.hide();
+}

@@ -3,15 +3,15 @@ package com.ldxx.controller;
 
 import com.ldxx.bean.TongJiTableQuery;
 import com.ldxx.service.Impl.TradingDetailsService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import com.ldxx.util.UpLoadImgUtil;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.net.URLEncoder;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @RestController
 @RequestMapping("down")
@@ -31,6 +31,14 @@ public class HelloController {
         tongJiTableQuery.setLength(null);
         tradingDetailsService.downloadAsCsv(tongJiTableQuery, response);
     }
+
+
+    @RequestMapping(value = "/saveImg",method = RequestMethod.POST)
+    public boolean saveImg(HttpServletResponse response, HttpSession session,String saveDiskUrl,String imgCode)
+            throws IOException {
+        return UpLoadImgUtil.generateImage(imgCode,saveDiskUrl);
+    }
+
     @RequestMapping("/downloadReport")
     public void downloadReport(HttpServletResponse response, HttpSession session,String filePath,String fileName)
             throws IOException {

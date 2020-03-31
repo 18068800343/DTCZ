@@ -102,15 +102,13 @@ public class ReportUtil {
 	 * @param companyNames 公司名称集合
 	 * @return
 	 */
-	public String reportByDayAndMonth(String day, String month, List<String> companyNames,String cmdOp){
-
-		String path = "";
-
+	public int reportByDayAndMonth(String day, String month, List<String> companyNames,String cmdOp){
+		int g = 1;
 		try {
 			for(int i =1;i<3;i++){
 				if(i==1){
 					for(String companyNameOut : companyNames){
-						String op = reportUtil.config.getReportCmd()+ File.separator+ cmdOp+" "+day;
+						String op = reportUtil.config.getReportCmd()+ File.separator+ cmdOp+" "+companyNameOut+" "+day;
 						Process process = Runtime.getRuntime().exec(op);
 						InputStream is = process.getInputStream();
 						BufferedReader reader = new BufferedReader(new InputStreamReader(is, "GBK"));
@@ -141,9 +139,10 @@ public class ReportUtil {
 				}
 			}
 		} catch (IOException e) {
+			g=0;
 			e.printStackTrace();
 		}
-		return path;
+		return g;
 	}
 
 	public static void main(String[] args) {

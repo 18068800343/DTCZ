@@ -194,6 +194,7 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
 <script src="js/quanxian.js"></script>
+<script src="../js/myTool.js"></script>
 <script>
 
 	$(document).ready( function () {
@@ -386,6 +387,38 @@
 		}
 
 	})
+	//生成报告
+	$('#myModal').delegate('#baocun','click', function () {
+		let companyNames = $("#zhandian").val();
+		let dayTime = $("#dayTime").val();
+		let monthTime = $("#monthTime").val();
+		if(pageConst.flag){
+           if(companyNames==""||companyNames==null||companyNames==undefined){
+           	 toastr.error("请选择生成单位!");
+           	 return;
+		   }
+		}
+		myTool.showMask();
+		$.ajax({
+			type: 'POST',
+			url:'/ReportInfoController/reportDayAndMonth',
+			dataType: 'json',
+			data: {
+				dayTime:dayTime,
+				monthTime:monthTime,
+				companyNames:companyNames.toString()
+			},
+			success: function (json) {
+				myTool.hidMask();
+				$("#myModal").modal("hide");
+				if(json==1){
+					toastr.success("生成成功");
+					initTable()
+				}
+
+			}
+		});
+	})
 
 	function down(obj){
 		let tr=$(obj).parents("tr");
@@ -395,6 +428,7 @@
 		window.location.href=encodeURI("../down/downloadReport?type=downloadFile&fileName="+name+"&filePath="+path);
 	}
 
+	let pageConst={};
 	function getLoginUser(){
 		$.ajax({
 			type: 'POST',
@@ -408,8 +442,11 @@
 			},
 			success: function (json) {
 				if(json.groups!="控股"&&json.groups!="路公司"){
+					//非控股和路公司
+					pageConst.flag=true;
 					$("#companySel").show();
 				}else{
+					pageConst.flag=false;
 					$("#companySel").hide();
 				}
 			}
