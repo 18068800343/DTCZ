@@ -96,12 +96,12 @@
 		</style>
 	</head>
 	<body style="background-image: none;">
-	<div class="layui-tab" style="margin-left:10%">
+	<div class="layui-tab" lay-filter="demo" style="margin-left:10%">
 			  <ul class="layui-tab-title labelli">
 			    <li class="layui-this labelthis">综合信息统计</li>
-			    <li>当日车流量</li>
-			    <li>当日超载车辆</li>
-			    <li>当日关键超载车辆</li>
+			    <li lay-id="cheliuliang">当日车流量</li>
+			    <li lay-id="chaozai">当日超载车辆</li>
+			    <li lay-id="guanjianchaozai">当日关键超载车辆</li>
 			  </ul>
 			  <div class="layui-tab-content marginl">
 			    <div class="layui-tab-item layui-show">
@@ -111,23 +111,27 @@
 			        <img alt="" src="./img/img.png" style="float:right;margin-top:10%;">
 			        <div style="margin-top:20%;"><span style="font-size:40px;" id="jiancezhandianNum"></span><a style="margin-left:5px;color:#D6E4FE;background-color:#549CFD;color:white;border:2px solid #549CFD;cursor:pointer;" class="primary"  onclick="nowJianceSite()" data-toggle="modal" data-target="">查看</a></div>
 			     </div>
-			     <a href="#sy">
-			     <div class="zd col-xs-2" style="background-color:#3ED75E;height:170px;color:white;border-radius:5px 5px 5px;margin-left:2%;">
-			        <p style="font-size:15px;margin-top:7%;">当日车流量/辆</p>
-			        <img alt="" src="./img/img.png" style="float:right;margin-top:10%;">
-			        <div style="margin-top:20%;"><span style="font-size:40px;" id="jiancecheliuliangNum"></span></div>
-			     </div>
+			     <a  onclick="clickImg(2)">
+					 <div class="zd col-xs-2" style="background-color:#3ED75E;height:170px;color:white;border-radius:5px 5px 5px;margin-left:2%;">
+						<p style="font-size:15px;margin-top:7%;">当日车流量/辆</p>
+						<img alt="" src="./img/img.png" style="float:right;margin-top:10%;">
+						<div style="margin-top:20%;"><span style="font-size:40px;" id="jiancecheliuliangNum"></span></div>
+					 </div>
 			     </a>
-			      <div class="zd col-xs-2" style="background-color:#FDAF54;height:170px;color:white;border-radius:5px 5px 5px;margin-left:2%;">
-			        <p style="font-size:15px;margin-top:7%;">当日超载车辆/辆</p>
-			        <img alt="" src="./img/img.png" style="float:right;margin-top:10%;">
-			        <div style="margin-top:20%;"><span style="font-size:40px;" id="jiancechaozaiNum"></span></div>
-			     </div>
-			      <div class="zd col-xs-2" style="background-color:#FD6854;height:170px;color:white;border-radius:5px 5px 5px;margin-left:2%;">
-			        <p style="font-size:15px;margin-top:7%;">当日关键超载车辆/辆</p>
-			        <img alt="" src="./img/img.png" style="float:right;margin-top:10%;">
-			        <div style="margin-top:20%;"><span style="font-size:40px;" id="jianceguanjianchaozhongNum"></span></div>
-			     </div>
+					<a  onclick="clickImg(3)">
+					  <div class="zd col-xs-2" style="background-color:#FDAF54;height:170px;color:white;border-radius:5px 5px 5px;margin-left:2%;">
+						<p style="font-size:15px;margin-top:7%;">当日超载车辆/辆</p>
+						<img alt="" src="./img/img.png" style="float:right;margin-top:10%;">
+						<div style="margin-top:20%;"><span style="font-size:40px;" id="jiancechaozaiNum"></span></div>
+					 </div>
+					</a>
+					<a  onclick="clickImg(4)">
+					  <div class="zd col-xs-2" style="background-color:#FD6854;height:170px;color:white;border-radius:5px 5px 5px;margin-left:2%;">
+						<p style="font-size:15px;margin-top:7%;">当日关键超载车辆/辆</p>
+						<img alt="" src="./img/img.png" style="float:right;margin-top:10%;">
+						<div style="margin-top:20%;"><span style="font-size:40px;" id="jianceguanjianchaozhongNum"></span></div>
+					 </div>
+					</a>
 			  <div class="labelfirst">
 			 <div class="sele" >
 				<label for="" class="col-sm-2 control-label shaixuan" >筛选站点</label>
@@ -992,6 +996,27 @@
 		});
 	table5.buttons().container().appendTo( $('#tabBtn5') );
 	$('.buttons-csv').addClass('btn btn-primary');
+
+	var element
+	layui.use('element', function(){
+		 element = layui.element;
+		//一些事件监听
+		element.on('tab(demo)', function(data){
+			console.log(data);
+		});
+
+	});
+
+	function clickImg(obj){
+		if(obj=="2"){
+			element.tabChange("demo", "cheliuliang");
+		}else if(obj=="3"){
+			element.tabChange("demo", "chaozai");
+		}else if(obj=="4"){
+			element.tabChange("demo", "guanjianchaozai");
+		}
+
+	}
 		var user;
 		function getLoginUser(){
 			$.ajax({
