@@ -77,9 +77,21 @@
       .layui-this{
          background-color:#EEF5FF !important;
          color:#6FA9FD !important;
+         
       }
       .layui-tab-title{
          border:1px solid #EEF5FF !important;
+      }
+      .texth{
+      	 height:35px;
+         line-height:35px;
+         padding-left:5px;
+      }
+      .zhuti-content{
+        height:	1550px !important;
+      }
+      #myTabContent1Month{
+        width:100% !important;
       }
     </style>
 </head>
@@ -108,10 +120,10 @@
                         </div>
                         <label class="col-sm-1	 control-label riqi"
                                style="margin-left: -2%;width: 70px;line-height: 30px;font-size:16px;font-weight:500;">日期:</label>
-                        <div class="col-sm-2">
+                        <div class="col-sm-2" style="width: 20%">
                             <!-- 样式1 -->
                             <input type="date" id="startTime" value="请选择"
-                                   style="height: 34px;border-radius: 5px;box-shadow: none;width: 200px;border:1px solid #DDD;">
+                                   style="height: 34px;border-radius: 5px;box-shadow: none;width: 60%;border:1px solid #DDD;">
                         </div>
                         <button type="button" class="btn btn-primary" onclick="queding()" style="width: 100px;margin-left:120px;background-color:#549CFD;border:none;">确定</button>
                         <div class="jiance">
@@ -126,42 +138,42 @@
                 </div>
 
                 <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief" style="">
-                    <ul class="layui-tab-title" style="float:right;margin-top:-45px;">
+                    <ul class="layui-tab-title" style="float:right;margin-top:-60px;">
                         <li class="layui-this">数据表</li>
                         <li>统计图</li>
                     </ul>
                     <div class="layui-tab-content">
                         <div class="layui-tab-item layui-show">
                             <div class="LowerPart" style="margin-top:3px;">
-                                <div style="height: 300px;width:1050px;margin-left: 200px;" id="dataTable">
+                                <div style="height: 300px;width:1050px;margin-left: 200px;" id="dataTable" class="layui-table">
                                 </div>
                             </div>
                         </div>
                         <div class="layui-tab-item">
-                            <div style="width: 90%;margin-left: 5%;">
-                                <li class="layui-this">各车型车辆数及比例</li>
+                            <div style="width: 100%;">
+                                <li class="layui-this texth">各车型车辆数及比例</li>
                                 <div class="layui-tab-item layui-show">
                                     <p class="errorMsg1" style="display: inline-block;"></p>
-                                    <div id="_top" style="width:700px;height: 400px;margin-top: -50px;margin:0 auto">
+                                    <div id="_top" class="col-xs-12" style="width:1200px;height: 400px;margin-top: -50px;margin:0 auto">
                                     </div>
                                 </div>
                             </div>
 
-                            <div style="width: 90%;margin-left: 5%;">
-                                <li class="layui-this">超载车辆数及比例</li>
-                                <div class="layui-tab-item layui-show" style="margin-top: 70px;">
+                            <div style="width:100%;">
+                                <li class="layui-this texth">超载车辆数及比例</li>
+                                <div class="layui-tab-item layui-show">
                                     <p class="errorMsg1" style="display: inline-block;"></p>
-                                    <div id="_right" style="width:700px;height: 400px;margin-top: -50px;margin:0 auto">
+                                    <div id="_right" style="width:1200px;height: 400px;margin-top: -50px;margin:0 auto">
                                         <!--右边-->
                                     </div>
                                 </div>
                             </div>
                             <!--左上半部分结束-->
-                            <div style="width: 90%;margin-left: 5%;">
-                                <li class="layui-this">平均超载率</li>
+                            <div style="width: 100%;">
+                                <li class="layui-this texth">平均超载率</li>
                                 <div class="layui-tab-item layui-show">
                                     <p class="errorMsg1" style="display: inline-block;"></p>
-                                    <div id="bottom_" style="width:700px;height: 400px;margin-top: -50px;margin:0 auto">
+                                    <div id="bottom_" style="width:1200px;height: 400px;margin-top: -50px;margin:0 auto">
                                     </div>
                                 </div>
                             </div>
@@ -179,7 +191,7 @@
                 <div class="UpperPart">
                     <div class="UpperPartL" style="width: 90%;margin-left: 5%;">
                         <div class="sele" >
-                            <label class="col-sm-2 control-label shaixuan" >筛选站点</label>
+                            <label class="col-sm-2 control-label shaixuan" style="margin-left:-80px !important;font-size:16px;font-weight:500;">筛选站点</label>
                             <div class="col-sm-2" style="width: 20%;margin-left: 50px;">
                                 <!-- 样式1 -->
                                 <select class="form-control"  id="stationPort2" style="width:80%;">
@@ -187,57 +199,63 @@
                             </div>
                         </div>
                         <label class="col-sm-1	 control-label riqi"
-                               style="margin-left: 3%;width: 70px;line-height: 30px;">日期:</label>
+                               style="margin-left: -2%;width: 70px;line-height: 30px;font-size:16px;font-weight:500;">日期:</label>
                         <div class="col-sm-2" style="width: 20%">
                             <!-- 样式1 -->
                             <input type="text" id="startTime2" value="请选择"
                                    style="height: 34px;border-radius: 5px;box-shadow: none;width: 60%;border:1px solid #DDD;">
                         </div>
-                        <button type="button" class="btn btn-primary" onclick="queding2()" style="margin-left: 50px;width: 100px; background-image: linear-gradient(#1F62C8,#262E9F);">确定</button>
+                        <button type="button" class="btn btn-primary" onclick="queding2()" style="width: 100px;margin-left:120px;background-color:#549CFD;border:none;">确定</button>
                         <div class="jiance">
-                            <button type="button" class="btn btn-primary" onclick="nowJianceSite2()" data-toggle="modal" data-target="#allMsg2" style="width: 150px; background-image: linear-gradient(#1F62C8,#262E9F);">当前车道图</button>
+                            <button type="button" class="btn btn-primary" onclick="nowJianceSite2()" data-toggle="modal" data-target="#allMsg2" style="width: 150px;background-color:#549CFD;border:1px solid #549CFD;">当前车道图</button>
                         </div>
                     </div>
                     <div class="UpperPartR">
 
                     </div>
-
                 </div>
-                <div class="LowerPart" style="margin-top:3px;">
-
-                    <div style="height: 300px;width:1050px;margin-left: 200px;" id="dataTableMonth">
+                <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief" style="">
+                  <ul class="layui-tab-title" style="float:right;margin-top:-60px;">
+                        <li class="layui-this">数据表</li>
+                        <li>统计图</li>
+                    </ul>
+                <div class="layui-tab-content">
+                        <div class="layui-tab-item layui-show">
+                <div class="LowerPart" style="margin-top:18px;">
+                    <div style="height: 300px;width:100%;" id="dataTableMonth">
                     </div>
 
                 </div>
-
-                <div style="width: 90%;margin-left: 5%;">
-                    <li class="layui-this">各车型车辆数及比例</li>
+  			</div>
+  			  <div class="layui-tab-item">
+                <div style="width: 100%;">
+                    <li class="layui-this texth">各车型车辆数及比例</li>
                     <div class="layui-tab-item layui-show">
                         <p class="errorMsg2" style="display: inline-block;"></p>
-                        <div id="_top2" style="width:700px;height: 400px;margin-top: -50px;margin:0 auto">
+                        <div id="_top2" style="width:1300px;height: 400px;margin-top: -50px;margin:0 auto">
                         </div>
                     </div>
                 </div>
 
-                <div style="width: 90%;margin-left: 5%;">
-                    <li class="layui-this">超载车辆数及比例</li>
+                <div style="width: 100%;">
+                    <li class="layui-this texth">超载车辆数及比例</li>
                     <div class="layui-tab-item layui-show" style="margin-top: 70px;">
                         <p class="errorMsg2" style="display: inline-block;"></p>
-                        <div id="_right2" style="width:700px;height: 400px;margin-top: -50px;margin:0 auto">
+                        <div id="_right2" style="width:1300px;height: 400px;margin-top: -50px;margin:0 auto">
                             <!--右边-->
                         </div>
                     </div>
                 </div>
                 <!--左上半部分结束-->
-                <div style="width: 90%;margin-left: 5%;">
-                    <li class="layui-this">平均超载率</li>
+                <div style="width: 100%;">
+                    <li class="layui-this texth">平均超载率</li>
                     <div class="layui-tab-item layui-show">
                         <p class="errorMsg2" style="display: inline-block;"></p>
-                        <div id="bottom_2" style="width:700px;height: 400px;margin-top: -50px;margin:0 auto">
+                        <div id="bottom_2" style="width:1300px;height: 400px;margin-top: -50px;margin:0 auto">
                         </div>
                     </div>
                 </div>
-
+              </div>
             </div>
         </div>
 
@@ -251,6 +269,10 @@
      id="modalEchartsMonth">
     <div class="modal-dialog modal-lg" role="document" style="width:60%;">
         <div class="modal-content">
+        
+        
+        
+        
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
@@ -300,7 +322,7 @@
             <div class="modal-body">
                 <div>
                     <form class="form-inline">
-                        <table class="table table-bordered table-condensed" id="look_accessory">
+                        <table class="table table-bordered table-condensed layui-table" id="look_accessory">
                             <thead>
 
                             </thead>
@@ -504,7 +526,7 @@
             normal: {
                 show: true,
                 textBorderColor: '#336666',
-                color:'black',
+                color:'white',
                 textBorderWidth: 1
             }
         }
@@ -526,23 +548,47 @@
                 {
                     type: 'category',
                     data: ['2轴车', '3轴车', '4轴车', '5轴车', '6轴车'],
+                    splitLine:{
+                        show:false
+                     },
                     axisTick: {
                         alignWithLabel: true
-                    }
+                    },
+                    
+                    
+
                 }
             ],
             yAxis: [
                 {
-                    type: 'value'
+                    type: 'value',
+                    axisLine: { //坐标轴轴线相关设置。
+                        show: false
+                    },
+                    splitLine:{		
+                	　　　　show:false
+                	　　}
                 }
             ],
             series: [
                 {
-                    name: '直接访问',
                     type: 'bar',
                     label: seriesLabel,
-                    barWidth: '60%',
-                    data: CheXingNum
+                    barWidth: '20%',
+                    data: CheXingNum,
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {offset: 0, color: '#CAE0FE'},                   //柱图渐变色
+                                    {offset: 0.5, color: '#A2C9FE'},                 //柱图渐变色
+                                    {offset: 1, color: '#78B1FD'},                   //柱图渐变色
+                                ]
+                            )
+                        }
+                       
+                    },
                 }
             ]
         };
@@ -557,7 +603,7 @@
             normal: {
                 show: true,
                 textBorderColor: '#336666',
-                color:'black',
+                color:'white',
                 textBorderWidth: 1
             }
         }
@@ -579,6 +625,10 @@
                 {
                     type: 'category',
                     data: ['2轴车', '3轴车', '4轴车', '5轴车', '6轴车'],
+                    splitLine:{
+                        show:false
+                     },
+                     
                     axisTick: {
                         alignWithLabel: true
                     }
@@ -586,16 +636,34 @@
             ],
             yAxis: [
                 {
-                    type: 'value'
+                    type: 'value',
+                    axisLine: { //坐标轴轴线相关设置。
+                        show: false
+                    },
+                    splitLine:{		
+                	　　　　show:false
+                	　　}
                 }
             ],
             series: [
                 {
-                    name: '直接访问',
                     type: 'bar',
                     label: seriesLabel,
-                    barWidth: '60%',
-                    data: ChaoZaiNum
+                    barWidth: '20%',
+                    data: ChaoZaiNum,
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {offset: 0, color: '#CAE0FE'},                   //柱图渐变色
+                                    {offset: 0.5, color: '#A2C9FE'},                 //柱图渐变色
+                                    {offset: 1, color: '#78B1FD'},                   //柱图渐变色
+                                ]
+                            )
+                        }
+                       
+                    },
                 }
             ]
         };
@@ -611,7 +679,7 @@
             normal: {
                 show: true,
                 textBorderColor: '#336666',
-                color:'black',
+                color:'white',
                 textBorderWidth: 1
             }
         }
@@ -640,7 +708,13 @@
             ],
             yAxis: [
                 {
-                    type: 'value'
+                    type: 'value',
+                    axisLine: { //坐标轴轴线相关设置。
+                        show: false
+                    },
+                    splitLine:{		
+                	　　　　show:false
+                	　　}
                 }
             ],
             series: [
@@ -648,8 +722,21 @@
                     name: '直接访问',
                     type: 'bar',
                     label: seriesLabel,
-                    barWidth: '60%',
-                    data: ChaoZaiLvNum
+                    barWidth: '20%',
+                    data: ChaoZaiLvNum,
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {offset: 0, color: '#CAE0FE'},                   //柱图渐变色
+                                    {offset: 0.5, color: '#A2C9FE'},                 //柱图渐变色
+                                    {offset: 1, color: '#78B1FD'},                   //柱图渐变色
+                                ]
+                            )
+                        }
+                       
+                    },
                 }
             ]
         };
@@ -772,7 +859,7 @@
             normal: {
                 show: true,
                 textBorderColor: '#336666',
-                color:'black',
+                color:'white',
                 textBorderWidth: 1
             }
         }
@@ -801,7 +888,13 @@
             ],
             yAxis: [
                 {
-                    type: 'value'
+                    type: 'value',
+                    axisLine: { //坐标轴轴线相关设置。
+                        show: false
+                    },
+                    splitLine:{		
+                	　　　　show:false
+                	　　}
                 }
             ],
             series: [
@@ -809,8 +902,21 @@
                     name: '直接访问',
                     type: 'bar',
                     label: seriesLabel,
-                    barWidth: '60%',
-                    data: CheXingNum
+                    barWidth: '20%',
+                    data: CheXingNum,
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {offset: 0, color: '#CAE0FE'},                   //柱图渐变色
+                                    {offset: 0.5, color: '#A2C9FE'},                 //柱图渐变色
+                                    {offset: 1, color: '#78B1FD'},                   //柱图渐变色
+                                ]
+                            )
+                        }
+                       
+                    },
                 }
             ]
         };
@@ -825,7 +931,7 @@
             normal: {
                 show: true,
                 textBorderColor: '#336666',
-                color:'black',
+                color:'white',
                 textBorderWidth: 1
             }
         }
@@ -854,7 +960,13 @@
             ],
             yAxis: [
                 {
-                    type: 'value'
+                    type: 'value',
+                    axisLine: { //坐标轴轴线相关设置。
+                        show: false
+                    },
+                    splitLine:{		
+                	　　　　show:false
+                	　　}
                 }
             ],
             series: [
@@ -862,8 +974,21 @@
                     name: '直接访问',
                     type: 'bar',
                     label: seriesLabel,
-                    barWidth: '60%',
-                    data: ChaoZaiNum
+                    barWidth: '20%',
+                    data: ChaoZaiNum,
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {offset: 0, color: '#CAE0FE'},                   //柱图渐变色
+                                    {offset: 0.5, color: '#A2C9FE'},                 //柱图渐变色
+                                    {offset: 1, color: '#78B1FD'},                   //柱图渐变色
+                                ]
+                            )
+                        }
+                       
+                    },
                 }
             ]
         };
@@ -879,7 +1004,7 @@
             normal: {
                 show: true,
                 textBorderColor: '#336666',
-                color:'black',
+                color:'white',
                 textBorderWidth: 1
             }
         }
@@ -908,7 +1033,13 @@
             ],
             yAxis: [
                 {
-                    type: 'value'
+                    type: 'value',
+                    axisLine: { //坐标轴轴线相关设置。
+                        show: false
+                    },
+                    splitLine:{		
+                	　　　　show:false
+                	　　}
                 }
             ],
             series: [
@@ -916,8 +1047,21 @@
                     name: '直接访问',
                     type: 'bar',
                     label: seriesLabel,
-                    barWidth: '60%',
-                    data: ChaoZaiLvNum
+                    barWidth: '20%',
+                    data: ChaoZaiLvNum,
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {offset: 0, color: '#CAE0FE'},                   //柱图渐变色
+                                    {offset: 0.5, color: '#A2C9FE'},                 //柱图渐变色
+                                    {offset: 1, color: '#78B1FD'},                   //柱图渐变色
+                                ]
+                            )
+                        }
+                       
+                    },
                 }
             ]
         };
