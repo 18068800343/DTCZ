@@ -150,14 +150,15 @@ $('#leftTab a').bind('click', function () {
 	if(undefined!=name&&null!=name){
 		$('#iframe-player').attr('src', name + '.html')
 	}
-	if (name != 'home') {
-		$('#leftTab').addClass('homeLeft')
-		$('.daohang').slideDown()
+	if (name == 'home') {
+		$('.daohang').slideUp();
+		$('#leftTab').removeClass('homeLeft')
 	}else if(name==undefined){
 		$('.daohang').slideUp();
 	} else {
-		$('.daohang').slideUp();
-		$('#leftTab').removeClass('homeLeft')
+		$('#leftTab').addClass('homeLeft')
+		$('.daohang').slideDown()
+
 	}
 
 	let gunDong = $(this).attr("data-gundong");
