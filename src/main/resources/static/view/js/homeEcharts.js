@@ -781,7 +781,7 @@ homePageInit.setLastEcharts = (json) => {
      // 背景条
         
         legend: {
-            data: ['二级预警(≥80吨)', '三级预警(≥100吨)'],
+            data: ['一级预警(≥80吨)', '二级预警(≥100吨)'],
             textStyle: {
                 color: '#A3DCEC',
                 fontSize: 13
@@ -834,7 +834,7 @@ homePageInit.setLastEcharts = (json) => {
         ],
         series: [
             {
-                name: '二级预警(≥80吨)',
+                name: '一级预警(≥80吨)',
                 type: 'bar',
                 label: {
                     normal: {
@@ -851,7 +851,7 @@ homePageInit.setLastEcharts = (json) => {
 
             },
             {
-                name: '三级预警(≥100吨)',
+                name: '二级预警(≥100吨)',
                 type: 'bar',
                 label: {
                     normal: {
