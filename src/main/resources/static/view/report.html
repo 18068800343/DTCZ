@@ -82,7 +82,7 @@
 							<button type="button" class="form-inline btn btn-primary"  onclick="queding()">
 								查询
 							</button>
-							<button type="button" class="form-inline btn btn-primary" data-toggle="modal" data-target="#myModal" >生成 </button>
+							<button type="button" class="form-inline btn btn-primary Pla" data-toggle="modal" data-target="#myModal" >生成 </button>
 						</div>
 					</form>
 				</div>
@@ -241,8 +241,8 @@
 			"targets":7,
 			"searchable": true,
 			"render": function(data, type, full) {
-				let xiugai='<i class="glyphicon glyphicon-download-alt Phb" style="font-size:20px;cursor:pointer;display: none;" id="upd" title="下载" onclick="down(this)"></i>';
-				let shanchu='<i class="iconfont icon-shanchu Phc" style="font-size:20px;cursor:pointer;display: none;" id="del"  title="删除"></i>';
+				let xiugai='<i class="glyphicon glyphicon-download-alt Plb" style="font-size:20px;cursor:pointer;display: none;" id="upd" title="下载" onclick="down(this)"></i>';
+				let shanchu='<i class="iconfont icon-shanchu Plc" style="font-size:20px;cursor:pointer;display: none;" id="del"  title="删除"></i>';
 				//let look='<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" onclick="lookMs(this)" data-toggle="modal" data-target="#allMsg1" id="lookDetall"></i>'
 				return xiugai+shanchu;
 			}
@@ -308,14 +308,14 @@
 				if(json!=null &&json!=""){
 					let arr = json.usrPersmissionCoding.split(',');
 					for(let i=0;i<arr.length;i++){
-						if(arr[i].indexOf("Pha") >= 0 ){
-							$(".Pha").show();
+						if(arr[i].indexOf("Pla") >= 0 ){
+							$(".Pla").show();
 						}
-						if(arr[i].indexOf("Phb") >= 0 ){
-							$(".Phb").show();
+						if(arr[i].indexOf("Plb") >= 0 ){
+							$(".Plb").show();
 						}
-						if(arr[i].indexOf("Phc") >= 0 ){
-							$(".Phc").show();
+						if(arr[i].indexOf("Plc") >= 0 ){
+							$(".Plc").show();
 						}
 					}
 
