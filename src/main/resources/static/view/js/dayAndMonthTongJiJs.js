@@ -44,7 +44,7 @@ let initTableTbody = (json) => {
             tableDom.append("<thead>" + "</thead>" + "<tfoot>" +
                 "<tr align='center'>" +
                 "<td>" + "车道编号" + "</td>" +
-                "<td>" + "车道名" + "</td>" +
+                //"<td>" + "车道名" + "</td>" +
                 "<td>最大车重</td>" +
                 "</tr>" +
                 +
@@ -56,7 +56,7 @@ let initTableTbody = (json) => {
                     tdDom =  "<td data-id='"+json[0].avgLaneNo+",4'><a >" + json[0].avgMax + "</a></td>";
                     let dom = tableDom.find("tfoot");
                     $(dom).append("<tr align='center'>" +
-                        "<td colspan='2'>" + formatLaneName(json[0].avgLaneNo) + "</td>" +
+                        "<td>合计</td>" +
                         tdDom +
                         "</tr>")
                     break;
@@ -66,7 +66,7 @@ let initTableTbody = (json) => {
                 let dom = tableDom.find("tfoot");
                 $(dom).append("<tr align='center'>" +
                     "<td>" + json[n].avgLaneNo + "</td>" +
-                    "<td>" + formatLaneName(json[n].avgLaneNo) + "</td>" +
+                   /* "<td>" + formatLaneName(json[n].avgLaneNo) + "</td>" +*/
                     tdDom +
                     "</tr>")
             }
@@ -76,7 +76,7 @@ let initTableTbody = (json) => {
             tableDom.append("<thead>" + "</thead>" + "<tfoot>" +
                 "<tr align='center'>" +
                 "<td>" + "车道编号" + "</td>" +
-                "<td>" + "车道名" + "</td>" +
+                //"<td>" + "车道名" + "</td>" +
                 "<td>" + "2轴车" + "</td>" +
                 "<td>" + "3轴车" + "</td>" +
                 "<td>" + "4轴车" + "</td>" +
@@ -96,7 +96,7 @@ let initTableTbody = (json) => {
                     tdDom = tdDom + "<td data-id='"+json[0].avgLaneNo+","+k+"'><a >" + json[0]['column' + k] + "</a></td>";
                     let dom = tableDom.find("tfoot");
                     $(dom).append("<tr align='center'>" +
-                        "<td colspan='2'>" + formatLaneName(json[0].avgLaneNo) + "</td>" +
+                       "<td>合计</td>" +
                         tdDom +
                         "</tr>")
                     break;
@@ -109,7 +109,7 @@ let initTableTbody = (json) => {
                 let dom = tableDom.find("tfoot");
                 $(dom).append("<tr align='center'>" +
                     "<td>" + json[n].avgLaneNo + "</td>" +
-                    "<td>" + formatLaneName(json[n].avgLaneNo) + "</td>" +
+                    //"<td>" + formatLaneName(json[n].avgLaneNo) + "</td>" +
                     tdDom +
                     "</tr>")
 
@@ -269,7 +269,7 @@ let initTableTbodyMonth = (json) => {
             tableDom.append("<thead>" + "</thead>" + "<tfoot>" +
                 "<tr align='center'>" +
                 "<td>" + "车道编号" + "</td>" +
-                "<td>" + "车道名" + "</td>" +
+                //"<td>" + "车道名" + "</td>" +
                 "<td>最大车重</td>" +
                 "</tr>" +
                 +
@@ -281,7 +281,7 @@ let initTableTbodyMonth = (json) => {
                     tdDom =  "<td data-id='"+json[0].avgLaneNo+",4'><a >" + json[0].avgMax + "</a></td>";
                     let dom = tableDom.find("tfoot");
                     $(dom).append("<tr align='center'>" +
-                        "<td colspan='2'>" + formatLaneName(json[0].avgLaneNo) + "</td>" +
+                        "<td>合计</td>" +
                         tdDom +
                         "</tr>")
                     break;
@@ -291,7 +291,7 @@ let initTableTbodyMonth = (json) => {
                 let dom = tableDom.find("tfoot");
                 $(dom).append("<tr align='center'>" +
                     "<td>" + json[n].avgLaneNo + "</td>" +
-                    "<td>" + formatLaneName(json[n].avgLaneNo) + "</td>" +
+                    /*"<td>" + formatLaneName(json[n].avgLaneNo) + "</td>" +*/
                     tdDom +
                     "</tr>")
             }
@@ -301,7 +301,7 @@ let initTableTbodyMonth = (json) => {
             tableDom.append("<thead>" + "</thead>" + "<tfoot>" +
                 "<tr align='center'>" +
                 "<td>" + "车道编号" + "</td>" +
-                "<td>" + "车道名" + "</td>" +
+                //"<td>" + "车道名" + "</td>" +
                 "<td>" + "2轴车" + "</td>" +
                 "<td>" + "3轴车" + "</td>" +
                 "<td>" + "4轴车" + "</td>" +
@@ -321,7 +321,7 @@ let initTableTbodyMonth = (json) => {
                     tdDom = tdDom + "<td data-id='"+json[0].avgLaneNo+","+k+"'><a >" + json[0]['column' + k] + "</a></td>";
                     let dom = tableDom.find("tfoot");
                     $(dom).append("<tr align='center'>" +
-                        "<td colspan='2'>" + formatLaneName(json[0].avgLaneNo) + "</td>" +
+                        "<td >合计</td>" +
                         tdDom +
                         "</tr>")
                     break;
@@ -334,7 +334,7 @@ let initTableTbodyMonth = (json) => {
                 let dom = tableDom.find("tfoot");
                 $(dom).append("<tr align='center'>" +
                     "<td>" + json[n].avgLaneNo + "</td>" +
-                    "<td>" + formatLaneName(json[n].avgLaneNo) + "</td>" +
+                    /*"<td>" + formatLaneName(json[n].avgLaneNo) + "</td>" +*/
                     tdDom +
                     "</tr>")
 
