@@ -126,6 +126,7 @@
                                 <th>长(cm)</th>
                                 <th>车速(km/h)</th>
                                 <th>轴数</th>
+                                <th>超限值(kg)</th>
                                 <th>总重量(kg)</th>
                                 <th>路面温度(°C)</th>
                                 <th>超载率</th>
@@ -489,6 +490,7 @@
             { "data": "length"},
             { "data": "speed"},
             { "data": "axlesCount"},
+            { "data": "maxWeight"},
             { "data": "totalWeight"},
             { "data": "temperature",visible:false},
             { "data": "overWeightRatio"},
@@ -498,7 +500,7 @@
         ],
         "columnDefs": [{
             "class": "tcenter",
-            "targets": 13,
+            "targets": 14,
             "searchable": true,
             "render": function(data, type, full) {
                 var look='<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" onclick="lookMs(this)" data-toggle="modal" data-target="#allMsg1" id="lookDetall"></i>'
@@ -508,14 +510,14 @@
                 }
             },{
             "class": "tcenter",
-            "targets": 10,
+            "targets": 11,
             "searchable": true,
             "render": function(data, type, full) {
                 return ((data*100).toFixed(2))+"%";
             }
         },{
             "class": "tcenter",
-            "targets": 12,
+            "targets": 13,
             "searchable": true,
             "render": function(data, type, full) {
                 var url
@@ -548,7 +550,7 @@
         ],"fnDrawCallback" : function() {
             initTableQuanxian()
         },
-        "order": [[11, 'desc']],
+        "order": [[12, 'desc']],
         "oLanguage": { //国际化配置
             "sProcessing": "正在获取数据，请稍后...",
             "sLengthMenu": "显示 _MENU_ 条",

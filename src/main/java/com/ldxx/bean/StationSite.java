@@ -27,6 +27,8 @@ public class StationSite {
     private String company;
     //省界站名称
     private String provinceStationName;
+    //省界站
+    private String provinceStation;
     //掩码
     private String mask;
     //网关
@@ -42,6 +44,13 @@ public class StationSite {
     //站点信息
     private String stationInfo;
 
+    public String getProvinceStation() {
+        return provinceStation;
+    }
+
+    public void setProvinceStation(String provinceStation) {
+        this.provinceStation = provinceStation;
+    }
 
     private List<CompanySite> companyList;
     private Accessory file;

@@ -431,6 +431,7 @@
             <th data-id="Length">长</th>
             <th data-id="Speed">车速(Km/h)</th>
             <th>轴数</th>
+            <th>超限值(kg)</th>
             <th data-id="Total_Weight">总重量(Kg)</th>
             <th data-id="Over_Weight_Ratio">超载率</th>
             <th data-id="Evt_Time">时间</th>
@@ -826,6 +827,7 @@
                         {"data": "speed"},
                         //{"data": "directionName"},
                         {"data": "axlesCount"},
+                        { "data": "maxWeight"},
                         {"data": "totalWeight"},
                         //{"data": "isStraddleName"},
                         {"data": "overWeightRatioName"},
@@ -849,14 +851,14 @@
                     },*/
                         {
                             "class": "tcenter",
-                            "targets": 10,
+                            "targets": 11,
                             "searchable": true,
                             "render": function (data, type, full) {
                                 return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="' + full.idLocal + '" onclick="lookMsg(this)" id="lookDetall"></i>';
                             }
                         },{
                             "class": "tcenter",
-                            "targets": 8,
+                            "targets": 9,
                             "searchable": true,
                             "render": function(data, type, full) {
                                 if(data!="不超载"){

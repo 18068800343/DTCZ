@@ -79,6 +79,7 @@
                         <th>站点名称</th>
                         <th>路线及编号</th>
                         <th>省界站名称</th>
+                        <th>省界站</th>
                         <th>IP地址</th>
                         <th>端口号</th>
                         <th>经度</th>
@@ -146,24 +147,25 @@
                             <tr>
                                 <td>省界站名称</td>
                                 <td><input type="text" v-model="provinceStationName"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
-                                <td>省界站桩号</td>
-                                <td><input type="text" v-model="provinceStationStakeMark"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+                                <td>省界站</td>
+                                <td><input type="text" v-model="provinceStation"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
                             </tr>
                             <tr>
+                                <td>省界站桩号</td>
+                                <td><input type="text" v-model="provinceStationStakeMark"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
                                 <td>系统位置桩号</td>
                                 <td><input type="text" v-model="systemLocationStakeMark"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+                            </tr>
+                            <tr>
                                 <td style="width: 20%;">单位</td>
                                 <td>
                                     <select class="form-control"  v-model="company=companySelected" style="width: 100%;" >
                                         <option :value="company.companyName" v-for="company in companyList">{{company.companyName}}</option>
                                     </select>
                                 </td>
-                            </tr>
-                            <tr>
                                 <td>建成日期</td>
                                 <td><input type="text"  id="jianchengDate" class="form-control" placeholder="请输入" style="width: 100%;"></td>
-                                <td></td>
-                                <td></td>
+
                             </tr>
                             <tr>
                                 <td>站点信息</td>
@@ -243,24 +245,25 @@
                             <tr>
                                 <td>省界站名称</td>
                                 <td><input type="text" v-model="provinceStationName"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
-                                <td>省界站桩号</td>
-                                <td><input type="text" v-model="provinceStationStakeMark"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+                                <td>省界站</td>
+                                <td><input type="text" v-model="provinceStation"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
                             </tr>
                             <tr>
+                                <td>省界站桩号</td>
+                                <td><input type="text" v-model="provinceStationStakeMark"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
                                 <td>系统位置桩号</td>
                                 <td><input type="text" v-model="systemLocationStakeMark"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+                            </tr>
+                            <tr>
                                 <td style="width: 20%;">单位</td>
                                 <td>
                                     <select class="form-control"  v-model="company=companySelected" style="width: 100%;" >
                                         <option :value="company.companyName" v-for="company in companyList">{{company.companyName}}</option>
                                     </select>
                                 </td>
-                            </tr>
-                            <tr>
                                 <td>建成日期</td>
                                 <td><input type="text"  id="xg_jianchengDate"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
-                                <td></td>
-                                <td></td>
+
                             </tr>
                             <tr>
                                 <td>站点信息</td>
@@ -367,6 +370,7 @@
             { "data": "stationName"},
             { "data": "routeName"},
             { "data": "provinceStationName"},
+            { "data": "provinceStation"},
             { "data": "stationIp"},
             { "data": "stationPort"},
             { "data": "stationLongitude"},
@@ -385,7 +389,7 @@
         ],
         "columnDefs": [{
             "class": "tcenter",
-            "targets": 16,
+            "targets": 17,
             "searchable": true,
             "render": function(data, type, full) {
                 var xiugai='<i class="iconfont icon-xiugai Phb" style="font-size:20px;cursor:pointer;display: none;" id="upd" title="修改" data-toggle="modal" data-target="#change"></i>';
@@ -511,6 +515,7 @@
             companySelected:'',
             companyList:'',
             file:'',
+            provinceStation:''
         },
         methods:{
             getFile(event) {
@@ -624,7 +629,7 @@
         $("#xg_jianchengDate").val(data.completionDate)
         xgzhandian.stationInfo=data.stationInfo;
         xgzhandian.companySelected=data.company;
-
+        xgzhandian.provinceStation=data.provinceStation;
         $.ajax({
             type:"post",
             url:"/accessory/selectAccessoryById",
@@ -726,6 +731,7 @@
             companySelected:'',
             companyList:'',
             file:'',
+            provinceStation:''
         },
         methods:{
             getFile(event) {

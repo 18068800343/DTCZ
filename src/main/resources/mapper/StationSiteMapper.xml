@@ -23,9 +23,9 @@
 
 	<insert id="addStationSite" parameterType="StationSite">
 		insert into station_site (S_Id,Station_Id,Station_Name,Station_Ip,Station_Port,Station_Longitude,Station_Latitude,Del_State,Route_Name,
-		company,province_station_name,mask,gateway,lanes,province_station_stake_mark,System_Location_stake_mark,Completion_date,station_info)
+		company,province_station_name,mask,gateway,lanes,province_station_stake_mark,System_Location_stake_mark,Completion_date,station_info,province_station)
 			values(#{sId},#{stationId},#{stationName},#{stationIp},#{stationPort},#{stationLongitude},#{stationLatitude},#{delState},#{routeName},
-			#{company},#{provinceStationName},#{mask},#{gateway},#{lanes},#{provinceStationStakeMark},#{systemLocationStakeMark},#{completionDate},#{stationInfo})
+			#{company},#{provinceStationName},#{mask},#{gateway},#{lanes},#{provinceStationStakeMark},#{systemLocationStakeMark},#{completionDate},#{stationInfo},#{provinceStation})
 	</insert>
 
 	<insert id="addCompanySite" keyProperty="id" useGeneratedKeys="true" parameterType="companySite" >
@@ -49,7 +49,8 @@
 		province_station_stake_mark=#{provinceStationStakeMark},
 		System_Location_stake_mark=#{systemLocationStakeMark},
 		Completion_date=#{completionDate},
-		station_info=#{stationInfo}
+		station_info=#{stationInfo},
+		province_station=#{provinceStation}
 		where S_Id=#{sId}
 	</update>
 
