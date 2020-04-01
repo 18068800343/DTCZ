@@ -766,7 +766,7 @@ homePageInit.initLastEcharts = () => {
 
 homePageInit.setLastEcharts = (json) => {
     var myChart = echarts.init(document.getElementById("liti"));
-    var option = {
+    /*var option = {
         color: ['#6154FD','#FE545E'],
         textStyle: {
             color: '#fff',
@@ -867,7 +867,184 @@ homePageInit.setLastEcharts = (json) => {
                 }
             }
         ]
-    };
+    };*/
+    var maxdataShadow=[]
+    var barData=json.cnt2.split(",")
+
+    for (let i = 0; i < barData.length; i++) {
+        maxdataShadow.push(Math.max.apply(null, barData))
+    }
+    var option = {
+        color: ['#6154FD','#FE545E'],
+        textStyle: {
+            color: '#fff',
+            fontSize: 13
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'cross'
+            }
+        },
+        // 背景条
+
+        legend: {
+            data: ['一级预警(≥80吨)', '二级预警(≥100吨)'],
+            textStyle: {
+                color: '#A3DCEC',
+                fontSize: 13
+            },
+
+
+        },
+
+        xAxis: [
+            {
+                "axisLine":{       //y轴
+                    "show":false
+
+                },
+                type: 'category',
+                data: json.stationNames.split(","),
+                axisLabel : {
+                    formatter: function (params) {
+                        var newParamsName = "";
+                        var paramsNameNumber = params.length;
+                        var provideNumber = 3;
+                        var rowNumber = Math.ceil(paramsNameNumber / provideNumber);
+                        if (paramsNameNumber > provideNumber) {
+                            for (var p = 0; p < rowNumber; p++) {
+                                var tempStr = "";
+                                var start = p * provideNumber;
+                                var end = start + provideNumber;
+                                if (p == rowNumber - 1) {
+                                    tempStr = params.substring(start, paramsNameNumber);
+                                } else {
+                                    tempStr = params.substring(start, end) + "\n";
+                                }
+                                newParamsName += tempStr;
+                            }
+
+                        } else {
+                            newParamsName = params;
+                        }
+                        return newParamsName
+                    }
+                }
+            },{
+                type: 'category',
+                axisLine: {
+                    show: false
+                },
+                axisTick: {
+                    show: false
+                },
+                axisLabel: {
+                    show: false
+                },
+                splitArea: {
+                    show: false
+                },
+                splitLine: {
+                    show: false
+                },
+
+            },
+        ],
+        yAxis: [
+            {
+                show:false,
+                type: 'value',
+            },
+
+        ],
+        series: [
+            {
+                type: 'bar',
+                xAxisIndex: 1,
+                zlevel: 1,
+                itemStyle: {
+                    normal: {
+                        color: '#003363',
+                        borderWidth: 0,
+                        barBorderRadius:[50,50,0,0],//柱顶弧形
+                        shadowBlur: {
+                            shadowColor: 'rgba(255,255,255,0.31)',
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowOffsetY: 2,
+                        },
+                    }
+                },
+                barWidth: 20,
+                barGap: '0%',
+                data: maxdataShadow,
+            },
+            {
+                type: 'bar',
+                xAxisIndex: 1,
+                barGap: '0%',
+                data: maxdataShadow,
+                zlevel: 1,
+                barWidth: 20,
+                itemStyle: {
+                    normal: {
+                        color: '#003363',
+                        borderWidth: 0,
+                        barBorderRadius:[50,50,0,0],//柱顶弧形
+                        shadowBlur: {
+                            shadowColor: 'rgba(255,255,255,0.31)',
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowOffsetY: 2,
+                        },
+                    }
+                },
+            },
+
+            {
+                name: '一级预警(≥80吨)',
+                type: 'bar',
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top',
+                        color: 'white',
+                    }
+                },
+                data: json.cnt2.split(","),
+                barWidth : 20,//柱图宽度
+                zlevel: 2,
+                barGap: '0%',
+                itemStyle:{
+                    barBorderRadius:[50,50,0,0],//柱顶弧形
+                }
+
+
+            },
+            {
+
+
+                name: '二级预警(≥100吨)',
+                type: 'bar',
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top',
+                        color: 'white',
+                    }
+                },
+                data: json.cnt3.split(","),
+                barWidth : 20,//柱图宽度
+                zlevel: 2,
+                barGap: '0%',
+                itemStyle:{
+                    barBorderRadius:[50,50,0,0],//柱顶弧形
+                }
+
+            },
+        ]
+    }
 
 
     myChart.setOption(option);
