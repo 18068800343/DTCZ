@@ -69,7 +69,7 @@
 					<form class="form-horizontal" role="form">
 						<div>
 							<select class="form-inline "  id="dayOrMonth">
-								<option value="%">全部</option>
+								<option value="%%">全部</option>
 								<option value="1">日报告</option>
 								<option value="2">月报告</option>
 							</select>
@@ -200,11 +200,9 @@
 	$(document).ready( function () {
 		laydate.render({
 			elem: '#startTime', //指定元素
-			type: 'datetime',
 		});
 		laydate.render({
 			elem: '#endTime', //指定元素
-			type: 'datetime'
 		});
 		laydate.render({
 			elem: '#dayTime', //指定元素
@@ -216,6 +214,8 @@
 		initTable()
 		getLoginUser()
 		initCompanySel();
+		$("#dayOrMonth").val('2');
+		$("#dayOrMonth").trigger("change");
 	});
 	let table=$('#mainContent').DataTable({
 		"deferRender": true,
@@ -325,6 +325,13 @@
 			}
 		});
 	}
+
+	$("#dayOrMonth").on('change',function(){
+		$("#startTime").val('');
+		$("#endTime").val('');
+		let dayOrMonth = $(this).val();
+		initTable('','',dayOrMonth);
+	});
 
 	function queding() {
 		let startTime = $("#startTime").val();
