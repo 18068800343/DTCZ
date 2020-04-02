@@ -265,7 +265,7 @@
                                                          #{stationPorts}
                                                     )
                                                 ORDER BY
-                                                    cntc DESC
+                                                    cntc DESC,cc.Station_Name
                                                 <if test="limit!=null and limit!=''">
                                                     LIMIT #{limit}
                                                 </if>
