@@ -10,7 +10,7 @@ import java.util.Date;
  *
  */
 public class DateJsonValueProcessor implements JsonValueProcessor {
-    private String format = "yyyy-MM-dd HH:mm:ss";
+    private String format = "yyyyMMddHHmmss";
 
     public DateJsonValueProcessor()
     {
