@@ -70,7 +70,53 @@ let initTableTbody = (json) => {
                     tdDom +
                     "</tr>")
             }
-        } else {
+        } else if (i == 3||i==4) {
+            let tableDom = $("#myTabOne" + i).html('');
+            let k = 5 * (i) + i - 1;
+            tableDom.append("<thead>" + "</thead>" + "<tfoot>" +
+                "<tr align='center'>" +
+                "<td>" + "车道编号" + "</td>" +
+                //"<td>" + "车道名" + "</td>" +
+                "<td>" + "2轴车" + "</td>" +
+                "<td>" + "3轴车" + "</td>" +
+                "<td>" + "4轴车" + "</td>" +
+                "<td>" + "5轴车" + "</td>" +
+                "<td>" + "6轴车及以上" + "</td>" +
+                "<td>" + "合计" + "</td>" +
+                "</tr>" +
+                +
+                    "</tfoot>");
+            for (let n = 1; n <= json.length; n++) {
+                if (n == json.length) {
+                    //车道0即总计的一行的td
+                    let tdDom = "";
+                    for (let j = k + 1; j <= k + 5; j++) {
+                        tdDom = tdDom + "<td data-id='"+json[0].avgLaneNo+","+j+"'><a >" + json[0]['column' + j] + "%</a></td>";
+                    }
+                    tdDom = tdDom + "<td data-id='"+json[0].avgLaneNo+","+k+"'><a >" + json[0]['column' + k] + "%</a></td>";
+                    let dom = tableDom.find("tfoot");
+                    $(dom).append("<tr align='center'>" +
+                        "<td>合计</td>" +
+                        tdDom +
+                        "</tr>")
+                    break;
+                }
+                let tdDom = "";
+                for (let j = k + 1; j <= k + 5; j++) {
+                    tdDom = tdDom + "<td data-id='"+json[n].avgLaneNo+","+j+"'><a >" + json[n]['column' + j] + "%</a></td>";
+                }
+                tdDom = tdDom + "<td data-id='"+json[n].avgLaneNo+","+k+"'><a >" + json[n]['column' + k] + "%</a></td>";
+                let dom = tableDom.find("tfoot");
+                $(dom).append("<tr align='center'>" +
+                    "<td>" + json[n].avgLaneNo + "</td>" +
+                    //"<td>" + formatLaneName(json[n].avgLaneNo) + "</td>" +
+                    tdDom +
+                    "</tr>")
+
+            }
+
+
+        }else {
             let tableDom = $("#myTabOne" + i).html('');
             let k = 5 * (i) + i - 1;
             tableDom.append("<thead>" + "</thead>" + "<tfoot>" +
