@@ -17,6 +17,7 @@ import java.util.concurrent.Executors;
 @RequestMapping("down")
 public class HelloController {
 
+
     private final TradingDetailsService tradingDetailsService;
 
     public HelloController(TradingDetailsService tradingDetailsService) {
