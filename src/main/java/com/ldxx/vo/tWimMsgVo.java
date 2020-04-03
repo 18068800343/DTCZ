@@ -24,16 +24,16 @@ public class tWimMsgVo extends tWimMsg  implements Serializable{
 
     private String imgprefixurl;//图片url
 
-    private String deviceNo;//称重检测设备编号 编码规则 6 位行政区 划码+4 位点编号
+    private Integer deviceNo;//称重检测设备编号 编码规则 6 位行政区 划码+4 位点编号
     private Integer vehicleWeight;//车货总质量单位: 千克 数字类型
     private String plateImg1;//车牌图片base64二进制码
     private String plateImg2;//车牌正面照图片base64二进制码
 
-    public String getDeviceNo() {
+    public Integer getDeviceNo() {
         return deviceNo;
     }
 
-    public void setDeviceNo(String deviceNo) {
+    public void setDeviceNo(Integer deviceNo) {
         this.deviceNo = deviceNo;
     }
 

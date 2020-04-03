@@ -106,7 +106,7 @@ public class TVehicleOverweightController {
         Double OverWeightRatio=tWimMsg.getOverWeightRatio()*100;
         String plate = tWimMsg.getPlate();
         if(OverWeightRatio>=5&&!"无车牌".equals(plate)){
-            HandleRemoteDatas.HandleRemoteDatas(url,url2,tWimMsg,yujingUrl);//处理图片流并调用远程接口
+            //HandleRemoteDatas.HandleRemoteDatas(url,url2,tWimMsg,yujingUrl);//处理图片流并调用远程接口
         }
 
 
@@ -142,7 +142,7 @@ public class TVehicleOverweightController {
             Double OverWeightRatio=list.getOverWeightRatio()*100;
             String plate = list.getPlate();
             if(OverWeightRatio>=5&&!"无车牌".equals(plate)){
-                HandleRemoteDatas.HandleRemoteDatas(url,url2,list,yujingUrl);//处理图片流并调用远程接口
+                //HandleRemoteDatas.HandleRemoteDatas(url,url2,list,yujingUrl);//处理图片流并调用远程接口
             }
         }
         int i=service.addtVehicleOverweightList(tWimMsgVoList);

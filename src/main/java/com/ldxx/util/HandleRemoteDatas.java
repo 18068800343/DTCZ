@@ -26,7 +26,8 @@ public class HandleRemoteDatas {
         BASE64Encoder encoder2 = new BASE64Encoder();
         String base642 = encoder.encode(bytes2);//返回Base64编码过的字节数组字符串
         data.setPlateImg2(base642);
-        data.setDeviceNo(null);
+
+        data.setDeviceNo(getDeviceNo(data.getStationIP()));
         data.setVehicleWeight(data.getTotalWeight());
 
         JsonConfig jsonConfig = new JsonConfig();
@@ -37,6 +38,30 @@ public class HandleRemoteDatas {
         String s = toInterface.interfaceUtil(yujingUrl, data2);
         return s;
     }
+
+    private static int getDeviceNo(String port) {
+        switch (port)
+        {
+            case "10001": return 34;
+            case "10002": return 34;
+            case "10003": return 37;
+            case "10004": return 37;
+            case "10005": return 34;
+            case "10006": return 37;
+            case "10007": return 37;
+            case "10008": return 31;
+            case "10009": return 31;
+            case "100010": return 33;
+            case "100011": return 33;
+            case "100012": return 34;
+            case "100013": return 34;
+            case "100014": return 37;
+            case "100015": return 34;
+            case "100016": return 31;
+            default:return 0;
+        }
+    }
+
 
     public static <T> T setNullValue(T source) throws IllegalArgumentException, IllegalAccessException, SecurityException {
         Field[] fields = source.getClass().getDeclaredFields();
