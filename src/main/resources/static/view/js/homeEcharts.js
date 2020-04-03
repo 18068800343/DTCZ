@@ -977,7 +977,7 @@ homePageInit.setLastEcharts = (json) => {
                     }
                 },
                 barWidth: 20,
-                barGap: '20%',
+                barGap: '35%',
                 data: maxdataShadow,
                 label: {
                     normal: {
@@ -999,7 +999,7 @@ homePageInit.setLastEcharts = (json) => {
             {
                 type: 'bar',
                 xAxisIndex: 1,
-                barGap: '20%',
+                barGap: '35%',
                 data: maxdataShadow,
                 zlevel: 1,
                 barWidth: 20,
@@ -1047,7 +1047,7 @@ homePageInit.setLastEcharts = (json) => {
                 data: json.cnt2.split(","),
                 barWidth : 20,//柱图宽度
                 zlevel: 2,
-                barGap: '20%',
+                barGap: '35%',
                 itemStyle:{
                     barBorderRadius:[50,50,0,0],//柱顶弧形
                 }
@@ -1069,7 +1069,7 @@ homePageInit.setLastEcharts = (json) => {
                 data: json.cnt3.split(","),
                 barWidth : 20,//柱图宽度
                 zlevel: 2,
-                barGap: '20%',
+                barGap: '35%',
                 itemStyle:{
                     barBorderRadius:[50,50,0,0],//柱顶弧形
                 }
