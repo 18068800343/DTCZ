@@ -22,11 +22,11 @@ public class ReportInfoController {
     @Resource
     private ReportInfoDao dao;
     @RequestMapping("/getAllReportInfoByCompanyName")
-    public List<Report> getAllReportInfoByCompanyName(HttpSession session,String startTime,String endTime,String timeType){
+    public List<Report> getAllReportInfoByCompanyName(HttpSession session,String startTime,String endTime,String timeType,String companyName){
 
         tUserInfoVo user = (tUserInfoVo) session.getAttribute("user");
 
-        List<Report> reports = dao.getAllReportByCompanyName(user.getCompanyName(),startTime,endTime,timeType);
+        List<Report> reports = dao.getAllReportByCompanyName(user.getCompanyName(),startTime,endTime,timeType,companyName);
         return reports;
 
     }

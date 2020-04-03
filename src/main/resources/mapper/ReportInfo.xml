@@ -21,6 +21,9 @@
 			<if test="timeType !='' and timeType !=null ">
 				and  time_type like #{timeType}
 			</if>
+			<if test="companyWhere !='' and companyWhere !=null ">
+				and  company_name like #{companyWhere}
+			</if>
 		</where>
     </select>
 

@@ -78,7 +78,11 @@
 							&nbsp;&nbsp;&nbsp;
 							<label class="form-inline" />结束时间:
 							<input type="text" class="form-control"  id="endTime"/></label>
-							&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp; <label class="form-inline">选择公司:
+								<select  class="selectpicker"  id="zhandian1">
+									<option value="%">全部</option>
+								</select>
+							</label>
 							<button type="button" class="form-inline btn btn-primary"  onclick="queding()">
 								查询
 							</button>
@@ -329,6 +333,7 @@
 	$("#dayOrMonth").on('change',function(){
 		$("#startTime").val('');
 		$("#endTime").val('');
+		$("#zhandian1").val('%');
 		let dayOrMonth = $(this).val();
 		initTable('','',dayOrMonth);
 	});
@@ -337,14 +342,11 @@
 		let startTime = $("#startTime").val();
 		let endTime = $("#endTime").val();
 		let dayOrMonth = $("#dayOrMonth").val();
+		let zhandian1 = $("#zhandian1").val();
 
-		if(endTime<=startTime){
-			toastr.error("结束时间必须大于开始时间!");
-			return;
-		}
-		initTable(startTime,endTime,dayOrMonth);
+		initTable(startTime,endTime,dayOrMonth,zhandian1);
 	}
-	function initTable(startTime,endTime,dayOrMonth){
+	function initTable(startTime,endTime,dayOrMonth,zhandian1){
 		$.ajax({
 			type: 'POST',
 			url: '/ReportInfoController/getAllReportInfoByCompanyName',
@@ -352,7 +354,8 @@
 			data: {
 				startTime:startTime,
 				endTime:endTime,
-				timeType:dayOrMonth
+				timeType:dayOrMonth,
+				companyName:zhandian1,
 			},
 			error: function (msg) {
 				errMessage("请求UserController失败");
@@ -477,6 +480,7 @@
 							let groups = json[i].groups;
 							if(groups == '控股' || groups == '路公司'){
 								$("#zhandian").append("<option data-id='groups'  value='" + companyName + "'>" + companyName + "</option>");
+								$("#zhandian1").append("<option data-id='groups'  value='" + companyName + "'>" + companyName + "</option>");
 							}
 						}
 
