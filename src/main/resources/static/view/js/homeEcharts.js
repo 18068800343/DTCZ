@@ -94,12 +94,18 @@ let initHomeMap = (lngLats,stationNames)=>{
                 tooltip: {
                     trigger: 'item',
                     //formatter:'dede{b}'
+                    confine:true,
                     formatter: '{b}',
                     formatter: function (params,ticket,callback){
                         let $pna = params.name;
                         let res = '';
                         console.log(params,ticket)
-                        return stationNames[$pna];
+                        if(stationNames[$pna]!=undefined){
+                            return stationNames[$pna];
+                        }else{
+                            return $pna;
+                        }
+
                     }
                 },
                 legend: {
@@ -134,7 +140,7 @@ let initHomeMap = (lngLats,stationNames)=>{
                     },
                     data: markPointData,
                     geoCoord: geoCoordData,
-                  
+                    hoverable:false,//隐藏悬浮背景色
                     markPoint: {
                         symbol: 'emptyCircle',
                         symbolSize: 15,
