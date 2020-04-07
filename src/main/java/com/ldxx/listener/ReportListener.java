@@ -36,11 +36,11 @@ public class ReportListener implements ApplicationListener<ContextRefreshedEvent
             e.printStackTrace();
         }
         if(Const.REPORT_DAY){
-            schedule.scheduleWithFixedDelay(new AutoReportDayCallable(), waitTime+3600, 86400, TimeUnit.SECONDS);
+            schedule.scheduleWithFixedDelay(new AutoReportDayCallable(), waitTime+5400, 86400, TimeUnit.SECONDS);
         }
         if(Const.REPORT_MONTH){
             if(monthStr.equals("01")){
-            schedule.scheduleWithFixedDelay(new AutoReportMonthCallable(), waitTime+3600, 86400, TimeUnit.SECONDS);
+            schedule.scheduleWithFixedDelay(new AutoReportMonthCallable(), waitTime+5400, 86400, TimeUnit.SECONDS);
             }
         }
     }

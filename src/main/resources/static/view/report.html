@@ -1,190 +1,214 @@
 <!DOCTYPE html>
 <html class="margin_top55">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title></title>
-	<link rel="stylesheet" href="../font2/iconfont.css">
-	<link href="../style/bootstrap.min.css" rel="stylesheet">
-	<link href="../style/style.css" rel="stylesheet">
-	<link rel="stylesheet" href="../style/jquery.dataTables.min.css">
-	<link rel="stylesheet" href="../style/jquery-editable-select.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <link rel="stylesheet" href="../font2/iconfont.css">
+    <link href="../style/bootstrap.min.css" rel="stylesheet">
+    <link href="../style/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="../style/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="../style/jquery-editable-select.css">
 
-	<link href="../font3/bootstrap-select.css" rel="stylesheet">
-	<link rel="stylesheet"  href="css/layui.css" />
-	<link rel="stylesheet"  href="css/toastr.css"/>
+    <link href="../font3/bootstrap-select.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/layui.css"/>
+    <link rel="stylesheet" href="css/toastr.css"/>
 
 
-	<style lang="">
-		body{
-			background: #fff;
-		}
-		.UpperPart{
-			display: flex;
-			justify-content:space-between;
-			border-bottom: 1px solid #ccc;
-			padding-bottom: 12px;
-		}
-		.selected{
-			background: rgba(247, 161, 3,0.2);
-		}
-		#mainContent th{
-			cursor: pointer;
-		}
-		.modal-header{
-			background-color:#549CDF;
-			color:white;
-		}
-		.table.dataTable thead th, table.dataTable thead td{
-			border-bottom:0px solid #DEDEDE;
-		}
-		#mainContent th{
-			height:30px;
-			line-height:30px;
-		}
-		#mainContent td{
-			height:30px;
-			line-height:30px;
-		}
-		.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
-			border:0px solid #ddd;
-		}
-		.table.dataTable.no-footer{
-			border:0px solid #ddd;
-		}
-		.layui-table tbody tr:hover {
-			background-color: #F5F5F5;
-		}
-	</style>
+    <style lang="">
+        body {
+            background: #fff;
+        }
+
+        .UpperPart {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 12px;
+        }
+
+        .selected {
+            background: rgba(247, 161, 3, 0.2);
+        }
+
+        #mainContent th {
+            cursor: pointer;
+        }
+
+        .modal-header {
+            background-color: #549CDF;
+            color: white;
+        }
+
+        .table.dataTable thead th, table.dataTable thead td {
+            border-bottom: 0px solid #DEDEDE;
+        }
+
+        #mainContent th {
+            height: 30px;
+            line-height: 30px;
+        }
+
+        #mainContent td {
+            height: 30px;
+            line-height: 30px;
+        }
+
+        .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+            border: 0px solid #ddd;
+        }
+
+        .table.dataTable.no-footer {
+            border: 0px solid #ddd;
+        }
+
+        .layui-table tbody tr:hover {
+            background-color: #F5F5F5;
+        }
+    </style>
 </head>
 <body style="background-image: none;width: 90%;margin-left: 10%;">
 
 <div>
-	<!-- Tab panes -->
-	<div role="tabpanel" class="tab-pane active" id="home">
-		<div class="zhuti-content">
-			<div class="UpperPart">
-				<div class="UpperPartL">
-					<form class="form-horizontal" role="form">
-						<div>
-							<select class="form-inline "  id="dayOrMonth">
-								<option value="%%">全部</option>
-								<option value="1">日报告</option>
-								<option value="2">月报告</option>
-							</select>
-							<label class="form-inline" />开始时间:
-							<input type="text" class="form-control" id="startTime" /></label>
-							&nbsp;&nbsp;&nbsp;
-							<label class="form-inline" />结束时间:
-							<input type="text" class="form-control"  id="endTime"/></label>
-						&nbsp;&nbsp;&nbsp; <label class="form-inline">选择公司:
-								<select  class="selectpicker"  id="zhandian1">
-									<option value="%">全部</option>
-								</select>
-							</label>
-							<button type="button" class="form-inline btn btn-primary"  onclick="queding()">
-								查询
-							</button>
-							<button type="button" class="form-inline btn btn-primary Pla" data-toggle="modal" data-target="#myModal" >生成 </button>
-						</div>
-					</form>
-				</div>
-				<div class="UpperPartR">
-				</div>
-			</div>
-			<div class="LowerPart" style="margin-top:3px;">
-				<table class="table table-bordered table-condensed table-hover layui-table" lay-even lay-skin="nob" id="mainContent" style="white-space: nowrap;">
-					<thead>
-					<tr>
-						<th>id</th>
-						<th>单位名称</th>
-						<th>报告名称</th>
-						<th>报告路径</th>
-						<th>生成状态</th>
-						<th>报告类型</th>
-						<th>生成时间</th>
-						<th style="width:75px;">操作</th>
-					</tr>
-					</thead>
-					<tbody>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
+    <!-- Tab panes -->
+    <div role="tabpanel" class="tab-pane active" id="home">
+        <div class="zhuti-content">
+            <div class="UpperPart">
+                <div class="UpperPartL">
+                    <form class="form-horizontal" role="form">
+                        <div>
+                            <lable class="form-inline ">
+                                <select class="form-control " id="dayOrMonth">
+                                    <option value="%%">全部</option>
+                                    <option value="1">日报告</option>
+                                    <option value="2">月报告</option>
+                                </select>
+                            </lable>
+                            <label class="form-inline"/>开始时间:
+                            <input type="text" class="form-control" id="startTime"/></label>
+                            &nbsp;&nbsp;&nbsp;
+                            <label class="form-inline"/>结束时间:
+                            <input type="text" class="form-control" id="endTime"/></label>
+                            &nbsp;&nbsp;&nbsp; <label class="form-inline">选择公司:
+                            <select class="selectpicker" id="zhandian1">
+                                <option value="%">全部</option>
+                            </select>
+                        </label>
+                            <button type="button" class="form-inline btn btn-primary" onclick="queding()">
+                                查询
+                            </button>
+                            <button type="button" class="form-inline btn btn-primary Pla" data-toggle="modal"
+                                    data-target="#myModal">生成
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="UpperPartR">
+                </div>
+            </div>
+            <div class="LowerPart" style="margin-top:3px;">
+                <table class="table table-bordered table-condensed table-hover layui-table" lay-even lay-skin="nob"
+                       id="mainContent" style="white-space: nowrap;">
+                    <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>单位名称</th>
+                        <th>报告名称</th>
+                        <th>报告路径</th>
+                        <th>生成状态</th>
+                        <th>报告类型</th>
+                        <th>生成时间</th>
+                        <th style="width:75px;">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- allMsg -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg1">
-	<div class="modal-dialog modal-lg" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" ><b>账户信息</b></h4>
-			</div>
-			<div class="modal-body">
-				<div>
-					<form class="form-inline">
-						<table class="table table-bordered table-condensed" style="height: auto;">
-							<tr>
-								<td style="width: 20%;">用户名</td>
-								<td><input type="text" id="xg_username" class="form-control" placeholder="请输入" style="width: 80%;"></td>
-								<td>密码</td>
-								<td><input type="password" id="xg_password" class="form-control" placeholder="请输入" style="width: 80%;"></td>
-							</tr>
-						</table>
-					</form>
-				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-				<button type="button" class="btn btn-success" id="xgup_baocun">保存</button>
-			</div>
-		</div>
-	</div>
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     id="allMsg1">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title"><b>账户信息</b></h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <form class="form-inline">
+                        <table class="table table-bordered table-condensed" style="height: auto;">
+                            <tr>
+                                <td style="width: 20%;">用户名</td>
+                                <td><input type="text" id="xg_username" class="form-control" placeholder="请输入"
+                                           style="width: 80%;"></td>
+                                <td>密码</td>
+                                <td><input type="password" id="xg_password" class="form-control" placeholder="请输入"
+                                           style="width: 80%;"></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-success" id="xgup_baocun">保存</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Modal -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal">
-	<div class="modal-dialog modal-lg" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel"><b>主动生成报告</b></h4>
-			</div>
-			<div class="modal-body">
-				<div>
-						<table class="table table-bordered table-condensed" id="companySel">
-							<tr>
-								<td  style="width: 20%;">公司选择</td>
-								<td  style="width: 30%;">
-									<!-- 样式1 -->
-									<select class="form-control selectpicker" multiple data-actions-box="true" data-max-options="2"
-											data-live-search="true"
-											id="zhandian" style="width:80%;">
-									</select>
-								</td>
-								<td  style="width: 20%;"></td>
-								<td  style="width: 30%;"></td>
-							</tr>
-						</table>
-						<table class="table table-bordered table-condensed">
-							<tr>
-								<td  style="width: 20%;">日报告</td>
-								<td  style="width: 30%;"><input type="text" id="dayTime"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
-								<td  style="width: 20%;">月报告</td>
-								<td  style="width: 30%;"><input type="text" id="monthTime"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
-							</tr>
-						</table>
-				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-				<button type="button" class="btn btn-default" id="baocun">生成</button>
-			</div>
-		</div>
-	</div>
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     id="myModal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel"><b>主动生成报告</b></h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <table class="table table-bordered table-condensed" id="companySel">
+                        <tr>
+                            <td style="width: 20%;">公司选择</td>
+                            <td style="width: 30%;">
+                                <!-- 样式1 -->
+                                <select class="form-control selectpicker" multiple data-actions-box="true"
+                                        data-max-options="2"
+                                        data-live-search="true"
+                                        id="zhandian" style="width:80%;">
+                                </select>
+                            </td>
+                            <td style="width: 20%;"></td>
+                            <td style="width: 30%;"></td>
+                        </tr>
+                    </table>
+                    <table class="table table-bordered table-condensed">
+                        <tr>
+                            <td style="width: 20%;">日报告</td>
+                            <td style="width: 30%;"><input type="text" id="dayTime" class="form-control"
+                                                           placeholder="请输入" style="width: 100%;"></td>
+                            <td style="width: 20%;">月报告</td>
+                            <td style="width: 30%;"><input type="text" id="monthTime" class="form-control"
+                                                           placeholder="请输入" style="width: 100%;"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-default" id="baocun">生成</button>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- model结束 -->
 </body>
@@ -192,306 +216,306 @@
 <script src="js/laydate/laydate.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 <script src="js/datatables/jquery.dataTables.min.js"></script>
-<script src="../js/bootstrap-select.js" ></script>
-<script src="../js/jquery-editable-select.js" ></script>
-<script src="js/toastr.js" ></script>
+<script src="../js/bootstrap-select.js"></script>
+<script src="../js/jquery-editable-select.js"></script>
+<script src="js/toastr.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
 <script src="js/quanxian.js"></script>
 <script src="../js/myTool.js"></script>
 <script>
 
-	$(document).ready( function () {
-		laydate.render({
-			elem: '#startTime', //指定元素
-		});
-		laydate.render({
-			elem: '#endTime', //指定元素
-		});
-		laydate.render({
-			elem: '#dayTime', //指定元素
-		});
-		laydate.render({
-			elem: '#monthTime', //指定元素
-			type: 'month'
-		});
-		initTable()
-		getLoginUser()
-		initCompanySel();
-		$("#dayOrMonth").val('2');
-		$("#dayOrMonth").trigger("change");
-	});
-	let table=$('#mainContent').DataTable({
-		"deferRender": true,
-		"processing": true,
-		"bDestroy": true,
-		"iDisplayLength": 10,
-		"searching": true,
-		"lengthChange": false,
-		"oLanguage": {
-			"sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
-		},
-		"columns": [
-			{ "data": "id",visible:false},
-			{ "data": "companyName"},
-			{ "data": "reportName"},
-			{ "data": "reportUrl"},
-			{ "data": "reportStatus"},
-			{ "data": "timeType"},
-			{ "data": "reportTime"},
-			{ "data": null},
-		],
-		"columnDefs": [{
-			"class": "tcenter",
-			"targets":7,
-			"searchable": true,
-			"render": function(data, type, full) {
-				let xiugai='<i class="glyphicon glyphicon-download-alt Plb" style="font-size:20px;cursor:pointer;display: none;" id="upd" title="下载" onclick="down(this)"></i>';
-				let shanchu='<i class="iconfont icon-shanchu Plc" style="font-size:20px;cursor:pointer;display: none;" id="del"  title="删除"></i>';
-				//let look='<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" onclick="lookMs(this)" data-toggle="modal" data-target="#allMsg1" id="lookDetall"></i>'
-				return xiugai+shanchu;
-			}
-		},{
-			"class": "tcenter",
-			"targets":5,
-			"searchable": true,
-			"render": function(data, type, full) {
-				if(data=='1'){
-					return '日报告'
-				}else{
-					return '月报告'
-				}
-			}
-		},{
-			"class": "tcenter",
-			"targets":4,
-			"searchable": true,
-			"render": function(data, type, full) {
-				if(data=='1'){
-					return '成功'
-				}else{
-					return '失败'
-				}
-			}
-		}],"fnDrawCallback" : function() {
-			initTableQuanxian()
-		},
-		//让表格出横向滚动条 ，此时 表头和 表中数据将分为两个部分
-		"sScrollX":true,
-		// 让表格的宽度不自适应 ，固定宽度。 如果不设置 表头和表中数据会分离
-		//表中的数据自适应 ，表头的宽度固定
-		"bAutoWidth":false,
-		"order": [[0, 'asc']],
-		"oLanguage": { //国际化配置
-			"sProcessing": "正在获取数据，请稍后...",
-			"sLengthMenu": "显示 _MENU_ 条",
-			"sZeroRecords": "查询不到相关数据",
-			"sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
-			"sInfoEmpty": "记录数为0",
-			"sInfoFiltered": "(全部记录数 _MAX_ 条)",
-			"sInfoPostFix": "",
-			"sSearch": "搜索",
-			"sUrl": "",
-			"oPaginate": {
-				"sFirst": "第一页",
-				"sPrevious": "上一页",
-				"sNext": "下一页",
-				"sLast": "最后一页"
-			}},
+    $(document).ready(function () {
+        laydate.render({
+            elem: '#startTime', //指定元素
+        });
+        laydate.render({
+            elem: '#endTime', //指定元素
+        });
+        laydate.render({
+            elem: '#dayTime', //指定元素
+        });
+        laydate.render({
+            elem: '#monthTime', //指定元素
+            type: 'month'
+        });
+        initTable()
+        getLoginUser()
+        initCompanySel();
+        $("#dayOrMonth").val('2');
+        $("#dayOrMonth").trigger("change");
+    });
+    let table = $('#mainContent').DataTable({
+        "deferRender": true,
+        "processing": true,
+        "bDestroy": true,
+        "iDisplayLength": 10,
+        "searching": true,
+        "lengthChange": false,
+        "oLanguage": {
+            "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+        },
+        "columns": [
+            {"data": "id", visible: false},
+            {"data": "companyName"},
+            {"data": "reportName"},
+            {"data": "reportUrl",visible: false},
+            {"data": "reportStatus"},
+            {"data": "timeType"},
+            {"data": "reportTime"},
+            {"data": null},
+        ],
+        "columnDefs": [{
+            "class": "tcenter",
+            "targets": 7,
+            "searchable": true,
+            "render": function (data, type, full) {
+                let xiugai = '<i class="glyphicon glyphicon-download-alt Plb" style="font-size:20px;cursor:pointer;display: none;" id="upd" title="下载" onclick="down(this)"></i>';
+                let shanchu = '<i class="iconfont icon-shanchu Plc" style="font-size:20px;cursor:pointer;display: none;" id="del"  title="删除"></i>';
+                //let look='<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" onclick="lookMs(this)" data-toggle="modal" data-target="#allMsg1" id="lookDetall"></i>'
+                return xiugai + shanchu;
+            }
+        }, {
+            "class": "tcenter",
+            "targets": 5,
+            "searchable": true,
+            "render": function (data, type, full) {
+                if (data == '1') {
+                    return '日报告'
+                } else {
+                    return '月报告'
+                }
+            }
+        }, {
+            "class": "tcenter",
+            "targets": 4,
+            "searchable": true,
+            "render": function (data, type, full) {
+                if (data == '1') {
+                    return '成功'
+                } else {
+                    return '失败'
+                }
+            }
+        }], "fnDrawCallback": function () {
+            initTableQuanxian()
+        },
+        //让表格出横向滚动条 ，此时 表头和 表中数据将分为两个部分
+        "sScrollX": true,
+        // 让表格的宽度不自适应 ，固定宽度。 如果不设置 表头和表中数据会分离
+        //表中的数据自适应 ，表头的宽度固定
+        "bAutoWidth": false,
+        "order": [[0, 'asc']],
+        "oLanguage": { //国际化配置
+            "sProcessing": "正在获取数据，请稍后...",
+            "sLengthMenu": "显示 _MENU_ 条",
+            "sZeroRecords": "查询不到相关数据",
+            "sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
+            "sInfoEmpty": "记录数为0",
+            "sInfoFiltered": "(全部记录数 _MAX_ 条)",
+            "sInfoPostFix": "",
+            "sSearch": "搜索",
+            "sUrl": "",
+            "oPaginate": {
+                "sFirst": "第一页",
+                "sPrevious": "上一页",
+                "sNext": "下一页",
+                "sLast": "最后一页"
+            }
+        },
 
-	});
-	$.fn.dataTable.ext.errMode = 'none';       //屏蔽掉报错弹窗
+    });
+    $.fn.dataTable.ext.errMode = 'none';       //屏蔽掉报错弹窗
 
-	function initTableQuanxian(){
-		$.ajax({
-			type:"post",
-			url:"/login/getUser",
-			async:false,
-			data:{
-			},
-			success:function(json){
-				if(json!=null &&json!=""){
-					let arr = json.usrPersmissionCoding.split(',');
-					for(let i=0;i<arr.length;i++){
-						if(arr[i].indexOf("Pla") >= 0 ){
-							$(".Pla").show();
-						}
-						if(arr[i].indexOf("Plb") >= 0 ){
-							$(".Plb").show();
-						}
-						if(arr[i].indexOf("Plc") >= 0 ){
-							$(".Plc").show();
-						}
-					}
+    function initTableQuanxian() {
+        $.ajax({
+            type: "post",
+            url: "/login/getUser",
+            async: false,
+            data: {},
+            success: function (json) {
+                if (json != null && json != "") {
+                    let arr = json.usrPersmissionCoding.split(',');
+                    for (let i = 0; i < arr.length; i++) {
+                        if (arr[i].indexOf("Pla") >= 0) {
+                            $(".Pla").show();
+                        }
+                        if (arr[i].indexOf("Plb") >= 0) {
+                            $(".Plb").show();
+                        }
+                        if (arr[i].indexOf("Plc") >= 0) {
+                            $(".Plc").show();
+                        }
+                    }
 
-				}
+                }
 
-			}
-		});
-	}
+            }
+        });
+    }
 
-	$("#dayOrMonth").on('change',function(){
-		$("#startTime").val('');
-		$("#endTime").val('');
-		$("#zhandian1").val('%');
-		let dayOrMonth = $(this).val();
-		initTable('','',dayOrMonth);
-	});
+    $("#dayOrMonth").on('change', function () {
+        $("#startTime").val('');
+        $("#endTime").val('');
+        let dayOrMonth = $(this).val();
+        let zhandian1 = $("#zhandian1").val();
+        initTable('', '', dayOrMonth, zhandian1);
+    });
 
-	function queding() {
-		let startTime = $("#startTime").val();
-		let endTime = $("#endTime").val();
-		let dayOrMonth = $("#dayOrMonth").val();
-		let zhandian1 = $("#zhandian1").val();
+    function queding() {
+        let startTime = $("#startTime").val();
+        let endTime = $("#endTime").val();
+        let dayOrMonth = $("#dayOrMonth").val();
+        let zhandian1 = $("#zhandian1").val();
 
-		initTable(startTime,endTime,dayOrMonth,zhandian1);
-	}
-	function initTable(startTime,endTime,dayOrMonth,zhandian1){
-		$.ajax({
-			type: 'POST',
-			url: '/ReportInfoController/getAllReportInfoByCompanyName',
-			dataType: 'json',
-			data: {
-				startTime:startTime,
-				endTime:endTime,
-				timeType:dayOrMonth,
-				companyName:zhandian1,
-			},
-			error: function (msg) {
-				errMessage("请求UserController失败");
-			},
-			success: function (json) {
-				$('#mainContent').dataTable().fnClearTable();
-				$('#mainContent').DataTable().rows.add(json).draw(false);
-			}
-		});
-	}
+        initTable(startTime, endTime, dayOrMonth, zhandian1);
+    }
+
+    function initTable(startTime, endTime, dayOrMonth, zhandian1) {
+        $.ajax({
+            type: 'POST',
+            url: '/ReportInfoController/getAllReportInfoByCompanyName',
+            dataType: 'json',
+            data: {
+                startTime: startTime,
+                endTime: endTime,
+                timeType: dayOrMonth,
+                companyName: zhandian1,
+            },
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                $('#mainContent').dataTable().fnClearTable();
+                $('#mainContent').DataTable().rows.add(json).draw(false);
+            }
+        });
+    }
 
 
+    //删除
+    $('#mainContent').delegate('#del', 'click', function () {
+        let dom = $(this).parents('tr');
+        let data = $('#mainContent').DataTable().row(dom).data();
+        let msg = "您真的确定要删除吗？\n\n请确认！";
+        if (confirm(msg) == true) {
+            $.ajax({
+                type: 'POST',
+                url: '/ReportInfoController/deleteById',
+                dataType: 'json',
+                data: {
+                    id: data.rId
+                },
+                success: function (json) {
 
-	//删除
-	$('#mainContent').delegate('#del','click', function () {
-		let dom = $(this).parents('tr');
-		let data=$('#mainContent').DataTable().row(dom).data();
-		let msg = "您真的确定要删除吗？\n\n请确认！";
-		if (confirm(msg)==true){
-			$.ajax({
-				type: 'POST',
-				url:'/ReportInfoController/deleteById',
-				dataType: 'json',
-				data: {
-					id:data.rId
-				},
-				success: function (json) {
+                    if (json != 0) {
+                        $('#mainContent').DataTable().row(dom).remove().draw(false); //删除行立即显示
+                        toastr.success('删除成功');
+                    } else {
+                        toastr.error('删除失败');
+                    }
+                }
+            });
+        } else {
+            return false;
+        }
 
-					if(json!=0){
-						$('#mainContent').DataTable().row(dom).remove().draw(false); //删除行立即显示
-						toastr.success('删除成功');
-					}else{
-						toastr.error('删除失败');
-					}
-				}
-			});
-		}else{
-			return false;
-		}
+    })
+    //生成报告
+    $('#myModal').delegate('#baocun', 'click', function () {
+        let companyNames = $("#zhandian").val();
+        let dayTime = $("#dayTime").val();
+        let monthTime = $("#monthTime").val();
+        if (pageConst.flag) {
+            if (companyNames == "" || companyNames == null || companyNames == undefined) {
+                toastr.error("请选择生成单位!");
+                return;
+            }
+        }
+        myTool.showMask();
+        $.ajax({
+            type: 'POST',
+            url: '/ReportInfoController/reportDayAndMonth',
+            dataType: 'json',
+            data: {
+                dayTime: dayTime,
+                monthTime: monthTime,
+                companyNames: companyNames.toString()
+            },
+            success: function (json) {
+                myTool.hidMask();
+                $("#myModal").modal("hide");
+                if (json == 1) {
+                    toastr.success("生成成功");
+                    initTable()
+                }
 
-	})
-	//生成报告
-	$('#myModal').delegate('#baocun','click', function () {
-		let companyNames = $("#zhandian").val();
-		let dayTime = $("#dayTime").val();
-		let monthTime = $("#monthTime").val();
-		if(pageConst.flag){
-           if(companyNames==""||companyNames==null||companyNames==undefined){
-           	 toastr.error("请选择生成单位!");
-           	 return;
-		   }
-		}
-		myTool.showMask();
-		$.ajax({
-			type: 'POST',
-			url:'/ReportInfoController/reportDayAndMonth',
-			dataType: 'json',
-			data: {
-				dayTime:dayTime,
-				monthTime:monthTime,
-				companyNames:companyNames.toString()
-			},
-			success: function (json) {
-				myTool.hidMask();
-				$("#myModal").modal("hide");
-				if(json==1){
-					toastr.success("生成成功");
-					initTable()
-				}
+            }
+        });
+    })
 
-			}
-		});
-	})
+    function down(obj) {
+        let tr = $(obj).parents("tr");
+        let data = $("#mainContent").DataTable().row(tr).data();
+        let path = data.reportUrl;
+        let name = data.reportName;
+        window.location.href = encodeURI("../down/downloadReport?type=downloadFile&fileName=" + name + "&filePath=" + path);
+    }
 
-	function down(obj){
-		let tr=$(obj).parents("tr");
-		let data=$("#mainContent").DataTable().row(tr).data();
-		let path=data.reportUrl;
-		let name=data.reportName;
-		window.location.href=encodeURI("../down/downloadReport?type=downloadFile&fileName="+name+"&filePath="+path);
-	}
+    let pageConst = {};
 
-	let pageConst={};
-	function getLoginUser(){
-		$.ajax({
-			type: 'POST',
-			url: '/login/getUser',
-			dataType: 'json',
-			async:false,
-			data: {
-			},
-			error: function (msg) {
-				errMessage("请求UserController失败");
-			},
-			success: function (json) {
-				if(json.groups!="控股"&&json.groups!="路公司"){
-					//非控股和路公司
-					pageConst.flag=true;
-					$("#companySel").show();
-				}else{
-					pageConst.flag=false;
-					$("#companySel").hide();
-				}
-			}
-		});
-	}
+    function getLoginUser() {
+        $.ajax({
+            type: 'POST',
+            url: '/login/getUser',
+            dataType: 'json',
+            async: false,
+            data: {},
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                if (json.groups != "控股" && json.groups != "路公司") {
+                    //非控股和路公司
+                    pageConst.flag = true;
+                    $("#companySel").show();
+                } else {
+                    pageConst.flag = false;
+                    $("#companySel").hide();
+                }
+            }
+        });
+    }
 
-	function initCompanySel() {
-		$.ajax({
-			type: 'POST',
-			url: '/StationSite/getCompanyStationSite',
-			dataType: 'json',
-			async: false,
-			data: {},
-			error: function (msg) {
-			},
-			success: function (json) {
-				$("#zhandian").html('');
-				if (json != null) {
-						for (let i = 0; i < json.length; i++) {
-							let companyName = json[i].companyName;
-							let groups = json[i].groups;
-							if(groups == '控股' || groups == '路公司'){
-								$("#zhandian").append("<option data-id='groups'  value='" + companyName + "'>" + companyName + "</option>");
-								$("#zhandian1").append("<option data-id='groups'  value='" + companyName + "'>" + companyName + "</option>");
-							}
-						}
+    function initCompanySel() {
+        $.ajax({
+            type: 'POST',
+            url: '/StationSite/getCompanyStationSite',
+            dataType: 'json',
+            async: false,
+            data: {},
+            error: function (msg) {
+            },
+            success: function (json) {
+                $("#zhandian").html('');
+                if (json != null) {
+                    for (let i = 0; i < json.length; i++) {
+                        let companyName = json[i].companyName;
+                        let groups = json[i].groups;
+                        if (groups == '控股' || groups == '路公司') {
+                            $("#zhandian").append("<option data-id='groups'  value='" + companyName + "'>" + companyName + "</option>");
+                            $("#zhandian1").append("<option data-id='groups'  value='" + companyName + "'>" + companyName + "</option>");
+                        }
+                    }
 
-					$(".selectpicker").selectpicker({
-						noneSelectedText: '请选择',
-					});
-					$("#zhandian").selectpicker("refresh");
-					$('#zhandian').selectpicker('render');
-				}
-			}
-		});
-	}
+                    $(".selectpicker").selectpicker({
+                        noneSelectedText: '请选择',
+                    });
+                    $("#zhandian").selectpicker("refresh");
+                    $('#zhandian').selectpicker('render');
+                }
+            }
+        });
+    }
 </script>
 </html>

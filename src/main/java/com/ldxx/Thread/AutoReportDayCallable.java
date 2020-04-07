@@ -13,8 +13,11 @@ public class AutoReportDayCallable implements Runnable {
 
         //或缺前一天日期
         String date = DateUtil.getYestodayStr();
-         ReportUtil.getInstance().getReportPath("CreateDayReport.exe 2 "+date,1);
-        ReportUtil.getInstance().getReportPath("CreateDayReport.exe 1 "+date,1);
+         //ReportUtil.getInstance().getReportPath("CreateDayReport.exe 2 "+date,1);
+        ReportUtil.getInstance().getReportPath("CreateDayReport.exe "+date,1);
     }
 
+    public static void main(String[] args) {
+        new ReportUtil().getReportPath("CreateDayReport.exe "+ DateUtil.getYestodayStr(),1);
+    }
 }
