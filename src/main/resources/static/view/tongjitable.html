@@ -315,13 +315,14 @@
                 <!-- 样式1 -->
                          <select value="请选择" class="selectpicker" multiple data-max-options="1" data-live-search="true" @change="formatTimeRange" v-model="timeRange" id="timeRange"
                     style="height: 34px; border-radius: 5px; box-shadow: none; margin-left: 30px; border: 1px solid rgb(221, 221, 221);">
-                <option value="">全部</option>
-                <option value="7">最近一周</option>
+                <option value="1">最近一天</option>
+                <option value="3">最近三天</option>
                 <option value="30">最近一个月</option>
                 <option value="60">最近二个月</option>
                 <option value="90">最近三个月</option>
                 <option value="180">最近半年</option>
                 <option value="365">最近一年</option>
+                <option value="">自定义</option>
             </select>
             </div>
         </div>
@@ -329,7 +330,7 @@
             <label class="col-sm-1	 control-label riqi kaishiriqi" style="width:7%;line-height: 30px; margin-left:2%;font-weight:normal;">开始时间</label>
         <div class="col-sm-2 kaishiriqidiv" style="margin-left:-1.5%;">
             <!-- 样式1 -->
-            <input type="text" v-model="startTime" id="startTime" value="请选择"
+            <input type="text" v-model="startTime" id="startTime" value="请选择" disabled
                   style="height: 34px;border-radius: 5px;box-shadow: none;width: 250%;border:1px solid #DDD;">
         </div>
         <label class="col-sm-1	 control-label riqi jieshuriqi" style="width:7%; line-height: 30px;margin-left:13%;font-weight:normal; ">结束时间
@@ -337,7 +338,7 @@
         <div class="col-sm-2 jieshuriqidiv" style="width:5%;margin-left:-0.5%;padding-left: 17px;">
             <!-- 样式1 -->
 
-            <input type="text" v-model="endTime" id="endTime" value="请选择"
+            <input type="text" v-model="endTime" id="endTime" value="请选择" disabled
                    style="height: 34px;border-radius: 5px;box-shadow: none;width: 260%;border:1px solid #DDD;">
         </div>
         <label for="" class="col-sm-2 control-label" style="margin-left:8.5%;font-weight:normal;width:5%;">车牌号</label>
@@ -912,7 +913,11 @@
                 if(timeRange==""){
                     this.startTime="";
                     this.endTime = "";
+                $("#startTime").removeAttr("disabled");
+                $("#endTime").removeAttr("disabled");
                 }else{
+                $("#startTime").attr("disabled",true);
+                $("#endTime").attr("disabled",true);
                 const end = new Date();
                 const start = new Date();
                 start.setTime(start.getTime() - 3600 * 1000 * 24 * timeRange);
@@ -1129,7 +1134,8 @@
         alert("即将开始下载...")
        location.href= "/down/download_csv"
     }
-
+    // mainVm.timeRange = 1;
+    // mainVm.formatTimeRange();
     mainVm.searchInit();
 
     $("#mainContent").find("th").on('click',function(){
