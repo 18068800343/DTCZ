@@ -380,12 +380,21 @@
             </div>
              <div class="sele bts" style="position:absolute;width:100%;margin-top:-2.5%;">
                 <label for="" class="col-sm-2 control-label chesu" style="margin-left:1%;font-weight:normal;">车长</label>
-                <div class="col-sm-2 " style="margin-left:-2%;width:13%;padding-left: 18px;">
+                 <div class="col-sm-2 " style="margin-left:-40px;width:5%;padding-left: 19px;">
                     <!-- 样式1 -->
                     <input type="text" class="text3" value="请输入" v-model="chesuStart" @input="checknum('chesuStart')"
-                           style="height: 34px;border-radius: 5px;box-shadow: none;width: 101%;border:1px solid #DDD;padding:3px;">
-                </div> 
-                <label for="" class="col-sm-2 control-label chesu" style="margin-left:7.5%;font-weight:normal;">车速</label>
+                           style="height: 34px;border-radius: 5px;box-shadow: none;width: 120%;border:1px solid #DDD;padding:3px;">
+
+                </div>
+                 
+                <div class="col-sm-2 " style="width:5%;">
+                    <div class="xian2"
+                         style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: -5%;margin-top: 15%;">
+                    </div>
+                    <input type="text" class="text4" value="请输入" v-model="chesuEnd" @input="checknum('chesuEnd')"
+                           style="height: 34px;border-radius: 5px;box-shadow: none;width:120%;margin-left: 30px;border:1px solid #DDD;padding:3px;">
+                </div>	
+                <label for="" class="col-sm-2 control-label chesu" style="margin-left:180px;font-weight:normal;">车速</label>
                 <div class="col-sm-2 chesuk" style="margin-left:-2.5%;width:5%;padding-left: 19px;">
                     <!-- 样式1 -->
                     <input type="text" class="text3" value="请输入" v-model="chesuStart" @input="checknum('chesuStart')"
