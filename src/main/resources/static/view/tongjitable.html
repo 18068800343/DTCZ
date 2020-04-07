@@ -382,7 +382,7 @@
                 <label for="" class="col-sm-2 control-label chesu" style="margin-left:1%;font-weight:normal;">车长</label>
                  <div class="col-sm-2 " style="margin-left:-40px;width:5%;padding-left: 19px;">
                     <!-- 样式1 -->
-                    <input type="text" class="text3" value="请输入" v-model="chesuStart" @input="checknum('chesuStart')"
+                    <input type="text" class="text3" value="请输入" v-model="cheChangStart" @input="checknum('cheChangStart')"
                            style="height: 34px;border-radius: 5px;box-shadow: none;width: 120%;border:1px solid #DDD;padding:3px;">
 
                 </div>
@@ -391,7 +391,7 @@
                     <div class="xian2"
                          style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: -5%;margin-top: 15%;">
                     </div>
-                    <input type="text" class="text4" value="请输入" v-model="chesuEnd" @input="checknum('chesuEnd')"
+                    <input type="text" class="text4" value="请输入" v-model="cheChangEnd" @input="checknum('cheChangEnd')"
                            style="height: 34px;border-radius: 5px;box-shadow: none;width:120%;margin-left: 30px;border:1px solid #DDD;padding:3px;">
                 </div>	
                 <label for="" class="col-sm-2 control-label chesu" style="margin-left:180px;font-weight:normal;">车速</label>
@@ -759,6 +759,8 @@
             chepai: "",
             chesuStart: "",
             chesuEnd: "",
+            cheChangStart: "",
+            cheChangEnd: "",
             zhoushu: "",
             roadTmpStart: "",
             roadTmpEnd: "",
@@ -804,6 +806,8 @@
                             param.chepai = mainVm.chepai;
                             param.chesuStart = mainVm.chesuStart;
                             param.chesuEnd = mainVm.chesuEnd;
+                            param.cheChangStart = mainVm.cheChangStart;
+                            param.cheChangEnd = mainVm.cheChangEnd;
                             param.zhoushu = mainVm.zhoushu;
                             param.roadTmpStart = mainVm.roadTmpStart;
                             param.roadTmpEnd = mainVm.roadTmpEnd;

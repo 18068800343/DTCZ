@@ -122,6 +122,12 @@
             <if test="chesuEnd!=null and chesuEnd!='' ">
                 and speed &lt; #{chesuEnd}
             </if>
+            <if test="cheChangStart!=null and cheChangStart!='' ">
+                and #{cheChangStart} &lt; length
+            </if>
+            <if test="cheChangEnd!=null and cheChangEnd!='' ">
+                and length &lt; #{cheChangEnd}
+            </if>
 
             <if test="roadTmpStart!=null and roadTmpStart!='' ">
                 and #{roadTmpStart} &lt; Temperature
@@ -295,7 +301,12 @@
             <if test="chesuEnd!=null and chesuEnd!='' ">
                 and speed &lt; #{chesuEnd}
             </if>
-
+            <if test="cheChangStart!=null and cheChangStart!='' ">
+                and #{cheChangStart} &lt; length
+            </if>
+            <if test="cheChangEnd!=null and cheChangEnd!='' ">
+                and length &lt; #{cheChangEnd}
+            </if>
             <if test="roadTmpStart!=null and roadTmpStart!='' ">
                 and #{roadTmpStart} &lt; Temperature
             </if>

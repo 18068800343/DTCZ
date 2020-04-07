@@ -117,6 +117,11 @@ public class tWimMsgController {
         Double chesuStart = doubleMid.get("start");
         Double chesuEnd = doubleMid.get("end");
 
+        //格式化车长
+        doubleMid = FormatUtil.changeBigAndSmall(tongJiTableQuery.getCheChangStart(),tongJiTableQuery.getCheChangEnd());
+        Double cheChangStart = doubleMid.get("start");
+        Double cheChangEnd = doubleMid.get("end");
+
         //格式化温度
         doubleMid = FormatUtil.changeBigAndSmall(tongJiTableQuery.getRoadTmpStart(),tongJiTableQuery.getRoadTmpEnd());
         Double roadTmpStart = doubleMid.get("start");
@@ -131,6 +136,8 @@ public class tWimMsgController {
         tongJiTableQuery.setEndWeight(endWeight);
         tongJiTableQuery.setChesuStart(chesuStart);
         tongJiTableQuery.setChesuEnd(chesuEnd);
+        tongJiTableQuery.setCheChangStart(cheChangStart);
+        tongJiTableQuery.setCheChangEnd(cheChangEnd);
         tongJiTableQuery.setRoadTmpStart(roadTmpStart);
         tongJiTableQuery.setRoadTmpEnd(roadTmpEnd);
         tongJiTableQuery.setChaozhongStart(chaozhongStart);
