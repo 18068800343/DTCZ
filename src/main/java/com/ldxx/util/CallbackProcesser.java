@@ -27,6 +27,7 @@ public class CallbackProcesser {
             this.osw = new OutputStreamWriter(this.response.getOutputStream());
             }
 //            this.osw.write("\ufeff");
+
 //            this.osw.write(new String(new byte[] { (byte) 0xEF, (byte) 0xBB,(byte) 0xBF }));
             this.osw.write(Const.CSV_HEAD);
             this.osw.write("\n");
