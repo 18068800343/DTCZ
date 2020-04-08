@@ -710,16 +710,10 @@
                     $(".selectpicker").selectpicker({
                         noneSelectedText: '请选择',
                     });
-                    if (user.lastMonitoringSite != null && user.lastMonitoringSite != "" && user.lastMonitoringSite != undefined) {
-                        if (user.lastMonitoringSite.indexOf(",") != -1) {
-                            $("#zhandian").val(user.lastMonitoringSite.split(","));
-                            $('#zhandian').selectpicker('val', user.lastMonitoringSite.split(","));
-                        } else {
-                            $("#zhandian").val(user.lastMonitoringSite);
-                            $('#zhandian').selectpicker('val', user.lastMonitoringSite);
-                        }
 
-                    }
+                    $("#zhandian").val(json.stationPort.split(","));
+                    $('#zhandian').selectpicker('val', json.stationPort.split(","));
+
                     $("#zhandian").selectpicker("refresh");
                     $('#zhandian').selectpicker('render');
                 }
