@@ -21,12 +21,13 @@ public class CallbackProcesser {
         String fileName = "result.csv";
         this.response.addHeader("Content-Type", "application/csv");
         this.response.addHeader("Content-Disposition", "attachment; filename="+fileName);
-        //this.response.setCharacterEncoding("utf-8");
+        this.response.setCharacterEncoding("utf-8");
         try {
             if(null==this.osw){
-            this.osw = new OutputStreamWriter(this.response.getOutputStream(), "UTF-8");
+            this.osw = new OutputStreamWriter(this.response.getOutputStream());
             }
-            this.osw.write(new String(new byte[] { (byte) 0xEF, (byte) 0xBB,(byte) 0xBF }));
+//            this.osw.write("\ufeff");
+//            this.osw.write(new String(new byte[] { (byte) 0xEF, (byte) 0xBB,(byte) 0xBF }));
             this.osw.write(Const.CSV_HEAD);
             this.osw.write("\n");
         } catch (IOException e) {
