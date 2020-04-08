@@ -4,19 +4,18 @@ package com.ldxx.service.Impl;
 import com.ldxx.bean.TongJiTableQuery;
 import com.ldxx.util.CallbackProcesser;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Service
 public class TradingDetailsService {
 
-    private final SqlSessionTemplate sqlSessionTemplate;
-
-    public TradingDetailsService(SqlSessionTemplate sqlSessionTemplate) {
-        this.sqlSessionTemplate = sqlSessionTemplate;
-    }
+    @Resource
+    private  SqlSessionTemplate sqlSessionTemplate;
 
     public void downloadAsCsv(TongJiTableQuery tongJiTableQuery, HttpServletResponse httpServletResponse)
             throws IOException {
