@@ -878,7 +878,7 @@ homePageInit.setLastEcharts = (json) => {
     var barData=json.cnt2.split(",")
 
     for (let i = 0; i < barData.length; i++) {
-        maxdataShadow.push(Math.max.apply(null, barData))
+        maxdataShadow.push(Math.max.apply(null, barData)==0?1:Math.max.apply(null, barData))
     }
     var option = {
         color: ['#6154FD','#FE545E'],
