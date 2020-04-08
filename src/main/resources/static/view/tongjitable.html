@@ -633,12 +633,12 @@
 <script src="../js/jquery.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 <!--<script src="../js/bootstrap-select.js"></script>-->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
 <script src="js/laydate/laydate.js"></script>
 <script src="js/bootstrap-select.min.js"></script>
 <script src="js/echarts.min(1).js" type="text/javascript" charset="utf-8"></script>
 <script src="js/datatables/jquery.dataTables.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
 <script src="../js/common-scripts.js"></script>
 <script src="../js/echartsOptionInit.js"></script>
 <script src="js/toastr.js"></script>
@@ -1174,8 +1174,9 @@
         alert("即将开始下载...")
        location.href= "/down/download_csv"
     }
-    // mainVm.timeRange = 1;
-    // mainVm.formatTimeRange();
+    mainVm.timeRange = "1";
+    $("#timeRange").val("1");
+    mainVm.formatTimeRange();
     mainVm.searchInit();
 
     $("#mainContent").find("th").on('click',function(){

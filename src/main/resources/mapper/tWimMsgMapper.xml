@@ -163,6 +163,11 @@
             ${columnName}
             DESC
         </if>
+        <if test="columnName =='' or columnName ==null ">
+            ORDER BY
+            Evt_Time
+            DESC
+        </if>
         <if test="start !=null">
             LIMIT #{start},
             #{length}
@@ -177,7 +182,11 @@
             aaa.${columnName}
             DESC
         </if>
-
+        <if test="columnName =='' or columnName ==null ">
+            ORDER BY
+            aaa.Evt_Time
+            DESC
+        </if>
     </select>
 
     <select id="getMeiRiCheLiuLiangByStationPort" resultType="int">
