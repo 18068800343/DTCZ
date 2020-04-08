@@ -81,6 +81,70 @@ public class tWimMsgController {
         return i;
     }
 
+    @RequestMapping("/settWimMsgCondiTion")
+    public int settWimMsgCondiTion(HttpSession session,  TongJiTableQuery tongJiTableQuery) {
+        String zhandianduankouhao="";
+        tUserInfo user = (tUserInfo) session.getAttribute("user");
+        String stationPort = tongJiTableQuery.getStationPort();
+        String startTime = tongJiTableQuery.getStartTime();
+        String endTime = tongJiTableQuery.getEndTime();
+        String chexing = tongJiTableQuery.getChexing();
+        Double startWeight = tongJiTableQuery.getStartWeight();
+        Double endWeight = tongJiTableQuery.getEndWeight();
+        if(stationPort!=null&&stationPort!=""){
+            zhandianduankouhao=stationPort;
+            if(user!=null){
+                updlastMonitoringSiteById(stationPort,user.getUsrId(),session);
+            }
+        }else{
+            if(user!=null){
+                zhandianduankouhao = user.getStationPort();
+                updlastMonitoringSiteById(user.getStationPort(),user.getUsrId(),session);
+            }
+        }
+        //格式化重量范围s
+        Double mid = 0.0;
+        if(null!=startWeight&&null!=endWeight&&startWeight>endWeight){
+            mid=startWeight;
+            startWeight = endWeight;
+            endWeight = mid;
+        }
+        //格式化车速
+        Map<String,Double> doubleMid = FormatUtil.changeBigAndSmall(tongJiTableQuery.getChesuStart(),tongJiTableQuery.getChesuEnd());
+        Double chesuStart = doubleMid.get("start");
+        Double chesuEnd = doubleMid.get("end");
+
+        //格式化车长
+        doubleMid = FormatUtil.changeBigAndSmall(tongJiTableQuery.getCheChangStart(),tongJiTableQuery.getCheChangEnd());
+        Double cheChangStart = doubleMid.get("start");
+        Double cheChangEnd = doubleMid.get("end");
+
+        //格式化温度
+        doubleMid = FormatUtil.changeBigAndSmall(tongJiTableQuery.getRoadTmpStart(),tongJiTableQuery.getRoadTmpEnd());
+        Double roadTmpStart = doubleMid.get("start");
+        Double roadTmpEnd = doubleMid.get("end");
+
+        //格式化超重比率
+        doubleMid = FormatUtil.changeBigAndSmall(tongJiTableQuery.getChaozhongStart(),tongJiTableQuery.getChaozhongEnd());
+        Double chaozhongStart = doubleMid.get("start");
+        Double chaozhongEnd = doubleMid.get("end");
+
+        tongJiTableQuery.setStartWeight(startWeight);
+        tongJiTableQuery.setEndWeight(endWeight);
+        tongJiTableQuery.setChesuStart(chesuStart);
+        tongJiTableQuery.setChesuEnd(chesuEnd);
+        tongJiTableQuery.setCheChangStart(cheChangStart);
+        tongJiTableQuery.setCheChangEnd(cheChangEnd);
+        tongJiTableQuery.setRoadTmpStart(roadTmpStart);
+        tongJiTableQuery.setRoadTmpEnd(roadTmpEnd);
+        tongJiTableQuery.setChaozhongStart(chaozhongStart);
+        tongJiTableQuery.setChaozhongEnd(chaozhongEnd);
+
+        tongJiTableQuery.setStationPort(zhandianduankouhao);
+        session.setAttribute("tongJiTableQuery",tongJiTableQuery);
+        return 1;
+    }
+
     @RequestMapping("/getAlltWimMsgByCondiTion")
     public PageData<tWimMsgVo> getAlltWimMsgByCondiTion(HttpSession session,  TongJiTableQuery tongJiTableQuery) {
 

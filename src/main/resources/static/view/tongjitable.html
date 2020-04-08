@@ -323,6 +323,7 @@
                 <option value="180">最近半年</option>
                 <option value="365">最近一年</option>
                 <option value="">自定义</option>
+                <option value="all">全部</option>
             </select>
             </div>
         </div>
@@ -937,6 +938,11 @@
                     this.endTime = "";
                 $("#startTime").removeAttr("disabled");
                 $("#endTime").removeAttr("disabled");
+                }else if(timeRange=='all'){
+                    this.startTime="";
+                    this.endTime = "";
+                    $("#startTime").attr("disabled",true);
+                    $("#endTime").attr("disabled",true);
                 }else{
                 $("#startTime").attr("disabled",true);
                 $("#endTime").attr("disabled",true);
@@ -1151,6 +1157,24 @@
 
     function hidMask() {
         myTool.mask.hide();
+    }
+
+    function setTongJiTableQuerySession() {
+        $.ajax({
+            type: 'POST',
+            url: "/tWimMsg/settWimMsgCondiTion",
+            dataType: 'json',
+            // 传给服务器的数据，可以添加我们自己的查询参数
+            data:mainVm.data,
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                lookxiangqing(json);
+                hidMask()
+                $("#allMsg1").modal('show');
+            }
+        });
     }
     function exportA() {
         alert("即将开始下载...")
