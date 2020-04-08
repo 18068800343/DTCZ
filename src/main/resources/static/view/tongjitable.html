@@ -651,10 +651,18 @@
         laydate.render({
             elem: '#startTime', //指定元素
             type: 'datetime',
+            trigger: 'click',   // 事件类型
+            done: function(value, date, startTime){
+            mainVm.startTime = value;
+        }
         });
         laydate.render({
             elem: '#endTime', //指定元素
-            type: 'datetime'
+            type: 'datetime',
+            trigger: 'click',   // 事件类型
+            done: function(value, date, endTime){
+                mainVm.endTime = value;
+            }
         });
         /*initchexing();*/
     });
@@ -799,7 +807,7 @@
                         data: function (param) {
                             param.stationPort = mainVm.stationPort;
                             param.chexing = "";
-                            param.startTime = mainVm.startTime;400
+                            param.startTime = mainVm.startTime;
                             param.endTime = mainVm.endTime;
                             param.endWeight = mainVm.endWeight;
                             param.startWeight = mainVm.startWeight;
@@ -935,7 +943,7 @@
                 const end = new Date();
                 const start = new Date();
                 start.setTime(start.getTime() - 3600 * 1000 * 24 * timeRange);
-                end.setTime(end.getTime() + 3600 * 1000 * 24 * 1);
+                end.setTime(end.getTime());
                 this.startTime = start.Format("yyyy-MM-dd hh:mm:ss");
                 this.endTime = end.Format("yyyy-MM-dd hh:mm:ss");
                 }
