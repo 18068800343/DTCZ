@@ -21,12 +21,8 @@ class Consumer extends Thread {
 
 public class Main {
     public static void main(String[] args) {
-        Buffer buffer = new Buffer();
-        Producer p = new Producer(buffer);
-        Consumer c = new Consumer(buffer);
+        final Buffer buffer = new Buffer();
 
-        p.start();
-        c.start();
     }
 }
 
@@ -49,8 +45,8 @@ class Producer extends Thread {
 }
 
 class Buffer {
-    private int data;
-    private boolean empty;
+    public int data;
+    public boolean empty;
 
     public Buffer() {
         this.empty = true;

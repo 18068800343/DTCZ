@@ -22,7 +22,18 @@ public class DateUtil {
 		String dateString = format.format(date);
 		return dateString;
 	}
+	public static String getLastMonthStr(){
+		Date date=new Date();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - 1); // 设置为上一个月
+		date = calendar.getTime();
+		SimpleDateFormat format= new SimpleDateFormat("yyyy-MM");
+		String dateString = format.format(date);
+		return dateString;
+	}
 	public static void main(String[] args) {
-		
+		String str = DateUtil.getLastMonthStr();
+		System.out.println(str);
 	}
 }

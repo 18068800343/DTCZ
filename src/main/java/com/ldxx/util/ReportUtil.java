@@ -61,7 +61,12 @@ public class ReportUtil {
 	public String getReportPath(String cmdOp,Integer timeType){
 
 		String path = "";
-		String op = reportUtil.config.getReportCmd()+ File.separator+ cmdOp;
+		String op = "";
+		if(timeType==1){
+			op = reportUtil.config.getReportCmd()+ File.separator+ cmdOp;
+		}else {
+			op = reportUtil.config.getReportCmdMonth()+ File.separator+ cmdOp;
+		}
 		try {
 			Process process = Runtime.getRuntime().exec(op);
 			InputStream is = process.getInputStream();

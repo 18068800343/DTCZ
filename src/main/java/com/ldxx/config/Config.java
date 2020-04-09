@@ -15,6 +15,15 @@ public class Config {
 
     private String reportPath;
     private String reportCmd;
+    private String reportCmdMonth;
+
+    public String getReportCmdMonth() {
+        return reportCmdMonth;
+    }
+
+    public void setReportCmdMonth(String reportCmdMonth) {
+        this.reportCmdMonth = reportCmdMonth;
+    }
 
     public String getReportPath() {
         return reportPath;
