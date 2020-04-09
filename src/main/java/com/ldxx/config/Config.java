@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 public class Config {
 
     private String reportPath;
+
     private String reportCmd;
     private String reportCmdMonth;
 
