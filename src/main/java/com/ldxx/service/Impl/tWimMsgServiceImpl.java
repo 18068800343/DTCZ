@@ -46,6 +46,17 @@ public class tWimMsgServiceImpl implements tWimMsgService {
     }
 
     @Override
+    public List<tWimMsgVo>  getAlltWimMsgYiChangByConditionByPage(TongJiTableQuery tongJiTableQuery) {
+
+        //PageHelper.startPage(tongJiTableQuery.getStart(), tongJiTableQuery.getLength());
+
+
+        List<tWimMsgVo> list = dao.getAlltWimMsgYiChangByCondition(tongJiTableQuery);
+        //PageInfo<tWimMsgVo> pageInfo = new PageInfo<>(list);
+        return list;
+    }
+
+    @Override
     public int getMeiRiCheLiuLiangByStationPort(String stationPort) {
         return dao.getMeiRiCheLiuLiangByStationPort(stationPort);
     }
@@ -59,6 +70,12 @@ public class tWimMsgServiceImpl implements tWimMsgService {
     public int getCountByTableName(@Param("tjq") TongJiTableQuery tongJiTableQuery) {
 
         return dao.getCountByTableName(tongJiTableQuery);
+    }
+
+    @Override
+    public int getCountYiChangByTableName(@Param("tjq") TongJiTableQuery tongJiTableQuery) {
+
+        return dao.getCountYiChangByTableName(tongJiTableQuery);
     }
 
     @Override
@@ -84,5 +101,9 @@ public class tWimMsgServiceImpl implements tWimMsgService {
     @Override
     public tWimMsgVo gettWimMsgById(String idLocal) {
         return dao.gettWimMsgById(idLocal);
+    }
+    @Override
+    public tWimMsgVo gettWimMsgYiChangById(String idLocal) {
+        return dao.gettWimMsgYiChangById(idLocal);
     }
 }

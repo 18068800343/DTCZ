@@ -1,6 +1,7 @@
 package com.ldxx.controller;
 
 import com.ldxx.Thread.PageCountCallable;
+import com.ldxx.Thread.PageCountYiChangCallable;
 import com.ldxx.bean.*;
 import com.ldxx.dao.StationSiteDao;
 import com.ldxx.dao.tUserInfoDao;
@@ -233,6 +234,94 @@ public class tWimMsgController {
         return pd;
     }
 
+    @RequestMapping("/getAlltWimMsgYiChangByCondiTion")
+    public PageData<tWimMsgVo> getAlltWimMsgYiChangByCondiTion(HttpSession session,  TongJiTableQuery tongJiTableQuery) {
+
+
+
+        String zhandianduankouhao="";
+        tUserInfo user = (tUserInfo) session.getAttribute("user");
+        String stationPort = tongJiTableQuery.getStationPort();
+        String startTime = tongJiTableQuery.getStartTime();
+        String endTime = tongJiTableQuery.getEndTime();
+        String chexing = tongJiTableQuery.getChexing();
+        Double startWeight = tongJiTableQuery.getStartWeight();
+        Double endWeight = tongJiTableQuery.getEndWeight();
+           if(stationPort!=null&&stationPort!=""){
+            zhandianduankouhao=stationPort;
+            if(user!=null){
+                updlastMonitoringSiteById(stationPort,user.getUsrId(),session);
+            }
+        }else{
+             if(user!=null){
+                zhandianduankouhao = user.getStationPort();
+                updlastMonitoringSiteById(user.getStationPort(),user.getUsrId(),session);
+            }
+        }
+           //格式化重量范围s
+        Double mid = 0.0;
+        if(null!=startWeight&&null!=endWeight&&startWeight>endWeight){
+            mid=startWeight;
+            startWeight = endWeight;
+            endWeight = mid;
+        }
+        //格式化车速
+        Map<String,Double> doubleMid = FormatUtil.changeBigAndSmall(tongJiTableQuery.getChesuStart(),tongJiTableQuery.getChesuEnd());
+        Double chesuStart = doubleMid.get("start");
+        Double chesuEnd = doubleMid.get("end");
+
+        //格式化车长
+        doubleMid = FormatUtil.changeBigAndSmall(tongJiTableQuery.getCheChangStart(),tongJiTableQuery.getCheChangEnd());
+        Double cheChangStart = doubleMid.get("start");
+        Double cheChangEnd = doubleMid.get("end");
+
+        //格式化温度
+        doubleMid = FormatUtil.changeBigAndSmall(tongJiTableQuery.getRoadTmpStart(),tongJiTableQuery.getRoadTmpEnd());
+        Double roadTmpStart = doubleMid.get("start");
+        Double roadTmpEnd = doubleMid.get("end");
+
+        //格式化超重比率
+        doubleMid = FormatUtil.changeBigAndSmall(tongJiTableQuery.getChaozhongStart(),tongJiTableQuery.getChaozhongEnd());
+        Double chaozhongStart = doubleMid.get("start");
+        Double chaozhongEnd = doubleMid.get("end");
+
+        tongJiTableQuery.setStartWeight(startWeight);
+        tongJiTableQuery.setEndWeight(endWeight);
+        tongJiTableQuery.setChesuStart(chesuStart);
+        tongJiTableQuery.setChesuEnd(chesuEnd);
+        tongJiTableQuery.setCheChangStart(cheChangStart);
+        tongJiTableQuery.setCheChangEnd(cheChangEnd);
+        tongJiTableQuery.setRoadTmpStart(roadTmpStart);
+        tongJiTableQuery.setRoadTmpEnd(roadTmpEnd);
+        tongJiTableQuery.setChaozhongStart(chaozhongStart);
+        tongJiTableQuery.setChaozhongEnd(chaozhongEnd);
+
+        tongJiTableQuery.setStationPort(zhandianduankouhao);
+
+        List<tWimMsgVo> list= service.getAlltWimMsgYiChangByConditionByPage(tongJiTableQuery);
+        PageData<tWimMsgVo> pd = new PageData<>();
+        pd.setData(list);
+        ExecutorService threadPoolExecutor = Executors.newFixedThreadPool(2);
+        Callable callable = new PageCountYiChangCallable(tongJiTableQuery);
+
+        Future<Integer> res = null;
+        res = threadPoolExecutor.submit(callable);
+        try {
+            Integer count  = res.get();
+            pd.setiTotalRecords(count);
+            pd.setiTotalDisplayRecords(count);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        session.setAttribute("tongJiTableQueryYiChang",tongJiTableQuery);
+        /*redisServiceImpl.set("tongJiTableQuery",tongJiTableQuery);*/
+        //TongJiTableQuery tongJiTableQuery1 = (TongJiTableQuery) redisServiceImpl.get("tongJiTableQuery");
+        threadPoolExecutor.shutdown();
+        return pd;
+    }
+
     /**
      * 每日车流量
      * @param stationPort
@@ -418,6 +507,10 @@ public class tWimMsgController {
     @RequestMapping("/gettWimMsgById")
     public tWimMsgVo gettWimMsgById(String idLocal) {
         return service.gettWimMsgById(idLocal);
+    }
+    @RequestMapping("/gettWimMsgYiChangById")
+    public tWimMsgVo gettWimMsgYiChangById(String idLocal) {
+        return service.gettWimMsgYiChangById(idLocal);
     }
 
 

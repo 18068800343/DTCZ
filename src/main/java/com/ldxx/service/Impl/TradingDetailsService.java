@@ -26,4 +26,14 @@ public class TradingDetailsService {
         /*httpServletResponse.getWriter().flush();
         httpServletResponse.getWriter().close();*/
     }
+
+    public void downloadYiChangAsCsv(TongJiTableQuery tongJiTableQuery, HttpServletResponse httpServletResponse)
+            throws IOException {
+
+        CustomResultHandler customResultHandler = new CustomResultHandler(new CallbackProcesser(httpServletResponse));
+        sqlSessionTemplate.select(
+                "com.ldxx.dao.tWimMsgDao.getAlltWimMsgYiChangByCondition", tongJiTableQuery, customResultHandler);
+        /*httpServletResponse.getWriter().flush();
+        httpServletResponse.getWriter().close();*/
+    }
 }

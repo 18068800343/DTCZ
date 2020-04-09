@@ -188,6 +188,121 @@
             DESC
         </if>
     </select>
+    <select id="getAlltWimMsgYiChangByCondition" fetchSize="-2147483648" resultType="tWimMsgVo">
+        SELECT * FROM (SELECT
+        CASE aa.Direction
+        WHEN 0 THEN
+        '正常行驶'
+        ELSE
+        '逆行'
+        END AS directionName,
+        CASE aa.Is_Straddle
+        WHEN 0 THEN
+        '否'
+        ELSE
+        '是'
+        END AS isStraddleName,
+        aa.Lane_No as laneNoName,
+        CASE WHEN aa.Over_Weight_Ratio>0 THEN aa.Over_Weight_Ratio
+        ELSE '不超载'
+        end as overWeightRatioName,
+        aa.*, b.Station_Name,
+        b.Route_Name,
+        concat_ws(
+        "+",
+        b.Station_Name,
+        b.Route_Name
+        ) AS stationNameRouteName,
+        c.License_Plate_Color,
+        d.Vehicle_Type_Name,IFNULL(e.Overload_Standard,49000) as maxWeight
+        FROM
+        (select * from t_vehicle_msg_abnormal a
+        <where>
+            <if test="startTime!=null and startTime!='' ">
+                and #{startTime} &lt;= msg_time
+            </if>
+            <if test="endTime!=null and endTime!='' ">
+                and msg_time &lt;= #{endTime}
+            </if>
+            <if test="startWeight!=null and startWeight!='' ">
+                and #{startWeight} &lt; total_weight
+            </if>
+            <if test="endWeight!=null and endWeight!='' ">
+                and total_weight &lt; #{endWeight}
+            </if>
+
+            <if test="chesuStart!=null and chesuStart!='' ">
+                and #{chesuStart} &lt; speed
+            </if>
+            <if test="chesuEnd!=null and chesuEnd!='' ">
+                and speed &lt; #{chesuEnd}
+            </if>
+            <if test="cheChangStart!=null and cheChangStart!='' ">
+                and #{cheChangStart} &lt; length
+            </if>
+            <if test="cheChangEnd!=null and cheChangEnd!='' ">
+                and length &lt; #{cheChangEnd}
+            </if>
+
+            <if test="roadTmpStart!=null and roadTmpStart!='' ">
+                and #{roadTmpStart} &lt; Temperature
+            </if>
+            <if test="roadTmpEnd!=null and roadTmpEnd!='' ">
+                and Temperature &lt; #{roadTmpEnd}
+            </if>
+
+            <if test="chaozhongStart !=null and chaozhongStart!=''">
+                and Over_Weight_Ratio >0
+            </if>
+            <if test="chaozhongEnd!=null and chaozhongEnd!='' ">
+                and Over_Weight_Ratio &lt; #{chaozhongEnd}
+            </if>
+
+            <if test="chepai!=null and chepai!='' ">
+                and Plate like CONCAT('%',#{chepai},'%')
+            </if>
+
+            <if test="zhoushu!=null and zhoushu!='' ">
+                and Axles_Count = #{zhoushu}
+            </if>
+
+
+            <include refid="CheXing_IP_sql_tongji">
+            </include>
+            <include refid="StationIP_sql_tongji">
+            </include>
+
+        </where>
+        <if test="columnName !='' and columnName !=null ">
+            ORDER BY
+            ${columnName}
+            DESC
+        </if>
+        <if test="columnName =='' or columnName ==null ">
+            ORDER BY
+            Evt_Time
+            DESC
+        </if>
+        <if test="start !=null">
+            LIMIT #{start},
+            #{length}
+        </if>
+        ) aa
+        LEFT JOIN station_site b ON aa.Station_IP = b.Station_Port
+        LEFT JOIN license_plate c ON aa.Plate_Color = c.License_Plate_No
+        LEFT JOIN vehicle_type d ON aa.Class_Index = d.Vehicle_Type_No
+        LEFT JOIN overload_standard e on aa.Axles_Count=e.Axle_Number)aaa
+        <if test="columnName !='' and columnName !=null ">
+            ORDER BY
+            aaa.${columnName}
+            DESC
+        </if>
+        <if test="columnName =='' or columnName ==null ">
+            ORDER BY
+            aaa.Evt_Time
+            DESC
+        </if>
+    </select>
 
     <select id="getMeiRiCheLiuLiangByStationPort" resultType="int">
         SELECT COUNT(*) from t_vehicle_msg_today where  Station_IP=#{stationPort} AND date(Evt_Time) = curdate()
@@ -290,6 +405,64 @@
 
     <select id="getCountByTableName" resultType="int">
         SELECT COUNT(*) from t_vehicle_msg a
+        <where>
+            <if test="startTime!=null and startTime!='' ">
+                and #{startTime} &lt;= msg_time
+            </if>
+            <if test="endTime!=null and endTime!='' ">
+                and msg_time &lt;= #{endTime}
+            </if>
+            <if test="startWeight!=null and startWeight!='' ">
+                and #{startWeight} &lt; total_weight
+            </if>
+            <if test="endWeight!=null and endWeight!='' ">
+                and total_weight &lt; #{endWeight}
+            </if>
+
+            <if test="chesuStart!=null and chesuStart!='' ">
+                and #{chesuStart} &lt; speed
+            </if>
+            <if test="chesuEnd!=null and chesuEnd!='' ">
+                and speed &lt; #{chesuEnd}
+            </if>
+            <if test="cheChangStart!=null and cheChangStart!='' ">
+                and #{cheChangStart} &lt; length
+            </if>
+            <if test="cheChangEnd!=null and cheChangEnd!='' ">
+                and length &lt; #{cheChangEnd}
+            </if>
+            <if test="roadTmpStart!=null and roadTmpStart!='' ">
+                and #{roadTmpStart} &lt; Temperature
+            </if>
+            <if test="roadTmpEnd!=null and roadTmpEnd!='' ">
+                and Temperature &lt; #{roadTmpEnd}
+            </if>
+
+            <if test="chaozhongStart !=null and chaozhongStart!=''">
+                and  Over_Weight_Ratio >0
+            </if>
+            <if test="chaozhongEnd!=null and chaozhongEnd!='' ">
+                and Over_Weight_Ratio &lt; #{chaozhongEnd}
+            </if>
+
+            <if test="chepai!=null and chepai!='' ">
+                and Plate like CONCAT('%',#{chepai},'%')
+            </if>
+
+            <if test="zhoushu!=null and zhoushu!='' ">
+                and Axles_Count = #{zhoushu}
+            </if>
+
+
+            <include refid="CheXing_IP_sql_tongji">
+            </include>
+            <include refid="StationIP_sql_tongji">
+            </include>
+
+        </where>
+    </select>
+    <select id="getCountYiChangByTableName" resultType="int">
+        SELECT COUNT(*) from t_vehicle_msg_abnormal a
         <where>
             <if test="startTime!=null and startTime!='' ">
                 and #{startTime} &lt;= msg_time
@@ -598,6 +771,28 @@
         a.*,b.Station_Name,b.Route_Name,concat_ws("+",b.Station_Name,b.Route_Name) as stationNameRouteName,
         c.License_Plate_Color,d.Vehicle_Type_Name
         from t_vehicle_msg a
+        LEFT JOIN station_site b on a.Station_IP=b.Station_Port
+        LEFT JOIN license_plate c ON a.Plate_Color=c.License_Plate_No
+        LEFT JOIN vehicle_type d ON a.Class_Index=d.Vehicle_Type_No
+        where a.id_local=#{idLocal}
+    </select>
+    <select id="gettWimMsgYiChangById" resultType="tWimMsgVo">
+        select CASE a.Direction WHEN 0 THEN '正常行驶'
+        ELSE '逆行'
+        END as directionName,
+        CASE a.Is_Straddle WHEN 0 THEN '否'
+        ELSE '是'
+        end as isStraddleName,
+         CASE a.Lane_No WHEN 1 THEN '超车道'
+        WHEN 2 THEN '行车道'
+        ELSE '应急车道'
+        end as  laneNoName,
+        CASE  WHEN a.Over_Weight_Ratio>0  THEN '超载'
+        ELSE '不超载'
+        end as overWeightRatioName,
+        a.*,b.Station_Name,b.Route_Name,concat_ws("+",b.Station_Name,b.Route_Name) as stationNameRouteName,
+        c.License_Plate_Color,d.Vehicle_Type_Name
+        from t_vehicle_msg_abnormal a
         LEFT JOIN station_site b on a.Station_IP=b.Station_Port
         LEFT JOIN license_plate c ON a.Plate_Color=c.License_Plate_No
         LEFT JOIN vehicle_type d ON a.Class_Index=d.Vehicle_Type_No

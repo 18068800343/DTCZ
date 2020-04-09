@@ -15,11 +15,15 @@ public interface tWimMsgService {
 
     List<tWimMsgVo> getAlltWimMsgByConditionByPage(TongJiTableQuery tongJiTableQuery);
 
+    List<tWimMsgVo> getAlltWimMsgYiChangByConditionByPage(TongJiTableQuery tongJiTableQuery);
+
     int getMeiRiCheLiuLiangByStationPort(String stationPort);
 
     int getMeiRiChaoZhongByStationPort(String stationPort);
 
     int getCountByTableName(@Param("tjq") TongJiTableQuery tongJiTableQuery);
+
+    int getCountYiChangByTableName(@Param("tjq") TongJiTableQuery tongJiTableQuery);
 
     int getMeiRiGuanJianCheLiangByStationPort(String stationPort);
 
@@ -30,4 +34,6 @@ public interface tWimMsgService {
     List<tWimMsgVo> getMeiRiCheLiuLiangShujuByStationPort(String stationPort);
 
     tWimMsgVo gettWimMsgById(String idLocal);
+
+    tWimMsgVo gettWimMsgYiChangById(String idLocal);
 }

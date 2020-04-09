@@ -32,6 +32,14 @@ public class HelloController {
         tongJiTableQuery.setLength(null);
         tradingDetailsService.downloadAsCsv(tongJiTableQuery, response);
     }
+    @GetMapping("/download_csv_yichang")
+    public void downloadYiChangAsCsv(HttpServletResponse response, HttpSession session)
+            throws IOException {
+        TongJiTableQuery tongJiTableQuery = (TongJiTableQuery) session.getAttribute("tongJiTableQueryYiChang");
+        tongJiTableQuery.setStart(null);
+        tongJiTableQuery.setLength(null);
+        tradingDetailsService.downloadYiChangAsCsv(tongJiTableQuery, response);
+    }
 
 
     @RequestMapping(value = "/saveImg",method = RequestMethod.POST)

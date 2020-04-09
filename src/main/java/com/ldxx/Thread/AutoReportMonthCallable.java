@@ -10,6 +10,6 @@ public class AutoReportMonthCallable implements Runnable {
         //或缺前一天日期
         String date = DateUtil.getLastMonthStr();
         //ReportUtil.getInstance().getReportPath("CreateDayReport.exe 2 "+date,1);
-        ReportUtil.getInstance().getReportPath("CreateMonthReport.exe "+date,1);
+        ReportUtil.getInstance().getReportPath("CreateMonthReport.exe "+date,2);
     }
 }

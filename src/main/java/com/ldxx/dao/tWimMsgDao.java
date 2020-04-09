@@ -14,6 +14,8 @@ public interface tWimMsgDao {
 
     List<tWimMsgVo> getAlltWimMsgByCondition( TongJiTableQuery tongJiTableQuery);
 
+    List<tWimMsgVo> getAlltWimMsgYiChangByCondition( TongJiTableQuery tongJiTableQuery);
+
     CheLiuLiangEchartsList getCheLiuLiangEchartsList(String stationPorts,Integer link,Integer limit);
 
 
@@ -32,6 +34,8 @@ public interface tWimMsgDao {
 
     int getCountByTableName(TongJiTableQuery tongJiTableQuery);
 
+    int getCountYiChangByTableName(TongJiTableQuery tongJiTableQuery);
+
     int getMeiRiChaoZhongByStationPort(@Param("stationPort")String stationPort);
 
     int getMeiRiGuanJianCheLiangByStationPort(@Param("stationPort")String stationPort);
@@ -43,6 +47,7 @@ public interface tWimMsgDao {
     List<tWimMsgVo> getMeiRiCheLiuLiangShujuByStationPort(@Param("stationPort")String stationPort);
 
     tWimMsgVo gettWimMsgById(String idLocal);
+    tWimMsgVo gettWimMsgYiChangById(String idLocal);
 
     CheLiuLiangEchartsList getGuanJianChaoZhongCheLiangEchartsList2(Integer lv1,Integer lv2,String stationPorts);
 
