@@ -16,6 +16,44 @@
     <!--<link rel="stylesheet" type="text/css" href="css/layui.css" />-->
     <link rel="stylesheet" href="css/toastr.css"/>
     <style>
+    /*
+    *
+    *   CSS部分
+    *
+    * */
+        .jump_button{
+            width: 54px;
+            height: 33px;
+            color: #fff;
+            background: #65CEA7;
+        }
+
+        .my_dataTables_jump{
+            display:inline-block;
+            float:right;
+            margin-top:15px;
+            position: relative;
+            top:4px;
+            left:4px;
+        }
+        .my_dataTables_jump span{
+            width: 54px;
+            height: 33px;
+            border:1px solid #EFF2F7;
+            background-color: #EFF2F7;
+            color:#535351;
+            cursor: auto;
+        }
+        .my_dataTables_jump span:hover{
+            color:#535351;
+        }
+        .my_dataTables_jump input{
+            height:34px;
+            width: 65px;
+            border:1px solid #EFF2F7;
+            background-color: #EFF2F7;
+        }
+
         #mainContent_info {
             margin-left: 5%;
         }
@@ -629,6 +667,21 @@
 </div>
 </div>
 <!-- allMsg1 -->
+
+/*
+*
+*   HTML部分
+*
+* */
+<textarea id="jump_page_html" style="display:none">
+    <div class="my_dataTables_jump">
+        <span class="btn">
+            跳转
+        </span>
+        <input type='text' id='jump_page_space' class='btn'>
+        <button type="button" id="jump_page_button" class="jump_button btn">确认</button>
+    </div>
+</textarea>
 </body>
 <script src="../js/jquery.js"></script>
 <script src="../js/bootstrap.min.js"></script>
@@ -745,6 +798,7 @@
             }
         });
     }*/
+    let table;
 
     //新建生产计划
     let mainVm = new Vue({
@@ -788,7 +842,7 @@
 
                                 });*/
 
-                let table = $('#mainContent').dataTable({
+                     table = $('#mainContent').DataTable({
                     "deferRender": true,
                     "processing": true,
                     "bDestroy": true,
@@ -887,6 +941,14 @@
                             }
                         }
                     ],
+                    // 添加自定义跳转
+                    "fnDrawCallback": function () {
+                        let jump_page = $('#jump_page_html').text(); //选择textarea中预存的代码
+                        $("#mainContent_paginate").append(jump_page);
+                        $("#jump_page_button").click(function(){
+                            jump_page_action();
+                        });
+                    },
                     "order": [],
                     "ordering": false,
                     "oLanguage": { //国际化配置
@@ -1184,6 +1246,16 @@
         mainVm.columnName = columnName;
         mainVm.searchInit();
     });
+
+    //跳转函数——页码修改、表单数据重构-即重发ajax进行渲染
+    function jump_page_action(){
+        let page = parseInt($('#jump_page_space').val());//要转整形
+
+        let page_num = parseInt($('#mainContent_paginate span a').last().text()); //选取“下一页” 前一个元素的值，也就是最大页数
+        if(page >= 1 && page <= page_num) {  //跳转的页数在可选范围中（大于等于1，小于等于最大页）
+            table.page(page - 1).draw('page'); //
+        }
+    }
 </script>
 
 
