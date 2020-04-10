@@ -101,7 +101,10 @@
         c.License_Plate_Color,
         d.Vehicle_Type_Name,IFNULL(e.Overload_Standard,49000) as maxWeight
         FROM
-        (select * from t_vehicle_msg a
+        (
+        SELECT * FROM t_vehicle_msg WHERE id_local in (
+        SELECT id_local from (
+        select id_local from t_vehicle_msg a
         <where>
             <if test="startTime!=null and startTime!='' ">
                 and #{startTime} &lt;= Evt_Time
@@ -169,9 +172,9 @@
         </if>
         <if test="start !=null">
             LIMIT #{start},
-            #{length}
+            #{length} ) an
         </if>
-        ) aa
+        )) aa
         LEFT JOIN station_site b ON aa.Station_IP = b.Station_Port
         LEFT JOIN license_plate c ON aa.Plate_Color = c.License_Plate_No
         LEFT JOIN vehicle_type d ON aa.Class_Index = d.Vehicle_Type_No

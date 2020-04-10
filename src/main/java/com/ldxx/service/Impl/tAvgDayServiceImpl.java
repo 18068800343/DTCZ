@@ -56,8 +56,10 @@ public class tAvgDayServiceImpl implements tAvgDayService {
 
         String columnNameStr = dao.getColumnNameStrByTableName("t_avg_month");
         String columnName = dao.getColumnNameStrByTableName("t_avg_month").split(",")[columnIndex-1];
+
         List listX = dao.getEchartsListByLaneNoAndColumnXMonth(stationIP,columnName,laneNo);
         List listY = dao.getEchartsListByLaneNoAndColumnYMonth(stationIP,columnName,laneNo);
+
         map.put("y",listX);
         map.put("x",listY);
 
