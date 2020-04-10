@@ -6,7 +6,8 @@ import com.ldxx.bean.Accessory;
 import org.apache.ibatis.annotations.Param;
 
 public interface AccessoryDao {
-	
+
+
 	public int addAccessory(@Param("accessory") List<Accessory> accessory);
 	
 	public int deleteAccessory(@Param("id") String id);
