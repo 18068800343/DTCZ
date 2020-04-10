@@ -800,7 +800,7 @@
     }*/
     let table;
 
-    let order_flag=false;
+    let order_flag;
     //新建生产计划
     let mainVm = new Vue({
         el: '#mainVm',
@@ -877,7 +877,7 @@
                                 }else{
                                 param.columnName = mainVm.columnName + " DESC";
                                 }
-                                order_flag = !order_flag;
+                                // order_flag = !order_flag;
                             }
                             return param;
                         },
@@ -1249,8 +1249,16 @@
     mainVm.formatTimeRange();
     mainVm.searchInit();
 
+    let last_page_column='';
     $("#mainContent").find("th").on('click',function(){
+
         let columnName = $(this).attr("data-id");
+        if(last_page_column == columnName  ){
+            order_flag = !order_flag;
+        }else{
+            order_flag=false
+        }
+        last_page_column =  columnName;
         mainVm.columnName = columnName;
         mainVm.searchInit();
     });

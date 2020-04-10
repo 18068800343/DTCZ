@@ -104,10 +104,10 @@
         (select * from t_vehicle_msg a
         <where>
             <if test="startTime!=null and startTime!='' ">
-                and #{startTime} &lt;= msg_time
+                and #{startTime} &lt;= Evt_Time
             </if>
             <if test="endTime!=null and endTime!='' ">
-                and msg_time &lt;= #{endTime}
+                and Evt_Time &lt;= #{endTime}
             </if>
             <if test="startWeight!=null and startWeight!='' ">
                 and #{startWeight} &lt; total_weight
@@ -274,7 +274,6 @@
         <if test="columnName !='' and columnName !=null ">
             ORDER BY
             ${columnName}
-            DESC
         </if>
         <if test="columnName =='' or columnName ==null ">
             ORDER BY
@@ -293,7 +292,6 @@
         <if test="columnName !='' and columnName !=null ">
             ORDER BY
             aaa.${columnName}
-            DESC
         </if>
         <if test="columnName =='' or columnName ==null ">
             ORDER BY
@@ -405,10 +403,10 @@
         SELECT COUNT(*) from t_vehicle_msg a
         <where>
             <if test="startTime!=null and startTime!='' ">
-                and #{startTime} &lt;= msg_time
+                and #{startTime} &lt;= Evt_Time
             </if>
             <if test="endTime!=null and endTime!='' ">
-                and msg_time &lt;= #{endTime}
+                and Evt_Time &lt;= #{endTime}
             </if>
             <if test="startWeight!=null and startWeight!='' ">
                 and #{startWeight} &lt; total_weight
@@ -463,10 +461,10 @@
         SELECT COUNT(*) from t_vehicle_msg_abnormal a
         <where>
             <if test="startTime!=null and startTime!='' ">
-                and #{startTime} &lt;= msg_time
+                and #{startTime} &lt;= Evt_Time
             </if>
             <if test="endTime!=null and endTime!='' ">
-                and msg_time &lt;= #{endTime}
+                and Evt_Time &lt;= #{endTime}
             </if>
             <if test="startWeight!=null and startWeight!='' ">
                 and #{startWeight} &lt; total_weight
