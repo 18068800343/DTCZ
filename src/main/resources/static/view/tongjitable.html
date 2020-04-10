@@ -480,7 +480,7 @@
             <th>车牌颜色<img src="img/bottom2.png"/></th>
             <th data-id="Length">长<img src="img/bottom2.png"/></th>
             <th data-id="Speed">车速(km/h)<img src="img/bottom2.png"/></th>
-            <th>轴数<img src="img/bottom2.png"/></th>
+            <th data-id="Axles_Count">轴数<img src="img/bottom2.png"/></th>
             <th>超限值(kg)<img src="img/bottom2.png"/></th>
             <th data-id="Total_Weight">总重量(kg)<img src="img/bottom2.png"/></th>
             <th data-id="Over_Weight_Ratio">超载率<img src="img/bottom2.png"/></th>
@@ -800,6 +800,7 @@
     }*/
     let table;
 
+    let order_flag=false;
     //新建生产计划
     let mainVm = new Vue({
         el: '#mainVm',
@@ -870,7 +871,14 @@
                             param.roadTmpEnd = mainVm.roadTmpEnd;
                             param.chaozhongStart = mainVm.chaozhongStart;
                             param.chaozhongEnd = mainVm.chaozhongEnd;
-                            param.columnName = mainVm.columnName;
+                            if(''!=mainVm.columnName&&mainVm.columnName!=null){
+                                if(order_flag){
+                                param.columnName = mainVm.columnName + " ASC";
+                                }else{
+                                param.columnName = mainVm.columnName + " DESC";
+                                }
+                                order_flag = !order_flag;
+                            }
                             return param;
                         },
                         //用于处理服务器端返回的数据。 dataSrc是DataTable特有的
