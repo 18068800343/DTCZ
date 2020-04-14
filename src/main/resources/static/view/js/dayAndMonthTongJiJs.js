@@ -69,7 +69,7 @@ let initTableTbody = (json) => {
                 let dom = tableDom.find("tfoot");
                 let img;
                 if(Strack3){
-                    img="<td rowspan='"+(json.length)+"'>" + getimgUrl() + "</td>" ;
+                    img="<td width='20%' rowspan='"+(json.length)+"'>" + getimgUrl() + "</td>" ;
                     Strack3=false;
                 }
                 $(dom).append("<tr align='center'>" +
@@ -120,7 +120,7 @@ let initTableTbody = (json) => {
                 let dom = tableDom.find("tfoot");
                 let img;
                 if(Strack2){
-                    img="<td rowspan='"+(json.length)+"'>" + getimgUrl() + "</td>" ;
+                    img="<td width='20%' rowspan='"+(json.length)+"'>" + getimgUrl() + "</td>" ;
                     Strack2=false;
                 }
                 $(dom).append("<tr align='center'>" +
@@ -175,7 +175,7 @@ let initTableTbody = (json) => {
                 let dom = tableDom.find("tfoot");
                 let img;
                 if(Strack){
-                    img="<td rowspan='"+(json.length)+"'>" + getimgUrl() + "</td>" ;
+                    img="<td width='20%' rowspan='"+(json.length)+"'>" + getimgUrl() + "</td>" ;
                     Strack=false;
                 }
                 $(dom).append("<tr align='center'>" +
@@ -205,7 +205,7 @@ let getimgUrl= () =>{
             if(json!=null&&json!=''&&json.length!=0){
                 for(var i=0;i<json.length;i++){
                     var url=getLocalPath2()+json[i].acUrl;
-                    imgUrl=imgUrl+'<a target="_blank" href="'+url+'" ><img  src="'+url+'" class="popup" width="100" /></a>'
+                    imgUrl=imgUrl+'<a target="_blank" href="'+url+'" ><img  src="'+url+'" class="popup" style="max-width:300px !important;" /></a>'
                 }
             }else{
                 imgUrl=imgUrl+"无车道图"
@@ -404,7 +404,7 @@ let initTableTbodyMonth = (json) => {
                 let dom = tableDom.find("tfoot");
                 let img;
                 if(Strack3){
-                    img="<td rowspan='"+(json.length)+"'>" + getimgUrl() + "</td>" ;
+                    img="<td width='20%' rowspan='"+(json.length)+"'>" + getimgUrl() + "</td>" ;
                     Strack3=false;
                 }
                 $(dom).append("<tr align='center'>" +
@@ -455,7 +455,7 @@ let initTableTbodyMonth = (json) => {
                 let dom = tableDom.find("tfoot");
                 let img;
                 if(Strack2){
-                    img="<td rowspan='"+(json.length)+"'>" + getimgUrl() + "</td>" ;
+                    img="<td width='20%' rowspan='"+(json.length)+"'>" + getimgUrl() + "</td>" ;
                     Strack2=false;
                 }
                 $(dom).append("<tr align='center'>" +
@@ -509,7 +509,7 @@ let initTableTbodyMonth = (json) => {
                 let dom = tableDom.find("tfoot");
                 let img;
                 if(Strack){
-                    img="<td rowspan='"+(json.length)+"'>" + getimgUrl() + "</td>" ;
+                    img="<td width='20%' rowspan='"+(json.length)+"'>" + getimgUrl() + "</td>" ;
                     Strack=false;
                 }
                 $(dom).append("<tr align='center'>" +
