@@ -305,7 +305,7 @@
 
 
      
-        <div class="col-sm-2"  >
+        <div class="col-sm-2" style="width:4%;" >
         </div>
         <label class="col-sm-1	 control-label chexing"
                style=" width: 70px; line-height: 30px;font-weight:normal;">车型</label>
@@ -324,7 +324,7 @@
             </select>
         </div>
          <label for="" class="col-sm-2 control-label chaozhongbili" style="margin-left:13%;font-weight:normal;width:8%;">是否超载</label>
-                <div class="col-sm-2 czbl" style="width: 10%">
+                <div class="col-sm-2 czbl" style="width: 13%">
 <!--                    <input type="text" class="text8" value="请输入" v-model="chaozhongStart"
                            @input="checknum('chaozhongStart')"
                            style="border-radius: 5px;box-shadow: none;border:1px solid #DDD;padding:3px; ;height:34px;margin-left:-40px;">-->
@@ -366,21 +366,21 @@
             </div>
         </div>
       
-            <label class="col-sm-1	 control-label riqi kaishiriqi" style="width:7%;line-height: 30px; margin-left:2%;font-weight:normal;">开始时间</label>
+            <label class="col-sm-1	 control-label riqi kaishiriqi" style="width:7%;line-height: 30px;font-weight:normal;margin-left:-1%;">开始时间</label>
         <div class="col-sm-2 kaishiriqidiv" style="margin-left:-1.5%;">
             <!-- 样式1 -->
             <input type="text" v-model="startTime" id="startTime" value="请选择" disabled
-                  style="height: 34px;border-radius: 5px;box-shadow: none;width: 250%;border:1px solid #DDD;">
+                  style="height: 34px;border-radius: 5px;box-shadow: none;width: 246%;border:1px solid #DDD;">
         </div>
         <label class="col-sm-1	 control-label riqi jieshuriqi" style="width:7%; line-height: 30px;margin-left:13%;font-weight:normal; ">结束时间
         </label>
-        <div class="col-sm-2 jieshuriqidiv" style="width:5%;margin-left:-0.5%;padding-left: 17px;">
+        <div class="col-sm-2 jieshuriqidiv" style="width:6.2%;margin-left:-0.5%;padding-left: 17px;">
             <!-- 样式1 -->
 
             <input type="text" v-model="endTime" id="endTime" value="请选择" disabled
                    style="height: 34px;border-radius: 5px;box-shadow: none;width: 260%;border:1px solid #DDD;">
         </div>
-        <label for="" class="col-sm-2 control-label" style="margin-left:8.5%;font-weight:normal;width:5%;">车牌号</label>
+        <label for="" class="col-sm-2 control-label" style="margin-left:10.3%;font-weight:normal;width:5%;">车牌号</label>
         <div class="col-sm-2 chepai">
             <!-- 样式1 -->
             <input type="text" value="请输入" v-model="chepai"
@@ -433,7 +433,7 @@
                     <input type="text" class="text4" value="请输入" v-model="cheChangEnd" @input="checknum('cheChangEnd')"
                            style="height: 34px;border-radius: 5px;box-shadow: none;width:120%;margin-left: 30px;border:1px solid #DDD;padding:3px;">
                 </div>	
-                <label for="" class="col-sm-2 control-label chesu" style="margin-left:180px;font-weight:normal;">车速</label>
+                <label for="" class="col-sm-2 control-label chesu" style="margin-left:130px;font-weight:normal;">车速</label>
                 <div class="col-sm-2 chesuk" style="margin-left:-2.5%;width:5%;padding-left: 19px;">
                     <!-- 样式1 -->
                     <input type="text" class="text3" value="请输入" v-model="chesuStart" @input="checknum('chesuStart')"
