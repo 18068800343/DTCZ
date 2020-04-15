@@ -482,45 +482,79 @@
                     "color":"red",
                 })
                 var CheXingNum=[0,0,0,0,0];
-                setCheXingNumEChars(CheXingNum);
+                var CheXingNumbili=['0.00%','0.00%','0.00%','0.00%','0.00%'];
+                setCheXingNumEChars(CheXingNum,CheXingNumbili);
 
                 var ChaoZaiNum=[0,0,0,0,0];
-                setChaoZaiNumEChars(ChaoZaiNum);
+                var ChaoZaiNumbili=['0.00%','0.00%','0.00%','0.00%','0.00%'];
+                setChaoZaiNumEChars(ChaoZaiNum,ChaoZaiNumbili);
 
                 var ChaoZaiLvNum=[0,0,0,0,0];
-                setChaoZaiLvNumEChars(ChaoZaiLvNum);
+                var ChaoZaiLvNumbili=['0.00%','0.00%','0.00%','0.00%','0.00%'];
+                setChaoZaiLvNumEChars(ChaoZaiLvNum,ChaoZaiLvNumbili);
             },
             success: function (json) {
                 if(json!=null){
                     $(".errorMsg1").html('')
                     var CheXingNum=new Array();
+                    var CheXingNumbili=new Array();
                     CheXingNum.push(json.axlesCount2)
                     CheXingNum.push(json.axlesCount3)
                     CheXingNum.push(json.axlesCount4)
                     CheXingNum.push(json.axlesCount5)
                     CheXingNum.push(json.axlesCount6)
-                    setCheXingNumEChars(CheXingNum);
+                    if(json.avgCount!=0){
+                        CheXingNumbili.push((json.axlesCount2/json.avgCount).toFixed(2)+'%')
+                        CheXingNumbili.push((json.axlesCount3/json.avgCount).toFixed(2)+'%')
+                        CheXingNumbili.push((json.axlesCount4/json.avgCount).toFixed(2)+'%')
+                        CheXingNumbili.push((json.axlesCount5/json.avgCount).toFixed(2)+'%')
+                        CheXingNumbili.push((json.axlesCount6/json.avgCount).toFixed(2)+'%')
+                    }else{
+                        CheXingNumbili=['0.00%','0.00%','0.00%','0.00%','0.00%'];
+                    }
+                    setCheXingNumEChars(CheXingNum,CheXingNumbili);
 
                     var ChaoZaiNum=new Array();
+                    var ChaoZaiNumbili=new Array();
                     ChaoZaiNum.push(json.avgOverloadCount2)
                     ChaoZaiNum.push(json.avgOverloadCount3)
                     ChaoZaiNum.push(json.avgOverloadCount4)
                     ChaoZaiNum.push(json.avgOverloadCount5)
                     ChaoZaiNum.push(json.avgOverloadCount6)
-                    setChaoZaiNumEChars(ChaoZaiNum);
+                    if(json.avgOverloadCount!=0){
+                        ChaoZaiNumbili.push((json.avgOverloadCount2/json.avgOverloadCount).toFixed(2)+'%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount3/json.avgOverloadCount).toFixed(2)+'%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount4/json.avgOverloadCount).toFixed(2)+'%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount5/json.avgOverloadCount).toFixed(2)+'%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount6/json.avgOverloadCount).toFixed(2)+'%')
+                    }else {
+                        ChaoZaiNumbili=['0.00%','0.00%','0.00%','0.00%','0.00%'];
+                    }
+                    setChaoZaiNumEChars(ChaoZaiNum,ChaoZaiNumbili);
 
                     var ChaoZaiLvNum=new Array();
+                    var ChaoZaiLvNumbili=new Array();
                     ChaoZaiLvNum.push(json.avgOverloadRatio2)
                     ChaoZaiLvNum.push(json.avgOverloadRatio3)
                     ChaoZaiLvNum.push(json.avgOverloadRatio4)
                     ChaoZaiLvNum.push(json.avgOverloadRatio5)
                     ChaoZaiLvNum.push(json.avgOverloadRatio6)
-                    setChaoZaiLvNumEChars(ChaoZaiLvNum);
+                    if(json.avgOverloadRatio!=0){
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio2/json.avgOverloadRatio).toFixed(2)+'%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio3/json.avgOverloadRatio).toFixed(2)+'%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio4/json.avgOverloadRatio).toFixed(2)+'%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio5/json.avgOverloadRatio).toFixed(2)+'%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio6/json.avgOverloadRatio).toFixed(2)+'%')
+                    }else{
+                        ChaoZaiLvNumbili=['0.00%','0.00%','0.00%','0.00%','0.00%'];
+                    }
+
+                    setChaoZaiLvNumEChars(ChaoZaiLvNum,ChaoZaiLvNumbili);
                 }
             }
         });
     }
-    function setCheXingNumEChars(CheXingNum){
+    function setCheXingNumEChars(CheXingNum,CheXingNumbili){
         var myChart = echarts.init(document.getElementById('_top'));
         var seriesLabel = {
             normal: {
@@ -575,11 +609,40 @@
                     type: 'bar',
                     label: seriesLabel,
                     barWidth: '20%',
+                    barGap: '-100%',
                     data: CheXingNum,
                     label: {
                         normal: {
                             show: true,
                             position: 'top',
+                            color: 'black',
+                            formatter: function(data) {
+                                return CheXingNumbili[data.dataIndex];
+                            },
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {offset: 0, color: '#CAE0FE'},                   //柱图渐变色
+                                    {offset: 0.5, color: '#A2C9FE'},                 //柱图渐变色
+                                    {offset: 1, color: '#78B1FD'},                   //柱图渐变色
+                                ]
+                            )
+                        }
+
+                    },
+                },{
+                    type: 'bar',
+                    label: seriesLabel,
+                    barWidth: '20%',
+                    data: CheXingNum,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'inside',
                             color: 'black',
                         }
                     },
@@ -594,7 +657,7 @@
                                 ]
                             )
                         }
-                       
+
                     },
                 }
             ]
@@ -604,7 +667,7 @@
     }
 
 
-    function setChaoZaiNumEChars(ChaoZaiNum){
+    function setChaoZaiNumEChars(ChaoZaiNum,ChaoZaiNumbili){
         var myChart2 = echarts.init(document.getElementById('_right'));
         var seriesLabel = {
             normal: {
@@ -657,11 +720,40 @@
                     type: 'bar',
                     label: seriesLabel,
                     barWidth: '20%',
+                    barGap: '-100%',
                     data: ChaoZaiNum,
                     label: {
                         normal: {
                             show: true,
                             position: 'top',
+                            color: 'black',
+                            formatter: function(data) {
+                                return ChaoZaiNumbili[data.dataIndex];
+                            },
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {offset: 0, color: '#CAE0FE'},                   //柱图渐变色
+                                    {offset: 0.5, color: '#A2C9FE'},                 //柱图渐变色
+                                    {offset: 1, color: '#78B1FD'},                   //柱图渐变色
+                                ]
+                            )
+                        }
+
+                    },
+                },{
+                    type: 'bar',
+                    label: seriesLabel,
+                    barWidth: '20%',
+                    data: ChaoZaiNum,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'inside',
                             color: 'black',
                         }
                     },
@@ -687,7 +779,7 @@
     }
 
 
-    function setChaoZaiLvNumEChars(ChaoZaiLvNum){
+    function setChaoZaiLvNumEChars(ChaoZaiLvNum,ChaoZaiLvNumbili){
         var myChart3 = echarts.init(document.getElementById('bottom_'));
         var seriesLabel = {
             normal: {
@@ -733,7 +825,35 @@
             ],
             series: [
                 {
-                    name: '直接访问',
+                    type: 'bar',
+                    label: seriesLabel,
+                    barWidth: '20%',
+                    barGap: '-100%',
+                    data: ChaoZaiLvNum,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top',
+                            color: 'black',
+                            formatter: function(data) {
+                                return ChaoZaiLvNumbili[data.dataIndex];
+                            },
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {offset: 0, color: '#CAE0FE'},                   //柱图渐变色
+                                    {offset: 0.5, color: '#A2C9FE'},                 //柱图渐变色
+                                    {offset: 1, color: '#78B1FD'},                   //柱图渐变色
+                                ]
+                            )
+                        }
+
+                    },
+                },{
                     type: 'bar',
                     label: seriesLabel,
                     barWidth: '20%',
@@ -741,7 +861,7 @@
                     label: {
                         normal: {
                             show: true,
-                            position: 'top',
+                            position: 'inside',
                             color: 'black',
                         }
                     },
@@ -846,47 +966,80 @@
                     "color":"red",
                 })
                 var CheXingNum=[0,0,0,0,0];
-                setCheXingNumEChars2(CheXingNum);
+                var CheXingNumbili=['0.00%','0.00%','0.00%','0.00%','0.00%'];
+                setCheXingNumEChars2(CheXingNum,CheXingNumbili);
 
                 var ChaoZaiNum=[0,0,0,0,0];
-                setChaoZaiNumEChars2(ChaoZaiNum);
+                var ChaoZaiNumbili=['0.00%','0.00%','0.00%','0.00%','0.00%'];
+                setChaoZaiNumEChars2(ChaoZaiNum,ChaoZaiNumbili);
 
                 var ChaoZaiLvNum=[0,0,0,0,0];
-                setChaoZaiLvNumEChars2(ChaoZaiLvNum);
+                var ChaoZaiLvNumbili=['0.00%','0.00%','0.00%','0.00%','0.00%'];
+                setChaoZaiLvNumEChars2(ChaoZaiLvNum,ChaoZaiLvNumbili);
             },
             success: function (json) {
                 if(json!=null){
                     $(".errorMsg2").html('')
                     var CheXingNum=[];
+                    var CheXingNumbili=[];
                     CheXingNum.push(json.axlesCount2)
                     CheXingNum.push(json.axlesCount3)
                     CheXingNum.push(json.axlesCount4)
                     CheXingNum.push(json.axlesCount5)
                     CheXingNum.push(json.axlesCount6)
-                    setCheXingNumEChars2(CheXingNum);
+                    if(json.avgCount!=0){
+                        CheXingNumbili.push((json.axlesCount2/json.avgCount).toFixed(2)+'%')
+                        CheXingNumbili.push((json.axlesCount3/json.avgCount).toFixed(2)+'%')
+                        CheXingNumbili.push((json.axlesCount4/json.avgCount).toFixed(2)+'%')
+                        CheXingNumbili.push((json.axlesCount5/json.avgCount).toFixed(2)+'%')
+                        CheXingNumbili.push((json.axlesCount6/json.avgCount).toFixed(2)+'%')
+                    }else{
+                        CheXingNumbili=['0.00%','0.00%','0.00%','0.00%','0.00%'];
+                    }
+                    setCheXingNumEChars2(CheXingNum,CheXingNumbili);
 
                     var ChaoZaiNum=[];
+                    var ChaoZaiNumbili=[];
                     ChaoZaiNum.push(json.avgOverloadCount2)
                     ChaoZaiNum.push(json.avgOverloadCount3)
                     ChaoZaiNum.push(json.avgOverloadCount4)
                     ChaoZaiNum.push(json.avgOverloadCount5)
                     ChaoZaiNum.push(json.avgOverloadCount6)
-                    setChaoZaiNumEChars2(ChaoZaiNum);
+                    if(json.avgOverloadCount!=0){
+                        ChaoZaiNumbili.push((json.avgOverloadCount2/json.avgOverloadCount).toFixed(2)+'%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount3/json.avgOverloadCount).toFixed(2)+'%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount4/json.avgOverloadCount).toFixed(2)+'%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount5/json.avgOverloadCount).toFixed(2)+'%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount6/json.avgOverloadCount).toFixed(2)+'%')
+                    }else {
+                        ChaoZaiNumbili=['0.00%','0.00%','0.00%','0.00%','0.00%'];
+                    }
+                    setChaoZaiNumEChars2(ChaoZaiNum,ChaoZaiNumbili);
 
                     var ChaoZaiLvNum=[];
+                    var ChaoZaiLvNumbili=[];
                     ChaoZaiLvNum.push(json.avgOverloadRatio2)
                     ChaoZaiLvNum.push(json.avgOverloadRatio3)
                     ChaoZaiLvNum.push(json.avgOverloadRatio4)
                     ChaoZaiLvNum.push(json.avgOverloadRatio5)
                     ChaoZaiLvNum.push(json.avgOverloadRatio6)
-                    setChaoZaiLvNumEChars2(ChaoZaiLvNum);
+                    if(json.avgOverloadRatio!=0){
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio2/json.avgOverloadRatio).toFixed(2)+'%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio3/json.avgOverloadRatio).toFixed(2)+'%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio4/json.avgOverloadRatio).toFixed(2)+'%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio5/json.avgOverloadRatio).toFixed(2)+'%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio6/json.avgOverloadRatio).toFixed(2)+'%')
+                    }else{
+                        ChaoZaiLvNumbili=['0.00%','0.00%','0.00%','0.00%','0.00%'];
+                    }
+                    setChaoZaiLvNumEChars2(ChaoZaiLvNum,ChaoZaiLvNumbili);
                 }
             }
         });
     }
 
 
-    function setCheXingNumEChars2(CheXingNum){
+    function setCheXingNumEChars2(CheXingNum,CheXingNumbili){
         var myChart = echarts.init(document.getElementById('_top2'));
         var seriesLabel = {
             normal: {
@@ -932,7 +1085,35 @@
             ],
             series: [
                 {
-                    name: '直接访问',
+                    type: 'bar',
+                    label: seriesLabel,
+                    barWidth: '20%',
+                    barGap: '-100%',
+                    data: CheXingNum,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top',
+                            color: 'black',
+                            formatter: function(data) {
+                                return CheXingNumbili[data.dataIndex];
+                            },
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {offset: 0, color: '#CAE0FE'},                   //柱图渐变色
+                                    {offset: 0.5, color: '#A2C9FE'},                 //柱图渐变色
+                                    {offset: 1, color: '#78B1FD'},                   //柱图渐变色
+                                ]
+                            )
+                        }
+
+                    },
+                },{
                     type: 'bar',
                     label: seriesLabel,
                     barWidth: '20%',
@@ -940,7 +1121,7 @@
                     label: {
                         normal: {
                             show: true,
-                            position: 'top',
+                            position: 'inside',
                             color: 'black',
                         }
                     },
@@ -965,7 +1146,7 @@
     }
 
 
-    function setChaoZaiNumEChars2(ChaoZaiNum){
+    function setChaoZaiNumEChars2(ChaoZaiNum,ChaoZaiNumbili){
         var myChart2 = echarts.init(document.getElementById('_right2'));
         var seriesLabel = {
             normal: {
@@ -1011,6 +1192,35 @@
             ],
             series: [
                 {
+                    type: 'bar',
+                    label: seriesLabel,
+                    barWidth: '20%',
+                    barGap: '-100%',
+                    data: ChaoZaiNum,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top',
+                            color: 'black',
+                            formatter: function(data) {
+                                return ChaoZaiNumbili[data.dataIndex];
+                            },
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {offset: 0, color: '#CAE0FE'},                   //柱图渐变色
+                                    {offset: 0.5, color: '#A2C9FE'},                 //柱图渐变色
+                                    {offset: 1, color: '#78B1FD'},                   //柱图渐变色
+                                ]
+                            )
+                        }
+
+                    },
+                },{
                     name: '直接访问',
                     type: 'bar',
                     label: seriesLabel,
@@ -1019,7 +1229,7 @@
                     label: {
                         normal: {
                             show: true,
-                            position: 'top',
+                            position: 'inside',
                             color: 'black',
                         }
                     },
@@ -1045,7 +1255,7 @@
     }
 
 
-    function setChaoZaiLvNumEChars2(ChaoZaiLvNum){
+    function setChaoZaiLvNumEChars2(ChaoZaiLvNum,ChaoZaiLvNumbili){
         var myChart3 = echarts.init(document.getElementById('bottom_2'));
         var seriesLabel = {
             normal: {
@@ -1091,6 +1301,35 @@
             ],
             series: [
                 {
+                    type: 'bar',
+                    label: seriesLabel,
+                    barWidth: '20%',
+                    barGap: '-100%',
+                    data: ChaoZaiLvNum,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top',
+                            color: 'black',
+                            formatter: function(data) {
+                                return ChaoZaiLvNumbili[data.dataIndex];
+                            },
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {offset: 0, color: '#CAE0FE'},                   //柱图渐变色
+                                    {offset: 0.5, color: '#A2C9FE'},                 //柱图渐变色
+                                    {offset: 1, color: '#78B1FD'},                   //柱图渐变色
+                                ]
+                            )
+                        }
+
+                    },
+                },{
                     name: '直接访问',
                     type: 'bar',
                     label: seriesLabel,
@@ -1099,7 +1338,7 @@
                     label: {
                         normal: {
                             show: true,
-                            position: 'top',
+                            position: 'inside',
                             color: 'black',
                         }
                     },
