@@ -6,6 +6,7 @@ import java.util.List;
 import com.ldxx.bean.Accessory;
 import com.ldxx.dao.AccessoryDao;
 import com.ldxx.service.AccessoryService;
+import com.ldxx.vo.ImgUrlPrefixVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,8 @@ public class AccessoryServiceImpl implements AccessoryService {
 
 	@Autowired
 	private AccessoryDao dao;
+	@Autowired
+	ImgUrlPrefixVo imgUrlPrefixVo;
 	
 	@Override
 	public int addAccessory(List<Accessory> accessory) {
@@ -39,7 +42,7 @@ public class AccessoryServiceImpl implements AccessoryService {
 		int i=dao.deleteAccessoryByIdAndName(accessory);
 		if(i>0){
 			String path=accessory.getAcUrl();
-			File f=new File(path);
+			File f=new File(imgUrlPrefixVo.getFujianUrl()+"\\"+path);
 			f.delete();
 		}
 		return i;
