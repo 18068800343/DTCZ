@@ -3,12 +3,13 @@
 <mapper namespace="com.ldxx.dao.tUserInfoDao">
 
     <insert id="addtUserInfo" parameterType="tUserInfo">
-		insert into t_user_info (Usr_Id,Usr_Name,Usr_Pwd,Usr_Sex,Usr_Phone,Usr_Role,Station_Port,Station_Name,Del_State)
-			values(#{usrId},#{usrName},#{usrPwd},#{usrSex},#{usrPhone},#{usrRole},#{stationPort},#{stationName},#{delState})
+		insert into t_user_info (Usr_Id,Usr_Uname,Usr_Name,Usr_Pwd,Usr_Sex,Usr_Phone,Usr_Role,Station_Port,Station_Name,Del_State,Usr_Persmission_Coding)
+			values(#{usrId},#{usrUname},#{usrName},#{usrPwd},#{usrSex},#{usrPhone},#{usrRole},#{stationPort},#{stationName},#{delState},#{UsrPersmissionCoding})
 	</insert>
 
     <update id="updatetUserInfo" parameterType="tUserInfo">
 		update t_user_info set
+		Usr_Uname=#{usrUname},
 		Usr_Name=#{usrName},
 		Usr_Pwd=#{usrPwd},
 		Usr_Sex=#{usrSex},
@@ -17,6 +18,13 @@
 		Station_Port=#{stationPort},
 		Station_Name=#{stationName}
 		where Usr_Id=#{usrId}
+	</update>
+	<update id="updtUserInfoByUsrName" parameterType="tUserInfo">
+		update t_user_info set
+		Usr_Uname=#{usrUname},
+		Usr_Pwd=#{usrPwd},
+		Usr_Role=#{usrRole}
+		where Usr_Name=#{usrName}
 	</update>
 
     <update id="updatepasswordById">
@@ -27,6 +35,9 @@
 
     <update id="deltUserInfo">
 		update t_user_info set Del_State=0 where Usr_Id=#{id}
+	</update>
+	<update id="deltUserInfoByUsrName">
+		update t_user_info set Del_State=0 where Usr_Name=#{useraccount}
 	</update>
 
     <select id="getAlltUserInfo" resultType="tUserInfoVo">

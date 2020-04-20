@@ -8,6 +8,7 @@ import com.ldxx.dao.StationSiteDao;
 import com.ldxx.service.StationSiteService;
 import com.ldxx.util.LDXXUtils;
 import com.ldxx.util.MsgFormatUtils;
+import com.ldxx.util.getNumCode;
 import com.ldxx.vo.ImgUrlPrefixVo;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -189,8 +190,11 @@ public class StationSiteController {
     public String addCompanySite( CompanySite companySite) {
         JSONObject jsonObject=new JSONObject();
         String id = LDXXUtils.getUUID12();
+        stationSiteDao.countNumCompanySite();
+        int num = stationSiteDao.countNumCompanySite();
+        String code = getNumCode.getNumCode(num+1, "JSJKDW");
+        companySite.setId(code);
         int i=stationSiteDao.addCompanySite(companySite);
-        companySite.setStationName("");
         String daoMsg = MsgFormatUtils.getMsgByResult(i, "新增");
         jsonObject.put("resultMsg",daoMsg);
         jsonObject.put("daoMsg",i);

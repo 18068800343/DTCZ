@@ -27,9 +27,13 @@ public interface StationSiteDao {
 
     int addCompanySite(CompanySite companySite);
 
+    int countNumCompanySite();
+
     int iscountStationIp(String stationIp);
 
     int iscountStationPort(String stationPort);
+
+    int iscountCompanySiteName(String name);
 
 
     int xg_iscountStationIp(String stationIp,String id);

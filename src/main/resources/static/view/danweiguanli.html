@@ -116,9 +116,10 @@
                                 <td style="width: 20%;">单位类型</td>
                                 <td style="width: 30%;">
                                     <select class="form-control" id="groups" style="width: 70%;" >
-                                        <option value="路公司">路公司</option>
-                                        <option value="控股">控股</option>
-                                        <option value="其他">其他</option>
+                                        <option value="0">控股</option>
+                                        <option value="1">路公司</option>
+                                        <option value="2">养护单位</option>
+                                        <option value="3">其他</option>
                                     </select>
                                 </td>
                             </tr>
@@ -163,9 +164,10 @@
                                 <td style="width: 20%;">单位类型</td>
                                 <td style="width: 30%;">
                                     <select class="form-control" id="xg_groups" style="width: 70%;" >
-                                        <option value="路公司">路公司</option>
-                                        <option value="控股">控股</option>
-                                        <option value="其他">其他</option>
+                                        <option value="0">控股</option>
+                                        <option value="1">路公司</option>
+                                        <option value="2">养护单位</option>
+                                        <option value="3">其他</option>
                                     </select>
                                 </td>
                             </tr>
@@ -286,6 +288,22 @@
                 var shanchu='<i class="iconfont icon-shanchu Pfc" style="font-size:20px;cursor:pointer;display: none;" id="del4"  title="删除"></i>';
                 //var look='<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" onclick="lookMs(this)" data-toggle="modal" data-target="#allMsg1" id="lookDetall"></i>'
                 return xiugai+shanchu;
+            }
+
+        },{
+            "class": "tcenter",
+            "targets": 2,
+            "searchable": true,
+            "render": function(data, type, full) {
+                if(data=="0"){
+                    return "控股"
+                }else if(data=="1"){
+                    return "路公司"
+                }else if(data=="2"){
+                    return "养护单位"
+                }else{
+                    return "其他"
+                }
             }
 
         }],

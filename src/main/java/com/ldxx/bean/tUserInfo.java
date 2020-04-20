@@ -5,6 +5,7 @@ package com.ldxx.bean;
  */
 public class tUserInfo {
     private String usrId;
+    private String usrUname;
     private String usrName;
     private String usrPwd;
     private String usrSex;
@@ -21,6 +22,14 @@ public class tUserInfo {
     private Integer delState;
     //权限编码
     private String UsrPersmissionCoding;
+
+    public String getUsrUname() {
+        return usrUname;
+    }
+
+    public void setUsrUname(String usrUname) {
+        this.usrUname = usrUname;
+    }
 
     public String getUsrPersmissionCoding() {
         return UsrPersmissionCoding;

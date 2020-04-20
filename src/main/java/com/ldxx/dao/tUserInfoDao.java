@@ -27,4 +27,8 @@ public interface tUserInfoDao {
     tUserInfoVo selectUserById(String usrId);
 
     int updlastMonitoringSiteById(@Param("lastMonitoringSite")String lastMonitoringSite,@Param("usrId")String usrId);
+
+    int deltUserInfoByUsrName(String useraccount);
+
+    int updtUserInfoByUsrName(tUserInfo tUserInfo);
 }

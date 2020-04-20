@@ -116,12 +116,14 @@
                     <form class="form-inline">
                         <table class="table table-bordered table-condensed">
                             <tr>
-                                <td  style="width: 20%;">姓名</td>
+                                <td  style="width: 20%;">用户名</td>
                                 <td  style="width: 30%;"><input type="text" id="UsrName"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
                                 <td  style="width: 20%;">密码</td>
                                 <td  style="width: 30%;"><input type="text" id="UsrPwd"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
                             </tr>
                             <tr>
+                                <td  style="width: 20%;">姓名</td>
+                                <td  style="width: 30%;"><input type="text" id="usrUname"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
                                 <td>性别</td>
                                 <td>
                                     <select class="form-control" id="UsrSex"  style="width:100%;">
@@ -129,10 +131,10 @@
                                         <option value="女">女</option>
                                     </select>
                                 </td>
-                                <td>联系方式</td>
-                                <td><input type="text" id="UsrPhone"  class="form-control" placeholder="请输入" style="width:100%;"></td>
                             </tr>
                             <tr>
+                                <td>联系方式</td>
+                                <td><input type="text" id="UsrPhone"  class="form-control" placeholder="请输入" style="width:100%;"></td>
                                 <!--<td>角色</td>
                                 <td>
                                     <select class="form-control" id="zhiwu" style="width:80%;">
@@ -146,8 +148,6 @@
                                     </select>-->
                                     <select class="form-control" id="UserRole"  style="width:100%;"></select>
                                 </td>
-                                <td></td>
-                                <td></td>
                             </tr>
 
                         </table>
@@ -176,12 +176,14 @@
                     <form class="form-inline">
                         <table class="table table-bordered table-condensed" style="height: auto;">
                             <tr>
-                                <td>姓名</td>
+                                <td>用户名</td>
                                 <td><input type="text" id="xg_UsrName"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
                                 <td>密码</td>
                                 <td><input type="text" id="xg_UsrPwd"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
                             </tr>
                             <tr>
+                                <td  style="width: 20%;">姓名</td>
+                                <td  style="width: 30%;"><input type="text" id="xg_usrUname"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
                                 <td style="width: 20%;">性别</td>
                                 <td>
                                     <select class="form-control" id="xg_UsrSex"  style="width:100%;">
@@ -189,10 +191,10 @@
                                         <option value="女">女</option>
                                     </select>
                                 </td>
-                                <td>联系方式</td>
-                                <td><input type="text" id="xg_UsrPhone"  class="form-control" placeholder="请输入" style="width:100%;"></td>
                             </tr>
                             <tr>
+                                <td>联系方式</td>
+                                <td><input type="text" id="xg_UsrPhone"  class="form-control" placeholder="请输入" style="width:100%;"></td>
                                 <!--<td>角色</td>
                                 <td>
                                     <select class="form-control" id="zhiwu" style="width:80%;">
@@ -309,7 +311,7 @@
             "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
         },
         "columns": [
-            { "data": "usrName"},
+            { "data": "usrUname"},
             { "data": "usrSex"},
             { "data": "usrPhone"},
             { "data": "companyName"},
@@ -446,6 +448,7 @@
         var UsrPwd=$("#UsrPwd").val();
         var UsrSex=$("#UsrSex").val();
         var UsrPhone=$("#UsrPhone").val();
+        var usrUname=$("#usrUname").val();
         /*var checkParam = $('#StationName').find('option:selected');
         var checkText=[];
         for (var i=0;i<checkParam.length;i++) {
@@ -464,6 +467,7 @@
                 usrSex:UsrSex,
                 usrPhone:UsrPhone,
                 usrRole:usrRole,
+                usrUname:usrUname,
                 /*stationPort:stationPort,
                 stationName:StationName,*/
 
@@ -478,7 +482,7 @@
                     $('#mainContent').DataTable().row.add(json.user).draw(false);     //新增行立即显示
                     $("#myModal").modal('hide');
                 }else if(json.result==-1){
-                    toastr.error("姓名重复");
+                    toastr.error("用户名重复");
                 }else{
                     toastr.error("添加失败");
                 }
@@ -500,6 +504,7 @@
         $("#xg_UsrPhone").val(data.usrPhone);
         //xg_initzhandian(data.stationPort.split(","))
         $("#xg_UsrRole").val(data.usrRole);
+        $("#xg_usrUname").val(data.usrUname)
     })
     /*function xg_initzhandian(obj){
         $.ajax({
@@ -534,6 +539,7 @@
         var UsrPwd=$("#xg_UsrPwd").val();
         var UsrSex=$("#xg_UsrSex").val();
         var UsrPhone=$("#xg_UsrPhone").val();
+        var usrUname=$("#xg_usrUname").val();
         /*var checkParam = $('#xg_StationName').find('option:selected');
         var checkText=[];
         for (var i=0;i<checkParam.length;i++) {
@@ -553,6 +559,7 @@
                 usrSex:UsrSex,
                 usrPhone:UsrPhone,
                 usrRole:usrRole,
+                usrUname:usrUname,
                 /*stationPort:stationPort,
                 stationName:StationName,*/
 
@@ -568,7 +575,7 @@
                     $("#change").modal('hide');
                     initTableQuanxian()
                 }else if(json.result==-1){
-                    toastr.error("姓名重复");
+                    toastr.error("用户名重复");
                 }else{
                     toastr.error("修改失败");
                 }

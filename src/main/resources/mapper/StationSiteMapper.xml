@@ -29,7 +29,7 @@
 	</insert>
 
 	<insert id="addCompanySite" keyProperty="id" useGeneratedKeys="true" parameterType="companySite" >
-		insert into t_dic_company values(null,#{companyName},#{stationPort},#{groups})
+		insert into t_dic_company values(#{id},#{companyName},#{stationPort},#{groups})
 	</insert>
 
 	<update id="updStationSite" parameterType="StationSite">
@@ -70,6 +70,12 @@
 		delete from t_dic_company  where id=#{id}
 	</update>
 
+	<select id="iscountCompanySiteName" resultType="int">
+		select count(*) from t_dic_company where company_name=#{name}
+	</select>
+	<select id="countNumCompanySite" resultType="int">
+		select count(*) from t_dic_company
+	</select>
 
 	<select id="iscountStationIp" resultType="int">
 		select count(Station_Ip) from station_site where Station_Ip=#{stationIp} and Del_State=1
