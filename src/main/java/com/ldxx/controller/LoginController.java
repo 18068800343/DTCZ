@@ -4,6 +4,7 @@ package com.ldxx.controller;
 import com.ldxx.bean.tUserInfo;
 import com.ldxx.config.Config;
 import com.ldxx.service.tUserInfoService;
+import com.ldxx.util.Base64Util;
 import com.ldxx.vo.tUserInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -16,9 +17,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 @Configuration
@@ -81,5 +84,41 @@ public class LoginController {
 	@RequestMapping("/keepSession")//退出
 	public int keepSession(){
 		return 1;
+	}
+
+	@RequestMapping(value="/userloginInterface",method= RequestMethod.GET)
+	public void userloginInterface(String usrName,String usrPwd, HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException {
+		String decodeusrPwd = Base64Util.decode(usrPwd);//base64密码解码
+		int state=0;
+		tUserInfoVo loginUser=null;
+		Map<String,Object> map=new HashMap<>();
+		HttpSession session = request.getSession();
+		if(null!=usrName&&null!=decodeusrPwd&&!"".equals(usrName)&&!"".equals(decodeusrPwd)) {
+			loginUser=service.selectUserByUsrName(usrName);
+			if(null!=loginUser&&null!=loginUser.getUsrName())
+			{
+				if(decodeusrPwd.equals(loginUser.getUsrPwd()))
+				{//成功登陆
+					session.setAttribute("user",loginUser);
+					state=1;
+				}else {state=-3;}//用户密码错误
+			}else {state=-2;}//该用户不存在
+		}else {state=-1;}//用户名或密码为空
+
+		if(state==1){
+			response.sendRedirect("../view/index.html");
+		}else if(state==-1){
+			request.setAttribute("errorMessage","用户名或密码为空");
+			//请求转发
+			request.getRequestDispatcher("../view/login.html").forward(request,response);
+		}else if(state==-2){
+			request.setAttribute("errorMessage","用户不存在");
+			//请求转发
+			request.getRequestDispatcher("../view/login.html").forward(request,response);
+		}else if(state==-3){
+			request.setAttribute("errorMessage","用户密码错误");
+			//请求转发
+			request.getRequestDispatcher("../view/login.html").forward(request,response);
+		}
 	}
 }
