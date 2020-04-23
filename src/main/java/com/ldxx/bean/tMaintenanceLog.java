@@ -14,20 +14,31 @@ public class tMaintenanceLog {
     private String logContent;//维护内容
     private int delState;//1存在0删除
     private String isChangeEquipment;//是否更换设备 1是，0否
-    private String isChangeEquipmentName;
+
     private String logRemarks;//备注
+    private String stationIP;//站点端口号
 
     private List<Accessory> accessory;
-    private String usrName;
 
+    private String stationName;//站点
 
-    public String getIsChangeEquipmentName() {
-        return isChangeEquipmentName;
+    public String getStationName() {
+        return stationName;
     }
 
-    public void setIsChangeEquipmentName(String isChangeEquipmentName) {
-        this.isChangeEquipmentName = isChangeEquipmentName;
+    public void setStationName(String stationName) {
+        this.stationName = stationName;
     }
+
+    public String getStationIP() {
+        return stationIP;
+    }
+
+    public void setStationIP(String stationIP) {
+        this.stationIP = stationIP;
+    }
+
+
 
     public String getFaultTime() {
         return faultTime;
@@ -103,11 +114,5 @@ public class tMaintenanceLog {
         this.logContent = logContent;
     }
 
-    public String getUsrName() {
-        return usrName;
-    }
 
-    public void setUsrName(String usrName) {
-        this.usrName = usrName;
-    }
 }

@@ -3,8 +3,8 @@
 <mapper namespace="com.ldxx.dao.tMaintenanceLogDao" >
 
     <insert id="addtMaintenanceLog" parameterType="tMaintenanceLog">
-        insert into t_maintenance_log(log_id,log_time,log_user,log_content,del_state,fault_time,is_change_equipment,log_remarks)
-            values (#{logId},#{logTime},#{logUser},#{logContent},#{delState},#{faultTime},#{isChangeEquipment},#{logRemarks})
+        insert into t_maintenance_log(log_id,log_time,log_user,log_content,del_state,fault_time,log_remarks,station_IP)
+            values (#{logId},#{logTime},#{logUser},#{logContent},#{delState},#{faultTime},#{logRemarks},#{stationIP})
     </insert>
 
     <update id="deltMaintenanceLog">
@@ -17,17 +17,14 @@
         log_user=#{logUser},
         log_content=#{logContent},
         fault_time=#{faultTime},
-        is_change_equipment=#{isChangeEquipment},
-        log_remarks=#{logRemarks}
+        log_remarks=#{logRemarks},
+        station_IP=#{stationIP}
         where log_id=#{logId}
     </update>
 
     <select id="getAlltMaintenanceLog" resultType="tMaintenanceLog">
-        select case a.is_change_equipment when 0 then '否'
-        else '是'
-        end as isChangeEquipmentName,
-        a.*,b.Usr_Name from t_maintenance_log a
-        left join t_user_info b on a.log_user=b.Usr_Id
+        select a.*,b.Station_Name as stationName from t_maintenance_log a
+         LEFT JOIN station_site b on a.station_IP=b.Station_Port
         where a.del_state=1
     </select>
 
@@ -35,8 +32,8 @@
 
 
     <insert id="addtMaintenanceReplaceLog" parameterType="tMaintenanceReplaceLog">
-         insert into t_maintenance_replace_log(log_replace_id,equipment_name,equipment_position_number,replace_time,replace_reason,log_replace_user,del_state)
-            values (#{logReplaceId},#{equipmentName},#{equipmentPositionNumber},#{replaceTime},#{replaceReason},#{logReplaceUser},#{delState})
+         insert into t_maintenance_replace_log(log_replace_id,equipment_name,equipment_position_number,replace_time,replace_reason,log_replace_user,del_state,station_IP)
+            values (#{logReplaceId},#{equipmentName},#{equipmentPositionNumber},#{replaceTime},#{replaceReason},#{logReplaceUser},#{delState},#{stationIP})
     </insert>
     <update id="updtMaintenanceReplaceLog" parameterType="tMaintenanceReplaceLog">
         update t_maintenance_replace_log set
@@ -44,13 +41,14 @@
         equipment_position_number=#{equipmentPositionNumber},
         replace_time=#{replaceTime},
         replace_reason=#{replaceReason},
-        log_replace_user=#{logReplaceUser}
+        log_replace_user=#{logReplaceUser},
+        station_IP=#{stationIP}
         where log_replace_id=#{logReplaceId}
     </update>
     <select id="getAlltMaintenanceReplaceLog" resultType="tMaintenanceReplaceLog">
 
-        select a.*,b.Usr_Name from t_maintenance_replace_log a
-        left join t_user_info b on a.log_replace_user=b.Usr_Id
+        select a.*,b.Station_Name as stationName  from t_maintenance_replace_log a
+        LEFT JOIN station_site b on a.station_IP=b.Station_Port
         where a.del_state=1
     </select>
     <update id="deltMaintenanceReplaceLog">

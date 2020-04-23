@@ -53,12 +53,18 @@ let initTableTbody = (json) => {
                     "</tfoot>");
             let Strack3=true;
             for (let n = 1; n <= json.length; n++) {
+                let img;
                 if (n == json.length) {
                     //车道0即总计的一行的td
                     let tdDom = "";
                     tdDom =  "<td data-id='"+json[0].avgLaneNo+",4'><a >" + json[0].avgMax + "</a></td>";
                     let dom = tableDom.find("tfoot");
+                    if(Strack3){
+                        img="<td width='20%' rowspan='"+(json.length)+"'>" + getimgUrl(1) + "</td>" ;
+                        Strack3=false;
+                    }
                     $(dom).append("<tr align='center'>" +
+                        img+
                         "<td>合计</td>" +
                         tdDom +
                         "</tr>")
@@ -67,9 +73,8 @@ let initTableTbody = (json) => {
                 let tdDom = "";
                 tdDom = "<td data-id='"+json[1].avgLaneNo+",4'><a >" + json[n].avgMax + "</a></td>";
                 let dom = tableDom.find("tfoot");
-                let img;
                 if(Strack3){
-                    img="<td width='20%' rowspan='"+(json.length)+"'>" + getimgUrl() + "</td>" ;
+                    img="<td width='20%' rowspan='"+(json.length)+"'>" + getimgUrl(1) + "</td>" ;
                     Strack3=false;
                 }
                 $(dom).append("<tr align='center'>" +
@@ -98,6 +103,7 @@ let initTableTbody = (json) => {
                     "</tfoot>");
             var Strack2=true;
             for (let n = 1; n <= json.length; n++) {
+                let img;
                 if (n == json.length) {
                     //车道0即总计的一行的td
                     let tdDom = "";
@@ -106,7 +112,12 @@ let initTableTbody = (json) => {
                     }
                     tdDom = tdDom + "<td data-id='"+json[0].avgLaneNo+","+k+"'><a >" + json[0]['column' + k].toFixed(2) + "%</a></td>";
                     let dom = tableDom.find("tfoot");
+                    if(Strack2){
+                        img="<td width='20%' rowspan='"+(json.length)+"'>" + getimgUrl(1) + "</td>" ;
+                        Strack2=false;
+                    }
                     $(dom).append("<tr align='center'>" +
+                        img+
                         "<td>合计</td>" +
                         tdDom +
                         "</tr>")
@@ -118,9 +129,8 @@ let initTableTbody = (json) => {
                 }
                 tdDom = tdDom + "<td data-id='"+json[n].avgLaneNo+","+k+"'><a >" + json[n]['column' + k].toFixed(2) + "%</a></td>";
                 let dom = tableDom.find("tfoot");
-                let img;
                 if(Strack2){
-                    img="<td width='20%' rowspan='"+(json.length)+"'>" + getimgUrl() + "</td>" ;
+                    img="<td width='20%' rowspan='"+(json.length)+"'>" + getimgUrl(1) + "</td>" ;
                     Strack2=false;
                 }
                 $(dom).append("<tr align='center'>" +
@@ -153,6 +163,7 @@ let initTableTbody = (json) => {
             let Strack=true;
             for (let n = 1; n <= json.length; n++) {
                 let url=getimgUrl(json[0].stationIP);
+                let img;
                 if (n == json.length) {
                     //车道0即总计的一行的td
                     let tdDom = "";
@@ -161,7 +172,12 @@ let initTableTbody = (json) => {
                     }
                     tdDom = tdDom + "<td data-id='"+json[0].avgLaneNo+","+k+"'><a >" + json[0]['column' + k] + "</a></td>";
                     let dom = tableDom.find("tfoot");
+                    if(Strack){
+                        img="<td width='20%' rowspan='"+(json.length)+"'>" + getimgUrl(1) + "</td>" ;
+                        Strack=false;
+                    }
                     $(dom).append("<tr align='center'>" +
+                        img+
                        "<td>合计</td>" +
                         tdDom +
                         "</tr>")
@@ -173,9 +189,8 @@ let initTableTbody = (json) => {
                 }
                 tdDom = tdDom + "<td data-id='"+json[n].avgLaneNo+","+k+"'><a >" + json[n]['column' + k] + "</a></td>";
                 let dom = tableDom.find("tfoot");
-                let img;
                 if(Strack){
-                    img="<td width='20%' rowspan='"+(json.length)+"'>" + getimgUrl() + "</td>" ;
+                    img="<td width='20%' rowspan='"+(json.length)+"'>" + getimgUrl(1) + "</td>" ;
                     Strack=false;
                 }
                 $(dom).append("<tr align='center'>" +
@@ -191,7 +206,13 @@ let initTableTbody = (json) => {
         }
     }
 }
-let getimgUrl= () =>{
+let getimgUrl= (e) =>{
+    var stationPort;
+    if(e==1){
+        stationPort=$("#stationPort").val()
+    }else if(e==2){
+        stationPort=$("#stationPort2").val()
+    }
     let imgUrl=""
     $.ajax({
         type: 'POST',
@@ -199,7 +220,7 @@ let getimgUrl= () =>{
         dataType: 'json',
         async:false,
         data: {
-            stationPort:$("#stationPort").val(),
+            stationPort:stationPort,
         },
         success: function (json) {
             if(json!=null&&json!=''&&json.length!=0){
@@ -388,12 +409,18 @@ let initTableTbodyMonth = (json) => {
                     "</tfoot>");
             let Strack3=true;
             for (let n = 1; n <= json.length; n++) {
+                let img;
                 if (n == json.length) {
                     //车道0即总计的一行的td
                     let tdDom = "";
                     tdDom =  "<td data-id='"+json[0].avgLaneNo+",4'><a >" + json[0].avgMax + "</a></td>";
                     let dom = tableDom.find("tfoot");
+                    if(Strack3){
+                        img="<td width='20%' rowspan='"+(json.length)+"'>" + getimgUrl(2) + "</td>" ;
+                        Strack3=false;
+                    }
                     $(dom).append("<tr align='center'>" +
+                        img+
                         "<td>合计</td>" +
                         tdDom +
                         "</tr>")
@@ -402,9 +429,8 @@ let initTableTbodyMonth = (json) => {
                 let tdDom = "";
                 tdDom = "<td data-id='"+json[n].avgLaneNo+",4'><a >" + json[n].avgMax + "</a></td>";
                 let dom = tableDom.find("tfoot");
-                let img;
                 if(Strack3){
-                    img="<td width='20%' rowspan='"+(json.length)+"'>" + getimgUrl() + "</td>" ;
+                    img="<td width='20%' rowspan='"+(json.length)+"'>" + getimgUrl(2) + "</td>" ;
                     Strack3=false;
                 }
                 $(dom).append("<tr align='center'>" +
@@ -433,6 +459,7 @@ let initTableTbodyMonth = (json) => {
                     "</tfoot>");
             let Strack2=true;
             for (let n = 1; n <= json.length; n++) {
+                let img;
                 if (n == json.length) {
                     //车道0即总计的一行的td
                     let tdDom = "";
@@ -441,7 +468,12 @@ let initTableTbodyMonth = (json) => {
                     }
                     tdDom = tdDom + "<td data-id='"+json[0].avgLaneNo+","+k+"'><a >" + json[0]['column' + k].toFixed(2) + "%</a></td>";
                     let dom = tableDom.find("tfoot");
+                    if(Strack2){
+                        img="<td width='20%' rowspan='"+(json.length)+"'>" + getimgUrl(2) + "</td>" ;
+                        Strack2=false;
+                    }
                     $(dom).append("<tr align='center'>" +
+                        img+
                         "<td >合计</td>" +
                         tdDom +
                         "</tr>")
@@ -453,9 +485,8 @@ let initTableTbodyMonth = (json) => {
                 }
                 tdDom = tdDom + "<td data-id='"+json[n].avgLaneNo+","+k+"'><a >" + json[n]['column' + k].toFixed(2) + "%</a></td>";
                 let dom = tableDom.find("tfoot");
-                let img;
                 if(Strack2){
-                    img="<td width='20%' rowspan='"+(json.length)+"'>" + getimgUrl() + "</td>" ;
+                    img="<td width='20%' rowspan='"+(json.length)+"'>" + getimgUrl(2) + "</td>" ;
                     Strack2=false;
                 }
                 $(dom).append("<tr align='center'>" +
@@ -487,6 +518,7 @@ let initTableTbodyMonth = (json) => {
                     "</tfoot>");
             let Strack=true;
             for (let n = 1; n <= json.length; n++) {
+                let img;
                 if (n == json.length) {
                     //车道0即总计的一行的td
                     let tdDom = "";
@@ -495,7 +527,12 @@ let initTableTbodyMonth = (json) => {
                     }
                     tdDom = tdDom + "<td data-id='"+json[0].avgLaneNo+","+k+"'><a >" + json[0]['column' + k] + "</a></td>";
                     let dom = tableDom.find("tfoot");
+                    if(Strack){
+                        img="<td width='20%' rowspan='"+(json.length)+"'>" + getimgUrl(2) + "</td>" ;
+                        Strack=false;
+                    }
                     $(dom).append("<tr align='center'>" +
+                        img+
                         "<td >合计</td>" +
                         tdDom +
                         "</tr>")
@@ -507,9 +544,8 @@ let initTableTbodyMonth = (json) => {
                 }
                 tdDom = tdDom + "<td data-id='"+json[n].avgLaneNo+","+k+"'><a >" + json[n]['column' + k] + "</a></td>";
                 let dom = tableDom.find("tfoot");
-                let img;
                 if(Strack){
-                    img="<td width='20%' rowspan='"+(json.length)+"'>" + getimgUrl() + "</td>" ;
+                    img="<td width='20%' rowspan='"+(json.length)+"'>" + getimgUrl(2) + "</td>" ;
                     Strack=false;
                 }
                 $(dom).append("<tr align='center'>" +

@@ -11,14 +11,24 @@ public class tMaintenanceReplaceLog {
     private String replaceReason;
     private int delState;//1存在0删除
     private String logReplaceUser;//维护人
-    private String usrName;
 
-    public String getUsrName() {
-        return usrName;
+    private String stationIP;//站点端口号
+    private String stationName;//站点
+
+    public String getStationName() {
+        return stationName;
     }
 
-    public void setUsrName(String usrName) {
-        this.usrName = usrName;
+    public void setStationName(String stationName) {
+        this.stationName = stationName;
+    }
+
+    public String getStationIP() {
+        return stationIP;
+    }
+
+    public void setStationIP(String stationIP) {
+        this.stationIP = stationIP;
     }
 
     public String getLogReplaceUser() {

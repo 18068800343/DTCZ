@@ -40,9 +40,7 @@ public class tMaintenanceLogController {
         String id= LDXXUtils.getUUID12();
         tMaintenanceLog.setLogId(id);
         tMaintenanceLog.setDelState(1);
-        tUserInfo user = (tUserInfo) session.getAttribute("user");
-        tMaintenanceLog.setLogUser(user.getUsrId());
-        tMaintenanceLog.setUsrName(user.getUsrName());
+
         String webApps=imgUrlPrefixVo.getFujianUrl();
         String path=webApps;
         File f=new File(path);
@@ -80,15 +78,6 @@ public class tMaintenanceLogController {
     @RequestMapping("/updtMaintenanceLog")
     public Map<String,Object> updtMaintenanceLog(tMaintenanceLog tMaintenanceLog, @RequestParam("file") MultipartFile[] file, HttpSession session) throws IOException {
         Map<String,Object> map=new HashMap<>();
-        tUserInfo user = (tUserInfo) session.getAttribute("user");
-        tMaintenanceLog.setLogUser(user.getUsrId());
-        tMaintenanceLog.setUsrName(user.getUsrName());
-        if("0".equals(tMaintenanceLog.getIsChangeEquipment())){
-            tMaintenanceLog.setIsChangeEquipmentName("否");
-        }else{
-            tMaintenanceLog.setIsChangeEquipmentName("是");
-        }
-
         String id= tMaintenanceLog.getLogId();
         String webApps=imgUrlPrefixVo.getFujianUrl();
         String path=webApps;
@@ -133,9 +122,6 @@ public class tMaintenanceLogController {
         String id= LDXXUtils.getUUID12();
         tMaintenanceReplaceLog.setLogReplaceId(id);
         tMaintenanceReplaceLog.setDelState(1);
-        tUserInfo user = (tUserInfo) session.getAttribute("user");
-        tMaintenanceReplaceLog.setLogReplaceUser(user.getUsrId());
-        tMaintenanceReplaceLog.setUsrName(user.getUsrName());
 
         int i=dao.addtMaintenanceReplaceLog(tMaintenanceReplaceLog);
         map.put("result", i);
@@ -146,9 +132,6 @@ public class tMaintenanceLogController {
     @RequestMapping("/updtMaintenanceReplaceLog")
     public Map<String,Object> updtMaintenanceReplaceLog(tMaintenanceReplaceLog tMaintenanceReplaceLog, HttpSession session) {
         Map<String,Object> map=new HashMap<>();
-        tUserInfo user = (tUserInfo) session.getAttribute("user");
-        tMaintenanceReplaceLog.setLogReplaceUser(user.getUsrId());
-        tMaintenanceReplaceLog.setUsrName(user.getUsrName());
 
         int i=dao.updtMaintenanceReplaceLog(tMaintenanceReplaceLog);
         map.put("result", i);

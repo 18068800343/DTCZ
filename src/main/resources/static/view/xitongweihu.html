@@ -81,7 +81,7 @@
                                 <th>故障日期</th>
                                 <th>维护日期</th>
                                 <th>维护内容</th>
-                                <th>是否更换设备</th>
+                                <th>站点</th>
                                 <th>备注</th>
                                 <th style="width:75px;">操作</th>
                             </tr>
@@ -105,7 +105,7 @@
                     <thead>
                     <tr>
                         <th>维护人</th>
-                        <th>设备名称</th>
+                        <th>站点</th>
                         <th>设备位置/编号</th>
                         <th>更换日期</th>
                         <th>更换原因</th>
@@ -141,15 +141,16 @@
                                 <td  style="width: 30%;"><input type="text" id="shijian"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
                             </tr>
                             <tr>
-                                <td  style="width: 20%;">是否更换设备</td>
+                                <td  style="width: 20%;">站点</td>
                                 <td  style="width: 30%;">
-                                    <select class="form-control" id="isChangeEquipment" style="width: 100%;">
-                                        <option value="1">是</option>
-                                        <option value="0">否</option>
+                                    <select class="form-control" id="zhandian" style="width: 100%;">
+
                                     </select>
                                 </td>
-                                <td  style="width: 20%;"></td>
-                                <td  style="width: 30%;"></td>
+                                <td  style="width: 20%;">维护人</td>
+                                <td  style="width: 30%;">
+                                    <input type="text" id="weihuren" style="width: 100%;" placeholder="请输入" class="form-control">
+                                </td>
                             </tr>
                             <tr>
                                 <td  style="width: 20%;">维护内容</td>
@@ -206,15 +207,16 @@
                                 <td  style="width: 30%;"><input type="text" id="xg_shijian"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
                             </tr>
                             <tr>
-                                <td  style="width: 20%;">是否更换设备</td>
+                                <td  style="width: 20%;">站点</td>
                                 <td  style="width: 30%;">
-                                    <select class="form-control" id="xg_isChangeEquipment" style="width: 100%;">
-                                        <option value="1">是</option>
-                                        <option value="0">否</option>
+                                    <select class="form-control" id="xg_zhandian" style="width: 100%;">
+
                                     </select>
                                 </td>
-                                <td  style="width: 20%;"></td>
-                                <td  style="width: 30%;"></td>
+                                <td  style="width: 20%;">维护人</td>
+                                <td  style="width: 30%;">
+                                    <input type="text" id="xg_weihuren" style="width: 100%;" class="form-control">
+                                </td>
                             </tr>
                             <tr>
                                 <td  style="width: 20%;">维护内容</td>
@@ -273,8 +275,8 @@
                                 <td  style="width: 30%;" id="look_shijian"></td>
                             </tr>
                             <tr>
-                                <td  style="width: 20%;">是否更换设备</td>
-                                <td  style="width: 30%;" id="look_isChangeEquipment"></td>
+                                <td  style="width: 20%;">站点</td>
+                                <td  style="width: 30%;" id="look_StationName"></td>
                                 <td  style="width: 20%;">维护人</td>
                                 <td  style="width: 30%;" id="look_weihuren"></td>
                             </tr>
@@ -320,16 +322,20 @@
                     <form class="form-inline" >
                         <table class="table table-bordered table-condensed">
                             <tr>
-                                <td  style="width: 20%;">设备名称</td>
-                                <td  style="width: 30%;"><input type="text" id="equipmentName"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+                                <td  style="width: 20%;">站点</td>
+                                <td  style="width: 30%;">
+                                    <select class="form-control" id="zhandian2" style="width: 100%;">
+
+                                    </select>
+                                </td>
                                 <td  style="width: 20%;">设备位置/编号</td>
                                 <td  style="width: 30%;"><input type="text" id="equipmentPositionNumber"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
                             </tr>
                             <tr>
                                 <td  style="width: 20%;">更换日期</td>
                                 <td  style="width: 30%;"><input type="text" id="replaceTime"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
-                                <td  style="width: 20%;"></td>
-                                <td  style="width: 30%;"></td>
+                                <td  style="width: 20%;">维护人</td>
+                                <td  style="width: 30%;"><input type="text" id="weihuren2"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
                             </tr>
                             <tr>
                                 <td  style="width: 20%;">更换原因</td>
@@ -364,16 +370,20 @@
                     <form class="form-inline" >
                         <table class="table table-bordered table-condensed">
                             <tr>
-                                <td  style="width: 20%;">设备名称</td>
-                                <td  style="width: 30%;"><input type="text" id="xg_equipmentName"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
+                                <td  style="width: 20%;">站点</td>
+                                <td  style="width: 30%;">
+                                    <select class="form-control" id="xg_zhandian2" style="width: 100%;">
+
+                                    </select>
+                                </td>
                                 <td  style="width: 20%;">设备位置/编号</td>
                                 <td  style="width: 30%;"><input type="text" id="xg_equipmentPositionNumber"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
                             </tr>
                             <tr>
                                 <td  style="width: 20%;">更换日期</td>
                                 <td  style="width: 30%;"><input type="text" id="xg_replaceTime"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
-                                <td  style="width: 20%;"></td>
-                                <td  style="width: 30%;"></td>
+                                <td  style="width: 20%;">维护人</td>
+                                <td  style="width: 30%;"><input type="text" id="xg_weihuren2"  class="form-control" placeholder="请输入" style="width: 100%;"></td>
                             </tr>
                             <tr>
                                 <td  style="width: 20%;">更换原因</td>
@@ -401,23 +411,23 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" ><b>修改系统设备更换日志</b></h4>
+                <h4 class="modal-title" ><b>详细信息</b></h4>
             </div>
             <div class="modal-body">
                 <div>
                     <form class="form-inline" >
                         <table class="table table-bordered table-condensed">
                             <tr>
-                                <td  style="width: 20%;">设备名称</td>
-                                <td  style="width: 30%;" id="look_equipmentName"></td>
+                                <td  style="width: 20%;">站点</td>
+                                <td  style="width: 30%;" id="look_zhandian2"></td>
                                 <td  style="width: 20%;">设备位置/编号</td>
                                 <td  style="width: 30%;" id="look_equipmentPositionNumber"></td>
                             </tr>
                             <tr>
                                 <td  style="width: 20%;">更换日期</td>
                                 <td  style="width: 30%;" id="look_replaceTime" ></td>
-                                <td  style="width: 20%;"></td>
-                                <td  style="width: 30%;"></td>
+                                <td  style="width: 20%;">维护人</td>
+                                <td  style="width: 30%;" id="look_weihuren2"></td>
                             </tr>
                             <tr>
                                 <td  style="width: 20%;">更换原因</td>
@@ -462,6 +472,7 @@
 <script>
 
     $(document).ready( function () {
+        initzhandian()
         laydate.render({
             elem: '#shijian', //指定元素
             type: 'datetime'
@@ -501,11 +512,11 @@
             "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
         },
         "columns": [
-            { "data": "usrName"},
+            { "data": "logUser"},
             { "data": "faultTime"},
             { "data": "logTime"},
             { "data": "logContent"},
-            { "data": "isChangeEquipmentName"},
+            { "data": "stationName"},
             { "data": "logRemarks"},
             { "data": null},
         ],
@@ -574,8 +585,8 @@
             "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
         },
         "columns": [
-            { "data": "usrName"},
-            { "data": "equipmentName"},
+            { "data": "logReplaceUser"},
+            { "data": "stationName"},
             { "data": "equipmentPositionNumber"},
             { "data": "replaceTime"},
             { "data": "replaceReason"},
@@ -688,12 +699,52 @@
         });
     }
 
+    function initzhandian(){
+        $.ajax({
+            type: 'POST',
+            //url: '/tUserInfo/selectUserById',
+            url: '/login/getUser',
+            dataType: 'json',
+            async:false,
+            data: {
+            },
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+
+                $("#zhandian").html('');
+                if(json!=null){
+                    if(json.stationPort.indexOf(",")!=-1&&json.stationName.indexOf(",")!=-1){
+                        var stationPort=json.stationPort.split(",");
+                        var stationName=json.stationName.split(",");
+                        for(var i=0;i<stationPort.length;i++){
+                            for(var i=0;i<stationName.length;i++){
+                                $("#zhandian").append("<option  value='"+stationPort[i]+"'>"+stationName[i]+"</option>");
+                                $("#xg_zhandian").append("<option  value='"+stationPort[i]+"'>"+stationName[i]+"</option>");
+                                $("#zhandian2").append("<option  value='"+stationPort[i]+"'>"+stationName[i]+"</option>");
+                                $("#xg_zhandian2").append("<option  value='"+stationPort[i]+"'>"+stationName[i]+"</option>");
+                            }
+                        }
+                    }else{
+                        $("#zhandian").append("<option  value='"+json.stationPort+"'>"+json.stationName+"</option>");
+                        $("#xg_zhandian").append("<option  value='"+json.stationPort+"'>"+json.stationName+"</option>");
+                        $("#zhandian2").append("<option  value='"+json.stationPort+"'>"+json.stationName+"</option>");
+                        $("#xg_zhandian2").append("<option  value='"+json.stationPort+"'>"+json.stationName+"</option>");
+                    }
+
+
+                }
+            }
+        });
+    }
 
 
     $("#baocun").click(function(){
         var faultTime=$("#faultTime").val();
         var shijian=$("#shijian").val();
-        var isChangeEquipment=$("#isChangeEquipment").val();
+        var zhandian=$("#zhandian").val();
+        var weihuren=$("#weihuren").val();
         var weihuContent=$("#weihuContent").val();
         var logRemarks=$("#logRemarks").val();
 
@@ -705,7 +756,8 @@
                 logTime:shijian,
                 logContent:weihuContent,
                 faultTime:faultTime,
-                isChangeEquipment:isChangeEquipment,
+                stationIP:zhandian,
+                logUser:weihuren,
                 logRemarks:logRemarks
             },
             error: function (msg) {
@@ -714,6 +766,7 @@
             success: function (json) {
                 if(json.result>0){
                     toastr.success("添加成功");
+                    json.tMaintenanceLog.stationName=$("#zhandian").find("option:selected").text()
                     $('#mainContent').DataTable().row.add(json.tMaintenanceLog).draw(false);     //新增行立即显示
                     $("#myModal").modal('hide');
                 }else{
@@ -736,6 +789,8 @@
         $("#xg_isChangeEquipment").val(data.isChangeEquipment);
         $("#xg_weihuContent").val(data.logContent);
         $("#xg_logRemarks").val(data.logRemarks);
+        $("#xg_zhandian").val(data.stationIP);
+        $("#xg_weihuren").val(data.logUser);
         $.ajax({
             type:"post",
             url:"/accessory/selectAccessoryById",
@@ -796,8 +851,9 @@
         var faultTime=$("#xg_faultTime").val();
         var shijian=$("#xg_shijian").val();
         var weihuContent=$("#xg_weihuContent").val();
-        var isChangeEquipment=$("#xg_isChangeEquipment").val();
         var logRemarks=$("#xg_logRemarks").val();
+        var zhandian=$("#xg_zhandian").val();
+        var weihuren=$("#xg_weihuren").val();
 
         var options={
             type: 'POST',
@@ -808,7 +864,8 @@
                 logTime:shijian,
                 logContent:weihuContent,
                 faultTime:faultTime,
-                isChangeEquipment:isChangeEquipment,
+                stationIP:zhandian,
+                logUser:weihuren,
                 logRemarks:logRemarks,
             },
             error: function (msg) {
@@ -817,6 +874,7 @@
             success: function (json) {
                 if(json.result>0){
                     toastr.success("修改成功");
+                    json.tMaintenanceLog.stationName=$("#xg_zhandian").find("option:selected").text()
                     $('#mainContent').DataTable().row(tr).data(json.tMaintenanceLog);
                     $("#change").modal('hide');
                     initTableQuanxian()
@@ -864,8 +922,8 @@
         var data=$('#mainContent').DataTable().row(dom).data();
         $("#look_faultTime").text(data.faultTime)
         $("#look_shijian").text(data.logTime);
-        $("#look_isChangeEquipment").text(data.isChangeEquipmentName)
-        $("#look_weihuren").text(data.usrName);
+        $("#look_StationName").text(data.stationName)
+        $("#look_weihuren").text(data.logUser);
         $("#look_weihuContent").text(data.logContent);
         $("#look_logRemarks").text(data.logRemarks)
         $.ajax({
@@ -941,21 +999,22 @@
     }
 
     $("#baocun2").click(function(){
-        var equipmentName=$("#equipmentName").val();
         var equipmentPositionNumber=$("#equipmentPositionNumber").val();
         var replaceTime=$("#replaceTime").val();
         var replaceReason=$("#replaceReason").val();
+        var zhandian=$("#zhandian2").val();
+        var weihuren=$("#weihuren2").val();
 
         $.ajax({
             type: 'POST',
             url: '/tMaintenanceLog/addtMaintenanceReplaceLog',
             dataType: 'json',
             data: {
-                equipmentName:equipmentName,
                 equipmentPositionNumber:equipmentPositionNumber,
                 replaceTime:replaceTime,
                 replaceReason:replaceReason,
-
+                stationIP:zhandian,
+                logReplaceUser:weihuren,
             },
             error: function (msg) {
                 errMessage("请求UserController失败");
@@ -963,6 +1022,7 @@
             success: function (json) {
                 if(json.result>0){
                     toastr.success("添加成功");
+                    json.tMaintenanceReplaceLog.stationName=$("#zhandian2").find("option:selected").text();
                     $('#mainContent2').DataTable().row.add(json.tMaintenanceReplaceLog).draw(false);     //新增行立即显示
                     $("#myModal2").modal('hide');
                 }else{
@@ -979,28 +1039,30 @@
         tr2 = $(this).closest('tr');
         var data=$('#mainContent2').DataTable().row(dom).data();
         xgId2=data.logReplaceId
-        $("#xg_equipmentName").val(data.equipmentName);
+
         $("#xg_equipmentPositionNumber").val(data.equipmentPositionNumber);
         $("#xg_replaceTime").val(data.replaceTime);
         $("#xg_replaceReason").val(data.replaceReason);
-
+        $("#xg_zhandian2").val(data.stationIP);
+        $("#xg_weihuren2").val(data.logReplaceUser);
     })
     $("#xg_baocun2").click(function(){
-        var equipmentName=$("#xg_equipmentName").val();
         var equipmentPositionNumber=$("#xg_equipmentPositionNumber").val();
         var replaceTime=$("#xg_replaceTime").val();
         var replaceReason=$("#xg_replaceReason").val();
-
+        var zhandian=$("#xg_zhandian2").val();
+        var weihuren=$("#xg_weihuren2").val();
         var options={
             type: 'POST',
             url: '/tMaintenanceLog/updtMaintenanceReplaceLog',
             dataType: 'json',
             data: {
                 logReplaceId:xgId2,
-                equipmentName:equipmentName,
                 equipmentPositionNumber:equipmentPositionNumber,
                 replaceTime:replaceTime,
                 replaceReason:replaceReason,
+                stationIP:zhandian,
+                logReplaceUser:weihuren,
             },
             error: function (msg) {
                 errMessage("请求UserController失败");
@@ -1008,6 +1070,7 @@
             success: function (json) {
                 if(json.result>0){
                     toastr.success("修改成功");
+                    json.tMaintenanceReplaceLog.stationName=$("#xg_zhandian2").find("option:selected").text();
                     $('#mainContent2').DataTable().row(tr2).data(json.tMaintenanceReplaceLog);
                     $("#change2").modal('hide');
                     initTableQuanxian()
@@ -1049,11 +1112,12 @@
     function lookMs2(obj){
         var dom = $(obj).parents('tr');
         var data=$('#mainContent2').DataTable().row(dom).data();
-        $("#look_equipmentName").text(data.equipmentName);
+
         $("#look_equipmentPositionNumber").text(data.equipmentPositionNumber);
         $("#look_replaceTime").text(data.replaceTime);
         $("#look_replaceReason").text(data.replaceReason);
-
+        $("#look_zhandian2").text(data.stationName);
+        $("#look_weihuren2").text(data.logReplaceUser);
     }
 
 </script>
