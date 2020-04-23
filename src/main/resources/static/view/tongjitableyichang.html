@@ -16,6 +16,44 @@
     <!--<link rel="stylesheet" type="text/css" href="css/layui.css" />-->
     <link rel="stylesheet" href="css/toastr.css"/>
     <style>
+        /*
+        *
+        *   CSS部分
+        *
+        * */
+        .jump_button{
+            width: 54px;
+            height: 33px;
+            color: #fff;
+            background: #65CEA7;
+        }
+
+        .my_dataTables_jump{
+            display:inline-block;
+            float:right;
+            margin-top:-3px;
+            position: relative;
+            top:4px;
+            left:4px;
+        }
+        .my_dataTables_jump span{
+            width: 54px;
+            height: 33px;
+            border:1px solid #EFF2F7;
+            background-color: #EFF2F7;
+            color:#535351;
+            cursor: auto;
+        }
+        .my_dataTables_jump span:hover{
+            color:#535351;
+        }
+        .my_dataTables_jump input{
+            height:34px;
+            width: 65px;
+            border:1px solid #EFF2F7;
+            background-color: #EFF2F7;
+        }
+
         #mainContent_info {
             margin-left: 5%;
         }
@@ -27,10 +65,10 @@
             background-color:#549CDF;
             color:white;
         }
-      .table.dataTable thead th, table.dataTable thead td{
+        .table.dataTable thead th, table.dataTable thead td{
             border-bottom:0px solid #DEDEDE;
         }
-       #mainContent th{
+        #mainContent th{
             height:30px;
             line-height:30px;
         }
@@ -42,27 +80,27 @@
             border:0px solid #ddd;
         }
         .table.dataTable.no-footer{
-             border:0px solid #ddd;
+            border:0px solid #ddd;
         }
         #mainContent_info{
             float:right;
             margin-right:5%;
         }
         #mainContent_paginate{
-           margin-right:15%;
+            margin-right:15%;
         }
         .current{
-           background-color:#549CFD;
+            background-color:#549CFD;
         }
         .btn-group{
-           width:80%;
+            width:80%;
         }
         @media screen and (max-width: 1400px) {
             .mask-loading {
                 top: 40% !important;
             }
             .kaishiriqi,.jieshuriqi{
-                width:10% !important;  
+                width:10% !important;
             }
             .chepaihaoinput{
                 margin-left:-8% !important;
@@ -80,45 +118,45 @@
                 margin-left:10% !important;
             }
             .chongzhi{
-               position:absolute !important;
-               z-index:2 !important;
-               width:80px !important;
-               right:3% !important;
-               margin-top:3.6% !important;
+                position:absolute !important;
+                z-index:2 !important;
+                width:80px !important;
+                right:3% !important;
+                margin-top:3.6% !important;
             }
             .bottomsele{
-              top:18% !important;
+                top:18% !important;
             }
             .queding{
-             margin-top:4% !important;
-             width:80px !important;
-             right:2%;
+                margin-top:4% !important;
+                width:80px !important;
+                right:2%;
             }
             .chesuk{
-             margin-left:-1% !important;
-             width:7% !important;
+                margin-left:-1% !important;
+                width:7% !important;
             }
             .chesukk{
-             width:7% !important;
+                width:7% !important;
             }
             .lumianwendu{
-             margin-left:2.5% !important;
+                margin-left:2.5% !important;
             }
             .lmwd{
-             margin-left:-1% !important;
-             width:7% !important;
+                margin-left:-1% !important;
+                width:7% !important;
             }
             .lmwdt{
-            width:7% !important;
+                width:7% !important;
             }
             .chepai{
-             margin-left:0% !important;
+                margin-left:0% !important;
             }
             .text3{
-             width:150%;
+                width:150%;
             }
             .bts{
-               margin-top:-3.4% !important;
+                margin-top:-3.4% !important;
             }
         }
 
@@ -130,7 +168,7 @@
 
             .text1 {
                 width: 100px !important;
-             }
+            }
 
             .text2 {
                 width: 100px;
@@ -174,7 +212,7 @@
                 margin-left: 3% !important;
                 width: 8% !important;
             }
-            
+
 
             .text3 {
                 width: 100px !important;
@@ -241,394 +279,409 @@
 <body style="background-image: none;">
 <div class="form-group" id="rightTab">
     <div id="mainVm" style="margin-left:1.5%;">
-     <button type="button" class="btn btn-primary jiancezhandian" onclick="nowJianceSite()" data-toggle="modal"
+        <button type="button" class="btn btn-primary jiancezhandian" onclick="nowJianceSite()" data-toggle="modal"
                 data-target="#jianceDiv"
                 style="width: 170px;visibility:hidden; top:43px;background-color:#549CFD; margin-left:1.5%;border:1px solid #549CFD;font-size:16px;">
             当前监测站点
         </button>
-          <input type="button" id="but" onclick="but2()" class="button" value="高级筛选"
+        <input type="button" id="but" onclick="but2()" class="button" value="高级筛选"
                style="height:34px;float:right;color:#549CFD;border:none;background-color:transparent;margin-right:2.5%;">
         <div class="sele" >
-        <div class="top_main">
-            <label class="col-sm-2 control-label zhongliang" style="width:5%;font-weight:normal;">重量</label>
-            <div class="col-sm-2">
-                <!-- 样式1 -->
-                <input type="text" class="text1 col-xs-12" value="请输入" v-model="startWeight" @input="checknum('startWeight')"
-                       style="height: 34px;border-radius: 5px;box-shadow: none;border:1px solid #DDD;padding:3px;">
+            <div class="top_main">
+                <label class="col-sm-2 control-label zhongliang" style="width:5%;font-weight:normal;">重量</label>
+                <div class="col-sm-2">
+                    <!-- 样式1 -->
+                    <input type="text" class="text1 col-xs-12" value="请输入" v-model="startWeight" @input="checknum('startWeight')"
+                           style="height: 34px;border-radius: 5px;box-shadow: none;border:1px solid #DDD;padding:3px;">
+                </div>
+
+                <div class="col-sm-2 col1">
+                    <div class="xian2"
+                         style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: -30%;margin-top: 15%;">
+                    </div>
+                    <input type="text" class="text2 col-xs-12" value="请输入" v-model="endWeight" @input="checknum('endWeight')" style="height: 34px;border-radius: 5px;box-shadow: none;margin-left: -10px;border:1px solid #DDD;padding:3px;width:103%;">
+                </div>
             </div>
 
-            <div class="col-sm-2 col1">
+
+
+            <div class="col-sm-2" style="width:4%;" >
+            </div>
+            <label class="col-sm-1	 control-label chexing"
+                   style=" width: 70px; line-height: 30px;font-weight:normal;">车型</label>
+
+            <div class="col-sm-2" style="margin-left: 1%;">
                 <div class="xian2"
-                     style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: -30%;margin-top: 15%;">
-                </div>
-                <input type="text" class="text2 col-xs-12" value="请输入" v-model="endWeight" @input="checknum('endWeight')" style="height: 34px;border-radius: 5px;box-shadow: none;margin-left: -10px;border:1px solid #DDD;padding:3px;width:103%;">
-            </div>
-        </div>
-
-
-     
-        <div class="col-sm-2"  >
-        </div>
-        <label class="col-sm-1	 control-label chexing"
-               style=" width: 70px; line-height: 30px;font-weight:normal;">车型</label>
-
-        <div class="col-sm-2" style="margin-left: 1%;">
-            <div class="xian2"
-                 style="width: 10px; height: 2px; background-color: rgb(222, 222, 222); position: absolute; margin-left: 5%; margin-top: 15%;"></div>
-            <select value="请选择" class="selectpicker" multiple data-max-options="1" data-live-search="true" id="chexing"
-                    style="height: 34px; border-radius: 5px; box-shadow: none; margin-left: 30px; border: 1px solid rgb(221, 221, 221);">
-                <option value="">全部</option>
-                <option value="2">2轴车</option>
-                <option value="3">3轴车</option>
-                <option value="4">4轴车</option>
-                <option value="5">5轴车</option>
-                <option value="6">6轴车</option>
-            </select>
-        </div>
-         <label for="" class="col-sm-2 control-label chaozhongbili" style="margin-left:13%;font-weight:normal;width:8%;">是否超载</label>
-                <div class="col-sm-2 czbl" style="width: 10%">
-<!--                    <input type="text" class="text8" value="请输入" v-model="chaozhongStart"
-                           @input="checknum('chaozhongStart')"
-                           style="border-radius: 5px;box-shadow: none;border:1px solid #DDD;padding:3px; ;height:34px;margin-left:-40px;">-->
-                    <select value="请选择" class="text8 col-xs-12	" data-live-search="true"  v-model="chaozhongStart"
-                            style="border-radius: 5px;box-shadow: none;border:1px solid #DDD;padding:3px; ;height:34px;margin-left:-40px;">
-                        <option value="">全部</option>
-                        <option value="1">超载</option>
-                    </select>
-                </div>
-        <div class="sele">
-            <label for="" class="col-sm-2 control-label" style="width:5%;font-weight:normal;margin-left:18%;float:left;left:-17%;">站点</label>
-            <div class="col-sm-2" style="width: 17%;margin-left:-16%;">
-                <!-- 样式1 -->
-                <select class="form-control selectpicker" multiple data-actions-box="true" data-max-options="2"
-                        data-live-search="true"
-                        id="zhandian" style="width:80%;">
+                     style="width: 10px; height: 2px; background-color: rgb(222, 222, 222); position: absolute; margin-left: 5%; margin-top: 15%;"></div>
+                <select value="请选择" class="selectpicker" multiple data-max-options="1" data-live-search="true" id="chexing"
+                        style="height: 34px; border-radius: 5px; box-shadow: none; margin-left: 30px; border: 1px solid rgb(221, 221, 221);">
+                    <option value="">全部</option>
+                    <option value="2">2轴车</option>
+                    <option value="3">3轴车</option>
+                    <option value="4">4轴车</option>
+                    <option value="5">5轴车</option>
+                    <option value="6">6轴车</option>
                 </select>
             </div>
-
-        </div>
-        <div style="position:relative;">
-        
-           <label class="col-sm-1	 control-label riqi"
-               style="margin-left: 1%;width: 70px;line-height: 30px;font-size:15px;font-weight:normal;">日期</label>
-            <div class="col-sm-2 chepai" style="width: 21.5%;padding-left: 29px;">
-                <!-- 样式1 -->
-                         <select value="请选择" class="selectpicker" multiple data-max-options="1" data-live-search="true" @change="formatTimeRange" v-model="timeRange" id="timeRange"
-                    style="height: 34px; border-radius: 5px; box-shadow: none; margin-left: 30px; border: 1px solid rgb(221, 221, 221);">
-                <option value="1">最近一天</option>
-                <option value="3">最近三天</option>
-                <option value="30">最近一个月</option>
-                <option value="60">最近二个月</option>
-                <option value="90">最近三个月</option>
-                <option value="180">最近半年</option>
-                <option value="365">最近一年</option>
-                <option value="">自定义</option>
-                <option value="all">全部</option>
-            </select>
+            <label for="" class="col-sm-2 control-label chaozhongbili" style="margin-left:12%;font-weight:normal;width:8%;">是否超载</label>
+            <div class="col-sm-2 czbl" style="width: 13%">
+                <!--                    <input type="text" class="text8" value="请输入" v-model="chaozhongStart"
+                                           @input="checknum('chaozhongStart')"
+                                           style="border-radius: 5px;box-shadow: none;border:1px solid #DDD;padding:3px; ;height:34px;margin-left:-40px;">-->
+                <select value="请选择" class="text8 col-xs-12	" data-live-search="true"  v-model="chaozhongStart"
+                        style="width:200px;border-radius: 5px;box-shadow: none;border:1px solid #DDD;padding:3px; ;height:34px;margin-left:-40px;">
+                    <option value="">全部</option>
+                    <option value="1">超载</option>
+                </select>
             </div>
-        </div>
-      
-            <label class="col-sm-1	 control-label riqi kaishiriqi" style="width:7%;line-height: 30px; margin-left:2%;font-weight:normal;">开始时间</label>
-        <div class="col-sm-2 kaishiriqidiv" style="margin-left:-1.5%;">
-            <!-- 样式1 -->
-            <input type="text" v-model="startTime" id="startTime" value="请选择" disabled
-                  style="height: 34px;border-radius: 5px;box-shadow: none;width: 250%;border:1px solid #DDD;">
-        </div>
-        <label class="col-sm-1	 control-label riqi jieshuriqi" style="width:7%; line-height: 30px;margin-left:13%;font-weight:normal; ">结束时间
-        </label>
-        <div class="col-sm-2 jieshuriqidiv" style="width:5%;margin-left:-0.5%;padding-left: 17px;">
-            <!-- 样式1 -->
+            <div class="sele">
+                <label for="" class="col-sm-2 control-label" style="width:5%;font-weight:normal;margin-left:19%;float:left;left:-17%;">站点</label>
+                <div class="col-sm-2" style="width: 17%;margin-left:-16%;">
+                    <!-- 样式1 -->
+                    <select class="form-control selectpicker" multiple data-actions-box="true" data-max-options="2"
+                            data-live-search="true"
+                            id="zhandian" style="width:80%;">
+                    </select>
+                </div>
 
-            <input type="text" v-model="endTime" id="endTime" value="请选择" disabled
-                   style="height: 34px;border-radius: 5px;box-shadow: none;width: 260%;border:1px solid #DDD;">
-        </div>
-        <label for="" class="col-sm-2 control-label" style="margin-left:8.5%;font-weight:normal;width:5%;">车牌号</label>
-        <div class="col-sm-2 chepai">
-            <!-- 样式1 -->
-            <input type="text" value="请输入" v-model="chepai"
-                   style="border-radius: 5px;box-shadow: none;border:1px solid #DDD;padding:3px; margin-left:0%;height:34px;width:290%;">
-        </div>
-         <div class="jiance">
+            </div>
+            <div style="position:relative;">
+
+                <label class="col-sm-1	 control-label riqi"
+                       style="margin-left: 1%;width: 70px;line-height: 30px;font-size:15px;font-weight:normal;">日期</label>
+                <div class="col-sm-2 chepai" style="width: 21.5%;padding-left: 29px;">
+                    <!-- 样式1 -->
+                    <select value="请选择" class="selectpicker" multiple data-max-options="1" data-live-search="true" @change="formatTimeRange" v-model="timeRange" id="timeRange"
+                            style="height: 34px; border-radius: 5px; box-shadow: none; margin-left: 30px; border: 1px solid rgb(221, 221, 221);">
+                        <option value="1">最近一天</option>
+                        <option value="3">最近三天</option>
+                        <option value="30">最近一个月</option>
+                        <option value="60">最近二个月</option>
+                        <option value="90">最近三个月</option>
+                        <option value="180">最近半年</option>
+                        <option value="365">最近一年</option>
+                        <option value="">自定义</option>
+                        <option value="all">全部</option>
+                    </select>
+                </div>
+            </div>
+
+            <label class="col-sm-1	 control-label riqi kaishiriqi" style="width:7%;line-height: 30px;font-weight:normal;margin-left:-1%;">开始时间</label>
+            <div class="col-sm-2 kaishiriqidiv" style="margin-left:-1.5%;">
+                <!-- 样式1 -->
+                <input type="text" v-model="startTime" id="startTime" value="请选择" disabled
+                       style="height: 34px;border-radius: 5px;box-shadow: none;width: 246%;border:1px solid #DDD;">
+            </div>
+            <label class="col-sm-1	 control-label riqi jieshuriqi" style="width:7%; line-height: 30px;margin-left:12%;font-weight:normal; ">结束时间
+            </label>
+            <div class="col-sm-2 jieshuriqidiv" style="width:6.2%;margin-left:-0.5%;padding-left: 17px;">
+                <!-- 样式1 -->
+
+                <input type="text" v-model="endTime" id="endTime" value="请选择" disabled
+                       style="height: 34px;border-radius: 5px;box-shadow: none;width:200px;border:1px solid #DDD;">
+            </div>
+            <label for="" class="col-sm-2 control-label" style="margin-left:11.3%;font-weight:normal;width:5%;">车牌号</label>
+            <div class="col-sm-2 chepai">
+                <!-- 样式1 -->
+                <input type="text" value="请输入" v-model="chepai"
+                       style="border-radius: 5px;box-shadow: none;border:1px solid #DDD;padding:3px; margin-left:0%;height:34px;width:290%;">
+            </div>
+            <div class="jiance">
                 <button type="button" class="btn btn-primary queding" @click="searchInit"
                         style="width: 110px;z-index:50;position:relative;margin-left:84%;margin-top:0.5%;background-color:#549CFD;border:1px solid #549CFD;">
                     确定
                 </button>
-          <button type="button" class="btn btn-primary chongzhi" @click="searchInit"
+                <button type="button" class="btn btn-primary chongzhi" @click="searchInit"
                         style="width: 110px;  position:relative;margin-top:0.5%;background-color:#CCCCCC;color:#666666;border:1px solid #CCCCCC;">
                     重置
                 </button>
             </div>
-        <div class="mydiv" style="clear:both;margin-top:10px;display:none;">
+            <div class="mydiv" style="clear:both;margin-top:10px;display:none;">
 
-            <!-- 轴数 -->
-    <!--  <label for="" class="col-sm-2 control-label zhousu" style="margin-left:3%;width:5%;display: none;">轴数</label>
-            <div class="col-sm-2" style="display: none;">
-                <input type="text" class="text5" value="请输入" v-model="zhoushu" @input="checknum('zhoushu')"
-                       style="border-radius: 5px;box-shadow: none;border:1px solid #DDD;padding:3px; ;height:34px;margin-left:-20px;">
-            </div>-->
-            <!--  路面温度 -->
-            <div class="sele ">
-                <!-- 超重比例 -->
-        <div class="col-sm-2" style="margin-left: 6%;">
-<!--                <div class="col-sm-2 bl" style="margin-left:-1%;">
-                    <div class="xian2"
-                         style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: -5%;margin-top: 15%;">
+                <!-- 轴数 -->
+                <!--  <label for="" class="col-sm-2 control-label zhousu" style="margin-left:3%;width:5%;display: none;">轴数</label>
+                        <div class="col-sm-2" style="display: none;">
+                            <input type="text" class="text5" value="请输入" v-model="zhoushu" @input="checknum('zhoushu')"
+                                   style="border-radius: 5px;box-shadow: none;border:1px solid #DDD;padding:3px; ;height:34px;margin-left:-20px;">
+                        </div>-->
+                <!--  路面温度 -->
+                <div class="sele ">
+                    <!-- 超重比例 -->
+                    <div class="col-sm-2" style="margin-left: 6%;">
+                        <!--                <div class="col-sm-2 bl" style="margin-left:-1%;">
+                                            <div class="xian2"
+                                                 style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: -5%;margin-top: 15%;">
+                                            </div>
+                                            <input type="text" class="text9" v-model="chaozhongEnd" value="请输入"
+                                                   @input="checknum('chaozhongEnd')" style="height: 34px;border-radius: 5px;box-shadow: none;width:
+                                    120%;margin-left: 30px;border:1px solid #DDD;padding:3px;">
+                                        </div>-->
                     </div>
-                    <input type="text" class="text9" v-model="chaozhongEnd" value="请输入"
-                           @input="checknum('chaozhongEnd')" style="height: 34px;border-radius: 5px;box-shadow: none;width:
-            120%;margin-left: 30px;border:1px solid #DDD;padding:3px;">
-                </div>-->
-            </div>
-             <div class="sele bts" style="position:absolute;width:100%;margin-top:-2.5%;">
-                <label for="" class="col-sm-2 control-label chesu" style="margin-left:1%;font-weight:normal;">车长</label>
-                 <div class="col-sm-2 " style="margin-left:-40px;width:5%;padding-left: 19px;">
-                    <!-- 样式1 -->
-                    <input type="text" class="text3" value="请输入" v-model="cheChangStart" @input="checknum('cheChangStart')"
-                           style="height: 34px;border-radius: 5px;box-shadow: none;width: 120%;border:1px solid #DDD;padding:3px;">
+                    <div class="sele bts" style="position:absolute;width:100%;margin-top:-2.5%;">
+                        <label for="" class="col-sm-2 control-label chesu" style="margin-left:1%;font-weight:normal;">车长</label>
+                        <div class="col-sm-2 " style="margin-left:-40px;width:5%;padding-left: 19px;">
+                            <!-- 样式1 -->
+                            <input type="text" class="text3" value="请输入" v-model="cheChangStart" @input="checknum('cheChangStart')"
+                                   style="height: 34px;border-radius: 5px;box-shadow: none;width: 120%;border:1px solid #DDD;padding:3px;">
 
+                        </div>
+
+                        <div class="col-sm-2 " style="width:5%;">
+                            <div class="xian2"
+                                 style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: -5%;margin-top: 15%;">
+                            </div>
+                            <input type="text" class="text4" value="请输入" v-model="cheChangEnd" @input="checknum('cheChangEnd')"
+                                   style="height: 34px;border-radius: 5px;box-shadow: none;width:120%;margin-left: 30px;border:1px solid #DDD;padding:3px;">
+                        </div>
+                        <label for="" class="col-sm-2 control-label chesu" style="margin-left:130px;font-weight:normal;">车速</label>
+                        <div class="col-sm-2 chesuk" style="margin-left:-2.5%;width:5%;padding-left: 19px;">
+                            <!-- 样式1 -->
+                            <input type="text" class="text3" value="请输入" v-model="chesuStart" @input="checknum('chesuStart')"
+                                   style="height: 34px;border-radius: 5px;box-shadow: none;width: 120%;border:1px solid #DDD;padding:3px;">
+
+                        </div>
+
+                        <div class="col-sm-2 chesukk" style="width:5%;">
+                            <div class="xian2"
+                                 style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: -5%;margin-top: 15%;">
+                            </div>
+                            <input type="text" class="text4" value="请输入" v-model="chesuEnd" @input="checknum('chesuEnd')"
+                                   style="height: 34px;border-radius: 5px;box-shadow: none;width:120%;margin-left: 30px;border:1px solid #DDD;padding:3px;">
+                        </div>
+                        <!-- <label for="" class="col-sm-2 control-label lumianwendu" style="margin-left:7%;font-weight:normal;">路面温度</label>
+                         <div class="col-sm-2 lmwd" style="margin-left:-2%;width:5%;padding-right: 0px;padding-left: 28px;">
+                             &lt;!&ndash; 样式1 &ndash;&gt;
+                             <input type="text" class="text6" value="请输入" v-model="roadTmpStart"
+                                    @input="checknum('roadTmpStart')"
+                                    style="height: 34px;border-radius: 5px;box-shadow: none;width: 70%;border:1px solid #DDD;padding:3px;">
+                         </div>-->
+
+                        <!--                <div class="col-sm-2 lmwdt" style="width:5%;">
+                                            <div class="xian2"
+                                                 style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: -35%;margin-top: 15%;">
+                                            </div>
+                                            <input type="text" class="text7" v-model="roadTmpEnd" value="请输入" @input="checknum('roadTmpEnd')"
+                                                   style="height: 34px;border-radius: 5px;box-shadow: none;width:70%;margin-left: -10px;border:1px solid #DDD;padding:3px;">
+                                        </div>-->
+                    </div>
                 </div>
-                 
-                <div class="col-sm-2 " style="width:5%;">
-                    <div class="xian2"
-                         style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: -5%;margin-top: 15%;">
-                    </div>
-                    <input type="text" class="text4" value="请输入" v-model="cheChangEnd" @input="checknum('cheChangEnd')"
-                           style="height: 34px;border-radius: 5px;box-shadow: none;width:120%;margin-left: 30px;border:1px solid #DDD;padding:3px;">
-                </div>	
-                <label for="" class="col-sm-2 control-label chesu" style="margin-left:180px;font-weight:normal;">车速</label>
-                <div class="col-sm-2 chesuk" style="margin-left:-2.5%;width:5%;padding-left: 19px;">
-                    <!-- 样式1 -->
-                    <input type="text" class="text3" value="请输入" v-model="chesuStart" @input="checknum('chesuStart')"
-                           style="height: 34px;border-radius: 5px;box-shadow: none;width: 120%;border:1px solid #DDD;padding:3px;">
-
-                </div>
-                 
-                <div class="col-sm-2 chesukk" style="width:5%;">
-                    <div class="xian2"
-                         style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: -5%;margin-top: 15%;">
-                    </div>
-                    <input type="text" class="text4" value="请输入" v-model="chesuEnd" @input="checknum('chesuEnd')"
-                           style="height: 34px;border-radius: 5px;box-shadow: none;width:120%;margin-left: 30px;border:1px solid #DDD;padding:3px;">
-                </div>	
-               <!-- <label for="" class="col-sm-2 control-label lumianwendu" style="margin-left:7%;font-weight:normal;">路面温度</label>
-                <div class="col-sm-2 lmwd" style="margin-left:-2%;width:5%;padding-right: 0px;padding-left: 28px;">
-                    &lt;!&ndash; 样式1 &ndash;&gt;
-                    <input type="text" class="text6" value="请输入" v-model="roadTmpStart"
-                           @input="checknum('roadTmpStart')"
-                           style="height: 34px;border-radius: 5px;box-shadow: none;width: 70%;border:1px solid #DDD;padding:3px;">
-                </div>-->
-
-<!--                <div class="col-sm-2 lmwdt" style="width:5%;">
-                    <div class="xian2"
-                         style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: -35%;margin-top: 15%;">
-                    </div>
-                    <input type="text" class="text7" v-model="roadTmpEnd" value="请输入" @input="checknum('roadTmpEnd')"
-                           style="height: 34px;border-radius: 5px;box-shadow: none;width:70%;margin-left: -10px;border:1px solid #DDD;padding:3px;">
-                </div>-->
             </div>
         </div>
-        </div>
-    </div>
         <div class="xian" style="position:relative;"></div>
         <input type="button" id="export" onclick="exportA()" class="button" value="导出EXCEL" style="float:right;border:1px solid #549CFD;margin:0.5%;margin-right:5%;background-color:#549CFD;color:white;border-radius:5px 5px 5px;font-size:12px;padding:7px;">
-    <!--表格-->
-    <table class="table table-striped table-hover" id="mainContent"
-           style="width: 90%;margin: 0 auto; margin-top: 20px;">
-        <thead style="background-color: white;height:40px;">
-        <tr>
-            <th style="width: 12%">站点<img src="img/bottom2.png"/></th>
-            <th>车道号<img src="img/bottom2.png"/></th>
-            <th>车牌号<img src="img/bottom2.png"/></th>
-            <th>车牌颜色<img src="img/bottom2.png"/></th>
-            <th data-id="Length">长<img src="img/bottom2.png"/></th>
-            <th data-id="Speed">车速(km/h)<img src="img/bottom2.png"/></th>
-            <th>轴数<img src="img/bottom2.png"/></th>
-            <th>超限值(kg)<img src="img/bottom2.png"/></th>
-            <th data-id="Total_Weight">总重量(kg)<img src="img/bottom2.png"/></th>
-            <th data-id="Over_Weight_Ratio">超载率<img src="img/bottom2.png"/></th>
-            <th data-id="Evt_Time">时间<img src="img/bottom2.png"/></th>
-            <th>详情</th>
-        </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
-</div>
+        <!--表格-->
+        <table class="table table-striped table-hover" id="mainContent"
+               style="width: 90%;margin: 0 auto; margin-top: 20px;">
+            <thead style="background-color: white;height:40px;">
+            <tr>
+                <th style="width: 12%">站点<img src="img/bottom2.png"/></th>
+                <th>车道号<img src="img/bottom2.png"/></th>
+                <th>车牌号<img src="img/bottom2.png"/></th>
+                <th>车牌颜色<img src="img/bottom2.png"/></th>
+                <th data-id="Length">长<img src="img/bottom2.png"/></th>
+                <th data-id="Speed">车速(km/h)<img src="img/bottom2.png"/></th>
+                <th data-id="Axles_Count">轴数<img src="img/bottom2.png"/></th>
+                <th>超限值(kg)<img src="img/bottom2.png"/></th>
+                <th data-id="Total_Weight">总重量(kg)<img src="img/bottom2.png"/></th>
+                <th data-id="Over_Weight_Ratio">超载率<img src="img/bottom2.png"/></th>
+                <th data-id="Evt_Time">时间<img src="img/bottom2.png"/></th>
+                <th>详情</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
 
-<!-- allMsg -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-     id="jianceDiv">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title"><b>当前监测站点</b></h4>
-            </div>
-            <div class="modal-body">
-                <div>
-                    <form class="form-inline">
-                        <table class="table table-bordered table-condensed" style="height: auto;" id="jianceTable">
-                            <tbody>
+    <!-- allMsg -->
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+         id="jianceDiv">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title"><b>当前监测站点</b></h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <form class="form-inline">
+                            <table class="table table-bordered table-condensed" style="height: auto;" id="jianceTable">
+                                <tbody>
 
-                            </tbody>
-                        </table>
-                    </form>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        </div>
+    </div>
+
+    <!-- allMsg1 -->
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg1" style="margin-top: 3%">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content"  id="lookWimMsgDiv">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" ><b>详细信息</b></h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <form class="form-inline">
+                            <table class="table  table-condensed" style="">
+                                <tr>
+                                    <td>站点</td>
+                                    <td>{{stationName}}</td>
+                                    <td>轴数</td>
+                                    <td>{{axlesCount}}</td>
+                                </tr>
+                                <tr>
+
+                                    <td>车型</td>
+                                    <td>{{vehicleTypeName}}</td>
+                                    <td>车道号</td>
+                                    <td>{{laneNo}}</td>
+                                </tr>
+                                <tr>
+                                    <td>车牌号</td>
+                                    <td>{{plate}}</td>
+                                    <td>行驶方向</td>
+                                    <td>{{directionName}}</td>
+
+                                </tr>
+                                <tr>
+                                    <td>超载率</td>
+                                    <td>{{overWeightRatioName}}</td>
+                                    <td>是否跨道</td>
+                                    <td>{{isStraddleName}}</td>
+                                </tr>
+                                <tr>
+                                    <td>车长(cm)</td>
+                                    <td>{{length}}</td>
+                                    <td>车牌颜色</td>
+                                    <td>{{licensePlateColor}}</td>
+                                </tr>
+                                <tr>
+                                    <td>超重量(kg)</td>
+                                    <td>{{overWeight}}</td>
+                                    <td>通行时间</td>
+                                    <td>{{evtTime}}</td>
+                                </tr>
+                                <tr>
+                                    <td>总重量(kg)</td>
+                                    <td>{{totalWeight}}</td>
+                                    <!--<td>打包时间</td>
+                                    <td>{{msgTime}}</td>-->
+                                    <td>路面温度(°C)</td>
+                                    <td>{{temperature}}</td>
+                                </tr>
+
+                                <tr>
+                                    <td>车速(km/h)</td>
+                                    <td>{{speed}}</td>
+                                    <td>查看图片</td>
+                                    <td rowspan="2">
+                                        <div id="chepaiImg">
+                                        </div>
+                                        <div id="chebodyDiv">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+
+                                </tr>
+                            </table>
+                            <table class="table  table-condensed" style="height: auto; margin-top: -2%;">
+                                <thead>
+                                <td colspan="10">轴重(kg)</td>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td width="38px;">轴1:</td>
+                                    <td>{{axle1}}</td>
+                                    <td width="38px;">轴2:</td>
+                                    <td>{{axle2}}</td>
+                                    <td width="38px;">轴3:</td>
+                                    <td>{{axle3}}</td>
+                                    <td width="38px;">轴4:</td>
+                                    <td>{{axle4}}</td>
+                                    <td width="38px;" style="text-align:right">轴5:</td>
+                                    <td>{{axle5}}</td>
+                                </tr>
+                                <tr>
+                                    <td width="38px;">轴6:</td>
+                                    <td>{{axle6}}</td>
+                                    <td width="38px;">轴7:</td>
+                                    <td>{{axle7}}</td>
+                                    <td width="38px;">轴8:</td>
+                                    <td>{{axle8}}</td>
+                                    <td width="38px;">轴9:</td>
+                                    <td>{{axle9}}</td>
+                                    <td width="44px;">轴10:</td>
+                                    <td>{{axle10}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <table class="table  table-condensed" style="height: auto; margin-top: -2%">
+                                <thead>
+                                <td colspan="10">轴间距(cm)</td>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td width="38px;">轴1:</td>
+                                    <td>{{axleSpace1}}</td>
+                                    <td width="38px;">轴2:</td>
+                                    <td>{{axleSpace2}}</td>
+                                    <td width="38px;">轴3:</td>
+                                    <td>{{axleSpace3}}</td>
+                                    <td width="38px;">轴4:</td>
+                                    <td>{{axleSpace4}}</td>
+                                    <td width="38px;">轴5:</td>
+                                    <td>{{axleSpace5}}</td>
+                                </tr>
+                                <tr>
+                                    <td width="38px;">轴6:</td>
+                                    <td>{{axleSpace6}}</td>
+                                    <td width="38px;">轴7:</td>
+                                    <td>{{axleSpace7}}</td>
+                                    <td width="38px;">轴8:</td>
+                                    <td>{{axleSpace8}}</td>
+                                    <td width="38px;">轴9:</td>
+                                    <td>{{axleSpace9}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <!--<button type="button" class="btn btn-success" id="xgup_baocun">保存</button>-->
+                </div>
             </div>
         </div>
     </div>
 </div>
-
 <!-- allMsg1 -->
-<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg1" style="margin-top: 3%">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content"  id="lookWimMsgDiv">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" ><b>详细信息</b></h4>
-            </div>
-            <div class="modal-body">
-                <div>
-                    <form class="form-inline">
-                        <table class="table  table-condensed" style="">
-                            <tr>
-                                <td>站点</td>
-                                <td>{{stationName}}</td>
-                                <td>轴数</td>
-                                <td>{{axlesCount}}</td>
-                            </tr>
-                            <tr>
 
-                                <td>车型</td>
-                                <td>{{vehicleTypeName}}</td>
-                                <td>车道号</td>
-                                <td>{{laneNo}}</td>
-                            </tr>
-                            <tr>
-                                <td>车牌号</td>
-                                <td>{{plate}}</td>
-                                <td>行驶方向</td>
-                                <td>{{directionName}}</td>
-
-                            </tr>
-                            <tr>
-                                <td>超载率</td>
-                                <td>{{overWeightRatioName}}</td>
-                                <td>是否跨道</td>
-                                <td>{{isStraddleName}}</td>
-                            </tr>
-                            <tr>
-                                <td>车长(cm)</td>
-                                <td>{{length}}</td>
-                                <td>车牌颜色</td>
-                                <td>{{licensePlateColor}}</td>
-                            </tr>
-                            <tr>
-                                <td>超重量(kg)</td>
-                                <td>{{overWeight}}</td>
-                                <td>通行时间</td>
-                                <td>{{evtTime}}</td>
-                            </tr>
-                            <tr>
-                                <td>总重量(kg)</td>
-                                <td>{{totalWeight}}</td>
-                                <!--<td>打包时间</td>
-                                <td>{{msgTime}}</td>-->
-                                <td>路面温度(°C)</td>
-                                <td>{{temperature}}</td>
-                            </tr>
-
-                            <tr>
-                                <td>车速(km/h)</td>
-                                <td>{{speed}}</td>
-                                <td>查看图片</td>
-                                <td rowspan="2">
-                                    <div id="chepaiImg">
-                                    </div>
-                                    <div id="chebodyDiv">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-
-                            </tr>
-                        </table>
-                        <table class="table  table-condensed" style="height: auto; margin-top: -2%;">
-                            <thead>
-                            <td colspan="10">轴重(kg)</td>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td width="38px;">轴1:</td>
-                                <td>{{axle1}}</td>
-                                <td width="38px;">轴2:</td>
-                                <td>{{axle2}}</td>
-                                <td width="38px;">轴3:</td>
-                                <td>{{axle3}}</td>
-                                <td width="38px;">轴4:</td>
-                                <td>{{axle4}}</td>
-                                <td width="38px;" style="text-align:right">轴5:</td>
-                                <td>{{axle5}}</td>
-                            </tr>
-                            <tr>
-                                <td width="38px;">轴6:</td>
-                                <td>{{axle6}}</td>
-                                <td width="38px;">轴7:</td>
-                                <td>{{axle7}}</td>
-                                <td width="38px;">轴8:</td>
-                                <td>{{axle8}}</td>
-                                <td width="38px;">轴9:</td>
-                                <td>{{axle9}}</td>
-                                <td width="44px;">轴10:</td>
-                                <td>{{axle10}}</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <table class="table  table-condensed" style="height: auto; margin-top: -2%">
-                            <thead>
-                            <td colspan="10">轴间距(cm)</td>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td width="38px;">轴1:</td>
-                                <td>{{axleSpace1}}</td>
-                                <td width="38px;">轴2:</td>
-                                <td>{{axleSpace2}}</td>
-                                <td width="38px;">轴3:</td>
-                                <td>{{axleSpace3}}</td>
-                                <td width="38px;">轴4:</td>
-                                <td>{{axleSpace4}}</td>
-                                <td width="38px;">轴5:</td>
-                                <td>{{axleSpace5}}</td>
-                            </tr>
-                            <tr>
-                                <td width="38px;">轴6:</td>
-                                <td>{{axleSpace6}}</td>
-                                <td width="38px;">轴7:</td>
-                                <td>{{axleSpace7}}</td>
-                                <td width="38px;">轴8:</td>
-                                <td>{{axleSpace8}}</td>
-                                <td width="38px;">轴9:</td>
-                                <td>{{axleSpace9}}</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </form>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <!--<button type="button" class="btn btn-success" id="xgup_baocun">保存</button>-->
-            </div>
-        </div>
+/*
+*
+*   HTML部分
+*
+* */
+<textarea id="jump_page_html" style="display:none">
+    <div class="my_dataTables_jump">
+        <span class="btn">
+            跳转
+        </span>
+        <input type='text' id='jump_page_space' class='btn' placeholder="页码">
+        <button type="button" id="jump_page_button" class="jump_button btn">确认</button>
     </div>
-</div>
-</div>
-<!-- allMsg1 -->
+</textarea>
 </body>
 <script src="../js/jquery.js"></script>
 <script src="../js/bootstrap.min.js"></script>
@@ -654,8 +707,8 @@
             type: 'datetime',
             trigger: 'click',   // 事件类型
             done: function(value, date, startTime){
-            mainVm.startTime = value;
-        }
+                mainVm.startTime = value;
+            }
         });
         laydate.render({
             elem: '#endTime', //指定元素
@@ -721,31 +774,33 @@
         });
     }
 
-/*    function initchexing() {
-        $.ajax({
-            type: 'POST',
-            url: '/VehicleType/getVehicleType',
-            dataType: 'json',
-            async: false,
-            data: {},
-            error: function (msg) {
-            },
-            success: function (json) {
-                $("#chexing").html('');
-                if (json != null) {
-                    for (let i in json) {
-                        $("#chexing").append("<option  value='" + json[i].vehicleTypeId + "'>" + json[i].vehicleTypeName + "</option>");
+    /*    function initchexing() {
+            $.ajax({
+                type: 'POST',
+                url: '/VehicleType/getVehicleType',
+                dataType: 'json',
+                async: false,
+                data: {},
+                error: function (msg) {
+                },
+                success: function (json) {
+                    $("#chexing").html('');
+                    if (json != null) {
+                        for (let i in json) {
+                            $("#chexing").append("<option  value='" + json[i].vehicleTypeId + "'>" + json[i].vehicleTypeName + "</option>");
+                        }
+                        $(".selectpicker").selectpicker({
+                            noneSelectedText: '请选择',
+                        });
+                        $("#chexing").selectpicker("refresh");
+                        $('#chexing').selectpicker('render');
                     }
-                    $(".selectpicker").selectpicker({
-                        noneSelectedText: '请选择',
-                    });
-                    $("#chexing").selectpicker("refresh");
-                    $('#chexing').selectpicker('render');
                 }
-            }
-        });
-    }*/
+            });
+        }*/
+    let table;
 
+    let order_flag;
     //新建生产计划
     let mainVm = new Vue({
         el: '#mainVm',
@@ -788,7 +843,7 @@
 
                                 });*/
 
-                let table = $('#mainContent').dataTable({
+                table = $('#mainContent').DataTable({
                     "deferRender": true,
                     "processing": true,
                     "bDestroy": true,
@@ -816,7 +871,14 @@
                             param.roadTmpEnd = mainVm.roadTmpEnd;
                             param.chaozhongStart = mainVm.chaozhongStart;
                             param.chaozhongEnd = mainVm.chaozhongEnd;
-                            param.columnName = mainVm.columnName;
+                            if(''!=mainVm.columnName&&mainVm.columnName!=null){
+                                if(order_flag){
+                                    param.columnName = mainVm.columnName + " ASC";
+                                }else{
+                                    param.columnName = mainVm.columnName + " DESC";
+                                }
+                                // order_flag = !order_flag;
+                            }
                             return param;
                         },
                         //用于处理服务器端返回的数据。 dataSrc是DataTable特有的
@@ -887,6 +949,14 @@
                             }
                         }
                     ],
+                    // 添加自定义跳转
+                    "fnDrawCallback": function () {
+                        let jump_page = $('#jump_page_html').text(); //选择textarea中预存的代码
+                        $("#mainContent_paginate").append(jump_page);
+                        $("#jump_page_button").click(function(){
+                            jump_page_action();
+                        });
+                    },
                     "order": [],
                     "ordering": false,
                     "oLanguage": { //国际化配置
@@ -930,22 +1000,22 @@
                 if(timeRange==""){
                     this.startTime="";
                     this.endTime = "";
-                $("#startTime").removeAttr("disabled");
-                $("#endTime").removeAttr("disabled");
+                    $("#startTime").removeAttr("disabled");
+                    $("#endTime").removeAttr("disabled");
                 }else if(timeRange=='all'){
                     this.startTime="";
                     this.endTime = "";
                     $("#startTime").attr("disabled",true);
                     $("#endTime").attr("disabled",true);
                 }else{
-                $("#startTime").attr("disabled",true);
-                $("#endTime").attr("disabled",true);
-                const end = new Date();
-                const start = new Date();
-                start.setTime(start.getTime() - 3600 * 1000 * 24 * timeRange);
-                end.setTime(end.getTime());
-                this.startTime = start.Format("yyyy-MM-dd hh:mm:ss");
-                this.endTime = end.Format("yyyy-MM-dd hh:mm:ss");
+                    $("#startTime").attr("disabled",true);
+                    $("#endTime").attr("disabled",true);
+                    const end = new Date();
+                    const start = new Date();
+                    start.setTime(start.getTime() - 3600 * 1000 * 24 * timeRange);
+                    end.setTime(end.getTime());
+                    this.startTime = start.Format("yyyy-MM-dd hh:mm:ss");
+                    this.endTime = end.Format("yyyy-MM-dd hh:mm:ss");
                 }
             },
             init: function () {
@@ -1128,17 +1198,9 @@
             success: function (json) {
                 $("#chepaiImg").html('')
                 $("#chebodyDiv").html('')
-
-                if(data.overWeightRatioName!="不超载"){
-                    var url2="http://"+json.imgUrlPrefix+"/port"+data.stationIP+"/"+data.idLocal+"-Image.jpg"
-                    var img2='<a target="_blank" href="'+url2+'"><img id="chebodyImg" src="'+url2+'" class="popup" width=\'80\' height=\'60\';" /></a>'
-                    $("#chebodyDiv").append(img2)
-                }else{
-                    var url="http://"+json.imgUrlPrefix+"/port"+data.stationIP+"/"+data.idLocal+"-PlateImg.jpg"
-                    var img='<a target="_blank" href="'+url+'"><img id="" src="'+url+'" class="popup" width=\'80\' height=\'60\' /></a>'
-                    $("#chepaiImg").append(img)
-                }
-
+                var url2="http://"+json.imgUrlPrefix+"/port"+data.stationIP+"/"+data.idLocal+"-Image.jpg"
+                var img2='<a target="_blank" href="'+url2+'"><img id="chebodyImg" src="'+url2+'" class="popup" width=\'80\' height=\'60\';" /></a>'
+                $("#chebodyDiv").append(img2)
             }
         });
 
@@ -1172,18 +1234,36 @@
     }
     function exportA() {
         alert("即将开始下载...")
-       location.href= "/down/download_csv_yichang"
+        location.href= "/down/download_csv_yichang"
     }
     mainVm.timeRange = "1";
     $("#timeRange").val("1");
     mainVm.formatTimeRange();
     mainVm.searchInit();
 
+    let last_page_column='';
     $("#mainContent").find("th").on('click',function(){
+
         let columnName = $(this).attr("data-id");
+        if(last_page_column == columnName  ){
+            order_flag = !order_flag;
+        }else{
+            order_flag=false
+        }
+        last_page_column =  columnName;
         mainVm.columnName = columnName;
         mainVm.searchInit();
     });
+
+    //跳转函数——页码修改、表单数据重构-即重发ajax进行渲染
+    function jump_page_action(){
+        let page = parseInt($('#jump_page_space').val());//要转整形
+
+        let page_num = parseInt($('#mainContent_paginate span a').last().text()); //选取“下一页” 前一个元素的值，也就是最大页数
+        if(page >= 1 && page <= page_num) {  //跳转的页数在可选范围中（大于等于1，小于等于最大页）
+            table.page(page - 1).draw('page'); //
+        }
+    }
 </script>
 
 

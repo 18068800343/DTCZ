@@ -172,8 +172,9 @@
         </if>
         <if test="start !=null">
             LIMIT #{start},
-            #{length} ) an
+            #{length}
         </if>
+        ) an
         )) aa
         LEFT JOIN station_site b ON aa.Station_IP = b.Station_Port
         LEFT JOIN license_plate c ON aa.Plate_Color = c.License_Plate_No
@@ -795,7 +796,7 @@
         LEFT JOIN station_site b on a.Station_IP=b.Station_Port
         LEFT JOIN license_plate c ON a.Plate_Color=c.License_Plate_No
         LEFT JOIN vehicle_type d ON a.Class_Index=d.Vehicle_Type_No
-        where a.id_local=#{idLocal}
+        where a.id_local like CONCAT(#{idLocal},'%')
     </select>
 
     <select id="getGuanJianChaoZhongCheLiangEchartsList2" resultType="CheLiuLiangEchartsList">

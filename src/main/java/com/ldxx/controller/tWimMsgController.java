@@ -510,7 +510,14 @@ public class tWimMsgController {
     }
     @RequestMapping("/gettWimMsgYiChangById")
     public tWimMsgVo gettWimMsgYiChangById(String idLocal) {
-        return service.gettWimMsgYiChangById(idLocal);
+
+        tWimMsgVo tWimMsgVo = service.gettWimMsgYiChangById(idLocal);
+        if(null==tWimMsgVo){
+            idLocal = idLocal.substring(0,idLocal.length()-6);
+            return service.gettWimMsgYiChangById(idLocal);
+        }else {
+            return tWimMsgVo;
+        }
     }
 
 
