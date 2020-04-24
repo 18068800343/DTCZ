@@ -618,12 +618,9 @@
                             FIND_IN_SET(b.Station_Port ,#{stationPorts})
                         ORDER BY
                             cnt DESC ,b.Station_Name ASC
-                        <if test="limit!=null and limit!=''">
-                            LIMIT #{limit}
-                        </if>
                     ) dd
                 ORDER BY
-                    dd.cnt) aa LEFT JOIN (SELECT
+                    dd.cnt DESC) aa LEFT JOIN (SELECT
                     *
                 FROM
                     (
@@ -659,7 +656,7 @@
                         LIMIT 6
                     ) dd
                 ORDER BY
-                    dd.cnt) bb on aa.Station_Port = bb.Station_Port ORDER BY aa.cnt desc
+                    dd.cnt DESC) bb on aa.Station_Port = bb.Station_Port ORDER BY aa.cnt DESC,bb.cnt DESC LIMIT 6
                 ) aaa
 
     </select>
