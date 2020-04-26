@@ -1118,13 +1118,15 @@
     })
 
     var lookMsg = (e)=>{
+        var dom = $(e).parents('tr');
+        let data=$("#mainContent").DataTable().row(dom).data();
         showMask()
         $.ajax({
             type: 'POST',
             url: '/tWimMsg/gettWimMsgById',
             dataType: 'json',
             data: {
-                idLocal:$(e).attr("data-id")
+                idLocal:data.idLocal
             },
             error: function (msg) {
                 errMessage("请求UserController失败");
