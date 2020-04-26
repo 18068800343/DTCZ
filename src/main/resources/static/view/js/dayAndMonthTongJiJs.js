@@ -74,17 +74,75 @@ let initTableTbody = (json) => {
                 tdDom = "<td data-id='"+json[1].avgLaneNo+",4' data-key='"+json[n].avgMaxID+"'><a >" + json[n].avgMax + "</a></td>";
                 let dom = tableDom.find("tfoot");
                 if(Strack3){
-                    img="<td width='20%' rowspan='"+(json.length)+"'>" + getimgUrl(1) + "</td>" ;
-                    Strack3=false;
+                    img = "<td width='20%' rowspan='" + (json.length) + "'>" + getimgUrl(1) + "</td>";
+                    Strack3 = false;
                 }
                 $(dom).append("<tr align='center'>" +
-                    img+
+                    img +
                     "<td>" + json[n].avgLaneNo + "</td>" +
-                   /* "<td>" + formatLaneName(json[n].avgLaneNo) + "</td>" +*/
+                    /* "<td>" + formatLaneName(json[n].avgLaneNo) + "</td>" +*/
                     tdDom +
                     "</tr>")
             }
-        } else if (i == 3||i==4) {
+        } else if (i == 3) {
+            let tableDom = $("#myTabOne" + i).html('');
+            let k = 5 * (i) + i - 1;
+            tableDom.append("<thead>" + "</thead>" + "<tfoot>" +
+                "<tr align='center'>" +
+                "<td>" + "车道图" + "</td>" +
+                "<td>" + "车道编号" + "</td>" +
+                //"<td>" + "车道名" + "</td>" +
+                "<td>" + "2轴车" + "</td>" +
+                "<td>" + "3轴车" + "</td>" +
+                "<td>" + "4轴车" + "</td>" +
+                "<td>" + "5轴车" + "</td>" +
+                "<td>" + "6轴车及以上" + "</td>" +
+                "</tr>" +
+                +
+                    "</tfoot>");
+            var Strack2=true;
+            for (let n = 1; n <= json.length; n++) {
+                let img;
+                if (n == json.length) {
+                    //车道0即总计的一行的td
+                    let tdDom = "";
+                    for (let j = k + 1; j <= k + 4; j++) {
+                        tdDom = tdDom + "<td data-id='" + json[0].avgLaneNo + "," + j + "'><a >" + json[0]['column' + j].toFixed(2) + "%</a></td>";
+                    }
+                    tdDom = tdDom + "<td data-id='"+json[0].avgLaneNo+","+k+"'><a >" + json[0]['column' + k].toFixed(2) + "%</a></td>";
+                    let dom = tableDom.find("tfoot");
+                    if(Strack2){
+                        img="<td width='20%' rowspan='"+(json.length)+"'>" + getimgUrl(1) + "</td>" ;
+                        Strack2=false;
+                    }
+                    $(dom).append("<tr align='center'>" +
+                        img+
+                        "<td>合计</td>" +
+                        tdDom +
+                        "</tr>")
+                    break;
+                }
+                let tdDom = "";
+                for (let j = k + 1; j <= k + 4; j++) {
+                    tdDom = tdDom + "<td data-id='" + json[n].avgLaneNo + "," + j + "'><a >" + json[n]['column' + j].toFixed(2) + "%</a></td>";
+                }
+                tdDom = tdDom + "<td data-id='"+json[n].avgLaneNo+","+k+"'><a >" + json[n]['column' + k].toFixed(2) + "%</a></td>";
+                let dom = tableDom.find("tfoot");
+                if (Strack2) {
+                    img = "<td width='20%' rowspan='" + (json.length) + "'>" + getimgUrl(1) + "</td>";
+                    Strack2 = false;
+                }
+                $(dom).append("<tr align='center'>" +
+                    img +
+                    "<td>" + json[n].avgLaneNo + "</td>" +
+                    //"<td>" + formatLaneName(json[n].avgLaneNo) + "</td>" +
+                    tdDom +
+                    "</tr>")
+
+            }
+
+
+        } else if (i == 4) {
             let tableDom = $("#myTabOne" + i).html('');
             let k = 5 * (i) + i - 1;
             tableDom.append("<thead>" + "</thead>" + "<tfoot>" +
@@ -101,23 +159,23 @@ let initTableTbody = (json) => {
                 "</tr>" +
                 +
                     "</tfoot>");
-            var Strack2=true;
+            var Strack2 = true;
             for (let n = 1; n <= json.length; n++) {
                 let img;
                 if (n == json.length) {
                     //车道0即总计的一行的td
                     let tdDom = "";
                     for (let j = k + 1; j <= k + 5; j++) {
-                        tdDom = tdDom + "<td data-id='"+json[0].avgLaneNo+","+j+"'><a >" + json[0]['column' + j].toFixed(2) + "%</a></td>";
+                        tdDom = tdDom + "<td data-id='" + json[0].avgLaneNo + "," + j + "'><a >" + json[0]['column' + j].toFixed(2) + "%</a></td>";
                     }
-                    tdDom = tdDom + "<td data-id='"+json[0].avgLaneNo+","+k+"'><a >" + json[0]['column' + k].toFixed(2) + "%</a></td>";
+                    tdDom = tdDom + "<td data-id='" + json[0].avgLaneNo + "," + k + "'><a >" + json[0]['column' + k].toFixed(2) + "%</a></td>";
                     let dom = tableDom.find("tfoot");
-                    if(Strack2){
-                        img="<td width='20%' rowspan='"+(json.length)+"'>" + getimgUrl(1) + "</td>" ;
-                        Strack2=false;
+                    if (Strack2) {
+                        img = "<td width='20%' rowspan='" + (json.length) + "'>" + getimgUrl(1) + "</td>";
+                        Strack2 = false;
                     }
                     $(dom).append("<tr align='center'>" +
-                        img+
+                        img +
                         "<td>合计</td>" +
                         tdDom +
                         "</tr>")
@@ -125,16 +183,16 @@ let initTableTbody = (json) => {
                 }
                 let tdDom = "";
                 for (let j = k + 1; j <= k + 5; j++) {
-                    tdDom = tdDom + "<td data-id='"+json[n].avgLaneNo+","+j+"'><a >" + json[n]['column' + j].toFixed(2) + "%</a></td>";
+                    tdDom = tdDom + "<td data-id='" + json[n].avgLaneNo + "," + j + "'><a >" + json[n]['column' + j].toFixed(2) + "%</a></td>";
                 }
-                tdDom = tdDom + "<td data-id='"+json[n].avgLaneNo+","+k+"'><a >" + json[n]['column' + k].toFixed(2) + "%</a></td>";
+                tdDom = tdDom + "<td data-id='" + json[n].avgLaneNo + "," + k + "'><a >" + json[n]['column' + k].toFixed(2) + "%</a></td>";
                 let dom = tableDom.find("tfoot");
-                if(Strack2){
-                    img="<td width='20%' rowspan='"+(json.length)+"'>" + getimgUrl(1) + "</td>" ;
-                    Strack2=false;
+                if (Strack2) {
+                    img = "<td width='20%' rowspan='" + (json.length) + "'>" + getimgUrl(1) + "</td>";
+                    Strack2 = false;
                 }
                 $(dom).append("<tr align='center'>" +
-                    img+
+                    img +
                     "<td>" + json[n].avgLaneNo + "</td>" +
                     //"<td>" + formatLaneName(json[n].avgLaneNo) + "</td>" +
                     tdDom +
@@ -143,7 +201,7 @@ let initTableTbody = (json) => {
             }
 
 
-        }else {
+        } else {
             let tableDom = $("#myTabOne" + i).html('');
             let k = 5 * (i) + i - 1;
             tableDom.append("<thead>" + "</thead>" + "<tfoot>" +
@@ -178,7 +236,7 @@ let initTableTbody = (json) => {
                     }
                     $(dom).append("<tr align='center'>" +
                         img+
-                       "<td>合计</td>" +
+                        "<td>合计</td>" +
                         tdDom +
                         "</tr>")
                     break;
@@ -437,18 +495,18 @@ let initTableTbodyMonth = (json) => {
                 tdDom = "<td data-id='"+json[n].avgLaneNo+",4' data-key='"+json[n].avgMaxID+"'><a >" + json[n].avgMax + "</a></td>";
                 let dom = tableDom.find("tfoot");
                 if(Strack3){
-                    img="<td width='20%' rowspan='"+(json.length)+"'>" + getimgUrl(2) + "</td>" ;
-                    Strack3=false;
+                    img = "<td width='20%' rowspan='" + (json.length) + "'>" + getimgUrl(2) + "</td>";
+                    Strack3 = false;
                 }
                 $(dom).append("<tr align='center'>" +
-                    img+
+                    img +
                     "<td>" + json[n].avgLaneNo + "</td>" +
                     /*"<td>" + formatLaneName(json[n].avgLaneNo) + "</td>" +*/
                     tdDom +
                     "</tr>")
             }
-        }  else if (i == 3||i==4) {
-            let tableDom = $("#myTabOne" + i+"Month").html('');
+        } else if (i == 3) {
+            let tableDom = $("#myTabOne" + i + "Month").html('');
             let k = 5 * (i) + i - 1;
             tableDom.append("<thead>" + "</thead>" + "<tfoot>" +
                 "<tr align='center'>" +
@@ -460,7 +518,6 @@ let initTableTbodyMonth = (json) => {
                 "<td>" + "4轴车" + "</td>" +
                 "<td>" + "5轴车" + "</td>" +
                 "<td>" + "6轴车及以上" + "</td>" +
-                "<td>" + "合计" + "</td>" +
                 "</tr>" +
                 +
                     "</tfoot>");
@@ -470,8 +527,8 @@ let initTableTbodyMonth = (json) => {
                 if (n == json.length) {
                     //车道0即总计的一行的td
                     let tdDom = "";
-                    for (let j = k + 1; j <= k + 5; j++) {
-                        tdDom = tdDom + "<td data-id='"+json[0].avgLaneNo+","+j+"'><a >" + json[0]['column' + j].toFixed(2) + "%</a></td>";
+                    for (let j = k + 1; j <= k + 4; j++) {
+                        tdDom = tdDom + "<td data-id='" + json[0].avgLaneNo + "," + j + "'><a >" + json[0]['column' + j].toFixed(2) + "%</a></td>";
                     }
                     tdDom = tdDom + "<td data-id='"+json[0].avgLaneNo+","+k+"'><a >" + json[0]['column' + k].toFixed(2) + "%</a></td>";
                     let dom = tableDom.find("tfoot");
@@ -487,8 +544,8 @@ let initTableTbodyMonth = (json) => {
                     break;
                 }
                 let tdDom = "";
-                for (let j = k + 1; j <= k + 5; j++) {
-                    tdDom = tdDom + "<td data-id='"+json[n].avgLaneNo+","+j+"'><a >" + json[n]['column' + j].toFixed(2) + "%</a></td>";
+                for (let j = k + 1; j <= k + 4; j++) {
+                    tdDom = tdDom + "<td data-id='" + json[n].avgLaneNo + "," + j + "'><a >" + json[n]['column' + j].toFixed(2) + "%</a></td>";
                 }
                 tdDom = tdDom + "<td data-id='"+json[n].avgLaneNo+","+k+"'><a >" + json[n]['column' + k].toFixed(2) + "%</a></td>";
                 let dom = tableDom.find("tfoot");
@@ -497,7 +554,7 @@ let initTableTbodyMonth = (json) => {
                     Strack2=false;
                 }
                 $(dom).append("<tr align='center'>" +
-                    img+
+                    img +
                     "<td>" + json[n].avgLaneNo + "</td>" +
                     /*"<td>" + formatLaneName(json[n].avgLaneNo) + "</td>" +*/
                     tdDom +
@@ -506,8 +563,67 @@ let initTableTbodyMonth = (json) => {
             }
 
 
-        }else {
-            let tableDom = $("#myTabOne" + i+"Month").html('');
+        } else if (i == 4) {
+            let tableDom = $("#myTabOne" + i + "Month").html('');
+            let k = 5 * (i) + i - 1;
+            tableDom.append("<thead>" + "</thead>" + "<tfoot>" +
+                "<tr align='center'>" +
+                "<td>" + "车道图" + "</td>" +
+                "<td>" + "车道编号" + "</td>" +
+                //"<td>" + "车道名" + "</td>" +
+                "<td>" + "2轴车" + "</td>" +
+                "<td>" + "3轴车" + "</td>" +
+                "<td>" + "4轴车" + "</td>" +
+                "<td>" + "5轴车" + "</td>" +
+                "<td>" + "6轴车及以上" + "</td>" +
+                "<td>" + "合计" + "</td>" +
+                "</tr>" +
+                +
+                    "</tfoot>");
+            let Strack2 = true;
+            for (let n = 1; n <= json.length; n++) {
+                let img;
+                if (n == json.length) {
+                    //车道0即总计的一行的td
+                    let tdDom = "";
+                    for (let j = k + 1; j <= k + 5; j++) {
+                        tdDom = tdDom + "<td data-id='" + json[0].avgLaneNo + "," + j + "'><a >" + json[0]['column' + j].toFixed(2) + "%</a></td>";
+                    }
+                    tdDom = tdDom + "<td data-id='" + json[0].avgLaneNo + "," + k + "'><a >" + json[0]['column' + k].toFixed(2) + "%</a></td>";
+                    let dom = tableDom.find("tfoot");
+                    if (Strack2) {
+                        img = "<td width='20%' rowspan='" + (json.length) + "'>" + getimgUrl(2) + "</td>";
+                        Strack2 = false;
+                    }
+                    $(dom).append("<tr align='center'>" +
+                        img +
+                        "<td >合计</td>" +
+                        tdDom +
+                        "</tr>")
+                    break;
+                }
+                let tdDom = "";
+                for (let j = k + 1; j <= k + 5; j++) {
+                    tdDom = tdDom + "<td data-id='" + json[n].avgLaneNo + "," + j + "'><a >" + json[n]['column' + j].toFixed(2) + "%</a></td>";
+                }
+                tdDom = tdDom + "<td data-id='" + json[n].avgLaneNo + "," + k + "'><a >" + json[n]['column' + k].toFixed(2) + "%</a></td>";
+                let dom = tableDom.find("tfoot");
+                if (Strack2) {
+                    img = "<td width='20%' rowspan='" + (json.length) + "'>" + getimgUrl(2) + "</td>";
+                    Strack2 = false;
+                }
+                $(dom).append("<tr align='center'>" +
+                    img +
+                    "<td>" + json[n].avgLaneNo + "</td>" +
+                    /*"<td>" + formatLaneName(json[n].avgLaneNo) + "</td>" +*/
+                    tdDom +
+                    "</tr>")
+
+            }
+
+
+        } else {
+            let tableDom = $("#myTabOne" + i + "Month").html('');
             let k = 5 * (i) + i - 1;
             tableDom.append("<thead>" + "</thead>" + "<tfoot>" +
                 "<tr align='center'>" +
