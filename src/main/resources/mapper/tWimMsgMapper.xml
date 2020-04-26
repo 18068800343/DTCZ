@@ -656,7 +656,7 @@
                         LIMIT 6
                     ) dd
                 ORDER BY
-                    dd.cnt DESC) bb on aa.Station_Port = bb.Station_Port ORDER BY aa.cnt DESC,bb.cnt DESC LIMIT 6
+                    dd.cnt DESC) bb on aa.Station_Port = bb.Station_Port ORDER BY aa.cnt DESC,bb.cnt DESC,bb.Station_Name ASC LIMIT 6
                 ) aaa
 
     </select>

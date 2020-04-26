@@ -11,88 +11,107 @@
     <link rel="stylesheet" href="../style/jquery.dataTables.min.css">
     <link rel="stylesheet" href="../style/jquery-editable-select.css">
     <link href="../font3/bootstrap-select.css" rel="stylesheet">
-    <link href="js/bootstrap-datepicker/bootstrap-datepicker3.min.css" rel="stylesheet" />
+    <link href="js/bootstrap-datepicker/bootstrap-datepicker3.min.css" rel="stylesheet"/>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
-    <link rel="stylesheet" type="text/css" href="css/home.css" />
-    <link rel="stylesheet"  href="css/layui.css" />
-    <link rel="stylesheet"  href="css/toastr.css"/>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+    <link rel="stylesheet" type="text/css" href="css/home.css"/>
+    <link rel="stylesheet" href="css/layui.css"/>
+    <link rel="stylesheet" href="css/toastr.css"/>
 
     <style lang="">
-        body{
+        body {
             background: #fff;
         }
-        #mainContent_info{
+
+        #mainContent_info {
             margin-left: 5%;
         }
-        #mainContent_paginate{
+
+        #mainContent_paginate {
             margin-right: 5%;
         }
-        .UpperPart{
-            justify-content:space-between;
+
+        .UpperPart {
+            justify-content: space-between;
             padding-bottom: 12px;
         }
-        .selected{
-            background: rgba(247, 161, 3,0.2);
+
+        .selected {
+            background: rgba(247, 161, 3, 0.2);
         }
-        #mainContent th{
+
+        #mainContent th {
             cursor: pointer;
         }
 
-        .jiance{
+        .jiance {
             float: right;
             margin-right: 5%;
 
         }
-        .nav-tabs{
-           border:0px solid #ddd;
+
+        .nav-tabs {
+            border: 0px solid #ddd;
         }
-        .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
-           border:0px solid #ddd;
+
+        .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+            border: 0px solid #ddd;
         }
-        .nav-pills>li.active>a:focus{
-           background-color:#549CFD;
+
+        .nav-pills > li.active > a:focus {
+            background-color: #549CFD;
         }
-        .nav-pills>li>a{
-           background-color:#FFF;
-           border-radius:50px 50px;
-           margin-left:10px;
+
+        .nav-pills > li > a {
+            background-color: #FFF;
+            border-radius: 50px 50px;
+            margin-left: 10px;
         }
-        #dataTable{
-          width:100% !important;
-          display:block;
-          margin-left:0px !important;
+
+        #dataTable {
+            width: 100% !important;
+            display: block;
+            margin-left: 0px !important;
         }
-        #myTabContent1{
-         width:100% !important;
+
+        #myTabContent1 {
+            width: 100% !important;
         }
-        .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
-          border-bottom:2px solid #549CFD;
-          color:#549CFD;
-          font-size:16px;
+
+        .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+            border-bottom: 2px solid #549CFD;
+            color: #549CFD;
+            font-size: 16px;
         }
-        .myTabOne1{
-          text-align:left;
+
+        .myTabOne1 {
+            text-align: left;
         }
-      .layui-this{
-         background-color:#EEF5FF !important;
-         color:#6FA9FD !important;
-         
-      }
-      .layui-tab-title{
-         border:1px solid #EEF5FF !important;
-      }
-      .texth{
-      	 height:35px;
-         line-height:35px;
-         padding-left:5px;
-      }
-      .zhuti-content{
-        height:	1550px !important;
-      }
-      #myTabContent1Month{
-        width:100% !important;
-      }
+
+        .layui-this {
+            background-color: #EEF5FF !important;
+            color: #6FA9FD !important;
+
+        }
+
+        .layui-tab-title {
+            border: 1px solid #EEF5FF !important;
+        }
+
+        .texth {
+            height: 35px;
+            line-height: 35px;
+            padding-left: 5px;
+        }
+
+        .zhuti-content {
+            height: 1550px !important;
+        }
+
+        #myTabContent1Month {
+            width: 100% !important;
+        }
     </style>
 </head>
 <body style="background-image: none;background-color:#F5F5F5;">
@@ -100,7 +119,8 @@
 <div class="form-group" id="rightTab">
     <!-- Nav tabs -->
     <ul class="nav nav-pills" role="tablist" style="margin-bottom:20px;">
-        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">日交通量统计</a></li>
+        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab"
+                                                  data-toggle="tab">日交通量统计</a></li>
         <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">月交通量统计</a></li>
 
     </ul>
@@ -110,11 +130,12 @@
             <div class="zhuti-content">
                 <div class="UpperPart">
                     <div class="UpperPartL" style="width: 90%;margin-left: 5%;">
-                        <div class="sele" >
-                            <label class="col-sm-2 control-label shaixuan" style="margin-left:-80px !important;font-size:16px;font-weight:500;" >筛选站点</label>
+                        <div class="sele">
+                            <label class="col-sm-2 control-label shaixuan"
+                                   style="margin-left:-80px !important;font-size:16px;font-weight:500;">筛选站点</label>
                             <div class="col-sm-2" style="width: 20%;margin-left: 50px;">
                                 <!-- 样式1 -->
-                                <select class="form-control"  id="stationPort" style="width:80%;">
+                                <select class="form-control" id="stationPort" style="width:80%;">
                                 </select>
                             </div>
                         </div>
@@ -125,7 +146,9 @@
                             <input type="date" id="startTime" value="请选择"
                                    style="height: 34px;border-radius: 5px;box-shadow: none;width: 60%;border:1px solid #DDD;">
                         </div>
-                        <button type="button" class="btn btn-primary" onclick="queding()" style="width: 100px;margin-left:120px;background-color:#549CFD;border:none;">确定</button>
+                        <button type="button" class="btn btn-primary" onclick="queding()"
+                                style="width: 100px;margin-left:120px;background-color:#549CFD;border:none;">确定
+                        </button>
                         <div class="jiance">
                             <!--<button type="button" class="btn btn-primary" onclick="nowJianceSite()" data-toggle="modal" data-target="#allMsg1" style="width: 150px;background-color:#549CFD;border:1px solid #549CFD;">当前车道图</button>-->
                         </div>
@@ -145,8 +168,9 @@
                     <div class="layui-tab-content">
                         <div class="layui-tab-item layui-show">
                             <div class="LowerPart" style="margin-top:3px;">
-                                <div style="height: 300px;width:1050px;margin-left: 200px;" id="dataTable" class="layui-table">
-                                </div> 
+                                <div style="height: 300px;width:1050px;margin-left: 200px;" id="dataTable"
+                                     class="layui-table">
+                                </div>
                             </div>
                         </div>
                         <div class="layui-tab-item">
@@ -154,7 +178,8 @@
                                 <li class="layui-this texth">各车型车辆数及比例</li>
                                 <div class="layui-tab-item layui-show">
                                     <p class="errorMsg1" style="display: inline-block;"></p>
-                                    <div id="_top" class="col-xs-12" style="width:1200px;height: 400px;margin-top: -50px;margin:0 auto">
+                                    <div id="_top" class="col-xs-12"
+                                         style="width:1200px;height: 400px;margin-top: -50px;margin:0 auto">
                                     </div>
                                 </div>
                             </div>
@@ -173,14 +198,14 @@
                                 <li class="layui-this texth">平均超载率</li>
                                 <div class="layui-tab-item layui-show">
                                     <p class="errorMsg1" style="display: inline-block;"></p>
-                                    <div id="bottom_" style="width:1200px;height: 400px;margin-top: -50px;margin:0 auto">
+                                    <div id="bottom_"
+                                         style="width:1200px;height: 400px;margin-top: -50px;margin:0 auto">
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
 
 
             </div>
@@ -190,11 +215,12 @@
             <div class="zhuti-content">
                 <div class="UpperPart">
                     <div class="UpperPartL" style="width: 90%;margin-left: 5%;">
-                        <div class="sele" >
-                            <label class="col-sm-2 control-label shaixuan" style="margin-left:-80px !important;font-size:16px;font-weight:500;">筛选站点</label>
+                        <div class="sele">
+                            <label class="col-sm-2 control-label shaixuan"
+                                   style="margin-left:-80px !important;font-size:16px;font-weight:500;">筛选站点</label>
                             <div class="col-sm-2" style="width: 20%;margin-left: 50px;">
                                 <!-- 样式1 -->
-                                <select class="form-control"  id="stationPort2" style="width:80%;">
+                                <select class="form-control" id="stationPort2" style="width:80%;">
                                 </select>
                             </div>
                         </div>
@@ -205,7 +231,9 @@
                             <input type="text" id="startTime2" value="请选择"
                                    style="height: 34px;border-radius: 5px;box-shadow: none;width: 60%;border:1px solid #DDD;">
                         </div>
-                        <button type="button" class="btn btn-primary" onclick="queding2()" style="width: 100px;margin-left:120px;background-color:#549CFD;border:none;">确定</button>
+                        <button type="button" class="btn btn-primary" onclick="queding2()"
+                                style="width: 100px;margin-left:120px;background-color:#549CFD;border:none;">确定
+                        </button>
                         <div class="jiance">
                             <!--<button type="button" class="btn btn-primary" onclick="nowJianceSite2()" data-toggle="modal" data-target="#allMsg2" style="width: 150px;background-color:#549CFD;border:1px solid #549CFD;">当前车道图</button>-->
                         </div>
@@ -215,184 +243,658 @@
                     </div>
                 </div>
                 <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief" style="">
-                  <ul class="layui-tab-title" style="float:right;margin-top:-60px;">
+                    <ul class="layui-tab-title" style="float:right;margin-top:-60px;">
                         <li class="layui-this">数据表</li>
                         <li>统计图</li>
                     </ul>
-                <div class="layui-tab-content">
+                    <div class="layui-tab-content">
                         <div class="layui-tab-item layui-show">
-                <div class="LowerPart" style="margin-top:18px;">
-                    <div style="height: 300px;width:100%;" id="dataTableMonth">
-                    </div>
+                            <div class="LowerPart" style="margin-top:18px;">
+                                <div style="height: 300px;width:100%;" id="dataTableMonth">
+                                </div>
 
-                </div>
-  			</div>
-  			  <div class="layui-tab-item">
-                <div style="width: 100%;">
-                    <li class="layui-this texth">各车型车辆数及比例</li>
-                    <div class="layui-tab-item layui-show">
-                        <p class="errorMsg2" style="display: inline-block;"></p>
-                        <div id="_top2" style="width:1300px;height: 400px;margin-top: -50px;margin:0 auto">
+                            </div>
+                        </div>
+                        <div class="layui-tab-item">
+                            <div style="width: 100%;">
+                                <li class="layui-this texth">各车型车辆数及比例</li>
+                                <div class="layui-tab-item layui-show">
+                                    <p class="errorMsg2" style="display: inline-block;"></p>
+                                    <div id="_top2" style="width:1300px;height: 400px;margin-top: -50px;margin:0 auto">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="width: 100%;">
+                                <li class="layui-this texth">超载车辆数及比例</li>
+                                <div class="layui-tab-item layui-show" style="margin-top: 70px;">
+                                    <p class="errorMsg2" style="display: inline-block;"></p>
+                                    <div id="_right2"
+                                         style="width:1300px;height: 400px;margin-top: -50px;margin:0 auto">
+                                        <!--右边-->
+                                    </div>
+                                </div>
+                            </div>
+                            <!--左上半部分结束-->
+                            <div style="width: 100%;">
+                                <li class="layui-this texth">平均超载率</li>
+                                <div class="layui-tab-item layui-show">
+                                    <p class="errorMsg2" style="display: inline-block;"></p>
+                                    <div id="bottom_2"
+                                         style="width:1300px;height: 400px;margin-top: -50px;margin:0 auto">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div style="width: 100%;">
-                    <li class="layui-this texth">超载车辆数及比例</li>
-                    <div class="layui-tab-item layui-show" style="margin-top: 70px;">
-                        <p class="errorMsg2" style="display: inline-block;"></p>
-                        <div id="_right2" style="width:1300px;height: 400px;margin-top: -50px;margin:0 auto">
-                            <!--右边-->
-                        </div>
+
+            </div>
+        </div>
+
+        <!-- allMsg -->
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+             id="modalEchartsMonth">
+            <div class="modal-dialog modal-lg" role="document" style="width:60%;">
+                <div class="modal-content">
+
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title"><b>趋势图</b></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="myChartMonth" style="width: 1000px;height:500px;"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                     </div>
                 </div>
-                <!--左上半部分结束-->
-                <div style="width: 100%;">
-                    <li class="layui-this texth">平均超载率</li>
-                    <div class="layui-tab-item layui-show">
-                        <p class="errorMsg2" style="display: inline-block;"></p>
-                        <div id="bottom_2" style="width:1300px;height: 400px;margin-top: -50px;margin:0 auto">
+            </div>
+        </div>
+        <!-- end allMsg content -->
+
+
+        <!-- allMsg1 -->
+        <div class="modal fade " tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg3">
+            <div class="modal-dialog " role="document">
+                <div class="modal-content" id="lookWimMsgDiv">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title"><b>详细信息</b></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <form class="form-inline">
+                                <table class="table  table-condensed" style="">
+                                    <tr>
+                                        <td>站点</td>
+                                        <td>{{stationName}}</td>
+                                        <td>轴数</td>
+                                        <td>{{axlesCount}}</td>
+                                    </tr>
+                                    <tr>
+
+                                        <td>车型</td>
+                                        <td>{{vehicleTypeName}}</td>
+                                        <td>车道号</td>
+                                        <td>{{laneNo}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>车牌号</td>
+                                        <td>{{plate}}</td>
+                                        <td>行驶方向</td>
+                                        <td>{{directionName}}</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>超载率</td>
+                                        <td>{{overWeightRatioName}}</td>
+                                        <td>是否跨道</td>
+                                        <td>{{isStraddleName}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>车长(cm)</td>
+                                        <td>{{length}}</td>
+                                        <td>车牌颜色</td>
+                                        <td>{{licensePlateColor}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>超重量(kg)</td>
+                                        <td>{{overWeight}}</td>
+                                        <td>通行时间</td>
+                                        <td>{{evtTime}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>总重量(kg)</td>
+                                        <td>{{totalWeight}}</td>
+                                        <!--<td>打包时间</td>
+                                        <td>{{msgTime}}</td>-->
+                                        <td>路面温度(°C)</td>
+                                        <td>{{temperature}}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>车速(km/h)</td>
+                                        <td>{{speed}}</td>
+                                        <td>查看图片</td>
+                                        <td rowspan="2">
+                                            <div class="chepaiImg">
+                                            </div>
+                                            <div class="chebodyDiv">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+
+                                    </tr>
+                                </table>
+                                <table class="table  table-condensed" style="height: auto; margin-top: -2%;">
+                                    <thead>
+                                    <td colspan="10">轴重(kg)</td>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td width="38px;">轴1:</td>
+                                        <td>{{axle1}}</td>
+                                        <td width="38px;">轴2:</td>
+                                        <td>{{axle2}}</td>
+                                        <td width="38px;">轴3:</td>
+                                        <td>{{axle3}}</td>
+                                        <td width="38px;">轴4:</td>
+                                        <td>{{axle4}}</td>
+                                        <td width="38px;" style="text-align:right">轴5:</td>
+                                        <td>{{axle5}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="38px;">轴6:</td>
+                                        <td>{{axle6}}</td>
+                                        <td width="38px;">轴7:</td>
+                                        <td>{{axle7}}</td>
+                                        <td width="38px;">轴8:</td>
+                                        <td>{{axle8}}</td>
+                                        <td width="38px;">轴9:</td>
+                                        <td>{{axle9}}</td>
+                                        <td width="44px;">轴10:</td>
+                                        <td>{{axle10}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <table class="table  table-condensed" style="height: auto; margin-top: -2%">
+                                    <thead>
+                                    <td colspan="10">轴间距(cm)</td>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td width="38px;">轴1:</td>
+                                        <td>{{axleSpace1}}</td>
+                                        <td width="38px;">轴2:</td>
+                                        <td>{{axleSpace2}}</td>
+                                        <td width="38px;">轴3:</td>
+                                        <td>{{axleSpace3}}</td>
+                                        <td width="38px;">轴4:</td>
+                                        <td>{{axleSpace4}}</td>
+                                        <td width="38px;">轴5:</td>
+                                        <td>{{axleSpace5}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="38px;">轴6:</td>
+                                        <td>{{axleSpace6}}</td>
+                                        <td width="38px;">轴7:</td>
+                                        <td>{{axleSpace7}}</td>
+                                        <td width="38px;">轴8:</td>
+                                        <td>{{axleSpace8}}</td>
+                                        <td width="38px;">轴9:</td>
+                                        <td>{{axleSpace9}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </form>
                         </div>
                     </div>
-                </div>
-              </div>
-            </div>
-        </div>
-
-
-
-    </div>
-</div>
-
-<!-- allMsg -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-     id="modalEchartsMonth">
-    <div class="modal-dialog modal-lg" role="document" style="width:60%;">
-        <div class="modal-content">
-        
-        
-        
-        
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title"><b>趋势图</b></h4>
-            </div>
-            <div class="modal-body">
-                <div id="myChartMonth" style="width: 1000px;height:500px;"></div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end allMsg content -->
-
-
-<!-- allMsg -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-     id="modalEcharts">
-    <div class="modal-dialog modal-lg" role="document" style="width:60%;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title"><b>趋势图</b></h4>
-            </div>
-            <div class="modal-body">
-                <div id="myChart" style="width: 1000px;height:500px;"></div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!-- allMsg -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg1">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" ><b>车道图</b></h4>
-            </div>
-            <div class="modal-body">
-                <div>
-                    <form class="form-inline">
-                        <table class="table table-bordered table-condensed layui-table" id="look_accessory">
-                            <thead>
-
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                    </form>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <!--<button type="button" class="btn btn-success" id="xgup_baocun">保存</button>-->
+                    </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-            </div>
         </div>
-    </div>
-</div>
-<!-- allMsg -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg2">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" ><b>车道图</b></h4>
-            </div>
-            <div class="modal-body">
-                <div>
-                    <form class="form-inline">
-                        <table class="table table-bordered table-condensed" id="look_accessory2">
-                            <thead>
 
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                    </form>
+        <!-- allMsg -->
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+             id="modalEcharts">
+            <div class="modal-dialog modal-lg" role="document" style="width:60%;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title"><b>趋势图</b></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="myChart" style="width: 1000px;height:500px;"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        </div>
+
+        <!-- allMsg -->
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+             id="modalEchartsDetail">
+            <div class="modal-dialog modal-lg" role="document" style="width:60%;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>-->
+                        <!--                </button>-->
+                        <!--                <h4 class="modal-title"><b>趋势图</b></h4>-->
+                    </div>
+                    <div class="modal-body">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-pills" role="tablist" style="margin-bottom:20px;">
+                            <li role="presentation" class="active"><a href="#echarts2" aria-controls="echarts2"
+                                                                      role="tab" data-toggle="tab">趋势图</a></li>
+                            <li role="presentation"><a href="#details2" aria-controls="details2" role="tab"
+                                                       data-toggle="tab">最大车重详情</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="echarts2">
+                                <div id="myChart2" style="width: 1000px;height:500px;"></div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="details2">
+                                <div>
+                                    <form class="form-inline">
+                                        <table class="table  table-condensed" style="">
+                                            <tr>
+                                                <td>站点</td>
+                                                <td>{{stationName}}</td>
+                                                <td>轴数</td>
+                                                <td>{{axlesCount}}</td>
+                                            </tr>
+                                            <tr>
+
+                                                <td>车型</td>
+                                                <td>{{vehicleTypeName}}</td>
+                                                <td>车道号</td>
+                                                <td>{{laneNo}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>车牌号</td>
+                                                <td>{{plate}}</td>
+                                                <td>行驶方向</td>
+                                                <td>{{directionName}}</td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>超载率</td>
+                                                <td>{{overWeightRatioName}}</td>
+                                                <td>是否跨道</td>
+                                                <td>{{isStraddleName}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>车长(cm)</td>
+                                                <td>{{length}}</td>
+                                                <td>车牌颜色</td>
+                                                <td>{{licensePlateColor}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>超重量(kg)</td>
+                                                <td>{{overWeight}}</td>
+                                                <td>通行时间</td>
+                                                <td>{{evtTime}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>总重量(kg)</td>
+                                                <td>{{totalWeight}}</td>
+                                                <!--<td>打包时间</td>
+                                                <td>{{msgTime}}</td>-->
+                                                <td>路面温度(°C)</td>
+                                                <td>{{temperature}}</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>车速(km/h)</td>
+                                                <td>{{speed}}</td>
+                                                <td>查看图片</td>
+                                                <td rowspan="2">
+                                                    <div id="chepaiImg">
+                                                    </div>
+                                                    <div id="chebodyDiv">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+
+                                            </tr>
+                                        </table>
+                                        <table class="table  table-condensed" style="height: auto; margin-top: -2%;">
+                                            <thead>
+                                            <td colspan="10">轴重(kg)</td>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td width="38px;">轴1:</td>
+                                                <td>{{axle1}}</td>
+                                                <td width="38px;">轴2:</td>
+                                                <td>{{axle2}}</td>
+                                                <td width="38px;">轴3:</td>
+                                                <td>{{axle3}}</td>
+                                                <td width="38px;">轴4:</td>
+                                                <td>{{axle4}}</td>
+                                                <td width="38px;" style="text-align:right">轴5:</td>
+                                                <td>{{axle5}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="38px;">轴6:</td>
+                                                <td>{{axle6}}</td>
+                                                <td width="38px;">轴7:</td>
+                                                <td>{{axle7}}</td>
+                                                <td width="38px;">轴8:</td>
+                                                <td>{{axle8}}</td>
+                                                <td width="38px;">轴9:</td>
+                                                <td>{{axle9}}</td>
+                                                <td width="44px;">轴10:</td>
+                                                <td>{{axle10}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <table class="table  table-condensed" style="height: auto; margin-top: -2%">
+                                            <thead>
+                                            <td colspan="10">轴间距(cm)</td>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td width="38px;">轴1:</td>
+                                                <td>{{axleSpace1}}</td>
+                                                <td width="38px;">轴2:</td>
+                                                <td>{{axleSpace2}}</td>
+                                                <td width="38px;">轴3:</td>
+                                                <td>{{axleSpace3}}</td>
+                                                <td width="38px;">轴4:</td>
+                                                <td>{{axleSpace4}}</td>
+                                                <td width="38px;">轴5:</td>
+                                                <td>{{axleSpace5}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="38px;">轴6:</td>
+                                                <td>{{axleSpace6}}</td>
+                                                <td width="38px;">轴7:</td>
+                                                <td>{{axleSpace7}}</td>
+                                                <td width="38px;">轴8:</td>
+                                                <td>{{axleSpace8}}</td>
+                                                <td width="38px;">轴9:</td>
+                                                <td>{{axleSpace9}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- allMsg -->
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+             id="modalEchartsDetailMonth">
+            <div class="modal-dialog modal-lg" role="document" style="width:60%;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>-->
+                        <!--                </button>-->
+                        <!--                <h4 class="modal-title"><b>趋势图</b></h4>-->
+                    </div>
+                    <div class="modal-body">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-pills" role="tablist" style="margin-bottom:20px;">
+                            <li role="presentation" class="active"><a href="#echartsMonth2"
+                                                                      aria-controls="echartsMonth2" role="tab"
+                                                                      data-toggle="tab">趋势图</a></li>
+                            <li role="presentation"><a href="#detailsMonth2" aria-controls="detailsMonth2" role="tab"
+                                                       data-toggle="tab">最大车重详情</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="echartsMonth2">
+                                <div id="myChartMonth2" style="width: 1000px;height:500px;"></div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="detailsMonth2">
+                                <div>
+                                    <form class="form-inline">
+                                        <table class="table  table-condensed" style="">
+                                            <tr>
+                                                <td>站点</td>
+                                                <td>{{stationName}}</td>
+                                                <td>轴数</td>
+                                                <td>{{axlesCount}}</td>
+                                            </tr>
+                                            <tr>
+
+                                                <td>车型</td>
+                                                <td>{{vehicleTypeName}}</td>
+                                                <td>车道号</td>
+                                                <td>{{laneNo}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>车牌号</td>
+                                                <td>{{plate}}</td>
+                                                <td>行驶方向</td>
+                                                <td>{{directionName}}</td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>超载率</td>
+                                                <td>{{overWeightRatioName}}</td>
+                                                <td>是否跨道</td>
+                                                <td>{{isStraddleName}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>车长(cm)</td>
+                                                <td>{{length}}</td>
+                                                <td>车牌颜色</td>
+                                                <td>{{licensePlateColor}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>超重量(kg)</td>
+                                                <td>{{overWeight}}</td>
+                                                <td>通行时间</td>
+                                                <td>{{evtTime}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>总重量(kg)</td>
+                                                <td>{{totalWeight}}</td>
+                                                <!--<td>打包时间</td>
+                                                <td>{{msgTime}}</td>-->
+                                                <td>路面温度(°C)</td>
+                                                <td>{{temperature}}</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>车速(km/h)</td>
+                                                <td>{{speed}}</td>
+                                                <td>查看图片</td>
+                                                <td rowspan="2">
+                                                    <div id="chepaiImg1">
+                                                    </div>
+                                                    <div id="chebodyDiv1">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+
+                                            </tr>
+                                        </table>
+                                        <table class="table  table-condensed" style="height: auto; margin-top: -2%;">
+                                            <thead>
+                                            <td colspan="10">轴重(kg)</td>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td width="38px;">轴1:</td>
+                                                <td>{{axle1}}</td>
+                                                <td width="38px;">轴2:</td>
+                                                <td>{{axle2}}</td>
+                                                <td width="38px;">轴3:</td>
+                                                <td>{{axle3}}</td>
+                                                <td width="38px;">轴4:</td>
+                                                <td>{{axle4}}</td>
+                                                <td width="38px;" style="text-align:right">轴5:</td>
+                                                <td>{{axle5}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="38px;">轴6:</td>
+                                                <td>{{axle6}}</td>
+                                                <td width="38px;">轴7:</td>
+                                                <td>{{axle7}}</td>
+                                                <td width="38px;">轴8:</td>
+                                                <td>{{axle8}}</td>
+                                                <td width="38px;">轴9:</td>
+                                                <td>{{axle9}}</td>
+                                                <td width="44px;">轴10:</td>
+                                                <td>{{axle10}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <table class="table  table-condensed" style="height: auto; margin-top: -2%">
+                                            <thead>
+                                            <td colspan="10">轴间距(cm)</td>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td width="38px;">轴1:</td>
+                                                <td>{{axleSpace1}}</td>
+                                                <td width="38px;">轴2:</td>
+                                                <td>{{axleSpace2}}</td>
+                                                <td width="38px;">轴3:</td>
+                                                <td>{{axleSpace3}}</td>
+                                                <td width="38px;">轴4:</td>
+                                                <td>{{axleSpace4}}</td>
+                                                <td width="38px;">轴5:</td>
+                                                <td>{{axleSpace5}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="38px;">轴6:</td>
+                                                <td>{{axleSpace6}}</td>
+                                                <td width="38px;">轴7:</td>
+                                                <td>{{axleSpace7}}</td>
+                                                <td width="38px;">轴8:</td>
+                                                <td>{{axleSpace8}}</td>
+                                                <td width="38px;">轴9:</td>
+                                                <td>{{axleSpace9}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- allMsg -->
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+             id="allMsg1">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title"><b>车道图</b></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <form class="form-inline">
+                                <table class="table table-bordered table-condensed layui-table" id="look_accessory">
+                                    <thead>
+
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- allMsg -->
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+             id="allMsg2">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title"><b>车道图</b></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <form class="form-inline">
+                                <table class="table table-bordered table-condensed" id="look_accessory2">
+                                    <thead>
+
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
 </body>
 <script src="../js/jquery.js"></script>
 <script src="../js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
 <script src="js/datatables/jquery.dataTables.min.js"></script>
-<script src="../js/bootstrap-select.js" ></script>
-<script src="js/bootstrap-datepicker/bootstrap-datepicker.js" ></script>
-<script src="js/bootstrap-datepicker/bootstrap-datepicker.zh-CN.js" ></script>
-<script src="../js/jquery-editable-select.js" ></script>
+<script src="../js/bootstrap-select.js"></script>
+<script src="js/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+<script src="js/bootstrap-datepicker/bootstrap-datepicker.zh-CN.js"></script>
+<script src="../js/jquery-editable-select.js"></script>
 <script src="js/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/layui.all.js" type="text/javascript" charset="utf-8"></script>
-<script src="js/toastr.js" ></script>
+<script src="js/toastr.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
-<script src="https:/ /cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
 <script src="js/echarts.min(1).js" type="text/javascript" charset="utf-8"></script>
 <script src="js/dayAndMonthTongJiJs.js" type="text/javascript" charset="utf-8"></script>
 <script>
 
-    $(document).ready( function () {
+    $(document).ready(function () {
         $("#startTime2").datepicker({
             startView: 'years',  //起始选择范围
-            maxViewMode:'years', //最大选择范围
-            minViewMode:'months', //最小选择范围
-            todayHighlight : true,// 当前时间高亮显示
-            autoclose : 'true',// 选择时间后弹框自动消失
-            format : 'yyyy-mm',// 时间格式
-            language : 'zh-CN',// 汉化
+            maxViewMode: 'years', //最大选择范围
+            minViewMode: 'months', //最小选择范围
+            todayHighlight: true,// 当前时间高亮显示
+            autoclose: 'true',// 选择时间后弹框自动消失
+            format: 'yyyy-mm',// 时间格式
+            language: 'zh-CN',// 汉化
             // todayBtn:"linked",//显示今天 按钮
-            clearBtn : true,// 清除按钮，和今天 按钮只能显示一个
+            clearBtn: true,// 清除按钮，和今天 按钮只能显示一个
         });
 
         dayAndMonthTongjiDom.initTable();
@@ -404,23 +906,22 @@
     });
 
 
-    function initzhandian(){
+    function initzhandian() {
         $.ajax({
             type: 'POST',
             url: '/StationSite/getAllStationSite',
             dataType: 'json',
-            data: {
-            },
+            data: {},
             error: function (msg) {
                 errMessage("请求UserController失败");
             },
             success: function (json) {
-                if(json!=null){
+                if (json != null) {
                     $("#stationPort").html('');
                     $("#stationPort2").html('');
-                    for(var i=0;i<json.length;i++){
-                        $("#stationPort").append("<option  value='"+json[i].stationPort+"'>"+(json[i].stationName)+"</option>");
-                        $("#stationPort2").append("<option  value='"+json[i].stationPort+"'>"+(json[i].stationName)+"</option>");
+                    for (var i = 0; i < json.length; i++) {
+                        $("#stationPort").append("<option  value='" + json[i].stationPort + "'>" + (json[i].stationName) + "</option>");
+                        $("#stationPort2").append("<option  value='" + json[i].stationPort + "'>" + (json[i].stationName) + "</option>");
                     }
 
                 }
@@ -429,39 +930,37 @@
     }
 
 
-
     function getNow(s) {
-        return s < 10 ? '0' + s: s;
+        return s < 10 ? '0' + s : s;
     }
 
-    function getTime(){
+    function getTime() {
         var myDate = new Date;
         var year = myDate.getFullYear(); //获取当前年
         var mon = myDate.getMonth() + 1; //获取当前月
-        var date = myDate.getDate()-1; //获取当前日
+        var date = myDate.getDate() - 1; //获取当前日
         //var h = myDate.getHours();//获取当前小时数(0-23)
         //var m = myDate.getMinutes();//获取当前分钟数(0-59)
         //var s = myDate.getSeconds();//获取当前秒
         //var week = myDate.getDay();
         //var weeks = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
-        var now=getNow(year) + "-" + getNow(mon) + "-" + getNow(date);
-        var now2=getNow(year) + "-" + getNow(myDate.getMonth());
+        var now = getNow(year) + "-" + getNow(mon) + "-" + getNow(date);
+        var now2 = getNow(year) + "-" + getNow(myDate.getMonth());
         $("#startTime").val(now);
         $("#startTime2").val(now2);
         return now;
     }
 
 
-
-    function queding(){
-        var stationPort=$("#stationPort").val();
-        var startTime=$("#startTime").val();
-        dayAndMonthTongjiDom.initTableBodyAjax(stationPort,startTime);
+    function queding() {
+        var stationPort = $("#stationPort").val();
+        var startTime = $("#startTime").val();
+        dayAndMonthTongjiDom.initTableBodyAjax(stationPort, startTime);
         $("#stationPort2").val(stationPort);
         queding2()
 
-        if(startTime==null||startTime==''||startTime==undefined){
-            startTime=getTime();
+        if (startTime == null || startTime == '' || startTime == undefined) {
+            startTime = getTime();
         }
         /*$("#_top").html()
         $("#_right").html()
@@ -470,97 +969,98 @@
             type: 'POST',
             url: '/tAvgDay/gettAvgDayByIpAndTime',
             dataType: 'json',
-            async:false,
+            async: false,
             data: {
-                stationIP:stationPort,
-                avgTime:startTime,
-                avgLaneNo:0,
+                stationIP: stationPort,
+                avgTime: startTime,
+                avgLaneNo: 0,
             },
             error: function (msg) {
                 $(".errorMsg1").html('无数据').css({
-                    "margin-left":"30px",
-                    "color":"red",
+                    "margin-left": "30px",
+                    "color": "red",
                 })
-                var CheXingNum=[0,0,0,0,0];
-                var CheXingNumbili=['0.00%','0.00%','0.00%','0.00%','0.00%'];
-                setCheXingNumEChars(CheXingNum,CheXingNumbili);
+                var CheXingNum = [0, 0, 0, 0, 0];
+                var CheXingNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
+                setCheXingNumEChars(CheXingNum, CheXingNumbili);
 
-                var ChaoZaiNum=[0,0,0,0,0];
-                var ChaoZaiNumbili=['0.00%','0.00%','0.00%','0.00%','0.00%'];
-                setChaoZaiNumEChars(ChaoZaiNum,ChaoZaiNumbili);
+                var ChaoZaiNum = [0, 0, 0, 0, 0];
+                var ChaoZaiNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
+                setChaoZaiNumEChars(ChaoZaiNum, ChaoZaiNumbili);
 
-                var ChaoZaiLvNum=[0,0,0,0,0];
-                var ChaoZaiLvNumbili=['0.00%','0.00%','0.00%','0.00%','0.00%'];
-                setChaoZaiLvNumEChars(ChaoZaiLvNum,ChaoZaiLvNumbili);
+                var ChaoZaiLvNum = [0, 0, 0, 0, 0];
+                var ChaoZaiLvNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
+                setChaoZaiLvNumEChars(ChaoZaiLvNum, ChaoZaiLvNumbili);
             },
             success: function (json) {
-                if(json!=null){
+                if (json != null) {
                     $(".errorMsg1").html('')
-                    var CheXingNum=new Array();
-                    var CheXingNumbili=new Array();
+                    var CheXingNum = new Array();
+                    var CheXingNumbili = new Array();
                     CheXingNum.push(json.axlesCount2)
                     CheXingNum.push(json.axlesCount3)
                     CheXingNum.push(json.axlesCount4)
                     CheXingNum.push(json.axlesCount5)
                     CheXingNum.push(json.axlesCount6)
-                    if(json.avgCount!=0){
-                        CheXingNumbili.push((json.axlesCount2/json.avgCount).toFixed(2)+'%')
-                        CheXingNumbili.push((json.axlesCount3/json.avgCount).toFixed(2)+'%')
-                        CheXingNumbili.push((json.axlesCount4/json.avgCount).toFixed(2)+'%')
-                        CheXingNumbili.push((json.axlesCount5/json.avgCount).toFixed(2)+'%')
-                        CheXingNumbili.push((json.axlesCount6/json.avgCount).toFixed(2)+'%')
-                    }else{
-                        CheXingNumbili=['0.00%','0.00%','0.00%','0.00%','0.00%'];
+                    if (json.avgCount != 0) {
+                        CheXingNumbili.push((json.axlesCount2 / json.avgCount).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount3 / json.avgCount).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount4 / json.avgCount).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount5 / json.avgCount).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount6 / json.avgCount).toFixed(2) + '%')
+                    } else {
+                        CheXingNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
-                    setCheXingNumEChars(CheXingNum,CheXingNumbili);
+                    setCheXingNumEChars(CheXingNum, CheXingNumbili);
 
-                    var ChaoZaiNum=new Array();
-                    var ChaoZaiNumbili=new Array();
+                    var ChaoZaiNum = new Array();
+                    var ChaoZaiNumbili = new Array();
                     ChaoZaiNum.push(json.avgOverloadCount2)
                     ChaoZaiNum.push(json.avgOverloadCount3)
                     ChaoZaiNum.push(json.avgOverloadCount4)
                     ChaoZaiNum.push(json.avgOverloadCount5)
                     ChaoZaiNum.push(json.avgOverloadCount6)
-                    if(json.avgOverloadCount!=0){
-                        ChaoZaiNumbili.push((json.avgOverloadCount2/json.avgOverloadCount).toFixed(2)+'%')
-                        ChaoZaiNumbili.push((json.avgOverloadCount3/json.avgOverloadCount).toFixed(2)+'%')
-                        ChaoZaiNumbili.push((json.avgOverloadCount4/json.avgOverloadCount).toFixed(2)+'%')
-                        ChaoZaiNumbili.push((json.avgOverloadCount5/json.avgOverloadCount).toFixed(2)+'%')
-                        ChaoZaiNumbili.push((json.avgOverloadCount6/json.avgOverloadCount).toFixed(2)+'%')
-                    }else {
-                        ChaoZaiNumbili=['0.00%','0.00%','0.00%','0.00%','0.00%'];
+                    if (json.avgOverloadCount != 0) {
+                        ChaoZaiNumbili.push((json.avgOverloadCount2 / json.avgOverloadCount).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount3 / json.avgOverloadCount).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount4 / json.avgOverloadCount).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount5 / json.avgOverloadCount).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount6 / json.avgOverloadCount).toFixed(2) + '%')
+                    } else {
+                        ChaoZaiNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
-                    setChaoZaiNumEChars(ChaoZaiNum,ChaoZaiNumbili);
+                    setChaoZaiNumEChars(ChaoZaiNum, ChaoZaiNumbili);
 
-                    var ChaoZaiLvNum=new Array();
-                    var ChaoZaiLvNumbili=new Array();
+                    var ChaoZaiLvNum = new Array();
+                    var ChaoZaiLvNumbili = new Array();
                     ChaoZaiLvNum.push(json.avgOverloadRatio2.toFixed(2))
                     ChaoZaiLvNum.push(json.avgOverloadRatio3.toFixed(2))
                     ChaoZaiLvNum.push(json.avgOverloadRatio4.toFixed(2))
                     ChaoZaiLvNum.push(json.avgOverloadRatio5.toFixed(2))
                     ChaoZaiLvNum.push(json.avgOverloadRatio6.toFixed(2))
-                    if(json.avgOverloadRatio!=0){
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio2.toFixed(2)/json.avgOverloadRatio).toFixed(2)+'%')
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio3.toFixed(2)/json.avgOverloadRatio).toFixed(2)+'%')
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio4.toFixed(2)/json.avgOverloadRatio).toFixed(2)+'%')
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio5.toFixed(2)/json.avgOverloadRatio).toFixed(2)+'%')
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio6.toFixed(2)/json.avgOverloadRatio).toFixed(2)+'%')
-                    }else{
-                        ChaoZaiLvNumbili=['0.00%','0.00%','0.00%','0.00%','0.00%'];
+                    if (json.avgOverloadRatio != 0) {
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio2.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio3.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio4.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio5.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio6.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
+                    } else {
+                        ChaoZaiLvNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
 
-                    setChaoZaiLvNumEChars(ChaoZaiLvNum,ChaoZaiLvNumbili);
+                    setChaoZaiLvNumEChars(ChaoZaiLvNum, ChaoZaiLvNumbili);
                 }
             }
         });
     }
-    function setCheXingNumEChars(CheXingNum,CheXingNumbili){
+
+    function setCheXingNumEChars(CheXingNum, CheXingNumbili) {
         var myChart = echarts.init(document.getElementById('_top'));
         var seriesLabel = {
             normal: {
                 show: true,
                 textBorderColor: '#336666',
-                color:'white',
+                color: 'white',
                 textBorderWidth: 1
             }
         }
@@ -582,14 +1082,13 @@
                 {
                     type: 'category',
                     data: ['2轴车', '3轴车', '4轴车', '5轴车', '6轴车'],
-                    splitLine:{
-                        show:false
-                     },
+                    splitLine: {
+                        show: false
+                    },
                     axisTick: {
                         alignWithLabel: true
                     },
-                    
-                    
+
 
                 }
             ],
@@ -599,9 +1098,9 @@
                     axisLine: { //坐标轴轴线相关设置。
                         show: false
                     },
-                    splitLine:{		
-                	　　　　show:false
-                	　　}
+                    splitLine: {
+                        show: false
+                    }
                 }
             ],
             series: [
@@ -616,7 +1115,7 @@
                             show: true,
                             position: 'top',
                             color: 'black',
-                            formatter: function(data) {
+                            formatter: function (data) {
                                 return CheXingNumbili[data.dataIndex];
                             },
                         }
@@ -634,7 +1133,7 @@
                         }
 
                     },
-                },{
+                }, {
                     type: 'bar',
                     label: seriesLabel,
                     barWidth: '20%',
@@ -667,13 +1166,13 @@
     }
 
 
-    function setChaoZaiNumEChars(ChaoZaiNum,ChaoZaiNumbili){
+    function setChaoZaiNumEChars(ChaoZaiNum, ChaoZaiNumbili) {
         var myChart2 = echarts.init(document.getElementById('_right'));
         var seriesLabel = {
             normal: {
                 show: true,
                 textBorderColor: '#336666',
-                color:'white',
+                color: 'white',
                 textBorderWidth: 1
             }
         }
@@ -695,10 +1194,10 @@
                 {
                     type: 'category',
                     data: ['2轴车', '3轴车', '4轴车', '5轴车', '6轴车'],
-                    splitLine:{
-                        show:false
-                     },
-                     
+                    splitLine: {
+                        show: false
+                    },
+
                     axisTick: {
                         alignWithLabel: true
                     }
@@ -710,9 +1209,9 @@
                     axisLine: { //坐标轴轴线相关设置。
                         show: false
                     },
-                    splitLine:{		
-                	　　　　show:false
-                	　　}
+                    splitLine: {
+                        show: false
+                    }
                 }
             ],
             series: [
@@ -727,7 +1226,7 @@
                             show: true,
                             position: 'top',
                             color: 'black',
-                            formatter: function(data) {
+                            formatter: function (data) {
                                 return ChaoZaiNumbili[data.dataIndex];
                             },
                         }
@@ -745,7 +1244,7 @@
                         }
 
                     },
-                },{
+                }, {
                     type: 'bar',
                     label: seriesLabel,
                     barWidth: '20%',
@@ -768,7 +1267,7 @@
                                 ]
                             )
                         }
-                       
+
                     },
                 }
             ]
@@ -779,13 +1278,13 @@
     }
 
 
-    function setChaoZaiLvNumEChars(ChaoZaiLvNum,ChaoZaiLvNumbili){
+    function setChaoZaiLvNumEChars(ChaoZaiLvNum, ChaoZaiLvNumbili) {
         var myChart3 = echarts.init(document.getElementById('bottom_'));
         var seriesLabel = {
             normal: {
                 show: true,
                 textBorderColor: '#336666',
-                color:'white',
+                color: 'white',
                 textBorderWidth: 1
             }
         }
@@ -818,9 +1317,9 @@
                     axisLine: { //坐标轴轴线相关设置。
                         show: false
                     },
-                    splitLine:{		
-                	　　　　show:false
-                	　　}
+                    splitLine: {
+                        show: false
+                    }
                 }
             ],
             series: [
@@ -835,7 +1334,7 @@
                             show: true,
                             position: 'top',
                             color: 'black',
-                            formatter: function(data) {
+                            formatter: function (data) {
                                 return ChaoZaiLvNumbili[data.dataIndex];
                             },
                         }
@@ -853,7 +1352,7 @@
                         }
 
                     },
-                },{
+                }, {
                     type: 'bar',
                     label: seriesLabel,
                     barWidth: '20%',
@@ -876,7 +1375,7 @@
                                 ]
                             )
                         }
-                       
+
                     },
                 }
             ]
@@ -886,42 +1385,42 @@
     }
 
 
-    function nowJianceSite(){
+    function nowJianceSite() {
         $.ajax({
             type: 'POST',
             url: '/StationSite/getAccessoryByPort',
             dataType: 'json',
-            async:false,
+            async: false,
             data: {
-                stationPort:$("#stationPort").val(),
+                stationPort: $("#stationPort").val(),
             },
             error: function (msg) {
                 $(".errorMsg2").html('无数据').css({
-                    "margin-left":"30px",
-                    "color":"red",
+                    "margin-left": "30px",
+                    "color": "red",
                 })
                 errMessage("请求UserController失败");
             },
             success: function (json) {
                 $("#look_accessory tbody").empty();
-                if(json!=null&&json!=''&&json.length!=0){
-                    for(var i=0;i<json.length;i++){
-                        $("#look_accessory tbody").append("<tr>"+
-                            "<td style='width:20%;'>附件</td>"+
-                            "<td colspan='3'><a href='"+getLocalPath()+"/dtcz_file/"+json[i].acUrl+"' target='view_window' style='color:blue'>"+json[i].acName+"</a></td>"+
+                if (json != null && json != '' && json.length != 0) {
+                    for (var i = 0; i < json.length; i++) {
+                        $("#look_accessory tbody").append("<tr>" +
+                            "<td style='width:20%;'>附件</td>" +
+                            "<td colspan='3'><a href='" + getLocalPath() + "/dtcz_file/" + json[i].acUrl + "' target='view_window' style='color:blue'>" + json[i].acName + "</a></td>" +
                             "</tr>");
                     }
-                }else{
-                    $("#look_accessory tbody").append("<tr>"+
-                        "<td style='width:20%;'>附件</td>"+
-                        "<td colspan='3' style='color: red'>无附件</td>"+
+                } else {
+                    $("#look_accessory tbody").append("<tr>" +
+                        "<td style='width:20%;'>附件</td>" +
+                        "<td colspan='3' style='color: red'>无附件</td>" +
                         "</tr>");
                 }
             }
         });
     }
 
-    function getLocalPath(){
+    function getLocalPath() {
         /*var pathArray = window.location.pathname.split('/');
         var secondLevelLocation = pathArray[1];
         var loginUrl = window.location.protocol + "//"  + window.location.host ;*/
@@ -930,22 +1429,22 @@
             type: 'POST',
             url: '/tVehicleOverweight/getimgUrlPrefix',
             dataType: 'json',
-            async:false,
-            data: {
-            },
+            async: false,
+            data: {},
             success: function (json) {
-                 loginUrl="http://"+json.imgUrlPrefix+""
+                loginUrl = "http://" + json.imgUrlPrefix + ""
             }
         });
         return loginUrl;
     }
+
     <!--====================================================月交通量统计=========================================================================-->
-    function queding2(){
-        var stationPort=$("#stationPort2").val();
-        var startTime=$("#startTime2").val();
-        dayAndMonthTongjiDomMonth.initTableBodyAjaxMonth(stationPort,startTime);
-        if(startTime==null||startTime==''||startTime==undefined){
-            startTime=getTime();
+    function queding2() {
+        var stationPort = $("#stationPort2").val();
+        var startTime = $("#startTime2").val();
+        dayAndMonthTongjiDomMonth.initTableBodyAjaxMonth(stationPort, startTime);
+        if (startTime == null || startTime == '' || startTime == undefined) {
+            startTime = getTime();
         }
         /*$("#_top2").empty()
         $("#_right2").empty()
@@ -954,98 +1453,98 @@
             type: 'POST',
             url: '/tAvgDay/gettAvgMonthByIpAndTime',
             dataType: 'json',
-            async:false,
+            async: false,
             data: {
-                stationIP:stationPort,
-                avgTime:startTime,
-                avgLaneNo:0,
+                stationIP: stationPort,
+                avgTime: startTime,
+                avgLaneNo: 0,
             },
             error: function (msg) {
                 $(".errorMsg2").html('无数据').css({
-                    "margin-left":"30px",
-                    "color":"red",
+                    "margin-left": "30px",
+                    "color": "red",
                 })
-                var CheXingNum=[0,0,0,0,0];
-                var CheXingNumbili=['0.00%','0.00%','0.00%','0.00%','0.00%'];
-                setCheXingNumEChars2(CheXingNum,CheXingNumbili);
+                var CheXingNum = [0, 0, 0, 0, 0];
+                var CheXingNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
+                setCheXingNumEChars2(CheXingNum, CheXingNumbili);
 
-                var ChaoZaiNum=[0,0,0,0,0];
-                var ChaoZaiNumbili=['0.00%','0.00%','0.00%','0.00%','0.00%'];
-                setChaoZaiNumEChars2(ChaoZaiNum,ChaoZaiNumbili);
+                var ChaoZaiNum = [0, 0, 0, 0, 0];
+                var ChaoZaiNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
+                setChaoZaiNumEChars2(ChaoZaiNum, ChaoZaiNumbili);
 
-                var ChaoZaiLvNum=[0,0,0,0,0];
-                var ChaoZaiLvNumbili=['0.00%','0.00%','0.00%','0.00%','0.00%'];
-                setChaoZaiLvNumEChars2(ChaoZaiLvNum,ChaoZaiLvNumbili);
+                var ChaoZaiLvNum = [0, 0, 0, 0, 0];
+                var ChaoZaiLvNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
+                setChaoZaiLvNumEChars2(ChaoZaiLvNum, ChaoZaiLvNumbili);
             },
             success: function (json) {
-                if(json!=null){
+                if (json != null) {
                     $(".errorMsg2").html('')
-                    var CheXingNum=[];
-                    var CheXingNumbili=[];
+                    var CheXingNum = [];
+                    var CheXingNumbili = [];
                     CheXingNum.push(json.axlesCount2)
                     CheXingNum.push(json.axlesCount3)
                     CheXingNum.push(json.axlesCount4)
                     CheXingNum.push(json.axlesCount5)
                     CheXingNum.push(json.axlesCount6)
-                    if(json.avgCount!=0){
-                        CheXingNumbili.push((json.axlesCount2/json.avgCount).toFixed(2)+'%')
-                        CheXingNumbili.push((json.axlesCount3/json.avgCount).toFixed(2)+'%')
-                        CheXingNumbili.push((json.axlesCount4/json.avgCount).toFixed(2)+'%')
-                        CheXingNumbili.push((json.axlesCount5/json.avgCount).toFixed(2)+'%')
-                        CheXingNumbili.push((json.axlesCount6/json.avgCount).toFixed(2)+'%')
-                    }else{
-                        CheXingNumbili=['0.00%','0.00%','0.00%','0.00%','0.00%'];
+                    if (json.avgCount != 0) {
+                        CheXingNumbili.push((json.axlesCount2 / json.avgCount).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount3 / json.avgCount).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount4 / json.avgCount).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount5 / json.avgCount).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount6 / json.avgCount).toFixed(2) + '%')
+                    } else {
+                        CheXingNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
-                    setCheXingNumEChars2(CheXingNum,CheXingNumbili);
+                    setCheXingNumEChars2(CheXingNum, CheXingNumbili);
 
-                    var ChaoZaiNum=[];
-                    var ChaoZaiNumbili=[];
+                    var ChaoZaiNum = [];
+                    var ChaoZaiNumbili = [];
                     ChaoZaiNum.push(json.avgOverloadCount2)
                     ChaoZaiNum.push(json.avgOverloadCount3)
                     ChaoZaiNum.push(json.avgOverloadCount4)
                     ChaoZaiNum.push(json.avgOverloadCount5)
                     ChaoZaiNum.push(json.avgOverloadCount6)
-                    if(json.avgOverloadCount!=0){
-                        ChaoZaiNumbili.push((json.avgOverloadCount2/json.avgOverloadCount).toFixed(2)+'%')
-                        ChaoZaiNumbili.push((json.avgOverloadCount3/json.avgOverloadCount).toFixed(2)+'%')
-                        ChaoZaiNumbili.push((json.avgOverloadCount4/json.avgOverloadCount).toFixed(2)+'%')
-                        ChaoZaiNumbili.push((json.avgOverloadCount5/json.avgOverloadCount).toFixed(2)+'%')
-                        ChaoZaiNumbili.push((json.avgOverloadCount6/json.avgOverloadCount).toFixed(2)+'%')
-                    }else {
-                        ChaoZaiNumbili=['0.00%','0.00%','0.00%','0.00%','0.00%'];
+                    if (json.avgOverloadCount != 0) {
+                        ChaoZaiNumbili.push((json.avgOverloadCount2 / json.avgOverloadCount).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount3 / json.avgOverloadCount).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount4 / json.avgOverloadCount).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount5 / json.avgOverloadCount).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount6 / json.avgOverloadCount).toFixed(2) + '%')
+                    } else {
+                        ChaoZaiNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
-                    setChaoZaiNumEChars2(ChaoZaiNum,ChaoZaiNumbili);
+                    setChaoZaiNumEChars2(ChaoZaiNum, ChaoZaiNumbili);
 
-                    var ChaoZaiLvNum=[];
-                    var ChaoZaiLvNumbili=[];
+                    var ChaoZaiLvNum = [];
+                    var ChaoZaiLvNumbili = [];
                     ChaoZaiLvNum.push(json.avgOverloadRatio2.toFixed(2))
                     ChaoZaiLvNum.push(json.avgOverloadRatio3.toFixed(2))
                     ChaoZaiLvNum.push(json.avgOverloadRatio4.toFixed(2))
                     ChaoZaiLvNum.push(json.avgOverloadRatio5.toFixed(2))
                     ChaoZaiLvNum.push(json.avgOverloadRatio6.toFixed(2))
-                    if(json.avgOverloadRatio!=0){
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio2.toFixed(2)/json.avgOverloadRatio).toFixed(2)+'%')
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio3.toFixed(2)/json.avgOverloadRatio).toFixed(2)+'%')
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio4.toFixed(2)/json.avgOverloadRatio).toFixed(2)+'%')
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio5.toFixed(2)/json.avgOverloadRatio).toFixed(2)+'%')
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio6.toFixed(2)/json.avgOverloadRatio).toFixed(2)+'%')
-                    }else{
-                        ChaoZaiLvNumbili=['0.00%','0.00%','0.00%','0.00%','0.00%'];
+                    if (json.avgOverloadRatio != 0) {
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio2.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio3.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio4.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio5.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio6.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
+                    } else {
+                        ChaoZaiLvNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
-                    setChaoZaiLvNumEChars2(ChaoZaiLvNum,ChaoZaiLvNumbili);
+                    setChaoZaiLvNumEChars2(ChaoZaiLvNum, ChaoZaiLvNumbili);
                 }
             }
         });
     }
 
 
-    function setCheXingNumEChars2(CheXingNum,CheXingNumbili){
+    function setCheXingNumEChars2(CheXingNum, CheXingNumbili) {
         var myChart = echarts.init(document.getElementById('_top2'));
         var seriesLabel = {
             normal: {
                 show: true,
                 textBorderColor: '#336666',
-                color:'white',
+                color: 'white',
                 textBorderWidth: 1
             }
         }
@@ -1078,9 +1577,9 @@
                     axisLine: { //坐标轴轴线相关设置。
                         show: false
                     },
-                    splitLine:{		
-                	　　　　show:false
-                	　　}
+                    splitLine: {
+                        show: false
+                    }
                 }
             ],
             series: [
@@ -1095,7 +1594,7 @@
                             show: true,
                             position: 'top',
                             color: 'black',
-                            formatter: function(data) {
+                            formatter: function (data) {
                                 return CheXingNumbili[data.dataIndex];
                             },
                         }
@@ -1113,7 +1612,7 @@
                         }
 
                     },
-                },{
+                }, {
                     type: 'bar',
                     label: seriesLabel,
                     barWidth: '20%',
@@ -1136,7 +1635,7 @@
                                 ]
                             )
                         }
-                       
+
                     },
                 }
             ]
@@ -1146,13 +1645,13 @@
     }
 
 
-    function setChaoZaiNumEChars2(ChaoZaiNum,ChaoZaiNumbili){
+    function setChaoZaiNumEChars2(ChaoZaiNum, ChaoZaiNumbili) {
         var myChart2 = echarts.init(document.getElementById('_right2'));
         var seriesLabel = {
             normal: {
                 show: true,
                 textBorderColor: '#336666',
-                color:'white',
+                color: 'white',
                 textBorderWidth: 1
             }
         }
@@ -1185,9 +1684,9 @@
                     axisLine: { //坐标轴轴线相关设置。
                         show: false
                     },
-                    splitLine:{		
-                	　　　　show:false
-                	　　}
+                    splitLine: {
+                        show: false
+                    }
                 }
             ],
             series: [
@@ -1202,7 +1701,7 @@
                             show: true,
                             position: 'top',
                             color: 'black',
-                            formatter: function(data) {
+                            formatter: function (data) {
                                 return ChaoZaiNumbili[data.dataIndex];
                             },
                         }
@@ -1220,7 +1719,7 @@
                         }
 
                     },
-                },{
+                }, {
                     name: '直接访问',
                     type: 'bar',
                     label: seriesLabel,
@@ -1244,7 +1743,7 @@
                                 ]
                             )
                         }
-                       
+
                     },
                 }
             ]
@@ -1255,13 +1754,13 @@
     }
 
 
-    function setChaoZaiLvNumEChars2(ChaoZaiLvNum,ChaoZaiLvNumbili){
+    function setChaoZaiLvNumEChars2(ChaoZaiLvNum, ChaoZaiLvNumbili) {
         var myChart3 = echarts.init(document.getElementById('bottom_2'));
         var seriesLabel = {
             normal: {
                 show: true,
                 textBorderColor: '#336666',
-                color:'white',
+                color: 'white',
                 textBorderWidth: 1
             }
         }
@@ -1294,9 +1793,9 @@
                     axisLine: { //坐标轴轴线相关设置。
                         show: false
                     },
-                    splitLine:{		
-                	　　　　show:false
-                	　　}
+                    splitLine: {
+                        show: false
+                    }
                 }
             ],
             series: [
@@ -1311,7 +1810,7 @@
                             show: true,
                             position: 'top',
                             color: 'black',
-                            formatter: function(data) {
+                            formatter: function (data) {
                                 return ChaoZaiLvNumbili[data.dataIndex];
                             },
                         }
@@ -1329,7 +1828,7 @@
                         }
 
                     },
-                },{
+                }, {
                     name: '直接访问',
                     type: 'bar',
                     label: seriesLabel,
@@ -1353,7 +1852,7 @@
                                 ]
                             )
                         }
-                       
+
                     },
                 }
             ]
@@ -1363,42 +1862,406 @@
     }
 
 
-    function nowJianceSite2(){
+    function nowJianceSite2() {
         $.ajax({
             type: 'POST',
             url: '/StationSite/getAccessoryByPort',
             dataType: 'json',
-            async:false,
+            async: false,
             data: {
-                stationPort:$("#stationPort2").val(),
+                stationPort: $("#stationPort2").val(),
             },
             error: function (msg) {
                 $(".errorMsg2").html('无数据').css({
-                    "margin-left":"30px",
-                    "color":"red",
+                    "margin-left": "30px",
+                    "color": "red",
                 })
                 errMessage("请求UserController失败");
             },
             success: function (json) {
                 $("#look_accessory2 tbody").empty();
-                if(json!=null&&json!=''&&json.length!=0){
-                    for(var i=0;i<json.length;i++){
-                        $("#look_accessory2 tbody").append("<tr>"+
-                            "<td style='width:20%;'>附件</td>"+
-                            "<td colspan='3'><a href='"+getLocalPath()+"/dtcz_file/"+json[i].acUrl+"' target='view_window' style='color:blue'>"+json[i].acName+"</a></td>"+
+                if (json != null && json != '' && json.length != 0) {
+                    for (var i = 0; i < json.length; i++) {
+                        $("#look_accessory2 tbody").append("<tr>" +
+                            "<td style='width:20%;'>附件</td>" +
+                            "<td colspan='3'><a href='" + getLocalPath() + "/dtcz_file/" + json[i].acUrl + "' target='view_window' style='color:blue'>" + json[i].acName + "</a></td>" +
                             /* "<td colspan='2'><input type='text' class='form-control' style='width:100%;' value='"+json[i].acName+"' disabled></td>"+
                             "<td style='width:150px;'><button type='button' class='btn btn-primary' data1='"+json[i].acUrl+"' data2='"+json[i].aId+"' data3='"+json[i].acName+"' onclick='delete_file(this)'>删除附件</button></td>"+*/
                             "</tr>");
                     }
-                }else{
-                    $("#look_accessory2 tbody").append("<tr>"+
-                        "<td style='width:20%;'>附件</td>"+
-                        "<td colspan='3' style='color: red'>无附件</td>"+
+                } else {
+                    $("#look_accessory2 tbody").append("<tr>" +
+                        "<td style='width:20%;'>附件</td>" +
+                        "<td colspan='3' style='color: red'>无附件</td>" +
                         "</tr>");
                 }
             }
         });
     }
 
+
+    let looktWimMsg = new Vue({
+        el: '#modalEchartsDetail',
+        //表单数据
+        data: {
+            idLocal: "",
+            id: "",
+            stationId: "",
+            evtTime: "",
+            msgTime: "",
+            laneNo: "",
+            plate: "",
+            plateColor: "",
+            classIndex: "",
+            length: "",
+            speed: "",
+            direction: "",
+            axlesCount: "",
+            totalWeight: '',
+            wetmixingtimedeviation: '',
+            axle1: '',
+            axle2: '',
+            axle3: '',
+            axle4: '',
+            axle5: '',
+            axle6: '',
+            axle7: '',
+            axle8: '',
+            axle9: '',
+            axle10: '',
+            axleSpace1: '',
+            axleSpace2: '',
+            axleSpace3: '',
+            axleSpace4: '',
+            axleSpace5: '',
+            axleSpace6: '',
+            axleSpace7: '',
+            axleSpace8: '',
+            axleSpace9: '',
+            isStraddle: '',
+            temperature: '',
+            overWeight: '',
+            overWeightRatio: '',
+            wIMId: '',
+            lPRId: '',
+            stationIP: '',
+            stationNameRouteName: '',
+            directionName: '',
+            isStraddleName: '',
+            stationName: '',
+            routeName: '',
+            licensePlateColor: '',
+            vehicleTypeName: '',
+        },
+        methods: {}
+    })
+
+    let looktWimMsg1 = new Vue({
+        el: '#modalEchartsDetailMonth',
+        //表单数据
+        data: {
+            idLocal: "",
+            id: "",
+            stationId: "",
+            evtTime: "",
+            msgTime: "",
+            laneNo: "",
+            plate: "",
+            plateColor: "",
+            classIndex: "",
+            length: "",
+            speed: "",
+            direction: "",
+            axlesCount: "",
+            totalWeight: '',
+            wetmixingtimedeviation: '',
+            axle1: '',
+            axle2: '',
+            axle3: '',
+            axle4: '',
+            axle5: '',
+            axle6: '',
+            axle7: '',
+            axle8: '',
+            axle9: '',
+            axle10: '',
+            axleSpace1: '',
+            axleSpace2: '',
+            axleSpace3: '',
+            axleSpace4: '',
+            axleSpace5: '',
+            axleSpace6: '',
+            axleSpace7: '',
+            axleSpace8: '',
+            axleSpace9: '',
+            isStraddle: '',
+            temperature: '',
+            overWeight: '',
+            overWeightRatio: '',
+            wIMId: '',
+            lPRId: '',
+            stationIP: '',
+            stationNameRouteName: '',
+            directionName: '',
+            isStraddleName: '',
+            stationName: '',
+            routeName: '',
+            licensePlateColor: '',
+            vehicleTypeName: '',
+        },
+        methods: {}
+    })
+
+
+    const page_init_vue_data = {
+        idLocal: "",
+        id: "",
+        stationId: "",
+        evtTime: "",
+        msgTime: "",
+        laneNo: "",
+        plate: "",
+        plateColor: "",
+        classIndex: "",
+        length: "",
+        speed: "",
+        direction: "",
+        axlesCount: "",
+        totalWeight: '',
+        wetmixingtimedeviation: '',
+        axle1: '',
+        axle2: '',
+        axle3: '',
+        axle4: '',
+        axle5: '',
+        axle6: '',
+        axle7: '',
+        axle8: '',
+        axle9: '',
+        axle10: '',
+        axleSpace1: '',
+        axleSpace2: '',
+        axleSpace3: '',
+        axleSpace4: '',
+        axleSpace5: '',
+        axleSpace6: '',
+        axleSpace7: '',
+        axleSpace8: '',
+        axleSpace9: '',
+        isStraddle: '',
+        temperature: '',
+        overWeight: '',
+        overWeightRatio: '',
+        overWeightRatioName: '',
+        wIMId: '',
+        lPRId: '',
+        stationIP: '',
+        stationNameRouteName: '',
+        directionName: '',
+        isStraddleName: '',
+        stationName: '',
+        routeName: '',
+        licensePlateColor: '',
+        vehicleTypeName: '',
+    };
+    Object.freeze(page_init_vue_data);
+
+    var lookxiangqing = (data, obj) => {
+        Object.assign(looktWimMsg.$data, page_init_vue_data)
+        looktWimMsg.overWeightRatioName ="";
+        $("#chepaiImg").empty();
+        $("#chebodyDiv").empty();
+        if (data != "") {
+            looktWimMsg.id = data.id;
+            looktWimMsg.idLocal = data.idLocal;
+            looktWimMsg.stationNameRouteName = data.stationNameRouteName;
+            looktWimMsg.stationId = data.stationId;
+            looktWimMsg.evtTime = data.evtTime;
+            looktWimMsg.msgTime = data.msgTime;
+            looktWimMsg.laneNo = data.laneNo;
+            looktWimMsg.plate = data.plate;
+            looktWimMsg.plateColor = data.plateColor;
+            looktWimMsg.classIndex = data.classIndex;
+            looktWimMsg.length = data.length;
+            looktWimMsg.speed = data.speed;
+            looktWimMsg.direction = data.direction;
+            looktWimMsg.axlesCount = data.axlesCount;
+            looktWimMsg.totalWeight = data.totalWeight;
+            looktWimMsg.wetmixingtimedeviation = data.wetmixingtimedeviation;
+            looktWimMsg.axle1 = data.axle1;
+            looktWimMsg.axle2 = data.axle2;
+            looktWimMsg.axle3 = data.axle3;
+            looktWimMsg.axle4 = data.axle4;
+            looktWimMsg.axle5 = data.axle5;
+            looktWimMsg.axle6 = data.axle6;
+            looktWimMsg.axle7 = data.axle7;
+            looktWimMsg.axle8 = data.axle8;
+            looktWimMsg.axle9 = data.axle9;
+            looktWimMsg.axle10 = data.axle10;
+            looktWimMsg.axleSpace1 = data.axleSpace1;
+            looktWimMsg.axleSpace2 = data.axleSpace2;
+            looktWimMsg.axleSpace3 = data.axleSpace3;
+            looktWimMsg.axleSpace4 = data.axleSpace4;
+            looktWimMsg.axleSpace5 = data.axleSpace5;
+            looktWimMsg.axleSpace6 = data.axleSpace6;
+            looktWimMsg.axleSpace7 = data.axleSpace7;
+            looktWimMsg.axleSpace8 = data.axleSpace8;
+            looktWimMsg.axleSpace9 = data.axleSpace9;
+            looktWimMsg.isStraddle = data.isStraddle;
+            looktWimMsg.temperature = data.temperature;
+            looktWimMsg.overWeight = data.overWeight;
+            looktWimMsg.overWeightRatio = data.overWeightRatio * 100;
+            looktWimMsg.wIMId = data.wIMId;
+            looktWimMsg.lPRId = data.lPRId;
+            looktWimMsg.stationIP = data.stationIP;
+            looktWimMsg.stationNameRouteName = data.stationNameRouteName;
+            looktWimMsg.directionName = data.directionName;
+            looktWimMsg.isStraddleName = data.isStraddleName;
+            looktWimMsg.stationName = data.stationName;
+            looktWimMsg.routeName = data.routeName;
+            looktWimMsg.licensePlateColor = data.licensePlateColor;
+            looktWimMsg.vehicleTypeName = data.axlesCount + "轴";
+            ;
+            looktWimMsg.overWeightRatioName = data.overWeightRatioName == "超载" ? (data.overWeightRatio * 100).toFixed(2) + "%" : data.overWeightRatioName;
+
+
+            $.ajax({
+                type: 'POST',
+                url: '/tVehicleOverweight/getimgUrlPrefix',
+                dataType: 'json',
+                data: {},
+                success: function (json) {
+                    $("#chepaiImg").html('')
+                    $("#chebodyDiv").html('')
+
+                    if (obj != 1 && obj != 2) {
+                        var url2 = "http://" + json.imgUrlPrefix + "/port" + data.stationIP + "/" + data.idLocal + "-Image.jpg"
+                        var img2 = '<a target="_blank" href="' + url2 + '"><img id="chebodyImg" src="' + url2 + '" class="popup" width=\'80\' height=\'60\';" /></a>'
+                        $("#chebodyDiv").append(img2)
+                    } else {
+                        var url = "http://" + json.imgUrlPrefix + "/port" + data.stationIP + "/" + data.idLocal + "-PlateImg.jpg"
+                        var img = '<a target="_blank" href="' + url + '"><img id="" src="' + url + '" class="popup" width=\'80\' height=\'60\';" /></a>'
+                        $("#chepaiImg").append(img)
+                    }
+
+                }
+            });
+        }
+    }
+    var lookxiangqing1 = (data, obj) => {
+        Object.assign(looktWimMsg1.$data, page_init_vue_data)
+        looktWimMsg1.overWeightRatioName ="";
+        $("#chepaiImg1").empty();
+        $("#chebodyDiv1").empty();
+        if (data != "") {
+            looktWimMsg1.id = data.id;
+            looktWimMsg1.idLocal = data.idLocal;
+            looktWimMsg1.stationNameRouteName = data.stationNameRouteName;
+            looktWimMsg.stationId = data.stationId;
+            looktWimMsg1.evtTime = data.evtTime;
+            looktWimMsg1.msgTime = data.msgTime;
+            looktWimMsg1.laneNo = data.laneNo;
+            looktWimMsg1.plate = data.plate;
+            looktWimMsg1.plateColor = data.plateColor;
+            looktWimMsg1.classIndex = data.classIndex;
+            looktWimMsg1.length = data.length;
+            looktWimMsg1.speed = data.speed;
+            looktWimMsg1.direction = data.direction;
+            looktWimMsg1.axlesCount = data.axlesCount;
+            looktWimMsg1.totalWeight = data.totalWeight;
+            looktWimMsg1.wetmixingtimedeviation = data.wetmixingtimedeviation;
+            looktWimMsg1.axle1 = data.axle1;
+            looktWimMsg1.axle2 = data.axle2;
+            looktWimMsg1.axle3 = data.axle3;
+            looktWimMsg1.axle4 = data.axle4;
+            looktWimMsg1.axle5 = data.axle5;
+            looktWimMsg1.axle6 = data.axle6;
+            looktWimMsg1.axle7 = data.axle7;
+            looktWimMsg1.axle8 = data.axle8;
+            looktWimMsg1.axle9 = data.axle9;
+            looktWimMsg1.axle10 = data.axle10;
+            looktWimMsg1.axleSpace1 = data.axleSpace1;
+            looktWimMsg1.axleSpace2 = data.axleSpace2;
+            looktWimMsg1.axleSpace3 = data.axleSpace3;
+            looktWimMsg1.axleSpace4 = data.axleSpace4;
+            looktWimMsg1.axleSpace5 = data.axleSpace5;
+            looktWimMsg1.axleSpace6 = data.axleSpace6;
+            looktWimMsg1.axleSpace7 = data.axleSpace7;
+            looktWimMsg1.axleSpace8 = data.axleSpace8;
+            looktWimMsg1.axleSpace9 = data.axleSpace9;
+            looktWimMsg1.isStraddle = data.isStraddle;
+            looktWimMsg1.temperature = data.temperature;
+            looktWimMsg1.overWeight = data.overWeight;
+            looktWimMsg1.overWeightRatio = data.overWeightRatio * 100;
+            looktWimMsg1.wIMId = data.wIMId;
+            looktWimMsg1.lPRId = data.lPRId;
+            looktWimMsg1.stationIP = data.stationIP;
+            looktWimMsg1.stationNameRouteName = data.stationNameRouteName;
+            looktWimMsg1.directionName = data.directionName;
+            looktWimMsg1.isStraddleName = data.isStraddleName;
+            looktWimMsg1.stationName = data.stationName;
+            looktWimMsg1.routeName = data.routeName;
+            looktWimMsg1.licensePlateColor = data.licensePlateColor;
+            looktWimMsg1.vehicleTypeName = data.axlesCount + "轴";
+            ;
+            looktWimMsg1.overWeightRatioName = data.overWeightRatioName == "超载" ? (data.overWeightRatio * 100).toFixed(2) + "%" : data.overWeightRatioName;
+
+            $.ajax({
+                type: 'POST',
+                url: '/tVehicleOverweight/getimgUrlPrefix',
+                dataType: 'json',
+                data: {},
+                success: function (json) {
+                    $("#chepaiImg1").html('')
+                    $("#chebodyDiv1").html('')
+
+                    if (obj != 1 && obj != 2) {
+                        var url2 = "http://" + json.imgUrlPrefix + "/port" + data.stationIP + "/" + data.idLocal + "-Image.jpg"
+                        var img2 = '<a target="_blank" href="' + url2 + '"><img id="chebodyImg" src="' + url2 + '" class="popup" width=\'80\' height=\'60\';" /></a>'
+                        $("#chebodyDiv1").append(img2)
+                    } else {
+                        var url = "http://" + json.imgUrlPrefix + "/port" + data.stationIP + "/" + data.idLocal + "-PlateImg.jpg"
+                        var img = '<a target="_blank" href="' + url + '"><img id="" src="' + url + '" class="popup" width=\'80\' height=\'60\';" /></a>'
+                        $("#chepaiImg1").append(img)
+                    }
+
+                }
+            });
+        }
+    }
+
+    function lookMsg(e, obj) {
+        $.ajax({
+            type: 'POST',
+            url: '/tWimMsg/gettWimMsgById',
+            dataType: 'json',
+            data: {
+                idLocal: e
+            },
+            error: function (msg) {
+                lookxiangqing("", obj);
+            },
+            success: function (json) {
+                lookxiangqing(json, obj);
+            }
+        });
+    }
+
+    function lookMsg1(e, obj) {
+        $.ajax({
+            type: 'POST',
+            url: '/tWimMsg/gettWimMsgById',
+            dataType: 'json',
+            data: {
+                idLocal: e
+            },
+            error: function (msg) {
+                lookxiangqing1("", obj);
+            },
+            success: function (json) {
+                lookxiangqing1(json, obj);
+            }
+        });
+    }
 </script>
 </html>

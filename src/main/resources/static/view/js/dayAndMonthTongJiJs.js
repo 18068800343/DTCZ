@@ -57,7 +57,7 @@ let initTableTbody = (json) => {
                 if (n == json.length) {
                     //车道0即总计的一行的td
                     let tdDom = "";
-                    tdDom =  "<td data-id='"+json[0].avgLaneNo+",4'><a >" + json[0].avgMax + "</a></td>";
+                    tdDom =  "<td data-id='"+json[0].avgLaneNo+",4' data-key='"+json[0].avgMaxID+"'><a >" + json[0].avgMax + "</a></td>";
                     let dom = tableDom.find("tfoot");
                     if(Strack3){
                         img="<td width='20%' rowspan='"+(json.length)+"'>" + getimgUrl(1) + "</td>" ;
@@ -71,7 +71,7 @@ let initTableTbody = (json) => {
                     break;
                 }
                 let tdDom = "";
-                tdDom = "<td data-id='"+json[1].avgLaneNo+",4'><a >" + json[n].avgMax + "</a></td>";
+                tdDom = "<td data-id='"+json[1].avgLaneNo+",4' data-key='"+json[n].avgMaxID+"'><a >" + json[n].avgMax + "</a></td>";
                 let dom = tableDom.find("tfoot");
                 if(Strack3){
                     img="<td width='20%' rowspan='"+(json.length)+"'>" + getimgUrl(1) + "</td>" ;
@@ -272,6 +272,7 @@ dayAndMonthTongjiDom.bindClick = (stationIp)=>{
         if(str!=undefined){
             $(this).on('click',function () {
                 let strIn = $(this).attr("data-id");
+                let key = $(this).attr("data-key");
                 let laneNo = strIn.split(",")[0];
                 let column = strIn.split(",")[1];
                 $.ajax({
@@ -286,7 +287,8 @@ dayAndMonthTongjiDom.bindClick = (stationIp)=>{
                     error: function (msg) {
                     },
                     success: function (json) {
-                        dayAndMonthTongjiDom.makeLineChart(json);
+                        dayAndMonthTongjiDom.makeLineChart(json,column);
+                        lookMsg(key,3);
                     }
                 });
             })
@@ -294,13 +296,18 @@ dayAndMonthTongjiDom.bindClick = (stationIp)=>{
         }
     })
 }
-dayAndMonthTongjiDom.makeLineChart = (data)=>{
+dayAndMonthTongjiDom.makeLineChart = (data,column)=>{
+    if(column=='4'){
+      $("#modalEchartsDetail").modal("show");
+      initMyChart(data,'myChart2');
+    }else{
       $("#modalEcharts").modal("show");
-      initMyChart(data);
+        initMyChart(data,'myChart');
+    }
 }
 
-let initMyChart = (data)=>{
-    let myChart = echarts.init(document.getElementById('myChart'));
+let initMyChart = (data,id)=>{
+    let myChart = echarts.init(document.getElementById(id));
     let option = {
         title: {
             text: ''
@@ -413,7 +420,7 @@ let initTableTbodyMonth = (json) => {
                 if (n == json.length) {
                     //车道0即总计的一行的td
                     let tdDom = "";
-                    tdDom =  "<td data-id='"+json[0].avgLaneNo+",4'><a >" + json[0].avgMax + "</a></td>";
+                    tdDom =  "<td data-id='"+json[0].avgLaneNo+",4' data-key='"+json[0].avgMaxID+"'><a >" + json[0].avgMax + "</a></td>";
                     let dom = tableDom.find("tfoot");
                     if(Strack3){
                         img="<td width='20%' rowspan='"+(json.length)+"'>" + getimgUrl(2) + "</td>" ;
@@ -427,7 +434,7 @@ let initTableTbodyMonth = (json) => {
                     break;
                 }
                 let tdDom = "";
-                tdDom = "<td data-id='"+json[n].avgLaneNo+",4'><a >" + json[n].avgMax + "</a></td>";
+                tdDom = "<td data-id='"+json[n].avgLaneNo+",4' data-key='"+json[n].avgMaxID+"'><a >" + json[n].avgMax + "</a></td>";
                 let dom = tableDom.find("tfoot");
                 if(Strack3){
                     img="<td width='20%' rowspan='"+(json.length)+"'>" + getimgUrl(2) + "</td>" ;
@@ -567,6 +574,7 @@ dayAndMonthTongjiDomMonth.bindClick = (stationIp)=>{
         if(str!=undefined){
             $(this).on('click',function () {
                 let strIn = $(this).attr("data-id");
+                let key = $(this).attr("data-key");
                 let laneNo = strIn.split(",")[0];
                 let column = strIn.split(",")[1];
                 $.ajax({
@@ -581,7 +589,8 @@ dayAndMonthTongjiDomMonth.bindClick = (stationIp)=>{
                     error: function (msg) {
                     },
                     success: function (json) {
-                        dayAndMonthTongjiDomMonth.makeLineChartMonth(json);
+                        dayAndMonthTongjiDomMonth.makeLineChartMonth(json,column);
+                        lookMsg1(key,3);
                     }
                 });
             })
@@ -589,13 +598,18 @@ dayAndMonthTongjiDomMonth.bindClick = (stationIp)=>{
         }
     })
 }
-dayAndMonthTongjiDomMonth.makeLineChartMonth = (data)=>{
-    $("#modalEchartsMonth").modal("show");
-    initMyChartMonth(data);
+dayAndMonthTongjiDomMonth.makeLineChartMonth = (data,column)=>{
+    if(column=='4'){
+        $("#modalEchartsDetailMonth").modal("show");
+        initMyChartMonth(data,'myChartMonth2');
+    }else{
+        $("#modalEchartsMonth").modal("show");
+        initMyChartMonth(data,'myChartMonth');
+    }
 }
 
-let initMyChartMonth = (data)=>{
-    let myChart = echarts.init(document.getElementById('myChartMonth'));
+let initMyChartMonth = (data,id)=>{
+    let myChart = echarts.init(document.getElementById(id));
     let option = {
         title: {
             text: ''

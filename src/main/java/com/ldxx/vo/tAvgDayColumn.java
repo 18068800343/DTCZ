@@ -32,6 +32,15 @@ public class tAvgDayColumn {
     private double column28;
 
     private int avgDays;
+    private String avgMaxID;
+
+    public String getAvgMaxID() {
+        return avgMaxID;
+    }
+
+    public void setAvgMaxID(String avgMaxID) {
+        this.avgMaxID = avgMaxID;
+    }
 
     public int getAvgDays() {
         return avgDays;
