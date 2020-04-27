@@ -907,7 +907,7 @@
 
 
     function initzhandian() {
-        $.ajax({
+        /*$.ajax({
             type: 'POST',
             url: '/StationSite/getAllStationSite',
             dataType: 'json',
@@ -924,6 +924,39 @@
                         $("#stationPort2").append("<option  value='" + json[i].stationPort + "'>" + (json[i].stationName) + "</option>");
                     }
 
+                }
+            }
+        });*/
+        $.ajax({
+            type: 'POST',
+            //url: '/tUserInfo/selectUserById',
+            url: '/login/getUser',
+            dataType: 'json',
+            async:false,
+            data: {
+                //id:user.usrId,
+            },
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                user=json;
+                $("#stationPort").html('');
+                $("#stationPort2").html('');
+                if(json!=null){
+                    if(json.stationPort.indexOf(",")!=-1&&json.stationName.indexOf(",")!=-1){
+                        var stationPort=json.stationPort.split(",");
+                        var stationName=json.stationName.split(",");
+                        for(var i=0;i<stationPort.length;i++){
+                            for(var i=0;i<stationName.length;i++){
+                                $("#stationPort").append("<option  value='"+stationPort[i]+"'>"+stationName[i]+"</option>");
+                                $("#stationPort2").append("<option  value='"+stationPort[i]+"'>"+stationName[i]+"</option>");
+                            }
+                        }
+                    }else{
+                        $("#stationPort").append("<option  value='"+json.stationPort+"'>"+json.stationName+"</option>");
+                        $("#stationPort2").append("<option  value='"+json.stationPort+"'>"+json.stationName+"</option>");
+                    }
                 }
             }
         });
