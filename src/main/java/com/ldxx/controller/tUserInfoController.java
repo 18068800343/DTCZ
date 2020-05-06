@@ -12,12 +12,14 @@ import com.ldxx.util.MsgFormatUtils;
 import com.ldxx.util.getNumCode;
 import com.ldxx.vo.UserBody;
 import com.ldxx.vo.tUserInfoVo;
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -116,9 +118,10 @@ public class tUserInfoController {
      * @return
      */
     @RequestMapping("/UserSynchronization")
-    public String UserSynchronization(String data) {
+    public String UserSynchronization(@RequestBody String data) throws UnsupportedEncodingException {
         JSONObject jsonObject=new JSONObject();
-        String data2=Base64Util.decode(data);
+        //String data2=Base64Util.decode(data);
+        String data2=new String(Base64.decodeBase64(data),"utf-8");
         UserBody Body = jsonObject.parseObject(data2,UserBody.class);
         tUserInfo tUserInfo=new tUserInfo();
         String decode = Base64Util.decode(Body.getPASSWORD());//base64密码解码
