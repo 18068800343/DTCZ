@@ -10,6 +10,7 @@ import com.ldxx.util.Base64Util;
 import com.ldxx.util.LDXXUtils;
 import com.ldxx.util.MsgFormatUtils;
 import com.ldxx.util.getNumCode;
+import com.ldxx.vo.UserBody;
 import com.ldxx.vo.tUserInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -114,31 +115,31 @@ public class tUserInfoController {
      * @return
      */
     @RequestMapping("/UserSynchronization")
-    public String UserSynchronization(String USER_NAME,String USER_ACCOUNT,String PASSWORD,String COMPANY_ID,String COMPANY_NAME,String COMPANY_TYPE,String TYPE) {
+    public String UserSynchronization(UserBody UserBody) {
         JSONObject jsonObject=new JSONObject();
         tUserInfo tUserInfo=new tUserInfo();
-        String decode = Base64Util.decode(PASSWORD);//base64密码解码
+        String decode = Base64Util.decode(UserBody.getPASSWORD());//base64密码解码
         tUserInfoVo tUserInfoVo = service.selectUserByUsrName("user");
-        tUserInfo.setUsrUname(USER_NAME);
-        tUserInfo.setUsrName(USER_ACCOUNT);
+        tUserInfo.setUsrUname(UserBody.getUSER_NAME());
+        tUserInfo.setUsrName(UserBody.getUSER_ACCOUNT());
         tUserInfo.setUsrPwd(decode);
-        int iscountCompanySiteName = ssdao.iscountCompanySiteName(COMPANY_NAME);
+        int iscountCompanySiteName = ssdao.iscountCompanySiteName(UserBody.getCOMPANY_NAME());
         if(iscountCompanySiteName>0){
-            tUserInfo.setUsrRole(COMPANY_ID);
+            tUserInfo.setUsrRole(UserBody.getCOMPANY_ID());
         }else{
             CompanySite CompanySite=new CompanySite();
             int num = ssdao.countNumCompanySite();
             String code = getNumCode.getNumCode(num+1, "JSJKDW");
             CompanySite.setId(code);
-            CompanySite.setCompanyName(COMPANY_NAME);
-            CompanySite.setGroups(COMPANY_TYPE);
+            CompanySite.setCompanyName(UserBody.getCOMPANY_NAME());
+            CompanySite.setGroups(UserBody.getCOMPANY_TYPE());
             ssdao.addCompanySite(CompanySite);
             tUserInfo.setUsrRole(code);
         }
 
         int i=0;
         String string="";
-        switch (TYPE){
+        switch (UserBody.getTYPE()){
             case "0"://新增
                 string="新增";
                 String id=LDXXUtils.getUUID12();
@@ -149,7 +150,7 @@ public class tUserInfoController {
                 break;
             case "1"://删除
                 string="删除";
-                i=dao.deltUserInfoByUsrName(USER_ACCOUNT);
+                i=dao.deltUserInfoByUsrName(UserBody.getUSER_ACCOUNT());
                 break;
             case "2"://修改
                 string="修改";
