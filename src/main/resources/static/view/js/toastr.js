@@ -336,3 +336,16 @@
         window['toastr'] = factory(window['jQuery']);
     }
 }));
+
+
+function getYMDStr(evtTime) {
+    if (null != evtTime && "" != evtTime) {
+        let index = evtTime.indexOf(" ");
+        let dataStr = evtTime.substring(0, index);
+        let year = dataStr.split("-")[0];
+        let monthDay = dataStr.split("-")[1] + dataStr.split("-")[2];
+        return year + "/" + monthDay;
+    } else {
+        return "";
+    }
+}

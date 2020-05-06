@@ -9,11 +9,11 @@ import java.io.*;
 public class UpLoadImgUtil {
 
     public static void main(String[] args) {
-        String imgFile = "D:\\Desktop\\2m.jpg";// 待处理的图片
+        String imgFile = "F:\\img\\2.png";// 待处理的图片
         String imgbese = getImgStr(imgFile);
         System.out.println(imgbese.length());
         System.out.println(imgbese);
-        String imgFilePath = "D:\\Desktop\\0094.jpg";// 新生成的图片
+        String imgFilePath = "F:\\img\\0094\\0506\\2.png";// 新生成的图片
         generateImage(imgbese, imgFilePath);
     }
 
@@ -63,6 +63,15 @@ public class UpLoadImgUtil {
                     b[i] += 256;
                 }
             }
+
+            int lastIndex = imgFilePath.lastIndexOf("\\");
+            String path = imgFilePath.substring(0, lastIndex);
+
+            File file = new File(path);
+            if (!file.exists() && !file.isDirectory()) {
+                file.mkdirs();
+            }
+
             // 生成jpg图片
             OutputStream out = new FileOutputStream(imgFilePath);
             out.write(b);

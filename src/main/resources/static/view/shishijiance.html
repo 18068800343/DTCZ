@@ -1666,12 +1666,12 @@
 					$("#chebodyDiv").html('')
 
 					if(data.overWeightRatioName=="不超载"){
-						var url="http://"+json.imgUrlPrefix+"/port"+data.stationIP+"/"+data.idLocal+"-PlateImg.jpg"
-						var img='<a target="_blank" href="'+url+'"><img id="" src="'+url+'" class="popup" width=\'80\' height=\'60\' /></a>'
+						var url = "http://" + json.imgUrlPrefix + "/port" + data.stationIP + "/" + getYMDStr(data.evtTime) + "/" + data.idLocal + "-PlateImg.jpg"
+						var img = '<a target="_blank" href="' + url + '"><img id="" src="' + url + '" class="popup" width=\'80\' height=\'60\' /></a>'
 						$("#chepaiImg").append(img)
-					}else{
-						var url2="http://"+json.imgUrlPrefix+"/port"+data.stationIP+"/"+data.idLocal+"-Image.jpg"
-						var img2='<a target="_blank" href="'+url2+'"><img id="chebodyImg" src="'+url2+'" class="popup" width=\'80\' height=\'60\';" /></a>'
+					}else {
+						var url2 = "http://" + json.imgUrlPrefix + "/port" + data.stationIP + "/" + getYMDStr(data.evtTime) + "/" + data.idLocal + "-Image.jpg"
+						var img2 = '<a target="_blank" href="' + url2 + '"><img id="chebodyImg" src="' + url2 + '" class="popup" width=\'80\' height=\'60\';" /></a>'
 						$("#chebodyDiv").append(img2)
 					}
 
