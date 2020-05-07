@@ -24,7 +24,7 @@
 		Usr_Uname=#{usrUname},
 		Usr_Pwd=#{usrPwd},
 		Usr_Role=#{usrRole}
-		where Usr_Name=#{usrName}
+		where Usr_Name=#{usrName} and Del_State=1
 	</update>
 
     <update id="updatepasswordById">
@@ -37,7 +37,7 @@
 		update t_user_info set Del_State=0 where Usr_Id=#{id}
 	</update>
 	<update id="deltUserInfoByUsrName">
-		update t_user_info set Del_State=0 where Usr_Name=#{useraccount}
+		update t_user_info set Del_State=0 where Usr_Name=#{useraccount} and Del_State=1
 	</update>
 
     <select id="getAlltUserInfo" resultType="tUserInfoVo">

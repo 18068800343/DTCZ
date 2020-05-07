@@ -145,22 +145,38 @@ public class tUserInfoController {
 
         int i=0;
         String string="";
+        int iscountName = service.iscountName(Body.getUSER_ACCOUNT());
         switch (Body.getTYPE()){
             case "0"://新增
-                string="新增";
-                String id=LDXXUtils.getUUID12();
-                tUserInfo.setUsrId(id);
-                tUserInfo.setDelState(1);
-                tUserInfo.setUsrPersmissionCoding(tUserInfoVo.getUsrPersmissionCoding());
-                i= service.addtUserInfo(tUserInfo);
+                if(iscountName>0){//用户名已存在
+                    string="用户名已存在，新增";
+                    i=0;
+                }else{
+                    string="新增";
+                    String id=LDXXUtils.getUUID12();
+                    tUserInfo.setUsrId(id);
+                    tUserInfo.setDelState(1);
+                    tUserInfo.setUsrPersmissionCoding(tUserInfoVo.getUsrPersmissionCoding());
+                    i= service.addtUserInfo(tUserInfo);
+                }
                 break;
             case "1"://删除
-                string="删除";
-                i=dao.deltUserInfoByUsrName(Body.getUSER_ACCOUNT());
+                if(iscountName>0){//用户名存在
+                    string="删除";
+                    i=dao.deltUserInfoByUsrName(Body.getUSER_ACCOUNT());
+                }else{
+                    string="用户名不存在，删除";
+                    i=0;
+                }
                 break;
             case "2"://修改
-                string="修改";
-                i=dao.updtUserInfoByUsrName(tUserInfo);
+                if(iscountName>0){//用户名存在
+                    string="修改";
+                    i=dao.updtUserInfoByUsrName(tUserInfo);
+                }else{
+                    string="用户名不存在，修改";
+                    i=0;
+                }
                 break;
         }
         String daoMsg = MsgFormatUtils.getMsgByResult(i, string);
