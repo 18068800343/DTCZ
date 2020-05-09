@@ -138,6 +138,7 @@ public class tUserInfoController {
             String code = getNumCode.getNumCode(num+1, "JSJKDW");
             CompanySite.setId(code);
             CompanySite.setCompanyName(Body.getCOMPANY_NAME());
+            CompanySite.setStationPort(tUserInfoVo.getStationPort());
             CompanySite.setGroups(Body.getCOMPANY_TYPE());
             ssdao.addCompanySite(CompanySite);
             tUserInfo.setUsrRole(code);
