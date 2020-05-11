@@ -9,7 +9,7 @@ import java.util.Map;
 
 public interface tAvgDayService {
 
-    tAvgDay gettAvgDayByIpAndTime(String stationIP,  String avgTime,int avgLaneNo);
+    tAvgDay gettAvgDayByIpAndTime(String stationIP, String avgTime, int avgLaneNo);
 
     List<tAvgDayColumn> gettAvgDayColumnByIpAndTime(String stationIP, String avgTime, int avgLaneNo);
 
@@ -17,9 +17,17 @@ public interface tAvgDayService {
     List<tAvgDayColumn> gettAvgDayColumnByIpAndTimeMonth(String stationIP, String avgTime, int avgLaneNo);
 
 
-    Map<String,List<String>> getEchartsListByLaneNoAndColumn(String stationIP, String column, String laneNo);
+    Map<String, List<String>> getEchartsListByLaneNoAndColumn(String stationIP, String column, String laneNo);
 
-    Map<String,List<String>> getEchartsListByLaneNoAndColumnMonth(String stationIP, String column, String laneNo);
+    Map<String, List<String>> getEchartsListByLaneNoAndColumn_lgs(String companyName, String column, String laneNo);
+
+    Map<String, List<String>> getEchartsListByLaneNoAndColumn_sj(String provinceName, String column, String laneNo);
+
+    Map<String, List<String>> getEchartsListByLaneNoAndColumnMonth(String stationIP, String column, String laneNo);
+
+    Map<String, List<String>> getEchartsListByLaneNoAndColumnMonth_lgs(String companyName, String column, String laneNo);
+
+    Map<String, List<String>> getEchartsListByLaneNoAndColumnMonth_sj(String provinceName, String column, String laneNo);
 
     tAvgMonth gettAvgMonthByIpAndTime(String stationIP, String avgTime, int avgLaneNo);
 }

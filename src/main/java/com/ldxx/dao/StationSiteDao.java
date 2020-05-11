@@ -11,7 +11,9 @@ public interface StationSiteDao {
 
     List<StationSite> getAllStationSite();
 
-    StationSite getStationSiteByStationNameAndRouteName(String stationName,String routeName);
+    List<StationSite> getProvinceStationList();
+
+    StationSite getStationSiteByStationNameAndRouteName(String stationName, String routeName);
 
     StationSite getStationSiteById(String id);
 

@@ -40,9 +40,14 @@ public class StationSiteController {
     private StationSiteDao stationSiteDao;
 
     @RequestMapping("/getAllStationSite")
-    public List<StationSite> getAllStationSite(){
+    public List<StationSite> getAllStationSite() {
         List<StationSite> list = service.getAllStationSite();
         return list;
+    }
+
+    @RequestMapping("/getProvinceStationList")
+    public List<StationSite> getProvinceStationList() {
+        return stationSiteDao.getProvinceStationList();
     }
 
     @RequestMapping("/getStationSiteById")

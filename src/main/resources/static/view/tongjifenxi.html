@@ -120,8 +120,16 @@
     <!-- Nav tabs -->
     <ul class="nav nav-pills" role="tablist" style="margin-bottom:20px;">
         <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab"
-                                                  data-toggle="tab">日交通量统计</a></li>
-        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">月交通量统计</a></li>
+                                                  data-toggle="tab">测站日统计</a></li>
+        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">测站月统计</a></li>
+        <li role="presentation"><a href="#home_lgs" aria-controls="home" role="tab"
+                                   data-toggle="tab">路公司日统计</a></li>
+        <li role="presentation"><a href="#profile_lgs" aria-controls="profile_lgs" role="tab"
+                                   data-toggle="tab">路公司月统计</a></li>
+        <li role="presentation"><a href="#home_sj" aria-controls="home" role="tab"
+                                   data-toggle="tab">省界日统计</a></li>
+        <li role="presentation"><a href="#profile_sj" aria-controls="profile_sj" role="tab" data-toggle="tab">省界月统计</a>
+        </li>
 
     </ul>
     <!-- Tab panes -->
@@ -293,6 +301,349 @@
             </div>
         </div>
 
+        <!--路公司标签页-->
+        <div role="tabpanel" class="tab-pane" id="home_lgs">
+            <div class="zhuti-content">
+                <div class="UpperPart">
+                    <div class="UpperPartL" style="width: 90%;margin-left: 5%;">
+                        <div class="sele">
+                            <label class="col-sm-2 control-label shaixuan"
+                                   style="margin-left:-80px !important;font-size:16px;font-weight:500;">筛选站点</label>
+                            <div class="col-sm-2" style="width: 20%;margin-left: 50px;">
+                                <!-- 样式1 -->
+                                <select class="form-control" id="stationPort_lgs" style="width:80%;">
+                                </select>
+                            </div>
+                        </div>
+                        <label class="col-sm-1	 control-label riqi"
+                               style="margin-left: -2%;width: 70px;line-height: 30px;font-size:16px;font-weight:500;">日期:</label>
+                        <div class="col-sm-2" style="width: 20%">
+                            <!-- 样式1 -->
+                            <input type="date" id="startTime_lgs" value="请选择"
+                                   style="height: 34px;border-radius: 5px;box-shadow: none;width: 60%;border:1px solid #DDD;">
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="queding_lgs()"
+                                style="width: 100px;margin-left:120px;background-color:#549CFD;border:none;">确定
+                        </button>
+                        <div class="jiance">
+                            <!--<button type="button" class="btn btn-primary" onclick="nowJianceSite()" data-toggle="modal" data-target="#allMsg1" style="width: 150px;background-color:#549CFD;border:1px solid #549CFD;">当前车道图</button>-->
+                        </div>
+                    </div>
+
+                    <div class="UpperPartR">
+
+                    </div>
+
+                </div>
+
+                <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief" style="">
+                    <ul class="layui-tab-title" style="float:right;margin-top:-60px;">
+                        <li class="layui-this">数据表</li>
+                        <li>统计图</li>
+                    </ul>
+                    <div class="layui-tab-content">
+                        <div class="layui-tab-item layui-show">
+                            <div class="LowerPart" style="margin-top:3px;">
+                                <div style="height: 300px;width:1050px;margin-left: 200px;" id="dataTable_lgs"
+                                     class="layui-table">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-tab-item">
+                            <div style="width: 100%;">
+                                <li class="layui-this texth">各车型车辆数及比例</li>
+                                <div class="layui-tab-item layui-show">
+                                    <p class="errorMsg1" style="display: inline-block;"></p>
+                                    <div id="_top_lgs" class="col-xs-12"
+                                         style="width:1200px;height: 400px;margin-top: -50px;margin:0 auto">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="width:100%;">
+                                <li class="layui-this texth">超载车辆数及比例</li>
+                                <div class="layui-tab-item layui-show">
+                                    <p class="errorMsg1" style="display: inline-block;"></p>
+                                    <div id="_right_lgs"
+                                         style="width:1200px;height: 400px;margin-top: -50px;margin:0 auto">
+                                        <!--右边-->
+                                    </div>
+                                </div>
+                            </div>
+                            <!--左上半部分结束-->
+                            <div style="width: 100%;">
+                                <li class="layui-this texth">平均超载率</li>
+                                <div class="layui-tab-item layui-show">
+                                    <p class="errorMsg1" style="display: inline-block;"></p>
+                                    <div id="bottom_lgs"
+                                         style="width:1200px;height: 400px;margin-top: -50px;margin:0 auto">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="profile_lgs">
+            <div class="zhuti-content">
+                <div class="UpperPart">
+                    <div class="UpperPartL" style="width: 90%;margin-left: 5%;">
+                        <div class="sele">
+                            <label class="col-sm-2 control-label shaixuan"
+                                   style="margin-left:-80px !important;font-size:16px;font-weight:500;">筛选站点</label>
+                            <div class="col-sm-2" style="width: 20%;margin-left: 50px;">
+                                <!-- 样式1 -->
+                                <select class="form-control" id="stationPort2_lgs" style="width:80%;">
+                                </select>
+                            </div>
+                        </div>
+                        <label class="col-sm-1	 control-label riqi"
+                               style="margin-left: -2%;width: 70px;line-height: 30px;font-size:16px;font-weight:500;">日期:</label>
+                        <div class="col-sm-2" style="width: 20%">
+                            <!-- 样式1 -->
+                            <input type="text" id="startTime2_lgs" value="请选择"
+                                   style="height: 34px;border-radius: 5px;box-shadow: none;width: 60%;border:1px solid #DDD;">
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="queding2_lgs()"
+                                style="width: 100px;margin-left:120px;background-color:#549CFD;border:none;">确定
+                        </button>
+                        <div class="jiance">
+                            <!--<button type="button" class="btn btn-primary" onclick="nowJianceSite2()" data-toggle="modal" data-target="#allMsg2" style="width: 150px;background-color:#549CFD;border:1px solid #549CFD;">当前车道图</button>-->
+                        </div>
+                    </div>
+                    <div class="UpperPartR">
+
+                    </div>
+                </div>
+                <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief" style="">
+                    <ul class="layui-tab-title" style="float:right;margin-top:-60px;">
+                        <li class="layui-this">数据表</li>
+                        <li>统计图</li>
+                    </ul>
+                    <div class="layui-tab-content">
+                        <div class="layui-tab-item layui-show">
+                            <div class="LowerPart" style="margin-top:18px;">
+                                <div style="height: 300px;width:100%;" id="dataTableMonth_lgs">
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="layui-tab-item">
+                            <div style="width: 100%;">
+                                <li class="layui-this texth">各车型车辆数及比例</li>
+                                <div class="layui-tab-item layui-show">
+                                    <p class="errorMsg2" style="display: inline-block;"></p>
+                                    <div id="_top2_lgs"
+                                         style="width:1300px;height: 400px;margin-top: -50px;margin:0 auto">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="width: 100%;">
+                                <li class="layui-this texth">超载车辆数及比例</li>
+                                <div class="layui-tab-item layui-show" style="margin-top: 70px;">
+                                    <p class="errorMsg2" style="display: inline-block;"></p>
+                                    <div id="_right2_lgs"
+                                         style="width:1300px;height: 400px;margin-top: -50px;margin:0 auto">
+                                        <!--右边-->
+                                    </div>
+                                </div>
+                            </div>
+                            <!--左上半部分结束-->
+                            <div style="width: 100%;">
+                                <li class="layui-this texth">平均超载率</li>
+                                <div class="layui-tab-item layui-show">
+                                    <p class="errorMsg2" style="display: inline-block;"></p>
+                                    <div id="bottom_2_lgs"
+                                         style="width:1300px;height: 400px;margin-top: -50px;margin:0 auto">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <!--路公司标签页结束-->
+
+
+        <!--省界标签页-->
+        <div role="tabpanel" class="tab-pane" id="home_sj">
+            <div class="zhuti-content">
+                <div class="UpperPart">
+                    <div class="UpperPartL" style="width: 90%;margin-left: 5%;">
+                        <div class="sele">
+                            <label class="col-sm-2 control-label shaixuan"
+                                   style="margin-left:-80px !important;font-size:16px;font-weight:500;">筛选站点</label>
+                            <div class="col-sm-2" style="width: 20%;margin-left: 50px;">
+                                <!-- 样式1 -->
+                                <select class="form-control" id="stationPort_sj" style="width:80%;">
+                                </select>
+                            </div>
+                        </div>
+                        <label class="col-sm-1	 control-label riqi"
+                               style="margin-left: -2%;width: 70px;line-height: 30px;font-size:16px;font-weight:500;">日期:</label>
+                        <div class="col-sm-2" style="width: 20%">
+                            <!-- 样式1 -->
+                            <input type="date" id="startTime_sj" value="请选择"
+                                   style="height: 34px;border-radius: 5px;box-shadow: none;width: 60%;border:1px solid #DDD;">
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="queding_sj()"
+                                style="width: 100px;margin-left:120px;background-color:#549CFD;border:none;">确定
+                        </button>
+                        <div class="jiance">
+                            <!--<button type="button" class="btn btn-primary" onclick="nowJianceSite()" data-toggle="modal" data-target="#allMsg1" style="width: 150px;background-color:#549CFD;border:1px solid #549CFD;">当前车道图</button>-->
+                        </div>
+                    </div>
+
+                    <div class="UpperPartR">
+
+                    </div>
+
+                </div>
+
+                <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief" style="">
+                    <ul class="layui-tab-title" style="float:right;margin-top:-60px;">
+                        <li class="layui-this">数据表</li>
+                        <li>统计图</li>
+                    </ul>
+                    <div class="layui-tab-content">
+                        <div class="layui-tab-item layui-show">
+                            <div class="LowerPart" style="margin-top:3px;">
+                                <div style="height: 300px;width:1050px;margin-left: 200px;" id="dataTable_sj"
+                                     class="layui-table">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-tab-item">
+                            <div style="width: 100%;">
+                                <li class="layui-this texth">各车型车辆数及比例</li>
+                                <div class="layui-tab-item layui-show">
+                                    <p class="errorMsg1" style="display: inline-block;"></p>
+                                    <div id="_top_sj" class="col-xs-12"
+                                         style="width:1200px;height: 400px;margin-top: -50px;margin:0 auto">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="width:100%;">
+                                <li class="layui-this texth">超载车辆数及比例</li>
+                                <div class="layui-tab-item layui-show">
+                                    <p class="errorMsg1" style="display: inline-block;"></p>
+                                    <div id="_right_sj"
+                                         style="width:1200px;height: 400px;margin-top: -50px;margin:0 auto">
+                                        <!--右边-->
+                                    </div>
+                                </div>
+                            </div>
+                            <!--左上半部分结束-->
+                            <div style="width: 100%;">
+                                <li class="layui-this texth">平均超载率</li>
+                                <div class="layui-tab-item layui-show">
+                                    <p class="errorMsg1" style="display: inline-block;"></p>
+                                    <div id="bottom_sj"
+                                         style="width:1200px;height: 400px;margin-top: -50px;margin:0 auto">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="profile_sj">
+            <div class="zhuti-content">
+                <div class="UpperPart">
+                    <div class="UpperPartL" style="width: 90%;margin-left: 5%;">
+                        <div class="sele">
+                            <label class="col-sm-2 control-label shaixuan"
+                                   style="margin-left:-80px !important;font-size:16px;font-weight:500;">筛选站点</label>
+                            <div class="col-sm-2" style="width: 20%;margin-left: 50px;">
+                                <!-- 样式1 -->
+                                <select class="form-control" id="stationPort2_sj" style="width:80%;">
+                                </select>
+                            </div>
+                        </div>
+                        <label class="col-sm-1	 control-label riqi"
+                               style="margin-left: -2%;width: 70px;line-height: 30px;font-size:16px;font-weight:500;">日期:</label>
+                        <div class="col-sm-2" style="width: 20%">
+                            <!-- 样式1 -->
+                            <input type="text" id="startTime2_sj" value="请选择"
+                                   style="height: 34px;border-radius: 5px;box-shadow: none;width: 60%;border:1px solid #DDD;">
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="queding2_sj()"
+                                style="width: 100px;margin-left:120px;background-color:#549CFD;border:none;">确定
+                        </button>
+                        <div class="jiance">
+                            <!--<button type="button" class="btn btn-primary" onclick="nowJianceSite2()" data-toggle="modal" data-target="#allMsg2" style="width: 150px;background-color:#549CFD;border:1px solid #549CFD;">当前车道图</button>-->
+                        </div>
+                    </div>
+                    <div class="UpperPartR">
+
+                    </div>
+                </div>
+                <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief" style="">
+                    <ul class="layui-tab-title" style="float:right;margin-top:-60px;">
+                        <li class="layui-this">数据表</li>
+                        <li>统计图</li>
+                    </ul>
+                    <div class="layui-tab-content">
+                        <div class="layui-tab-item layui-show">
+                            <div class="LowerPart" style="margin-top:18px;">
+                                <div style="height: 300px;width:100%;" id="dataTableMonth_sj">
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="layui-tab-item">
+                            <div style="width: 100%;">
+                                <li class="layui-this texth">各车型车辆数及比例</li>
+                                <div class="layui-tab-item layui-show">
+                                    <p class="errorMsg2" style="display: inline-block;"></p>
+                                    <div id="_top2_sj"
+                                         style="width:1300px;height: 400px;margin-top: -50px;margin:0 auto">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="width: 100%;">
+                                <li class="layui-this texth">超载车辆数及比例</li>
+                                <div class="layui-tab-item layui-show" style="margin-top: 70px;">
+                                    <p class="errorMsg2" style="display: inline-block;"></p>
+                                    <div id="_right2_sj"
+                                         style="width:1300px;height: 400px;margin-top: -50px;margin:0 auto">
+                                        <!--右边-->
+                                    </div>
+                                </div>
+                            </div>
+                            <!--左上半部分结束-->
+                            <div style="width: 100%;">
+                                <li class="layui-this texth">平均超载率</li>
+                                <div class="layui-tab-item layui-show">
+                                    <p class="errorMsg2" style="display: inline-block;"></p>
+                                    <div id="bottom_2_sj"
+                                         style="width:1300px;height: 400px;margin-top: -50px;margin:0 auto">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <!--省界标签页结束-->
+
         <!-- allMsg -->
         <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
              id="modalEchartsMonth">
@@ -308,6 +659,55 @@
                     </div>
                     <div class="modal-body">
                         <div id="myChartMonth" style="width: 1000px;height:500px;"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end allMsg content -->
+
+
+        <!-- allMsg -->
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+             id="modalEchartsMonth_lgs">
+            <div class="modal-dialog modal-lg" role="document" style="width:60%;">
+                <div class="modal-content">
+
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title"><b>趋势图</b></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="myChartMonth_lgs" style="width: 1000px;height:500px;"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end allMsg content -->
+
+        <!-- allMsg -->
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+             id="modalEchartsMonth_sj">
+            <div class="modal-dialog modal-lg" role="document" style="width:60%;">
+                <div class="modal-content">
+
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title"><b>趋势图</b></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="myChartMonth_sj" style="width: 1000px;height:500px;"></div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
@@ -487,6 +887,48 @@
 
         <!-- allMsg -->
         <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+             id="modalEcharts_sj">
+            <div class="modal-dialog modal-lg" role="document" style="width:60%;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title"><b>趋势图</b></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="myChart_sj" style="width: 1000px;height:500px;"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- allMsg -->
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+             id="modalEcharts_lgs">
+            <div class="modal-dialog modal-lg" role="document" style="width:60%;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title"><b>趋势图</b></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="myChart_lgs" style="width: 1000px;height:500px;"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- allMsg -->
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
              id="modalEchartsDetail">
             <div class="modal-dialog modal-lg" role="document" style="width:60%;">
                 <div class="modal-content">
@@ -566,6 +1008,329 @@
                                                     <div id="chepaiImg">
                                                     </div>
                                                     <div id="chebodyDiv">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+
+                                            </tr>
+                                        </table>
+                                        <table class="table  table-condensed" style="height: auto; margin-top: -2%;">
+                                            <thead>
+                                            <td colspan="10">轴重(kg)</td>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td width="38px;">轴1:</td>
+                                                <td>{{axle1}}</td>
+                                                <td width="38px;">轴2:</td>
+                                                <td>{{axle2}}</td>
+                                                <td width="38px;">轴3:</td>
+                                                <td>{{axle3}}</td>
+                                                <td width="38px;">轴4:</td>
+                                                <td>{{axle4}}</td>
+                                                <td width="38px;" style="text-align:right">轴5:</td>
+                                                <td>{{axle5}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="38px;">轴6:</td>
+                                                <td>{{axle6}}</td>
+                                                <td width="38px;">轴7:</td>
+                                                <td>{{axle7}}</td>
+                                                <td width="38px;">轴8:</td>
+                                                <td>{{axle8}}</td>
+                                                <td width="38px;">轴9:</td>
+                                                <td>{{axle9}}</td>
+                                                <td width="44px;">轴10:</td>
+                                                <td>{{axle10}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <table class="table  table-condensed" style="height: auto; margin-top: -2%">
+                                            <thead>
+                                            <td colspan="10">轴间距(cm)</td>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td width="38px;">轴1:</td>
+                                                <td>{{axleSpace1}}</td>
+                                                <td width="38px;">轴2:</td>
+                                                <td>{{axleSpace2}}</td>
+                                                <td width="38px;">轴3:</td>
+                                                <td>{{axleSpace3}}</td>
+                                                <td width="38px;">轴4:</td>
+                                                <td>{{axleSpace4}}</td>
+                                                <td width="38px;">轴5:</td>
+                                                <td>{{axleSpace5}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="38px;">轴6:</td>
+                                                <td>{{axleSpace6}}</td>
+                                                <td width="38px;">轴7:</td>
+                                                <td>{{axleSpace7}}</td>
+                                                <td width="38px;">轴8:</td>
+                                                <td>{{axleSpace8}}</td>
+                                                <td width="38px;">轴9:</td>
+                                                <td>{{axleSpace9}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- allMsg -->
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+             id="modalEchartsDetail_lgs">
+            <div class="modal-dialog modal-lg" role="document" style="width:60%;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>-->
+                        <!--                </button>-->
+                        <!--                <h4 class="modal-title"><b>趋势图</b></h4>-->
+                    </div>
+                    <div class="modal-body">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-pills" role="tablist" style="margin-bottom:20px;">
+                            <li role="presentation" class="active"><a href="#echarts2_lgs" aria-controls="echarts2_lgs"
+                                                                      role="tab" data-toggle="tab">趋势图</a></li>
+                            <!--                            <li role="presentation"><a href="#details2" aria-controls="details2" role="tab"-->
+                            <!--                                                       data-toggle="tab">最大车重详情</a></li>-->
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="echarts2_lgs">
+                                <div id="myChart2_lgs" style="width: 1000px;height:500px;"></div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="details2_lgs">
+                                <div>
+                                    <form class="form-inline">
+                                        <table class="table  table-condensed" style="">
+                                            <tr>
+                                                <td>站点</td>
+                                                <td>{{stationName}}</td>
+                                                <td>轴数</td>
+                                                <td>{{axlesCount}}</td>
+                                            </tr>
+                                            <tr>
+
+                                                <td>车型</td>
+                                                <td>{{vehicleTypeName}}</td>
+                                                <td>车道号</td>
+                                                <td>{{laneNo}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>车牌号</td>
+                                                <td>{{plate}}</td>
+                                                <td>行驶方向</td>
+                                                <td>{{directionName}}</td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>超载率</td>
+                                                <td>{{overWeightRatioName}}</td>
+                                                <td>是否跨道</td>
+                                                <td>{{isStraddleName}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>车长(cm)</td>
+                                                <td>{{length}}</td>
+                                                <td>车牌颜色</td>
+                                                <td>{{licensePlateColor}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>超重量(kg)</td>
+                                                <td>{{overWeight}}</td>
+                                                <td>通行时间</td>
+                                                <td>{{evtTime}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>总重量(kg)</td>
+                                                <td>{{totalWeight}}</td>
+                                                <!--<td>打包时间</td>
+                                                <td>{{msgTime}}</td>-->
+                                                <td>路面温度(°C)</td>
+                                                <td>{{temperature}}</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>车速(km/h)</td>
+                                                <td>{{speed}}</td>
+                                                <td>查看图片</td>
+                                                <td rowspan="2">
+                                                    <div id="chepaiImg_lgs">
+                                                    </div>
+                                                    <div id="chebodyDiv_lgs">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+
+                                            </tr>
+                                        </table>
+                                        <table class="table  table-condensed" style="height: auto; margin-top: -2%;">
+                                            <thead>
+                                            <td colspan="10">轴重(kg)</td>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td width="38px;">轴1:</td>
+                                                <td>{{axle1}}</td>
+                                                <td width="38px;">轴2:</td>
+                                                <td>{{axle2}}</td>
+                                                <td width="38px;">轴3:</td>
+                                                <td>{{axle3}}</td>
+                                                <td width="38px;">轴4:</td>
+                                                <td>{{axle4}}</td>
+                                                <td width="38px;" style="text-align:right">轴5:</td>
+                                                <td>{{axle5}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="38px;">轴6:</td>
+                                                <td>{{axle6}}</td>
+                                                <td width="38px;">轴7:</td>
+                                                <td>{{axle7}}</td>
+                                                <td width="38px;">轴8:</td>
+                                                <td>{{axle8}}</td>
+                                                <td width="38px;">轴9:</td>
+                                                <td>{{axle9}}</td>
+                                                <td width="44px;">轴10:</td>
+                                                <td>{{axle10}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <table class="table  table-condensed" style="height: auto; margin-top: -2%">
+                                            <thead>
+                                            <td colspan="10">轴间距(cm)</td>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td width="38px;">轴1:</td>
+                                                <td>{{axleSpace1}}</td>
+                                                <td width="38px;">轴2:</td>
+                                                <td>{{axleSpace2}}</td>
+                                                <td width="38px;">轴3:</td>
+                                                <td>{{axleSpace3}}</td>
+                                                <td width="38px;">轴4:</td>
+                                                <td>{{axleSpace4}}</td>
+                                                <td width="38px;">轴5:</td>
+                                                <td>{{axleSpace5}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="38px;">轴6:</td>
+                                                <td>{{axleSpace6}}</td>
+                                                <td width="38px;">轴7:</td>
+                                                <td>{{axleSpace7}}</td>
+                                                <td width="38px;">轴8:</td>
+                                                <td>{{axleSpace8}}</td>
+                                                <td width="38px;">轴9:</td>
+                                                <td>{{axleSpace9}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- allMsg -->
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+             id="modalEchartsDetail_sj">
+            <div class="modal-dialog modal-lg" role="document" style="width:60%;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>-->
+                        <!--                </button>-->
+                        <!--                <h4 class="modal-title"><b>趋势图</b></h4>-->
+                    </div>
+                    <div class="modal-body">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-pills" role="tablist" style="margin-bottom:20px;">
+                            <li role="presentation" class="active"><a href="#echarts2_sj" aria-controls="echarts2_sj"
+                                                                      role="tab" data-toggle="tab">趋势图</a></li>
+                            <!--                            <li role="presentation"><a href="#details2" aria-controls="details2" role="tab"-->
+                            <!--                                                       data-toggle="tab">最大车重详情</a></li>-->
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="echarts2_sj">
+                                <div id="myChart2_sj" style="width: 1000px;height:500px;"></div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="details2_sj">
+                                <div>
+                                    <form class="form-inline">
+                                        <table class="table  table-condensed" style="">
+                                            <tr>
+                                                <td>站点</td>
+                                                <td>{{stationName}}</td>
+                                                <td>轴数</td>
+                                                <td>{{axlesCount}}</td>
+                                            </tr>
+                                            <tr>
+
+                                                <td>车型</td>
+                                                <td>{{vehicleTypeName}}</td>
+                                                <td>车道号</td>
+                                                <td>{{laneNo}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>车牌号</td>
+                                                <td>{{plate}}</td>
+                                                <td>行驶方向</td>
+                                                <td>{{directionName}}</td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>超载率</td>
+                                                <td>{{overWeightRatioName}}</td>
+                                                <td>是否跨道</td>
+                                                <td>{{isStraddleName}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>车长(cm)</td>
+                                                <td>{{length}}</td>
+                                                <td>车牌颜色</td>
+                                                <td>{{licensePlateColor}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>超重量(kg)</td>
+                                                <td>{{overWeight}}</td>
+                                                <td>通行时间</td>
+                                                <td>{{evtTime}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>总重量(kg)</td>
+                                                <td>{{totalWeight}}</td>
+                                                <!--<td>打包时间</td>
+                                                <td>{{msgTime}}</td>-->
+                                                <td>路面温度(°C)</td>
+                                                <td>{{temperature}}</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>车速(km/h)</td>
+                                                <td>{{speed}}</td>
+                                                <td>查看图片</td>
+                                                <td rowspan="2">
+                                                    <div id="chepaiImg_sj">
+                                                    </div>
+                                                    <div id="chebodyDiv_sj">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -808,6 +1573,332 @@
             </div>
         </div>
 
+
+        <!-- allMsg -->
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+             id="modalEchartsDetailMonth_lgs">
+            <div class="modal-dialog modal-lg" role="document" style="width:60%;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>-->
+                        <!--                </button>-->
+                        <!--                <h4 class="modal-title"><b>趋势图</b></h4>-->
+                    </div>
+                    <div class="modal-body">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-pills" role="tablist" style="margin-bottom:20px;">
+                            <li role="presentation" class="active"><a href="#echartsMonth2"
+                                                                      aria-controls="echartsMonth2" role="tab"
+                                                                      data-toggle="tab">趋势图</a></li>
+                            <!--                            <li role="presentation"><a href="#detailsMonth2_lgs" aria-controls="detailsMonth2_lgs" role="tab"-->
+                            <!--                                                       data-toggle="tab">最大车重详情</a></li>-->
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="echartsMonth2_lgs">
+                                <div id="myChartMonth2_lgs" style="width: 1000px;height:500px;"></div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="detailsMonth2_lgs">
+                                <div>
+                                    <form class="form-inline">
+                                        <table class="table  table-condensed" style="">
+                                            <tr>
+                                                <td>站点</td>
+                                                <td>{{stationName}}</td>
+                                                <td>轴数</td>
+                                                <td>{{axlesCount}}</td>
+                                            </tr>
+                                            <tr>
+
+                                                <td>车型</td>
+                                                <td>{{vehicleTypeName}}</td>
+                                                <td>车道号</td>
+                                                <td>{{laneNo}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>车牌号</td>
+                                                <td>{{plate}}</td>
+                                                <td>行驶方向</td>
+                                                <td>{{directionName}}</td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>超载率</td>
+                                                <td>{{overWeightRatioName}}</td>
+                                                <td>是否跨道</td>
+                                                <td>{{isStraddleName}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>车长(cm)</td>
+                                                <td>{{length}}</td>
+                                                <td>车牌颜色</td>
+                                                <td>{{licensePlateColor}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>超重量(kg)</td>
+                                                <td>{{overWeight}}</td>
+                                                <td>通行时间</td>
+                                                <td>{{evtTime}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>总重量(kg)</td>
+                                                <td>{{totalWeight}}</td>
+                                                <!--<td>打包时间</td>
+                                                <td>{{msgTime}}</td>-->
+                                                <td>路面温度(°C)</td>
+                                                <td>{{temperature}}</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>车速(km/h)</td>
+                                                <td>{{speed}}</td>
+                                                <td>查看图片</td>
+                                                <td rowspan="2">
+                                                    <div id="chepaiImg1_lgs">
+                                                    </div>
+                                                    <div id="chebodyDiv1_lgs">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+
+                                            </tr>
+                                        </table>
+                                        <table class="table  table-condensed" style="height: auto; margin-top: -2%;">
+                                            <thead>
+                                            <td colspan="10">轴重(kg)</td>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td width="38px;">轴1:</td>
+                                                <td>{{axle1}}</td>
+                                                <td width="38px;">轴2:</td>
+                                                <td>{{axle2}}</td>
+                                                <td width="38px;">轴3:</td>
+                                                <td>{{axle3}}</td>
+                                                <td width="38px;">轴4:</td>
+                                                <td>{{axle4}}</td>
+                                                <td width="38px;" style="text-align:right">轴5:</td>
+                                                <td>{{axle5}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="38px;">轴6:</td>
+                                                <td>{{axle6}}</td>
+                                                <td width="38px;">轴7:</td>
+                                                <td>{{axle7}}</td>
+                                                <td width="38px;">轴8:</td>
+                                                <td>{{axle8}}</td>
+                                                <td width="38px;">轴9:</td>
+                                                <td>{{axle9}}</td>
+                                                <td width="44px;">轴10:</td>
+                                                <td>{{axle10}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <table class="table  table-condensed" style="height: auto; margin-top: -2%">
+                                            <thead>
+                                            <td colspan="10">轴间距(cm)</td>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td width="38px;">轴1:</td>
+                                                <td>{{axleSpace1}}</td>
+                                                <td width="38px;">轴2:</td>
+                                                <td>{{axleSpace2}}</td>
+                                                <td width="38px;">轴3:</td>
+                                                <td>{{axleSpace3}}</td>
+                                                <td width="38px;">轴4:</td>
+                                                <td>{{axleSpace4}}</td>
+                                                <td width="38px;">轴5:</td>
+                                                <td>{{axleSpace5}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="38px;">轴6:</td>
+                                                <td>{{axleSpace6}}</td>
+                                                <td width="38px;">轴7:</td>
+                                                <td>{{axleSpace7}}</td>
+                                                <td width="38px;">轴8:</td>
+                                                <td>{{axleSpace8}}</td>
+                                                <td width="38px;">轴9:</td>
+                                                <td>{{axleSpace9}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- allMsg -->
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+             id="modalEchartsDetailMonth_sj">
+            <div class="modal-dialog modal-lg" role="document" style="width:60%;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>-->
+                        <!--                </button>-->
+                        <!--                <h4 class="modal-title"><b>趋势图</b></h4>-->
+                    </div>
+                    <div class="modal-body">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-pills" role="tablist" style="margin-bottom:20px;">
+                            <li role="presentation" class="active"><a href="#echartsMonth2"
+                                                                      aria-controls="echartsMonth2" role="tab"
+                                                                      data-toggle="tab">趋势图</a></li>
+                            <!--                            <li role="presentation"><a href="#detailsMonth2_sj" aria-controls="detailsMonth2_sj" role="tab"-->
+                            <!--                                                       data-toggle="tab">最大车重详情</a></li>-->
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="echartsMonth2_sj">
+                                <div id="myChartMonth2_sj" style="width: 1000px;height:500px;"></div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="detailsMonth2_sj">
+                                <div>
+                                    <form class="form-inline">
+                                        <table class="table  table-condensed" style="">
+                                            <tr>
+                                                <td>站点</td>
+                                                <td>{{stationName}}</td>
+                                                <td>轴数</td>
+                                                <td>{{axlesCount}}</td>
+                                            </tr>
+                                            <tr>
+
+                                                <td>车型</td>
+                                                <td>{{vehicleTypeName}}</td>
+                                                <td>车道号</td>
+                                                <td>{{laneNo}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>车牌号</td>
+                                                <td>{{plate}}</td>
+                                                <td>行驶方向</td>
+                                                <td>{{directionName}}</td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>超载率</td>
+                                                <td>{{overWeightRatioName}}</td>
+                                                <td>是否跨道</td>
+                                                <td>{{isStraddleName}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>车长(cm)</td>
+                                                <td>{{length}}</td>
+                                                <td>车牌颜色</td>
+                                                <td>{{licensePlateColor}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>超重量(kg)</td>
+                                                <td>{{overWeight}}</td>
+                                                <td>通行时间</td>
+                                                <td>{{evtTime}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>总重量(kg)</td>
+                                                <td>{{totalWeight}}</td>
+                                                <!--<td>打包时间</td>
+                                                <td>{{msgTime}}</td>-->
+                                                <td>路面温度(°C)</td>
+                                                <td>{{temperature}}</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>车速(km/h)</td>
+                                                <td>{{speed}}</td>
+                                                <td>查看图片</td>
+                                                <td rowspan="2">
+                                                    <div id="chepaiImg1_sj">
+                                                    </div>
+                                                    <div id="chebodyDiv1_sj">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+
+                                            </tr>
+                                        </table>
+                                        <table class="table  table-condensed" style="height: auto; margin-top: -2%;">
+                                            <thead>
+                                            <td colspan="10">轴重(kg)</td>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td width="38px;">轴1:</td>
+                                                <td>{{axle1}}</td>
+                                                <td width="38px;">轴2:</td>
+                                                <td>{{axle2}}</td>
+                                                <td width="38px;">轴3:</td>
+                                                <td>{{axle3}}</td>
+                                                <td width="38px;">轴4:</td>
+                                                <td>{{axle4}}</td>
+                                                <td width="38px;" style="text-align:right">轴5:</td>
+                                                <td>{{axle5}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="38px;">轴6:</td>
+                                                <td>{{axle6}}</td>
+                                                <td width="38px;">轴7:</td>
+                                                <td>{{axle7}}</td>
+                                                <td width="38px;">轴8:</td>
+                                                <td>{{axle8}}</td>
+                                                <td width="38px;">轴9:</td>
+                                                <td>{{axle9}}</td>
+                                                <td width="44px;">轴10:</td>
+                                                <td>{{axle10}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <table class="table  table-condensed" style="height: auto; margin-top: -2%">
+                                            <thead>
+                                            <td colspan="10">轴间距(cm)</td>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td width="38px;">轴1:</td>
+                                                <td>{{axleSpace1}}</td>
+                                                <td width="38px;">轴2:</td>
+                                                <td>{{axleSpace2}}</td>
+                                                <td width="38px;">轴3:</td>
+                                                <td>{{axleSpace3}}</td>
+                                                <td width="38px;">轴4:</td>
+                                                <td>{{axleSpace4}}</td>
+                                                <td width="38px;">轴5:</td>
+                                                <td>{{axleSpace5}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="38px;">轴6:</td>
+                                                <td>{{axleSpace6}}</td>
+                                                <td width="38px;">轴7:</td>
+                                                <td>{{axleSpace7}}</td>
+                                                <td width="38px;">轴8:</td>
+                                                <td>{{axleSpace8}}</td>
+                                                <td width="38px;">轴9:</td>
+                                                <td>{{axleSpace9}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- allMsg -->
         <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
              id="allMsg1">
@@ -882,9 +1973,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
 <script src="js/echarts.min(1).js" type="text/javascript" charset="utf-8"></script>
 <script src="js/dayAndMonthTongJiJs.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/dayAndMonthTongJiJs_lgs.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/dayAndMonthTongJiJs_sj.js" type="text/javascript" charset="utf-8"></script>
 <script>
 
     $(document).ready(function () {
+        // *********测站日月统计初始化
         $("#startTime2").datepicker({
             startView: 'years',  //起始选择范围
             maxViewMode: 'years', //最大选择范围
@@ -903,6 +1997,52 @@
         initzhandian()
         queding();
         queding2();
+        //**********测站日月统计初始化结束
+
+
+        //**********路公司日月统计初始化
+        $("#startTime2_lgs").datepicker({
+            startView: 'years',  //起始选择范围
+            maxViewMode: 'years', //最大选择范围
+            minViewMode: 'months', //最小选择范围
+            todayHighlight: true,// 当前时间高亮显示
+            autoclose: 'true',// 选择时间后弹框自动消失
+            format: 'yyyy-mm',// 时间格式
+            language: 'zh-CN',// 汉化
+            // todayBtn:"linked",//显示今天 按钮
+            clearBtn: true,// 清除按钮，和今天 按钮只能显示一个
+        });
+
+        dayAndMonthTongjiDom_lgs.initTable();
+        dayAndMonthTongjiDomMonth_lgs.initTableMonth();
+        getTime_lgs()
+        initzhandian_lgs()
+        queding_lgs();
+        queding2_lgs();
+        //**********路公司日月统计初始化结束
+
+
+        //**********省界日月统计初始化
+        $("#startTime2_sj").datepicker({
+            startView: 'years',  //起始选择范围
+            maxViewMode: 'years', //最大选择范围
+            minViewMode: 'months', //最小选择范围
+            todayHighlight: true,// 当前时间高亮显示
+            autoclose: 'true',// 选择时间后弹框自动消失
+            format: 'yyyy-mm',// 时间格式
+            language: 'zh-CN',// 汉化
+            // todayBtn:"linked",//显示今天 按钮
+            clearBtn: true,// 清除按钮，和今天 按钮只能显示一个
+        });
+
+        dayAndMonthTongjiDom_sj.initTable();
+        dayAndMonthTongjiDomMonth_sj.initTableMonth();
+        getTime_sj()
+        initzhandian_sj()
+        queding_sj();
+        queding2_sj();
+        //**********省界日月统计初始化结束
+
     });
 
 
@@ -919,7 +2059,7 @@
                 if (json != null) {
                     $("#stationPort").html('');
                     $("#stationPort2").html('');
-                    for (var i = 0; i < json.length; i++) {
+                    for (let i = 0; i < json.length; i++) {
                         $("#stationPort").append("<option  value='" + json[i].stationPort + "'>" + (json[i].stationName) + "</option>");
                         $("#stationPort2").append("<option  value='" + json[i].stationPort + "'>" + (json[i].stationName) + "</option>");
                     }
@@ -944,19 +2084,65 @@
                 $("#stationPort").html('');
                 $("#stationPort2").html('');
                 if(json!=null){
-                    if(json.stationPort.indexOf(",")!=-1&&json.stationName.indexOf(",")!=-1){
-                        var stationPort=json.stationPort.split(",");
-                        var stationName=json.stationName.split(",");
-                        for(var i=0;i<stationPort.length;i++){
-                            for(var i=0;i<stationName.length;i++){
-                                $("#stationPort").append("<option  value='"+stationPort[i]+"'>"+stationName[i]+"</option>");
-                                $("#stationPort2").append("<option  value='"+stationPort[i]+"'>"+stationName[i]+"</option>");
+                    if(json.stationPort.indexOf(",")!=-1&&json.stationName.indexOf(",")!=-1) {
+                        let stationPort = json.stationPort.split(",");
+                        let stationName = json.stationName.split(",");
+                        for (let i = 0; i < stationPort.length; i++) {
+                            for (let i = 0; i < stationName.length; i++) {
+                                $("#stationPort").append("<option  value='" + stationPort[i] + "'>" + stationName[i] + "</option>");
+                                $("#stationPort2").append("<option  value='" + stationPort[i] + "'>" + stationName[i] + "</option>");
                             }
                         }
-                    }else{
-                        $("#stationPort").append("<option  value='"+json.stationPort+"'>"+json.stationName+"</option>");
-                        $("#stationPort2").append("<option  value='"+json.stationPort+"'>"+json.stationName+"</option>");
+                    } else {
+                        $("#stationPort").append("<option  value='" + json.stationPort + "'>" + json.stationName + "</option>");
+                        $("#stationPort2").append("<option  value='" + json.stationPort + "'>" + json.stationName + "</option>");
                     }
+                }
+            }
+        });
+    }
+
+    function initzhandian_lgs() {
+        $.ajax({
+            type: 'POST',
+            url: '/TDicLgsController/getTDicLgsList',
+            dataType: 'json',
+            async: false,
+            data: {},
+            error: function (msg) {
+            },
+            success: function (json) {
+                $("#stationPort_lgs").html('');
+                $("#stationPort2_lgs").html('');
+                for (let i in json) {
+                    $("#stationPort_lgs").append("<option  value='" + json[i].companyName + "'>" + json[i].companyName + "</option>");
+                    $("#stationPort2_lgs").append("<option  value='" + json[i].companyName + "'>" + json[i].companyName + "</option>");
+                }
+            }
+        });
+    }
+
+    function initzhandian_sj() {
+        $.ajax({
+            type: 'POST',
+            //url: '/tUserInfo/selectUserById',
+            url: '/StationSite/getProvinceStationList',
+            dataType: 'json',
+            async: false,
+            data: {
+                //id:user.usrId,
+            },
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                user = json;
+                $("#stationPort_sj").html('');
+                $("#stationPort2_sj").html('');
+
+                for (let i = 0; i < json.length; i++) {
+                    $("#stationPort_sj").append("<option  value='" + json[i].provinceStation + "'>" + json[i].provinceStation + "</option>");
+                    $("#stationPort2_sj").append("<option  value='" + json[i].provinceStation + "'>" + json[i].provinceStation + "</option>");
                 }
             }
         });
@@ -968,26 +2154,60 @@
     }
 
     function getTime() {
-        var myDate = new Date;
-        var year = myDate.getFullYear(); //获取当前年
-        var mon = myDate.getMonth() + 1; //获取当前月
-        var date = myDate.getDate() - 1; //获取当前日
-        //var h = myDate.getHours();//获取当前小时数(0-23)
-        //var m = myDate.getMinutes();//获取当前分钟数(0-59)
-        //var s = myDate.getSeconds();//获取当前秒
-        //var week = myDate.getDay();
-        //var weeks = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
-        var now = getNow(year) + "-" + getNow(mon) + "-" + getNow(date);
-        var now2 = getNow(year) + "-" + getNow(myDate.getMonth());
+        let myDate = new Date;
+        let year = myDate.getFullYear(); //获取当前年
+        let mon = myDate.getMonth() + 1; //获取当前月
+        let date = myDate.getDate() - 1; //获取当前日
+        //let h = myDate.getHours();//获取当前小时数(0-23)
+        //let m = myDate.getMinutes();//获取当前分钟数(0-59)
+        //let s = myDate.getSeconds();//获取当前秒
+        //let week = myDate.getDay();
+        //let weeks = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+        let now = getNow(year) + "-" + getNow(mon) + "-" + getNow(date);
+        let now2 = getNow(year) + "-" + getNow(myDate.getMonth());
         $("#startTime").val(now);
         $("#startTime2").val(now2);
         return now;
     }
 
+    function getTime_lgs() {
+        let myDate = new Date;
+        let year = myDate.getFullYear(); //获取当前年
+        let mon = myDate.getMonth() + 1; //获取当前月
+        let date = myDate.getDate() - 1; //获取当前日
+        //let h = myDate.getHours();//获取当前小时数(0-23)
+        //let m = myDate.getMinutes();//获取当前分钟数(0-59)
+        //let s = myDate.getSeconds();//获取当前秒
+        //let week = myDate.getDay();
+        //let weeks = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+        let now = getNow(year) + "-" + getNow(mon) + "-" + getNow(date);
+        let now2 = getNow(year) + "-" + getNow(myDate.getMonth());
+        $("#startTime_lgs").val(now);
+        $("#startTime2_lgs").val(now2);
+        return now;
+    }
+
+    function getTime_sj() {
+        let myDate = new Date;
+        let year = myDate.getFullYear(); //获取当前年
+        let mon = myDate.getMonth() + 1; //获取当前月
+        let date = myDate.getDate() - 1; //获取当前日
+        //let h = myDate.getHours();//获取当前小时数(0-23)
+        //let m = myDate.getMinutes();//获取当前分钟数(0-59)
+        //let s = myDate.getSeconds();//获取当前秒
+        //let week = myDate.getDay();
+        //let weeks = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+        let now = getNow(year) + "-" + getNow(mon) + "-" + getNow(date);
+        let now2 = getNow(year) + "-" + getNow(myDate.getMonth());
+        $("#startTime_sj").val(now);
+        $("#startTime2_sj").val(now2);
+        return now;
+    }
+
 
     function queding() {
-        var stationPort = $("#stationPort").val();
-        var startTime = $("#startTime").val();
+        let stationPort = $("#stationPort").val();
+        let startTime = $("#startTime").val();
         dayAndMonthTongjiDom.initTableBodyAjax(stationPort, startTime);
         $("#stationPort2").val(stationPort);
         queding2()
@@ -1013,23 +2233,23 @@
                     "margin-left": "30px",
                     "color": "red",
                 })
-                var CheXingNum = [0, 0, 0, 0, 0];
-                var CheXingNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
+                let CheXingNum = [0, 0, 0, 0, 0];
+                let CheXingNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                 setCheXingNumEChars(CheXingNum, CheXingNumbili);
 
-                var ChaoZaiNum = [0, 0, 0, 0, 0];
-                var ChaoZaiNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
+                let ChaoZaiNum = [0, 0, 0, 0, 0];
+                let ChaoZaiNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                 setChaoZaiNumEChars(ChaoZaiNum, ChaoZaiNumbili);
 
-                var ChaoZaiLvNum = [0, 0, 0, 0, 0];
-                var ChaoZaiLvNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
+                let ChaoZaiLvNum = [0, 0, 0, 0, 0];
+                let ChaoZaiLvNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                 setChaoZaiLvNumEChars(ChaoZaiLvNum, ChaoZaiLvNumbili);
             },
             success: function (json) {
                 if (json != null) {
                     $(".errorMsg1").html('')
-                    var CheXingNum = new Array();
-                    var CheXingNumbili = new Array();
+                    let CheXingNum = new Array();
+                    let CheXingNumbili = new Array();
                     CheXingNum.push(json.axlesCount2)
                     CheXingNum.push(json.axlesCount3)
                     CheXingNum.push(json.axlesCount4)
@@ -1046,8 +2266,8 @@
                     }
                     setCheXingNumEChars(CheXingNum, CheXingNumbili);
 
-                    var ChaoZaiNum = new Array();
-                    var ChaoZaiNumbili = new Array();
+                    let ChaoZaiNum = new Array();
+                    let ChaoZaiNumbili = new Array();
                     ChaoZaiNum.push(json.avgOverloadCount2)
                     ChaoZaiNum.push(json.avgOverloadCount3)
                     ChaoZaiNum.push(json.avgOverloadCount4)
@@ -1064,8 +2284,8 @@
                     }
                     setChaoZaiNumEChars(ChaoZaiNum, ChaoZaiNumbili);
 
-                    var ChaoZaiLvNum = new Array();
-                    var ChaoZaiLvNumbili = new Array();
+                    let ChaoZaiLvNum = new Array();
+                    let ChaoZaiLvNumbili = new Array();
                     ChaoZaiLvNum.push(json.avgOverloadRatio2.toFixed(2))
                     ChaoZaiLvNum.push(json.avgOverloadRatio3.toFixed(2))
                     ChaoZaiLvNum.push(json.avgOverloadRatio4.toFixed(2))
@@ -1087,9 +2307,205 @@
         });
     }
 
+    function queding_lgs() {
+        let stationPort = $("#stationPort_lgs").val();
+        let startTime = $("#startTime_lgs").val();
+        dayAndMonthTongjiDom_lgs.initTableBodyAjax(stationPort, startTime);
+        $("#stationPort2_lgs").val(stationPort);
+        queding2_lgs()
+        if (startTime == null || startTime == '' || startTime == undefined) {
+            startTime = getTime();
+        }
+        $.ajax({
+            type: 'POST',
+            url: '/tAvgDay/gettAvgDayByIpAndTime',
+            dataType: 'json',
+            async: false,
+            data: {
+                companyName: stationPort,
+                avgTime: startTime,
+                avgLaneNo: 0,
+            },
+            error: function (msg) {
+                $(".errorMsg1").html('无数据').css({
+                    "margin-left": "30px",
+                    "color": "red",
+                })
+                let CheXingNum = [0, 0, 0, 0, 0];
+                let CheXingNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
+                setCheXingNumEChars_lgs(CheXingNum, CheXingNumbili);
+
+                let ChaoZaiNum = [0, 0, 0, 0, 0];
+                let ChaoZaiNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
+                setChaoZaiNumEChars_lgs(ChaoZaiNum, ChaoZaiNumbili);
+
+                let ChaoZaiLvNum = [0, 0, 0, 0, 0];
+                let ChaoZaiLvNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
+                setChaoZaiLvNumEChars_lgs(ChaoZaiLvNum, ChaoZaiLvNumbili);
+            },
+            success: function (json) {
+                if (json != null) {
+                    $(".errorMsg1").html('')
+                    let CheXingNum = new Array();
+                    let CheXingNumbili = new Array();
+                    CheXingNum.push(json.axlesCount2)
+                    CheXingNum.push(json.axlesCount3)
+                    CheXingNum.push(json.axlesCount4)
+                    CheXingNum.push(json.axlesCount5)
+                    CheXingNum.push(json.axlesCount6)
+                    if (json.avgCount != 0) {
+                        CheXingNumbili.push((json.axlesCount2 / json.avgCount).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount3 / json.avgCount).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount4 / json.avgCount).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount5 / json.avgCount).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount6 / json.avgCount).toFixed(2) + '%')
+                    } else {
+                        CheXingNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
+                    }
+                    setCheXingNumEChars_lgs(CheXingNum, CheXingNumbili);
+
+                    let ChaoZaiNum = new Array();
+                    let ChaoZaiNumbili = new Array();
+                    ChaoZaiNum.push(json.avgOverloadCount2)
+                    ChaoZaiNum.push(json.avgOverloadCount3)
+                    ChaoZaiNum.push(json.avgOverloadCount4)
+                    ChaoZaiNum.push(json.avgOverloadCount5)
+                    ChaoZaiNum.push(json.avgOverloadCount6)
+                    if (json.avgOverloadCount != 0) {
+                        ChaoZaiNumbili.push((json.avgOverloadCount2 / json.avgOverloadCount).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount3 / json.avgOverloadCount).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount4 / json.avgOverloadCount).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount5 / json.avgOverloadCount).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount6 / json.avgOverloadCount).toFixed(2) + '%')
+                    } else {
+                        ChaoZaiNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
+                    }
+                    setChaoZaiNumEChars_lgs(ChaoZaiNum, ChaoZaiNumbili);
+
+                    let ChaoZaiLvNum = new Array();
+                    let ChaoZaiLvNumbili = new Array();
+                    ChaoZaiLvNum.push(json.avgOverloadRatio2.toFixed(2))
+                    ChaoZaiLvNum.push(json.avgOverloadRatio3.toFixed(2))
+                    ChaoZaiLvNum.push(json.avgOverloadRatio4.toFixed(2))
+                    ChaoZaiLvNum.push(json.avgOverloadRatio5.toFixed(2))
+                    ChaoZaiLvNum.push(json.avgOverloadRatio6.toFixed(2))
+                    if (json.avgOverloadRatio != 0) {
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio2.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio3.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio4.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio5.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio6.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
+                    } else {
+                        ChaoZaiLvNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
+                    }
+
+                    setChaoZaiLvNumEChars_lgs(ChaoZaiLvNum, ChaoZaiLvNumbili);
+                }
+            }
+        });
+    }
+
+    function queding_sj() {
+        let stationPort = $("#stationPort_sj").val();
+        let startTime = $("#startTime_sj").val();
+        dayAndMonthTongjiDom_sj.initTableBodyAjax(stationPort, startTime);
+        $("#stationPort2_sj").val(stationPort);
+        queding2_sj()
+        if (startTime == null || startTime == '' || startTime == undefined) {
+            startTime = getTime();
+        }
+        $.ajax({
+            type: 'POST',
+            url: '/tAvgDay/gettAvgDayByIpAndTime',
+            dataType: 'json',
+            async: false,
+            data: {
+                stationIP: stationPort,
+                avgTime: startTime,
+                avgLaneNo: 0,
+            },
+            error: function (msg) {
+                $(".errorMsg1").html('无数据').css({
+                    "margin-left": "30px",
+                    "color": "red",
+                })
+                let CheXingNum = [0, 0, 0, 0, 0];
+                let CheXingNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
+                setCheXingNumEChars_sj(CheXingNum, CheXingNumbili);
+
+                let ChaoZaiNum = [0, 0, 0, 0, 0];
+                let ChaoZaiNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
+                setChaoZaiNumEChars_sj(ChaoZaiNum, ChaoZaiNumbili);
+
+                let ChaoZaiLvNum = [0, 0, 0, 0, 0];
+                let ChaoZaiLvNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
+                setChaoZaiLvNumEChars_sj(ChaoZaiLvNum, ChaoZaiLvNumbili);
+            },
+            success: function (json) {
+                if (json != null) {
+                    $(".errorMsg1").html('')
+                    let CheXingNum = new Array();
+                    let CheXingNumbili = new Array();
+                    CheXingNum.push(json.axlesCount2)
+                    CheXingNum.push(json.axlesCount3)
+                    CheXingNum.push(json.axlesCount4)
+                    CheXingNum.push(json.axlesCount5)
+                    CheXingNum.push(json.axlesCount6)
+                    if (json.avgCount != 0) {
+                        CheXingNumbili.push((json.axlesCount2 / json.avgCount).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount3 / json.avgCount).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount4 / json.avgCount).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount5 / json.avgCount).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount6 / json.avgCount).toFixed(2) + '%')
+                    } else {
+                        CheXingNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
+                    }
+                    setCheXingNumEChars_sj(CheXingNum, CheXingNumbili);
+
+                    let ChaoZaiNum = new Array();
+                    let ChaoZaiNumbili = new Array();
+                    ChaoZaiNum.push(json.avgOverloadCount2)
+                    ChaoZaiNum.push(json.avgOverloadCount3)
+                    ChaoZaiNum.push(json.avgOverloadCount4)
+                    ChaoZaiNum.push(json.avgOverloadCount5)
+                    ChaoZaiNum.push(json.avgOverloadCount6)
+                    if (json.avgOverloadCount != 0) {
+                        ChaoZaiNumbili.push((json.avgOverloadCount2 / json.avgOverloadCount).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount3 / json.avgOverloadCount).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount4 / json.avgOverloadCount).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount5 / json.avgOverloadCount).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount6 / json.avgOverloadCount).toFixed(2) + '%')
+                    } else {
+                        ChaoZaiNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
+                    }
+                    setChaoZaiNumEChars_sj(ChaoZaiNum, ChaoZaiNumbili);
+
+                    let ChaoZaiLvNum = new Array();
+                    let ChaoZaiLvNumbili = new Array();
+                    ChaoZaiLvNum.push(json.avgOverloadRatio2.toFixed(2))
+                    ChaoZaiLvNum.push(json.avgOverloadRatio3.toFixed(2))
+                    ChaoZaiLvNum.push(json.avgOverloadRatio4.toFixed(2))
+                    ChaoZaiLvNum.push(json.avgOverloadRatio5.toFixed(2))
+                    ChaoZaiLvNum.push(json.avgOverloadRatio6.toFixed(2))
+                    if (json.avgOverloadRatio != 0) {
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio2.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio3.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio4.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio5.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio6.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
+                    } else {
+                        ChaoZaiLvNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
+                    }
+
+                    setChaoZaiLvNumEChars_sj(ChaoZaiLvNum, ChaoZaiLvNumbili);
+                }
+            }
+        });
+    }
+
     function setCheXingNumEChars(CheXingNum, CheXingNumbili) {
-        var myChart = echarts.init(document.getElementById('_top'));
-        var seriesLabel = {
+        let myChart = echarts.init(document.getElementById('_top'));
+        let seriesLabel = {
             normal: {
                 show: true,
                 textBorderColor: '#336666',
@@ -1097,7 +2513,229 @@
                 textBorderWidth: 1
             }
         }
-        var option = {
+        let option = {
+            color: ['#3398DB'],
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: ['2轴车', '3轴车', '4轴车', '5轴车', '6轴车'],
+                    splitLine: {
+                        show: false
+                    },
+                    axisTick: {
+                        alignWithLabel: true
+                    },
+
+
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    axisLine: { //坐标轴轴线相关设置。
+                        show: false
+                    },
+                    splitLine: {
+                        show: false
+                    }
+                }
+            ],
+            series: [
+                {
+                    type: 'bar',
+                    label: seriesLabel,
+                    barWidth: '20%',
+                    barGap: '-100%',
+                    data: CheXingNum,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top',
+                            color: 'black',
+                            formatter: function (data) {
+                                return CheXingNumbili[data.dataIndex];
+                            },
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {offset: 0, color: '#CAE0FE'},                   //柱图渐变色
+                                    {offset: 0.5, color: '#A2C9FE'},                 //柱图渐变色
+                                    {offset: 1, color: '#78B1FD'},                   //柱图渐变色
+                                ]
+                            )
+                        }
+
+                    },
+                }, {
+                    type: 'bar',
+                    label: seriesLabel,
+                    barWidth: '20%',
+                    data: CheXingNum,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'inside',
+                            color: 'black',
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {offset: 0, color: '#CAE0FE'},                   //柱图渐变色
+                                    {offset: 0.5, color: '#A2C9FE'},                 //柱图渐变色
+                                    {offset: 1, color: '#78B1FD'},                   //柱图渐变色
+                                ]
+                            )
+                        }
+
+                    },
+                }
+            ]
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    }
+
+    function setCheXingNumEChars_lgs(CheXingNum, CheXingNumbili) {
+        let myChart = echarts.init(document.getElementById('_top_lgs'));
+        let seriesLabel = {
+            normal: {
+                show: true,
+                textBorderColor: '#336666',
+                color: 'white',
+                textBorderWidth: 1
+            }
+        }
+        let option = {
+            color: ['#3398DB'],
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: ['2轴车', '3轴车', '4轴车', '5轴车', '6轴车'],
+                    splitLine: {
+                        show: false
+                    },
+                    axisTick: {
+                        alignWithLabel: true
+                    },
+
+
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    axisLine: { //坐标轴轴线相关设置。
+                        show: false
+                    },
+                    splitLine: {
+                        show: false
+                    }
+                }
+            ],
+            series: [
+                {
+                    type: 'bar',
+                    label: seriesLabel,
+                    barWidth: '20%',
+                    barGap: '-100%',
+                    data: CheXingNum,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top',
+                            color: 'black',
+                            formatter: function (data) {
+                                return CheXingNumbili[data.dataIndex];
+                            },
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {offset: 0, color: '#CAE0FE'},                   //柱图渐变色
+                                    {offset: 0.5, color: '#A2C9FE'},                 //柱图渐变色
+                                    {offset: 1, color: '#78B1FD'},                   //柱图渐变色
+                                ]
+                            )
+                        }
+
+                    },
+                }, {
+                    type: 'bar',
+                    label: seriesLabel,
+                    barWidth: '20%',
+                    data: CheXingNum,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'inside',
+                            color: 'black',
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {offset: 0, color: '#CAE0FE'},                   //柱图渐变色
+                                    {offset: 0.5, color: '#A2C9FE'},                 //柱图渐变色
+                                    {offset: 1, color: '#78B1FD'},                   //柱图渐变色
+                                ]
+                            )
+                        }
+
+                    },
+                }
+            ]
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    }
+
+    function setCheXingNumEChars_sj(CheXingNum, CheXingNumbili) {
+        let myChart = echarts.init(document.getElementById('_top_sj'));
+        let seriesLabel = {
+            normal: {
+                show: true,
+                textBorderColor: '#336666',
+                color: 'white',
+                textBorderWidth: 1
+            }
+        }
+        let option = {
             color: ['#3398DB'],
             tooltip: {
                 trigger: 'axis',
@@ -1200,8 +2838,8 @@
 
 
     function setChaoZaiNumEChars(ChaoZaiNum, ChaoZaiNumbili) {
-        var myChart2 = echarts.init(document.getElementById('_right'));
-        var seriesLabel = {
+        let myChart2 = echarts.init(document.getElementById('_right'));
+        let seriesLabel = {
             normal: {
                 show: true,
                 textBorderColor: '#336666',
@@ -1209,7 +2847,229 @@
                 textBorderWidth: 1
             }
         }
-        var option2 = {
+        let option2 = {
+            color: ['#3398DB'],
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: ['2轴车', '3轴车', '4轴车', '5轴车', '6轴车'],
+                    splitLine: {
+                        show: false
+                    },
+
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    axisLine: { //坐标轴轴线相关设置。
+                        show: false
+                    },
+                    splitLine: {
+                        show: false
+                    }
+                }
+            ],
+            series: [
+                {
+                    type: 'bar',
+                    label: seriesLabel,
+                    barWidth: '20%',
+                    barGap: '-100%',
+                    data: ChaoZaiNum,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top',
+                            color: 'black',
+                            formatter: function (data) {
+                                return ChaoZaiNumbili[data.dataIndex];
+                            },
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {offset: 0, color: '#CAE0FE'},                   //柱图渐变色
+                                    {offset: 0.5, color: '#A2C9FE'},                 //柱图渐变色
+                                    {offset: 1, color: '#78B1FD'},                   //柱图渐变色
+                                ]
+                            )
+                        }
+
+                    },
+                }, {
+                    type: 'bar',
+                    label: seriesLabel,
+                    barWidth: '20%',
+                    data: ChaoZaiNum,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'inside',
+                            color: 'black',
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {offset: 0, color: '#CAE0FE'},                   //柱图渐变色
+                                    {offset: 0.5, color: '#A2C9FE'},                 //柱图渐变色
+                                    {offset: 1, color: '#78B1FD'},                   //柱图渐变色
+                                ]
+                            )
+                        }
+
+                    },
+                }
+            ]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart2.setOption(option2);
+    }
+
+    function setChaoZaiNumEChars_lgs(ChaoZaiNum, ChaoZaiNumbili) {
+        let myChart2 = echarts.init(document.getElementById('_right_lgs'));
+        let seriesLabel = {
+            normal: {
+                show: true,
+                textBorderColor: '#336666',
+                color: 'white',
+                textBorderWidth: 1
+            }
+        }
+        let option2 = {
+            color: ['#3398DB'],
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: ['2轴车', '3轴车', '4轴车', '5轴车', '6轴车'],
+                    splitLine: {
+                        show: false
+                    },
+
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    axisLine: { //坐标轴轴线相关设置。
+                        show: false
+                    },
+                    splitLine: {
+                        show: false
+                    }
+                }
+            ],
+            series: [
+                {
+                    type: 'bar',
+                    label: seriesLabel,
+                    barWidth: '20%',
+                    barGap: '-100%',
+                    data: ChaoZaiNum,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top',
+                            color: 'black',
+                            formatter: function (data) {
+                                return ChaoZaiNumbili[data.dataIndex];
+                            },
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {offset: 0, color: '#CAE0FE'},                   //柱图渐变色
+                                    {offset: 0.5, color: '#A2C9FE'},                 //柱图渐变色
+                                    {offset: 1, color: '#78B1FD'},                   //柱图渐变色
+                                ]
+                            )
+                        }
+
+                    },
+                }, {
+                    type: 'bar',
+                    label: seriesLabel,
+                    barWidth: '20%',
+                    data: ChaoZaiNum,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'inside',
+                            color: 'black',
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {offset: 0, color: '#CAE0FE'},                   //柱图渐变色
+                                    {offset: 0.5, color: '#A2C9FE'},                 //柱图渐变色
+                                    {offset: 1, color: '#78B1FD'},                   //柱图渐变色
+                                ]
+                            )
+                        }
+
+                    },
+                }
+            ]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart2.setOption(option2);
+    }
+
+    function setChaoZaiNumEChars_sj(ChaoZaiNum, ChaoZaiNumbili) {
+        let myChart2 = echarts.init(document.getElementById('_right_sj'));
+        let seriesLabel = {
+            normal: {
+                show: true,
+                textBorderColor: '#336666',
+                color: 'white',
+                textBorderWidth: 1
+            }
+        }
+        let option2 = {
             color: ['#3398DB'],
             tooltip: {
                 trigger: 'axis',
@@ -1312,8 +3172,8 @@
 
 
     function setChaoZaiLvNumEChars(ChaoZaiLvNum, ChaoZaiLvNumbili) {
-        var myChart3 = echarts.init(document.getElementById('bottom_'));
-        var seriesLabel = {
+        let myChart3 = echarts.init(document.getElementById('bottom_'));
+        let seriesLabel = {
             normal: {
                 show: true,
                 textBorderColor: '#336666',
@@ -1321,7 +3181,220 @@
                 textBorderWidth: 1
             }
         }
-        var option3 = {
+        let option3 = {
+            color: ['#3398DB'],
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: ['2轴车', '3轴车', '4轴车', '5轴车', '6轴车'],
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    axisLine: { //坐标轴轴线相关设置。
+                        show: false
+                    },
+                    splitLine: {
+                        show: false
+                    }
+                }
+            ],
+            series: [
+                {
+                    type: 'bar',
+                    label: seriesLabel,
+                    barWidth: '20%',
+                    barGap: '-100%',
+                    data: ChaoZaiLvNum,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top',
+                            color: 'black',
+                            formatter: function (data) {
+                                return ChaoZaiLvNumbili[data.dataIndex];
+                            },
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {offset: 0, color: '#CAE0FE'},                   //柱图渐变色
+                                    {offset: 0.5, color: '#A2C9FE'},                 //柱图渐变色
+                                    {offset: 1, color: '#78B1FD'},                   //柱图渐变色
+                                ]
+                            )
+                        }
+
+                    },
+                }, {
+                    type: 'bar',
+                    label: seriesLabel,
+                    barWidth: '20%',
+                    data: ChaoZaiLvNum,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'inside',
+                            color: 'black',
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {offset: 0, color: '#CAE0FE'},                   //柱图渐变色
+                                    {offset: 0.5, color: '#A2C9FE'},                 //柱图渐变色
+                                    {offset: 1, color: '#78B1FD'},                   //柱图渐变色
+                                ]
+                            )
+                        }
+
+                    },
+                }
+            ]
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        myChart3.setOption(option3);
+    }
+
+    function setChaoZaiLvNumEChars_lgs(ChaoZaiLvNum, ChaoZaiLvNumbili) {
+        let myChart3 = echarts.init(document.getElementById('bottom_lgs'));
+        let seriesLabel = {
+            normal: {
+                show: true,
+                textBorderColor: '#336666',
+                color: 'white',
+                textBorderWidth: 1
+            }
+        }
+        let option3 = {
+            color: ['#3398DB'],
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: ['2轴车', '3轴车', '4轴车', '5轴车', '6轴车'],
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    axisLine: { //坐标轴轴线相关设置。
+                        show: false
+                    },
+                    splitLine: {
+                        show: false
+                    }
+                }
+            ],
+            series: [
+                {
+                    type: 'bar',
+                    label: seriesLabel,
+                    barWidth: '20%',
+                    barGap: '-100%',
+                    data: ChaoZaiLvNum,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top',
+                            color: 'black',
+                            formatter: function (data) {
+                                return ChaoZaiLvNumbili[data.dataIndex];
+                            },
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {offset: 0, color: '#CAE0FE'},                   //柱图渐变色
+                                    {offset: 0.5, color: '#A2C9FE'},                 //柱图渐变色
+                                    {offset: 1, color: '#78B1FD'},                   //柱图渐变色
+                                ]
+                            )
+                        }
+
+                    },
+                }, {
+                    type: 'bar',
+                    label: seriesLabel,
+                    barWidth: '20%',
+                    data: ChaoZaiLvNum,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'inside',
+                            color: 'black',
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {offset: 0, color: '#CAE0FE'},                   //柱图渐变色
+                                    {offset: 0.5, color: '#A2C9FE'},                 //柱图渐变色
+                                    {offset: 1, color: '#78B1FD'},                   //柱图渐变色
+                                ]
+                            )
+                        }
+
+                    },
+                }
+            ]
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        myChart3.setOption(option3);
+    }
+
+
+    function setChaoZaiLvNumEChars_sj(ChaoZaiLvNum, ChaoZaiLvNumbili) {
+        let myChart3 = echarts.init(document.getElementById('bottom_sj'));
+        let seriesLabel = {
+            normal: {
+                show: true,
+                textBorderColor: '#336666',
+                color: 'white',
+                textBorderWidth: 1
+            }
+        }
+        let option3 = {
             color: ['#3398DB'],
             tooltip: {
                 trigger: 'axis',
@@ -1437,7 +3510,7 @@
             success: function (json) {
                 $("#look_accessory tbody").empty();
                 if (json != null && json != '' && json.length != 0) {
-                    for (var i = 0; i < json.length; i++) {
+                    for (let i = 0; i < json.length; i++) {
                         $("#look_accessory tbody").append("<tr>" +
                             "<td style='width:20%;'>附件</td>" +
                             "<td colspan='3'><a href='" + getLocalPath() + "/dtcz_file/" + json[i].acUrl + "' target='view_window' style='color:blue'>" + json[i].acName + "</a></td>" +
@@ -1454,10 +3527,10 @@
     }
 
     function getLocalPath() {
-        /*var pathArray = window.location.pathname.split('/');
-        var secondLevelLocation = pathArray[1];
-        var loginUrl = window.location.protocol + "//"  + window.location.host ;*/
-        var loginUrl;
+        /*let pathArray = window.location.pathname.split('/');
+        let secondLevelLocation = pathArray[1];
+        let loginUrl = window.location.protocol + "//"  + window.location.host ;*/
+        let loginUrl;
         $.ajax({
             type: 'POST',
             url: '/tVehicleOverweight/getimgUrlPrefix',
@@ -1473,8 +3546,8 @@
 
     <!--====================================================月交通量统计=========================================================================-->
     function queding2() {
-        var stationPort = $("#stationPort2").val();
-        var startTime = $("#startTime2").val();
+        let stationPort = $("#stationPort2").val();
+        let startTime = $("#startTime2").val();
         dayAndMonthTongjiDomMonth.initTableBodyAjaxMonth(stationPort, startTime);
         if (startTime == null || startTime == '' || startTime == undefined) {
             startTime = getTime();
@@ -1497,23 +3570,23 @@
                     "margin-left": "30px",
                     "color": "red",
                 })
-                var CheXingNum = [0, 0, 0, 0, 0];
-                var CheXingNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
+                let CheXingNum = [0, 0, 0, 0, 0];
+                let CheXingNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                 setCheXingNumEChars2(CheXingNum, CheXingNumbili);
 
-                var ChaoZaiNum = [0, 0, 0, 0, 0];
-                var ChaoZaiNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
+                let ChaoZaiNum = [0, 0, 0, 0, 0];
+                let ChaoZaiNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                 setChaoZaiNumEChars2(ChaoZaiNum, ChaoZaiNumbili);
 
-                var ChaoZaiLvNum = [0, 0, 0, 0, 0];
-                var ChaoZaiLvNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
+                let ChaoZaiLvNum = [0, 0, 0, 0, 0];
+                let ChaoZaiLvNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                 setChaoZaiLvNumEChars2(ChaoZaiLvNum, ChaoZaiLvNumbili);
             },
             success: function (json) {
                 if (json != null) {
                     $(".errorMsg2").html('')
-                    var CheXingNum = [];
-                    var CheXingNumbili = [];
+                    let CheXingNum = [];
+                    let CheXingNumbili = [];
                     CheXingNum.push(json.axlesCount2)
                     CheXingNum.push(json.axlesCount3)
                     CheXingNum.push(json.axlesCount4)
@@ -1530,8 +3603,8 @@
                     }
                     setCheXingNumEChars2(CheXingNum, CheXingNumbili);
 
-                    var ChaoZaiNum = [];
-                    var ChaoZaiNumbili = [];
+                    let ChaoZaiNum = [];
+                    let ChaoZaiNumbili = [];
                     ChaoZaiNum.push(json.avgOverloadCount2)
                     ChaoZaiNum.push(json.avgOverloadCount3)
                     ChaoZaiNum.push(json.avgOverloadCount4)
@@ -1548,8 +3621,8 @@
                     }
                     setChaoZaiNumEChars2(ChaoZaiNum, ChaoZaiNumbili);
 
-                    var ChaoZaiLvNum = [];
-                    var ChaoZaiLvNumbili = [];
+                    let ChaoZaiLvNum = [];
+                    let ChaoZaiLvNumbili = [];
                     ChaoZaiLvNum.push(json.avgOverloadRatio2.toFixed(2))
                     ChaoZaiLvNum.push(json.avgOverloadRatio3.toFixed(2))
                     ChaoZaiLvNum.push(json.avgOverloadRatio4.toFixed(2))
@@ -1570,10 +3643,209 @@
         });
     }
 
+    <!--====================================================路公司月交通量统计=========================================================================-->
+    function queding2_lgs() {
+        let stationPort = $("#stationPort2_lgs").val();
+        let startTime = $("#startTime2_lgs").val();
+        dayAndMonthTongjiDomMonth_lgs.initTableBodyAjaxMonth(stationPort, startTime);
+        if (startTime == null || startTime == '' || startTime == undefined) {
+            startTime = getTime();
+        }
+        /*$("#_top2").empty()
+        $("#_right2").empty()
+        $("#bottom_2").empty()*/
+        $.ajax({
+            type: 'POST',
+            url: '/tAvgDay/gettAvgMonthByIpAndTime',
+            dataType: 'json',
+            async: false,
+            data: {
+                stationIP: stationPort,
+                avgTime: startTime,
+                avgLaneNo: 0,
+            },
+            error: function (msg) {
+                $(".errorMsg2").html('无数据').css({
+                    "margin-left": "30px",
+                    "color": "red",
+                })
+                let CheXingNum = [0, 0, 0, 0, 0];
+                let CheXingNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
+                setCheXingNumEChars2_lgs(CheXingNum, CheXingNumbili);
+
+                let ChaoZaiNum = [0, 0, 0, 0, 0];
+                let ChaoZaiNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
+                setChaoZaiNumEChars2_lgs(ChaoZaiNum, ChaoZaiNumbili);
+
+                let ChaoZaiLvNum = [0, 0, 0, 0, 0];
+                let ChaoZaiLvNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
+                setChaoZaiLvNumEChars2_lgs(ChaoZaiLvNum, ChaoZaiLvNumbili);
+            },
+            success: function (json) {
+                if (json != null) {
+                    $(".errorMsg2").html('')
+                    let CheXingNum = [];
+                    let CheXingNumbili = [];
+                    CheXingNum.push(json.axlesCount2)
+                    CheXingNum.push(json.axlesCount3)
+                    CheXingNum.push(json.axlesCount4)
+                    CheXingNum.push(json.axlesCount5)
+                    CheXingNum.push(json.axlesCount6)
+                    if (json.avgCount != 0) {
+                        CheXingNumbili.push((json.axlesCount2 / json.avgCount).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount3 / json.avgCount).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount4 / json.avgCount).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount5 / json.avgCount).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount6 / json.avgCount).toFixed(2) + '%')
+                    } else {
+                        CheXingNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
+                    }
+                    setCheXingNumEChars2_lgs(CheXingNum, CheXingNumbili);
+
+                    let ChaoZaiNum = [];
+                    let ChaoZaiNumbili = [];
+                    ChaoZaiNum.push(json.avgOverloadCount2)
+                    ChaoZaiNum.push(json.avgOverloadCount3)
+                    ChaoZaiNum.push(json.avgOverloadCount4)
+                    ChaoZaiNum.push(json.avgOverloadCount5)
+                    ChaoZaiNum.push(json.avgOverloadCount6)
+                    if (json.avgOverloadCount != 0) {
+                        ChaoZaiNumbili.push((json.avgOverloadCount2 / json.avgOverloadCount).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount3 / json.avgOverloadCount).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount4 / json.avgOverloadCount).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount5 / json.avgOverloadCount).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount6 / json.avgOverloadCount).toFixed(2) + '%')
+                    } else {
+                        ChaoZaiNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
+                    }
+                    setChaoZaiNumEChars2_lgs(ChaoZaiNum, ChaoZaiNumbili);
+
+                    let ChaoZaiLvNum = [];
+                    let ChaoZaiLvNumbili = [];
+                    ChaoZaiLvNum.push(json.avgOverloadRatio2.toFixed(2))
+                    ChaoZaiLvNum.push(json.avgOverloadRatio3.toFixed(2))
+                    ChaoZaiLvNum.push(json.avgOverloadRatio4.toFixed(2))
+                    ChaoZaiLvNum.push(json.avgOverloadRatio5.toFixed(2))
+                    ChaoZaiLvNum.push(json.avgOverloadRatio6.toFixed(2))
+                    if (json.avgOverloadRatio != 0) {
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio2.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio3.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio4.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio5.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio6.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
+                    } else {
+                        ChaoZaiLvNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
+                    }
+                    setChaoZaiLvNumEChars2_lgs(ChaoZaiLvNum, ChaoZaiLvNumbili);
+                }
+            }
+        });
+    }
+
+
+    <!--====================================================省界月交通量统计=========================================================================-->
+    function queding2_sj() {
+        let stationPort = $("#stationPort2_sj").val();
+        let startTime = $("#startTime2_sj").val();
+        dayAndMonthTongjiDomMonth_sj.initTableBodyAjaxMonth(stationPort, startTime);
+        if (startTime == null || startTime == '' || startTime == undefined) {
+            startTime = getTime();
+        }
+        /*$("#_top2").empty()
+        $("#_right2").empty()
+        $("#bottom_2").empty()*/
+        $.ajax({
+            type: 'POST',
+            url: '/tAvgDay/gettAvgMonthByIpAndTime',
+            dataType: 'json',
+            async: false,
+            data: {
+                stationIP: stationPort,
+                avgTime: startTime,
+                avgLaneNo: 0,
+            },
+            error: function (msg) {
+                $(".errorMsg2").html('无数据').css({
+                    "margin-left": "30px",
+                    "color": "red",
+                })
+                let CheXingNum = [0, 0, 0, 0, 0];
+                let CheXingNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
+                setCheXingNumEChars2_sj(CheXingNum, CheXingNumbili);
+
+                let ChaoZaiNum = [0, 0, 0, 0, 0];
+                let ChaoZaiNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
+                setChaoZaiNumEChars2_sj(ChaoZaiNum, ChaoZaiNumbili);
+
+                let ChaoZaiLvNum = [0, 0, 0, 0, 0];
+                let ChaoZaiLvNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
+                setChaoZaiLvNumEChars2_sj(ChaoZaiLvNum, ChaoZaiLvNumbili);
+            },
+            success: function (json) {
+                if (json != null) {
+                    $(".errorMsg2").html('')
+                    let CheXingNum = [];
+                    let CheXingNumbili = [];
+                    CheXingNum.push(json.axlesCount2)
+                    CheXingNum.push(json.axlesCount3)
+                    CheXingNum.push(json.axlesCount4)
+                    CheXingNum.push(json.axlesCount5)
+                    CheXingNum.push(json.axlesCount6)
+                    if (json.avgCount != 0) {
+                        CheXingNumbili.push((json.axlesCount2 / json.avgCount).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount3 / json.avgCount).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount4 / json.avgCount).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount5 / json.avgCount).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount6 / json.avgCount).toFixed(2) + '%')
+                    } else {
+                        CheXingNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
+                    }
+                    setCheXingNumEChars2_sj(CheXingNum, CheXingNumbili);
+
+                    let ChaoZaiNum = [];
+                    let ChaoZaiNumbili = [];
+                    ChaoZaiNum.push(json.avgOverloadCount2)
+                    ChaoZaiNum.push(json.avgOverloadCount3)
+                    ChaoZaiNum.push(json.avgOverloadCount4)
+                    ChaoZaiNum.push(json.avgOverloadCount5)
+                    ChaoZaiNum.push(json.avgOverloadCount6)
+                    if (json.avgOverloadCount != 0) {
+                        ChaoZaiNumbili.push((json.avgOverloadCount2 / json.avgOverloadCount).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount3 / json.avgOverloadCount).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount4 / json.avgOverloadCount).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount5 / json.avgOverloadCount).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount6 / json.avgOverloadCount).toFixed(2) + '%')
+                    } else {
+                        ChaoZaiNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
+                    }
+                    setChaoZaiNumEChars2_sj(ChaoZaiNum, ChaoZaiNumbili);
+
+                    let ChaoZaiLvNum = [];
+                    let ChaoZaiLvNumbili = [];
+                    ChaoZaiLvNum.push(json.avgOverloadRatio2.toFixed(2))
+                    ChaoZaiLvNum.push(json.avgOverloadRatio3.toFixed(2))
+                    ChaoZaiLvNum.push(json.avgOverloadRatio4.toFixed(2))
+                    ChaoZaiLvNum.push(json.avgOverloadRatio5.toFixed(2))
+                    ChaoZaiLvNum.push(json.avgOverloadRatio6.toFixed(2))
+                    if (json.avgOverloadRatio != 0) {
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio2.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio3.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio4.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio5.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio6.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
+                    } else {
+                        ChaoZaiLvNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
+                    }
+                    setChaoZaiLvNumEChars2_sj(ChaoZaiLvNum, ChaoZaiLvNumbili);
+                }
+            }
+        });
+    }
+
 
     function setCheXingNumEChars2(CheXingNum, CheXingNumbili) {
-        var myChart = echarts.init(document.getElementById('_top2'));
-        var seriesLabel = {
+        let myChart = echarts.init(document.getElementById('_top2'));
+        let seriesLabel = {
             normal: {
                 show: true,
                 textBorderColor: '#336666',
@@ -1581,7 +3853,219 @@
                 textBorderWidth: 1
             }
         }
-        var option = {
+        let option = {
+            color: ['#3398DB'],
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: ['2轴车', '3轴车', '4轴车', '5轴车', '6轴车'],
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    axisLine: { //坐标轴轴线相关设置。
+                        show: false
+                    },
+                    splitLine: {
+                        show: false
+                    }
+                }
+            ],
+            series: [
+                {
+                    type: 'bar',
+                    label: seriesLabel,
+                    barWidth: '20%',
+                    barGap: '-100%',
+                    data: CheXingNum,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top',
+                            color: 'black',
+                            formatter: function (data) {
+                                return CheXingNumbili[data.dataIndex];
+                            },
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {offset: 0, color: '#CAE0FE'},                   //柱图渐变色
+                                    {offset: 0.5, color: '#A2C9FE'},                 //柱图渐变色
+                                    {offset: 1, color: '#78B1FD'},                   //柱图渐变色
+                                ]
+                            )
+                        }
+
+                    },
+                }, {
+                    type: 'bar',
+                    label: seriesLabel,
+                    barWidth: '20%',
+                    data: CheXingNum,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'inside',
+                            color: 'black',
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {offset: 0, color: '#CAE0FE'},                   //柱图渐变色
+                                    {offset: 0.5, color: '#A2C9FE'},                 //柱图渐变色
+                                    {offset: 1, color: '#78B1FD'},                   //柱图渐变色
+                                ]
+                            )
+                        }
+
+                    },
+                }
+            ]
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    }
+
+    function setCheXingNumEChars2_lgs(CheXingNum, CheXingNumbili) {
+        let myChart = echarts.init(document.getElementById('_top2_lgs'));
+        let seriesLabel = {
+            normal: {
+                show: true,
+                textBorderColor: '#336666',
+                color: 'white',
+                textBorderWidth: 1
+            }
+        }
+        let option = {
+            color: ['#3398DB'],
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: ['2轴车', '3轴车', '4轴车', '5轴车', '6轴车'],
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    axisLine: { //坐标轴轴线相关设置。
+                        show: false
+                    },
+                    splitLine: {
+                        show: false
+                    }
+                }
+            ],
+            series: [
+                {
+                    type: 'bar',
+                    label: seriesLabel,
+                    barWidth: '20%',
+                    barGap: '-100%',
+                    data: CheXingNum,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top',
+                            color: 'black',
+                            formatter: function (data) {
+                                return CheXingNumbili[data.dataIndex];
+                            },
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {offset: 0, color: '#CAE0FE'},                   //柱图渐变色
+                                    {offset: 0.5, color: '#A2C9FE'},                 //柱图渐变色
+                                    {offset: 1, color: '#78B1FD'},                   //柱图渐变色
+                                ]
+                            )
+                        }
+
+                    },
+                }, {
+                    type: 'bar',
+                    label: seriesLabel,
+                    barWidth: '20%',
+                    data: CheXingNum,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'inside',
+                            color: 'black',
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {offset: 0, color: '#CAE0FE'},                   //柱图渐变色
+                                    {offset: 0.5, color: '#A2C9FE'},                 //柱图渐变色
+                                    {offset: 1, color: '#78B1FD'},                   //柱图渐变色
+                                ]
+                            )
+                        }
+
+                    },
+                }
+            ]
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    }
+
+    function setCheXingNumEChars2_sj(CheXingNum, CheXingNumbili) {
+        let myChart = echarts.init(document.getElementById('_top2_sj'));
+        let seriesLabel = {
+            normal: {
+                show: true,
+                textBorderColor: '#336666',
+                color: 'white',
+                textBorderWidth: 1
+            }
+        }
+        let option = {
             color: ['#3398DB'],
             tooltip: {
                 trigger: 'axis',
@@ -1679,8 +4163,8 @@
 
 
     function setChaoZaiNumEChars2(ChaoZaiNum, ChaoZaiNumbili) {
-        var myChart2 = echarts.init(document.getElementById('_right2'));
-        var seriesLabel = {
+        let myChart2 = echarts.init(document.getElementById('_right2'));
+        let seriesLabel = {
             normal: {
                 show: true,
                 textBorderColor: '#336666',
@@ -1688,7 +4172,223 @@
                 textBorderWidth: 1
             }
         }
-        var option2 = {
+        let option2 = {
+            color: ['#3398DB'],
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: ['2轴车', '3轴车', '4轴车', '5轴车', '6轴车'],
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    axisLine: { //坐标轴轴线相关设置。
+                        show: false
+                    },
+                    splitLine: {
+                        show: false
+                    }
+                }
+            ],
+            series: [
+                {
+                    type: 'bar',
+                    label: seriesLabel,
+                    barWidth: '20%',
+                    barGap: '-100%',
+                    data: ChaoZaiNum,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top',
+                            color: 'black',
+                            formatter: function (data) {
+                                return ChaoZaiNumbili[data.dataIndex];
+                            },
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {offset: 0, color: '#CAE0FE'},                   //柱图渐变色
+                                    {offset: 0.5, color: '#A2C9FE'},                 //柱图渐变色
+                                    {offset: 1, color: '#78B1FD'},                   //柱图渐变色
+                                ]
+                            )
+                        }
+
+                    },
+                }, {
+                    name: '直接访问',
+                    type: 'bar',
+                    label: seriesLabel,
+                    barWidth: '20%',
+                    data: ChaoZaiNum,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'inside',
+                            color: 'black',
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {offset: 0, color: '#CAE0FE'},                   //柱图渐变色
+                                    {offset: 0.5, color: '#A2C9FE'},                 //柱图渐变色
+                                    {offset: 1, color: '#78B1FD'},                   //柱图渐变色
+                                ]
+                            )
+                        }
+
+                    },
+                }
+            ]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart2.setOption(option2);
+    }
+
+    function setChaoZaiNumEChars2_lgs(ChaoZaiNum, ChaoZaiNumbili) {
+        let myChart2 = echarts.init(document.getElementById('_right2_lgs'));
+        let seriesLabel = {
+            normal: {
+                show: true,
+                textBorderColor: '#336666',
+                color: 'white',
+                textBorderWidth: 1
+            }
+        }
+        let option2 = {
+            color: ['#3398DB'],
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: ['2轴车', '3轴车', '4轴车', '5轴车', '6轴车'],
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    axisLine: { //坐标轴轴线相关设置。
+                        show: false
+                    },
+                    splitLine: {
+                        show: false
+                    }
+                }
+            ],
+            series: [
+                {
+                    type: 'bar',
+                    label: seriesLabel,
+                    barWidth: '20%',
+                    barGap: '-100%',
+                    data: ChaoZaiNum,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top',
+                            color: 'black',
+                            formatter: function (data) {
+                                return ChaoZaiNumbili[data.dataIndex];
+                            },
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {offset: 0, color: '#CAE0FE'},                   //柱图渐变色
+                                    {offset: 0.5, color: '#A2C9FE'},                 //柱图渐变色
+                                    {offset: 1, color: '#78B1FD'},                   //柱图渐变色
+                                ]
+                            )
+                        }
+
+                    },
+                }, {
+                    name: '直接访问',
+                    type: 'bar',
+                    label: seriesLabel,
+                    barWidth: '20%',
+                    data: ChaoZaiNum,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'inside',
+                            color: 'black',
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {offset: 0, color: '#CAE0FE'},                   //柱图渐变色
+                                    {offset: 0.5, color: '#A2C9FE'},                 //柱图渐变色
+                                    {offset: 1, color: '#78B1FD'},                   //柱图渐变色
+                                ]
+                            )
+                        }
+
+                    },
+                }
+            ]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart2.setOption(option2);
+    }
+
+    function setChaoZaiNumEChars2_sj(ChaoZaiNum, ChaoZaiNumbili) {
+        let myChart2 = echarts.init(document.getElementById('_right2_sj'));
+        let seriesLabel = {
+            normal: {
+                show: true,
+                textBorderColor: '#336666',
+                color: 'white',
+                textBorderWidth: 1
+            }
+        }
+        let option2 = {
             color: ['#3398DB'],
             tooltip: {
                 trigger: 'axis',
@@ -1788,8 +4488,8 @@
 
 
     function setChaoZaiLvNumEChars2(ChaoZaiLvNum, ChaoZaiLvNumbili) {
-        var myChart3 = echarts.init(document.getElementById('bottom_2'));
-        var seriesLabel = {
+        let myChart3 = echarts.init(document.getElementById('bottom_2'));
+        let seriesLabel = {
             normal: {
                 show: true,
                 textBorderColor: '#336666',
@@ -1797,7 +4497,221 @@
                 textBorderWidth: 1
             }
         }
-        var option3 = {
+        let option3 = {
+            color: ['#3398DB'],
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: ['2轴车', '3轴车', '4轴车', '5轴车', '6轴车'],
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    axisLine: { //坐标轴轴线相关设置。
+                        show: false
+                    },
+                    splitLine: {
+                        show: false
+                    }
+                }
+            ],
+            series: [
+                {
+                    type: 'bar',
+                    label: seriesLabel,
+                    barWidth: '20%',
+                    barGap: '-100%',
+                    data: ChaoZaiLvNum,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top',
+                            color: 'black',
+                            formatter: function (data) {
+                                return ChaoZaiLvNumbili[data.dataIndex];
+                            },
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {offset: 0, color: '#CAE0FE'},                   //柱图渐变色
+                                    {offset: 0.5, color: '#A2C9FE'},                 //柱图渐变色
+                                    {offset: 1, color: '#78B1FD'},                   //柱图渐变色
+                                ]
+                            )
+                        }
+
+                    },
+                }, {
+                    name: '直接访问',
+                    type: 'bar',
+                    label: seriesLabel,
+                    barWidth: '20%',
+                    data: ChaoZaiLvNum,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'inside',
+                            color: 'black',
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {offset: 0, color: '#CAE0FE'},                   //柱图渐变色
+                                    {offset: 0.5, color: '#A2C9FE'},                 //柱图渐变色
+                                    {offset: 1, color: '#78B1FD'},                   //柱图渐变色
+                                ]
+                            )
+                        }
+
+                    },
+                }
+            ]
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        myChart3.setOption(option3);
+    }
+
+    function setChaoZaiLvNumEChars2_lgs(ChaoZaiLvNum, ChaoZaiLvNumbili) {
+        let myChart3 = echarts.init(document.getElementById('bottom_2_lgs'));
+        let seriesLabel = {
+            normal: {
+                show: true,
+                textBorderColor: '#336666',
+                color: 'white',
+                textBorderWidth: 1
+            }
+        }
+        let option3 = {
+            color: ['#3398DB'],
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: ['2轴车', '3轴车', '4轴车', '5轴车', '6轴车'],
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    axisLine: { //坐标轴轴线相关设置。
+                        show: false
+                    },
+                    splitLine: {
+                        show: false
+                    }
+                }
+            ],
+            series: [
+                {
+                    type: 'bar',
+                    label: seriesLabel,
+                    barWidth: '20%',
+                    barGap: '-100%',
+                    data: ChaoZaiLvNum,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top',
+                            color: 'black',
+                            formatter: function (data) {
+                                return ChaoZaiLvNumbili[data.dataIndex];
+                            },
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {offset: 0, color: '#CAE0FE'},                   //柱图渐变色
+                                    {offset: 0.5, color: '#A2C9FE'},                 //柱图渐变色
+                                    {offset: 1, color: '#78B1FD'},                   //柱图渐变色
+                                ]
+                            )
+                        }
+
+                    },
+                }, {
+                    name: '直接访问',
+                    type: 'bar',
+                    label: seriesLabel,
+                    barWidth: '20%',
+                    data: ChaoZaiLvNum,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'inside',
+                            color: 'black',
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {offset: 0, color: '#CAE0FE'},                   //柱图渐变色
+                                    {offset: 0.5, color: '#A2C9FE'},                 //柱图渐变色
+                                    {offset: 1, color: '#78B1FD'},                   //柱图渐变色
+                                ]
+                            )
+                        }
+
+                    },
+                }
+            ]
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        myChart3.setOption(option3);
+    }
+
+    function setChaoZaiLvNumEChars2_sj(ChaoZaiLvNum, ChaoZaiLvNumbili) {
+        let myChart3 = echarts.init(document.getElementById('bottom_2_sj'));
+        let seriesLabel = {
+            normal: {
+                show: true,
+                textBorderColor: '#336666',
+                color: 'white',
+                textBorderWidth: 1
+            }
+        }
+        let option3 = {
             color: ['#3398DB'],
             tooltip: {
                 trigger: 'axis',
@@ -1914,7 +4828,7 @@
             success: function (json) {
                 $("#look_accessory2 tbody").empty();
                 if (json != null && json != '' && json.length != 0) {
-                    for (var i = 0; i < json.length; i++) {
+                    for (let i = 0; i < json.length; i++) {
                         $("#look_accessory2 tbody").append("<tr>" +
                             "<td style='width:20%;'>附件</td>" +
                             "<td colspan='3'><a href='" + getLocalPath() + "/dtcz_file/" + json[i].acUrl + "' target='view_window' style='color:blue'>" + json[i].acName + "</a></td>" +
@@ -2046,6 +4960,120 @@
     })
 
 
+    let looktWimMsg1_lgs = new Vue({
+        el: '#modalEchartsDetailMonth_lgs',
+        //表单数据
+        data: {
+            idLocal: "",
+            id: "",
+            stationId: "",
+            evtTime: "",
+            msgTime: "",
+            laneNo: "",
+            plate: "",
+            plateColor: "",
+            classIndex: "",
+            length: "",
+            speed: "",
+            direction: "",
+            axlesCount: "",
+            totalWeight: '',
+            wetmixingtimedeviation: '',
+            axle1: '',
+            axle2: '',
+            axle3: '',
+            axle4: '',
+            axle5: '',
+            axle6: '',
+            axle7: '',
+            axle8: '',
+            axle9: '',
+            axle10: '',
+            axleSpace1: '',
+            axleSpace2: '',
+            axleSpace3: '',
+            axleSpace4: '',
+            axleSpace5: '',
+            axleSpace6: '',
+            axleSpace7: '',
+            axleSpace8: '',
+            axleSpace9: '',
+            isStraddle: '',
+            temperature: '',
+            overWeight: '',
+            overWeightRatio: '',
+            wIMId: '',
+            lPRId: '',
+            stationIP: '',
+            stationNameRouteName: '',
+            directionName: '',
+            isStraddleName: '',
+            stationName: '',
+            routeName: '',
+            licensePlateColor: '',
+            vehicleTypeName: '',
+        },
+        methods: {}
+    })
+
+
+    let looktWimMsg1_sj = new Vue({
+        el: '#modalEchartsDetailMonth_sj',
+        //表单数据
+        data: {
+            idLocal: "",
+            id: "",
+            stationId: "",
+            evtTime: "",
+            msgTime: "",
+            laneNo: "",
+            plate: "",
+            plateColor: "",
+            classIndex: "",
+            length: "",
+            speed: "",
+            direction: "",
+            axlesCount: "",
+            totalWeight: '',
+            wetmixingtimedeviation: '',
+            axle1: '',
+            axle2: '',
+            axle3: '',
+            axle4: '',
+            axle5: '',
+            axle6: '',
+            axle7: '',
+            axle8: '',
+            axle9: '',
+            axle10: '',
+            axleSpace1: '',
+            axleSpace2: '',
+            axleSpace3: '',
+            axleSpace4: '',
+            axleSpace5: '',
+            axleSpace6: '',
+            axleSpace7: '',
+            axleSpace8: '',
+            axleSpace9: '',
+            isStraddle: '',
+            temperature: '',
+            overWeight: '',
+            overWeightRatio: '',
+            wIMId: '',
+            lPRId: '',
+            stationIP: '',
+            stationNameRouteName: '',
+            directionName: '',
+            isStraddleName: '',
+            stationName: '',
+            routeName: '',
+            licensePlateColor: '',
+            vehicleTypeName: '',
+        },
+        methods: {}
+    })
+
+
     const page_init_vue_data = {
         idLocal: "",
         id: "",
@@ -2099,9 +5127,9 @@
     };
     Object.freeze(page_init_vue_data);
 
-    var lookxiangqing = (data, obj) => {
+    let lookxiangqing = (data, obj) => {
         Object.assign(looktWimMsg.$data, page_init_vue_data)
-        looktWimMsg.overWeightRatioName ="";
+        looktWimMsg.overWeightRatioName = "";
         $("#chepaiImg").empty();
         $("#chebodyDiv").empty();
         if (data != "") {
@@ -2168,12 +5196,12 @@
                     $("#chebodyDiv").html('')
 
                     if (obj != 1 && obj != 2) {
-                        var url2 = "http://" + json.imgUrlPrefix + "/port" + data.stationIP + "/" + data.idLocal + "-Image.jpg"
-                        var img2 = '<a target="_blank" href="' + url2 + '"><img id="chebodyImg" src="' + url2 + '" class="popup" width=\'80\' height=\'60\';" /></a>'
+                        let url2 = "http://" + json.imgUrlPrefix + "/port" + data.stationIP + "/" + data.idLocal + "-Image.jpg"
+                        let img2 = '<a target="_blank" href="' + url2 + '"><img id="chebodyImg" src="' + url2 + '" class="popup" width=\'80\' height=\'60\';" /></a>'
                         $("#chebodyDiv").append(img2)
                     } else {
-                        var url = "http://" + json.imgUrlPrefix + "/port" + data.stationIP + "/" + data.idLocal + "-PlateImg.jpg"
-                        var img = '<a target="_blank" href="' + url + '"><img id="" src="' + url + '" class="popup" width=\'80\' height=\'60\';" /></a>'
+                        let url = "http://" + json.imgUrlPrefix + "/port" + data.stationIP + "/" + data.idLocal + "-PlateImg.jpg"
+                        let img = '<a target="_blank" href="' + url + '"><img id="" src="' + url + '" class="popup" width=\'80\' height=\'60\';" /></a>'
                         $("#chepaiImg").append(img)
                     }
 
@@ -2181,9 +5209,9 @@
             });
         }
     }
-    var lookxiangqing1 = (data, obj) => {
+    let lookxiangqing1 = (data, obj) => {
         Object.assign(looktWimMsg1.$data, page_init_vue_data)
-        looktWimMsg1.overWeightRatioName ="";
+        looktWimMsg1.overWeightRatioName = "";
         $("#chepaiImg1").empty();
 
         $("#chebodyDiv1").empty();
@@ -2250,12 +5278,96 @@
                     $("#chebodyDiv1").html('')
 
                     if (obj != 1 && obj != 2) {
-                        var url2 = "http://" + json.imgUrlPrefix + "/port" + data.stationIP + "/" + data.idLocal + "-Image.jpg"
-                        var img2 = '<a target="_blank" href="' + url2 + '"><img id="chebodyImg" src="' + url2 + '" class="popup" width=\'80\' height=\'60\';" /></a>'
+                        let url2 = "http://" + json.imgUrlPrefix + "/port" + data.stationIP + "/" + data.idLocal + "-Image.jpg"
+                        let img2 = '<a target="_blank" href="' + url2 + '"><img id="chebodyImg" src="' + url2 + '" class="popup" width=\'80\' height=\'60\';" /></a>'
                         $("#chebodyDiv1").append(img2)
                     } else {
-                        var url = "http://" + json.imgUrlPrefix + "/port" + data.stationIP + "/" + data.idLocal + "-PlateImg.jpg"
-                        var img = '<a target="_blank" href="' + url + '"><img id="" src="' + url + '" class="popup" width=\'80\' height=\'60\';" /></a>'
+                        let url = "http://" + json.imgUrlPrefix + "/port" + data.stationIP + "/" + data.idLocal + "-PlateImg.jpg"
+                        let img = '<a target="_blank" href="' + url + '"><img id="" src="' + url + '" class="popup" width=\'80\' height=\'60\';" /></a>'
+                        $("#chepaiImg1").append(img)
+                    }
+
+                }
+            });
+        }
+    }
+
+
+    let lookxiangqing1_lgs = (data, obj) => {
+        Object.assign(looktWimMsg1_lgs.$data, page_init_vue_data)
+        looktWimMsg1_lgs.overWeightRatioName = "";
+        $("#chepaiImg1").empty();
+
+        $("#chebodyDiv1").empty();
+        if (data != "") {
+            looktWimMsg1_lgs.id = data.id;
+            looktWimMsg1_lgs.idLocal = data.idLocal;
+            looktWimMsg1_lgs.stationNameRouteName = data.stationNameRouteName;
+            looktWimMsg1_lgs.stationId = data.stationId;
+            looktWimMsg1_lgs.evtTime = data.evtTime;
+            looktWimMsg1_lgs.msgTime = data.msgTime;
+            looktWimMsg1_lgs.laneNo = data.laneNo;
+            looktWimMsg1_lgs.plate = data.plate;
+            looktWimMsg1_lgs.plateColor = data.plateColor;
+            looktWimMsg1_lgs.classIndex = data.classIndex;
+            looktWimMsg1_lgs.length = data.length;
+            looktWimMsg1_lgs.speed = data.speed;
+            looktWimMsg1_lgs.direction = data.direction;
+            looktWimMsg1_lgs.axlesCount = data.axlesCount;
+            looktWimMsg1_lgs.totalWeight = data.totalWeight;
+            looktWimMsg1_lgs.wetmixingtimedeviation = data.wetmixingtimedeviation;
+            looktWimMsg1_lgs.axle1 = data.axle1;
+            looktWimMsg1_lgs.axle2 = data.axle2;
+            looktWimMsg1_lgs.axle3 = data.axle3;
+            looktWimMsg1_lgs.axle4 = data.axle4;
+            looktWimMsg1_lgs.axle5 = data.axle5;
+            looktWimMsg1_lgs.axle6 = data.axle6;
+            looktWimMsg1_lgs.axle7 = data.axle7;
+            looktWimMsg1_lgs.axle8 = data.axle8;
+            looktWimMsg1_lgs.axle9 = data.axle9;
+            looktWimMsg1_lgs.axle10 = data.axle10;
+            looktWimMsg1_lgs.axleSpace1 = data.axleSpace1;
+            looktWimMsg1_lgs.axleSpace2 = data.axleSpace2;
+            looktWimMsg1_lgs.axleSpace3 = data.axleSpace3;
+            looktWimMsg1_lgs.axleSpace4 = data.axleSpace4;
+            looktWimMsg1_lgs.axleSpace5 = data.axleSpace5;
+            looktWimMsg1_lgs.axleSpace6 = data.axleSpace6;
+            looktWimMsg1_lgs.axleSpace7 = data.axleSpace7;
+            looktWimMsg1_lgs.axleSpace8 = data.axleSpace8;
+            looktWimMsg1_lgs.axleSpace9 = data.axleSpace9;
+            looktWimMsg1_lgs.isStraddle = data.isStraddle;
+            looktWimMsg1_lgs.temperature = data.temperature;
+            looktWimMsg1_lgs.overWeight = data.overWeight;
+            looktWimMsg1_lgs.overWeightRatio = data.overWeightRatio * 100;
+            looktWimMsg1_lgs.wIMId = data.wIMId;
+            looktWimMsg1_lgs.lPRId = data.lPRId;
+            looktWimMsg1_lgs.stationIP = data.stationIP;
+            looktWimMsg1_lgs.stationNameRouteName = data.stationNameRouteName;
+            looktWimMsg1_lgs.directionName = data.directionName;
+            looktWimMsg1_lgs.isStraddleName = data.isStraddleName;
+            looktWimMsg1_lgs.stationName = data.stationName;
+            looktWimMsg1_lgs.routeName = data.routeName;
+            looktWimMsg1_lgs.licensePlateColor = data.licensePlateColor;
+            looktWimMsg1_lgs.vehicleTypeName = data.axlesCount + "轴";
+            ;
+            looktWimMsg1_lgs.overWeightRatioName = data.overWeightRatioName == "超载" ? (data.overWeightRatio * 100).toFixed(2) + "%" : data.overWeightRatioName;
+
+            $.ajax({
+                type: 'POST',
+                url: '/tVehicleOverweight/getimgUrlPrefix',
+                dataType: 'json',
+                data: {},
+                success: function (json) {
+                    $("#chepaiImg1").html('')
+                    $("#chebodyDiv1").html('')
+
+                    if (obj != 1 && obj != 2) {
+                        let url2 = "http://" + json.imgUrlPrefix + "/port" + data.stationIP + "/" + data.idLocal + "-Image.jpg"
+                        let img2 = '<a target="_blank" href="' + url2 + '"><img id="chebodyImg" src="' + url2 + '" class="popup" width=\'80\' height=\'60\';" /></a>'
+                        $("#chebodyDiv1").append(img2)
+                    } else {
+                        let url = "http://" + json.imgUrlPrefix + "/port" + data.stationIP + "/" + data.idLocal + "-PlateImg.jpg"
+                        let img = '<a target="_blank" href="' + url + '"><img id="" src="' + url + '" class="popup" width=\'80\' height=\'60\';" /></a>'
                         $("#chepaiImg1").append(img)
                     }
 
