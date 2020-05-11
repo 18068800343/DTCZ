@@ -457,7 +457,7 @@
 <script src="js/datatables/jszip.min.js"></script>
 <!--导出CSV结束-->
 <script>
-
+    var imgUrlPrefix;
     $(document).ready( function () {
 
         laydate.render({
@@ -472,6 +472,18 @@
 
         $("#chuli_state").trigger('change')
 
+        $.ajax({
+            type: 'POST',
+            url: '/tVehicleOverweight/getimgUrlPrefix',
+            dataType: 'json',
+            async:false,
+            data: {
+            },
+            success: function (json) {
+                imgUrlPrefix=json.imgUrlPrefix;
+                return imgUrlPrefix
+            }
+        });
     });
     var table=$('#mainContent').dataTable({
         "deferRender": true,
@@ -522,8 +534,7 @@
             "targets": 13,
             "searchable": true,
             "render": function(data, type, full) {
-                var url
-                $.ajax({
+                /*$.ajax({
                     type: 'POST',
                     url: '/tVehicleOverweight/getimgUrlPrefix',
                     dataType: 'json',
@@ -534,8 +545,9 @@
                         var path="http://"+json.imgUrlPrefix+"/port"+full.stationIP+"/" + getYMDStr(data.evtTime) + "/" +full.idLocal+"-Image.jpg"
                         url="<a target='_blank' href="+path+"><img src="+path+"  width='50' height='40'/>"
                     }
-                });
-                return url;
+                });*/
+                var path="http://"+imgUrlPrefix+"/port"+full.stationIP+"/" + getYMDStr(data.evtTime) + "/" +full.idLocal+"-Image.jpg"
+                return "<a target='_blank' href="+path+"><img src="+path+"  width='50' height='40'/>"
             }
         },{
             "class": "tcenter",
@@ -939,7 +951,7 @@
         looktWimMsg.vehicleTypeName=data.axlesCount+"轴";;
         looktWimMsg.overWeightRatioName=(data.overWeightRatio*100).toFixed(2)+"%";
 
-        $.ajax({
+        /*$.ajax({
             type: 'POST',
             url: '/tVehicleOverweight/getimgUrlPrefix',
             dataType: 'json',
@@ -953,7 +965,11 @@
                     $("#chebodyDiv").append(img2)
 
             }
-        });
+        });*/
+        $("#chebodyDiv").html('')
+        var url2 = "http://" + imgUrlPrefix + "/port" + data.stationIP + "/" + getYMDStr(data.evtTime) + "/" + data.idLocal + "-Image.jpg"
+        var img2 = '<a target="_blank" href="' + url2 + '" ><img id="chebodyImg" src="' + url2 + '" class="popup" " width=\'80\' height=\'60\'/></a>'
+        $("#chebodyDiv").append(img2)
     }
 
     function querenchuli(obj){
