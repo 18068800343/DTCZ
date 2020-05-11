@@ -531,7 +531,7 @@
                     data: {
                     },
                     success: function (json) {
-                        var path="http://"+json.imgUrlPrefix+"/port"+full.stationIP+"/"+full.idLocal+"-Image.jpg"
+                        var path="http://"+json.imgUrlPrefix+"/port"+full.stationIP+"/" + getYMDStr(data.evtTime) + "/" +full.idLocal+"-Image.jpg"
                         url="<a target='_blank' href="+path+"><img src="+path+"  width='50' height='40'/>"
                     }
                 });
