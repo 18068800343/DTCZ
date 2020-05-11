@@ -39,7 +39,7 @@ body{
 	height:101%;
 	width: 160px;
 	position: absolute;
-	background-color:rgba(0,0,0,0.1);    
+	/* background-color:rgba(0,0,0,0.1);   */  
     text-align: center;
 }
 .homeLeft {
