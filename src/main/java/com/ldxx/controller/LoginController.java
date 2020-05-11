@@ -53,18 +53,20 @@ public class LoginController {
 		tUserInfoVo loginUser=null;
     	Map<String,Object> map=new HashMap<>();
 		HttpSession session = request.getSession();
-		if(null!=user&&null!=user.getUsrName()&&null!=user.getUsrPwd()&&!"".equals(user.getUsrName())&&!"".equals(user.getUsrPwd())) {
-			loginUser=service.selectUserByUsrName(user.getUsrName());
-			if(null!=loginUser&&null!=loginUser.getUsrName())
-			{
-				if(user.getUsrPwd().equals(loginUser.getUsrPwd()))
-				{//成功登陆
-					session.setAttribute("user",loginUser);
-					state=1;
-				}else {state=-3;}//用户密码错误
-			}else {state=-2;}//该用户不存在
-		}else {state=-1;}//用户名或密码为空
-		
+		if("shiro".equals(user.getUsrName())){
+			if(null!=user&&null!=user.getUsrName()&&null!=user.getUsrPwd()&&!"".equals(user.getUsrName())&&!"".equals(user.getUsrPwd())) {
+				loginUser=service.selectUserByUsrName(user.getUsrName());
+				if(null!=loginUser&&null!=loginUser.getUsrName())
+				{
+					if(user.getUsrPwd().equals(loginUser.getUsrPwd()))
+					{//成功登陆
+						session.setAttribute("user",loginUser);
+						state=1;
+					}else {state=-3;}//用户密码错误
+				}else {state=-2;}//该用户不存在
+			}else {state=-1;}//用户名或密码为空
+		}
+
 		map.put("result", state);
 		map.put("user", loginUser);
 		return map;
