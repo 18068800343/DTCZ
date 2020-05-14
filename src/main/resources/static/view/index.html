@@ -45,8 +45,8 @@
 
 <body>
 <!--导航栏开始-->
-<div class="col-xs-12 daohang"  style="position:fixed;z-index:1">
-	<!-- <img src="img/首页logo.png" /> -->
+<!-- <div class="col-xs-12 daohang"  style="position:fixed;z-index:1;display:none;">
+	<img src="img/首页logo.png" />
 	<span>动态称重数据管理</span>
 	<div class="rightD">
 		<i></i>
@@ -58,14 +58,14 @@
 			<a onclick="exit()" id="tuichu"></a>
 		</p>
 	</div>
-</div>
+</div> -->
 <!--导航栏结束-->
 <!--左半部分开始-->
 <div id="leftTab" style="position:fixed">
 	<a href="javascript:void(0);" lang="home" data-gundong="true"  target="iframe_a" class="Pa yijicaidan" name="yi" style="margin-top:40%;">首页</a>
 	<a href="javascript:void(0);" lang='shishijiance'  target="iframe_a" class="Pb yijicaidan" name="yi" id="pb">实时监测</a>
 	<a href="javascript:void(0);" lang='tongjitable' target="iframe_a" class="Pc yijicaidan"name="yi">数据查询</a>
-	<a href="javascript:void(0);" lang='tongjitableyichang' target="iframe_a" class="Pm yijicaidan"name="yi">异常数据</a>
+<!--	<a href="javascript:void(0);" lang='tongjitableyichang' target="iframe_a" class="Pc yijicaidan"name="yi">异常数据</a>-->
 	<a href="javascript:void(0);" lang='tongjifenxi' data-gundong="true" target="iframe_a" name="yi" class="Pd yijicaidan">统计分析</a>
 	<a href="javascript:void(0);" lang='yujingguanli' target="iframe_a" class="Pk yijicaidan" name="yi">预警管理</a>
 	<a href="javascript:void(0);" lang='report' target="iframe_a" class="Pl yijicaidan" name="yi">报告管理</a>
@@ -149,6 +149,14 @@
 <!--<script src="js/layui.js" type="text/javascript" charset="utf-8"></script>-->
 <script src="js/quanxian.js"></script>
 <script type="text/javascript">
+	
+	//注意：选项卡 依赖 element 模块，否则无法进行功能性操作
+layui.use('element', function(){
+  var element = layui.element;
+  
+  //…
+});
+
 $('#leftTab a').bind('click', function () {
 	let name = $(this).attr('lang');
 	if(undefined!=name&&null!=name){
