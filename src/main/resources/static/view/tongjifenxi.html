@@ -2238,10 +2238,7 @@
                 avgLaneNo: 0,
             },
             error: function (msg) {
-                $(".errorMsg1").html('无数据').css({
-                    "margin-left": "30px",
-                    "color": "red",
-                })
+
                 let CheXingNum = [0, 0, 0, 0, 0];
                 let CheXingNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                 setCheXingNumEChars(CheXingNum, CheXingNumbili);
@@ -2265,11 +2262,11 @@
                     CheXingNum.push(json.axlesCount5)
                     CheXingNum.push(json.axlesCount6)
                     if (json.avgCount != 0) {
-                        CheXingNumbili.push((json.axlesCount2 / json.avgCount).toFixed(2) + '%')
-                        CheXingNumbili.push((json.axlesCount3 / json.avgCount).toFixed(2) + '%')
-                        CheXingNumbili.push((json.axlesCount4 / json.avgCount).toFixed(2) + '%')
-                        CheXingNumbili.push((json.axlesCount5 / json.avgCount).toFixed(2) + '%')
-                        CheXingNumbili.push((json.axlesCount6 / json.avgCount).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount2 / json.avgCount*100).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount3 / json.avgCount*100).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount4 / json.avgCount*100).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount5 / json.avgCount*100).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount6 / json.avgCount*100).toFixed(2) + '%')
                     } else {
                         CheXingNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
@@ -2283,11 +2280,11 @@
                     ChaoZaiNum.push(json.avgOverloadCount5)
                     ChaoZaiNum.push(json.avgOverloadCount6)
                     if (json.avgOverloadCount != 0) {
-                        ChaoZaiNumbili.push((json.avgOverloadCount2 / json.avgOverloadCount).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json.avgOverloadCount3 / json.avgOverloadCount).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json.avgOverloadCount4 / json.avgOverloadCount).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json.avgOverloadCount5 / json.avgOverloadCount).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json.avgOverloadCount6 / json.avgOverloadCount).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount2 / json.avgOverloadCount*100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount3 / json.avgOverloadCount*100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount4 / json.avgOverloadCount*100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount5 / json.avgOverloadCount*100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount6 / json.avgOverloadCount*100).toFixed(2) + '%')
                     } else {
                         ChaoZaiNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
@@ -2301,11 +2298,13 @@
                     ChaoZaiLvNum.push(json.avgOverloadRatio5.toFixed(2))
                     ChaoZaiLvNum.push(json.avgOverloadRatio6.toFixed(2))
                     if (json.avgOverloadRatio != 0) {
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio2.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio3.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio4.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio5.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio6.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
+                        var avgOverloadRatio=json.avgOverloadRatio
+                        //var avgOverloadRatio=(json.avgOverloadRatio2+json.avgOverloadRatio3+json.avgOverloadRatio4+json.avgOverloadRatio5+json.avgOverloadRatio6).toFixed(2)
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio2.toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio3.toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio4.toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio5.toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio6.toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
                     } else {
                         ChaoZaiLvNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
@@ -2327,7 +2326,7 @@
         }
         $.ajax({
             type: 'POST',
-            url: '/tAvgDay/gettAvgDayByIpAndTime',
+            url: '/tAvgDay/gettAvgDayColumnByCompanyNameAndTime_lgs',
             dataType: 'json',
             async: false,
             data: {
@@ -2336,10 +2335,7 @@
                 avgLaneNo: 0,
             },
             error: function (msg) {
-                $(".errorMsg1").html('无数据').css({
-                    "margin-left": "30px",
-                    "color": "red",
-                })
+
                 let CheXingNum = [0, 0, 0, 0, 0];
                 let CheXingNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                 setCheXingNumEChars_lgs(CheXingNum, CheXingNumbili);
@@ -2357,17 +2353,18 @@
                     $(".errorMsg1").html('')
                     let CheXingNum = new Array();
                     let CheXingNumbili = new Array();
-                    CheXingNum.push(json.axlesCount2)
-                    CheXingNum.push(json.axlesCount3)
-                    CheXingNum.push(json.axlesCount4)
-                    CheXingNum.push(json.axlesCount5)
-                    CheXingNum.push(json.axlesCount6)
-                    if (json.avgCount != 0) {
-                        CheXingNumbili.push((json.axlesCount2 / json.avgCount).toFixed(2) + '%')
-                        CheXingNumbili.push((json.axlesCount3 / json.avgCount).toFixed(2) + '%')
-                        CheXingNumbili.push((json.axlesCount4 / json.avgCount).toFixed(2) + '%')
-                        CheXingNumbili.push((json.axlesCount5 / json.avgCount).toFixed(2) + '%')
-                        CheXingNumbili.push((json.axlesCount6 / json.avgCount).toFixed(2) + '%')
+                    CheXingNum.push(json[0].column6)
+                    CheXingNum.push(json[0].column7)
+                    CheXingNum.push(json[0].column8)
+                    CheXingNum.push(json[0].column9)
+                    CheXingNum.push(json[0].column10)
+                    if (json[0].column5 != 0) {
+                        var avgCount=json[0].column5
+                        CheXingNumbili.push((json[0].column6 / avgCount*100).toFixed(2) + '%')
+                        CheXingNumbili.push((json[0].column7 / avgCount*100).toFixed(2) + '%')
+                        CheXingNumbili.push((json[0].column8 / avgCount*100).toFixed(2) + '%')
+                        CheXingNumbili.push((json[0].column9 / avgCount*100).toFixed(2) + '%')
+                        CheXingNumbili.push((json[0].column10 / avgCount*100).toFixed(2) + '%')
                     } else {
                         CheXingNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
@@ -2375,17 +2372,18 @@
 
                     let ChaoZaiNum = new Array();
                     let ChaoZaiNumbili = new Array();
-                    ChaoZaiNum.push(json.avgOverloadCount2)
-                    ChaoZaiNum.push(json.avgOverloadCount3)
-                    ChaoZaiNum.push(json.avgOverloadCount4)
-                    ChaoZaiNum.push(json.avgOverloadCount5)
-                    ChaoZaiNum.push(json.avgOverloadCount6)
-                    if (json.avgOverloadCount != 0) {
-                        ChaoZaiNumbili.push((json.avgOverloadCount2 / json.avgOverloadCount).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json.avgOverloadCount3 / json.avgOverloadCount).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json.avgOverloadCount4 / json.avgOverloadCount).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json.avgOverloadCount5 / json.avgOverloadCount).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json.avgOverloadCount6 / json.avgOverloadCount).toFixed(2) + '%')
+                    ChaoZaiNum.push(json[0].column12)
+                    ChaoZaiNum.push(json[0].column13)
+                    ChaoZaiNum.push(json[0].column14)
+                    ChaoZaiNum.push(json[0].column15)
+                    ChaoZaiNum.push(json[0].column16)
+                    if (json[0].column11 != 0) {
+                        var avgOverloadCount=json[0].column11
+                        ChaoZaiNumbili.push((json[0].column12 / avgOverloadCount*100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json[0].column13 / avgOverloadCount*100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json[0].column14 / avgOverloadCount*100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json[0].column15 / avgOverloadCount*100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json[0].column16 / avgOverloadCount*100).toFixed(2) + '%')
                     } else {
                         ChaoZaiNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
@@ -2393,17 +2391,19 @@
 
                     let ChaoZaiLvNum = new Array();
                     let ChaoZaiLvNumbili = new Array();
-                    ChaoZaiLvNum.push(json.avgOverloadRatio2.toFixed(2))
-                    ChaoZaiLvNum.push(json.avgOverloadRatio3.toFixed(2))
-                    ChaoZaiLvNum.push(json.avgOverloadRatio4.toFixed(2))
-                    ChaoZaiLvNum.push(json.avgOverloadRatio5.toFixed(2))
-                    ChaoZaiLvNum.push(json.avgOverloadRatio6.toFixed(2))
-                    if (json.avgOverloadRatio != 0) {
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio2.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio3.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio4.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio5.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio6.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
+                    ChaoZaiLvNum.push((json[0].column18/100).toFixed(2))
+                    ChaoZaiLvNum.push((json[0].column19/100).toFixed(2))
+                    ChaoZaiLvNum.push((json[0].column20/100).toFixed(2))
+                    ChaoZaiLvNum.push((json[0].column21/100).toFixed(2))
+                    ChaoZaiLvNum.push((json[0].column22/100).toFixed(2))
+                    if (json[0].column17 != 0) {
+                        var avgOverloadRatio=json[0].column17/100
+                        //var avgOverloadRatio=((json[0].column18/100)+(json[0].column19/100)+(json[0].column20/100)+(json[0].column21/100)+(json[0].column22/100)).toFixed(2)
+                        ChaoZaiLvNumbili.push(((json[0].column18/100).toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push(((json[0].column19/100).toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push(((json[0].column20/100).toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push(((json[0].column21/100).toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push(((json[0].column22/100).toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
                     } else {
                         ChaoZaiLvNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
@@ -2425,19 +2425,16 @@
         }
         $.ajax({
             type: 'POST',
-            url: '/tAvgDay/gettAvgDayByIpAndTime',
+            url: '/tAvgDay/gettAvgDayColumnByCompanyNameAndTime_sj',
             dataType: 'json',
             async: false,
             data: {
-                stationIP: stationPort,
+                provinceName: stationPort,
                 avgTime: startTime,
                 avgLaneNo: 0,
             },
             error: function (msg) {
-                $(".errorMsg1").html('无数据').css({
-                    "margin-left": "30px",
-                    "color": "red",
-                })
+
                 let CheXingNum = [0, 0, 0, 0, 0];
                 let CheXingNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                 setCheXingNumEChars_sj(CheXingNum, CheXingNumbili);
@@ -2455,17 +2452,18 @@
                     $(".errorMsg1").html('')
                     let CheXingNum = new Array();
                     let CheXingNumbili = new Array();
-                    CheXingNum.push(json.axlesCount2)
-                    CheXingNum.push(json.axlesCount3)
-                    CheXingNum.push(json.axlesCount4)
-                    CheXingNum.push(json.axlesCount5)
-                    CheXingNum.push(json.axlesCount6)
-                    if (json.avgCount != 0) {
-                        CheXingNumbili.push((json.axlesCount2 / json.avgCount).toFixed(2) + '%')
-                        CheXingNumbili.push((json.axlesCount3 / json.avgCount).toFixed(2) + '%')
-                        CheXingNumbili.push((json.axlesCount4 / json.avgCount).toFixed(2) + '%')
-                        CheXingNumbili.push((json.axlesCount5 / json.avgCount).toFixed(2) + '%')
-                        CheXingNumbili.push((json.axlesCount6 / json.avgCount).toFixed(2) + '%')
+                    CheXingNum.push(json[0].column6)
+                    CheXingNum.push(json[0].column7)
+                    CheXingNum.push(json[0].column8)
+                    CheXingNum.push(json[0].column9)
+                    CheXingNum.push(json[0].column10)
+                    if (json[0].column5 != 0) {
+                        var avgCount=json[0].column5
+                        CheXingNumbili.push((json[0].column6 / avgCount*100).toFixed(2) + '%')
+                        CheXingNumbili.push((json[0].column7 / avgCount*100).toFixed(2) + '%')
+                        CheXingNumbili.push((json[0].column8 / avgCount*100).toFixed(2) + '%')
+                        CheXingNumbili.push((json[0].column9 / avgCount*100).toFixed(2) + '%')
+                        CheXingNumbili.push((json[0].column10 / avgCount*100).toFixed(2) + '%')
                     } else {
                         CheXingNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
@@ -2473,17 +2471,18 @@
 
                     let ChaoZaiNum = new Array();
                     let ChaoZaiNumbili = new Array();
-                    ChaoZaiNum.push(json.avgOverloadCount2)
-                    ChaoZaiNum.push(json.avgOverloadCount3)
-                    ChaoZaiNum.push(json.avgOverloadCount4)
-                    ChaoZaiNum.push(json.avgOverloadCount5)
-                    ChaoZaiNum.push(json.avgOverloadCount6)
-                    if (json.avgOverloadCount != 0) {
-                        ChaoZaiNumbili.push((json.avgOverloadCount2 / json.avgOverloadCount).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json.avgOverloadCount3 / json.avgOverloadCount).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json.avgOverloadCount4 / json.avgOverloadCount).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json.avgOverloadCount5 / json.avgOverloadCount).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json.avgOverloadCount6 / json.avgOverloadCount).toFixed(2) + '%')
+                    ChaoZaiNum.push(json[0].column12)
+                    ChaoZaiNum.push(json[0].column13)
+                    ChaoZaiNum.push(json[0].column14)
+                    ChaoZaiNum.push(json[0].column15)
+                    ChaoZaiNum.push(json[0].column16)
+                    if (json[0].column11 != 0) {
+                        var avgOverloadCount=json[0].column11
+                        ChaoZaiNumbili.push((json[0].column12 / avgOverloadCount*100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json[0].column13 / avgOverloadCount*100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json[0].column14 / avgOverloadCount*100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json[0].column15 / avgOverloadCount*100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json[0].column16 / avgOverloadCount*100).toFixed(2) + '%')
                     } else {
                         ChaoZaiNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
@@ -2491,17 +2490,19 @@
 
                     let ChaoZaiLvNum = new Array();
                     let ChaoZaiLvNumbili = new Array();
-                    ChaoZaiLvNum.push(json.avgOverloadRatio2.toFixed(2))
-                    ChaoZaiLvNum.push(json.avgOverloadRatio3.toFixed(2))
-                    ChaoZaiLvNum.push(json.avgOverloadRatio4.toFixed(2))
-                    ChaoZaiLvNum.push(json.avgOverloadRatio5.toFixed(2))
-                    ChaoZaiLvNum.push(json.avgOverloadRatio6.toFixed(2))
-                    if (json.avgOverloadRatio != 0) {
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio2.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio3.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio4.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio5.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio6.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
+                    ChaoZaiLvNum.push((json[0].column18/100).toFixed(2))
+                    ChaoZaiLvNum.push((json[0].column19/100).toFixed(2))
+                    ChaoZaiLvNum.push((json[0].column20/100).toFixed(2))
+                    ChaoZaiLvNum.push((json[0].column21/100).toFixed(2))
+                    ChaoZaiLvNum.push((json[0].column22/100).toFixed(2))
+                    if (json[0].column17 != 0) {
+                        var avgOverloadRatio=json[0].column17/100
+                        //var avgOverloadRatio=((json[0].column18/100)+(json[0].column19/100)+(json[0].column20/100)+(json[0].column21/100)+(json[0].column22/100)).toFixed(2)
+                        ChaoZaiLvNumbili.push(((json[0].column18/100).toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push(((json[0].column19/100).toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push(((json[0].column20/100).toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push(((json[0].column21/100).toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push(((json[0].column22/100).toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
                     } else {
                         ChaoZaiLvNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
@@ -3575,10 +3576,7 @@
                 avgLaneNo: 0,
             },
             error: function (msg) {
-                $(".errorMsg2").html('无数据').css({
-                    "margin-left": "30px",
-                    "color": "red",
-                })
+
                 let CheXingNum = [0, 0, 0, 0, 0];
                 let CheXingNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                 setCheXingNumEChars2(CheXingNum, CheXingNumbili);
@@ -3602,11 +3600,11 @@
                     CheXingNum.push(json.axlesCount5)
                     CheXingNum.push(json.axlesCount6)
                     if (json.avgCount != 0) {
-                        CheXingNumbili.push((json.axlesCount2 / json.avgCount).toFixed(2) + '%')
-                        CheXingNumbili.push((json.axlesCount3 / json.avgCount).toFixed(2) + '%')
-                        CheXingNumbili.push((json.axlesCount4 / json.avgCount).toFixed(2) + '%')
-                        CheXingNumbili.push((json.axlesCount5 / json.avgCount).toFixed(2) + '%')
-                        CheXingNumbili.push((json.axlesCount6 / json.avgCount).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount2 / json.avgCount*100).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount3 / json.avgCount*100).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount4 / json.avgCount*100).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount5 / json.avgCount*100).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount6 / json.avgCount*100).toFixed(2) + '%')
                     } else {
                         CheXingNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
@@ -3620,11 +3618,11 @@
                     ChaoZaiNum.push(json.avgOverloadCount5)
                     ChaoZaiNum.push(json.avgOverloadCount6)
                     if (json.avgOverloadCount != 0) {
-                        ChaoZaiNumbili.push((json.avgOverloadCount2 / json.avgOverloadCount).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json.avgOverloadCount3 / json.avgOverloadCount).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json.avgOverloadCount4 / json.avgOverloadCount).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json.avgOverloadCount5 / json.avgOverloadCount).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json.avgOverloadCount6 / json.avgOverloadCount).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount2 / json.avgOverloadCount*100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount3 / json.avgOverloadCount*100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount4 / json.avgOverloadCount*100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount5 / json.avgOverloadCount*100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount6 / json.avgOverloadCount*100).toFixed(2) + '%')
                     } else {
                         ChaoZaiNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
@@ -3638,11 +3636,13 @@
                     ChaoZaiLvNum.push(json.avgOverloadRatio5.toFixed(2))
                     ChaoZaiLvNum.push(json.avgOverloadRatio6.toFixed(2))
                     if (json.avgOverloadRatio != 0) {
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio2.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio3.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio4.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio5.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio6.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
+                        var avgOverloadRatio=json.avgOverloadRatio
+                        //var avgOverloadRatio=(json.avgOverloadRatio2+json.avgOverloadRatio3+json.avgOverloadRatio4+json.avgOverloadRatio5+json.avgOverloadRatio6).toFixed(2)
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio2.toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio3.toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio4.toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio5.toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio6.toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
                     } else {
                         ChaoZaiLvNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
@@ -3665,19 +3665,16 @@
         $("#bottom_2").empty()*/
         $.ajax({
             type: 'POST',
-            url: '/tAvgDay/gettAvgMonthByIpAndTime',
+            url: '/tAvgDay/gettAvgDayColumnByIpAndTimeMonth_lgs',
             dataType: 'json',
             async: false,
             data: {
-                stationIP: stationPort,
+                companyName: stationPort,
                 avgTime: startTime,
                 avgLaneNo: 0,
             },
             error: function (msg) {
-                $(".errorMsg2").html('无数据').css({
-                    "margin-left": "30px",
-                    "color": "red",
-                })
+
                 let CheXingNum = [0, 0, 0, 0, 0];
                 let CheXingNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                 setCheXingNumEChars2_lgs(CheXingNum, CheXingNumbili);
@@ -3695,17 +3692,18 @@
                     $(".errorMsg2").html('')
                     let CheXingNum = [];
                     let CheXingNumbili = [];
-                    CheXingNum.push(json.axlesCount2)
-                    CheXingNum.push(json.axlesCount3)
-                    CheXingNum.push(json.axlesCount4)
-                    CheXingNum.push(json.axlesCount5)
-                    CheXingNum.push(json.axlesCount6)
-                    if (json.avgCount != 0) {
-                        CheXingNumbili.push((json.axlesCount2 / json.avgCount).toFixed(2) + '%')
-                        CheXingNumbili.push((json.axlesCount3 / json.avgCount).toFixed(2) + '%')
-                        CheXingNumbili.push((json.axlesCount4 / json.avgCount).toFixed(2) + '%')
-                        CheXingNumbili.push((json.axlesCount5 / json.avgCount).toFixed(2) + '%')
-                        CheXingNumbili.push((json.axlesCount6 / json.avgCount).toFixed(2) + '%')
+                    CheXingNum.push(json[0].column6)
+                    CheXingNum.push(json[0].column7)
+                    CheXingNum.push(json[0].column8)
+                    CheXingNum.push(json[0].column9)
+                    CheXingNum.push(json[0].column10)
+                    if (json[0].column5 != 0) {
+                        var avgCount=json[0].column5
+                        CheXingNumbili.push((json[0].column6 / avgCount*100).toFixed(2) + '%')
+                        CheXingNumbili.push((json[0].column7 / avgCount*100).toFixed(2) + '%')
+                        CheXingNumbili.push((json[0].column8 / avgCount*100).toFixed(2) + '%')
+                        CheXingNumbili.push((json[0].column9 / avgCount*100).toFixed(2) + '%')
+                        CheXingNumbili.push((json[0].column10 / avgCount*100).toFixed(2) + '%')
                     } else {
                         CheXingNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
@@ -3713,17 +3711,18 @@
 
                     let ChaoZaiNum = [];
                     let ChaoZaiNumbili = [];
-                    ChaoZaiNum.push(json.avgOverloadCount2)
-                    ChaoZaiNum.push(json.avgOverloadCount3)
-                    ChaoZaiNum.push(json.avgOverloadCount4)
-                    ChaoZaiNum.push(json.avgOverloadCount5)
-                    ChaoZaiNum.push(json.avgOverloadCount6)
-                    if (json.avgOverloadCount != 0) {
-                        ChaoZaiNumbili.push((json.avgOverloadCount2 / json.avgOverloadCount).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json.avgOverloadCount3 / json.avgOverloadCount).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json.avgOverloadCount4 / json.avgOverloadCount).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json.avgOverloadCount5 / json.avgOverloadCount).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json.avgOverloadCount6 / json.avgOverloadCount).toFixed(2) + '%')
+                    ChaoZaiNum.push(json[0].column12)
+                    ChaoZaiNum.push(json[0].column13)
+                    ChaoZaiNum.push(json[0].column14)
+                    ChaoZaiNum.push(json[0].column15)
+                    ChaoZaiNum.push(json[0].column16)
+                    if (json[0].column11 != 0) {
+                        var avgOverloadCount=json[0].column11
+                        ChaoZaiNumbili.push((json[0].column12 / avgOverloadCount*100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json[0].column13 / avgOverloadCount*100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json[0].column14 / avgOverloadCount*100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json[0].column15 / avgOverloadCount*100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json[0].column16 / avgOverloadCount*100).toFixed(2) + '%')
                     } else {
                         ChaoZaiNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
@@ -3731,17 +3730,19 @@
 
                     let ChaoZaiLvNum = [];
                     let ChaoZaiLvNumbili = [];
-                    ChaoZaiLvNum.push(json.avgOverloadRatio2.toFixed(2))
-                    ChaoZaiLvNum.push(json.avgOverloadRatio3.toFixed(2))
-                    ChaoZaiLvNum.push(json.avgOverloadRatio4.toFixed(2))
-                    ChaoZaiLvNum.push(json.avgOverloadRatio5.toFixed(2))
-                    ChaoZaiLvNum.push(json.avgOverloadRatio6.toFixed(2))
-                    if (json.avgOverloadRatio != 0) {
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio2.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio3.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio4.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio5.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio6.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
+                    ChaoZaiLvNum.push((json[0].column18/100).toFixed(2))
+                    ChaoZaiLvNum.push((json[0].column19/100).toFixed(2))
+                    ChaoZaiLvNum.push((json[0].column20/100).toFixed(2))
+                    ChaoZaiLvNum.push((json[0].column21/100).toFixed(2))
+                    ChaoZaiLvNum.push((json[0].column22/100).toFixed(2))
+                    if (json[0].column17 != 0) {
+                        var avgOverloadRatio=json[0].column17/100
+                        //var avgOverloadRatio=((json[0].column18/100)+(json[0].column19/100)+(json[0].column20/100)+(json[0].column21/100)+(json[0].column22/100)).toFixed(2)
+                        ChaoZaiLvNumbili.push(((json[0].column18/100).toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push(((json[0].column19/100).toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push(((json[0].column20/100).toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push(((json[0].column21/100).toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push(((json[0].column22/100).toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
                     } else {
                         ChaoZaiLvNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
@@ -3765,19 +3766,16 @@
         $("#bottom_2").empty()*/
         $.ajax({
             type: 'POST',
-            url: '/tAvgDay/gettAvgMonthByIpAndTime',
+            url: '/tAvgDay/gettAvgDayColumnByIpAndTimeMonth_sj',
             dataType: 'json',
             async: false,
             data: {
-                stationIP: stationPort,
+                provinceName: stationPort,
                 avgTime: startTime,
                 avgLaneNo: 0,
             },
             error: function (msg) {
-                $(".errorMsg2").html('无数据').css({
-                    "margin-left": "30px",
-                    "color": "red",
-                })
+
                 let CheXingNum = [0, 0, 0, 0, 0];
                 let CheXingNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                 setCheXingNumEChars2_sj(CheXingNum, CheXingNumbili);
@@ -3795,17 +3793,18 @@
                     $(".errorMsg2").html('')
                     let CheXingNum = [];
                     let CheXingNumbili = [];
-                    CheXingNum.push(json.axlesCount2)
-                    CheXingNum.push(json.axlesCount3)
-                    CheXingNum.push(json.axlesCount4)
-                    CheXingNum.push(json.axlesCount5)
-                    CheXingNum.push(json.axlesCount6)
-                    if (json.avgCount != 0) {
-                        CheXingNumbili.push((json.axlesCount2 / json.avgCount).toFixed(2) + '%')
-                        CheXingNumbili.push((json.axlesCount3 / json.avgCount).toFixed(2) + '%')
-                        CheXingNumbili.push((json.axlesCount4 / json.avgCount).toFixed(2) + '%')
-                        CheXingNumbili.push((json.axlesCount5 / json.avgCount).toFixed(2) + '%')
-                        CheXingNumbili.push((json.axlesCount6 / json.avgCount).toFixed(2) + '%')
+                    CheXingNum.push(json[0].column6)
+                    CheXingNum.push(json[0].column7)
+                    CheXingNum.push(json[0].column8)
+                    CheXingNum.push(json[0].column9)
+                    CheXingNum.push(json[0].column10)
+                    if (json[0].column5 != 0) {
+                        var avgCount=json[0].column5
+                        CheXingNumbili.push((json[0].column6 / avgCount*100).toFixed(2) + '%')
+                        CheXingNumbili.push((json[0].column7 / avgCount*100).toFixed(2) + '%')
+                        CheXingNumbili.push((json[0].column8 / avgCount*100).toFixed(2) + '%')
+                        CheXingNumbili.push((json[0].column9 / avgCount*100).toFixed(2) + '%')
+                        CheXingNumbili.push((json[0].column10 / avgCount*100).toFixed(2) + '%')
                     } else {
                         CheXingNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
@@ -3813,17 +3812,18 @@
 
                     let ChaoZaiNum = [];
                     let ChaoZaiNumbili = [];
-                    ChaoZaiNum.push(json.avgOverloadCount2)
-                    ChaoZaiNum.push(json.avgOverloadCount3)
-                    ChaoZaiNum.push(json.avgOverloadCount4)
-                    ChaoZaiNum.push(json.avgOverloadCount5)
-                    ChaoZaiNum.push(json.avgOverloadCount6)
-                    if (json.avgOverloadCount != 0) {
-                        ChaoZaiNumbili.push((json.avgOverloadCount2 / json.avgOverloadCount).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json.avgOverloadCount3 / json.avgOverloadCount).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json.avgOverloadCount4 / json.avgOverloadCount).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json.avgOverloadCount5 / json.avgOverloadCount).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json.avgOverloadCount6 / json.avgOverloadCount).toFixed(2) + '%')
+                    ChaoZaiNum.push(json[0].column12)
+                    ChaoZaiNum.push(json[0].column13)
+                    ChaoZaiNum.push(json[0].column14)
+                    ChaoZaiNum.push(json[0].column15)
+                    ChaoZaiNum.push(json[0].column16)
+                    if (json[0].column11 != 0) {
+                        var avgOverloadCount=json[0].column11
+                        ChaoZaiNumbili.push((json[0].column12 / avgOverloadCount*100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json[0].column13 / avgOverloadCount*100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json[0].column14 / avgOverloadCount*100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json[0].column15 / avgOverloadCount*100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json[0].column16 / avgOverloadCount*100).toFixed(2) + '%')
                     } else {
                         ChaoZaiNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
@@ -3831,17 +3831,19 @@
 
                     let ChaoZaiLvNum = [];
                     let ChaoZaiLvNumbili = [];
-                    ChaoZaiLvNum.push(json.avgOverloadRatio2.toFixed(2))
-                    ChaoZaiLvNum.push(json.avgOverloadRatio3.toFixed(2))
-                    ChaoZaiLvNum.push(json.avgOverloadRatio4.toFixed(2))
-                    ChaoZaiLvNum.push(json.avgOverloadRatio5.toFixed(2))
-                    ChaoZaiLvNum.push(json.avgOverloadRatio6.toFixed(2))
-                    if (json.avgOverloadRatio != 0) {
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio2.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio3.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio4.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio5.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio6.toFixed(2) / json.avgOverloadRatio).toFixed(2) + '%')
+                    ChaoZaiLvNum.push((json[0].column18/100).toFixed(2))
+                    ChaoZaiLvNum.push((json[0].column19/100).toFixed(2))
+                    ChaoZaiLvNum.push((json[0].column20/100).toFixed(2))
+                    ChaoZaiLvNum.push((json[0].column21/100).toFixed(2))
+                    ChaoZaiLvNum.push((json[0].column22/100).toFixed(2))
+                    if (json[0].column17 != 0) {
+                        var avgOverloadRatio=json[0].column17/100
+                        //var avgOverloadRatio=((json[0].column18/100)+(json[0].column19/100)+(json[0].column20/100)+(json[0].column21/100)+(json[0].column22/100)).toFixed(2)
+                        ChaoZaiLvNumbili.push(((json[0].column18/100).toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push(((json[0].column19/100).toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push(((json[0].column20/100).toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push(((json[0].column21/100).toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push(((json[0].column22/100).toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
                     } else {
                         ChaoZaiLvNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
