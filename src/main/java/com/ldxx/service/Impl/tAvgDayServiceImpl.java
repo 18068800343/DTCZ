@@ -22,18 +22,23 @@ public class tAvgDayServiceImpl implements tAvgDayService {
     private tAvgDayDao dao;
 
     @Override
-    public tAvgDay gettAvgDayByIpAndTime(String stationIP,  String avgTime,int avgLaneNo) {
-        return dao.gettAvgDayByIpAndTime(stationIP, avgTime,avgLaneNo);
+    public tAvgDay gettAvgDayByIpAndTime(String stationIP, String avgTime, int avgLaneNo) {
+        return dao.gettAvgDayByIpAndTime(stationIP, avgTime, avgLaneNo);
     }
 
     @Override
     public List<tAvgDayColumn> gettAvgDayColumnByIpAndTime(String stationIP, String avgTime, int avgLaneNo) {
-        return dao.gettAvgDayColumnByIpAndTime(stationIP, avgTime,avgLaneNo);
+        return dao.gettAvgDayColumnByIpAndTime(stationIP, avgTime, avgLaneNo);
+    }
+
+    @Override
+    public List<tAvgDayColumn> gettAvgDayColumnByIpAndTime_week(String stationIP, String avgTime, int avgLaneNo) {
+        return dao.gettAvgDayColumnByIpAndTime_week(stationIP, avgTime, avgLaneNo);
     }
 
     @Override
     public List<tAvgDayColumn> gettAvgDayColumnByIpAndTimeMonth(String stationIP, String avgTime, int avgLaneNo) {
-        return dao.gettAvgDayColumnByIpAndTimeMonth(stationIP, avgTime,avgLaneNo);
+        return dao.gettAvgDayColumnByIpAndTimeMonth(stationIP, avgTime, avgLaneNo);
     }
 
     @Override
@@ -50,12 +55,38 @@ public class tAvgDayServiceImpl implements tAvgDayService {
     }
 
     @Override
+    public Map<String, List<String>> getEchartsListByLaneNoAndColumn_week(String stationIP, String column, String laneNo) {
+        Map map = new HashMap();
+        Integer columnIndex = Integer.parseInt(column);
+        String columnName = dao.getColumnNameStrByTableName("t_avg_week").split(",")[columnIndex - 1];
+        List listX = dao.getEchartsListByLaneNoAndColumnX_week(stationIP, columnName, laneNo);
+        List listY = dao.getEchartsListByLaneNoAndColumnY_week(stationIP, columnName, laneNo);
+        map.put("y", listX);
+        map.put("x", listY);
+
+        return map;
+    }
+
+    @Override
     public Map<String, List<String>> getEchartsListByLaneNoAndColumn_lgs(String companyName, String column, String laneNo) {
         Map map = new HashMap();
         Integer columnIndex = Integer.parseInt(column);
-        String columnName = dao.getColumnNameStrByTableName("t_avg_day").split(",")[columnIndex - 1];
+        String columnName = dao.getColumnNameStrByTableName("t_avg_day_lgs").split(",")[columnIndex - 1];
         List listX = dao.getEchartsListByLaneNoAndColumnX_lgs(companyName, columnName, laneNo);
         List listY = dao.getEchartsListByLaneNoAndColumnY_lgs(companyName, columnName, laneNo);
+        map.put("y", listX);
+        map.put("x", listY);
+
+        return map;
+    }
+
+    @Override
+    public Map<String, List<String>> getEchartsListByLaneNoAndColumn_lgs_week(String companyName, String column, String laneNo) {
+        Map map = new HashMap();
+        Integer columnIndex = Integer.parseInt(column);
+        String columnName = dao.getColumnNameStrByTableName("t_avg_week_lgs").split(",")[columnIndex - 1];
+        List listX = dao.getEchartsListByLaneNoAndColumnX_lgs_week(companyName, columnName, laneNo);
+        List listY = dao.getEchartsListByLaneNoAndColumnY_lgs_week(companyName, columnName, laneNo);
         map.put("y", listX);
         map.put("x", listY);
 
@@ -69,6 +100,19 @@ public class tAvgDayServiceImpl implements tAvgDayService {
         String columnName = dao.getColumnNameStrByTableName("t_avg_day").split(",")[columnIndex - 1];
         List listX = dao.getEchartsListByLaneNoAndColumnX_sj(provinceName, columnName, laneNo);
         List listY = dao.getEchartsListByLaneNoAndColumnY_sj(provinceName, columnName, laneNo);
+        map.put("y", listX);
+        map.put("x", listY);
+
+        return map;
+    }
+
+    @Override
+    public Map<String, List<String>> getEchartsListByLaneNoAndColumn_sj_week(String provinceName, String column, String laneNo) {
+        Map map = new HashMap();
+        Integer columnIndex = Integer.parseInt(column);
+        String columnName = dao.getColumnNameStrByTableName("t_avg_week").split(",")[columnIndex - 1];
+        List listX = dao.getEchartsListByLaneNoAndColumnX_sj_week(provinceName, columnName, laneNo);
+        List listY = dao.getEchartsListByLaneNoAndColumnY_sj_week(provinceName, columnName, laneNo);
         map.put("y", listX);
         map.put("x", listY);
 

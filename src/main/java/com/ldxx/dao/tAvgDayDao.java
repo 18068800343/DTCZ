@@ -12,10 +12,15 @@ public interface tAvgDayDao {
 
     List<tAvgDayColumn> gettAvgDayColumnByIpAndTime(String stationIP, String avgTime, int avgLaneNo);
 
+    List<tAvgDayColumn> gettAvgDayColumnByIpAndTime_week(String stationIP, String avgTime, int avgLaneNo);
+
     List<tAvgDayColumn> gettAvgDayColumnByCompanyNameAndTime_lgs(String companyName, String avgTime, int avgLaneNo);
+
+    List<tAvgDayColumn> gettAvgDayColumnByCompanyNameAndTime_lgs_week(String companyName, String avgTime, int avgLaneNo);
 
     List<tAvgDayColumn> gettAvgDayColumnByCompanyNameAndTime_sj(String provinceName, String avgTime, int avgLaneNo);
 
+    List<tAvgDayColumn> gettAvgDayColumnByCompanyNameAndTime_sj_week(String provinceName, String avgTime, int avgLaneNo);
 
     List<tAvgDayColumn> gettAvgDayColumnByIpAndTimeMonth(String stationIP, String avgTime, int avgLaneNo);
 
@@ -27,13 +32,25 @@ public interface tAvgDayDao {
 
     List<String> getEchartsListByLaneNoAndColumnY(String stationIP, String columnName, String laneNo);
 
+    List<String> getEchartsListByLaneNoAndColumnX_week(String stationIP, String columnName, String laneNo);
+
+    List<String> getEchartsListByLaneNoAndColumnY_week(String stationIP, String columnName, String laneNo);
+
     List<String> getEchartsListByLaneNoAndColumnX_lgs(String companyName, String columnName, String laneNo);
 
     List<String> getEchartsListByLaneNoAndColumnY_lgs(String companyName, String columnName, String laneNo);
 
+    List<String> getEchartsListByLaneNoAndColumnX_lgs_week(String companyName, String columnName, String laneNo);
+
+    List<String> getEchartsListByLaneNoAndColumnY_lgs_week(String companyName, String columnName, String laneNo);
+
     List<String> getEchartsListByLaneNoAndColumnX_sj(String provinceName, String columnName, String laneNo);
 
     List<String> getEchartsListByLaneNoAndColumnY_sj(String provinceName, String columnName, String laneNo);
+
+    List<String> getEchartsListByLaneNoAndColumnX_sj_week(String provinceName, String columnName, String laneNo);
+
+    List<String> getEchartsListByLaneNoAndColumnY_sj_week(String provinceName, String columnName, String laneNo);
 
     List<String> getEchartsListByLaneNoAndColumnXMonth(String stationIP, String columnName, String laneNo);
 
