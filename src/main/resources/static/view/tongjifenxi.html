@@ -112,14 +112,17 @@
         #myTabContent1Month {
             width: 100% !important;
         }
-        .layui-table{
-            width:100% !important;
+
+        .layui-table {
+            width: 100% !important;
         }
-        .pull-left{
-            width:100%;
+
+        .pull-left {
+            width: 100%;
         }
-        .tab-content{
-            width:100% !important;
+
+        .tab-content {
+            width: 100% !important;
         }
     </style>
 </head>
@@ -128,8 +131,11 @@
 <div class="form-group" id="rightTab" style="margin-top:-2%;">
     <!-- Nav tabs -->
     <ul class="nav nav-pills" role="tablist" style="margin-bottom:20px;">
-        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab"
+        <li role="presentation" class="active"><a href="#home_zhtj" aria-controls="home" role="tab"
                                                   data-toggle="tab">测站日统计</a></li>
+
+        <li role="presentation"><a href="#home" aria-controls="home" role="tab"
+                                   data-toggle="tab">测站日统计</a></li>
 
         <li role="presentation"><a href="#home_week" aria-controls="home" role="tab"
                                    data-toggle="tab">测站周统计</a></li>
@@ -151,7 +157,63 @@
     </ul>
     <!-- Tab panes -->
     <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="home">
+        <div role="tabpanel" class="tab-pane active" id="home_zhtj">
+            <div class="zhuti-content">
+                <div class="UpperPart">
+                    <div class="UpperPartL" style="width: 90%;margin-left: 5%;">
+                        <label class="col-sm-1	 control-label riqi"
+                               style="margin-left: -2%;width: 70px;line-height: 30px;font-size:16px;font-weight:500;">日期:</label>
+                        <div class="col-sm-2" style="width: 20%">
+                            <!-- 样式1 -->
+                            <input type="date" id="startTime_zhtj" value="请选择"
+                                   style="height: 34px;border-radius: 5px;box-shadow: none;width: 60%;border:1px solid #DDD;">
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="queding_zhtj()"
+                                style="width: 100px;margin-left:120px;background-color:#549CFD;border:none;">确定
+                        </button>
+                        <div class="jiance">
+                            <!--<button type="button" class="btn btn-primary" onclick="nowJianceSite()" data-toggle="modal" data-target="#allMsg1" style="width: 150px;background-color:#549CFD;border:1px solid #549CFD;">当前车道图</button>-->
+                        </div>
+                    </div>
+
+                    <div class="UpperPartR">
+
+                    </div>
+
+                </div>
+
+                <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief" style="">
+                    <form class="form-inline">
+                        <table class="table table-bordered table-condensed layui-table" id="table_zhtj">
+                            <thead>
+
+                            </thead>
+                            <tbody>
+                            <tr align="center">
+                                <td>总流量</td>
+                                <td>超载车辆数</td>
+                                <td>最大车重</td>
+                                <td>一级预警数量</td>
+                                <td>二级预警数量</td>
+                            </tr>
+                            <tr align="center">
+                                <td data-id="0,6"><a>8507</a></td>
+                                <td data-id="0,7"><a>90</a></td>
+                                <td data-id="0,8"><a>180</a></td>
+                                <td data-id="0,9"><a>170</a></td>
+                                <td data-id="0,10"><a>478</a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+
+
+            </div>
+        </div>
+
+
+        <div role="tabpanel" class="tab-pane" id="home">
             <div class="zhuti-content">
                 <div class="UpperPart">
                     <div class="UpperPartL" style="width: 90%;margin-left: 5%;">
@@ -202,7 +264,7 @@
                             <div style="width: 100%;">
                                 <li class="layui-this texth">各车型车辆数及比例</li>
                                 <div class="layui-tab-item layui-show">
-                                   <!--  <p class="errorMsg1" style="display: inline-block;"></p> -->
+                                    <!--  <p class="errorMsg1" style="display: inline-block;"></p> -->
                                     <div id="_top" class="col-xs-12"
                                          style="width:1200px;height: 400px;margin-top: -50px;margin:0 auto">
                                     </div>
@@ -212,7 +274,7 @@
                             <div style="width:100%;">
                                 <li class="layui-this texth">超载车辆数及比例</li>
                                 <div class="layui-tab-item layui-show">
-                                   <!--  <p class="errorMsg1" style="display: inline-block;"></p> -->
+                                    <!--  <p class="errorMsg1" style="display: inline-block;"></p> -->
                                     <div id="_right" style="width:1200px;height: 400px;margin-top: -50px;margin:0 auto">
                                         <!--右边-->
                                     </div>
@@ -370,7 +432,7 @@
                             <div style="width: 100%;">
                                 <li class="layui-this texth">各车型车辆数及比例</li>
                                 <div class="layui-tab-item layui-show">
-                                   <!--  <p class="errorMsg2" style="display: inline-block;"></p> -->
+                                    <!--  <p class="errorMsg2" style="display: inline-block;"></p> -->
                                     <div id="_top2" style="width:1300px;height: 400px;margin-top: -50px;margin:0 auto">
                                     </div>
                                 </div>
@@ -379,7 +441,7 @@
                             <div style="width: 100%;">
                                 <li class="layui-this texth">超载车辆数及比例</li>
                                 <div class="layui-tab-item layui-show" style="margin-top: 70px;">
-                                   <!--  <p class="errorMsg2" style="display: inline-block;"></p> -->
+                                    <!--  <p class="errorMsg2" style="display: inline-block;"></p> -->
                                     <div id="_right2"
                                          style="width:1300px;height: 400px;margin-top: -50px;margin:0 auto">
                                         <!--右边-->
@@ -466,7 +528,7 @@
                             <div style="width:100%;">
                                 <li class="layui-this texth">超载车辆数及比例</li>
                                 <div class="layui-tab-item layui-show">
-                                   <!--  <p class="errorMsg1" style="display: inline-block;"></p> -->
+                                    <!--  <p class="errorMsg1" style="display: inline-block;"></p> -->
                                     <div id="_right_lgs"
                                          style="width:1200px;height: 400px;margin-top: -50px;margin:0 auto">
                                         <!--右边-->
@@ -636,7 +698,7 @@
                             <div style="width: 100%;">
                                 <li class="layui-this texth">超载车辆数及比例</li>
                                 <div class="layui-tab-item layui-show" style="margin-top: 70px;">
-                                   <!--  <p class="errorMsg2" style="display: inline-block;"></p> -->
+                                    <!--  <p class="errorMsg2" style="display: inline-block;"></p> -->
                                     <div id="_right2_lgs"
                                          style="width:1300px;height: 400px;margin-top: -50px;margin:0 auto">
                                         <!--右边-->
@@ -647,7 +709,7 @@
                             <div style="width: 100%;">
                                 <li class="layui-this texth">平均超载率</li>
                                 <div class="layui-tab-item layui-show">
-                                   <!--  <p class="errorMsg2" style="display: inline-block;"></p> -->
+                                    <!--  <p class="errorMsg2" style="display: inline-block;"></p> -->
                                     <div id="bottom_2_lgs"
                                          style="width:1300px;height: 400px;margin-top: -50px;margin:0 auto">
                                     </div>
@@ -725,7 +787,7 @@
                             <div style="width:100%;">
                                 <li class="layui-this texth">超载车辆数及比例</li>
                                 <div class="layui-tab-item layui-show">
-                                   <!--  <p class="errorMsg1" style="display: inline-block;"></p> -->
+                                    <!--  <p class="errorMsg1" style="display: inline-block;"></p> -->
                                     <div id="_right_sj"
                                          style="width:1200px;height: 400px;margin-top: -50px;margin:0 auto">
                                         <!--右边-->
@@ -886,7 +948,7 @@
                             <div style="width: 100%;">
                                 <li class="layui-this texth">各车型车辆数及比例</li>
                                 <div class="layui-tab-item layui-show">
-                                   <!--  <p class="errorMsg2" style="display: inline-block;"></p> -->
+                                    <!--  <p class="errorMsg2" style="display: inline-block;"></p> -->
                                     <div id="_top2_sj"
                                          style="width:1300px;height: 400px;margin-top: -50px;margin:0 auto">
                                     </div>
@@ -2802,6 +2864,7 @@
 <script src="js/dayAndMonthTongJiJs.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/dayAndMonthTongJiJs_lgs.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/dayAndMonthTongJiJs_sj.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/dayAndMonthTongJiJs_zhtj.js" type="text/javascript" charset="utf-8"></script>
 <script>
 
     $(document).ready(function () {
@@ -2902,7 +2965,7 @@
             //url: '/tUserInfo/selectUserById',
             url: '/login/getUser',
             dataType: 'json',
-            async:false,
+            async: false,
             data: {
                 //id:user.usrId,
             },
@@ -2910,12 +2973,12 @@
                 errMessage("请求UserController失败");
             },
             success: function (json) {
-                user=json;
+                user = json;
                 $("#stationPort").html('');
                 $("#stationPort_week").html('');
                 $("#stationPort2").html('');
-                if(json!=null){
-                    if(json.stationPort.indexOf(",")!=-1&&json.stationName.indexOf(",")!=-1) {
+                if (json != null) {
+                    if (json.stationPort.indexOf(",") != -1 && json.stationName.indexOf(",") != -1) {
                         let stationPort = json.stationPort.split(",");
                         let stationName = json.stationName.split(",");
                         for (let i = 0; i < stationPort.length; i++) {
@@ -3096,11 +3159,11 @@
                     CheXingNum.push(json.axlesCount5)
                     CheXingNum.push(json.axlesCount6)
                     if (json.avgCount != 0) {
-                        CheXingNumbili.push((json.axlesCount2 / json.avgCount*100).toFixed(2) + '%')
-                        CheXingNumbili.push((json.axlesCount3 / json.avgCount*100).toFixed(2) + '%')
-                        CheXingNumbili.push((json.axlesCount4 / json.avgCount*100).toFixed(2) + '%')
-                        CheXingNumbili.push((json.axlesCount5 / json.avgCount*100).toFixed(2) + '%')
-                        CheXingNumbili.push((json.axlesCount6 / json.avgCount*100).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount2 / json.avgCount * 100).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount3 / json.avgCount * 100).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount4 / json.avgCount * 100).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount5 / json.avgCount * 100).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount6 / json.avgCount * 100).toFixed(2) + '%')
                     } else {
                         CheXingNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
@@ -3114,11 +3177,11 @@
                     ChaoZaiNum.push(json.avgOverloadCount5)
                     ChaoZaiNum.push(json.avgOverloadCount6)
                     if (json.avgOverloadCount != 0) {
-                        ChaoZaiNumbili.push((json.avgOverloadCount2 / json.avgOverloadCount*100).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json.avgOverloadCount3 / json.avgOverloadCount*100).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json.avgOverloadCount4 / json.avgOverloadCount*100).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json.avgOverloadCount5 / json.avgOverloadCount*100).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json.avgOverloadCount6 / json.avgOverloadCount*100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount2 / json.avgOverloadCount * 100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount3 / json.avgOverloadCount * 100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount4 / json.avgOverloadCount * 100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount5 / json.avgOverloadCount * 100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount6 / json.avgOverloadCount * 100).toFixed(2) + '%')
                     } else {
                         ChaoZaiNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
@@ -3132,13 +3195,13 @@
                     ChaoZaiLvNum.push(json.avgOverloadRatio5.toFixed(2))
                     ChaoZaiLvNum.push(json.avgOverloadRatio6.toFixed(2))
                     if (json.avgOverloadRatio != 0) {
-                        var avgOverloadRatio=json.avgOverloadRatio
+                        var avgOverloadRatio = json.avgOverloadRatio
                         //var avgOverloadRatio=(json.avgOverloadRatio2+json.avgOverloadRatio3+json.avgOverloadRatio4+json.avgOverloadRatio5+json.avgOverloadRatio6).toFixed(2)
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio2.toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio3.toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio4.toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio5.toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio6.toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio2.toFixed(2) / avgOverloadRatio * 100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio3.toFixed(2) / avgOverloadRatio * 100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio4.toFixed(2) / avgOverloadRatio * 100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio5.toFixed(2) / avgOverloadRatio * 100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio6.toFixed(2) / avgOverloadRatio * 100).toFixed(2) + '%')
                     } else {
                         ChaoZaiLvNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
@@ -3196,12 +3259,12 @@
                     CheXingNum.push(json[0].column9)
                     CheXingNum.push(json[0].column10)
                     if (json[0].column5 != 0) {
-                        var avgCount=json[0].column5
-                        CheXingNumbili.push((json[0].column6 / avgCount*100).toFixed(2) + '%')
-                        CheXingNumbili.push((json[0].column7 / avgCount*100).toFixed(2) + '%')
-                        CheXingNumbili.push((json[0].column8 / avgCount*100).toFixed(2) + '%')
-                        CheXingNumbili.push((json[0].column9 / avgCount*100).toFixed(2) + '%')
-                        CheXingNumbili.push((json[0].column10 / avgCount*100).toFixed(2) + '%')
+                        var avgCount = json[0].column5
+                        CheXingNumbili.push((json[0].column6 / avgCount * 100).toFixed(2) + '%')
+                        CheXingNumbili.push((json[0].column7 / avgCount * 100).toFixed(2) + '%')
+                        CheXingNumbili.push((json[0].column8 / avgCount * 100).toFixed(2) + '%')
+                        CheXingNumbili.push((json[0].column9 / avgCount * 100).toFixed(2) + '%')
+                        CheXingNumbili.push((json[0].column10 / avgCount * 100).toFixed(2) + '%')
                     } else {
                         CheXingNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
@@ -3215,12 +3278,12 @@
                     ChaoZaiNum.push(json[0].column15)
                     ChaoZaiNum.push(json[0].column16)
                     if (json[0].column11 != 0) {
-                        var avgOverloadCount=json[0].column11
-                        ChaoZaiNumbili.push((json[0].column12 / avgOverloadCount*100).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json[0].column13 / avgOverloadCount*100).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json[0].column14 / avgOverloadCount*100).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json[0].column15 / avgOverloadCount*100).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json[0].column16 / avgOverloadCount*100).toFixed(2) + '%')
+                        var avgOverloadCount = json[0].column11
+                        ChaoZaiNumbili.push((json[0].column12 / avgOverloadCount * 100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json[0].column13 / avgOverloadCount * 100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json[0].column14 / avgOverloadCount * 100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json[0].column15 / avgOverloadCount * 100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json[0].column16 / avgOverloadCount * 100).toFixed(2) + '%')
                     } else {
                         ChaoZaiNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
@@ -3228,19 +3291,19 @@
 
                     let ChaoZaiLvNum = new Array();
                     let ChaoZaiLvNumbili = new Array();
-                    ChaoZaiLvNum.push((json[0].column18/100).toFixed(2))
-                    ChaoZaiLvNum.push((json[0].column19/100).toFixed(2))
-                    ChaoZaiLvNum.push((json[0].column20/100).toFixed(2))
-                    ChaoZaiLvNum.push((json[0].column21/100).toFixed(2))
-                    ChaoZaiLvNum.push((json[0].column22/100).toFixed(2))
+                    ChaoZaiLvNum.push((json[0].column18 / 100).toFixed(2))
+                    ChaoZaiLvNum.push((json[0].column19 / 100).toFixed(2))
+                    ChaoZaiLvNum.push((json[0].column20 / 100).toFixed(2))
+                    ChaoZaiLvNum.push((json[0].column21 / 100).toFixed(2))
+                    ChaoZaiLvNum.push((json[0].column22 / 100).toFixed(2))
                     if (json[0].column17 != 0) {
-                        var avgOverloadRatio=json[0].column17/100
+                        var avgOverloadRatio = json[0].column17 / 100
                         //var avgOverloadRatio=((json[0].column18/100)+(json[0].column19/100)+(json[0].column20/100)+(json[0].column21/100)+(json[0].column22/100)).toFixed(2)
-                        ChaoZaiLvNumbili.push(((json[0].column18/100).toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push(((json[0].column19/100).toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push(((json[0].column20/100).toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push(((json[0].column21/100).toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push(((json[0].column22/100).toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push(((json[0].column18 / 100).toFixed(2) / avgOverloadRatio * 100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push(((json[0].column19 / 100).toFixed(2) / avgOverloadRatio * 100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push(((json[0].column20 / 100).toFixed(2) / avgOverloadRatio * 100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push(((json[0].column21 / 100).toFixed(2) / avgOverloadRatio * 100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push(((json[0].column22 / 100).toFixed(2) / avgOverloadRatio * 100).toFixed(2) + '%')
                     } else {
                         ChaoZaiLvNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
@@ -3298,12 +3361,12 @@
                     CheXingNum.push(json[0].column9)
                     CheXingNum.push(json[0].column10)
                     if (json[0].column5 != 0) {
-                        var avgCount=json[0].column5
-                        CheXingNumbili.push((json[0].column6 / avgCount*100).toFixed(2) + '%')
-                        CheXingNumbili.push((json[0].column7 / avgCount*100).toFixed(2) + '%')
-                        CheXingNumbili.push((json[0].column8 / avgCount*100).toFixed(2) + '%')
-                        CheXingNumbili.push((json[0].column9 / avgCount*100).toFixed(2) + '%')
-                        CheXingNumbili.push((json[0].column10 / avgCount*100).toFixed(2) + '%')
+                        var avgCount = json[0].column5
+                        CheXingNumbili.push((json[0].column6 / avgCount * 100).toFixed(2) + '%')
+                        CheXingNumbili.push((json[0].column7 / avgCount * 100).toFixed(2) + '%')
+                        CheXingNumbili.push((json[0].column8 / avgCount * 100).toFixed(2) + '%')
+                        CheXingNumbili.push((json[0].column9 / avgCount * 100).toFixed(2) + '%')
+                        CheXingNumbili.push((json[0].column10 / avgCount * 100).toFixed(2) + '%')
                     } else {
                         CheXingNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
@@ -3317,12 +3380,12 @@
                     ChaoZaiNum.push(json[0].column15)
                     ChaoZaiNum.push(json[0].column16)
                     if (json[0].column11 != 0) {
-                        var avgOverloadCount=json[0].column11
-                        ChaoZaiNumbili.push((json[0].column12 / avgOverloadCount*100).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json[0].column13 / avgOverloadCount*100).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json[0].column14 / avgOverloadCount*100).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json[0].column15 / avgOverloadCount*100).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json[0].column16 / avgOverloadCount*100).toFixed(2) + '%')
+                        var avgOverloadCount = json[0].column11
+                        ChaoZaiNumbili.push((json[0].column12 / avgOverloadCount * 100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json[0].column13 / avgOverloadCount * 100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json[0].column14 / avgOverloadCount * 100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json[0].column15 / avgOverloadCount * 100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json[0].column16 / avgOverloadCount * 100).toFixed(2) + '%')
                     } else {
                         ChaoZaiNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
@@ -3330,19 +3393,19 @@
 
                     let ChaoZaiLvNum = new Array();
                     let ChaoZaiLvNumbili = new Array();
-                    ChaoZaiLvNum.push((json[0].column18/100).toFixed(2))
-                    ChaoZaiLvNum.push((json[0].column19/100).toFixed(2))
-                    ChaoZaiLvNum.push((json[0].column20/100).toFixed(2))
-                    ChaoZaiLvNum.push((json[0].column21/100).toFixed(2))
-                    ChaoZaiLvNum.push((json[0].column22/100).toFixed(2))
+                    ChaoZaiLvNum.push((json[0].column18 / 100).toFixed(2))
+                    ChaoZaiLvNum.push((json[0].column19 / 100).toFixed(2))
+                    ChaoZaiLvNum.push((json[0].column20 / 100).toFixed(2))
+                    ChaoZaiLvNum.push((json[0].column21 / 100).toFixed(2))
+                    ChaoZaiLvNum.push((json[0].column22 / 100).toFixed(2))
                     if (json[0].column17 != 0) {
-                        var avgOverloadRatio=json[0].column17/100
+                        var avgOverloadRatio = json[0].column17 / 100
                         //var avgOverloadRatio=((json[0].column18/100)+(json[0].column19/100)+(json[0].column20/100)+(json[0].column21/100)+(json[0].column22/100)).toFixed(2)
-                        ChaoZaiLvNumbili.push(((json[0].column18/100).toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push(((json[0].column19/100).toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push(((json[0].column20/100).toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push(((json[0].column21/100).toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push(((json[0].column22/100).toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push(((json[0].column18 / 100).toFixed(2) / avgOverloadRatio * 100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push(((json[0].column19 / 100).toFixed(2) / avgOverloadRatio * 100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push(((json[0].column20 / 100).toFixed(2) / avgOverloadRatio * 100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push(((json[0].column21 / 100).toFixed(2) / avgOverloadRatio * 100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push(((json[0].column22 / 100).toFixed(2) / avgOverloadRatio * 100).toFixed(2) + '%')
                     } else {
                         ChaoZaiLvNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
@@ -4440,11 +4503,11 @@
                     CheXingNum.push(json.axlesCount5)
                     CheXingNum.push(json.axlesCount6)
                     if (json.avgCount != 0) {
-                        CheXingNumbili.push((json.axlesCount2 / json.avgCount*100).toFixed(2) + '%')
-                        CheXingNumbili.push((json.axlesCount3 / json.avgCount*100).toFixed(2) + '%')
-                        CheXingNumbili.push((json.axlesCount4 / json.avgCount*100).toFixed(2) + '%')
-                        CheXingNumbili.push((json.axlesCount5 / json.avgCount*100).toFixed(2) + '%')
-                        CheXingNumbili.push((json.axlesCount6 / json.avgCount*100).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount2 / json.avgCount * 100).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount3 / json.avgCount * 100).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount4 / json.avgCount * 100).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount5 / json.avgCount * 100).toFixed(2) + '%')
+                        CheXingNumbili.push((json.axlesCount6 / json.avgCount * 100).toFixed(2) + '%')
                     } else {
                         CheXingNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
@@ -4458,11 +4521,11 @@
                     ChaoZaiNum.push(json.avgOverloadCount5)
                     ChaoZaiNum.push(json.avgOverloadCount6)
                     if (json.avgOverloadCount != 0) {
-                        ChaoZaiNumbili.push((json.avgOverloadCount2 / json.avgOverloadCount*100).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json.avgOverloadCount3 / json.avgOverloadCount*100).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json.avgOverloadCount4 / json.avgOverloadCount*100).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json.avgOverloadCount5 / json.avgOverloadCount*100).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json.avgOverloadCount6 / json.avgOverloadCount*100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount2 / json.avgOverloadCount * 100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount3 / json.avgOverloadCount * 100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount4 / json.avgOverloadCount * 100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount5 / json.avgOverloadCount * 100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json.avgOverloadCount6 / json.avgOverloadCount * 100).toFixed(2) + '%')
                     } else {
                         ChaoZaiNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
@@ -4476,13 +4539,13 @@
                     ChaoZaiLvNum.push(json.avgOverloadRatio5.toFixed(2))
                     ChaoZaiLvNum.push(json.avgOverloadRatio6.toFixed(2))
                     if (json.avgOverloadRatio != 0) {
-                        var avgOverloadRatio=json.avgOverloadRatio
+                        var avgOverloadRatio = json.avgOverloadRatio
                         //var avgOverloadRatio=(json.avgOverloadRatio2+json.avgOverloadRatio3+json.avgOverloadRatio4+json.avgOverloadRatio5+json.avgOverloadRatio6).toFixed(2)
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio2.toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio3.toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio4.toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio5.toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push((json.avgOverloadRatio6.toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio2.toFixed(2) / avgOverloadRatio * 100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio3.toFixed(2) / avgOverloadRatio * 100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio4.toFixed(2) / avgOverloadRatio * 100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio5.toFixed(2) / avgOverloadRatio * 100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push((json.avgOverloadRatio6.toFixed(2) / avgOverloadRatio * 100).toFixed(2) + '%')
                     } else {
                         ChaoZaiLvNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
@@ -4538,12 +4601,12 @@
                     CheXingNum.push(json[0].column9)
                     CheXingNum.push(json[0].column10)
                     if (json[0].column5 != 0) {
-                        var avgCount=json[0].column5
-                        CheXingNumbili.push((json[0].column6 / avgCount*100).toFixed(2) + '%')
-                        CheXingNumbili.push((json[0].column7 / avgCount*100).toFixed(2) + '%')
-                        CheXingNumbili.push((json[0].column8 / avgCount*100).toFixed(2) + '%')
-                        CheXingNumbili.push((json[0].column9 / avgCount*100).toFixed(2) + '%')
-                        CheXingNumbili.push((json[0].column10 / avgCount*100).toFixed(2) + '%')
+                        var avgCount = json[0].column5
+                        CheXingNumbili.push((json[0].column6 / avgCount * 100).toFixed(2) + '%')
+                        CheXingNumbili.push((json[0].column7 / avgCount * 100).toFixed(2) + '%')
+                        CheXingNumbili.push((json[0].column8 / avgCount * 100).toFixed(2) + '%')
+                        CheXingNumbili.push((json[0].column9 / avgCount * 100).toFixed(2) + '%')
+                        CheXingNumbili.push((json[0].column10 / avgCount * 100).toFixed(2) + '%')
                     } else {
                         CheXingNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
@@ -4557,12 +4620,12 @@
                     ChaoZaiNum.push(json[0].column15)
                     ChaoZaiNum.push(json[0].column16)
                     if (json[0].column11 != 0) {
-                        var avgOverloadCount=json[0].column11
-                        ChaoZaiNumbili.push((json[0].column12 / avgOverloadCount*100).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json[0].column13 / avgOverloadCount*100).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json[0].column14 / avgOverloadCount*100).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json[0].column15 / avgOverloadCount*100).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json[0].column16 / avgOverloadCount*100).toFixed(2) + '%')
+                        var avgOverloadCount = json[0].column11
+                        ChaoZaiNumbili.push((json[0].column12 / avgOverloadCount * 100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json[0].column13 / avgOverloadCount * 100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json[0].column14 / avgOverloadCount * 100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json[0].column15 / avgOverloadCount * 100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json[0].column16 / avgOverloadCount * 100).toFixed(2) + '%')
                     } else {
                         ChaoZaiNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
@@ -4570,19 +4633,19 @@
 
                     let ChaoZaiLvNum = [];
                     let ChaoZaiLvNumbili = [];
-                    ChaoZaiLvNum.push((json[0].column18/100).toFixed(2))
-                    ChaoZaiLvNum.push((json[0].column19/100).toFixed(2))
-                    ChaoZaiLvNum.push((json[0].column20/100).toFixed(2))
-                    ChaoZaiLvNum.push((json[0].column21/100).toFixed(2))
-                    ChaoZaiLvNum.push((json[0].column22/100).toFixed(2))
+                    ChaoZaiLvNum.push((json[0].column18 / 100).toFixed(2))
+                    ChaoZaiLvNum.push((json[0].column19 / 100).toFixed(2))
+                    ChaoZaiLvNum.push((json[0].column20 / 100).toFixed(2))
+                    ChaoZaiLvNum.push((json[0].column21 / 100).toFixed(2))
+                    ChaoZaiLvNum.push((json[0].column22 / 100).toFixed(2))
                     if (json[0].column17 != 0) {
-                        var avgOverloadRatio=json[0].column17/100
+                        var avgOverloadRatio = json[0].column17 / 100
                         //var avgOverloadRatio=((json[0].column18/100)+(json[0].column19/100)+(json[0].column20/100)+(json[0].column21/100)+(json[0].column22/100)).toFixed(2)
-                        ChaoZaiLvNumbili.push(((json[0].column18/100).toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push(((json[0].column19/100).toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push(((json[0].column20/100).toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push(((json[0].column21/100).toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push(((json[0].column22/100).toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push(((json[0].column18 / 100).toFixed(2) / avgOverloadRatio * 100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push(((json[0].column19 / 100).toFixed(2) / avgOverloadRatio * 100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push(((json[0].column20 / 100).toFixed(2) / avgOverloadRatio * 100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push(((json[0].column21 / 100).toFixed(2) / avgOverloadRatio * 100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push(((json[0].column22 / 100).toFixed(2) / avgOverloadRatio * 100).toFixed(2) + '%')
                     } else {
                         ChaoZaiLvNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
@@ -4639,12 +4702,12 @@
                     CheXingNum.push(json[0].column9)
                     CheXingNum.push(json[0].column10)
                     if (json[0].column5 != 0) {
-                        var avgCount=json[0].column5
-                        CheXingNumbili.push((json[0].column6 / avgCount*100).toFixed(2) + '%')
-                        CheXingNumbili.push((json[0].column7 / avgCount*100).toFixed(2) + '%')
-                        CheXingNumbili.push((json[0].column8 / avgCount*100).toFixed(2) + '%')
-                        CheXingNumbili.push((json[0].column9 / avgCount*100).toFixed(2) + '%')
-                        CheXingNumbili.push((json[0].column10 / avgCount*100).toFixed(2) + '%')
+                        var avgCount = json[0].column5
+                        CheXingNumbili.push((json[0].column6 / avgCount * 100).toFixed(2) + '%')
+                        CheXingNumbili.push((json[0].column7 / avgCount * 100).toFixed(2) + '%')
+                        CheXingNumbili.push((json[0].column8 / avgCount * 100).toFixed(2) + '%')
+                        CheXingNumbili.push((json[0].column9 / avgCount * 100).toFixed(2) + '%')
+                        CheXingNumbili.push((json[0].column10 / avgCount * 100).toFixed(2) + '%')
                     } else {
                         CheXingNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
@@ -4658,12 +4721,12 @@
                     ChaoZaiNum.push(json[0].column15)
                     ChaoZaiNum.push(json[0].column16)
                     if (json[0].column11 != 0) {
-                        var avgOverloadCount=json[0].column11
-                        ChaoZaiNumbili.push((json[0].column12 / avgOverloadCount*100).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json[0].column13 / avgOverloadCount*100).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json[0].column14 / avgOverloadCount*100).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json[0].column15 / avgOverloadCount*100).toFixed(2) + '%')
-                        ChaoZaiNumbili.push((json[0].column16 / avgOverloadCount*100).toFixed(2) + '%')
+                        var avgOverloadCount = json[0].column11
+                        ChaoZaiNumbili.push((json[0].column12 / avgOverloadCount * 100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json[0].column13 / avgOverloadCount * 100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json[0].column14 / avgOverloadCount * 100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json[0].column15 / avgOverloadCount * 100).toFixed(2) + '%')
+                        ChaoZaiNumbili.push((json[0].column16 / avgOverloadCount * 100).toFixed(2) + '%')
                     } else {
                         ChaoZaiNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
@@ -4671,19 +4734,19 @@
 
                     let ChaoZaiLvNum = [];
                     let ChaoZaiLvNumbili = [];
-                    ChaoZaiLvNum.push((json[0].column18/100).toFixed(2))
-                    ChaoZaiLvNum.push((json[0].column19/100).toFixed(2))
-                    ChaoZaiLvNum.push((json[0].column20/100).toFixed(2))
-                    ChaoZaiLvNum.push((json[0].column21/100).toFixed(2))
-                    ChaoZaiLvNum.push((json[0].column22/100).toFixed(2))
+                    ChaoZaiLvNum.push((json[0].column18 / 100).toFixed(2))
+                    ChaoZaiLvNum.push((json[0].column19 / 100).toFixed(2))
+                    ChaoZaiLvNum.push((json[0].column20 / 100).toFixed(2))
+                    ChaoZaiLvNum.push((json[0].column21 / 100).toFixed(2))
+                    ChaoZaiLvNum.push((json[0].column22 / 100).toFixed(2))
                     if (json[0].column17 != 0) {
-                        var avgOverloadRatio=json[0].column17/100
+                        var avgOverloadRatio = json[0].column17 / 100
                         //var avgOverloadRatio=((json[0].column18/100)+(json[0].column19/100)+(json[0].column20/100)+(json[0].column21/100)+(json[0].column22/100)).toFixed(2)
-                        ChaoZaiLvNumbili.push(((json[0].column18/100).toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push(((json[0].column19/100).toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push(((json[0].column20/100).toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push(((json[0].column21/100).toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
-                        ChaoZaiLvNumbili.push(((json[0].column22/100).toFixed(2) / avgOverloadRatio*100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push(((json[0].column18 / 100).toFixed(2) / avgOverloadRatio * 100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push(((json[0].column19 / 100).toFixed(2) / avgOverloadRatio * 100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push(((json[0].column20 / 100).toFixed(2) / avgOverloadRatio * 100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push(((json[0].column21 / 100).toFixed(2) / avgOverloadRatio * 100).toFixed(2) + '%')
+                        ChaoZaiLvNumbili.push(((json[0].column22 / 100).toFixed(2) / avgOverloadRatio * 100).toFixed(2) + '%')
                     } else {
                         ChaoZaiLvNumbili = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
                     }
