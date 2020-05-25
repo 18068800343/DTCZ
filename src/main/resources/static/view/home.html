@@ -1,2304 +1,2421 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="utf-8" />
-		<title>首页</title>
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-		<link rel="stylesheet" type="text/css" href="./css/bootstrap-theme.css" />
-		<link rel="stylesheet" type="text/css" href="css/index.css" />
-		<link rel="stylesheet" href="css/toastr.css" />
-		<link rel="stylesheet" type="text/css" href="css/layui.css" />
-		<style>
-			.main-table tr td {
-				padding: 3px;
-			}
-			
-			.main-table .red {
-				color: red;
-			}
-			
-			@font-face {
-				font-family: shuzi;
-				src: url("font/DS-DIGIT.ttf");
-			}
-			
-			@font-face {
-				font-family: pangmen;
-				src: url("font/庞门正道粗字体.ttf");
-			}
-			
-			@media screen and (min-width: 1920px) {
-				.righttop {
-					margin-top: -20% !important;
-				}
-				/* .righttop{
-                top:200px !important;
-            }
-            .rightbottom span{
-                margin-top: 1% !important;
-            }*/
-			}
-			
-			.lodingmsg {
-				color: white;
-				display: inline-block;
-				font-size: 14px;
-				padding: 5px;
-			}
-			
-			.lodingmsg:hover {
-				/*background: skyblue;*/
-				cursor: pointer;
-				border-radius: 3px;
-			}
-			
-			#tuichu {
-				color: white;
-			}
-			
-			.layui-tab-title {
-				border: 0px;
-				margin-left: 45%;
-				top: 25px;
-			}
-			
-			.layui-tab-title li {
-				border: 1px solid white;
-				border-radius: 50%;
-				width: 10px;
-				height: 10px;
-				padding: 0px !important;
-				min-width: 10px;
-				margin-left: 20px;
-			}
-			
-			.layui-this {
-				background-color: white;
-			}
-			
-			.layui-tab-title .layui-this:after {
-				border-style: none;
-			}
-			
-			.leftdiv1 {
-				margin-left: 3%;
-				margin-top: 2%;
-			}
-		</style>
-	</head>
+<head>
+	<meta charset="utf-8"/>
+	<title>首页</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="./css/bootstrap-theme.css"/>
+	<link rel="stylesheet" type="text/css" href="css/index.css"/>
+	<link rel="stylesheet" href="css/toastr.css"/>
+	<link rel="stylesheet" type="text/css" href="css/layui.css"/>
+	<style>
+		.main-table tr td {
+			padding: 3px;
+		}
 
-	<body class="jd">
-		<div class="head" style="height: 1000px;width: 100%;"></div>
-		<!--<div class="rightD" style="float: right;margin-top: -3.5%;margin-right: 5%;float: right;margin-top: -50.5%;">
-			<i></i>
-			<p class="lodingmsg time"></p>
-			<i></i>
-			<p class="lodingmsg" id="usrName" onclick="tanchulai()"></p>
-			<i>&nbsp;</i>
-			<p class="lodingmsg">
-				<a onclick="exit()" id="tuichu"></a>
-			</p>
-		</div>-->
-		<div class="layui-tab" style="position: absolute;color:white; background-color: transparent;top:5%;width: 100%;height:100%;z-index: 10;">
-			<ul class="layui-tab-title">
-				<li class="layui-this"></li>
-				<li></li>
-				<li></li>
-				<li></li>
-			</ul>
-			<div class="layui-tab-content">
-				<div class="layui-tab-item layui-show">
-					<div>
-						<div id="mainfir" class="col-xs-5" style="height:800px;margin:0 15px;float:left;margin-left: 10%;margin-top: 3%;"></div>
-						<div class="title">
-							<div class="leftdiv1 col-xs-5">
-								<div class="leftsj" style="background-color: #020957;padding: 3%;height: 140px;border: 1px solid #020957;border-radius: 8px;background-color: rgba(2, 10, 85, 0.4);color: #C0C0CB;">
-									<h2 class="jianceh" style="font-size: 17px;color:#007AFF;position: absolute;margin-top: 3px;font-weight: bolder;">实时统计</h2>
-									<div class="left1" style="margin-left: 14%;margin-top: -1%;">
-										<img src="img/first_img.png" style="height: 40px;">
-										<p class="leftp" id="leftTable1fir"></p><span>辆</span>
-										<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日总流量</p>
-									</div>
-									<div class="left2" style="margin-left: 14%;">
-										<img src="./img/second_img.png" style="height: 40px;">
-										<p class="leftp" id="leftTable2fir"></p><span>辆</span>
-										<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日超载车辆数</p>
-									</div>
-									<div class="left3" style="margin-top:-14%;margin-left:450px;">
-										<a href="javascript:;" onclick="lookMsg(homePageInit.idLocal,3)"><img src="img/third_img.png" style="height: 40px;"></a>
-										<p class="leftp" id="leftTable3fir"></p><span>吨</span>
-										<input type="input" id="idLocalfir" style="display: none">
-										<p style="margin-left: 16%;margin-top: -2%;font-size:13px;">当日最大车重</p>
-									</div>
-									<div class="left4" style="margin-left: 450px;">
-										<a href="javascript:;" onclick="bindLeftLinks(homePageInit.linkStationNames,homePageInit.links)"> <img src="img/first_img.png" style="height: 40px;"></a>
-										<p class="leftp" id="leftTable4fir"></p><span>个</span>
-										<p style="margin-left: 16%;margin-top: -2%;font-size:13px;">当日监测站点</p>
-									</div>
-								</div>
-								<!--<div class="y-span10 y-last">
-					            <div class="table">
-					                <div class="bj_nav y-clearfix">
-					                    <div>
-					                        <div id="main" style="height:500px;width:100%;margin-left:-80px;float:left;"></div>
-					                    </div>
-					                </div>
-					            </div>
-					        </div>-->
-								<div class="rleft col-xs-6" style="margin-top: 5%;color: #C0C0CB;background-color: #020957;border: 1px solid #020957;border-radius: 8px;background-color: rgba(2, 10, 85, 0.4);color: #C0C0CB;padding: 20px;width: 48%;margin-right: 2%;">
-									<h2 class="jianceh" style="font-size: 17px;color:#007AFF;font-weight: bolder;margin-bottom: 5%;">总流量统计</h2>
-									<p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_1.png"  style="margin-right: 5%;"><span style="color: white;">1</span><span style="margin-left: 10%;font-size: 12px;">G2京沪苏鲁界</span><span style="margin-left: 15%;font-size: 19px;color: #FF2929;font-weight: bolder;">15425</span><span style="margin-left: 13%;">辆</span></p>
-									<p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_2.png"  style="margin-right: 5%;"><span style="color: white;">2</span><span style="margin-left: 10%;font-size: 12px;">G2京沪苏鲁界</span><span style="margin-left: 15%;font-size: 19px;color: #FF7329;font-weight: bolder;">15425</span><span style="margin-left: 13%;">辆</span></p>
-									<p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_3.png"  style="margin-right: 5%;"><span style="color: white;">3</span><span style="margin-left: 10%;font-size: 12px;">G2京沪苏鲁界</span><span style="margin-left: 15%;font-size: 19px;color: #FDA82B;font-weight: bolder;">15425</span><span style="margin-left: 13%;">辆</span></p>
-									<p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_4.png"  style="margin-right: 5%;"><span style="color: white;">4</span><span style="margin-left: 10%;font-size: 12px;">G2京沪苏鲁界</span><span style="margin-left: 15%;font-size: 19px;color: #1AC2F9;font-weight: bolder;">15425</span><span style="margin-left: 13%;">辆</span></p>
-									<p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_4.png"  style="margin-right: 5%;"><span style="color: white;">5</span><span style="margin-left: 10%;font-size: 12px;">G2京沪苏鲁界</span><span style="margin-left: 15%;font-size: 19px;color: #1AC2F9;font-weight: bolder;">15425</span><span style="margin-left: 13%;">辆</span></p>
-									<p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_4.png"  style="margin-right: 5%;"><span style="color: white;">6</span><span style="margin-left: 10%;font-size: 12px;">G2京沪苏鲁界</span><span style="margin-left: 15%;font-size: 19px;color: #1AC2F9;font-weight: bolder;">15425</span><span style="margin-left: 13%;">辆</span></p>
-								</div>
-								<div class="rright col-xs-6" style="margin-top: 5%;color: #C0C0CB;background-color: #020957;border: 1px solid #020957;border-radius: 8px;background-color: rgba(2, 10, 85, 0.4);color: #C0C0CB;padding: 20px;">
-									<h2 class="jianceh" style="font-size: 17px;color:#007AFF;font-weight: bolder;margin-bottom: 5%;">超载率统计</h2>
-									<p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_1.png"  style="margin-right: 5%;"><span style="color: white;">1</span><span style="margin-left: 10%;font-size: 12px;">G2京沪苏鲁界</span><span style="margin-left: 15%;font-size: 19px;color: #FF2929;font-weight: bolder;">15425</span><span style="margin-left: 13%;">%</span></p>
-									<p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_2.png"  style="margin-right: 5%;"><span style="color: white;">2</span><span style="margin-left: 10%;font-size: 12px;">G2京沪苏鲁界</span><span style="margin-left: 15%;font-size: 19px;color: #FF7329;font-weight: bolder;">15425</span><span style="margin-left: 13%;">%</span></p>
-									<p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_3.png"  style="margin-right: 5%;"><span style="color: white;">3</span><span style="margin-left: 10%;font-size: 12px;">G2京沪苏鲁界</span><span style="margin-left: 15%;font-size: 19px;color: #FDA82B;font-weight: bolder;">15425</span><span style="margin-left: 13%;">%</span></p>
-									<p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_4.png"  style="margin-right: 5%;"><span style="color: white;">4</span><span style="margin-left: 10%;font-size: 12px;">G2京沪苏鲁界</span><span style="margin-left: 15%;font-size: 19px;color: #1AC2F9;font-weight: bolder;">15425</span><span style="margin-left: 13%;">%</span></p>
-									<p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_4.png"  style="margin-right: 5%;"><span style="color: white;">5</span><span style="margin-left: 10%;font-size: 12px;">G2京沪苏鲁界</span><span style="margin-left: 15%;font-size: 19px;color: #1AC2F9;font-weight: bolder;">15425</span><span style="margin-left: 13%;">%</span></p>
-									<p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_4.png"  style="margin-right: 5%;"><span style="color: white;">6</span><span style="margin-left: 10%;font-size: 12px;">G2京沪苏鲁界</span><span style="margin-left: 15%;font-size: 19px;color: #1AC2F9;font-weight: bolder;">15425</span><span style="margin-left: 13%;">%</span></p>
-								</div>
-								<div class="rbottom col-xs-12" style="margin-top: 5%;color: #C0C0CB;background-color: #020957;border: 1px solid #020957;border-radius: 8px;background-color: rgba(2, 10, 85, 0.4);color: #C0C0CB;padding: 20px;">
-									<h2 class="jianceh" style="font-size: 17px;color:#007AFF;font-weight: bolder;">趋势统计</h2>
-									<div id="chart3" style="width:750px; height: 350px;"></div>
-								</div>
+		.main-table .red {
+			color: red;
+		}
+
+		@font-face {
+			font-family: shuzi;
+			src: url("font/DS-DIGIT.ttf");
+		}
+
+		@font-face {
+			font-family: pangmen;
+			src: url("font/庞门正道粗字体.ttf");
+		}
+
+		@media screen and (min-width: 1920px) {
+			.righttop {
+				margin-top: -20% !important;
+			}
+
+			/* .righttop{
+            top:200px !important;
+        }
+        .rightbottom span{
+            margin-top: 1% !important;
+        }*/
+		}
+
+		.lodingmsg {
+			color: white;
+			display: inline-block;
+			font-size: 14px;
+			padding: 5px;
+		}
+
+		.lodingmsg:hover {
+			/*background: skyblue;*/
+			cursor: pointer;
+			border-radius: 3px;
+		}
+
+		#tuichu {
+			color: white;
+		}
+
+		.layui-tab-title {
+			border: 0px;
+			margin-left: 45%;
+			top: 25px;
+		}
+
+		.layui-tab-title li {
+			border: 1px solid white;
+			border-radius: 50%;
+			width: 10px;
+			height: 10px;
+			padding: 0px !important;
+			min-width: 10px;
+			margin-left: 20px;
+		}
+
+		.layui-this {
+			background-color: white;
+		}
+
+		.layui-tab-title .layui-this:after {
+			border-style: none;
+		}
+
+		.leftdiv1 {
+			margin-left: 3%;
+			margin-top: 2%;
+		}
+	</style>
+</head>
+
+<body class="jd">
+<div class="head" style="height: 1000px;width: 100%;"></div>
+<!--<div class="rightD" style="float: right;margin-top: -3.5%;margin-right: 5%;float: right;margin-top: -50.5%;">
+    <i></i>
+    <p class="lodingmsg time"></p>
+    <i></i>
+    <p class="lodingmsg" id="usrName" onclick="tanchulai()"></p>
+    <i>&nbsp;</i>
+    <p class="lodingmsg">
+        <a onclick="exit()" id="tuichu"></a>
+    </p>
+</div>-->
+<div class="layui-tab"
+	 style="position: absolute;color:white; background-color: transparent;top:5%;width: 100%;height:100%;z-index: 10;">
+	<ul class="layui-tab-title">
+		<li class="layui-this"></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+	<div class="layui-tab-content">
+		<div class="layui-tab-item layui-show">
+			<div>
+				<div id="mainfir" class="col-xs-5"
+					 style="height:800px;margin:0 15px;float:left;margin-left: 10%;margin-top: 3%;"></div>
+				<div class="title">
+					<div class="leftdiv1 col-xs-5">
+						<div class="leftsj"
+							 style="background-color: #020957;padding: 3%;height: 140px;border: 1px solid #020957;border-radius: 8px;background-color: rgba(2, 10, 85, 0.4);color: #C0C0CB;">
+							<h2 class="jianceh"
+								style="font-size: 17px;color:#007AFF;position: absolute;margin-top: 3px;font-weight: bolder;">
+								实时统计</h2>
+							<div class="left1" style="margin-left: 14%;margin-top: -1%;">
+								<img src="img/first_img.png" style="height: 40px;">
+								<p class="leftp" id="leftTable1fir"></p><span>辆</span>
+								<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日总流量</p>
 							</div>
+							<div class="left2" style="margin-left: 14%;">
+								<img src="./img/second_img.png" style="height: 40px;">
+								<p class="leftp" id="leftTable2fir"></p><span>辆</span>
+								<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日超载车辆数</p>
+							</div>
+							<div class="left3" style="margin-top:-14%;margin-left:450px;">
+								<a href="javascript:;" onclick="lookMsg(homePageInit.idLocal,3)"><img
+										src="img/third_img.png" style="height: 40px;"></a>
+								<p class="leftp" id="leftTable3fir"></p><span>吨</span>
+								<input type="input" id="idLocalfir" style="display: none">
+								<p style="margin-left: 16%;margin-top: -2%;font-size:13px;">当日最大车重</p>
+							</div>
+							<div class="left4" style="margin-left: 450px;">
+								<a href="javascript:;"
+								   onclick="bindLeftLinks(homePageInit.linkStationNames,homePageInit.links)"> <img
+										src="img/first_img.png" style="height: 40px;"></a>
+								<p class="leftp" id="leftTable4fir"></p><span>个</span>
+								<p style="margin-left: 16%;margin-top: -2%;font-size:13px;">当日监测站点</p>
+							</div>
+						</div>
+						<!--<div class="y-span10 y-last">
+                        <div class="table">
+                            <div class="bj_nav y-clearfix">
+                                <div>
+                                    <div id="main" style="height:500px;width:100%;margin-left:-80px;float:left;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+						<div class="rleft col-xs-6"
+							 style="margin-top: 5%;color: #C0C0CB;background-color: #020957;border: 1px solid #020957;border-radius: 8px;background-color: rgba(2, 10, 85, 0.4);color: #C0C0CB;padding: 20px;width: 48%;margin-right: 2%;">
+							<h2 class="jianceh"
+								style="font-size: 17px;color:#007AFF;font-weight: bolder;margin-bottom: 5%;">总流量统计</h2>
+							<p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_1.png"
+																			   style="margin-right: 5%;"><span
+									style="color: white;">1</span><span style="margin-left: 10%;font-size: 12px;">G2京沪苏鲁界</span><span
+									style="margin-left: 15%;font-size: 19px;color: #FF2929;font-weight: bolder;">15425</span><span
+									style="margin-left: 13%;">辆</span></p>
+							<p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_2.png"
+																			   style="margin-right: 5%;"><span
+									style="color: white;">2</span><span style="margin-left: 10%;font-size: 12px;">G2京沪苏鲁界</span><span
+									style="margin-left: 15%;font-size: 19px;color: #FF7329;font-weight: bolder;">15425</span><span
+									style="margin-left: 13%;">辆</span></p>
+							<p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_3.png"
+																			   style="margin-right: 5%;"><span
+									style="color: white;">3</span><span style="margin-left: 10%;font-size: 12px;">G2京沪苏鲁界</span><span
+									style="margin-left: 15%;font-size: 19px;color: #FDA82B;font-weight: bolder;">15425</span><span
+									style="margin-left: 13%;">辆</span></p>
+							<p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_4.png"
+																			   style="margin-right: 5%;"><span
+									style="color: white;">4</span><span style="margin-left: 10%;font-size: 12px;">G2京沪苏鲁界</span><span
+									style="margin-left: 15%;font-size: 19px;color: #1AC2F9;font-weight: bolder;">15425</span><span
+									style="margin-left: 13%;">辆</span></p>
+							<p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_4.png"
+																			   style="margin-right: 5%;"><span
+									style="color: white;">5</span><span style="margin-left: 10%;font-size: 12px;">G2京沪苏鲁界</span><span
+									style="margin-left: 15%;font-size: 19px;color: #1AC2F9;font-weight: bolder;">15425</span><span
+									style="margin-left: 13%;">辆</span></p>
+							<p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_4.png"
+																			   style="margin-right: 5%;"><span
+									style="color: white;">6</span><span style="margin-left: 10%;font-size: 12px;">G2京沪苏鲁界</span><span
+									style="margin-left: 15%;font-size: 19px;color: #1AC2F9;font-weight: bolder;">15425</span><span
+									style="margin-left: 13%;">辆</span></p>
+						</div>
+						<div class="rright col-xs-6"
+							 style="margin-top: 5%;color: #C0C0CB;background-color: #020957;border: 1px solid #020957;border-radius: 8px;background-color: rgba(2, 10, 85, 0.4);color: #C0C0CB;padding: 20px;">
+							<h2 class="jianceh"
+								style="font-size: 17px;color:#007AFF;font-weight: bolder;margin-bottom: 5%;">超载率统计</h2>
+							<p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_1.png"
+																			   style="margin-right: 5%;"><span
+									style="color: white;">1</span><span style="margin-left: 10%;font-size: 12px;">G2京沪苏鲁界</span><span
+									style="margin-left: 15%;font-size: 19px;color: #FF2929;font-weight: bolder;">15425</span><span
+									style="margin-left: 13%;">%</span></p>
+							<p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_2.png"
+																			   style="margin-right: 5%;"><span
+									style="color: white;">2</span><span style="margin-left: 10%;font-size: 12px;">G2京沪苏鲁界</span><span
+									style="margin-left: 15%;font-size: 19px;color: #FF7329;font-weight: bolder;">15425</span><span
+									style="margin-left: 13%;">%</span></p>
+							<p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_3.png"
+																			   style="margin-right: 5%;"><span
+									style="color: white;">3</span><span style="margin-left: 10%;font-size: 12px;">G2京沪苏鲁界</span><span
+									style="margin-left: 15%;font-size: 19px;color: #FDA82B;font-weight: bolder;">15425</span><span
+									style="margin-left: 13%;">%</span></p>
+							<p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_4.png"
+																			   style="margin-right: 5%;"><span
+									style="color: white;">4</span><span style="margin-left: 10%;font-size: 12px;">G2京沪苏鲁界</span><span
+									style="margin-left: 15%;font-size: 19px;color: #1AC2F9;font-weight: bolder;">15425</span><span
+									style="margin-left: 13%;">%</span></p>
+							<p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_4.png"
+																			   style="margin-right: 5%;"><span
+									style="color: white;">5</span><span style="margin-left: 10%;font-size: 12px;">G2京沪苏鲁界</span><span
+									style="margin-left: 15%;font-size: 19px;color: #1AC2F9;font-weight: bolder;">15425</span><span
+									style="margin-left: 13%;">%</span></p>
+							<p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_4.png"
+																			   style="margin-right: 5%;"><span
+									style="color: white;">6</span><span style="margin-left: 10%;font-size: 12px;">G2京沪苏鲁界</span><span
+									style="margin-left: 15%;font-size: 19px;color: #1AC2F9;font-weight: bolder;">15425</span><span
+									style="margin-left: 13%;">%</span></p>
+						</div>
+						<div class="rbottom col-xs-12"
+							 style="margin-top: 5%;color: #C0C0CB;background-color: #020957;border: 1px solid #020957;border-radius: 8px;background-color: rgba(2, 10, 85, 0.4);color: #C0C0CB;padding: 20px;">
+							<h2 class="jianceh" style="font-size: 17px;color:#007AFF;font-weight: bolder;">趋势统计</h2>
+							<div id="chart3" style="width:750px; height: 350px;"></div>
 						</div>
 					</div>
-				</div>
-				<div class="layui-tab-item">
-					<div class="twoleft col-xs-5" style="margin-left: 15%;">
-						<div class="topcenter" style="height:400px;background-color: rgba(2, 10, 85, 0.4);position: absolute;width: 92%;border: 1px solid #0A1D69;background-position:0 100%, 100% 100% !important;">
-							<!--	<a href="javascript:;" onclick="initLeftChartDetail(1);" style="display:inline-block;z-index:10;position:absolute;right:0;margin-top:1%;">更多</a>-->
-							<div class="bg">
-								<h2 style="font-size: 18px;color:#AAE6F9;font-weight: 500; padding: 10px;">2轴车数据统计</h2>
-							</div>
-							<div class="ltitle" style="margin-top: 3%;margin-left: 3%;">
-								<div class="left5" style="display: inline-block;width: 150px;">
-									<img src="img/first_img.png" style="height: 40px;">
-									<p class="leftp" id="leftTable1two"></p><span>辆</span>
-									<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日总流量</p>
-								</div>
-								<div class="left6" style="margin-left: 14%;display:inline-block;width: 150px;">
-									<img src="./img/second_img.png" style="height: 40px;">
-									<p class="leftp" id="leftTable2two"></p><span>辆</span>
-									<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日超载车辆数</p>
-								</div>
-								<div class="left7" style="margin-left: 14%;display:inline-block;width: 150px;">
-									<img src="./img/second_img.png" style="height: 40px;">
-									<p class="leftp" id="leftTable3two"></p><span>辆</span>
-									<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日超载车辆数</p>
-								</div>
-								<div id="maint"  style="width: 350px;height: 300px;display: inline-block;"></div>
-								<div id="mainb" style="width: 350px;height: 300px;display: inline-block;position: absolute;margin-left: 10px;"></div>
-							</div>
-
-							<!--<div id="xian1" style="height:380px;top: -60px;left:30px;">
-							</div>-->
-						</div>
-							<div class="topcenter" style="height:400px;background-color: rgba(2, 10, 85, 0.4);position: absolute;width: 92%;border: 1px solid #0A1D69;background-position:0 100%, 100% 100% !important;margin-left:98%;">
-							<!--	<a href="javascript:;" onclick="initLeftChartDetail(1);" style="display:inline-block;z-index:10;position:absolute;right:0;margin-top:1%;">更多</a>-->
-							<div class="bg">
-								<h2 style="font-size: 18px;color:#AAE6F9;font-weight: 500; padding: 10px;">3轴车数据统计</h2>
-							</div>
-							<div class="ltitle" style="margin-top: 3%;margin-left: 3%;">
-								<div class="left8" style="display: inline-block;width: 150px;">
-									<img src="img/first_img.png" style="height: 40px;">
-									<p class="leftp" id="leftTable1third"></p><span>辆</span>
-									<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日总流量</p>
-								</div>
-								<div class="left9" style="margin-left: 14%;display:inline-block;width: 150px;">
-									<img src="./img/second_img.png" style="height: 40px;">
-									<p class="leftp" id="leftTable2third"></p><span>辆</span>
-									<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日超载车辆数</p>
-								</div>
-								<div class="left10" style="margin-left: 14%;display:inline-block;width: 150px;">
-									<img src="./img/second_img.png" style="height: 40px;">
-									<p class="leftp" id="leftTable3third"></p><span>辆</span>
-									<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日超载车辆数</p>
-								</div>
-								<div id="maina"  style="width: 350px;height: 300px;display: inline-block;"></div>
-								<div id="mainc" style="width: 350px;height: 300px;display: inline-block;position: absolute;margin-left: 10px;"></div>
-							</div>
-
-							<!--<div id="xian1" style="height:380px;top: -60px;left:30px;">
-							</div>-->
-						</div>
-						<div class="secfirst" style="margin-top: 58%;">
-							<div class="topcenter" style="height:400px;background-color: rgba(2, 10, 85, 0.4);position: absolute;width: 92%;border: 1px solid #0A1D69;background-position:0 100%, 100% 100% !important;">
-							<!--	<a href="javascript:;" onclick="initLeftChartDetail(1);" style="display:inline-block;z-index:10;position:absolute;right:0;margin-top:1%;">更多</a>-->
-							<div class="bg">
-								<h2 style="font-size: 18px;color:#AAE6F9;font-weight: 500; padding: 10px;">4轴车数据统计</h2>
-							</div>
-							<div class="ltitle" style="margin-top: 3%;margin-left: 3%;">
-								<div class="left11" style="display: inline-block;width: 150px;">
-									<img src="img/first_img.png" style="height: 40px;">
-									<p class="leftp" id="leftTable1four"></p><span>辆</span>
-									<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日总流量</p>
-								</div>
-								<div class="left12" style="margin-left: 14%;display:inline-block;width: 150px;">
-									<img src="./img/second_img.png" style="height: 40px;">
-									<p class="leftp" id="leftTable2four"></p><span>辆</span>
-									<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日超载车辆数</p>
-								</div>
-								<div class="left13" style="margin-left: 14%;display:inline-block;width: 150px;">
-									<img src="./img/second_img.png" style="height: 40px;">
-									<p class="leftp" id="leftTable3four"></p><span>辆</span>
-									<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日超载车辆数</p>
-								</div>
-								<div id="maind"  style="width: 350px;height: 300px;display: inline-block;"></div>
-								<div id="maine" style="width: 350px;height: 300px;display: inline-block;position: absolute;margin-left: 10px;"></div>
-							</div>
-
-							<!--<div id="xian1" style="height:380px;top: -60px;left:30px;">
-							</div>-->
-						</div>
-						<div class="topcenter" style="height:400px;background-color: rgba(2, 10, 85, 0.4);position: absolute;width: 92%;border: 1px solid #0A1D69;background-position:0 100%, 100% 100% !important;margin-left: 98%;">
-							<!--	<a href="javascript:;" onclick="initLeftChartDetail(1);" style="display:inline-block;z-index:10;position:absolute;right:0;margin-top:1%;">更多</a>-->
-							<div class="bg">
-								<h2 style="font-size: 18px;color:#AAE6F9;font-weight: 500; padding: 10px;">5轴车数据统计</h2>
-							</div>
-							<div class="ltitle" style="margin-top: 3%;margin-left: 3%;">
-								<div class="left14" style="display: inline-block;width: 150px;">
-									<img src="img/first_img.png" style="height: 40px;">
-									<p class="leftp" id="leftTable1five"></p><span>辆</span>
-									<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日总流量</p>
-								</div>
-								<div class="left15" style="margin-left: 14%;display:inline-block;width: 150px;">
-									<img src="./img/second_img.png" style="height: 40px;">
-									<p class="leftp" id="leftTable2five"></p><span>辆</span>
-									<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日超载车辆数</p>
-								</div>
-								<div class="left16" style="margin-left: 14%;display:inline-block;width: 150px;">
-									<img src="./img/second_img.png" style="height: 40px;">
-									<p class="leftp" id="leftTable3five"></p><span>辆</span>
-									<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日超载车辆数</p>
-								</div>
-								<div id="mainf"  style="width: 350px;height: 300px;display: inline-block;"></div>
-								<div id="maing" style="width: 350px;height: 300px;display: inline-block;position: absolute;margin-left: 10px;"></div>
-							</div>
-
-							<!--<div id="xian1" style="height:380px;top: -60px;left:30px;">
-							</div>-->
-						</div>
-						</div>
-					</div>
-					
-				</div><br />
-				
-			<div class="layui-tab-item">
-				<div class="thidiv">
-					
-					<div class="thitop col-xs-9 topcenter" style="width: 77%; height:300px;background-color: rgba(2, 10, 85, 0.4);border: 1px solid #0A1D69;background-position:0 100%, 100% 100% !important;margin-left: 20%;">
-						<div class="bg" style="margin-left: -15px;">
-								<h2 style="font-size: 18px;color:#AAE6F9;font-weight: 500; padding: 10px;">5轴车数据统计</h2>
-							</div>
-						<div class="ltitle" style="margin-top: 1%;margin-left: 1%;position: absolute;">
-								<div class="left17" style="display: inline-block;width: 150px;">
-									<img src="img/first_img.png" style="height: 40px;">
-									<p class="leftp" id="leftTable1sex"></p><span>辆</span>
-									<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日总流量</p>
-								</div>
-								<div class="left18" style="display:inline-block;width: 150px;">
-									<img src="./img/second_img.png" style="height: 40px;">
-									<p class="leftp" id="leftTable2sex"></p><span>辆</span>
-									<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日超载车辆数</p>
-								</div>
-								<div id="mainj" style="width: 530px;height: 250px;display: inline-block;float:right; margin-left: 10px;"></div>
-								<div id="mainh"  style="width:530px;height: 250px;display: inline-block;float: right;"></div>
-								
-								<div class="wjkd" style="margin-top: 5%;">
-								<div class="left19" style="display:inline-block;width: 150px;">
-									<img src="./img/second_img.png" style="height: 40px;">
-									<p class="leftp" id="leftTable3sex"></p><span>辆</span>
-									<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日超载车辆数</p>
-								</div>
-								
-								</div>
-								
-								
-							</div>
-					</div>
-					<div class="fg">
-					<div class="topcenter col-xs-3" style="height:280px;background-color: rgba(2, 10, 85, 0.4);border: 1px solid #0A1D69;background-position:0 100%, 100% 100% !important;margin-left: 20%;margin-top:1%;">
-							<!--	<a href="javascript:;" onclick="initLeftChartDetail(1);" style="display:inline-block;z-index:10;position:absolute;right:0;margin-top:1%;">更多</a>-->
-							<div class="bg" style="margin-left: -3.5%;">
-								<h2 style="font-size: 18px;color:#AAE6F9;font-weight: 500; padding: 10px;">统计预警（公司统计）</h2>
-							</div>
-							<div id="firstmain"  style="width: 420px;height: 260px;display: inline-block;margin-left: 2%;"></div>
-
-							<!--<div id="xian1" style="height:380px;top: -60px;left:30px;">
-							</div>-->
-						</div>
-						<div class="topcenter col-xs-3" style="height:280px;background-color: rgba(2, 10, 85, 0.4);border: 1px solid #0A1D69;background-position:0 100%, 100% 100% !important;margin-left:1%;margin-top:1%;">
-							<!--	<a href="javascript:;" onclick="initLeftChartDetail(1);" style="display:inline-block;z-index:10;position:absolute;right:0;margin-top:1%;">更多</a>-->
-							<div class="bg" style="margin-left: -3.5%;">
-								<h2 style="font-size: 18px;color:#AAE6F9;font-weight: 500; padding: 10px;">按省界统计</h2>
-							</div>
-							<div id="secmain"  style="width: 420px;height: 260px;display: inline-block;margin-left: 2%;"></div>
-
-							<!--<div id="xian1" style="height:380px;top: -60px;left:30px;">
-							</div>-->
-						</div>
-						<div class="topcenter col-xs-3" style="height:280px;background-color: rgba(2, 10, 85, 0.4);border: 1px solid #0A1D69;background-position:0 100%, 100% 100% !important;margin-left:1%;margin-top:1%;">
-							<!--	<a href="javascript:;" onclick="initLeftChartDetail(1);" style="display:inline-block;z-index:10;position:absolute;right:0;margin-top:1%;">更多</a>-->
-							<div class="bg" style="margin-left: -3.5%;">
-								<h2 style="font-size: 18px;color:#AAE6F9;font-weight: 500; padding: 10px;">按站点6轴车超载数量top5统计</h2>
-							</div>
-							<div id="thimain"  style="width: 420px;height: 260px;display: inline-block;margin-left: 2%;"></div>
-
-							<!--<div id="xian1" style="height:380px;top: -60px;left:30px;">
-							</div>-->
-						</div>
-						</div>
-						<!--分割-->
-						<div class="fg2">
-							<div class="topcenter col-xs-3" style="height:280px;background-color: rgba(2, 10, 85, 0.4);border: 1px solid #0A1D69;background-position:0 100%, 100% 100% !important;margin-left: 20%;margin-top:1%;">
-							<!--	<a href="javascript:;" onclick="initLeftChartDetail(1);" style="display:inline-block;z-index:10;position:absolute;right:0;margin-top:1%;">更多</a>-->
-							<div class="bg" style="margin-left: -3.5%;">
-								<h2 style="font-size: 18px;color:#AAE6F9;font-weight: 500; padding: 10px;">6轴车超载预警（公司统计）</h2>
-							</div>
-							<div id="foumain"  style="width: 420px;height: 260px;display: inline-block;margin-left: 2%;"></div>
-
-							<!--<div id="xian1" style="height:380px;top: -60px;left:30px;">
-							</div>-->
-						</div>
-						<div class="topcenter col-xs-3" style="height:280px;background-color: rgba(2, 10, 85, 0.4);border: 1px solid #0A1D69;background-position:0 100%, 100% 100% !important;margin-left:1%;margin-top:1%;">
-							<!--	<a href="javascript:;" onclick="initLeftChartDetail(1);" style="display:inline-block;z-index:10;position:absolute;right:0;margin-top:1%;">更多</a>-->
-							<div class="bg" style="margin-left: -3.5%;">
-								<h2 style="font-size: 18px;color:#AAE6F9;font-weight: 500; padding: 10px;">当日单轴超载统计（>14吨）</h2>
-							</div>
-							<div id="fivemain"  style="width: 420px;height: 260px;display: inline-block;margin-left: 2%;"></div>
-
-							<!--<div id="xian1" style="height:380px;top: -60px;left:30px;">
-							</div>-->
-						</div>
-						<div class="topcenter col-xs-3" style="height:280px;background-color: rgba(2, 10, 85, 0.4);border: 1px solid #0A1D69;background-position:0 100%, 100% 100% !important;margin-left:1%;margin-top:1%;">
-							<!--	<a href="javascript:;" onclick="initLeftChartDetail(1);" style="display:inline-block;z-index:10;position:absolute;right:0;margin-top:1%;">更多</a>-->
-							<div class="bg" style="margin-left: -3.5%;">
-								<h2 style="font-size: 18px;color:#AAE6F9;font-weight: 500; padding: 10px;">按站点6轴车超载数量top5统计</h2>
-							</div>
-							<div id="sexmain"  style="width: 420px;height: 260px;display: inline-block;margin-left: 2%;"></div>
-
-							<!--<div id="xian1" style="height:380px;top: -60px;left:30px;">
-							</div>-->
-						</div>
-						</div>
 				</div>
 			</div>
-			<div class="layui-tab-item">
-				<div class="leftdiv col-xs-3">
-					<h2 class="jianceh" style="font-size: 19px;color:#007AFF;">监测站点实时统计</h2>
-					<div class="leftsj">
-						<div class="leftfirst">
-							<img src="img/first_img.png" style="height: 40px;">
-							<p class="leftp" id="leftTable1"></p><span>辆</span>
-							<p style="color: #A4A5B0;margin-left: 16%;margin-top: -2%;font-size:13px;">当日总流量</p>
-						</div>
-						<div class="leftsec">
-							<img src="./img/second_img.png" style="height: 40px;">
-							<p class="leftp" id="leftTable2"></p><span>辆</span>
-							<p style="color: #A4A5B0;margin-left: 16%;margin-top: -2%;font-size:13px;">当日超载车辆数</p>
-						</div>
-						<div class="leftth">
-							<a href="javascript:;" onclick="lookMsg(homePageInit.idLocal,3)"><img src="img/third_img.png" style="height: 40px;"></a>
-							<p class="leftp" id="leftTable3"></p><span>吨</span>
-							<input type="input" id="idLocal" style="display: none">
-							<p style="color: #A4A5B0;margin-left: 16%;margin-top: -2%;font-size:13px;">当日最大车重</p>
-						</div>
-						<div class="leftfou">
-							<a href="javascript:;" onclick="bindLeftLinks(homePageInit.linkStationNames,homePageInit.links)"> <img src="img/first_img.png" style="height: 40px;"></a>
-							<p class="leftp" id="leftTable4"></p><span>个</span>
-							<p style="color: #A4A5B0;margin-left: 16%;margin-top: -2%;font-size:13px;">当日监测站点</p>
-						</div>
-						<div class="y-span10 y-last">
-							<div class="table">		
-								<div class="bj_nav y-clearfix">
-									<div>
-										<div id="main" style="height:700px;width:500px;margin-left:-120px;float:left;"></div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- 左边结束 -->
-				<div class="centerdiv col-xs-4">
-					<div class="topcenter" style="height:420px;">
-						<a href="javascript:;" onclick="initLeftChartDetail(1);" style="display:inline-block;z-index:10;position:absolute;right:0;margin-top:1%;">更多</a>
-						<div class="bg">
-							<h2 class="dangqianche" style="font-size: 17px;color:#007AFF;font-weight: bolder; padding: 10px;">当日车流量统计（辆）</h2>
-						</div>
-
-						<div class="bz">
-							<span style="float: right;margin-right: 0%;color:#91C4DB;font-size:13px;">单位（辆） </span>
-						</div>
-						<div id="xian1" style="height:380px;top: -60px;left:30px;">
-						</div>
-					</div>
-					<div class="bottomcenter">
-						<a href="javascript:;" onclick="initLeftChartDetail(2)
-      
-      
-      ;" style="display:inline-block;z-index:10;position:absolute;right:0;margin-top:1%;">更多</a>
-						<div class="bg" style="margin-top: -8%;">
-							<h2 class="dangqianche" style="font-size: 16px;font-weight: bolder; padding: 10px;">当日超载比例统计</h2>
-						</div>
-						<div id="xian" style="height:360px;top: -45px;">
-							<div id="huan0" class="col-xs-4" style="height: 160px;width:200px;position: absolute;"></div>
-							<div id="huan1" class="col-xs-4" style="height: 160px;width:200px;position: absolute; margin-left: 30%;"></div>
-							<div id="huan2" class="col-xs-4" style="height: 160px;width:200px;float: right;position: absolute;right: 0;">
-							</div>
-							<div class="ecs" style="margin-top: 30%;">
-								<div id="huan3" class="col-xs-4" style="height: 160px;width:200px;position: absolute;"></div>
-								<div id="huan4" class="col-xs-4" style="height: 160px;width:200px;position: absolute; margin-left: 30%;"></div>
-								<div id="huan5" class="col-xs-4" style="height: 160px;width:200px;position: absolute;right: 0;"></div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- 中间结束 -->
-				<div class="right col-xs-3">
-					<a href="javascript:;" onclick="initLeftChartDetail(3);" style="display:inline-block;z-index:10;position:absolute;right:0;margin-top:5%;"> 更多</a>
+		</div>
+		<div class="layui-tab-item">
+			<div class="twoleft col-xs-5" style="margin-left: 15%;">
+				<div class="topcenter"
+					 style="height:400px;background-color: rgba(2, 10, 85, 0.4);position: absolute;width: 92%;border: 1px solid #0A1D69;background-position:0 100%, 100% 100% !important;">
+					<!--	<a href="javascript:;" onclick="initLeftChartDetail(1);" style="display:inline-block;z-index:10;position:absolute;right:0;margin-top:1%;">更多</a>-->
 					<div class="bg">
-						<h2 class="dangqianche" style="font-size: 17px;color:#007AFF;font-weight: bolder;padding: 10px;float: right;">当日超载数量统计（辆）</h2>
+						<h2 style="font-size: 18px;color:#AAE6F9;font-weight: 500; padding: 10px;">2轴车数据统计</h2>
 					</div>
-					<div class="righttop" style="margin-top: -10%;position: relative;">
-						<div id="by0" class="col-xs-4" style="height:200px;width:150px;position: absolute;float: left;"></div>
-						<div id="by1" class="col-xs-4" style="height:200px;width:150px;margin-left:32%;position: absolute;"></div>
-						<div id="by2" class="col-xs-4" style="height:200px;width:150px;margin-top:-10%;left:66%;"></div>
-					</div>
-					<div class="ert" style="margin-top: 40%;position: relative;">
-						<div id="by3" class="col-xs-4" style="height:200px;width:150px;position: absolute;"></div>
-						<div id="by4" class="col-xs-4" style="height:200px;width:150px;position: absolute;margin-left: 32%;"></div>
-						<div id="by5" class="col-xs-4" style="height:200px;width:150px;position: absolute;right: 0;"></div>
-					</div>
-					<div class="rightbottom" style="clear: both; position: relative;top: 120px;">
-
-						<!--     <div class="bg" style="position:relative;top:70px;">
-     <a href="javascript:;" onclick="initLeftChartDetail4(4);" style="display:inline-block;z-index:10;position:absolute;right:0;margin-top:2%;">更多</a>
-        <h2 class="dangqianche" style="font-size: 17px;color:#007AFF;font-weight: bolder;padding: 10px;">当前超载数量统计（辆）</h2>
-    </div>
-        <p style="font-size: 17px;color: #FFF;margin-top:15%;position:absolute;" class="col-xs-8">当前最大车重<span id="lastZuiDaChe	Zhong" style="color: #FE545E;font-size: 25px;background-color:#131A50;padding: 1.5%;margin: 1%;"></span>吨</p> -->
-
-					</div>
-					<div id="liti" class="col-xs-12" style="height: 400px; margin-top: 48%;width:500px;">
-					</div>
-				</div>
-			</div>
-		</div>
-		</div>
-
-		<!-- 修改Modal -->
-		<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="chart1Detail">
-			<div class="modal-dialog modal-lg" style="width:50%" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-						<h4 class="modal-title"><b>所有信息</b></h4>
-					</div>
-					<div class="modal-body">
-						<div>
-							<table class="table table-striped table-hover" id="mainContent" style="width: 100%;margin: 20px auto 0;">
-								<thead style="background-color: #DDE6F7;">
-									<tr>
-										<th style="width: 50%">测点名称</th>
-										<th>数据</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>测点1</td>
-										<td>100</td>
-									</tr>
-									<tr>
-										<td>测点2</td>
-										<td>55</td>
-									</tr>
-								</tbody>
-							</table>
+					<div class="ltitle" style="margin-top: 3%;margin-left: 3%;">
+						<div class="left5" style="display: inline-block;width: 150px;">
+							<img src="img/first_img.png" style="height: 40px;">
+							<p class="leftp" id="leftTable1two"></p><span>辆</span>
+							<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日总流量</p>
 						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- 修改Modal -->
-		<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="chart1Detail1">
-			<div class="modal-dialog modal-lg" style="width:50%" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-						<h4 class="modal-title"><b>连接信息</b></h4>
-					</div>
-					<div class="modal-body">
-						<div>
-							<table class="table table-striped table-hover" id="mainContent1" style="width: 100%;margin: 20px auto 0;">
-								<thead style="background-color: #DDE6F7;">
-									<tr>
-										<th style="width: 50%">测点名称</th>
-										<th>连接情况</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>测点1</td>
-										<td>100</td>
-									</tr>
-									<tr>
-										<td>测点2</td>
-										<td>55</td>
-									</tr>
-								</tbody>
-							</table>
+						<div class="left6" style="margin-left: 14%;display:inline-block;width: 150px;">
+							<img src="./img/second_img.png" style="height: 40px;">
+							<p class="leftp" id="leftTable2two"></p><span>辆</span>
+							<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日超载车辆数</p>
 						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- 修改Modal -->
-		<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="chart2Detail1">
-			<div class="modal-dialog modal-lg" style="width:50%" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-						<h4 class="modal-title"><b>所有信息</b></h4>
-					</div>
-					<div class="modal-body">
-						<div>
-							<table class="table table-striped table-hover" id="mainContent2" style="width: 100%;margin: 20px auto 0;">
-								<thead style="background-color: #DDE6F7;">
-									<tr>
-										<th style="width: 50%">测点名称</th>
-										<th>连接情况</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>测点1</td>
-										<td>100</td>
-									</tr>
-									<tr>
-										<td>测点2</td>
-										<td>55</td>
-									</tr>
-								</tbody>
-							</table>
+						<div class="left7" style="margin-left: 14%;display:inline-block;width: 150px;">
+							<img src="./img/second_img.png" style="height: 40px;">
+							<p class="leftp" id="leftTable3two"></p><span>辆</span>
+							<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日超载车辆数</p>
 						</div>
+						<div id="maint" style="width: 350px;height: 300px;display: inline-block;"></div>
+						<div id="mainb"
+							 style="width: 350px;height: 300px;display: inline-block;position: absolute;margin-left: 10px;"></div>
 					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-					</div>
+
+					<!--<div id="xian1" style="height:380px;top: -60px;left:30px;">
+                    </div>-->
 				</div>
-			</div>
-		</div>
-
-		<!-- allMsg1 -->
-		<div class="modal fade " tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg1">
-			<div class="modal-dialog " role="document">
-				<div class="modal-content" id="lookWimMsgDiv">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title"><b>详细信息</b></h4>
+				<div class="topcenter"
+					 style="height:400px;background-color: rgba(2, 10, 85, 0.4);position: absolute;width: 92%;border: 1px solid #0A1D69;background-position:0 100%, 100% 100% !important;margin-left:98%;">
+					<!--	<a href="javascript:;" onclick="initLeftChartDetail(1);" style="display:inline-block;z-index:10;position:absolute;right:0;margin-top:1%;">更多</a>-->
+					<div class="bg">
+						<h2 style="font-size: 18px;color:#AAE6F9;font-weight: 500; padding: 10px;">3轴车数据统计</h2>
 					</div>
-					<div class="modal-body">
-						<div>
-							<form class="form-inline">
-								<table class="table  table-condensed" style="">
-									<tr>
-										<td>站点</td>
-										<td>{{stationName}}</td>
-										<td>轴数</td>
-										<td>{{axlesCount}}</td>
-									</tr>
-									<tr>
-
-										<td>车型</td>
-										<td>{{vehicleTypeName}}</td>
-										<td>车道号</td>
-										<td>{{laneNo}}</td>
-									</tr>
-									<tr>
-										<td>车牌号</td>
-										<td>{{plate}}</td>
-										<td>行驶方向</td>
-										<td>{{directionName}}</td>
-
-									</tr>
-									<tr>
-										<td>超载率</td>
-										<td>{{overWeightRatioName}}</td>
-										<td>是否跨道</td>
-										<td>{{isStraddleName}}</td>
-									</tr>
-									<tr>
-										<td>车长(cm)</td>
-										<td>{{length}}</td>
-										<td>车牌颜色</td>
-										<td>{{licensePlateColor}}</td>
-									</tr>
-									<tr>
-										<td>超重量(kg)</td>
-										<td>{{overWeight}}</td>
-										<td>通行时间</td>
-										<td>{{evtTime}}</td>
-									</tr>
-									<tr>
-										<td>总重量(kg)</td>
-										<td>{{totalWeight}}</td>
-										<!--<td>打包时间</td>
-                                <td>{{msgTime}}</td>-->
-										<td>路面温度(°C)</td>
-										<td>{{temperature}}</td>
-									</tr>
-
-									<tr>
-										<td>车速(km/h)</td>
-										<td>查看图片</td>
-										<td rowspan="2">
-											<div id="chepaiImg">
-											</div>
-											<div id="chebodyDiv">
-											</div>
-										</td>
-									</tr>
-									<tr>
-
-									</tr>
-								</table>
-								<table class="table  table-condensed" style="height: auto; margin-top: -2%;">
-									<thead>
-										<td colspan="10">轴重(kg)</td>
-									</thead>
-									<tbody>
-										<tr>
-											<td width="38px;">轴1:</td>
-											<td>{{axle1}}</td>
-											<td width="38px;">轴2:</td>
-											<td>{{axle2}}</td>
-											<td width="38px;">轴3:</td>
-											<td>{{axle3}}</td>
-											<td width="38px;">轴4:</td>
-											<td>{{axle4}}</td>
-											<td width="38px;" style="text-align:right">轴5:</td>
-											<td>{{axle5}}</td>
-										</tr>
-										<tr>
-											<td width="38px;">轴6:</td>
-											<td>{{axle6}}</td>
-											<td width="38px;">轴7:</td>
-											<td>{{axle7}}</td>
-											<td width="38px;">轴8:</td>
-											<td>{{axle8}}</td>
-											<td width="38px;">轴9:</td>
-											<td>{{axle9}}</td>
-											<td width="44px;">轴10:</td>
-											<td>{{axle10}}</td>
-										</tr>
-									</tbody>
-								</table>
-								<table class="table  table-condensed" style="height: auto; margin-top: -2%">
-									<thead>
-										<td colspan="10">轴间距(cm)</td>
-									</thead>
-									<tbody>
-										<tr>
-											<td width="38px;">轴1:</td>
-											<td>{{axleSpace1}}</td>
-											<td width="38px;">轴2:</td>
-											<td>{{axleSpace2}}</td>
-											<td width="38px;">轴3:</td>
-											<td>{{axleSpace3}}</td>
-											<td width="38px;">轴4:</td>
-											<td>{{axleSpace4}}</td>
-											<td width="38px;">轴5:</td>
-											<td>{{axleSpace5}}</td>
-										</tr>
-										<tr>
-											<td width="38px;">轴6:</td>
-											<td>{{axleSpace6}}</td>
-											<td width="38px;">轴7:</td>
-											<td>{{axleSpace7}}</td>
-											<td width="38px;">轴8:</td>
-											<td>{{axleSpace8}}</td>
-											<td width="38px;">轴9:</td>
-											<td>{{axleSpace9}}</td>
-										</tr>
-									</tbody>
-								</table>
-							</form>
+					<div class="ltitle" style="margin-top: 3%;margin-left: 3%;">
+						<div class="left8" style="display: inline-block;width: 150px;">
+							<img src="img/first_img.png" style="height: 40px;">
+							<p class="leftp" id="leftTable1third"></p><span>辆</span>
+							<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日总流量</p>
 						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-						<!--<button type="button" class="btn btn-success" id="xgup_baocun">保存</button>-->
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- 修改Modal -->
-		<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="chart4Detail">
-			<div class="modal-dialog modal-lg" style="width:50%" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-						<h4 class="modal-title"><b>所有信息</b></h4>
-					</div>
-					<div class="modal-body">
-						<div>
-							<table class="table table-striped table-hover" id="mainContent4" style="width: 100%;margin: 20px auto 0;">
-								<thead style="background-color: #DDE6F7;">
-									<tr>
-										<th style="width: 40%">测点名称</th>
-										<th style="width: 30%">二级预警</th>
-										<th style="width: 30%">三级预警</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>测点1</td>
-										<td>100</td>
-										<td>100</td>
-									</tr>
-									<tr>
-										<td>测点2</td>
-										<td>55</td>
-										<td>55</td>
-									</tr>
-								</tbody>
-							</table>
+						<div class="left9" style="margin-left: 14%;display:inline-block;width: 150px;">
+							<img src="./img/second_img.png" style="height: 40px;">
+							<p class="leftp" id="leftTable2third"></p><span>辆</span>
+							<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日超载车辆数</p>
 						</div>
+						<div class="left10" style="margin-left: 14%;display:inline-block;width: 150px;">
+							<img src="./img/second_img.png" style="height: 40px;">
+							<p class="leftp" id="leftTable3third"></p><span>辆</span>
+							<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日超载车辆数</p>
+						</div>
+						<div id="maina" style="width: 350px;height: 300px;display: inline-block;"></div>
+						<div id="mainc"
+							 style="width: 350px;height: 300px;display: inline-block;position: absolute;margin-left: 10px;"></div>
 					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+
+					<!--<div id="xian1" style="height:380px;top: -60px;left:30px;">
+                    </div>-->
+				</div>
+				<div class="secfirst" style="margin-top: 58%;">
+					<div class="topcenter"
+						 style="height:400px;background-color: rgba(2, 10, 85, 0.4);position: absolute;width: 92%;border: 1px solid #0A1D69;background-position:0 100%, 100% 100% !important;">
+						<!--	<a href="javascript:;" onclick="initLeftChartDetail(1);" style="display:inline-block;z-index:10;position:absolute;right:0;margin-top:1%;">更多</a>-->
+						<div class="bg">
+							<h2 style="font-size: 18px;color:#AAE6F9;font-weight: 500; padding: 10px;">4轴车数据统计</h2>
+						</div>
+						<div class="ltitle" style="margin-top: 3%;margin-left: 3%;">
+							<div class="left11" style="display: inline-block;width: 150px;">
+								<img src="img/first_img.png" style="height: 40px;">
+								<p class="leftp" id="leftTable1four"></p><span>辆</span>
+								<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日总流量</p>
+							</div>
+							<div class="left12" style="margin-left: 14%;display:inline-block;width: 150px;">
+								<img src="./img/second_img.png" style="height: 40px;">
+								<p class="leftp" id="leftTable2four"></p><span>辆</span>
+								<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日超载车辆数</p>
+							</div>
+							<div class="left13" style="margin-left: 14%;display:inline-block;width: 150px;">
+								<img src="./img/second_img.png" style="height: 40px;">
+								<p class="leftp" id="leftTable3four"></p><span>辆</span>
+								<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日超载车辆数</p>
+							</div>
+							<div id="maind" style="width: 350px;height: 300px;display: inline-block;"></div>
+							<div id="maine"
+								 style="width: 350px;height: 300px;display: inline-block;position: absolute;margin-left: 10px;"></div>
+						</div>
+
+						<!--<div id="xian1" style="height:380px;top: -60px;left:30px;">
+                        </div>-->
+					</div>
+					<div class="topcenter"
+						 style="height:400px;background-color: rgba(2, 10, 85, 0.4);position: absolute;width: 92%;border: 1px solid #0A1D69;background-position:0 100%, 100% 100% !important;margin-left: 98%;">
+						<!--	<a href="javascript:;" onclick="initLeftChartDetail(1);" style="display:inline-block;z-index:10;position:absolute;right:0;margin-top:1%;">更多</a>-->
+						<div class="bg">
+							<h2 style="font-size: 18px;color:#AAE6F9;font-weight: 500; padding: 10px;">5轴车数据统计</h2>
+						</div>
+						<div class="ltitle" style="margin-top: 3%;margin-left: 3%;">
+							<div class="left14" style="display: inline-block;width: 150px;">
+								<img src="img/first_img.png" style="height: 40px;">
+								<p class="leftp" id="leftTable1five"></p><span>辆</span>
+								<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日总流量</p>
+							</div>
+							<div class="left15" style="margin-left: 14%;display:inline-block;width: 150px;">
+								<img src="./img/second_img.png" style="height: 40px;">
+								<p class="leftp" id="leftTable2five"></p><span>辆</span>
+								<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日超载车辆数</p>
+							</div>
+							<div class="left16" style="margin-left: 14%;display:inline-block;width: 150px;">
+								<img src="./img/second_img.png" style="height: 40px;">
+								<p class="leftp" id="leftTable3five"></p><span>辆</span>
+								<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日超载车辆数</p>
+							</div>
+							<div id="mainf" style="width: 350px;height: 300px;display: inline-block;"></div>
+							<div id="maing"
+								 style="width: 350px;height: 300px;display: inline-block;position: absolute;margin-left: 10px;"></div>
+						</div>
+
+						<!--<div id="xian1" style="height:380px;top: -60px;left:30px;">
+                        </div>-->
 					</div>
 				</div>
 			</div>
-		</div>
 
-		<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="change">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title" id="myModalLabel"><b>修改密码</b></h4>
+		</div>
+		<br/>
+
+		<div class="layui-tab-item">
+			<div class="thidiv">
+
+				<div class="thitop col-xs-9 topcenter"
+					 style="width: 77%; height:300px;background-color: rgba(2, 10, 85, 0.4);border: 1px solid #0A1D69;background-position:0 100%, 100% 100% !important;margin-left: 20%;">
+					<div class="bg" style="margin-left: -15px;">
+						<h2 style="font-size: 18px;color:#AAE6F9;font-weight: 500; padding: 10px;">5轴车数据统计</h2>
 					</div>
-					<div class="modal-body">
-						<div>
-							<table class="  table-condensed" style="width:60%;margin:0 auto;">
-								<tr>
-									<td style="width:40%;"><span>原密码:</span></td>
-									<td style="width:60%;">
-										<input type="text" class="form-control" id="old_password" style="width:100%;">
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<span>新密码:</span>
-									</td>
-									<td>
-										<input type="text" class="form-control" id="new_password" style="width:100%;">
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<span>重新输入新密码:</span>
-									</td>
-									<td>
-										<input type="text" class="form-control" id="new_password2" style="width:100%;">
-									</td>
-								</tr>
-							</table>
+					<div class="ltitle" style="margin-top: 1%;margin-left: 1%;position: absolute;">
+						<div class="left17" style="display: inline-block;width: 150px;">
+							<img src="img/first_img.png" style="height: 40px;">
+							<p class="leftp" id="leftTable1sex"></p><span>辆</span>
+							<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日总流量</p>
+						</div>
+						<div class="left18" style="display:inline-block;width: 150px;">
+							<img src="./img/second_img.png" style="height: 40px;">
+							<p class="leftp" id="leftTable2sex"></p><span>辆</span>
+							<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日超载车辆数</p>
+						</div>
+						<div id="mainj"
+							 style="width: 530px;height: 250px;display: inline-block;float:right; margin-left: 10px;"></div>
+						<div id="mainh" style="width:530px;height: 250px;display: inline-block;float: right;"></div>
+
+						<div class="wjkd" style="margin-top: 5%;">
+							<div class="left19" style="display:inline-block;width: 150px;">
+								<img src="./img/second_img.png" style="height: 40px;">
+								<p class="leftp" id="leftTable3sex"></p><span>辆</span>
+								<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日超载车辆数</p>
+							</div>
 
 						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 
-						<button type="button" class="btn btn-success" onclick="save_new_password()">保存</button>
+
+					</div>
+				</div>
+				<div class="fg">
+					<div class="topcenter col-xs-3"
+						 style="height:280px;background-color: rgba(2, 10, 85, 0.4);border: 1px solid #0A1D69;background-position:0 100%, 100% 100% !important;margin-left: 20%;margin-top:1%;">
+						<!--	<a href="javascript:;" onclick="initLeftChartDetail(1);" style="display:inline-block;z-index:10;position:absolute;right:0;margin-top:1%;">更多</a>-->
+						<div class="bg" style="margin-left: -3.5%;">
+							<h2 style="font-size: 18px;color:#AAE6F9;font-weight: 500; padding: 10px;">统计预警（公司统计）</h2>
+						</div>
+						<div id="firstmain"
+							 style="width: 420px;height: 260px;display: inline-block;margin-left: 2%;"></div>
+
+						<!--<div id="xian1" style="height:380px;top: -60px;left:30px;">
+                        </div>-->
+					</div>
+					<div class="topcenter col-xs-3"
+						 style="height:280px;background-color: rgba(2, 10, 85, 0.4);border: 1px solid #0A1D69;background-position:0 100%, 100% 100% !important;margin-left:1%;margin-top:1%;">
+						<!--	<a href="javascript:;" onclick="initLeftChartDetail(1);" style="display:inline-block;z-index:10;position:absolute;right:0;margin-top:1%;">更多</a>-->
+						<div class="bg" style="margin-left: -3.5%;">
+							<h2 style="font-size: 18px;color:#AAE6F9;font-weight: 500; padding: 10px;">按省界统计</h2>
+						</div>
+						<div id="secmain"
+							 style="width: 420px;height: 260px;display: inline-block;margin-left: 2%;"></div>
+
+						<!--<div id="xian1" style="height:380px;top: -60px;left:30px;">
+                        </div>-->
+					</div>
+					<div class="topcenter col-xs-3"
+						 style="height:280px;background-color: rgba(2, 10, 85, 0.4);border: 1px solid #0A1D69;background-position:0 100%, 100% 100% !important;margin-left:1%;margin-top:1%;">
+						<!--	<a href="javascript:;" onclick="initLeftChartDetail(1);" style="display:inline-block;z-index:10;position:absolute;right:0;margin-top:1%;">更多</a>-->
+						<div class="bg" style="margin-left: -3.5%;">
+							<h2 style="font-size: 18px;color:#AAE6F9;font-weight: 500; padding: 10px;">
+								按站点6轴车超载数量top5统计</h2>
+						</div>
+						<div id="thimain"
+							 style="width: 420px;height: 260px;display: inline-block;margin-left: 2%;"></div>
+
+						<!--<div id="xian1" style="height:380px;top: -60px;left:30px;">
+                        </div>-->
+					</div>
+				</div>
+				<!--分割-->
+				<div class="fg2">
+					<div class="topcenter col-xs-3"
+						 style="height:280px;background-color: rgba(2, 10, 85, 0.4);border: 1px solid #0A1D69;background-position:0 100%, 100% 100% !important;margin-left: 20%;margin-top:1%;">
+						<!--	<a href="javascript:;" onclick="initLeftChartDetail(1);" style="display:inline-block;z-index:10;position:absolute;right:0;margin-top:1%;">更多</a>-->
+						<div class="bg" style="margin-left: -3.5%;">
+							<h2 style="font-size: 18px;color:#AAE6F9;font-weight: 500; padding: 10px;">
+								6轴车超载预警（公司统计）</h2>
+						</div>
+						<div id="foumain"
+							 style="width: 420px;height: 260px;display: inline-block;margin-left: 2%;"></div>
+
+						<!--<div id="xian1" style="height:380px;top: -60px;left:30px;">
+                        </div>-->
+					</div>
+					<div class="topcenter col-xs-3"
+						 style="height:280px;background-color: rgba(2, 10, 85, 0.4);border: 1px solid #0A1D69;background-position:0 100%, 100% 100% !important;margin-left:1%;margin-top:1%;">
+						<!--	<a href="javascript:;" onclick="initLeftChartDetail(1);" style="display:inline-block;z-index:10;position:absolute;right:0;margin-top:1%;">更多</a>-->
+						<div class="bg" style="margin-left: -3.5%;">
+							<h2 style="font-size: 18px;color:#AAE6F9;font-weight: 500; padding: 10px;">
+								当日单轴超载统计（>14吨）</h2>
+						</div>
+						<div id="fivemain"
+							 style="width: 420px;height: 260px;display: inline-block;margin-left: 2%;"></div>
+
+						<!--<div id="xian1" style="height:380px;top: -60px;left:30px;">
+                        </div>-->
+					</div>
+					<div class="topcenter col-xs-3"
+						 style="height:280px;background-color: rgba(2, 10, 85, 0.4);border: 1px solid #0A1D69;background-position:0 100%, 100% 100% !important;margin-left:1%;margin-top:1%;">
+						<!--	<a href="javascript:;" onclick="initLeftChartDetail(1);" style="display:inline-block;z-index:10;position:absolute;right:0;margin-top:1%;">更多</a>-->
+						<div class="bg" style="margin-left: -3.5%;">
+							<h2 style="font-size: 18px;color:#AAE6F9;font-weight: 500; padding: 10px;">
+								按站点6轴车超载数量top5统计</h2>
+						</div>
+						<div id="sexmain"
+							 style="width: 420px;height: 260px;display: inline-block;margin-left: 2%;"></div>
+
+						<!--<div id="xian1" style="height:380px;top: -60px;left:30px;">
+                        </div>-->
 					</div>
 				</div>
 			</div>
 		</div>
-		<!-- 修改model结束 -->
-	</body>
-	<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-	<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
-	<script src="js/echarts.min(1).js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/build/dist/echarts.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/homeEcharts.js" type="text/javascript" charset="utf-8"></script>
-	<script src="../js/bootstrap.min.js"></script>
+		<div class="layui-tab-item">
+			<div class="leftdiv col-xs-3">
+				<h2 class="jianceh" style="font-size: 19px;color:#007AFF;">监测站点实时统计</h2>
+				<div class="leftsj">
+					<div class="leftfirst">
+						<img src="img/first_img.png" style="height: 40px;">
+						<p class="leftp" id="leftTable1"></p><span>辆</span>
+						<p style="color: #A4A5B0;margin-left: 16%;margin-top: -2%;font-size:13px;">当日总流量</p>
+					</div>
+					<div class="leftsec">
+						<img src="./img/second_img.png" style="height: 40px;">
+						<p class="leftp" id="leftTable2"></p><span>辆</span>
+						<p style="color: #A4A5B0;margin-left: 16%;margin-top: -2%;font-size:13px;">当日超载车辆数</p>
+					</div>
+					<div class="leftth">
+						<a href="javascript:;" onclick="lookMsg(homePageInit.idLocal,3)"><img src="img/third_img.png"
+																							  style="height: 40px;"></a>
+						<p class="leftp" id="leftTable3"></p><span>吨</span>
+						<input type="input" id="idLocal" style="display: none">
+						<p style="color: #A4A5B0;margin-left: 16%;margin-top: -2%;font-size:13px;">当日最大车重</p>
+					</div>
+					<div class="leftfou">
+						<a href="javascript:;"
+						   onclick="bindLeftLinks(homePageInit.linkStationNames,homePageInit.links)"> <img
+								src="img/first_img.png" style="height: 40px;"></a>
+						<p class="leftp" id="leftTable4"></p><span>个</span>
+						<p style="color: #A4A5B0;margin-left: 16%;margin-top: -2%;font-size:13px;">当日监测站点</p>
+					</div>
+					<div class="y-span10 y-last">
+						<div class="table">
+							<div class="bj_nav y-clearfix">
+								<div>
+									<div id="main"
+										 style="height:700px;width:500px;margin-left:-120px;float:left;"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 左边结束 -->
+			<div class="centerdiv col-xs-4">
+				<div class="topcenter" style="height:420px;">
+					<a href="javascript:;" onclick="initLeftChartDetail(1);"
+					   style="display:inline-block;z-index:10;position:absolute;right:0;margin-top:1%;">更多</a>
+					<div class="bg">
+						<h2 class="dangqianche"
+							style="font-size: 17px;color:#007AFF;font-weight: bolder; padding: 10px;">当日车流量统计（辆）</h2>
+					</div>
 
-	<script src="js/toastr.js"></script>
-	<script src="js/layui.all.js" type="text/javascript" charset="utf-8"></script>
-	<script type="text/javascript">
-		$(document).ready(function (){
-			//初始化车流量
-			homePageInit.initLeftEcharts('xian1');
-
-			//初始化环形图0
-			homePageInit.initDownEcharts();
-			homePageInit.initLastEcharts()
-
-			//初始化左侧总数据
-			homePageInit.initHomeData();
-			setInterval(refresh, 1000);
-			setInterval(refreshLeft, 4000);
-		})
-
-		// 基于准备好的dom，初始化echarts实例
-		var myChart = echarts.init(document.getElementById("maint"));
-		// 指定图表的配置项和数据
-		var option = {
-			 title: {
-            	text: '当日超载数量与比例',
-            	  padding: [20, 0, 0, 0],//标题内边距上右下
-            	 textStyle: {//textStyle设置标题样式
-			        color: '#A1A2B4',
-			        fontSize: 13
-			      },
-       		 },
-       		 
-			xAxis: [{
-				type: 'category',
-				data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
-				axisPointer: {
-					type: 'shadow'
-				},
-				axisLabel: {
-					show: true,
-					textStyle: {
-						color: '#A1A2B4'
-					}
-				},
-				axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-
-			}],
-			yAxis: [{
-					type: 'value',
-					axisLabel: {
-						color: '#abb8ce',
-					},
-					axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-				},
-				{
-					type: 'value',
-					axisLabel: {
-						color: '#abb8ce',
-					},
-					axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-				}
-			],
-			series: [{
-					type: 'bar',
-					data: [150, 205, 345, 452],
-					barWidth: 20, //柱图宽度
-					color:'#305BFF'
-				},
-
-				{
-					type: 'line',
-					yAxisIndex: 1,
-					color:'#E82DA2',
-					data: [150, 205, 345, 452]
-				}
-			]
-		};
-
-		// 使用刚指定的配置项和数据显示图表。
-		myChart.setOption(option);
-		
-	var myChart = echarts.init(document.getElementById("mainb"));
-		// 指定图表的配置项和数据
-		var option = {
-			 title: {
-            	text: '当日超载数量与比例',
-            	  padding: [20, 0, 0, 0],//标题内边距上右下
-            	 textStyle: {//textStyle设置标题样式
-			        color: '#A1A2B4',
-			        fontSize: 13
-			      },
-       		 },
-       		 
-			xAxis: [{
-				type: 'category',
-				data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
-				axisPointer: {
-					type: 'shadow'
-				},
-				axisLabel: {
-					show: true,
-					textStyle: {
-						color: '#A1A2B4'
-					}
-				},
-				axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-
-			}],
-			yAxis: [{
-					type: 'value',
-					axisLabel: {
-						color: '#abb8ce',
-					},
-					axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-				},
-				{
-					type: 'value',
-					axisLabel: {
-						color: '#abb8ce',
-					},
-					axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-				}
-			],
-			series: [{
-					type: 'bar',
-					data: [150, 205, 345, 452],
-					barWidth: 20, //柱图宽度
-					color:'#305BFF',
-					 itemStyle: {
-					 	
-	                    normal: {
-	                    	color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                            offset: 0,
-                            color: '#DE6451'
-                        }, {
-                            offset: 1,
-                            color: '#FEB243'
-                        }]),
-	                        barBorderRadius: 30
-	                    }
-               }
-			}
-			]
-		};
-
-		// 使用刚指定的配置项和数据显示图表。
-		myChart.setOption(option);
-//		===============================================2
-var myChart = echarts.init(document.getElementById("maina"));
-		// 指定图表的配置项和数据
-		var option = {
-			 title: {
-            	text: '当日超载数量与比例',
-            	  padding: [20, 0, 0, 0],//标题内边距上右下
-            	 textStyle: {//textStyle设置标题样式
-			        color: '#A1A2B4',
-			        fontSize: 13
-			      },
-       		 },
-       		 
-			xAxis: [{
-				type: 'category',
-				data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
-				axisPointer: {
-					type: 'shadow'
-				},
-				axisLabel: {
-					show: true,
-					textStyle: {
-						color: '#A1A2B4'
-					}
-				},
-				axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-
-			}],
-			yAxis: [{
-					type: 'value',
-					axisLabel: {
-						color: '#abb8ce',
-					},
-					axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-				},
-				{
-					type: 'value',
-					axisLabel: {
-						color: '#abb8ce',
-					},
-					axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-				}
-			],
-			series: [{
-					type: 'bar',
-					data: [150, 205, 345, 452],
-					barWidth: 20, //柱图宽度
-					color:'#305BFF'
-				},
-
-				{
-					type: 'line',
-					yAxisIndex: 1,
-					color:'#E82DA2',
-					data: [150, 205, 345, 452]
-				}
-			]
-		};
-
-		// 使用刚指定的配置项和数据显示图表。
-		myChart.setOption(option);
-		var myChart = echarts.init(document.getElementById("mainc"));
-		// 指定图表的配置项和数据
-		var option = {
-			 title: {
-            	text: '当日超载数量与比例',
-            	  padding: [20, 0, 0, 0],//标题内边距上右下
-            	 textStyle: {//textStyle设置标题样式
-			        color: '#A1A2B4',
-			        fontSize: 13
-			      },
-       		 },
-       		 
-			xAxis: [{
-				type: 'category',
-				data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
-				axisPointer: {
-					type: 'shadow'
-				},
-				axisLabel: {
-					show: true,
-					textStyle: {
-						color: '#A1A2B4'
-					}
-				},
-				axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-
-			}],
-			yAxis: [{
-					type: 'value',
-					axisLabel: {
-						color: '#abb8ce',
-					},
-					axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-				},
-				{
-					type: 'value',
-					axisLabel: {
-						color: '#abb8ce',
-					},
-					axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-				}
-			],
-			series: [{
-					type: 'bar',
-					data: [150, 205, 345, 452],
-					barWidth: 20, //柱图宽度
-					color:'#305BFF',
-					 itemStyle: {
-					 	
-	                    normal: {
-	                    	color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                            offset: 0,
-                            color: '#DE6451'
-                        }, {
-                            offset: 1,
-                            color: '#FEB243'
-                        }]),
-	                        barBorderRadius: 30
-	                    }
-               }
-			}
-			]
-		};
-
-		// 使用刚指定的配置项和数据显示图表。
-		myChart.setOption(option);
-//=====================================================3
-var myChart = echarts.init(document.getElementById("maind"));
-		// 指定图表的配置项和数据
-		var option = {
-			 title: {
-            	text: '当日超载数量与比例',
-            	  padding: [20, 0, 0, 0],//标题内边距上右下
-            	 textStyle: {//textStyle设置标题样式
-			        color: '#A1A2B4',
-			        fontSize: 13
-			      },
-       		 },
-       		 
-			xAxis: [{
-				type: 'category',
-				data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
-				axisPointer: {
-					type: 'shadow'
-				},
-				axisLabel: {
-					show: true,
-					textStyle: {
-						color: '#A1A2B4'
-					}
-				},
-				axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-
-			}],
-			yAxis: [{
-					type: 'value',
-					axisLabel: {
-						color: '#abb8ce',
-					},
-					axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-				},
-				{
-					type: 'value',
-					axisLabel: {
-						color: '#abb8ce',
-					},
-					axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-				}
-			],
-			series: [{
-					type: 'bar',
-					data: [150, 205, 345, 452],
-					barWidth: 20, //柱图宽度
-					color:'#305BFF'
-				},
-
-				{
-					type: 'line',
-					yAxisIndex: 1,
-					color:'#E82DA2',
-					data: [150, 205, 345, 452]
-				}
-			]
-		};
-
-		// 使用刚指定的配置项和数据显示图表。
-		myChart.setOption(option);
-		
-	var myChart = echarts.init(document.getElementById("maine"));
-		// 指定图表的配置项和数据
-		var option = {
-			 title: {
-            	text: '当日超载数量与比例',
-            	  padding: [20, 0, 0, 0],//标题内边距上右下
-            	 textStyle: {//textStyle设置标题样式
-			        color: '#A1A2B4',
-			        fontSize: 13
-			      },
-       		 },
-       		 
-			xAxis: [{
-				type: 'category',
-				data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
-				axisPointer: {
-					type: 'shadow'
-				},
-				axisLabel: {
-					show: true,
-					textStyle: {
-						color: '#A1A2B4'
-					}
-				},
-				axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-
-			}],
-			yAxis: [{
-					type: 'value',
-					axisLabel: {
-						color: '#abb8ce',
-					},
-					axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-				},
-				{
-					type: 'value',
-					axisLabel: {
-						color: '#abb8ce',
-					},
-					axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-				}
-			],
-			series: [{
-					type: 'bar',
-					data: [150, 205, 345, 452],
-					barWidth: 20, //柱图宽度
-					color:'#305BFF',
-					 itemStyle: {
-					 	
-	                    normal: {
-	                    	color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                            offset: 0,
-                            color: '#DE6451'
-                        }, {
-                            offset: 1,
-                            color: '#FEB243'
-                        }]),
-	                        barBorderRadius: 30
-	                    }
-               }
-			}
-			]
-		};
-
-		// 使用刚指定的配置项和数据显示图表。
-		myChart.setOption(option);
-		
-		
-//		=================================4
-var myChart = echarts.init(document.getElementById("mainf"));
-		// 指定图表的配置项和数据
-		var option = {
-			 title: {
-            	text: '当日超载数量与比例',
-            	  padding: [20, 0, 0, 0],//标题内边距上右下
-            	 textStyle: {//textStyle设置标题样式
-			        color: '#A1A2B4',
-			        fontSize: 13
-			      },
-       		 },
-       		 
-			xAxis: [{
-				type: 'category',
-				data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
-				axisPointer: {
-					type: 'shadow'
-				},
-				axisLabel: {
-					show: true,
-					textStyle: {
-						color: '#A1A2B4'
-					}
-				},
-				axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-
-			}],
-			yAxis: [{
-					type: 'value',
-					axisLabel: {
-						color: '#abb8ce',
-					},
-					axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-				},
-				{
-					type: 'value',
-					axisLabel: {
-						color: '#abb8ce',
-					},
-					axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-				}
-			],
-			series: [{
-					type: 'bar',
-					data: [150, 205, 345, 452],
-					barWidth: 20, //柱图宽度
-					color:'#305BFF'
-				},
-
-				{
-					type: 'line',
-					yAxisIndex: 1,
-					color:'#E82DA2',
-					data: [150, 205, 345, 452]
-				}
-			]
-		};
-
-		// 使用刚指定的配置项和数据显示图表。
-		myChart.setOption(option);
-
-//==================================================================小图标==============================================
-var myChart = echarts.init(document.getElementById("firstmain"));
-		// 指定图表的配置项和数据
-		var option = {
-			 
-       		 
-			xAxis: [{
-				type: 'category',
-				data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
-				axisPointer: {
-					type: 'shadow'
-				},
-				axisLabel: {
-					show: true,
-					textStyle: {
-						color: '#A1A2B4'
-					}
-				},
-				axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-
-			}],
-			yAxis: [{
-					type: 'value',
-					axisLabel: {
-						color: '#abb8ce',
-					},
-					axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-				},
-				{
-					type: 'value',
-					axisLabel: {
-						color: '#abb8ce',
-					},
-					axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-				}
-			],
-			series: [{
-					type: 'bar',
-					data: [150, 205, 345, 452],
-					barWidth: 20, //柱图宽度
-					color:'#305BFF'
-				},
-
-				{
-					type: 'line',
-					yAxisIndex: 1,
-					color:'#47FFCD',
-					data: [150, 205, 345, 452]
-				}
-			]
-		};
-
-		// 使用刚指定的配置项和数据显示图表。
-		myChart.setOption(option);
-		var myChart = echarts.init(document.getElementById("secmain"));
-		// 指定图表的配置项和数据
-		var option = {
-		    legend: {
-		        data: ['49~100吨', '100吨以上']
-		    },
-		    xAxis: [
-		        {
-				type: 'category',
-				data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
-				axisPointer: {
-					type: 'shadow'
-				},
-				axisLabel: {
-					show: true,
-					textStyle: {
-						color: '#A1A2B4'
-					}
-				},
-				axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-
-			}
-    ],
-    yAxis: [
-{
-					type: 'value',
-					axisLabel: {
-						color: '#abb8ce',
-					},
-					axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-				},
-				{
-					type: 'value',
-					axisLabel: {
-						color: '#abb8ce',
-					},
-					axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-				}
-    ],
-    series: [
-        {
-            name: '蒸发量',
-            type: 'bar',
-            data: [2.0, 4.9, 7.0, 23.2],
-            color:'#05D3DB'
-        },
-        {
-            name: '降水量',
-            type: 'bar',
-            data: [2.6, 5.9, 9.0, 26.4],
-            color:'#B38CFF'
-        }
-    ]
-};
+					<div class="bz">
+						<span style="float: right;margin-right: 0%;color:#91C4DB;font-size:13px;">单位（辆） </span>
+					</div>
+					<div id="xian1" style="height:380px;top: -60px;left:30px;">
+					</div>
+				</div>
+				<div class="bottomcenter">
+					<a href="javascript:;" onclick="initLeftChartDetail(2)
 
 
-		// 使用刚指定的配置项和数据显示图表。
-		myChart.setOption(option);
-		var myChart = echarts.init(document.getElementById("thimain"));
-		// 指定图表的配置项和数据
-		var option = {
-			 
-       		 
-			xAxis: [{
-				type: 'category',
-				data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
-				axisPointer: {
-					type: 'shadow'
-				},
-				axisLabel: {
-					show: true,
-					textStyle: {
-						color: '#A1A2B4'
-					}
-				},
-				axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
+      ;" style="display:inline-block;z-index:10;position:absolute;right:0;margin-top:1%;">更多</a>
+					<div class="bg" style="margin-top: -8%;">
+						<h2 class="dangqianche" style="font-size: 16px;font-weight: bolder; padding: 10px;">
+							当日超载比例统计</h2>
+					</div>
+					<div id="xian" style="height:360px;top: -45px;">
+						<div id="huan0" class="col-xs-4" style="height: 160px;width:200px;position: absolute;"></div>
+						<div id="huan1" class="col-xs-4"
+							 style="height: 160px;width:200px;position: absolute; margin-left: 30%;"></div>
+						<div id="huan2" class="col-xs-4"
+							 style="height: 160px;width:200px;float: right;position: absolute;right: 0;">
+						</div>
+						<div class="ecs" style="margin-top: 30%;">
+							<div id="huan3" class="col-xs-4"
+								 style="height: 160px;width:200px;position: absolute;"></div>
+							<div id="huan4" class="col-xs-4"
+								 style="height: 160px;width:200px;position: absolute; margin-left: 30%;"></div>
+							<div id="huan5" class="col-xs-4"
+								 style="height: 160px;width:200px;position: absolute;right: 0;"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 中间结束 -->
+			<div class="right col-xs-3">
+				<a href="javascript:;" onclick="initLeftChartDetail(3);"
+				   style="display:inline-block;z-index:10;position:absolute;right:0;margin-top:5%;"> 更多</a>
+				<div class="bg">
+					<h2 class="dangqianche"
+						style="font-size: 17px;color:#007AFF;font-weight: bolder;padding: 10px;float: right;">
+						当日超载数量统计（辆）</h2>
+				</div>
+				<div class="righttop" style="margin-top: -10%;position: relative;">
+					<div id="by0" class="col-xs-4"
+						 style="height:200px;width:150px;position: absolute;float: left;"></div>
+					<div id="by1" class="col-xs-4"
+						 style="height:200px;width:150px;margin-left:32%;position: absolute;"></div>
+					<div id="by2" class="col-xs-4" style="height:200px;width:150px;margin-top:-10%;left:66%;"></div>
+				</div>
+				<div class="ert" style="margin-top: 40%;position: relative;">
+					<div id="by3" class="col-xs-4" style="height:200px;width:150px;position: absolute;"></div>
+					<div id="by4" class="col-xs-4"
+						 style="height:200px;width:150px;position: absolute;margin-left: 32%;"></div>
+					<div id="by5" class="col-xs-4" style="height:200px;width:150px;position: absolute;right: 0;"></div>
+				</div>
+				<div class="rightbottom" style="clear: both; position: relative;top: 120px;">
 
-			}],
-			yAxis: [{
-					type: 'value',
-					axisLabel: {
-						color: '#abb8ce',
-					},
-					axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-				},
-				{
-					type: 'value',
-					axisLabel: {
-						color: '#abb8ce',
-					},
-					axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-				}
-			],
-			series: [{
-					type: 'bar',
-					data: [150, 205, 345, 452],
-					barWidth: 20, //柱图宽度
-					itemStyle: {
-                    normal: {
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                            offset: 0,
-                            color: '#FE4BA1'
-                        }, {
-                            offset: 1,
-                            color: '#FC5560'
-                        }]),
-                    }
-                },
+					<!--     <div class="bg" style="position:relative;top:70px;">
+ <a href="javascript:;" onclick="initLeftChartDetail4(4);" style="display:inline-block;z-index:10;position:absolute;right:0;margin-top:2%;">更多</a>
+    <h2 class="dangqianche" style="font-size: 17px;color:#007AFF;font-weight: bolder;padding: 10px;">当前超载数量统计（辆）</h2>
+</div>
+    <p style="font-size: 17px;color: #FFF;margin-top:15%;position:absolute;" class="col-xs-8">当前最大车重<span id="lastZuiDaChe	Zhong" style="color: #FE545E;font-size: 25px;background-color:#131A50;padding: 1.5%;margin: 1%;"></span>吨</p> -->
+
+				</div>
+				<div id="liti" class="col-xs-12" style="height: 400px; margin-top: 48%;width:500px;">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 修改Modal -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+	 id="chart1Detail">
+	<div class="modal-dialog modal-lg" style="width:50%" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title"><b>所有信息</b></h4>
+			</div>
+			<div class="modal-body">
+				<div>
+					<table class="table table-striped table-hover" id="mainContent"
+						   style="width: 100%;margin: 20px auto 0;">
+						<thead style="background-color: #DDE6F7;">
+						<tr>
+							<th style="width: 50%">测点名称</th>
+							<th>数据</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td>测点1</td>
+							<td>100</td>
+						</tr>
+						<tr>
+							<td>测点2</td>
+							<td>55</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 修改Modal -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+	 id="chart1Detail1">
+	<div class="modal-dialog modal-lg" style="width:50%" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title"><b>连接信息</b></h4>
+			</div>
+			<div class="modal-body">
+				<div>
+					<table class="table table-striped table-hover" id="mainContent1"
+						   style="width: 100%;margin: 20px auto 0;">
+						<thead style="background-color: #DDE6F7;">
+						<tr>
+							<th style="width: 50%">测点名称</th>
+							<th>连接情况</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td>测点1</td>
+							<td>100</td>
+						</tr>
+						<tr>
+							<td>测点2</td>
+							<td>55</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 修改Modal -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+	 id="chart2Detail1">
+	<div class="modal-dialog modal-lg" style="width:50%" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title"><b>所有信息</b></h4>
+			</div>
+			<div class="modal-body">
+				<div>
+					<table class="table table-striped table-hover" id="mainContent2"
+						   style="width: 100%;margin: 20px auto 0;">
+						<thead style="background-color: #DDE6F7;">
+						<tr>
+							<th style="width: 50%">测点名称</th>
+							<th>连接情况</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td>测点1</td>
+							<td>100</td>
+						</tr>
+						<tr>
+							<td>测点2</td>
+							<td>55</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- allMsg1 -->
+<div class="modal fade " tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg1">
+	<div class="modal-dialog " role="document">
+		<div class="modal-content" id="lookWimMsgDiv">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title"><b>详细信息</b></h4>
+			</div>
+			<div class="modal-body">
+				<div>
+					<form class="form-inline">
+						<table class="table  table-condensed" style="">
+							<tr>
+								<td>站点</td>
+								<td>{{stationName}}</td>
+								<td>轴数</td>
+								<td>{{axlesCount}}</td>
+							</tr>
+							<tr>
+
+								<td>车型</td>
+								<td>{{vehicleTypeName}}</td>
+								<td>车道号</td>
+								<td>{{laneNo}}</td>
+							</tr>
+							<tr>
+								<td>车牌号</td>
+								<td>{{plate}}</td>
+								<td>行驶方向</td>
+								<td>{{directionName}}</td>
+
+							</tr>
+							<tr>
+								<td>超载率</td>
+								<td>{{overWeightRatioName}}</td>
+								<td>是否跨道</td>
+								<td>{{isStraddleName}}</td>
+							</tr>
+							<tr>
+								<td>车长(cm)</td>
+								<td>{{length}}</td>
+								<td>车牌颜色</td>
+								<td>{{licensePlateColor}}</td>
+							</tr>
+							<tr>
+								<td>超重量(kg)</td>
+								<td>{{overWeight}}</td>
+								<td>通行时间</td>
+								<td>{{evtTime}}</td>
+							</tr>
+							<tr>
+								<td>总重量(kg)</td>
+								<td>{{totalWeight}}</td>
+								<!--<td>打包时间</td>
+                        <td>{{msgTime}}</td>-->
+								<td>路面温度(°C)</td>
+								<td>{{temperature}}</td>
+							</tr>
+
+							<tr>
+								<td>车速(km/h)</td>
+								<td>查看图片</td>
+								<td rowspan="2">
+									<div id="chepaiImg">
+									</div>
+									<div id="chebodyDiv">
+									</div>
+								</td>
+							</tr>
+							<tr>
+
+							</tr>
+						</table>
+						<table class="table  table-condensed" style="height: auto; margin-top: -2%;">
+							<thead>
+							<td colspan="10">轴重(kg)</td>
+							</thead>
+							<tbody>
+							<tr>
+								<td width="38px;">轴1:</td>
+								<td>{{axle1}}</td>
+								<td width="38px;">轴2:</td>
+								<td>{{axle2}}</td>
+								<td width="38px;">轴3:</td>
+								<td>{{axle3}}</td>
+								<td width="38px;">轴4:</td>
+								<td>{{axle4}}</td>
+								<td width="38px;" style="text-align:right">轴5:</td>
+								<td>{{axle5}}</td>
+							</tr>
+							<tr>
+								<td width="38px;">轴6:</td>
+								<td>{{axle6}}</td>
+								<td width="38px;">轴7:</td>
+								<td>{{axle7}}</td>
+								<td width="38px;">轴8:</td>
+								<td>{{axle8}}</td>
+								<td width="38px;">轴9:</td>
+								<td>{{axle9}}</td>
+								<td width="44px;">轴10:</td>
+								<td>{{axle10}}</td>
+							</tr>
+							</tbody>
+						</table>
+						<table class="table  table-condensed" style="height: auto; margin-top: -2%">
+							<thead>
+							<td colspan="10">轴间距(cm)</td>
+							</thead>
+							<tbody>
+							<tr>
+								<td width="38px;">轴1:</td>
+								<td>{{axleSpace1}}</td>
+								<td width="38px;">轴2:</td>
+								<td>{{axleSpace2}}</td>
+								<td width="38px;">轴3:</td>
+								<td>{{axleSpace3}}</td>
+								<td width="38px;">轴4:</td>
+								<td>{{axleSpace4}}</td>
+								<td width="38px;">轴5:</td>
+								<td>{{axleSpace5}}</td>
+							</tr>
+							<tr>
+								<td width="38px;">轴6:</td>
+								<td>{{axleSpace6}}</td>
+								<td width="38px;">轴7:</td>
+								<td>{{axleSpace7}}</td>
+								<td width="38px;">轴8:</td>
+								<td>{{axleSpace8}}</td>
+								<td width="38px;">轴9:</td>
+								<td>{{axleSpace9}}</td>
+							</tr>
+							</tbody>
+						</table>
+					</form>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				<!--<button type="button" class="btn btn-success" id="xgup_baocun">保存</button>-->
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 修改Modal -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+	 id="chart4Detail">
+	<div class="modal-dialog modal-lg" style="width:50%" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title"><b>所有信息</b></h4>
+			</div>
+			<div class="modal-body">
+				<div>
+					<table class="table table-striped table-hover" id="mainContent4"
+						   style="width: 100%;margin: 20px auto 0;">
+						<thead style="background-color: #DDE6F7;">
+						<tr>
+							<th style="width: 40%">测点名称</th>
+							<th style="width: 30%">二级预警</th>
+							<th style="width: 30%">三级预警</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td>测点1</td>
+							<td>100</td>
+							<td>100</td>
+						</tr>
+						<tr>
+							<td>测点2</td>
+							<td>55</td>
+							<td>55</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="change">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel"><b>修改密码</b></h4>
+			</div>
+			<div class="modal-body">
+				<div>
+					<table class="  table-condensed" style="width:60%;margin:0 auto;">
+						<tr>
+							<td style="width:40%;"><span>原密码:</span></td>
+							<td style="width:60%;">
+								<input type="text" class="form-control" id="old_password" style="width:100%;">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<span>新密码:</span>
+							</td>
+							<td>
+								<input type="text" class="form-control" id="new_password" style="width:100%;">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<span>重新输入新密码:</span>
+							</td>
+							<td>
+								<input type="text" class="form-control" id="new_password2" style="width:100%;">
+							</td>
+						</tr>
+					</table>
+
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+
+				<button type="button" class="btn btn-success" onclick="save_new_password()">保存</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 修改model结束 -->
+</body>
+<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+<script src="js/echarts.min(1).js" type="text/javascript" charset="utf-8"></script>
+<script src="js/build/dist/echarts.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/homeEcharts.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+<script src="js/toastr.js"></script>
+<script src="js/layui.all.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		//初始化车流量
+		homePageInit.initLeftEcharts('xian1');
+
+		//初始化环形图0
+		homePageInit.initDownEcharts();
+		homePageInit.initLastEcharts()
+
+		//初始化左侧总数据
+		homePageInit.initHomeData();
+		setInterval(refresh, 1000);
+		setInterval(refreshLeft, 4000);
+	})
+
+	// 基于准备好的dom，初始化echarts实例
+	var myChart = echarts.init(document.getElementById("maint"));
+	// 指定图表的配置项和数据
+	var option = {
+		title: {
+			text: '当日超载数量与比例',
+			padding: [20, 0, 0, 0],//标题内边距上右下
+			textStyle: {//textStyle设置标题样式
+				color: '#A1A2B4',
+				fontSize: 13
 			},
-			]
-		};
+		},
 
-		// 使用刚指定的配置项和数据显示图表。
-		myChart.setOption(option);
-		var myChart = echarts.init(document.getElementById("foumain"));
-		// 指定图表的配置项和数据
-		var option = {
-		    legend: {
-		        data: ['49~100吨', '100吨以上']
-		    },
-		    xAxis: [
-		        {
-				type: 'category',
-				data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
-				axisPointer: {
-					type: 'shadow'
-				},
-				axisLabel: {
-					show: true,
-					textStyle: {
-						color: '#A1A2B4'
-					}
-				},
-				axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-
-			}
-    ],
-    yAxis: [
-{
-					type: 'value',
-					axisLabel: {
-						color: '#abb8ce',
-					},
-					axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-				},
-				{
-					type: 'value',
-					axisLabel: {
-						color: '#abb8ce',
-					},
-					axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-				}
-    ],
-    series: [
-        {
-            
-            type: 'bar',
-            data: [2.0, 4.9, 7.0, 23.2],
-            color:'#6154FD'
-        },
-        {
-            
-            type: 'bar',
-            data: [2.6, 5.9, 9.0, 26.4],
-            color:'#FE545E'
-        }
-    ]
-};
-
-		// 使用刚指定的配置项和数据显示图表。
-		myChart.setOption(option);
-		var myChart = echarts.init(document.getElementById("fivemain"));
-		// 指定图表的配置项和数据
-		var  option = {
-        backgroundColor: '#001848',
-        xAxis: {
-            type: 'category',
-            axisTick:{
-                show:false,
-            },
-            boundaryGap: false,
-            axisTick:{
-                show:false,
-            },
-            axisLabel:{
-                color:'#fff'
-            },
-            axisLine:{
-                lineStyle:{
-                    color:'rgba(12,102,173,.5)',
-                    width:2,
-                }
-            },
-        },
-        yAxis: {
-            type: 'value',
-            axisTick:{
-                show:false,//不显示刻度线
-            },
-            axisLabel:{
-                color:'#fff'  //y轴上的字体颜色
-            },
-            axisLine:{
-                lineStyle:{
-                    width:2,
-                    color:'rgba(12,102,173,.5)',//y轴的轴线的宽度和颜色
-                }
-            },
-            splitLine: {
-                show: false       
-            }
-        },
-        series: [
-            {
-                type:'line',
-                symbol: 'none',
-                smooth:true,
-                areaStyle: {
-                    normal: {
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                            offset: 0,
-                            color: '#bb326f'
-                        }, {
-                            offset: 1,
-                            color: '#2A1A6B'
-                        }])
-                    }
-                },
-            }
-        ]
-    };
-
-		// 使用刚指定的配置项和数据显示图表。
-		myChart.setOption(option);
-		  option.xAxis.data = ['01','02','03','04','05','06','07','08','09','10','11','12 (月)'];
-    option.series[0].data = [21,25,27,12,22,21,25,27,12,22,42,32];
-    var chart3 = echarts.init(document.getElementById('fivemain'));
-    chart3.setOption(option);
-		var myChart = echarts.init(document.getElementById("sexmain"));
-		// 指定图表的配置项和数据
-		var option = {
-			 
-       		 
-			xAxis: [{
-				type: 'category',
-				data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
-				axisPointer: {
-					type: 'shadow'
-				},
-				axisLabel: {
-					show: true,
-					textStyle: {
-						color: '#A1A2B4'
-					}
-				},
-				axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-
-			}],
-			yAxis: [{
-					type: 'value',
-					axisLabel: {
-						color: '#abb8ce',
-					},
-					axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-				},
-				{
-					type: 'value',
-					axisLabel: {
-						color: '#abb8ce',
-					},
-					axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-				}
-			],
-			series: [{
-					type: 'bar',
-					data: [150, 205, 345, 452],
-					barWidth: 20, //柱图宽度
-					color:'#305BFF'
-				},
-
-				{
-					type: 'line',
-					yAxisIndex: 1,
-					color:'#47FFCD',
-					data: [150, 205, 345, 452]
-				}
-			]
-		};
-
-		// 使用刚指定的配置项和数据显示图表。
-		myChart.setOption(option);
-		
-	var myChart = echarts.init(document.getElementById("maing"));
-		// 指定图表的配置项和数据
-		var option = {
-			 title: {
-            	text: '当日超载数量与比例',
-            	  padding: [20, 0, 0, 0],//标题内边距上右下
-            	 textStyle: {//textStyle设置标题样式
-			        color: '#A1A2B4',
-			        fontSize: 13
-			      },
-       		 },
-       		 
-			xAxis: [{
-				type: 'category',
-				data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
-				axisPointer: {
-					type: 'shadow'
-				},
-				axisLabel: {
-					show: true,
-					textStyle: {
-						color: '#A1A2B4'
-					}
-				},
-				axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-
-			}],
-			yAxis: [{
-					type: 'value',
-					axisLabel: {
-						color: '#abb8ce',
-					},
-					axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-				},
-				{
-					type: 'value',
-					axisLabel: {
-						color: '#abb8ce',
-					},
-					axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-				}
-			],
-			series: [{
-					type: 'bar',
-					data: [150, 205, 345, 452],
-					barWidth: 20, //柱图宽度
-					color:'#305BFF',
-					 itemStyle: {
-					 	
-	                    normal: {
-	                    	color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                            offset: 0,
-                            color: '#DE6451'
-                        }, {
-                            offset: 1,
-                            color: '#FEB243'
-                        }]),
-	                        barBorderRadius: 30
-	                    }
-               }
-			}
-			]
-		};
-
-		// 使用刚指定的配置项和数据显示图表。
-		myChart.setOption(option);
-			var myChart = echarts.init(document.getElementById("mainj"));
-		// 指定图表的配置项和数据
-		var option = {
-			 title: {
-            	text: '当日超载数量与比例',
-            	  padding: [20, 0, 0, 0],//标题内边距上右下
-            	 textStyle: {//textStyle设置标题样式
-			        color: '#A1A2B4',
-			        fontSize: 13
-			      },
-       		 },
-       		 
-			xAxis: [{
-				type: 'category',
-				data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
-				axisPointer: {
-					type: 'shadow'
-				},
-				axisLabel: {
-					show: true,
-					textStyle: {
-						color: '#A1A2B4'
-					}
-				},
-				axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-
-			}],
-			yAxis: [{
-					type: 'value',
-					axisLabel: {
-						color: '#abb8ce',
-					},
-					axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-				},
-				{
-					type: 'value',
-					axisLabel: {
-						color: '#abb8ce',
-					},
-					axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-				}
-			],
-			series: [{
-					type: 'bar',
-					data: [150, 205, 345, 452],
-					barWidth: 20, //柱图宽度
-					color:'#305BFF',
-					 itemStyle: {
-					 	
-	                    normal: {
-	                    	color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                            offset: 0,
-                            color: '#DE6451'
-                        }, {
-                            offset: 1,
-                            color: '#FEB243'
-                        }]),
-	                        barBorderRadius: 30
-	                    }
-               }
-			}
-			]
-		};
-
-		// 使用刚指定的配置项和数据显示图表。
-		myChart.setOption(option);
-		var myChart = echarts.init(document.getElementById("mainh"));
-		// 指定图表的配置项和数据
-		var option = {
-			 title: {
-            	text: '当日超载数量与比例',
-            	  padding: [20, 0, 0, 0],//标题内边距上右下
-            	 textStyle: {//textStyle设置标题样式
-			        color: '#A1A2B4',
-			        fontSize: 13
-			      },
-       		 },
-       		 
-			xAxis: [{
-				type: 'category',
-				data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
-				axisPointer: {
-					type: 'shadow'
-				},
-				axisLabel: {
-					show: true,
-					textStyle: {
-						color: '#A1A2B4'
-					}
-				},
-				axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-
-			}],
-			yAxis: [{
-					type: 'value',
-					axisLabel: {
-						color: '#abb8ce',
-					},
-					axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-				},
-				{
-					type: 'value',
-					axisLabel: {
-						color: '#abb8ce',
-					},
-					axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-				}
-			],
-			series: [{
-					type: 'bar',
-					data: [150, 205, 345, 452],
-					barWidth: 20, //柱图宽度
-					color:'#305BFF'
-				},
-
-				{
-					type: 'line',
-					yAxisIndex: 1,
-					color:'#E82DA2',
-					data: [150, 205, 345, 452]
-				}
-			]
-		};
-
-		// 使用刚指定的配置项和数据显示图表。
-		myChart.setOption(option);
-		
-		var option = {
-			xAxis: {
-				type: 'category',
-				axisTick: {
-					show: false,
-				},
-				boundaryGap: false,
-				axisTick: {
-					show: false,
-				},
-				axisLabel: {
-					color: '#fff'
-				},
-				axisLine: {
-					lineStyle: {
-						color: 'rgba(12,102,173,.5)',
-						width: 2,
-					}
-				},
+		xAxis: [{
+			type: 'category',
+			data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
+			axisPointer: {
+				type: 'shadow'
 			},
-			yAxis: {
+			axisLabel: {
+				show: true,
+				textStyle: {
+					color: '#A1A2B4'
+				}
+			},
+			axisTick: { //y轴刻度线
+				show: false
+			},
+			axisLine: { //y轴
+				show: false
+			},
+			splitLine: {
+				show: false
+			}
+
+		}],
+		yAxis: [{
+			type: 'value',
+			axisLabel: {
+				color: '#abb8ce',
+			},
+			axisTick: { //y轴刻度线
+				show: false
+			},
+			axisLine: { //y轴
+				show: false
+			},
+			splitLine: {
+				show: false
+			}
+		},
+			{
 				type: 'value',
-				axisTick: {
-					show: false, //不显示刻度线
+				axisLabel: {
+					color: '#abb8ce',
+				},
+				axisTick: { //y轴刻度线
+					show: false
+				},
+				axisLine: { //y轴
+					show: false
+				},
+				splitLine: {
+					show: false
+				}
+			}
+		],
+		series: [{
+			type: 'bar',
+			data: [150, 205, 345, 452],
+			barWidth: 20, //柱图宽度
+			color: '#305BFF'
+		},
+
+			{
+				type: 'line',
+				yAxisIndex: 1,
+				color: '#E82DA2',
+				data: [150, 205, 345, 452]
+			}
+		]
+	};
+
+	// 使用刚指定的配置项和数据显示图表。
+	myChart.setOption(option);
+
+	var myChart = echarts.init(document.getElementById("mainb"));
+	// 指定图表的配置项和数据
+	var option = {
+		title: {
+			text: '当日超载数量与比例',
+			padding: [20, 0, 0, 0],//标题内边距上右下
+			textStyle: {//textStyle设置标题样式
+				color: '#A1A2B4',
+				fontSize: 13
+			},
+		},
+
+		xAxis: [{
+			type: 'category',
+			data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
+			axisPointer: {
+				type: 'shadow'
+			},
+			axisLabel: {
+				show: true,
+				textStyle: {
+					color: '#A1A2B4'
+				}
+			},
+			axisTick: { //y轴刻度线
+				show: false
+			},
+			axisLine: { //y轴
+				show: false
+			},
+			splitLine: {
+				show: false
+			}
+
+		}],
+		yAxis: [{
+			type: 'value',
+			axisLabel: {
+				color: '#abb8ce',
+			},
+			axisTick: { //y轴刻度线
+				show: false
+			},
+			axisLine: { //y轴
+				show: false
+			},
+			splitLine: {
+				show: false
+			}
+		},
+			{
+				type: 'value',
+				axisLabel: {
+					color: '#abb8ce',
+				},
+				axisTick: { //y轴刻度线
+					show: false
+				},
+				axisLine: { //y轴
+					show: false
+				},
+				splitLine: {
+					show: false
+				}
+			}
+		],
+		series: [{
+			type: 'bar',
+			data: [150, 205, 345, 452],
+			barWidth: 20, //柱图宽度
+			color: '#305BFF',
+			itemStyle: {
+
+				normal: {
+					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+						offset: 0,
+						color: '#DE6451'
+					}, {
+						offset: 1,
+						color: '#FEB243'
+					}]),
+					barBorderRadius: 30
+				}
+			}
+		}
+		]
+	};
+
+	// 使用刚指定的配置项和数据显示图表。
+	myChart.setOption(option);
+	//		===============================================2
+	var myChart = echarts.init(document.getElementById("maina"));
+	// 指定图表的配置项和数据
+	var option = {
+		title: {
+			text: '当日超载数量与比例',
+			padding: [20, 0, 0, 0],//标题内边距上右下
+			textStyle: {//textStyle设置标题样式
+				color: '#A1A2B4',
+				fontSize: 13
+			},
+		},
+
+		xAxis: [{
+			type: 'category',
+			data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
+			axisPointer: {
+				type: 'shadow'
+			},
+			axisLabel: {
+				show: true,
+				textStyle: {
+					color: '#A1A2B4'
+				}
+			},
+			axisTick: { //y轴刻度线
+				show: false
+			},
+			axisLine: { //y轴
+				show: false
+			},
+			splitLine: {
+				show: false
+			}
+
+		}],
+		yAxis: [{
+			type: 'value',
+			axisLabel: {
+				color: '#abb8ce',
+			},
+			axisTick: { //y轴刻度线
+				show: false
+			},
+			axisLine: { //y轴
+				show: false
+			},
+			splitLine: {
+				show: false
+			}
+		},
+			{
+				type: 'value',
+				axisLabel: {
+					color: '#abb8ce',
+				},
+				axisTick: { //y轴刻度线
+					show: false
+				},
+				axisLine: { //y轴
+					show: false
+				},
+				splitLine: {
+					show: false
+				}
+			}
+		],
+		series: [{
+			type: 'bar',
+			data: [150, 205, 345, 452],
+			barWidth: 20, //柱图宽度
+			color: '#305BFF'
+		},
+
+			{
+				type: 'line',
+				yAxisIndex: 1,
+				color: '#E82DA2',
+				data: [150, 205, 345, 452]
+			}
+		]
+	};
+
+	// 使用刚指定的配置项和数据显示图表。
+	myChart.setOption(option);
+	var myChart = echarts.init(document.getElementById("mainc"));
+	// 指定图表的配置项和数据
+	var option = {
+		title: {
+			text: '当日超载数量与比例',
+			padding: [20, 0, 0, 0],//标题内边距上右下
+			textStyle: {//textStyle设置标题样式
+				color: '#A1A2B4',
+				fontSize: 13
+			},
+		},
+
+		xAxis: [{
+			type: 'category',
+			data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
+			axisPointer: {
+				type: 'shadow'
+			},
+			axisLabel: {
+				show: true,
+				textStyle: {
+					color: '#A1A2B4'
+				}
+			},
+			axisTick: { //y轴刻度线
+				show: false
+			},
+			axisLine: { //y轴
+				show: false
+			},
+			splitLine: {
+				show: false
+			}
+
+		}],
+		yAxis: [{
+			type: 'value',
+			axisLabel: {
+				color: '#abb8ce',
+			},
+			axisTick: { //y轴刻度线
+				show: false
+			},
+			axisLine: { //y轴
+				show: false
+			},
+			splitLine: {
+				show: false
+			}
+		},
+			{
+				type: 'value',
+				axisLabel: {
+					color: '#abb8ce',
+				},
+				axisTick: { //y轴刻度线
+					show: false
+				},
+				axisLine: { //y轴
+					show: false
+				},
+				splitLine: {
+					show: false
+				}
+			}
+		],
+		series: [{
+			type: 'bar',
+			data: [150, 205, 345, 452],
+			barWidth: 20, //柱图宽度
+			color: '#305BFF',
+			itemStyle: {
+
+				normal: {
+					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+						offset: 0,
+						color: '#DE6451'
+					}, {
+						offset: 1,
+						color: '#FEB243'
+					}]),
+					barBorderRadius: 30
+				}
+			}
+		}
+		]
+	};
+
+	// 使用刚指定的配置项和数据显示图表。
+	myChart.setOption(option);
+	//=====================================================3
+	var myChart = echarts.init(document.getElementById("maind"));
+	// 指定图表的配置项和数据
+	var option = {
+		title: {
+			text: '当日超载数量与比例',
+			padding: [20, 0, 0, 0],//标题内边距上右下
+			textStyle: {//textStyle设置标题样式
+				color: '#A1A2B4',
+				fontSize: 13
+			},
+		},
+
+		xAxis: [{
+			type: 'category',
+			data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
+			axisPointer: {
+				type: 'shadow'
+			},
+			axisLabel: {
+				show: true,
+				textStyle: {
+					color: '#A1A2B4'
+				}
+			},
+			axisTick: { //y轴刻度线
+				show: false
+			},
+			axisLine: { //y轴
+				show: false
+			},
+			splitLine: {
+				show: false
+			}
+
+		}],
+		yAxis: [{
+			type: 'value',
+			axisLabel: {
+				color: '#abb8ce',
+			},
+			axisTick: { //y轴刻度线
+				show: false
+			},
+			axisLine: { //y轴
+				show: false
+			},
+			splitLine: {
+				show: false
+			}
+		},
+			{
+				type: 'value',
+				axisLabel: {
+					color: '#abb8ce',
+				},
+				axisTick: { //y轴刻度线
+					show: false
+				},
+				axisLine: { //y轴
+					show: false
+				},
+				splitLine: {
+					show: false
+				}
+			}
+		],
+		series: [{
+			type: 'bar',
+			data: [150, 205, 345, 452],
+			barWidth: 20, //柱图宽度
+			color: '#305BFF'
+		},
+
+			{
+				type: 'line',
+				yAxisIndex: 1,
+				color: '#E82DA2',
+				data: [150, 205, 345, 452]
+			}
+		]
+	};
+
+	// 使用刚指定的配置项和数据显示图表。
+	myChart.setOption(option);
+
+	var myChart = echarts.init(document.getElementById("maine"));
+	// 指定图表的配置项和数据
+	var option = {
+		title: {
+			text: '当日超载数量与比例',
+			padding: [20, 0, 0, 0],//标题内边距上右下
+			textStyle: {//textStyle设置标题样式
+				color: '#A1A2B4',
+				fontSize: 13
+			},
+		},
+
+		xAxis: [{
+			type: 'category',
+			data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
+			axisPointer: {
+				type: 'shadow'
+			},
+			axisLabel: {
+				show: true,
+				textStyle: {
+					color: '#A1A2B4'
+				}
+			},
+			axisTick: { //y轴刻度线
+				show: false
+			},
+			axisLine: { //y轴
+				show: false
+			},
+			splitLine: {
+				show: false
+			}
+
+		}],
+		yAxis: [{
+			type: 'value',
+			axisLabel: {
+				color: '#abb8ce',
+			},
+			axisTick: { //y轴刻度线
+				show: false
+			},
+			axisLine: { //y轴
+				show: false
+			},
+			splitLine: {
+				show: false
+			}
+		},
+			{
+				type: 'value',
+				axisLabel: {
+					color: '#abb8ce',
+				},
+				axisTick: { //y轴刻度线
+					show: false
+				},
+				axisLine: { //y轴
+					show: false
+				},
+				splitLine: {
+					show: false
+				}
+			}
+		],
+		series: [{
+			type: 'bar',
+			data: [150, 205, 345, 452],
+			barWidth: 20, //柱图宽度
+			color: '#305BFF',
+			itemStyle: {
+
+				normal: {
+					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+						offset: 0,
+						color: '#DE6451'
+					}, {
+						offset: 1,
+						color: '#FEB243'
+					}]),
+					barBorderRadius: 30
+				}
+			}
+		}
+		]
+	};
+
+	// 使用刚指定的配置项和数据显示图表。
+	myChart.setOption(option);
+
+
+	//		=================================4
+	var myChart = echarts.init(document.getElementById("mainf"));
+	// 指定图表的配置项和数据
+	var option = {
+		title: {
+			text: '当日超载数量与比例',
+			padding: [20, 0, 0, 0],//标题内边距上右下
+			textStyle: {//textStyle设置标题样式
+				color: '#A1A2B4',
+				fontSize: 13
+			},
+		},
+
+		xAxis: [{
+			type: 'category',
+			data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
+			axisPointer: {
+				type: 'shadow'
+			},
+			axisLabel: {
+				show: true,
+				textStyle: {
+					color: '#A1A2B4'
+				}
+			},
+			axisTick: { //y轴刻度线
+				show: false
+			},
+			axisLine: { //y轴
+				show: false
+			},
+			splitLine: {
+				show: false
+			}
+
+		}],
+		yAxis: [{
+			type: 'value',
+			axisLabel: {
+				color: '#abb8ce',
+			},
+			axisTick: { //y轴刻度线
+				show: false
+			},
+			axisLine: { //y轴
+				show: false
+			},
+			splitLine: {
+				show: false
+			}
+		},
+			{
+				type: 'value',
+				axisLabel: {
+					color: '#abb8ce',
+				},
+				axisTick: { //y轴刻度线
+					show: false
+				},
+				axisLine: { //y轴
+					show: false
+				},
+				splitLine: {
+					show: false
+				}
+			}
+		],
+		series: [{
+			type: 'bar',
+			data: [150, 205, 345, 452],
+			barWidth: 20, //柱图宽度
+			color: '#305BFF'
+		},
+
+			{
+				type: 'line',
+				yAxisIndex: 1,
+				color: '#E82DA2',
+				data: [150, 205, 345, 452]
+			}
+		]
+	};
+
+	// 使用刚指定的配置项和数据显示图表。
+	myChart.setOption(option);
+
+	//==================================================================小图标==============================================
+	var myChart = echarts.init(document.getElementById("firstmain"));
+	// 指定图表的配置项和数据
+	var option = {
+
+
+		xAxis: [{
+			type: 'category',
+			data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
+			axisPointer: {
+				type: 'shadow'
+			},
+			axisLabel: {
+				show: true,
+				textStyle: {
+					color: '#A1A2B4'
+				}
+			},
+			axisTick: { //y轴刻度线
+				show: false
+			},
+			axisLine: { //y轴
+				show: false
+			},
+			splitLine: {
+				show: false
+			}
+
+		}],
+		yAxis: [{
+			type: 'value',
+			axisLabel: {
+				color: '#abb8ce',
+			},
+			axisTick: { //y轴刻度线
+				show: false
+			},
+			axisLine: { //y轴
+				show: false
+			},
+			splitLine: {
+				show: false
+			}
+		},
+			{
+				type: 'value',
+				axisLabel: {
+					color: '#abb8ce',
+				},
+				axisTick: { //y轴刻度线
+					show: false
+				},
+				axisLine: { //y轴
+					show: false
+				},
+				splitLine: {
+					show: false
+				}
+			}
+		],
+		series: [{
+			type: 'bar',
+			data: [150, 205, 345, 452],
+			barWidth: 20, //柱图宽度
+			color: '#305BFF'
+		},
+
+			{
+				type: 'line',
+				yAxisIndex: 1,
+				color: '#47FFCD',
+				data: [150, 205, 345, 452]
+			}
+		]
+	};
+
+	// 使用刚指定的配置项和数据显示图表。
+	myChart.setOption(option);
+	var myChart = echarts.init(document.getElementById("secmain"));
+	// 指定图表的配置项和数据
+	var option = {
+		legend: {
+			data: ['49~100吨', '100吨以上']
+		},
+		xAxis: [
+			{
+				type: 'category',
+				data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
+				axisPointer: {
+					type: 'shadow'
 				},
 				axisLabel: {
-					color: '#fff' //y轴上的字体颜色
-				},
-				axisLine: {
-					lineStyle: {
-						width: 2,
-						color: 'rgba(12,102,173,.5)', //y轴的轴线的宽度和颜色
+					show: true,
+					textStyle: {
+						color: '#A1A2B4'
 					}
+				},
+				axisTick: { //y轴刻度线
+					show: false
+				},
+				axisLine: { //y轴
+					show: false
+				},
+				splitLine: {
+					show: false
+				}
+
+			}
+		],
+		yAxis: [
+			{
+				type: 'value',
+				axisLabel: {
+					color: '#abb8ce',
+				},
+				axisTick: { //y轴刻度线
+					show: false
+				},
+				axisLine: { //y轴
+					show: false
 				},
 				splitLine: {
 					show: false
 				}
 			},
-			series: [{
+			{
+				type: 'value',
+				axisLabel: {
+					color: '#abb8ce',
+				},
+				axisTick: { //y轴刻度线
+					show: false
+				},
+				axisLine: { //y轴
+					show: false
+				},
+				splitLine: {
+					show: false
+				}
+			}
+		],
+		series: [
+			{
+				name: '蒸发量',
+				type: 'bar',
+				data: [2.0, 4.9, 7.0, 23.2],
+				color: '#05D3DB'
+			},
+			{
+				name: '降水量',
+				type: 'bar',
+				data: [2.6, 5.9, 9.0, 26.4],
+				color: '#B38CFF'
+			}
+		]
+	};
+
+
+	// 使用刚指定的配置项和数据显示图表。
+	myChart.setOption(option);
+	var myChart = echarts.init(document.getElementById("thimain"));
+	// 指定图表的配置项和数据
+	var option = {
+
+
+		xAxis: [{
+			type: 'category',
+			data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
+			axisPointer: {
+				type: 'shadow'
+			},
+			axisLabel: {
+				show: true,
+				textStyle: {
+					color: '#A1A2B4'
+				}
+			},
+			axisTick: { //y轴刻度线
+				show: false
+			},
+			axisLine: { //y轴
+				show: false
+			},
+			splitLine: {
+				show: false
+			}
+
+		}],
+		yAxis: [{
+			type: 'value',
+			axisLabel: {
+				color: '#abb8ce',
+			},
+			axisTick: { //y轴刻度线
+				show: false
+			},
+			axisLine: { //y轴
+				show: false
+			},
+			splitLine: {
+				show: false
+			}
+		},
+			{
+				type: 'value',
+				axisLabel: {
+					color: '#abb8ce',
+				},
+				axisTick: { //y轴刻度线
+					show: false
+				},
+				axisLine: { //y轴
+					show: false
+				},
+				splitLine: {
+					show: false
+				}
+			}
+		],
+		series: [{
+			type: 'bar',
+			data: [150, 205, 345, 452],
+			barWidth: 20, //柱图宽度
+			itemStyle: {
+				normal: {
+					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+						offset: 0,
+						color: '#FE4BA1'
+					}, {
+						offset: 1,
+						color: '#FC5560'
+					}]),
+				}
+			},
+		},
+		]
+	};
+
+	// 使用刚指定的配置项和数据显示图表。
+	myChart.setOption(option);
+	var myChart = echarts.init(document.getElementById("foumain"));
+	// 指定图表的配置项和数据
+	var option = {
+		legend: {
+			data: ['49~100吨', '100吨以上']
+		},
+		xAxis: [
+			{
+				type: 'category',
+				data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
+				axisPointer: {
+					type: 'shadow'
+				},
+				axisLabel: {
+					show: true,
+					textStyle: {
+						color: '#A1A2B4'
+					}
+				},
+				axisTick: { //y轴刻度线
+					show: false
+				},
+				axisLine: { //y轴
+					show: false
+				},
+				splitLine: {
+					show: false
+				}
+
+			}
+		],
+		yAxis: [
+			{
+				type: 'value',
+				axisLabel: {
+					color: '#abb8ce',
+				},
+				axisTick: { //y轴刻度线
+					show: false
+				},
+				axisLine: { //y轴
+					show: false
+				},
+				splitLine: {
+					show: false
+				}
+			},
+			{
+				type: 'value',
+				axisLabel: {
+					color: '#abb8ce',
+				},
+				axisTick: { //y轴刻度线
+					show: false
+				},
+				axisLine: { //y轴
+					show: false
+				},
+				splitLine: {
+					show: false
+				}
+			}
+		],
+		series: [
+			{
+
+				type: 'bar',
+				data: [2.0, 4.9, 7.0, 23.2],
+				color: '#6154FD'
+			},
+			{
+
+				type: 'bar',
+				data: [2.6, 5.9, 9.0, 26.4],
+				color: '#FE545E'
+			}
+		]
+	};
+
+	// 使用刚指定的配置项和数据显示图表。
+	myChart.setOption(option);
+	var myChart = echarts.init(document.getElementById("fivemain"));
+	// 指定图表的配置项和数据
+	var option = {
+		backgroundColor: '#001848',
+		xAxis: {
+			type: 'category',
+			axisTick: {
+				show: false,
+			},
+			boundaryGap: false,
+			axisTick: {
+				show: false,
+			},
+			axisLabel: {
+				color: '#fff'
+			},
+			axisLine: {
+				lineStyle: {
+					color: 'rgba(12,102,173,.5)',
+					width: 2,
+				}
+			},
+		},
+		yAxis: {
+			type: 'value',
+			axisTick: {
+				show: false,//不显示刻度线
+			},
+			axisLabel: {
+				color: '#fff'  //y轴上的字体颜色
+			},
+			axisLine: {
+				lineStyle: {
+					width: 2,
+					color: 'rgba(12,102,173,.5)',//y轴的轴线的宽度和颜色
+				}
+			},
+			splitLine: {
+				show: false
+			}
+		},
+		series: [
+			{
 				type: 'line',
 				symbol: 'none',
 				smooth: true,
-				itemStyle: {
-					normal: {
-						color: '#09b0f5',
-					}
-				},
 				areaStyle: {
 					normal: {
 						color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
 							offset: 0,
-							color: '#09b0f5'
+							color: '#bb326f'
 						}, {
 							offset: 1,
-							color: 'rgba(12,102,173,.5)'
+							color: '#2A1A6B'
 						}])
 					}
 				},
-			}]
-		};
-		option.xAxis.data = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12 (月)'];
-		option.series[0].data = [21, 25, 27, 12, 22, 21, 25, 27, 12, 22, 42, 32];
-		var chart3 = echarts.init(document.getElementById('chart3'));
-		chart3.setOption(option);
-
-		layui.use('element', function() {
-			var element = layui.element;
-
-			//…
-		});
-		require.config({
-			paths: {
-				echarts: 'js/build/dist'
 			}
-		});
+		]
+	};
 
-		// 使用
-		require(
+	// 使用刚指定的配置项和数据显示图表。
+	myChart.setOption(option);
+	option.xAxis.data = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12 (月)'];
+	option.series[0].data = [21, 25, 27, 12, 22, 21, 25, 27, 12, 22, 42, 32];
+	var chart3 = echarts.init(document.getElementById('fivemain'));
+	chart3.setOption(option);
+	var myChart = echarts.init(document.getElementById("sexmain"));
+	// 指定图表的配置项和数据
+	var option = {
+
+
+		xAxis: [{
+			type: 'category',
+			data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
+			axisPointer: {
+				type: 'shadow'
+			},
+			axisLabel: {
+				show: true,
+				textStyle: {
+					color: '#A1A2B4'
+				}
+			},
+			axisTick: { //y轴刻度线
+				show: false
+			},
+			axisLine: { //y轴
+				show: false
+			},
+			splitLine: {
+				show: false
+			}
+
+		}],
+		yAxis: [{
+			type: 'value',
+			axisLabel: {
+				color: '#abb8ce',
+			},
+			axisTick: { //y轴刻度线
+				show: false
+			},
+			axisLine: { //y轴
+				show: false
+			},
+			splitLine: {
+				show: false
+			}
+		},
+			{
+				type: 'value',
+				axisLabel: {
+					color: '#abb8ce',
+				},
+				axisTick: { //y轴刻度线
+					show: false
+				},
+				axisLine: { //y轴
+					show: false
+				},
+				splitLine: {
+					show: false
+				}
+			}
+		],
+		series: [{
+			type: 'bar',
+			data: [150, 205, 345, 452],
+			barWidth: 20, //柱图宽度
+			color: '#305BFF'
+		},
+
+			{
+				type: 'line',
+				yAxisIndex: 1,
+				color: '#47FFCD',
+				data: [150, 205, 345, 452]
+			}
+		]
+	};
+
+	// 使用刚指定的配置项和数据显示图表。
+	myChart.setOption(option);
+
+	var myChart = echarts.init(document.getElementById("maing"));
+	// 指定图表的配置项和数据
+	var option = {
+		title: {
+			text: '当日超载数量与比例',
+			padding: [20, 0, 0, 0],//标题内边距上右下
+			textStyle: {//textStyle设置标题样式
+				color: '#A1A2B4',
+				fontSize: 13
+			},
+		},
+
+		xAxis: [{
+			type: 'category',
+			data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
+			axisPointer: {
+				type: 'shadow'
+			},
+			axisLabel: {
+				show: true,
+				textStyle: {
+					color: '#A1A2B4'
+				}
+			},
+			axisTick: { //y轴刻度线
+				show: false
+			},
+			axisLine: { //y轴
+				show: false
+			},
+			splitLine: {
+				show: false
+			}
+
+		}],
+		yAxis: [{
+			type: 'value',
+			axisLabel: {
+				color: '#abb8ce',
+			},
+			axisTick: { //y轴刻度线
+				show: false
+			},
+			axisLine: { //y轴
+				show: false
+			},
+			splitLine: {
+				show: false
+			}
+		},
+			{
+				type: 'value',
+				axisLabel: {
+					color: '#abb8ce',
+				},
+				axisTick: { //y轴刻度线
+					show: false
+				},
+				axisLine: { //y轴
+					show: false
+				},
+				splitLine: {
+					show: false
+				}
+			}
+		],
+		series: [{
+			type: 'bar',
+			data: [150, 205, 345, 452],
+			barWidth: 20, //柱图宽度
+			color: '#305BFF',
+			itemStyle: {
+
+				normal: {
+					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+						offset: 0,
+						color: '#DE6451'
+					}, {
+						offset: 1,
+						color: '#FEB243'
+					}]),
+					barBorderRadius: 30
+				}
+			}
+		}
+		]
+	};
+
+	// 使用刚指定的配置项和数据显示图表。
+	myChart.setOption(option);
+	var myChart = echarts.init(document.getElementById("mainj"));
+	// 指定图表的配置项和数据
+	var option = {
+		title: {
+			text: '当日超载数量与比例',
+			padding: [20, 0, 0, 0],//标题内边距上右下
+			textStyle: {//textStyle设置标题样式
+				color: '#A1A2B4',
+				fontSize: 13
+			},
+		},
+
+		xAxis: [{
+			type: 'category',
+			data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
+			axisPointer: {
+				type: 'shadow'
+			},
+			axisLabel: {
+				show: true,
+				textStyle: {
+					color: '#A1A2B4'
+				}
+			},
+			axisTick: { //y轴刻度线
+				show: false
+			},
+			axisLine: { //y轴
+				show: false
+			},
+			splitLine: {
+				show: false
+			}
+
+		}],
+		yAxis: [{
+			type: 'value',
+			axisLabel: {
+				color: '#abb8ce',
+			},
+			axisTick: { //y轴刻度线
+				show: false
+			},
+			axisLine: { //y轴
+				show: false
+			},
+			splitLine: {
+				show: false
+			}
+		},
+			{
+				type: 'value',
+				axisLabel: {
+					color: '#abb8ce',
+				},
+				axisTick: { //y轴刻度线
+					show: false
+				},
+				axisLine: { //y轴
+					show: false
+				},
+				splitLine: {
+					show: false
+				}
+			}
+		],
+		series: [{
+			type: 'bar',
+			data: [150, 205, 345, 452],
+			barWidth: 20, //柱图宽度
+			color: '#305BFF',
+			itemStyle: {
+
+				normal: {
+					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+						offset: 0,
+						color: '#DE6451'
+					}, {
+						offset: 1,
+						color: '#FEB243'
+					}]),
+					barBorderRadius: 30
+				}
+			}
+		}
+		]
+	};
+
+	// 使用刚指定的配置项和数据显示图表。
+	myChart.setOption(option);
+	var myChart = echarts.init(document.getElementById("mainh"));
+	// 指定图表的配置项和数据
+	var option = {
+		title: {
+			text: '当日超载数量与比例',
+			padding: [20, 0, 0, 0],//标题内边距上右下
+			textStyle: {//textStyle设置标题样式
+				color: '#A1A2B4',
+				fontSize: 13
+			},
+		},
+
+		xAxis: [{
+			type: 'category',
+			data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
+			axisPointer: {
+				type: 'shadow'
+			},
+			axisLabel: {
+				show: true,
+				textStyle: {
+					color: '#A1A2B4'
+				}
+			},
+			axisTick: { //y轴刻度线
+				show: false
+			},
+			axisLine: { //y轴
+				show: false
+			},
+			splitLine: {
+				show: false
+			}
+
+		}],
+		yAxis: [{
+			type: 'value',
+			axisLabel: {
+				color: '#abb8ce',
+			},
+			axisTick: { //y轴刻度线
+				show: false
+			},
+			axisLine: { //y轴
+				show: false
+			},
+			splitLine: {
+				show: false
+			}
+		},
+			{
+				type: 'value',
+				axisLabel: {
+					color: '#abb8ce',
+				},
+				axisTick: { //y轴刻度线
+					show: false
+				},
+				axisLine: { //y轴
+					show: false
+				},
+				splitLine: {
+					show: false
+				}
+			}
+		],
+		series: [{
+			type: 'bar',
+			data: [150, 205, 345, 452],
+			barWidth: 20, //柱图宽度
+			color: '#305BFF'
+		},
+
+			{
+				type: 'line',
+				yAxisIndex: 1,
+				color: '#E82DA2',
+				data: [150, 205, 345, 452]
+			}
+		]
+	};
+
+	// 使用刚指定的配置项和数据显示图表。
+	myChart.setOption(option);
+
+	var option = {
+		xAxis: {
+			type: 'category',
+			axisTick: {
+				show: false,
+			},
+			boundaryGap: false,
+			axisTick: {
+				show: false,
+			},
+			axisLabel: {
+				color: '#fff'
+			},
+			axisLine: {
+				lineStyle: {
+					color: 'rgba(12,102,173,.5)',
+					width: 2,
+				}
+			},
+		},
+		yAxis: {
+			type: 'value',
+			axisTick: {
+				show: false, //不显示刻度线
+			},
+			axisLabel: {
+				color: '#fff' //y轴上的字体颜色
+			},
+			axisLine: {
+				lineStyle: {
+					width: 2,
+					color: 'rgba(12,102,173,.5)', //y轴的轴线的宽度和颜色
+				}
+			},
+			splitLine: {
+				show: false
+			}
+		},
+		series: [{
+			type: 'line',
+			symbol: 'none',
+			smooth: true,
+			itemStyle: {
+				normal: {
+					color: '#09b0f5',
+				}
+			},
+			areaStyle: {
+				normal: {
+					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+						offset: 0,
+						color: '#09b0f5'
+					}, {
+						offset: 1,
+						color: 'rgba(12,102,173,.5)'
+					}])
+				}
+			},
+		}]
+	};
+	option.xAxis.data = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12 (月)'];
+	option.series[0].data = [21, 25, 27, 12, 22, 21, 25, 27, 12, 22, 42, 32];
+	var chart3 = echarts.init(document.getElementById('chart3'));
+	chart3.setOption(option);
+
+	layui.use('element', function () {
+		var element = layui.element;
+
+		//…
+	});
+	require.config({
+		paths: {
+			echarts: 'js/build/dist'
+		}
+	});
+
+	// 使用
+	require(
 			[
 				'echarts',
 				'echarts/chart/map'
 			],
-			function(ec) {
+			function (ec) {
 				require('echarts/util/mapData/params').params.jiangsu = {
 
-					getGeoJson: function(callback) {
-						$.getJSON('geoJson/jiangsu.json', function(data) {
+					getGeoJson: function (callback) {
+						$.getJSON('geoJson/jiangsu.json', function (data) {
 							// 压缩后的地图数据必须使用 decode 函数转换
 							callback(require('echarts/util/mapData/params').decode(data));
 						});
@@ -2344,9 +2461,9 @@ var myChart = echarts.init(document.getElementById("firstmain"));
 							}
 						},
 						data: [{
-								name: '六安市',
-								value: Math.round(Math.random() * 500)
-							},
+							name: '六安市',
+							value: Math.round(Math.random() * 500)
+						},
 							{
 								name: '安庆市',
 								value: Math.round(Math.random() * 500)
@@ -2434,9 +2551,9 @@ var myChart = echarts.init(document.getElementById("firstmain"));
 								loop: true
 							},
 							data: [{
-									name: '合肥市',
-									value: 95
-								},
+								name: '合肥市',
+								value: 95
+							},
 								{
 									name: '蚌埠市',
 									value: 2
@@ -2457,341 +2574,343 @@ var myChart = echarts.init(document.getElementById("firstmain"));
 				}
 				myChart.setOption(option);
 			}
-		);
-		//					Micke
-		var myChart = echarts.init(document.getElementById('main2'));
-		myChart.setOption({
-			title: {
-				text: ""
-			},
-			toolbox: {
-				show: true,
-				feature: {
-					mark: {
-						show: true
-					},
-					dataView: {
-						show: true,
-						readOnly: false
-					},
-					magicType: {
-						show: true,
-						type: ['line', 'bar']
-					},
-					restore: {
-						show: true
-					},
-					saveAsImage: {
-						show: true
-					}
-				}
-			},
-			tooltip: {
-				trigger: 'axis',
-				showDelay: 0, // 显示延迟，添加显示延迟可以避免频繁切换，单位ms
-				axisPointer: { // 坐标轴指示器，坐标轴触发有效
-					type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-				}
-			},
-			legend: {
-				data: ['蒸发量', '降水量', '平均温度']
-			},
-			xAxis: [{
-				type: 'category',
-				data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
-			}],
-			yAxis: [{
-					type: 'value',
-					name: '水量',
-					axisLabel: {
-						formatter: '{value} ml'
-					}
+	);
+	//					Micke
+	var myChart = echarts.init(document.getElementById('main2'));
+	myChart.setOption({
+		title: {
+			text: ""
+		},
+		toolbox: {
+			show: true,
+			feature: {
+				mark: {
+					show: true
 				},
-				{
-					type: 'value',
-					name: '温度',
-					axisLabel: {
-						formatter: '{value} °C'
-					}
-				}
-			],
-			series: [
-
-				{
-					name: '蒸发量',
-					type: 'bar',
-					data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
+				dataView: {
+					show: true,
+					readOnly: false
 				},
-				{
-					name: '降水量',
-					type: 'bar',
-					data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
+				magicType: {
+					show: true,
+					type: ['line', 'bar']
 				},
-				{
-					name: '平均温度',
-					type: 'line',
-					yAxisIndex: 1,
-					data: [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
+				restore: {
+					show: true
+				},
+				saveAsImage: {
+					show: true
 				}
-			]
-		});
-		var user;
-		$(document).ready(function() {
-			getTime();
-			$.ajax({
-				type: "post",
-				url: "/login/getUser",
-				data: {},
-				success: function(json) {
-					user = json;
-					if(json != null && json != "") {
-						$("#usrName").html(json.usrName)
-						$("#tuichu").text("退出")
-						setInterval(getTime, 1000);
-					} else {
-						$("#tuichu").text("登录")
-					}
-				}
-			});
-		})
-
-		function getNow(s) {
-			return s < 10 ? '0' + s : s;
-		}
-
-		function getTime() {
-			var myDate = new Date;
-			var year = myDate.getFullYear(); //获取当前年
-			var mon = myDate.getMonth() + 1; //获取当前月
-			var date = myDate.getDate(); //获取当前日
-			var h = myDate.getHours(); //获取当前小时数(0-23)
-			var m = myDate.getMinutes(); //获取当前分钟数(0-59)
-			var s = myDate.getSeconds(); //获取当前秒
-			var week = myDate.getDay();
-			//var weeks = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
-			$(".time").html(getNow(year) + "-" + getNow(mon) + "-" + getNow(date) + " " + getNow(h) + ":" + getNow(m) + ":" + getNow(s));
-		}
-
-		function tanchulai() {
-			$("#old_password").val("")
-			$("#new_password").val("")
-			$("#new_password2").val("")
-			$("#change").modal("show")
-		}
-
-		function save_new_password() {
-			var old_password = $("#old_password").val();
-			var new_password = $("#new_password").val();
-			var new_password2 = $("#new_password2").val();
-			if(new_password2 != new_password) {
-				toastr.error("两次输入新密码不一致");
-				return;
 			}
-			//console.log(user)
-			var password = old_password + "," + new_password
-			$.ajax({
-				type: "post",
-				url: "/tUserInfo/updatepasswordById",
-				data: {
-					usrId: user.usrId,
-					usrPwd: password
-				},
-				success: function(json) {
-					if(json > 0) {
-						toastr.success("修改成功")
-						$("#change").modal("hide")
-					} else if(json == -1) {
-						toastr.error("原密码不正确")
-					} else if(json == -2) {
-						toastr.error("新密码与原密码请保持不一致")
-					}
+		},
+		tooltip: {
+			trigger: 'axis',
+			showDelay: 0, // 显示延迟，添加显示延迟可以避免频繁切换，单位ms
+			axisPointer: { // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		legend: {
+			data: ['蒸发量', '降水量', '平均温度']
+		},
+		xAxis: [{
+			type: 'category',
+			data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+		}],
+		yAxis: [{
+			type: 'value',
+			name: '水量',
+			axisLabel: {
+				formatter: '{value} ml'
+			}
+		},
+			{
+				type: 'value',
+				name: '温度',
+				axisLabel: {
+					formatter: '{value} °C'
 				}
-			})
-		}
+			}
+		],
+		series: [
 
-		//退出
-		function exit() {
-			$.ajax({
-				type: "post",
-				url: "/login/exit",
-				async: false,
-				data: {},
-				success: function(json) {
-					localStorage.removeItem("obj");
-					location.href = "./login.html";
-				}
-			})
-		}
-
-		//初始化车流量
-		homePageInit.initLeftEcharts('xian1');
-
-		//初始化环形图0
-		homePageInit.initDownEcharts();
-		homePageInit.initLastEcharts()
-
-		//初始化左侧总数据
-		homePageInit.initHomeData();
-		setInterval(refresh, 1000);
-		setInterval(refreshLeft, 4000);
-
-		function refresh() {
-			homePageInit.initLeftEcharts('xian1');
-			homePageInit.initDownEcharts();
-			//
-			homePageInit.initLastEcharts()
-		}
-
-		function refreshLeft() {
-			homePageInit.initHomeData();
-		}
-
-		var looktWimMsg = new Vue({
-			el: '#lookWimMsgDiv',
-			//表单数据
-			data: {
-				idLocal: "",
-				id: "",
-				stationId: "",
-				evtTime: "",
-				msgTime: "",
-				laneNo: "",
-				plate: "",
-				plateColor: "",
-				classIndex: "",
-				length: "",
-				speed: "",
-				direction: "",
-				axlesCount: "",
-				totalWeight: '',
-				wetmixingtimedeviation: '',
-				axle1: '',
-				axle2: '',
-				axle3: '',
-				axle4: '',
-				axle5: '',
-				axle6: '',
-				axle7: '',
-				axle8: '',
-				axle9: '',
-				axle10: '',
-				axleSpace1: '',
-				axleSpace2: '',
-				axleSpace3: '',
-				axleSpace4: '',
-				axleSpace5: '',
-				axleSpace6: '',
-				axleSpace7: '',
-				axleSpace8: '',
-				axleSpace9: '',
-				isStraddle: '',
-				temperature: '',
-				overWeight: '',
-				overWeightRatio: '',
-				wIMId: '',
-				lPRId: '',
-				stationIP: '',
-				stationNameRouteName: '',
-				directionName: '',
-				isStraddleName: '',
-				stationName: '',
-				routeName: '',
-				licensePlateColor: '',
-				vehicleTypeName: '',
+			{
+				name: '蒸发量',
+				type: 'bar',
+				data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
 			},
-			methods: {}
+			{
+				name: '降水量',
+				type: 'bar',
+				data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
+			},
+			{
+				name: '平均温度',
+				type: 'line',
+				yAxisIndex: 1,
+				data: [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
+			}
+		]
+	});
+	var user;
+	$(document).ready(function () {
+		getTime();
+		$.ajax({
+			type: "post",
+			url: "/login/getUser",
+			data: {},
+			success: function (json) {
+				user = json;
+				if (json != null && json != "") {
+					$("#usrName").html(json.usrName)
+					$("#tuichu").text("退出")
+					setInterval(getTime, 1000);
+				} else {
+					$("#tuichu").text("登录")
+				}
+			}
+		});
+	})
+
+	function getNow(s) {
+		return s < 10 ? '0' + s : s;
+	}
+
+	function getTime() {
+		var myDate = new Date;
+		var year = myDate.getFullYear(); //获取当前年
+		var mon = myDate.getMonth() + 1; //获取当前月
+		var date = myDate.getDate(); //获取当前日
+		var h = myDate.getHours(); //获取当前小时数(0-23)
+		var m = myDate.getMinutes(); //获取当前分钟数(0-59)
+		var s = myDate.getSeconds(); //获取当前秒
+		var week = myDate.getDay();
+		//var weeks = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+		$(".time").html(getNow(year) + "-" + getNow(mon) + "-" + getNow(date) + " " + getNow(h) + ":" + getNow(m) + ":" + getNow(s));
+	}
+
+	function tanchulai() {
+		$("#old_password").val("")
+		$("#new_password").val("")
+		$("#new_password2").val("")
+		$("#change").modal("show")
+	}
+
+	function save_new_password() {
+		var old_password = $("#old_password").val();
+		var new_password = $("#new_password").val();
+		var new_password2 = $("#new_password2").val();
+		if (new_password2 != new_password) {
+			toastr.error("两次输入新密码不一致");
+			return;
+		}
+		//console.log(user)
+		var password = old_password + "," + new_password
+		$.ajax({
+			type: "post",
+			url: "/tUserInfo/updatepasswordById",
+			data: {
+				usrId: user.usrId,
+				usrPwd: password
+			},
+			success: function (json) {
+				if (json > 0) {
+					toastr.success("修改成功")
+					$("#change").modal("hide")
+				} else if (json == -1) {
+					toastr.error("原密码不正确")
+				} else if (json == -2) {
+					toastr.error("新密码与原密码请保持不一致")
+				}
+			}
 		})
+	}
 
-		function lookMsg(e, obj) {
-			$.ajax({
-				type: 'POST',
-				url: '/tWimMsg/gettWimMsgById',
-				dataType: 'json',
-				data: {
-					idLocal: e
-				},
-				error: function(msg) {},
-				success: function(json) {
-					lookxiangqing(json, obj);
-					$("#allMsg1").modal('show');
+	//退出
+	function exit() {
+		$.ajax({
+			type: "post",
+			url: "/login/exit",
+			async: false,
+			data: {},
+			success: function (json) {
+				localStorage.removeItem("obj");
+				location.href = "./login.html";
+			}
+		})
+	}
+
+	//初始化车流量
+	homePageInit.initLeftEcharts('xian1');
+
+	//初始化环形图0
+	homePageInit.initDownEcharts();
+	homePageInit.initLastEcharts()
+
+	//初始化左侧总数据
+	homePageInit.initHomeData();
+	setInterval(refresh, 1000);
+	setInterval(refreshLeft, 4000);
+
+	function refresh() {
+		homePageInit.initLeftEcharts('xian1');
+		homePageInit.initDownEcharts();
+		//
+		homePageInit.initLastEcharts()
+	}
+
+	function refreshLeft() {
+		homePageInit.initHomeData();
+	}
+
+	var looktWimMsg = new Vue({
+		el: '#lookWimMsgDiv',
+		//表单数据
+		data: {
+			idLocal: "",
+			id: "",
+			stationId: "",
+			evtTime: "",
+			msgTime: "",
+			laneNo: "",
+			plate: "",
+			plateColor: "",
+			classIndex: "",
+			length: "",
+			speed: "",
+			direction: "",
+			axlesCount: "",
+			totalWeight: '',
+			wetmixingtimedeviation: '',
+			axle1: '',
+			axle2: '',
+			axle3: '',
+			axle4: '',
+			axle5: '',
+			axle6: '',
+			axle7: '',
+			axle8: '',
+			axle9: '',
+			axle10: '',
+			axleSpace1: '',
+			axleSpace2: '',
+			axleSpace3: '',
+			axleSpace4: '',
+			axleSpace5: '',
+			axleSpace6: '',
+			axleSpace7: '',
+			axleSpace8: '',
+			axleSpace9: '',
+			isStraddle: '',
+			temperature: '',
+			overWeight: '',
+			overWeightRatio: '',
+			wIMId: '',
+			lPRId: '',
+			stationIP: '',
+			stationNameRouteName: '',
+			directionName: '',
+			isStraddleName: '',
+			stationName: '',
+			routeName: '',
+			licensePlateColor: '',
+			vehicleTypeName: '',
+		},
+		methods: {}
+	})
+
+	function lookMsg(e, obj) {
+		$.ajax({
+			type: 'POST',
+			url: '/tWimMsg/gettWimMsgById',
+			dataType: 'json',
+			data: {
+				idLocal: e
+			},
+			error: function (msg) {
+			},
+			success: function (json) {
+				lookxiangqing(json, obj);
+				$("#allMsg1").modal('show');
+			}
+		});
+	}
+
+	var lookxiangqing = (data, obj) => {
+		looktWimMsg.id = data.id;
+		looktWimMsg.idLocal = data.idLocal;
+		looktWimMsg.stationNameRouteName = data.stationNameRouteName;
+		looktWimMsg.stationId = data.stationId;
+		looktWimMsg.evtTime = data.evtTime;
+		looktWimMsg.msgTime = data.msgTime;
+		looktWimMsg.laneNo = data.laneNo;
+		looktWimMsg.plate = data.plate;
+		looktWimMsg.plateColor = data.plateColor;
+		looktWimMsg.classIndex = data.classIndex;
+		looktWimMsg.length = data.length;
+		looktWimMsg.speed = data.speed;
+		looktWimMsg.direction = data.direction;
+		looktWimMsg.axlesCount = data.axlesCount;
+		looktWimMsg.totalWeight = data.totalWeight;
+		looktWimMsg.wetmixingtimedeviation = data.wetmixingtimedeviation;
+		looktWimMsg.axle1 = data.axle1;
+		looktWimMsg.axle2 = data.axle2;
+		looktWimMsg.axle3 = data.axle3;
+		looktWimMsg.axle4 = data.axle4;
+		looktWimMsg.axle5 = data.axle5;
+		looktWimMsg.axle6 = data.axle6;
+		looktWimMsg.axle7 = data.axle7;
+		looktWimMsg.axle8 = data.axle8;
+		looktWimMsg.axle9 = data.axle9;
+		looktWimMsg.axle10 = data.axle10;
+		looktWimMsg.axleSpace1 = data.axleSpace1;
+		looktWimMsg.axleSpace2 = data.axleSpace2;
+		looktWimMsg.axleSpace3 = data.axleSpace3;
+		looktWimMsg.axleSpace4 = data.axleSpace4;
+		looktWimMsg.axleSpace5 = data.axleSpace5;
+		looktWimMsg.axleSpace6 = data.axleSpace6;
+		looktWimMsg.axleSpace7 = data.axleSpace7;
+		looktWimMsg.axleSpace8 = data.axleSpace8;
+		looktWimMsg.axleSpace9 = data.axleSpace9;
+		looktWimMsg.isStraddle = data.isStraddle;
+		looktWimMsg.temperature = data.temperature;
+		looktWimMsg.overWeight = data.overWeight;
+		looktWimMsg.overWeightRatio = data.overWeightRatio * 100;
+		looktWimMsg.wIMId = data.wIMId;
+		looktWimMsg.lPRId = data.lPRId;
+		looktWimMsg.stationIP = data.stationIP;
+		looktWimMsg.stationNameRouteName = data.stationNameRouteName;
+		looktWimMsg.directionName = data.directionName;
+		looktWimMsg.isStraddleName = data.isStraddleName;
+		looktWimMsg.stationName = data.stationName;
+		looktWimMsg.routeName = data.routeName;
+		looktWimMsg.licensePlateColor = data.licensePlateColor;
+		looktWimMsg.vehicleTypeName = data.axlesCount + "轴";
+		;
+		looktWimMsg.overWeightRatioName = data.overWeightRatioName == "超载" ? (data.overWeightRatio * 100).toFixed(2) + "%" : data.overWeightRatioName;
+
+		$.ajax({
+			type: 'POST',
+			url: '/tVehicleOverweight/getimgUrlPrefix',
+			dataType: 'json',
+			data: {},
+			success: function (json) {
+				$("#chepaiImg").html('')
+				$("#chebodyDiv").html('')
+
+				if (obj != 1 && obj != 2) {
+					var url2 = "http://" + json.imgUrlPrefix + "/port" + data.stationIP + "/" + data.idLocal + "-Image.jpg"
+					var img2 = '<a target="_blank" href="' + url2 + '"><img id="chebodyImg" src="' + url2 + '" class="popup" width=\'80\' height=\'60\';" /></a>'
+					$("#chebodyDiv").append(img2)
+				} else {
+					var url = "http://" + json.imgUrlPrefix + "/port" + data.stationIP + "/" + data.idLocal + "-PlateImg.jpg"
+					var img = '<a target="_blank" href="' + url + '"><img id="" src="' + url + '" class="popup" width=\'80\' height=\'60\';" /></a>'
+					$("#chepaiImg").append(img)
 				}
-			});
-		}
 
-		var lookxiangqing = (data, obj) => {
-			looktWimMsg.id = data.id;
-			looktWimMsg.idLocal = data.idLocal;
-			looktWimMsg.stationNameRouteName = data.stationNameRouteName;
-			looktWimMsg.stationId = data.stationId;
-			looktWimMsg.evtTime = data.evtTime;
-			looktWimMsg.msgTime = data.msgTime;
-			looktWimMsg.laneNo = data.laneNo;
-			looktWimMsg.plate = data.plate;
-			looktWimMsg.plateColor = data.plateColor;
-			looktWimMsg.classIndex = data.classIndex;
-			looktWimMsg.length = data.length;
-			looktWimMsg.speed = data.speed;
-			looktWimMsg.direction = data.direction;
-			looktWimMsg.axlesCount = data.axlesCount;
-			looktWimMsg.totalWeight = data.totalWeight;
-			looktWimMsg.wetmixingtimedeviation = data.wetmixingtimedeviation;
-			looktWimMsg.axle1 = data.axle1;
-			looktWimMsg.axle2 = data.axle2;
-			looktWimMsg.axle3 = data.axle3;
-			looktWimMsg.axle4 = data.axle4;
-			looktWimMsg.axle5 = data.axle5;
-			looktWimMsg.axle6 = data.axle6;
-			looktWimMsg.axle7 = data.axle7;
-			looktWimMsg.axle8 = data.axle8;
-			looktWimMsg.axle9 = data.axle9;
-			looktWimMsg.axle10 = data.axle10;
-			looktWimMsg.axleSpace1 = data.axleSpace1;
-			looktWimMsg.axleSpace2 = data.axleSpace2;
-			looktWimMsg.axleSpace3 = data.axleSpace3;
-			looktWimMsg.axleSpace4 = data.axleSpace4;
-			looktWimMsg.axleSpace5 = data.axleSpace5;
-			looktWimMsg.axleSpace6 = data.axleSpace6;
-			looktWimMsg.axleSpace7 = data.axleSpace7;
-			looktWimMsg.axleSpace8 = data.axleSpace8;
-			looktWimMsg.axleSpace9 = data.axleSpace9;
-			looktWimMsg.isStraddle = data.isStraddle;
-			looktWimMsg.temperature = data.temperature;
-			looktWimMsg.overWeight = data.overWeight;
-			looktWimMsg.overWeightRatio = data.overWeightRatio * 100;
-			looktWimMsg.wIMId = data.wIMId;
-			looktWimMsg.lPRId = data.lPRId;
-			looktWimMsg.stationIP = data.stationIP;
-			looktWimMsg.stationNameRouteName = data.stationNameRouteName;
-			looktWimMsg.directionName = data.directionName;
-			looktWimMsg.isStraddleName = data.isStraddleName;
-			looktWimMsg.stationName = data.stationName;
-			looktWimMsg.routeName = data.routeName;
-			looktWimMsg.licensePlateColor = data.licensePlateColor;
-			looktWimMsg.vehicleTypeName = data.axlesCount + "轴";;
-			looktWimMsg.overWeightRatioName = data.overWeightRatioName == "超载" ? (data.overWeightRatio * 100).toFixed(2) + "%" : data.overWeightRatioName;
-
-			$.ajax({
-				type: 'POST',
-				url: '/tVehicleOverweight/getimgUrlPrefix',
-				dataType: 'json',
-				data: {},
-				success: function(json) {
-					$("#chepaiImg").html('')
-					$("#chebodyDiv").html('')
-
-					if(obj != 1 && obj != 2) {
-						var url2 = "http://" + json.imgUrlPrefix + "/port" + data.stationIP + "/" + data.idLocal + "-Image.jpg"
-						var img2 = '<a target="_blank" href="' + url2 + '"><img id="chebodyImg" src="' + url2 + '" class="popup" width=\'80\' height=\'60\';" /></a>'
-						$("#chebodyDiv").append(img2)
-					} else {
-						var url = "http://" + json.imgUrlPrefix + "/port" + data.stationIP + "/" + data.idLocal + "-PlateImg.jpg"
-						var img = '<a target="_blank" href="' + url + '"><img id="" src="' + url + '" class="popup" width=\'80\' height=\'60\';" /></a>'
-						$("#chepaiImg").append(img)
-					}
-
-				}
-			});
-		}
-	</script>
+			}
+		});
+	}
+</script>
 
 </html>
