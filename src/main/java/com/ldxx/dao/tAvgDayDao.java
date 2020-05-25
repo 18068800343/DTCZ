@@ -10,6 +10,8 @@ public interface tAvgDayDao {
 
     tAvgDay gettAvgDayByIpAndTime(String stationIP, String avgTime, int avgLaneNo);
 
+    tAvgDay gettAvgDayTotalByTime(String avgTime);
+
     List<tAvgDayColumn> gettAvgDayColumnByIpAndTime(String stationIP, String avgTime, int avgLaneNo);
 
     List<tAvgDayColumn> gettAvgDayColumnByIpAndTime_week(String stationIP, String avgTime, int avgLaneNo);

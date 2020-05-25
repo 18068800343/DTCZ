@@ -29,6 +29,15 @@ public class tAvgDayController {
         return tAvgDay;
     }
 
+    @RequestMapping("/gettAvgDayTotalByTime")
+    public tAvgDay gettAvgDayTotalByTime(String avgTime) {
+        tAvgDay tAvgDay = tAvgDayDao.gettAvgDayTotalByTime(avgTime);
+        if (null == tAvgDay) {
+            tAvgDay = new tAvgDay();
+        }
+        return tAvgDay;
+    }
+
 
     @RequestMapping("/gettAvgDayColumnByCompanyNameAndTime_lgs")
     public List<tAvgDayColumn> gettAvgDayColumnByCompanyNameAndTime_lgs(String companyName, String avgTime, int avgLaneNo) {

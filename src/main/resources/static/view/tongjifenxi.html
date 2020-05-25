@@ -132,7 +132,7 @@
     <!-- Nav tabs -->
     <ul class="nav nav-pills" role="tablist" style="margin-bottom:20px;">
         <li role="presentation" class="active"><a href="#home_zhtj" aria-controls="home" role="tab"
-                                                  data-toggle="tab">测站日统计</a></li>
+                                                  data-toggle="tab">综合统计</a></li>
 
         <li role="presentation"><a href="#home" aria-controls="home" role="tab"
                                    data-toggle="tab">测站日统计</a></li>
@@ -197,11 +197,7 @@
                                 <td>二级预警数量</td>
                             </tr>
                             <tr align="center">
-                                <td data-id="0,6"><a>8507</a></td>
-                                <td data-id="0,7"><a>90</a></td>
-                                <td data-id="0,8"><a>180</a></td>
-                                <td data-id="0,9"><a>170</a></td>
-                                <td data-id="0,10"><a>478</a></td>
+
                             </tr>
                             </tbody>
                         </table>
@@ -2868,6 +2864,7 @@
 <script>
 
     $(document).ready(function () {
+
         // *********测站日月统计初始化
         $("#startTime2").datepicker({
             startView: 'years',  //起始选择范围
@@ -2890,7 +2887,6 @@
         queding2();
         //**********测站日月统计初始化结束
 
-
         //**********路公司日月统计初始化
         $("#startTime2_lgs").datepicker({
             startView: 'years',  //起始选择范围
@@ -2908,6 +2904,7 @@
         dayAndMonthTongjiDom_lgs_week.initTable();
         dayAndMonthTongjiDomMonth_lgs.initTableMonth();
         getTime_lgs()
+        queding_zhtj();
         initzhandian_lgs()
         queding_lgs();
         queding2_lgs();
@@ -3067,6 +3064,7 @@
         let now2 = getNow(year) + "-" + getNow(myDate.getMonth());
         $("#startTime").val(now);
         $("#startTime_week").val(now);
+        $("#startTime_zhtj").val(now);
         $("#startTime2").val(now2);
         return now;
     }
@@ -3107,6 +3105,11 @@
         return now;
     }
 
+
+    function queding_zhtj() {
+        let avgTime = $("#startTime_zhtj").val();
+        dayAndMonthTongjiDom_zhtj.initTable(avgTime);
+    }
 
     function queding() {
         let stationPort = $("#stationPort").val();

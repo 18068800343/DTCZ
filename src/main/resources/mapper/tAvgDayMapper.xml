@@ -3,11 +3,15 @@
 <mapper namespace="com.ldxx.dao.tAvgDayDao">
 
 
-    	<select id="gettAvgDayByIpAndTime" resultType="tAvgDay">
+    <select id="gettAvgDayByIpAndTime" resultType="tAvgDay">
   			select * from t_avg_day where Station_IP=#{stationIP} and Avg_Time=#{avgTime} and Avg_LaneNo=#{avgLaneNo}
   		</select>
 
-    	<select id="getColumnNameStrByTableName" resultType="string">
+    <select id="gettAvgDayTotalByTime" resultType="tAvgDay">
+  			select * from t_avg_day_total where  Avg_Time=#{avgTime}
+  		</select>
+
+    <select id="getColumnNameStrByTableName" resultType="string">
   			SELECT GROUP_CONCAT(COLUMN_NAME SEPARATOR ",") FROM information_schema.COLUMNS
 			WHERE  TABLE_NAME = #{tableName}
   		</select>

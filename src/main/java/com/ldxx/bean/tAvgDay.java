@@ -23,7 +23,35 @@ public class tAvgDay {
     private double avgOverloadRatio4;
     private double avgOverloadRatio5;
     private double avgOverloadRatio6;
+
     private String stationIP;
+    private Integer range80Count1;
+    private Integer rangeCount3;
+    private String avgMaxID;
+
+    public Integer getRange80Count1() {
+        return range80Count1;
+    }
+
+    public void setRange80Count1(Integer range80Count1) {
+        this.range80Count1 = range80Count1;
+    }
+
+    public Integer getRangeCount3() {
+        return rangeCount3;
+    }
+
+    public void setRangeCount3(Integer rangeCount3) {
+        this.rangeCount3 = rangeCount3;
+    }
+
+    public String getAvgMaxID() {
+        return avgMaxID;
+    }
+
+    public void setAvgMaxID(String avgMaxID) {
+        this.avgMaxID = avgMaxID;
+    }
 
     public String getiD() {
         return iD;
