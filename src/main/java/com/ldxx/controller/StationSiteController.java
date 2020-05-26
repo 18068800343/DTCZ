@@ -57,15 +57,22 @@ public class StationSiteController {
 
     @RequestMapping("/getCompanyStationSite")
     public List<CompanySite> getCompanyStationSite() {
+
         return stationSiteDao.getCompanyStation();
     }
 
+    @RequestMapping("/getCompanyStationSiteReport")
+    public List<CompanySite> getCompanyStationSiteReport() {
+
+        return stationSiteDao.getCompanyStationSiteReport();
+    }
+
     @RequestMapping("/addStationSite")
-    public String addStationSite(String stationSite,@RequestParam(value="file",required=false) MultipartFile file) throws IOException {
+    public String addStationSite(String stationSite, @RequestParam(value = "file", required = false) MultipartFile file) throws IOException {
         JSONObject jsonObject = new JSONObject();
-        Map<String,Class> map=new HashMap<>();
-        JSONObject jsonObject2=JSONObject.fromObject(stationSite);
-        StationSite StationSite=(StationSite)JSONObject.toBean(jsonObject2, StationSite.class,map);
+        Map<String, Class> map = new HashMap<>();
+        JSONObject jsonObject2 = JSONObject.fromObject(stationSite);
+        StationSite StationSite = (StationSite) JSONObject.toBean(jsonObject2, StationSite.class, map);
 
         String id = LDXXUtils.getUUID12();
 

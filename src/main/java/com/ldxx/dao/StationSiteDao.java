@@ -38,13 +38,15 @@ public interface StationSiteDao {
     int iscountCompanySiteName(String name);
 
 
-    int xg_iscountStationIp(String stationIp,String id);
+    int xg_iscountStationIp(String stationIp, String id);
 
-    int xg_iscountStationPort(String stationPort,String id);
+    int xg_iscountStationPort(String stationPort, String id);
 
     List<StationSite> getStationSiteByPort(String stationPort);
 
     List<CompanySite> getCompanyStation();
+
+    List<CompanySite> getCompanyStationSiteReport();
 
     List<Accessory> getAccessoryByPort(String stationPort);
 }

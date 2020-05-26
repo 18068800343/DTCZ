@@ -475,14 +475,14 @@
                 errMessage("请求UserController失败");
             },
             success: function (json) {
-                if (json.groups != "控股" && json.groups != "路公司") {
-                    //非控股和路公司
-                    pageConst.flag = true;
-                    $("#companySel").show();
-                } else {
-                    pageConst.flag = false;
-                    $("#companySel").hide();
-                }
+                // if (json.groups != "控股" && json.groups != "路公司") {
+                //非控股和路公司
+                pageConst.flag = true;
+                $("#companySel").show();
+                // } else {
+                //     pageConst.flag = false;
+                //     $("#companySel").hide();
+                // }
             }
         });
     }
@@ -490,7 +490,7 @@
     function initCompanySel() {
         $.ajax({
             type: 'POST',
-            url: '/StationSite/getCompanyStationSite',
+            url: '/StationSite/getCompanyStationSiteReport',
             dataType: 'json',
             async: false,
             data: {},
@@ -500,13 +500,9 @@
                 $("#zhandian").html('');
                 if (json != null) {
                     for (let i = 0; i < json.length; i++) {
-
                         let companyName = json[i].companyName;
-                        let groups = json[i].groups;
-                        if (groups == '控股' || groups == '路公司') {
-                            $("#zhandian").append("<option data-id='groups'  value='" + companyName + "'>" + companyName + "</option>");
-                            $("#zhandian1").append("<option data-id='groups'  value='" + companyName + "'>" + companyName + "</option>");
-                        }
+                        $("#zhandian").append("<option data-id='groups'  value='" + companyName + "'>" + companyName + "</option>");
+                        $("#zhandian1").append("<option data-id='groups'  value='" + companyName + "'>" + companyName + "</option>");
                     }
 
                     $(".selectpicker").selectpicker({
