@@ -7,6 +7,7 @@
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="./css/bootstrap-theme.css" />
+		<link rel="stylesheet" type="text/css" href="css/home.css" />
 		<link rel="stylesheet" type="text/css" href="css/index.css" />
 		<link rel="stylesheet" href="css/toastr.css" />
 		<link rel="stylesheet" type="text/css" href="css/layui.css" />
@@ -117,16 +118,16 @@
 								<div class="leftsj" style="background-color: #020957;padding: 3%;height: 140px;border: 1px solid #020957;border-radius: 8px;background-color: rgba(2, 10, 85, 0.4);color: #C0C0CB;">
 									<h2 class="jianceh" style="font-size: 17px;color:#007AFF;position: absolute;margin-top: 3px;font-weight: bolder;">实时统计</h2>
 									<div class="left1" style="margin-left: 14%;margin-top: -1%;">
-										<img src="img/first_img.png" style="height: 40px;">
+										<a href="javascript:;" onclick="leftfirstTb(1)"><img src="img/first_img.png" style="height: 40px;"></a>
 										<p class="leftp" id="leftTable1fir"></p><span>辆</span>
 										<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日总流量</p>
 									</div>
 									<div class="left2" style="margin-left: 14%;">
-										<img src="./img/second_img.png" style="height: 40px;">
+										<a href="javascript:;" onclick="leftfirstTb(2)"><img src="./img/second_img.png" style="height: 40px;"></a>
 										<p class="leftp" id="leftTable2fir"></p><span>辆</span>
 										<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日超载车辆数</p>
 									</div>
-									<div class="left3" style="margin-top:-14%;margin-left:450px;">
+									<div class="left3" style="margin-top:-17%;margin-left:450px;">
 										<a href="javascript:;" onclick="lookMsg(homePageInit.idLocal,3)"><img src="img/third_img.png" style="height: 40px;"></a>
 										<p class="leftp" id="leftTable3fir"></p><span>吨</span>
 										<input type="input" id="idLocalfir" style="display: none">
@@ -398,12 +399,12 @@
 					<h2 class="jianceh" style="font-size: 19px;color:#007AFF;">监测站点实时统计</h2>
 					<div class="leftsj">
 						<div class="leftfirst">
-							<img src="img/first_img.png" style="height: 40px;">
+							<a href="javascript:;" onclick="leftfirstTb(1)"><img src="img/first_img.png" style="height: 40px;"></a>
 							<p class="leftp" id="leftTable1"></p><span>辆</span>
 							<p style="color: #A4A5B0;margin-left: 16%;margin-top: -2%;font-size:13px;">当日总流量</p>
 						</div>
 						<div class="leftsec">
-							<img src="./img/second_img.png" style="height: 40px;">
+							<a href="javascript:;" onclick="leftfirstTb(2)"><img src="./img/second_img.png" style="height: 40px;"></a>
 							<p class="leftp" id="leftTable2"></p><span>辆</span>
 							<p style="color: #A4A5B0;margin-left: 16%;margin-top: -2%;font-size:13px;">当日超载车辆数</p>
 						</div>
@@ -2792,6 +2793,17 @@ var myChart = echarts.init(document.getElementById("firstmain"));
 				}
 			});
 		}
+
+		function leftfirstTb(obj){
+			window.location.href = 'shishijiance.html';
+			if(obj==1){
+				sessionStorage.setItem("from","1");
+			}else{
+				sessionStorage.setItem("from","2");
+			}
+
+		}
+
 	</script>
 
 </html>
