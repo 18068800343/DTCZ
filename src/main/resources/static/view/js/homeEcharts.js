@@ -406,6 +406,76 @@ let initFirLiuliangtongji=(stationNames,nums)=>{
 
 }
 
+let initFirChaoZaiLvTongji=(d)=>{
+    let url="";
+    switch (d) {
+        case 1:
+            url = '/tWimMsg/getCheLiuLiangEchartsList';
+            break;
+        case 2:
+            url = '/tWimMsg/getChaoZaiEchartsList';
+            break;
+        case 3:
+            url = '/tWimMsg/getChaoZaiEchartsList';
+            break;
+        case 4:
+            url = '/tWimMsg/getGuanJianChaoZhongCheLiangEchartsList';
+            break;
+    }
+    $.ajax({
+        type: 'POST',
+        url: url,
+        dataType: 'json',
+        data: {
+            stationPorts: homePageInit.stationPort.toString()
+        },
+        error: function (msg) {
+        },
+        success: function (json) {
+            $("#mainContent tbody").empty();
+            let stationNames = json.stationNames.split(",")
+            let nums = json.nums.split(",");
+
+            let dom;
+            if(d==1){//当日车流量统计
+                /*$("#chart1Detail b").empty();
+                $("#chart1Detail b").append("当日车流量统计");
+                for(let i=0;i<stationNames.length;i++){
+                    let tr = "<tr><td>"+stationNames[i]+"</td><td>"+nums[i]+"</td></tr>";
+                    dom+=tr;
+                }*/
+            }else{
+                if(d==2){//当日超载比例统计
+                    /*$("#chart1Detail b").empty();
+                    $("#chart1Detail b").append("当日超载比例统计");*/
+                    let numsBili = json.numsBili.split(",");
+                    for(let i=0;i<stationNames.length;i++){
+                        let num = numsBili[i];
+                        if(undefined==num){
+                            num="0%";
+                        }else{
+                            num = num*100
+                            num = num.toFixed(2)+"%";
+                        }
+                        let tr = "<tr><td>"+stationNames[i]+"</td><td>"+num+"</td></tr>";
+                        $("#fir_chaozailv"+i+"").html("")
+                        $("#fir_chaozailv"+i+"").html(num)
+                        $("#fir_chaozailvName"+i+"").html("")
+                        $("#fir_chaozailvName"+i+"").html(stationNames[i])
+                    }
+                }else{//当日超载数量统计
+                    /*$("#chart1Detail b").empty();
+                    $("#chart1Detail b").append("当日超载数量统计");
+                    for(let i=0;i<stationNames.length;i++){
+                        let tr = "<tr><td>"+stationNames[i]+"</td><td>"+nums[i]+"</td></tr>";
+                        dom+=tr;
+                    }*/
+                }
+            }
+
+        }
+    });
+}
 
 homePageInit.initLeftEcharts = (id) => {
     $.ajax({
@@ -423,6 +493,7 @@ homePageInit.initLeftEcharts = (id) => {
             homePageInit.nums = json.nums.split(",").reverse();
             homePageInit.setLeftEcharts(id, homePageInit.stationName, homePageInit.nums);
             initFirLiuliangtongji(homePageInit.stationName, homePageInit.nums)
+            initFirChaoZaiLvTongji(2)
         }
     });
 }
