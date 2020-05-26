@@ -425,6 +425,7 @@ let initFirChaoZaiLvTongji=(d)=>{
     $.ajax({
         type: 'POST',
         url: url,
+        async:false,
         dataType: 'json',
         data: {
             stationPorts: homePageInit.stationPort.toString()
