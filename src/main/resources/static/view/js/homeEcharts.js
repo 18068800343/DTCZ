@@ -83,6 +83,7 @@ let initHomeMap = (lngLats,stationNames)=>{
                 }
             }
             let myChart = ec.init(document.getElementById('main'));
+            let myChartmainfir = ec.init(document.getElementById('mainfir'));
             let ecConfig = require('echarts/config');
             let zrEvent = require('zrender/tool/event');
             let curIndx = 0;
@@ -168,6 +169,7 @@ let initHomeMap = (lngLats,stationNames)=>{
 
 
             myChart.setOption(option);
+            myChartmainfir.setOption(option);
 
         }
     );
@@ -388,6 +390,21 @@ homePageInit.setLeftEcharts = (id, stationNames, nums) => {
    /* bindChartClick(myChart,1);*/
 }
 
+let initFirLiuliangtongji=(stationNames,nums)=>{
+    if(nums!=null&&nums.length>0){
+        for(let i=0;i<nums.length+1;i++){
+            $("#fir_liuliang"+i+"").html("")
+            $("#fir_liuliang"+i+"").html(nums[i])
+        }
+    }
+    if(stationNames!=null&&stationNames.length>0){
+        for(let i=0;i<stationNames.length+1;i++){
+            $("#fir_liuliangName"+i+"").html("")
+            $("#fir_liuliangName"+i+"").html(stationNames[i])
+        }
+    }
+
+}
 
 
 homePageInit.initLeftEcharts = (id) => {
@@ -405,7 +422,7 @@ homePageInit.initLeftEcharts = (id) => {
             homePageInit.stationName = json.stationNames.split(",").reverse()
             homePageInit.nums = json.nums.split(",").reverse();
             homePageInit.setLeftEcharts(id, homePageInit.stationName, homePageInit.nums);
-
+            initFirLiuliangtongji(homePageInit.stationName, homePageInit.nums)
         }
     });
 }
@@ -430,6 +447,7 @@ homePageInit.initDownEcharts = () => {
                 homePageInit.initHuanEcharts("huan"+i,i,homePageInit.downNums,homePageInit.downStationName[i], homePageInit.downNums2 );
                 homePageInit.initHuanEcharts2("by"+i,i,homePageInit.downNums[i],homePageInit.downStationName[i], homePageInit.downNums2,homePageInit.downNums,homePageInit.downNums2[i]);
             }
+            //initFirChaoZailv(homePageInit.downNums,homePageInit.downStationName[i])
         }
     });
 }
@@ -736,13 +754,23 @@ homePageInit.initHomeData = ()=>{
         success: function (json) {
             $("#leftTable1").html('');
             $("#leftTable1").html(json.totalCheLiu);
+            $("#leftTable1fir").html('');
+            $("#leftTable1fir").html(json.totalCheLiu);
+
             $("#leftTable2").html('');
             $("#leftTable2").html(json.totalChaoZai);
+            $("#leftTable2fir").html('');
+            $("#leftTable2fir").html(json.totalChaoZai);
             homePageInit.idLocal = json.idLocal;
             $("#leftTable3").html('');
             $("#leftTable3").html((json.maxWeight/1000).toFixed(2));
+            $("#leftTable3fir").html('');
+            $("#leftTable3fir").html((json.maxWeight/1000).toFixed(2));
+
             $("#leftTable4").html('');
             $("#leftTable4").html(json.stationNums);
+            $("#leftTable4fir").html('');
+            $("#leftTable4fir").html(json.stationNums);
             $("#lastZuiDaCheZhong").html('')
             $("#lastZuiDaCheZhong").html((json.maxWeight/1000).toFixed(2))
             homePageInit.linkStationNames = json.stationNames.split(",");

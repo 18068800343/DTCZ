@@ -96,6 +96,7 @@
 		</style>
 	</head>
 	<body style="background-image: none;">
+	<div id="ssjcleftTab" style="width: 160px;height: 100%;position: fixed;background-color:#232733;margin-top: -30px;"></div>
 	<div class="layui-tab" lay-filter="demo" style="margin-left:10%;margin-top:-2%">
 			  <ul class="layui-tab-title labelli">
 			    <li class="layui-this labelthis">综合信息统计</li>
@@ -1016,6 +1017,18 @@
 		});
 
 	});
+	window.onload = function () {
+		var from = sessionStorage.getItem("from");
+		if(from == '1') {
+			//balabala  要触发的点击事件  $('#xxx').click()
+			clickImg(2)
+			sessionStorage.setItem("from",""); //销毁 from 防止在b页面刷新 依然触发$('#xxx').click()
+		}else if(from == '2'){
+			clickImg(3)
+			sessionStorage.setItem("from",""); //销毁 from 防止在b页面刷新 依然触发$('#xxx').click()
+		}
+
+	}
 
 	function clickImg(obj){
 		if(obj=="2"){
