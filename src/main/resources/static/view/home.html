@@ -863,6 +863,10 @@
 
 			//初始化左侧总数据
 			homePageInit.initHomeData();
+			//初始化总流量统计和超载率统计
+			homePageInit.initFirTongji();
+			//初始化趋势图
+			homePageInit.initFirqstjt('chart3');
 			setInterval(refresh, 1000);
 			setInterval(refreshLeft, 4000);
 		})
@@ -1787,13 +1791,13 @@ var myChart = echarts.init(document.getElementById("firstmain"));
     ],
     series: [
         {
-            
+
             type: 'bar',
             data: [2.0, 4.9, 7.0, 23.2],
             color:'#6154FD'
         },
         {
-            
+
             type: 'bar',
             data: [2.6, 5.9, 9.0, 26.4],
             color:'#FE545E'
@@ -1841,7 +1845,7 @@ var myChart = echarts.init(document.getElementById("firstmain"));
                 }
             },
             splitLine: {
-                show: false       
+                show: false
             }
         },
         series: [
@@ -1873,8 +1877,8 @@ var myChart = echarts.init(document.getElementById("firstmain"));
 		var myChart = echarts.init(document.getElementById("sexmain"));
 		// 指定图表的配置项和数据
 		var option = {
-			 
-       		 
+
+
 			xAxis: [{
 				type: 'category',
 				data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
@@ -2275,8 +2279,8 @@ var myChart = echarts.init(document.getElementById("firstmain"));
 		};
 		option.xAxis.data = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12 (月)'];
 		option.series[0].data = [21, 25, 27, 12, 22, 21, 25, 27, 12, 22, 42, 32];
-		var chart3 = echarts.init(document.getElementById('chart3'));
-		chart3.setOption(option);
+		//var chart3 = echarts.init(document.getElementById('chart3'));
+		//chart3.setOption(option);
 
 		layui.use('element', function() {
 			var element = layui.element;
@@ -2641,6 +2645,10 @@ var myChart = echarts.init(document.getElementById("firstmain"));
 			homePageInit.initDownEcharts();
 			//
 			homePageInit.initLastEcharts()
+			//初始化总流量统计和超载率统计
+			homePageInit.initFirTongji();
+			//初始化趋势图
+			homePageInit.initFirqstjt('chart3');
 		}
 
 		function refreshLeft() {
