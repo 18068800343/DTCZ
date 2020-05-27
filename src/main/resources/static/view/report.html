@@ -83,6 +83,7 @@
                                     <option value="%%">全部</option>
                                     <option value="1">日报告</option>
                                     <option value="2">月报告</option>
+                                    <option value="3">周报告</option>
                                 </select>
                             </lable>
                             <label class="form-inline"/>开始时间:
@@ -250,10 +251,9 @@
         laydate.render({
             elem: '#weekTime', //指定元素
         });
-        initTable()
         getLoginUser()
         initCompanySel();
-        $("#dayOrMonth").val('2');
+        $("#dayOrMonth").val('3');
         $("#dayOrMonth").trigger("change");
     });
     let table = $('#mainContent').DataTable({
@@ -293,8 +293,10 @@
             "render": function (data, type, full) {
                 if (data == '1') {
                     return '日报告'
-                } else {
+                } else if (data == '2') {
                     return '月报告'
+                } else {
+                    return '周报告'
                 }
             }
         }, {
@@ -460,7 +462,7 @@
                 $("#myModal").modal("hide");
                 if (json == 1) {
                     toastr.success("生成成功");
-                    initTable()
+                    queding()
                 }
 
             }
