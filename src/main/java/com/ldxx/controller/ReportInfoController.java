@@ -31,19 +31,20 @@ public class ReportInfoController {
 
     }
     @RequestMapping("/deleteById")
-    public int deleteById(HttpSession session,String id){
+    public int deleteById(HttpSession session, String id) {
         return dao.deleteById(id);
     }
+
     @RequestMapping("/reportDayAndMonth")
-    public int reportDayAndMonth(HttpSession session,String dayTime,String monthTime,String companyNames){
+    public int reportDayAndMonth(HttpSession session, String dayTime, String monthTime, String companyNames, String weekTime) {
         tUserInfoVo tUserInfo = (tUserInfoVo) session.getAttribute("user");
         String companName = tUserInfo.getCompanyName();
         String[] list = companyNames.split(",");
         List<String> list1 = new ArrayList<>();
         list1.add(companName);
-        List<String> companyNameList =  !"".equals(companyNames)&&null!=companyNames? Arrays.asList(companyNames.split(",")):list1;
+        List<String> companyNameList = !"".equals(companyNames) && null != companyNames ? Arrays.asList(companyNames.split(",")) : list1;
         String cmdOp = "CreateDayReport.exe 3";
-        ReportUtil.getInstance().reportByDayAndMonth(dayTime,monthTime,companyNameList,cmdOp);
+        ReportUtil.getInstance().reportByDayAndMonthAndWeek(dayTime, monthTime, weekTime, companyNameList, cmdOp);
         return 1;
     }
 

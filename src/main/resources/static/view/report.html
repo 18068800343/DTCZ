@@ -200,6 +200,14 @@
                             <td style="width: 30%;"><input type="text" id="monthTime" class="form-control"
                                                            placeholder="请输入" style="width: 100%;"></td>
                         </tr>
+
+                        <tr>
+                            <td style="width: 20%;">周报告</td>
+                            <td style="width: 30%;"><input type="text" id="weekTime" class="form-control"
+                                                           placeholder="请输入" style="width: 100%;"></td>
+                            <td style="width: 20%;"></td>
+                            <td style="width: 30%;"></td>
+                        </tr>
                     </table>
                 </div>
             </div>
@@ -238,6 +246,9 @@
         laydate.render({
             elem: '#monthTime', //指定元素
             type: 'month'
+        });
+        laydate.render({
+            elem: '#weekTime', //指定元素
         });
         initTable()
         getLoginUser()
@@ -426,6 +437,7 @@
         let companyNames = $("#zhandian").val();
         let dayTime = $("#dayTime").val();
         let monthTime = $("#monthTime").val();
+        let weekTime = $("#weekTime").val();
         if (pageConst.flag) {
             if (companyNames == "" || companyNames == null || companyNames == undefined) {
                 toastr.error("请选择生成单位!");
@@ -440,6 +452,7 @@
             data: {
                 dayTime: dayTime,
                 monthTime: monthTime,
+                weekTime: weekTime,
                 companyNames: companyNames.toString()
             },
             success: function (json) {
@@ -476,7 +489,7 @@
             },
             success: function (json) {
                 // if (json.groups != "控股" && json.groups != "路公司") {
-                //非控股和路公司
+                //     //非控股和路公司
                 pageConst.flag = true;
                 $("#companySel").show();
                 // } else {
@@ -498,6 +511,7 @@
             },
             success: function (json) {
                 $("#zhandian").html('');
+                $("#zhandian").append("<option data-id='groups'  value='控股公司'>控股公司</option>");
                 if (json != null) {
                     for (let i = 0; i < json.length; i++) {
                         let companyName = json[i].companyName;
