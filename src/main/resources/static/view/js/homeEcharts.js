@@ -390,6 +390,26 @@ homePageInit.setLeftEcharts = (id, stationNames, nums) => {
    /* bindChartClick(myChart,1);*/
 }
 
+homePageInit.initFirTongji= () =>{
+    $.ajax({
+        type: 'POST',
+        url: '/tWimMsg/getCheLiuLiangEchartsList',
+        dataType: 'json',
+        data: {
+            stationPorts: homePageInit.stationPort.toString(),
+            limit:6
+        },
+        error: function (msg) {
+        },
+        success: function (json) {
+            homePageInit.stationName = json.stationNames.split(",").reverse()
+            homePageInit.nums = json.nums.split(",").reverse();
+            initFirLiuliangtongji(homePageInit.stationName, homePageInit.nums)
+            initFirChaoZaiLvTongji()
+        }
+    });
+}
+
 let initFirLiuliangtongji=(stationNames,nums)=>{
     if(nums!=null&&nums.length>0){
         for(let i=0;i<nums.length+1;i++){
@@ -406,26 +426,11 @@ let initFirLiuliangtongji=(stationNames,nums)=>{
 
 }
 
-let initFirChaoZaiLvTongji=(d)=>{
-    let url="";
-    switch (d) {
-        case 1:
-            url = '/tWimMsg/getCheLiuLiangEchartsList';
-            break;
-        case 2:
-            url = '/tWimMsg/getChaoZaiEchartsList';
-            break;
-        case 3:
-            url = '/tWimMsg/getChaoZaiEchartsList';
-            break;
-        case 4:
-            url = '/tWimMsg/getGuanJianChaoZhongCheLiangEchartsList';
-            break;
-    }
+let initFirChaoZaiLvTongji=()=>{
+
     $.ajax({
         type: 'POST',
-        url: url,
-        async:false,
+        url: '/tWimMsg/getChaoZaiEchartsList',
         dataType: 'json',
         data: {
             stationPorts: homePageInit.stationPort.toString()
@@ -433,45 +438,22 @@ let initFirChaoZaiLvTongji=(d)=>{
         error: function (msg) {
         },
         success: function (json) {
-            $("#mainContent tbody").empty();
             let stationNames = json.stationNames.split(",")
             let nums = json.nums.split(",");
-
-            let dom;
-            if(d==1){//当日车流量统计
-                /*$("#chart1Detail b").empty();
-                $("#chart1Detail b").append("当日车流量统计");
-                for(let i=0;i<stationNames.length;i++){
-                    let tr = "<tr><td>"+stationNames[i]+"</td><td>"+nums[i]+"</td></tr>";
-                    dom+=tr;
-                }*/
-            }else{
-                if(d==2){//当日超载比例统计
-                    /*$("#chart1Detail b").empty();
-                    $("#chart1Detail b").append("当日超载比例统计");*/
-                    let numsBili = json.numsBili.split(",");
-                    for(let i=0;i<stationNames.length;i++){
-                        let num = numsBili[i];
-                        if(undefined==num){
-                            num="0%";
-                        }else{
-                            num = num*100
-                            num = num.toFixed(2)+"%";
-                        }
-                        let tr = "<tr><td>"+stationNames[i]+"</td><td>"+num+"</td></tr>";
-                        $("#fir_chaozailv"+i+"").html("")
-                        $("#fir_chaozailv"+i+"").html(num)
-                        $("#fir_chaozailvName"+i+"").html("")
-                        $("#fir_chaozailvName"+i+"").html(stationNames[i])
-                    }
-                }else{//当日超载数量统计
-                    /*$("#chart1Detail b").empty();
-                    $("#chart1Detail b").append("当日超载数量统计");
-                    for(let i=0;i<stationNames.length;i++){
-                        let tr = "<tr><td>"+stationNames[i]+"</td><td>"+nums[i]+"</td></tr>";
-                        dom+=tr;
-                    }*/
+            let numsBili = json.numsBili.split(",");
+            for(let i=0;i<stationNames.length;i++){
+                let num = numsBili[i];
+                if(undefined==num){
+                    num="0%";
+                }else{
+                    num = num*100
+                    num = num.toFixed(2)+"%";
                 }
+                let tr = "<tr><td>"+stationNames[i]+"</td><td>"+num+"</td></tr>";
+                $("#fir_chaozailv"+i+"").html("")
+                $("#fir_chaozailv"+i+"").html(num)
+                $("#fir_chaozailvName"+i+"").html("")
+                $("#fir_chaozailvName"+i+"").html(stationNames[i])
             }
 
         }
@@ -519,7 +501,6 @@ homePageInit.initDownEcharts = () => {
                 homePageInit.initHuanEcharts("huan"+i,i,homePageInit.downNums,homePageInit.downStationName[i], homePageInit.downNums2 );
                 homePageInit.initHuanEcharts2("by"+i,i,homePageInit.downNums[i],homePageInit.downStationName[i], homePageInit.downNums2,homePageInit.downNums,homePageInit.downNums2[i]);
             }
-            //initFirChaoZailv(homePageInit.downNums,homePageInit.downStationName[i])
         }
     });
 }
@@ -1282,4 +1263,190 @@ let initLeftChartDetail4=(d)=>{
             $("#chart4Detail").modal("show");
         }
     });
+}
+
+//***************************************************************初始化趋势统计图***************************************************************
+homePageInit.initFirqstjt = (id) => {
+    $.ajax({
+        type: 'POST',
+        url: '/tWimMsg/getChaoZaiEchartsList',
+        dataType: 'json',
+        data: {
+            stationPorts: homePageInit.stationPort.toString(),
+            limit:6
+        },
+        error: function (msg) {
+        },
+        success: function (json) {
+            homePageInit.downStationNames = json.stationNames.split(",");
+            homePageInit.downNums = json.nums.split(",");
+            homePageInit.numCount = json.numCount.split(",");
+            homePageInit.initFirqstjtEcharts(id,homePageInit.downStationNames,homePageInit.downNums, homePageInit.numCount );
+
+        }
+    });
+}
+homePageInit.initFirqstjtEcharts = (id,stationNames,nums,numCount) => {
+    // 趋势统计图
+    let myChart = echarts.init(document.getElementById(id));
+
+    var colors = ['#00f1b5', '#fd2b2a'];
+
+
+    option = {
+        color: colors,
+        textStyle: {
+            color: '#fff',
+            fontSize: 13
+        },
+        tooltip: {
+            trigger: 'none',
+            axisPointer: {
+                type: 'cross'
+            }
+        },
+        legend: {
+            data:['总流量', '超载量'],
+            textStyle: {
+                color: '#A3DCEC',
+                fontSize: 13
+            },
+        },
+        grid: {
+            top: 70,
+            bottom: 50
+        },
+        xAxis: [
+            {
+                type: 'category',
+                axisTick: {
+                    alignWithLabel: true
+                },
+                axisLine: { //y轴
+                    show: false
+                },
+                splitLine: {
+                    show: false
+                },
+                axisPointer: {
+                    label: {
+                        formatter: function (params) {
+                            return '总流量  ' + params.value
+                                + (params.seriesData.length ? '：' + params.seriesData[0].data : '');
+                        }
+                    }
+                },
+                data: stationNames,
+                axisLabel : {//坐标轴刻度标签的相关设置。
+                    interval:0,
+                    //rotate:"45" //文字倾斜
+                    formatter : function(params){ //文字换行
+                        var newParamsName = "";// 最终拼接成的字符串
+                        var paramsNameNumber = params.length;// 实际标签的个数
+                        var provideNumber = 4;// 每行能显示的字的个数
+                        var rowNumber = Math.ceil(paramsNameNumber / provideNumber);// 换行的话，需要显示几行，向上取整
+                        /**
+                         * 判断标签的个数是否大于规定的个数， 如果大于，则进行换行处理 如果不大于，即等于或小于，就返回原标签
+                         */
+                        // 条件等同于rowNumber>1
+                        if (paramsNameNumber > provideNumber) {
+                            /** 循环每一行,p表示行 */
+                            for (var p = 0; p < rowNumber; p++) {
+                                var tempStr = "";// 表示每一次截取的字符串
+                                var start = p * provideNumber;// 开始截取的位置
+                                var end = start + provideNumber;// 结束截取的位置
+                                // 此处特殊处理最后一行的索引值
+                                if (p == rowNumber - 1) {
+                                    // 最后一次不换行
+                                    tempStr = params.substring(start, paramsNameNumber);
+                                } else {
+                                    // 每一次拼接字符串并换行
+                                    tempStr = params.substring(start, end) + "\n";
+                                }
+                                newParamsName += tempStr;// 最终拼成的字符串
+                            }
+
+                        } else {
+                            // 将旧标签的值赋给新标签
+                            newParamsName = params;
+                        }
+                        //将最终的字符串返回
+                        return newParamsName
+                    }
+                },
+            },
+            {
+                type: 'category',
+                axisTick: {
+                    alignWithLabel: true
+                },
+                axisLine: {
+                    onZero: false,
+                    lineStyle: {
+                        color: colors[0]
+                    }
+                },
+                axisLine: { //y轴
+                    show: false
+                },
+                splitLine: {
+                    show: false
+                },
+                axisPointer: {
+                    label: {
+                        formatter: function (params) {
+                            return '超载量  ' + params.value
+                                + (params.seriesData.length ? '：' + params.seriesData[0].data : '');
+                        }
+                    }
+                },
+
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                position: 'left',
+                splitLine: {
+                    show: false
+                },
+                axisLine: { //y轴
+                    show: false
+                },
+                splitLine: {
+                    show: false
+                },
+            }
+        ],
+        series: [
+            {
+                name: '总流量',
+                type: 'line',
+                xAxisIndex: 1,
+                smooth: true,
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top'
+                    }
+                },
+                data: numCount
+            },
+            {
+                name: '超载量',
+                type: 'line',
+                smooth: true,
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top'
+                    }
+                },
+                data: nums
+            }
+        ]
+    };
+
+
+    myChart.setOption(option)
 }
