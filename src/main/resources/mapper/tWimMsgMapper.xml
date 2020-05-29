@@ -949,4 +949,144 @@
 			)dd ORDER BY dd.cnt DESC
 		) aa
     </select>
+
+    <resultMap type="java.util.Map" id="imgResultMap" >
+        <result property="liuliangCount" column="liuliangCount" jdbcType="BLOB" typeHandler="com.ldxx.util.MyBlobTypeHandler"/>
+        <result property="ChaoZaiCount" column="ChaoZaiCount" jdbcType="BLOB" typeHandler="com.ldxx.util.MyBlobTypeHandler"/>
+        <result property="GuanJianCount" column="GuanJianCount" jdbcType="BLOB" typeHandler="com.ldxx.util.MyBlobTypeHandler"/>
+    </resultMap>
+    <select id="getSecHomeTotal" resultMap="imgResultMap">
+        SELECT
+        GROUP_CONCAT(aa.liuliangCount SEPARATOR ',') liuliangCount,
+        bb.ChaoZaiCount ,cc.GuanJianCount
+        FROM
+        (
+        SELECT concat_ws("-",a.axles_count,count(*)) as liuliangCount
+            FROM t_vehicle_msg_today a
+            WHERE FIND_IN_SET(a.axles_count,#{axlesCount}) AND FIND_IN_SET(a.Station_IP,#{stationPorts})
+            AND date(a.Evt_Time) = curdate() GROUP BY a.axles_count
+        ) aa
+
+        LEFT JOIN (SELECT GROUP_CONCAT(aa.ChaoZaiCount SEPARATOR ',') ChaoZaiCount from (
+            SELECT concat_ws("-",a.axles_count,count(*)) ChaoZaiCount FROM t_vehicle_msg_today a
+            WHERE FIND_IN_SET(a.axles_count,#{axlesCount}) and a.Over_Weight>0 and a.Total_Weight &lt;(SELECT Crux_Weight FROM crux_weight  WHERE Del_State = 1 AND lv = 2)
+            and FIND_IN_SET(a.Station_IP,#{stationPorts}) and  date(a.Evt_Time) = curdate() GROUP BY a.axles_count
+        )aa
+        ) bb on 1=1
+
+        LEFT JOIN (SELECT GROUP_CONCAT(aa.GuanJianCount SEPARATOR ',') GuanJianCount from(
+            select concat_ws("-",a.axles_count,count(*)) as GuanJianCount FROM t_vehicle_overweight a
+            WHERE FIND_IN_SET(a.axles_count,#{axlesCount}) and a.Total_Weight >= (SELECT min(Crux_Weight) FROM crux_weight w WHERE Del_State = 1)
+            AND FIND_IN_SET(a.Station_IP,#{stationPorts}) and  date(a.Evt_Time) = curdate() GROUP BY a.axles_count
+        )aa
+        )cc on 1= 1
+
+
+    </select>
+
+    <select id="getSecLiuLiangEcharsList" resultType="SecHomeData">
+        SELECT group_concat(aa.liuLiangCount SEPARATOR ',') as liuLiangCount,group_concat(aa.Station_Name SEPARATOR ',') as stationNames from (
+            select COUNT(*) liuLiangCount,b.Station_Name  from t_vehicle_msg_today a
+            LEFT JOIN station_site b ON a.Station_IP = b.Station_Port
+            and  a.axles_count=#{axlesCount} and  date(a.Evt_Time) = curdate() GROUP BY
+                        b.Station_Port
+                    HAVING FIND_IN_SET(b.Station_Port,#{stationPorts})
+                ORDER BY liuLiangCount desc
+                <if test="limit!=null and limit!=''">
+                    LIMIT #{limit}
+                </if>
+        ) aa
+    </select>
+
+
+    <select id="getSecChaoZaiEcharsList" resultType="SecHomeData">
+        <!--SELECT group_concat(aa.chaoZaicCount SEPARATOR ',') as chaoZaicCount ,group_concat(aa.Station_Name SEPARATOR ',') as stationNames from (
+            select COUNT(*) chaoZaicCount,b.Station_Name  from t_vehicle_msg_today a
+            LEFT JOIN station_site b ON a.Station_IP = b.Station_Port
+            and  a.axles_count=#{axlesCount} and a.Over_Weight>0  and a.Total_Weight &lt;(SELECT Crux_Weight FROM crux_weight  WHERE Del_State = 1 AND lv = 2)
+            and  date(a.Evt_Time) = curdate() GROUP BY b.Station_Port
+            HAVING FIND_IN_SET(b.Station_Port,#{stationPorts})
+            ORDER BY chaoZaicCount desc
+            <if test="limit!=null and limit!=''">
+                LIMIT #{limit}
+            </if>
+        ) aa-->
+        SELECT group_concat(aa.chaoZaicCount SEPARATOR ',') as chaoZaicCount ,group_concat(aa.Station_Name SEPARATOR ',') as stationNames ,
+        group_concat(aa.chaoZaiBili SEPARATOR ',') as chaoZaiBili
+        from (
+            select *,(a.chaoZaicCount/b.liuLiangCount) as chaoZaiBili from (  select COUNT(*) chaoZaicCount,b.Station_Name  from t_vehicle_msg_today a
+                LEFT JOIN station_site b ON a.Station_IP = b.Station_Port
+                and  a.axles_count=#{axlesCount} and a.Over_Weight>0  and a.Total_Weight &lt;(SELECT Crux_Weight FROM crux_weight  WHERE Del_State = 1 AND lv = 2)
+                and  date(a.Evt_Time) = curdate() GROUP BY b.Station_Port
+                HAVING FIND_IN_SET(b.Station_Port,#{stationPorts})
+                ORDER BY chaoZaicCount desc
+            ) a
+            left join (
+                select COUNT(*) liuLiangCount,b.Station_Name  as StationName2 from t_vehicle_msg_today a
+                LEFT JOIN station_site b ON a.Station_IP = b.Station_Port
+                and  a.axles_count=#{axlesCount} and  date(a.Evt_Time) = curdate() GROUP BY
+                b.Station_Port
+                HAVING FIND_IN_SET(b.Station_Port,#{stationPorts})
+                ORDER BY liuLiangCount desc
+            ) b  on a.Station_Name=b.StationName2 ORDER BY a.chaoZaicCount desc
+            <if test="limit!=null and limit!=''">
+                LIMIT #{limit}
+            </if>
+        ) aa
+    </select>
+
+    <select id="getSecChaoZaiEcharsListMonth" resultType="SecHomeData">
+        select GROUP_CONCAT(a.chaoZai2CountMonth SEPARATOR ',') chaoZai2CountMonth,GROUP_CONCAT(a.chaoZai3CountMonth SEPARATOR ',') chaoZai3CountMonth,
+        GROUP_CONCAT(a.chaoZai4CountMonth SEPARATOR ',') chaoZai4CountMonth,GROUP_CONCAT(a.chaoZai5CountMonth SEPARATOR ',') chaoZai5CountMonth,
+        GROUP_CONCAT(a.chaoZai6CountMonth SEPARATOR ',') chaoZai6CountMonth,GROUP_CONCAT(a.Station_IP SEPARATOR ',') stationPort,
+        GROUP_CONCAT(a.Station_Name SEPARATOR ',') stationNames
+        from (
+            select (num2+IFNULL(chaozaiNum,0)) as chaoZai2CountMonth,(num3+IFNULL(chaozaiNum,0)) as chaoZai3CountMonth,
+            (num4+IFNULL(chaozaiNum,0)) as chaoZai4CountMonth,(num5+IFNULL(chaozaiNum,0)) as chaoZai5CountMonth,
+            (num6+IFNULL(chaozaiNum,0)) as chaoZai6CountMonth,a.Station_IP,a.Station_Name
+            from (
+                SELECT
+                Avg_Overload_Count_2 as num2,Avg_Overload_Count_3 as num3,Avg_Overload_Count_4 as num4,
+                Avg_Overload_Count_5 as num5,Avg_Overload_Count_6 as num6,a.Station_IP,b.Station_Name
+                FROM
+                t_avg_month a
+                left join station_site b ON b.Station_Port=a.Station_IP
+                WHERE
+                a.Avg_Time = #{yearMonth}
+                AND FIND_IN_SET(a.Station_IP, #{stationPorts})
+                AND a.Avg_LaneNo='0'
+            ) a
+            left join (
+                select IFNULL(COUNT(*),0) chaozaiNum,b.Station_Name,a.Station_IP from t_vehicle_msg_today a
+                LEFT JOIN station_site b ON a.Station_IP = b.Station_Port
+                and  a.axles_count=#{axlesCount} and a.Over_Weight>0  and a.Total_Weight &lt;(SELECT Crux_Weight FROM crux_weight  WHERE Del_State = 1 AND lv = 2)
+                and  date(a.Evt_Time) = curdate()
+                GROUP BY b.Station_Port
+                HAVING FIND_IN_SET(b.Station_Port,#{stationPorts})
+                ORDER BY chaozaiNum desc
+            ) b on a.Station_ip=b.Station_IP <include refid="limitSql"></include>
+        ) a
+
+    </select>
+    <sql id="limitSql">
+        <if test='axlesCount=="2"'>
+            ORDER BY chaoZai2CountMonth desc
+        </if>
+        <if test='axlesCount=="3"'>
+            ORDER BY chaoZai3CountMonth desc
+        </if>
+        <if test='axlesCount=="4"'>
+            ORDER BY chaoZai4CountMonth desc
+        </if>
+        <if test='axlesCount=="5"'>
+            ORDER BY chaoZai5CountMonth desc
+        </if>
+        <if test='axlesCount=="6"'>
+            ORDER BY chaoZai6CountMonth desc
+        </if>
+        <if test="limit!=null and limit!=''">
+            LIMIT #{limit}
+        </if>
+    </sql>
+    
 </mapper>

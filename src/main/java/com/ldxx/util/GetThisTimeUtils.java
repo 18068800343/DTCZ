@@ -25,4 +25,9 @@ public class GetThisTimeUtils {
 		SimpleDateFormat dateFormat= new SimpleDateFormat("yyyyMMddHHmmss");
 		return dateFormat.format(date);
 	}
+	public static String getMonth() {
+		Date date = new Date();
+		SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM");
+		return dateFormat.format(date);
+	}
 }

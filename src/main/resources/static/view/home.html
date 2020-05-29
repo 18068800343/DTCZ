@@ -194,8 +194,8 @@
 								</div>
 								<div class="left7" style="margin-left: 14%;display:inline-block;width: 150px;">
 									<img src="./img/second_img.png" style="height: 40px;">
-									<p class="leftp" id="leftTable3two"></p><span>辆</span>
-									<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日超载车辆数</p>
+									<p class="leftp" id="leftTable3two"></p>
+									<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日超载比例</p>
 								</div>
 								<div id="maint"  style="width: 350px;height: 300px;display: inline-block;"></div>
 								<div id="mainb" style="width: 350px;height: 300px;display: inline-block;position: absolute;margin-left: 10px;"></div>
@@ -222,8 +222,8 @@
 								</div>
 								<div class="left10" style="margin-left: 14%;display:inline-block;width: 150px;">
 									<img src="./img/second_img.png" style="height: 40px;">
-									<p class="leftp" id="leftTable3third"></p><span>辆</span>
-									<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日超载车辆数</p>
+									<p class="leftp" id="leftTable3third"></p>
+									<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日超载比例</p>
 								</div>
 								<div id="maina"  style="width: 350px;height: 300px;display: inline-block;"></div>
 								<div id="mainc" style="width: 350px;height: 300px;display: inline-block;position: absolute;margin-left: 10px;"></div>
@@ -251,8 +251,8 @@
 								</div>
 								<div class="left13" style="margin-left: 14%;display:inline-block;width: 150px;">
 									<img src="./img/second_img.png" style="height: 40px;">
-									<p class="leftp" id="leftTable3four"></p><span>辆</span>
-									<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日超载车辆数</p>
+									<p class="leftp" id="leftTable3four"></p>
+									<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日超载比例</p>
 								</div>
 								<div id="maind"  style="width: 350px;height: 300px;display: inline-block;"></div>
 								<div id="maine" style="width: 350px;height: 300px;display: inline-block;position: absolute;margin-left: 10px;"></div>
@@ -279,8 +279,8 @@
 								</div>
 								<div class="left16" style="margin-left: 14%;display:inline-block;width: 150px;">
 									<img src="./img/second_img.png" style="height: 40px;">
-									<p class="leftp" id="leftTable3five"></p><span>辆</span>
-									<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日超载车辆数</p>
+									<p class="leftp" id="leftTable3five"></p>
+									<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日超载比例</p>
 								</div>
 								<div id="mainf"  style="width: 350px;height: 300px;display: inline-block;"></div>
 								<div id="maing" style="width: 350px;height: 300px;display: inline-block;position: absolute;margin-left: 10px;"></div>
@@ -318,8 +318,8 @@
 								<div class="wjkd" style="margin-top: 5%;">
 								<div class="left19" style="display:inline-block;width: 150px;">
 									<img src="./img/second_img.png" style="height: 40px;">
-									<p class="leftp" id="leftTable3sex"></p><span>辆</span>
-									<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日超载车辆数</p>
+									<p class="leftp" id="leftTable3sex"></p>
+									<p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日超载比例</p>
 								</div>
 								
 								</div>
@@ -867,95 +867,17 @@
 			homePageInit.initFirTongji();
 			//初始化趋势图
 			homePageInit.initFirqstjt('chart3');
+			//初始化第二个页面统计数据
+			homePageInit.initSecHomeData();
+			//初始化第二个页面当日超载柱状图
+			homePageInit.initSecChaoZaiDataToday();
+			//初始化第二个页面超载柱状图
+			homePageInit.initSecChaoZaiDataMonth();
 			setInterval(refresh, 1000);
 			setInterval(refreshLeft, 4000);
 		})
 
-		// 基于准备好的dom，初始化echarts实例
-		var myChart = echarts.init(document.getElementById("maint"));
-		// 指定图表的配置项和数据
-		var option = {
-			 title: {
-            	text: '当日超载数量与比例',
-            	  padding: [20, 0, 0, 0],//标题内边距上右下
-            	 textStyle: {//textStyle设置标题样式
-			        color: '#A1A2B4',
-			        fontSize: 13
-			      },
-       		 },
-       		 
-			xAxis: [{
-				type: 'category',
-				data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
-				axisPointer: {
-					type: 'shadow'
-				},
-				axisLabel: {
-					show: true,
-					textStyle: {
-						color: '#A1A2B4'
-					}
-				},
-				axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
 
-			}],
-			yAxis: [{
-					type: 'value',
-					axisLabel: {
-						color: '#abb8ce',
-					},
-					axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-				},
-				{
-					type: 'value',
-					axisLabel: {
-						color: '#abb8ce',
-					},
-					axisTick: { //y轴刻度线
-						show: false
-					},
-					axisLine: { //y轴
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-				}
-			],
-			series: [{
-					type: 'bar',
-					data: [150, 205, 345, 452],
-					barWidth: 20, //柱图宽度
-					color:'#305BFF'
-				},
-
-				{
-					type: 'line',
-					yAxisIndex: 1,
-					color:'#E82DA2',
-					data: [150, 205, 345, 452]
-				}
-			]
-		};
-
-		// 使用刚指定的配置项和数据显示图表。
-		myChart.setOption(option);
 		
 	var myChart = echarts.init(document.getElementById("mainb"));
 		// 指定图表的配置项和数据
@@ -1059,7 +981,7 @@ var myChart = echarts.init(document.getElementById("maina"));
 			        fontSize: 13
 			      },
        		 },
-       		 
+
 			xAxis: [{
 				type: 'category',
 				data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
@@ -1234,7 +1156,7 @@ var myChart = echarts.init(document.getElementById("maind"));
 			        fontSize: 13
 			      },
        		 },
-       		 
+
 			xAxis: [{
 				type: 'category',
 				data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
@@ -1412,7 +1334,7 @@ var myChart = echarts.init(document.getElementById("mainf"));
 			        fontSize: 13
 			      },
        		 },
-       		 
+
 			xAxis: [{
 				type: 'category',
 				data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
@@ -2649,10 +2571,15 @@ var myChart = echarts.init(document.getElementById("firstmain"));
 			homePageInit.initFirTongji();
 			//初始化趋势图
 			homePageInit.initFirqstjt('chart3');
+			//初始化第二个页面当日超载柱状图
+			homePageInit.initSecChaoZaiDataToday();
+			//初始化第二个页面超载柱状图
+			homePageInit.initSecChaoZaiDataMonth();
 		}
 
 		function refreshLeft() {
 			homePageInit.initHomeData();
+			homePageInit.initSecHomeData();
 		}
 
 		var looktWimMsg = new Vue({

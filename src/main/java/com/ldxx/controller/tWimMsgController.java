@@ -1,5 +1,6 @@
 package com.ldxx.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.ldxx.Thread.PageCountCallable;
 import com.ldxx.Thread.PageCountYiChangCallable;
 import com.ldxx.bean.*;
@@ -8,9 +9,13 @@ import com.ldxx.dao.tUserInfoDao;
 import com.ldxx.dao.tWimMsgDao;
 import com.ldxx.service.Impl.RedisServiceImpl;
 import com.ldxx.service.tWimMsgService;
+import com.ldxx.util.Base64Util;
 import com.ldxx.util.FormatUtil;
+import com.ldxx.util.GetThisTimeUtils;
 import com.ldxx.vo.ChaoZaiVo;
 import com.ldxx.vo.tWimMsgVo;
+import net.sf.json.JSONObject;
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,10 +23,8 @@ import redis.clients.jedis.JedisPool;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.UnsupportedEncodingException;
+import java.util.*;
 import java.util.concurrent.*;
 
 @RestController
@@ -576,4 +579,67 @@ public class tWimMsgController {
         redisServiceImpl.set("1","22222");
         return "22222";
     }
+
+    /**
+     * 首页第二个界面根据轴数查询统计数量
+     * @param axlesCount 轴数
+     * @param stationPorts 端口
+     * @return
+     */
+    @RequestMapping("/getSecHomeTotal")
+    public Map<String,String> getSecHomeTotal(String axlesCount,String stationPorts) throws UnsupportedEncodingException {
+        Map<String,String> map = tWimMsgDao.getSecHomeTotal(axlesCount,stationPorts);
+        /*SecHomeData secHomeData=new SecHomeData();
+        Set<String> set1 = map.keySet();
+        Iterator<String> it = set1.iterator();
+        while(it.hasNext()) {
+            String key = it.next();
+            String value= map.get(key);
+            if("liuliangCount".equals(key)){
+                secHomeData.setLiuliangCount(value);
+            }else if("ChaoZaiCount".equals(key)){
+                secHomeData.setChaoZaiCount(value);
+            }else{
+                secHomeData.setGuanJianCount(value);
+            }
+        }*/
+        return map;
+    }
+
+    /**
+     * 首页第二个页面通过轴数和站点端口获得站点车流量
+     * @param axlesCount
+     * @param stationPorts
+     * @return
+     */
+    @RequestMapping("/getSecLiuLiangEcharsList")
+    public SecHomeData getSecLiuLiangEcharsList(String axlesCount,String stationPorts,Integer limit){
+        SecHomeData list = tWimMsgDao.getSecLiuLiangEcharsList(axlesCount, stationPorts,limit);
+        return list;
+    }
+    /**
+     * 首页第二个页面通过轴数和站点端口获得站点车流量
+     * @param axlesCount
+     * @param stationPorts
+     * @return
+     */
+    @RequestMapping("/getSecChaoZaiEcharsList")
+    public SecHomeData getSecChaoZaiEcharsList(String axlesCount,String stationPorts,Integer limit){
+        SecHomeData list = tWimMsgDao.getSecChaoZaiEcharsList(axlesCount, stationPorts,limit);
+        return list;
+    }
+
+    /**
+     * 首页第二个页面通过轴数和站点端口获得当月站点车流量
+     * @param axlesCount
+     * @param stationPorts
+     * @return
+     */
+    @RequestMapping("/getSecChaoZaiEcharsListMonth")
+    public SecHomeData getSecChaoZaiEcharsListMonth(String axlesCount,String stationPorts,Integer limit){
+        String yearMonth = GetThisTimeUtils.getMonth();
+        SecHomeData list = tWimMsgDao.getSecChaoZaiEcharsListMonth(yearMonth,axlesCount,stationPorts,limit);
+        return list;
+    }
+
 }

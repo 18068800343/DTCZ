@@ -2,11 +2,14 @@ package com.ldxx.dao;
 
 import com.ldxx.bean.CheLiuLiangEchartsList;
 import com.ldxx.bean.HomeData;
+import com.ldxx.bean.SecHomeData;
 import com.ldxx.bean.TongJiTableQuery;
 import com.ldxx.vo.tWimMsgVo;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public interface tWimMsgDao {
 
@@ -55,4 +58,9 @@ public interface tWimMsgDao {
     HomeData getJianCeTotal(String stationPorts);
     CheLiuLiangEchartsList getJianCeCheLiuLiangEchartsList(String stationPorts);
     CheLiuLiangEchartsList getJianCechaozaiEchartsList(String stationPorts);
+
+    Map<String,String> getSecHomeTotal(String axlesCount, String stationPorts);
+    SecHomeData getSecLiuLiangEcharsList(String axlesCount, String stationPorts,Integer limit);
+    SecHomeData getSecChaoZaiEcharsList(String axlesCount, String stationPorts,Integer limit);
+    SecHomeData getSecChaoZaiEcharsListMonth(String yearMonth,String axlesCount, String stationPorts,Integer limit);
 }

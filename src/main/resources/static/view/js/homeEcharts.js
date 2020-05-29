@@ -1450,3 +1450,475 @@ homePageInit.initFirqstjtEcharts = (id,stationNames,nums,numCount) => {
 
     myChart.setOption(option)
 }
+
+
+
+//*********************************************************  首页第二个页面统计 ************************************************************************************************
+homePageInit.initSecHomeData = ()=>{
+
+    $.ajax({
+        type: 'POST',
+        url: '/tWimMsg/getSecHomeTotal',
+        dataType: 'json',
+        data: {
+            axlesCount:'2,3,4,5,6',
+            stationPorts: homePageInit.stationPort.toString(),
+        },
+        error: function (msg) {
+        },
+        success: function (json) {
+            //车流量
+            var secliuliangNum=json.liuliangCount.split(',')
+            for(var i=0;i<secliuliangNum.length;i++){
+               var zhouNum=secliuliangNum[i].split('-')[0]
+                var zhouNumValue=secliuliangNum[i].split('-')[1]
+                switch (zhouNum) {
+                    case "2":
+                        $("#leftTable1two").html('');
+                        $("#leftTable1two").html(zhouNumValue);
+                        break;
+                    case "3":
+                        $("#leftTable1third").html('');
+                        $("#leftTable1third").html(zhouNumValue);
+                        break;
+                    case "4":
+                        $("#leftTable1four").html('');
+                        $("#leftTable1four").html(zhouNumValue);
+                        break;
+                    case "5":
+                        $("#leftTable1five").html('');
+                        $("#leftTable1five").html(zhouNumValue);
+                        break;
+                    case "6":
+                        $("#leftTable1sex").html('');
+                        $("#leftTable1sex").html(zhouNumValue);
+                        break;
+                    default:
+                        $("#leftTable1two").html(0);
+                        $("#leftTable1third").html(0);
+                        $("#leftTable1four").html(0);
+                        $("#leftTable1five").html(0);
+                        break;
+                }
+            }
+
+            //超载
+            var secchaozaiNum=json.ChaoZaiCount.split(',')
+            for(var i=0;i<secchaozaiNum.length;i++){
+                var zhouNum=secchaozaiNum[i].split('-')[0]
+                var zhouNumValue=secchaozaiNum[i].split('-')[1]
+                switch (zhouNum) {
+                    case "2":
+                        $("#leftTable2two").html('');
+                        $("#leftTable2two").html(zhouNumValue);
+                        break;
+                    case "3":
+                        $("#leftTable2third").html('');
+                        $("#leftTable2third").html(zhouNumValue);
+                        break;
+                    case "4":
+                        $("#leftTable2four").html('');
+                        $("#leftTable2four").html(zhouNumValue);
+                        break;
+                    case "5":
+                        $("#leftTable2five").html('');
+                        $("#leftTable2five").html(zhouNumValue);
+                        break;
+                    case "6":
+                        $("#leftTable2sex").html('');
+                        $("#leftTable2sex").html(zhouNumValue);
+                        break;
+                    default:
+                        $("#leftTable2two").html(0);
+                        $("#leftTable2third").html(0);
+                        $("#leftTable2four").html(0);
+                        $("#leftTable2five").html(0);
+                        break;
+                }
+            }
+            //超载比例
+            for(var a=0;a<secliuliangNum.length;a++){
+                for(var j=a;j<secchaozaiNum.length;j++){
+                    var zhouNum=secchaozaiNum[j].split('-')[0]
+                    var bili;
+                    var liuliangnum=parseInt(secliuliangNum[a].split('-')[1])
+                    var chaozainum=parseInt(secchaozaiNum[j].split('-')[1])
+                    var czbili=(chaozainum*1)/(liuliangnum*1);
+                    if(undefined==czbili){
+                        bili="0%";
+                    }else{
+                        bili = (czbili*100).toFixed(2)+"%";
+                    }
+                    switch (zhouNum) {
+                        case "2":
+                            $("#leftTable3two").html('');
+                            $("#leftTable3two").html(bili);
+                            break;
+                        case "3":
+                            $("#leftTable3third").html('');
+                            $("#leftTable3third").html(bili);
+                            break;
+                        case "4":
+                            $("#leftTable3four").html('');
+                            $("#leftTable3four").html(bili);
+                            break;
+                        case "5":
+                            $("#leftTable3five").html('');
+                            $("#leftTable3five").html(bili);
+                            break;
+                        case "6":
+                            $("#leftTable3sex").html('');
+                            $("#leftTable3sex").html(bili);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+
+        }
+    });
+}
+
+homePageInit.initSecChaoZaiDataToday=()=>{
+    homePageInit.initSecChaoZaiDataTodayEchars(2)
+    homePageInit.initSecChaoZaiDataTodayEchars(3)
+    homePageInit.initSecChaoZaiDataTodayEchars(4)
+    homePageInit.initSecChaoZaiDataTodayEchars(5)
+    homePageInit.initSecChaoZaiDataTodayEchars(6)
+}
+homePageInit.initSecChaoZaiDataTodayEchars=(zhoushu)=>{
+    $.ajax({
+        type: 'POST',
+        url: '/tWimMsg/getSecChaoZaiEcharsList',
+        dataType: 'json',
+        data: {
+            axlesCount:zhoushu,
+            stationPorts: homePageInit.stationPort.toString(),
+            limit:4,
+        },
+        error: function (msg) {
+        },
+        success: function (json) {
+            setSecCZEchars(json,zhoushu);
+        }
+    });
+}
+
+let setSecCZEchars=(data,zhoushu)=>{
+    var id;
+    switch (zhoushu) {
+        case 2:
+            id="maint";
+            break;
+        case 3:
+            id="maina";
+            break;
+        case 4:
+            id="maind";
+            break;
+        case 5:
+            id="mainf";
+            break;
+        case 6:
+            id="mainh";
+            break;
+        default:
+            break;
+    }
+// 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById(id));
+    // 指定图表的配置项和数据
+    var option = {
+        textStyle: {
+            color: '#fff',
+            fontSize: 13
+        },
+        title: {
+            text: '当日超载数量与比例',
+            padding: [20, 0, 0, 0],//标题内边距上右下
+            textStyle: {//textStyle设置标题样式
+                color: '#A1A2B4',
+                fontSize: 13
+            },
+        },
+
+        xAxis: [{
+            type: 'category',
+            data: data.stationNames.split(","),
+            axisPointer: {
+                type: 'shadow'
+            },
+            axisLabel: {
+                show: true,
+                textStyle: {
+                    color: '#A1A2B4'
+                },
+                formatter: function (params) {
+                    var newParamsName = "";
+                    var paramsNameNumber = params.length;
+                    var provideNumber = 3;
+                    var rowNumber = Math.ceil(paramsNameNumber / provideNumber);
+                    if (paramsNameNumber > provideNumber) {
+                        for (var p = 0; p < rowNumber; p++) {
+                            var tempStr = "";
+                            var start = p * provideNumber;
+                            var end = start + provideNumber;
+                            if (p == rowNumber - 1) {
+                                tempStr = params.substring(start, paramsNameNumber);
+                            } else {
+                                tempStr = params.substring(start, end) + "\n";
+                            }
+                            newParamsName += tempStr;
+                        }
+
+                    } else {
+                        newParamsName = params;
+                    }
+                    return newParamsName
+                }
+            },
+            axisTick: { //y轴刻度线
+                show: false
+            },
+            axisLine: { //y轴
+                show: false
+            },
+            splitLine: {
+                show: false
+            }
+
+        }],
+        yAxis: [{
+            type: 'value',
+            axisLabel: {
+                color: '#abb8ce',
+            },
+            axisTick: { //y轴刻度线
+                show: false
+            },
+            axisLine: { //y轴
+                show: false
+            },
+            splitLine: {
+                show: false
+            }
+        },
+            {
+                type: 'value',
+                axisLabel: {
+                    color: '#abb8ce',
+                },
+                axisTick: { //y轴刻度线
+                    show: false
+                },
+                axisLine: { //y轴
+                    show: false
+                },
+                splitLine: {
+                    show: false
+                }
+            }
+        ],
+        series: [{
+            type: 'bar',
+            data: data.chaoZaicCount.split(","),
+            barWidth: 20, //柱图宽度
+            label: {
+                normal: {
+                    show: true,
+                    position: 'top'
+                }
+            },
+            color:'#305BFF'
+
+        },
+
+            {
+                type: 'line',
+                yAxisIndex: 1,
+                color:'#E82DA2',
+                data: data.chaoZaicCount.split(",")
+            }
+        ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+}
+
+homePageInit.initSecChaoZaiDataMonth=()=>{
+    homePageInit.initSecChaoZaiEcharsMonth(2)
+    homePageInit.initSecChaoZaiEcharsMonth(3)
+    homePageInit.initSecChaoZaiEcharsMonth(4)
+    homePageInit.initSecChaoZaiEcharsMonth(5)
+    homePageInit.initSecChaoZaiEcharsMonth(6)
+}
+homePageInit.initSecChaoZaiEcharsMonth=(zhoushu)=>{
+    $.ajax({
+        type: 'POST',
+        url: '/tWimMsg/getSecChaoZaiEcharsListMonth',
+        dataType: 'json',
+        data: {
+            axlesCount:zhoushu,
+            stationPorts: homePageInit.stationPort.toString(),
+            limit:4,
+        },
+        error: function (msg) {
+        },
+        success: function (json) {
+            initSecChaoZaiEchars(json,zhoushu);
+        }
+    });
+}
+let initSecChaoZaiEchars=(data,zhoushu)=>{
+    var id;
+    var chaoZaiCountMonth;
+    switch (zhoushu) {
+        case 2:
+            id="mainb";
+            chaoZaiCountMonth=data.chaoZai2CountMonth.split(",")
+            break;
+        case 3:
+            id="mainc";
+            chaoZaiCountMonth=data.chaoZai3CountMonth.split(",")
+            break;
+        case 4:
+            id="maine";
+            chaoZaiCountMonth=data.chaoZai4CountMonth.split(",")
+            break;
+        case 5:
+            id="maing";
+            chaoZaiCountMonth=data.chaoZai5CountMonth.split(",")
+            break;
+        case 6:
+            id="mainj";
+            chaoZaiCountMonth=data.chaoZai6CountMonth.split(",")
+            break;
+        default:
+            break;
+    }
+    var myChart = echarts.init(document.getElementById(id));
+    // 指定图表的配置项和数据
+    var option = {
+        textStyle: {
+            color: '#fff',
+            fontSize: 13
+        },
+        title: {
+            text: '当月超载数量与比例',
+            padding: [20, 0, 0, 0],//标题内边距上右下
+            textStyle: {//textStyle设置标题样式
+                color: '#A1A2B4',
+                fontSize: 13
+            },
+        },
+
+        xAxis: [{
+            type: 'category',
+            data: data.stationNames.split(","),
+            axisPointer: {
+                type: 'shadow'
+            },
+            axisLabel: {
+                show: true,
+                textStyle: {
+                    color: '#A1A2B4'
+                },
+                formatter: function (params) {
+                    var newParamsName = "";
+                    var paramsNameNumber = params.length;
+                    var provideNumber = 3;
+                    var rowNumber = Math.ceil(paramsNameNumber / provideNumber);
+                    if (paramsNameNumber > provideNumber) {
+                        for (var p = 0; p < rowNumber; p++) {
+                            var tempStr = "";
+                            var start = p * provideNumber;
+                            var end = start + provideNumber;
+                            if (p == rowNumber - 1) {
+                                tempStr = params.substring(start, paramsNameNumber);
+                            } else {
+                                tempStr = params.substring(start, end) + "\n";
+                            }
+                            newParamsName += tempStr;
+                        }
+
+                    } else {
+                        newParamsName = params;
+                    }
+                    return newParamsName
+                }
+            },
+            axisTick: { //y轴刻度线
+                show: false
+            },
+            axisLine: { //y轴
+                show: false
+            },
+            splitLine: {
+                show: false
+            }
+
+        }],
+        yAxis: [{
+            type: 'value',
+            axisLabel: {
+                color: '#abb8ce',
+            },
+            axisTick: { //y轴刻度线
+                show: false
+            },
+            axisLine: { //y轴
+                show: false
+            },
+            splitLine: {
+                show: false
+            }
+        },
+            {
+                type: 'value',
+                axisLabel: {
+                    color: '#abb8ce',
+                },
+                axisTick: { //y轴刻度线
+                    show: false
+                },
+                axisLine: { //y轴
+                    show: false
+                },
+                splitLine: {
+                    show: false
+                }
+            }
+        ],
+        series: [{
+            type: 'bar',
+            data: chaoZaiCountMonth,
+            barWidth: 20, //柱图宽度
+            color:'#305BFF',
+            label: {
+                normal: {
+                    show: true,
+                    position: 'top'
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: '#DE6451'
+                    }, {
+                        offset: 1,
+                        color: '#FEB243'
+                    }]),
+                    barBorderRadius: 30
+                }
+            }
+        }
+        ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+}
