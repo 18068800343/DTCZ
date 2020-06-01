@@ -203,8 +203,12 @@
                         </table>
                     </form>
                 </div>
-
-
+                <div id="echarts_first" class="col-xs-6" style="height: 30%" ></div>
+                <div id="echarts_sec" class="col-xs-6" style="height: 30%" ></div>
+                 <div id="echarts_thr" class="col-xs-6" style="height: 30%" ></div>
+                <div id="echarts_four" class="col-xs-6" style="height: 30%" ></div>
+                  <div id="echarts_five" class="col-xs-6" style="height: 30%" ></div>
+                <!-- <div id="echarts_six" class="col-xs-6" style="height: 30%" ></div> -->
             </div>
         </div>
 
@@ -4086,7 +4090,150 @@
         myChart2.setOption(option2);
     }
 
+    var myChart = echarts.init(document.getElementById("echarts_first"));
+    // 指定图表的配置项和数据
+    var option = {
+    	    title: {
+    	        text: '总体情况统计'
+    	        
+    	    },
+    	    xAxis: {
+    	        type: 'category',
+    	        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    	    },
+    	    yAxis: {
+    	        type: 'value'
+    	    },
+    	    series: [{
+    	        data: [820, 932, 901, 934, 1290, 1330, 1320],
+    	        type: 'line',
+    	        smooth: true
+    	    }]
+    	};
 
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+
+    var myChart = echarts.init(document.getElementById("echarts_sec"));
+    // 指定图表的配置项和数据
+    var option = {
+    	    title: {
+    	        text: '总流量统计'
+    	        
+    	    },
+    	    xAxis: {
+    	        type: 'category',
+    	        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    	    },
+    	    yAxis: {
+    	        type: 'value'
+    	    },
+    	    series: [{
+    	        data: [820, 932, 901, 934, 1290, 1330, 1320],
+    	        type: 'line',
+    	        smooth: true
+    	    }]
+    	};
+
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+    
+    
+    var myChart = echarts.init(document.getElementById("echarts_thr"));
+    // 指定图表的配置项和数据
+    var option = {
+    	    title: {
+    	        text: '超载统计'
+    	        
+    	    },
+    	    xAxis: {
+    	        type: 'category',
+    	        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    	    },
+    	    yAxis: {
+    	        type: 'value'
+    	    },
+    	    series: [{
+    	        data: [820, 932, 901, 934, 1290, 1330, 1320],
+    	        type: 'line',
+    	        smooth: true
+    	    }]
+    	};
+
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+    var myChart = echarts.init(document.getElementById("echarts_four"));
+    // 指定图表的配置项和数据
+    var option = {
+    	    title: {
+    	        text: '一级预警统计'
+    	        
+    	    },
+    	    xAxis: {
+    	        type: 'category',
+    	        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    	    },
+    	    yAxis: {
+    	        type: 'value'
+    	    },
+    	    series: [{
+    	        data: [820, 932, 901, 934, 1290, 1330, 1320],
+    	        type: 'line',
+    	        smooth: true
+    	    }]
+    	};
+
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+    var myChart = echarts.init(document.getElementById("echarts_five"));
+    // 指定图表的配置项和数据
+    var option = {
+    		title: {
+    	        text: '二级预警统计'
+    	        
+    	    },
+    	    xAxis: {
+        	    
+    	        type: 'category',
+    	        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    	    },
+    	    yAxis: {
+    	        type: 'value'
+    	    },
+    	    series: [{
+    	        data: [820, 932, 901, 934, 1290, 1330, 1320],
+    	        type: 'line',
+    	        smooth: true
+    	    }]
+    	};
+
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+    var myChart = echarts.init(document.getElementById("echarts_six"));
+    // 指定图表的配置项和数据
+    var option = {
+    	    xAxis: {
+    	        type: 'category',
+    	        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    	    },
+    	    yAxis: {
+    	        type: 'value'
+    	    },
+    	    series: [{
+    	        data: [820, 932, 901, 934, 1290, 1330, 1320],
+    	        type: 'line',
+    	        smooth: true
+    	    }]
+    	};
+
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
     function setChaoZaiLvNumEChars(ChaoZaiLvNum, ChaoZaiLvNumbili) {
         let myChart3 = echarts.init(document.getElementById('bottom_'));
         let seriesLabel = {
