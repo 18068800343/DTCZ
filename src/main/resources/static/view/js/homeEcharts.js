@@ -1778,7 +1778,7 @@ let initSecChaoZaiEchars=(data,zhoushu)=>{
     switch (zhoushu) {
         case 2:
             id="mainb";
-            chaoZaiCountMonth=data.chaoZai2CountMonth.split(",")
+            chaoZaiCountMonth=data.chaoZai2CountMonth==null?0:data.chaoZai2CountMonth.split(",")
             break;
         case 3:
             id="mainc";

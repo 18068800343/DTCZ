@@ -1028,7 +1028,7 @@
                 b.Station_Port
                 HAVING FIND_IN_SET(b.Station_Port,#{stationPorts})
                 ORDER BY liuLiangCount desc
-            ) b  on a.Station_Name=b.StationName2 ORDER BY a.chaoZaicCount desc
+            ) b  on a.Station_Name=b.StationName2 ORDER BY a.chaoZaicCount desc,a.Station_Name asc
             <if test="limit!=null and limit!=''">
                 LIMIT #{limit}
             </if>
@@ -1041,9 +1041,9 @@
         GROUP_CONCAT(a.chaoZai6CountMonth SEPARATOR ',') chaoZai6CountMonth,GROUP_CONCAT(a.Station_IP SEPARATOR ',') stationPort,
         GROUP_CONCAT(a.Station_Name SEPARATOR ',') stationNames
         from (
-            select (num2+IFNULL(chaozaiNum,0)) as chaoZai2CountMonth,(num3+IFNULL(chaozaiNum,0)) as chaoZai3CountMonth,
-            (num4+IFNULL(chaozaiNum,0)) as chaoZai4CountMonth,(num5+IFNULL(chaozaiNum,0)) as chaoZai5CountMonth,
-            (num6+IFNULL(chaozaiNum,0)) as chaoZai6CountMonth,a.Station_IP,a.Station_Name
+            select (IFNULL(num2,0)+IFNULL(chaozaiNum,0)) as chaoZai2CountMonth,(IFNULL(num3,0)+IFNULL(chaozaiNum,0)) as chaoZai3CountMonth,
+            (IFNULL(num4,0)+IFNULL(chaozaiNum,0)) as chaoZai4CountMonth,(IFNULL(num5,0)+IFNULL(chaozaiNum,0)) as chaoZai5CountMonth,
+            (IFNULL(num6,0)+IFNULL(chaozaiNum,0)) as chaoZai6CountMonth,a.Station_IP,a.Station_Name
             from (
                 SELECT
                 Avg_Overload_Count_2 as num2,Avg_Overload_Count_3 as num3,Avg_Overload_Count_4 as num4,
@@ -1070,19 +1070,19 @@
     </select>
     <sql id="limitSql">
         <if test='axlesCount=="2"'>
-            ORDER BY chaoZai2CountMonth desc
+            ORDER BY chaoZai2CountMonth desc,a.Station_Name asc
         </if>
         <if test='axlesCount=="3"'>
-            ORDER BY chaoZai3CountMonth desc
+            ORDER BY chaoZai3CountMonth desc,a.Station_Name asc
         </if>
         <if test='axlesCount=="4"'>
-            ORDER BY chaoZai4CountMonth desc
+            ORDER BY chaoZai4CountMonth desc,a.Station_Name asc
         </if>
         <if test='axlesCount=="5"'>
-            ORDER BY chaoZai5CountMonth desc
+            ORDER BY chaoZai5CountMonth desc,a.Station_Name asc
         </if>
         <if test='axlesCount=="6"'>
-            ORDER BY chaoZai6CountMonth desc
+            ORDER BY chaoZai6CountMonth desc,a.Station_Name asc
         </if>
         <if test="limit!=null and limit!=''">
             LIMIT #{limit}
