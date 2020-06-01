@@ -471,4 +471,17 @@
   			select * from t_avg_month where Station_IP=#{stationIP} and Avg_Time=#{avgTime} and Avg_LaneNo=#{avgLaneNo}
   	</select>
 
+    <select id="gettjfxTotalEchars" resultType="tjfxTotalEchars">
+        SELECT
+            a.Avg_Time,
+            sum(a.Avg_Count) as zongliuliangnum,
+            sum(a.Avg_Overload_Count) as zongchaozainum,
+            sum(Range80Count2) as yijiyujingnum,
+            sum(a.RangeCount3) as erjiyujingnum
+        FROM
+            t_avg_day a
+        WHERE
+            a.Avg_LaneNo = '0'  GROUP BY a.Avg_Time
+    </select>
+
 </mapper>

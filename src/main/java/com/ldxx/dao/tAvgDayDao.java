@@ -2,6 +2,7 @@ package com.ldxx.dao;
 
 import com.ldxx.bean.tAvgDay;
 import com.ldxx.bean.tAvgMonth;
+import com.ldxx.bean.tjfxTotalEchars;
 import com.ldxx.vo.tAvgDayColumn;
 
 import java.util.List;
@@ -69,4 +70,6 @@ public interface tAvgDayDao {
     String getColumnNameStrByTableName(String tableName);
 
     tAvgMonth gettAvgMonthByIpAndTime(String stationIP, String avgTime, int avgLaneNo);
+
+    List<tjfxTotalEchars> gettjfxTotalEchars();
 }

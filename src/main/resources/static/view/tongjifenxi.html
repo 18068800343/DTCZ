@@ -132,7 +132,7 @@
     <!-- Nav tabs -->
     <ul class="nav nav-pills" role="tablist" style="margin-bottom:20px;">
         <li role="presentation" class="active"><a href="#home_zhtj" aria-controls="home" role="tab"
-                                                  data-toggle="tab">综合统计</a></li>
+                                                  data-toggle="tab">总体情况</a></li>
 
         <li role="presentation"><a href="#home" aria-controls="home" role="tab"
                                    data-toggle="tab">测站日统计</a></li>
@@ -203,7 +203,7 @@
                         </table>
                     </form>
                 </div>
-                <div id="echarts_first" class="col-xs-6" style="height: 30%" ></div>
+                <!--<div id="echarts_first" class="col-xs-6" style="height: 30%" ></div>-->
                 <div id="echarts_sec" class="col-xs-6" style="height: 30%" ></div>
                  <div id="echarts_thr" class="col-xs-6" style="height: 30%" ></div>
                 <div id="echarts_four" class="col-xs-6" style="height: 30%" ></div>
@@ -2868,6 +2868,8 @@
 <script>
 
     $(document).ready(function () {
+        //初始化总体情况
+        tjfxTotalEchars()
 
         // *********测站日月统计初始化
         $("#startTime2").datepicker({
@@ -3256,7 +3258,7 @@
                 setChaoZaiLvNumEChars_lgs(ChaoZaiLvNum, ChaoZaiLvNumbili);
             },
             success: function (json) {
-                if (json != null) {
+                if (json != null&&json.length!=0) {
                     $(".errorMsg1").html('')
                     let CheXingNum = new Array();
                     let CheXingNumbili = new Array();
@@ -3358,7 +3360,7 @@
                 setChaoZaiLvNumEChars_sj(ChaoZaiLvNum, ChaoZaiLvNumbili);
             },
             success: function (json) {
-                if (json != null) {
+                if (json != null&&json.length!=0) {
                     $(".errorMsg1").html('')
                     let CheXingNum = new Array();
                     let CheXingNumbili = new Array();
@@ -4090,126 +4092,7 @@
         myChart2.setOption(option2);
     }
 
-    var myChart = echarts.init(document.getElementById("echarts_first"));
-    // 指定图表的配置项和数据
-    var option = {
-    	    title: {
-    	        text: '总体情况统计'
-    	        
-    	    },
-    	    xAxis: {
-    	        type: 'category',
-    	        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-    	    },
-    	    yAxis: {
-    	        type: 'value'
-    	    },
-    	    series: [{
-    	        data: [820, 932, 901, 934, 1290, 1330, 1320],
-    	        type: 'line',
-    	        smooth: true
-    	    }]
-    	};
 
-
-    // 使用刚指定的配置项和数据显示图表。
-    myChart.setOption(option);
-
-    var myChart = echarts.init(document.getElementById("echarts_sec"));
-    // 指定图表的配置项和数据
-    var option = {
-    	    title: {
-    	        text: '总流量统计'
-    	        
-    	    },
-    	    xAxis: {
-    	        type: 'category',
-    	        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-    	    },
-    	    yAxis: {
-    	        type: 'value'
-    	    },
-    	    series: [{
-    	        data: [820, 932, 901, 934, 1290, 1330, 1320],
-    	        type: 'line',
-    	        smooth: true
-    	    }]
-    	};
-
-
-    // 使用刚指定的配置项和数据显示图表。
-    myChart.setOption(option);
-    
-    
-    var myChart = echarts.init(document.getElementById("echarts_thr"));
-    // 指定图表的配置项和数据
-    var option = {
-    	    title: {
-    	        text: '超载统计'
-    	        
-    	    },
-    	    xAxis: {
-    	        type: 'category',
-    	        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-    	    },
-    	    yAxis: {
-    	        type: 'value'
-    	    },
-    	    series: [{
-    	        data: [820, 932, 901, 934, 1290, 1330, 1320],
-    	        type: 'line',
-    	        smooth: true
-    	    }]
-    	};
-
-
-    // 使用刚指定的配置项和数据显示图表。
-    myChart.setOption(option);
-    var myChart = echarts.init(document.getElementById("echarts_four"));
-    // 指定图表的配置项和数据
-    var option = {
-    	    title: {
-    	        text: '一级预警统计'
-    	        
-    	    },
-    	    xAxis: {
-    	        type: 'category',
-    	        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-    	    },
-    	    yAxis: {
-    	        type: 'value'
-    	    },
-    	    series: [{
-    	        data: [820, 932, 901, 934, 1290, 1330, 1320],
-    	        type: 'line',
-    	        smooth: true
-    	    }]
-    	};
-
-
-    // 使用刚指定的配置项和数据显示图表。
-    myChart.setOption(option);
-    var myChart = echarts.init(document.getElementById("echarts_five"));
-    // 指定图表的配置项和数据
-    var option = {
-    		title: {
-    	        text: '二级预警统计'
-    	        
-    	    },
-    	    xAxis: {
-        	    
-    	        type: 'category',
-    	        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-    	    },
-    	    yAxis: {
-    	        type: 'value'
-    	    },
-    	    series: [{
-    	        data: [820, 932, 901, 934, 1290, 1330, 1320],
-    	        type: 'line',
-    	        smooth: true
-    	    }]
-    	};
 
 
     // 使用刚指定的配置项和数据显示图表。
@@ -4741,7 +4624,7 @@
                 setChaoZaiLvNumEChars2_lgs(ChaoZaiLvNum, ChaoZaiLvNumbili);
             },
             success: function (json) {
-                if (json != null) {
+                if (json != null&&json.length!=0) {
                     $(".errorMsg2").html('')
                     let CheXingNum = [];
                     let CheXingNumbili = [];
@@ -4842,7 +4725,7 @@
                 setChaoZaiLvNumEChars2_sj(ChaoZaiLvNum, ChaoZaiLvNumbili);
             },
             success: function (json) {
-                if (json != null) {
+                if (json != null&&json.length!=0) {
                     $(".errorMsg2").html('')
                     let CheXingNum = [];
                     let CheXingNumbili = [];
@@ -6629,5 +6512,169 @@
             }
         });
     }
+
+
+    //************************************************************************************************************
+    function tjfxTotalEchars(){
+        $.ajax({
+            type: 'POST',
+            url: '/tAvgDay/gettjfxTotalEchars',
+            dataType: 'json',
+            data: {
+            },
+            success: function (json) {
+                if(json!=null){
+                    setzongliuliangEchars(json.avgTime,json.zongliuliangnum);
+                    setzongChaozaiEchars(json.avgTime,json.zongchaozainum);
+                    setzongyijiyujingEchars(json.avgTime,json.yijiyujingnum);
+                    setzongerjiyujingEchars(json.avgTime,json.erjiyujingnum);
+                }
+            }
+        });
+    }
+
+    function setzongliuliangEchars(time,data){
+        var myChart = echarts.init(document.getElementById("echarts_sec"));
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: '总流量统计'
+
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    animation: false
+                }
+            },
+            xAxis: {
+                type: 'category',
+                data: time.split(",")
+            },
+            yAxis: {
+                type: 'value',
+                splitLine: {
+                    show: false
+                }
+            },
+            series: [{
+                data: data.split(","),
+                type: 'line',
+                smooth: true
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    }
+
+    function setzongChaozaiEchars(time,data){
+        var myChart = echarts.init(document.getElementById("echarts_thr"));
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: '超载统计'
+
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    animation: false
+                }
+            },
+            xAxis: {
+                type: 'category',
+                data: time.split(","),
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: data.split(","),
+                type: 'line',
+                smooth: true
+            }]
+        };
+
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    }
+
+    function setzongyijiyujingEchars(time,data){
+        var myChart = echarts.init(document.getElementById("echarts_four"));
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: '一级预警统计'
+
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    animation: false
+                }
+            },
+            xAxis: {
+                type: 'category',
+                data: time.split(",")
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: data.split(","),
+                type: 'line',
+                smooth: true
+            }]
+        };
+
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    }
+
+function setzongerjiyujingEchars(time,data){
+    var myChart = echarts.init(document.getElementById("echarts_five"));
+    // 指定图表的配置项和数据
+    var option = {
+        title: {
+            text: '二级预警统计'
+
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                animation: false
+            }
+        },
+        xAxis: {
+
+            type: 'category',
+            data: time.split(",")
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            data: data.split(","),
+            type: 'line',
+            smooth: true
+        }]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+}
+
+
+
+
+
+
+
+
+
+
 </script>
 </html>

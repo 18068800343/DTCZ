@@ -2,6 +2,7 @@ package com.ldxx.controller;
 
 import com.ldxx.bean.tAvgDay;
 import com.ldxx.bean.tAvgMonth;
+import com.ldxx.bean.tjfxTotalEchars;
 import com.ldxx.dao.tAvgDayDao;
 import com.ldxx.vo.tAvgDayColumn;
 import com.ldxx.service.tAvgDayService;
@@ -152,6 +153,45 @@ public class tAvgDayController {
     public tAvgMonth gettAvgMonthByIpAndTime(String stationIP, String avgTime, int avgLaneNo) {
         tAvgMonth tAvgMonth = service.gettAvgMonthByIpAndTime(stationIP, avgTime, avgLaneNo);
         return tAvgMonth;
+    }
+
+    @RequestMapping("/gettjfxTotalEchars")
+    public tjfxTotalEchars gettjfxTotalEchars(){
+        tjfxTotalEchars ztqk=new tjfxTotalEchars();
+        List<tjfxTotalEchars> tjfxTotalEchars = tAvgDayDao.gettjfxTotalEchars();
+        StringBuffer avgTime=new StringBuffer();
+        StringBuffer zongliuliangnum=new StringBuffer();
+        StringBuffer zongchaozainum =new StringBuffer();
+        StringBuffer yijiyujingnum =new StringBuffer();
+        StringBuffer erjiyujingnum =new StringBuffer();
+        for(int i=0;i<tjfxTotalEchars.size();i++){
+            avgTime.append(tjfxTotalEchars.get(i).getAvgTime()).append(",");
+            zongliuliangnum.append(tjfxTotalEchars.get(i).getZongliuliangnum()).append(",");
+            zongchaozainum.append(tjfxTotalEchars.get(i).getZongchaozainum()).append(",");
+            yijiyujingnum.append(tjfxTotalEchars.get(i).getYijiyujingnum()).append(",");
+            erjiyujingnum.append(tjfxTotalEchars.get(i).getErjiyujingnum()).append(",");
+        }
+        if(avgTime.length()>0){
+            avgTime.substring(0, avgTime.length()-1);
+        }
+        if(zongliuliangnum.length()>0){
+            zongliuliangnum.substring(0, zongliuliangnum.length()-1);
+        }
+        if(zongchaozainum.length()>0){
+            zongchaozainum.substring(0, zongchaozainum.length()-1);
+        }
+        if(yijiyujingnum.length()>0){
+            yijiyujingnum.substring(0, yijiyujingnum.length()-1);
+        }
+        if(erjiyujingnum.length()>0){
+            erjiyujingnum.substring(0, erjiyujingnum.length()-1);
+        }
+        ztqk.setAvgTime(avgTime.toString());
+        ztqk.setZongliuliangnum(zongliuliangnum.toString());
+        ztqk.setZongchaozainum(zongchaozainum.toString());
+        ztqk.setYijiyujingnum(yijiyujingnum.toString());
+        ztqk.setErjiyujingnum(erjiyujingnum.toString());
+        return ztqk;
     }
 
 
