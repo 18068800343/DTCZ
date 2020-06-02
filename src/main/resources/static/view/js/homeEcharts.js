@@ -205,7 +205,7 @@ homePageInit.setLeftEcharts = (id, stationNames, nums) => {
     for (let i = 0; i < barData.length; i++) {
         dataShadow.push(barData[i])
     }
-    var maxdataShadow=[]
+    let maxdataShadow = []
     for (let i = 0; i < barData.length; i++) {
         maxdataShadow.push(barData[barData.length-1])
     }
@@ -586,8 +586,8 @@ homePageInit.initHuanEcharts = (id,index,nums,stationName,nums2) => {
 }
 homePageInit.initHuanEcharts2 = (id,index,nums,stationName,nums2,nums3,num4) => {
     // 环形图
-    var myChart = echarts.init(document.getElementById(id));
-    let dataArray = getHuanDataByJson2(index,nums3,nums2);
+    let myChart = echarts.init(document.getElementById(id));
+    let dataArray = getHuanDataByJson2(index, nums3, nums2);
     let colorArray = getColor(index,nums3,nums2);
     /*let option = {
         // 标题组件，包含主标题和副标题
@@ -630,7 +630,7 @@ homePageInit.initHuanEcharts2 = (id,index,nums,stationName,nums2,nums3,num4) => 
             data: dataArray
         }]
     };*/
-    var option = {
+    let option = {
         title: {
             text: stationName,
             show: true,
@@ -852,8 +852,8 @@ homePageInit.initLastEcharts = () => {
 }
 
 homePageInit.setLastEcharts = (json) => {
-    var myChart = echarts.init(document.getElementById("liti"));
-    /*var option = {
+    let myChart = echarts.init(document.getElementById("liti"));
+    /*let option = {
         color: ['#6154FD','#FE545E'],
         textStyle: {
             color: '#fff',
@@ -886,15 +886,15 @@ homePageInit.setLastEcharts = (json) => {
                 data: json.stationNames.split(","),
                 axisLabel : {
                     formatter : function(params){
-                        var newParamsName = "";
-                        var paramsNameNumber = params.length;
-                        var provideNumber = 3;
-                        var rowNumber = Math.ceil(paramsNameNumber / provideNumber);
+                        let newParamsName = "";
+                        let paramsNameNumber = params.length;
+                        let provideNumber = 3;
+                        let rowNumber = Math.ceil(paramsNameNumber / provideNumber);
                         if (paramsNameNumber > provideNumber) {
-                            for (var p = 0; p < rowNumber; p++) {
-                                var tempStr = "";
-                                var start = p * provideNumber;
-                                var end = start + provideNumber;
+                            for (let p = 0; p < rowNumber; p++) {
+                                let tempStr = "";
+                                let start = p * provideNumber;
+                                let end = start + provideNumber;
                                 if (p == rowNumber - 1) {
                                     tempStr = params.substring(start, paramsNameNumber);
                                 } else {
@@ -955,14 +955,14 @@ homePageInit.setLastEcharts = (json) => {
             }
         ]
     };*/
-    var maxdataShadow=[]
-    var barData=json.cnt2.split(",")
+    let maxdataShadow = []
+    let barData = json.cnt2.split(",")
 
     for (let i = 0; i < barData.length; i++) {
-        maxdataShadow.push(Math.max.apply(null, barData)==0?1:Math.max.apply(null, barData))
+        maxdataShadow.push(Math.max.apply(null, barData) == 0 ? 1 : Math.max.apply(null, barData))
     }
-    var option = {
-        color: ['#6154FD','#FE545E'],
+    let option = {
+        color: ['#6154FD', '#FE545E'],
         textStyle: {
             color: '#fff',
             fontSize: 13
@@ -995,15 +995,15 @@ homePageInit.setLastEcharts = (json) => {
                 data: json.stationNames.split(","),
                 axisLabel : {
                     formatter: function (params) {
-                        var newParamsName = "";
-                        var paramsNameNumber = params.length;
-                        var provideNumber = 3;
-                        var rowNumber = Math.ceil(paramsNameNumber / provideNumber);
+                        let newParamsName = "";
+                        let paramsNameNumber = params.length;
+                        let provideNumber = 3;
+                        let rowNumber = Math.ceil(paramsNameNumber / provideNumber);
                         if (paramsNameNumber > provideNumber) {
-                            for (var p = 0; p < rowNumber; p++) {
-                                var tempStr = "";
-                                var start = p * provideNumber;
-                                var end = start + provideNumber;
+                            for (let p = 0; p < rowNumber; p++) {
+                                let tempStr = "";
+                                let start = p * provideNumber;
+                                let end = start + provideNumber;
                                 if (p == rowNumber - 1) {
                                     tempStr = params.substring(start, paramsNameNumber);
                                 } else {
@@ -1290,7 +1290,7 @@ homePageInit.initFirqstjtEcharts = (id,stationNames,nums,numCount) => {
     // 趋势统计图
     let myChart = echarts.init(document.getElementById(id));
 
-    var colors = ['#00f1b5', '#fd2b2a'];
+    let colors = ['#00f1b5', '#fd2b2a'];
 
 
     option = {
@@ -1340,21 +1340,21 @@ homePageInit.initFirqstjtEcharts = (id,stationNames,nums,numCount) => {
                 axisLabel : {//坐标轴刻度标签的相关设置。
                     interval:0,
                     //rotate:"45" //文字倾斜
-                    formatter : function(params){ //文字换行
-                        var newParamsName = "";// 最终拼接成的字符串
-                        var paramsNameNumber = params.length;// 实际标签的个数
-                        var provideNumber = 4;// 每行能显示的字的个数
-                        var rowNumber = Math.ceil(paramsNameNumber / provideNumber);// 换行的话，需要显示几行，向上取整
+                    formatter : function(params) { //文字换行
+                        let newParamsName = "";// 最终拼接成的字符串
+                        let paramsNameNumber = params.length;// 实际标签的个数
+                        let provideNumber = 4;// 每行能显示的字的个数
+                        let rowNumber = Math.ceil(paramsNameNumber / provideNumber);// 换行的话，需要显示几行，向上取整
                         /**
                          * 判断标签的个数是否大于规定的个数， 如果大于，则进行换行处理 如果不大于，即等于或小于，就返回原标签
                          */
                         // 条件等同于rowNumber>1
                         if (paramsNameNumber > provideNumber) {
                             /** 循环每一行,p表示行 */
-                            for (var p = 0; p < rowNumber; p++) {
-                                var tempStr = "";// 表示每一次截取的字符串
-                                var start = p * provideNumber;// 开始截取的位置
-                                var end = start + provideNumber;// 结束截取的位置
+                            for (let p = 0; p < rowNumber; p++) {
+                                let tempStr = "";// 表示每一次截取的字符串
+                                let start = p * provideNumber;// 开始截取的位置
+                                let end = start + provideNumber;// 结束截取的位置
                                 // 此处特殊处理最后一行的索引值
                                 if (p == rowNumber - 1) {
                                     // 最后一次不换行
@@ -1468,10 +1468,10 @@ homePageInit.initSecHomeData = ()=>{
         },
         success: function (json) {
             //车流量
-            var secliuliangNum=json.liuliangCount.split(',')
-            for(var i=0;i<secliuliangNum.length;i++){
-               var zhouNum=secliuliangNum[i].split('-')[0]
-                var zhouNumValue=secliuliangNum[i].split('-')[1]
+            let secliuliangNum = json.liuliangCount.split(',')
+            for (let i = 0; i < secliuliangNum.length; i++) {
+                let zhouNum = secliuliangNum[i].split('-')[0]
+                let zhouNumValue = secliuliangNum[i].split('-')[1]
                 switch (zhouNum) {
                     case "2":
                         $("#leftTable1two").html('');
@@ -1503,10 +1503,10 @@ homePageInit.initSecHomeData = ()=>{
             }
 
             //超载
-            var secchaozaiNum=json.ChaoZaiCount.split(',')
-            for(var i=0;i<secchaozaiNum.length;i++){
-                var zhouNum=secchaozaiNum[i].split('-')[0]
-                var zhouNumValue=secchaozaiNum[i].split('-')[1]
+            let secchaozaiNum = json.ChaoZaiCount.split(',')
+            for (let i = 0; i < secchaozaiNum.length; i++) {
+                let zhouNum = secchaozaiNum[i].split('-')[0]
+                let zhouNumValue = secchaozaiNum[i].split('-')[1]
                 switch (zhouNum) {
                     case "2":
                         $("#leftTable2two").html('');
@@ -1537,17 +1537,17 @@ homePageInit.initSecHomeData = ()=>{
                 }
             }
             //超载比例
-            for(var a=0;a<secliuliangNum.length;a++){
-                for(var j=a;j<secchaozaiNum.length;j++){
-                    var zhouNum=secchaozaiNum[j].split('-')[0]
-                    var bili;
-                    var liuliangnum=parseInt(secliuliangNum[a].split('-')[1])
-                    var chaozainum=parseInt(secchaozaiNum[j].split('-')[1])
-                    var czbili=(chaozainum*1)/(liuliangnum*1);
-                    if(undefined==czbili){
-                        bili="0%";
-                    }else{
-                        bili = (czbili*100).toFixed(2)+"%";
+            for (let a = 0; a < secliuliangNum.length; a++) {
+                for (let j = a; j < secchaozaiNum.length; j++) {
+                    let zhouNum = secchaozaiNum[j].split('-')[0]
+                    let bili;
+                    let liuliangnum = parseInt(secliuliangNum[a].split('-')[1])
+                    let chaozainum = parseInt(secchaozaiNum[j].split('-')[1])
+                    let czbili = (chaozainum * 1) / (liuliangnum * 1);
+                    if (undefined == czbili) {
+                        bili = "0%";
+                    } else {
+                        bili = (czbili * 100).toFixed(2) + "%";
                     }
                     switch (zhouNum) {
                         case "2":
@@ -1607,7 +1607,7 @@ homePageInit.initSecChaoZaiDataTodayEchars=(zhoushu)=>{
 }
 
 let setSecCZEchars=(data,zhoushu)=>{
-    var id;
+    let id;
     switch (zhoushu) {
         case 2:
             id="maint";
@@ -1628,9 +1628,9 @@ let setSecCZEchars=(data,zhoushu)=>{
             break;
     }
 // 基于准备好的dom，初始化echarts实例
-    var myChart = echarts.init(document.getElementById(id));
+    let myChart = echarts.init(document.getElementById(id));
     // 指定图表的配置项和数据
-    var option = {
+    let option = {
         textStyle: {
             color: '#fff',
             fontSize: 13
@@ -1656,15 +1656,15 @@ let setSecCZEchars=(data,zhoushu)=>{
                     color: '#A1A2B4'
                 },
                 formatter: function (params) {
-                    var newParamsName = "";
-                    var paramsNameNumber = params.length;
-                    var provideNumber = 3;
-                    var rowNumber = Math.ceil(paramsNameNumber / provideNumber);
+                    let newParamsName = "";
+                    let paramsNameNumber = params.length;
+                    let provideNumber = 3;
+                    let rowNumber = Math.ceil(paramsNameNumber / provideNumber);
                     if (paramsNameNumber > provideNumber) {
-                        for (var p = 0; p < rowNumber; p++) {
-                            var tempStr = "";
-                            var start = p * provideNumber;
-                            var end = start + provideNumber;
+                        for (let p = 0; p < rowNumber; p++) {
+                            let tempStr = "";
+                            let start = p * provideNumber;
+                            let end = start + provideNumber;
                             if (p == rowNumber - 1) {
                                 tempStr = params.substring(start, paramsNameNumber);
                             } else {
@@ -1772,17 +1772,17 @@ homePageInit.initSecChaoZaiEcharsMonth=(zhoushu)=>{
         }
     });
 }
-let initSecChaoZaiEchars=(data,zhoushu)=>{
-    var id;
-    var chaoZaiCountMonth;
+let initSecChaoZaiEchars=(data,zhoushu)=> {
+    let id;
+    let chaoZaiCountMonth;
     switch (zhoushu) {
         case 2:
-            id="mainb";
-            chaoZaiCountMonth=data.chaoZai2CountMonth==null?0:data.chaoZai2CountMonth.split(",")
+            id = "mainb";
+            chaoZaiCountMonth = data.chaoZai2CountMonth == null ? 0 : data.chaoZai2CountMonth.split(",")
             break;
         case 3:
-            id="mainc";
-            chaoZaiCountMonth=data.chaoZai3CountMonth.split(",")
+            id = "mainc";
+            chaoZaiCountMonth = data.chaoZai3CountMonth.split(",")
             break;
         case 4:
             id="maine";
@@ -1799,9 +1799,9 @@ let initSecChaoZaiEchars=(data,zhoushu)=>{
         default:
             break;
     }
-    var myChart = echarts.init(document.getElementById(id));
+    let myChart = echarts.init(document.getElementById(id));
     // 指定图表的配置项和数据
-    var option = {
+    let option = {
         textStyle: {
             color: '#fff',
             fontSize: 13
@@ -1827,15 +1827,15 @@ let initSecChaoZaiEchars=(data,zhoushu)=>{
                     color: '#A1A2B4'
                 },
                 formatter: function (params) {
-                    var newParamsName = "";
-                    var paramsNameNumber = params.length;
-                    var provideNumber = 3;
-                    var rowNumber = Math.ceil(paramsNameNumber / provideNumber);
+                    let newParamsName = "";
+                    let paramsNameNumber = params.length;
+                    let provideNumber = 3;
+                    let rowNumber = Math.ceil(paramsNameNumber / provideNumber);
                     if (paramsNameNumber > provideNumber) {
-                        for (var p = 0; p < rowNumber; p++) {
-                            var tempStr = "";
-                            var start = p * provideNumber;
-                            var end = start + provideNumber;
+                        for (let p = 0; p < rowNumber; p++) {
+                            let tempStr = "";
+                            let start = p * provideNumber;
+                            let end = start + provideNumber;
                             if (p == rowNumber - 1) {
                                 tempStr = params.substring(start, paramsNameNumber);
                             } else {
@@ -1930,28 +1930,32 @@ homePageInit.initGongSiTongJiYuJingData = () => {
         url: '/tWimMsg/getGongSiTongJiYuJingData',
         dataType: 'json',
         data: {
-            axlesCount: zhoushu,
             stationPorts: homePageInit.stationPort.toString(),
             limit: 4,
         },
         error: function (msg) {
         },
         success: function (json) {
-            initGongSiTongJiYuJingEcharts(json, zhoushu);
+            initGongSiTongJiYuJingEcharts(json);
         }
     });
 }
 
-let initGongSiTongJiYuJingEcharts = (data, zhoushu) => {
+let initGongSiTongJiYuJingEcharts = (data) => {
 //==================================================================小图标==============================================
-    var myChart = echarts.init(document.getElementById("firstmain"));
+    let myChart = echarts.init(document.getElementById("firstmain"));
     // 指定图表的配置项和数据
-    var option = {
+
+    let company = data.company != null ? data.company.split(",") : new Array(6);
+    let yiJi = data.yiJi != null ? data.yiJi.split(",") : [0, 0, 0, 0, 0, 0, 0];
+    let erJi = data.erJi != null ? data.erJi.split(",") : [0, 0, 0, 0, 0, 0, 0];
+
+    let option = {
 
 
         xAxis: [{
             type: 'category',
-            data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
+            data: company,
             axisPointer: {
                 type: 'shadow'
             },
@@ -2005,7 +2009,7 @@ let initGongSiTongJiYuJingEcharts = (data, zhoushu) => {
         ],
         series: [{
             type: 'bar',
-            data: [150, 205, 345, 452],
+            data: yiJi,
             barWidth: 20, //柱图宽度
             color: '#305BFF'
         },
@@ -2014,11 +2018,117 @@ let initGongSiTongJiYuJingEcharts = (data, zhoushu) => {
                 type: 'line',
                 yAxisIndex: 1,
                 color: '#47FFCD',
-                data: [150, 205, 345, 452]
+                data: erJi
             }
         ]
     };
 
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+}
+
+
+homePageInit.initShengJieTongJiYuJingData = () => {
+    $.ajax({
+        type: 'POST',
+        url: '/tWimMsg/initShengJieTongJiYuJingData',
+        dataType: 'json',
+        data: {
+            stationPorts: homePageInit.stationPort.toString(),
+            limit: 4,
+        },
+        error: function (msg) {
+        },
+        success: function (json) {
+            initShengJieTongJiYuJingData(json);
+        }
+    });
+}
+
+let initShengJieTongJiYuJingData = (data) => {
+    var myChart = echarts.init(document.getElementById("secmain"));
+    // 指定图表的配置项和数据
+
+    let provinceStation = data.provinceStation != null ? data.provinceStation.split(",") : new Array(6);
+    let yiJi = data.yiJi != null ? data.yiJi.split(",") : [0, 0, 0, 0, 0, 0, 0];
+    let erJi = data.erJi != null ? data.erJi.split(",") : [0, 0, 0, 0, 0, 0, 0];
+
+    var option = {
+        legend: {
+            data: ['49~100吨', '100吨以上']
+        },
+        xAxis: [
+            {
+                type: 'category',
+                data: provinceStation,
+                axisPointer: {
+                    type: 'shadow'
+                },
+                axisLabel: {
+                    show: true,
+                    textStyle: {
+                        color: '#A1A2B4'
+                    }
+                },
+                axisTick: { //y轴刻度线
+                    show: false
+                },
+                axisLine: { //y轴
+                    show: false
+                },
+                splitLine: {
+                    show: false
+                }
+
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                axisLabel: {
+                    color: '#abb8ce',
+                },
+                axisTick: { //y轴刻度线
+                    show: false
+                },
+                axisLine: { //y轴
+                    show: false
+                },
+                splitLine: {
+                    show: false
+                }
+            },
+            {
+                type: 'value',
+                axisLabel: {
+                    color: '#abb8ce',
+                },
+                axisTick: { //y轴刻度线
+                    show: false
+                },
+                axisLine: { //y轴
+                    show: false
+                },
+                splitLine: {
+                    show: false
+                }
+            }
+        ],
+        series: [
+            {
+                name: '蒸发量',
+                type: 'bar',
+                data: yiJi,
+                color: '#05D3DB'
+            },
+            {
+                name: '降水量',
+                type: 'bar',
+                data: erJi,
+                color: '#B38CFF'
+            }
+        ]
+    };
     // 使用刚指定的配置项和数据显示图表。
     myChart.setOption(option);
 }

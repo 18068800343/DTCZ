@@ -71,4 +71,6 @@ public interface tWimMsgDao {
 
 
     Map getGongSiTongJiYuJingData(String stationPorts, Integer limit);
+
+    Map initShengJieTongJiYuJingData(String stationPorts, Integer limit);
 }

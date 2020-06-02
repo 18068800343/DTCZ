@@ -1095,29 +1095,78 @@
                         LEFT JOIN (
                             SELECT
                                 tvmt.Station_IP,
-                                COUNT(1) AS erJi
+                                case when COUNT(1) is null then 0 else count(1) end AS erJi
                             FROM
                                 t_vehicle_msg_today tvmt
                             LEFT JOIN station_site ss ON tvmt.Station_IP = ss.Station_Port
                             WHERE
-                                tvmt.Total_Weight > 100000
+                                tvmt.Total_Weight > 100000 and FIND_IN_SET(tvmt.Station_IP,#{stationPorts})
                             GROUP BY
                                 company
                             ORDER BY
-                                Total_Weight
+                                Total_Weight limit #{limit}
                         ) aa ON aa.Station_IP = ss.Station_Ip
                         WHERE
                             tvmt.Total_Weight BETWEEN 49000
-                        AND 100000
+                        AND 100000 and FIND_IN_SET(tvmt.Station_IP,#{stationPorts})
                         GROUP BY
                             company
                         ORDER BY
-                            yiJi desc
+                            yiJi desc limit #{limit}
                     ) tb
                 ORDER BY
                     tb.yiJi DESC
             ) ta
 	</select>
+
+    <select id="initShengJieTongJiYuJingData" resultType="map">
+        SELECT
+            GROUP_CONCAT(ta.yi) AS yiJi,
+            GROUP_CONCAT(ta.er) AS erJi,
+            GROUP_CONCAT(ta.cm) AS provinceStation
+        FROM
+            (
+                SELECT
+                    tb.yiJi yi,
+                    tb.erJi er,
+                    tb.province_station cm
+                FROM
+                    (
+                        SELECT
+                            tvmt.*, ss.province_station,
+                            COUNT(1) AS yiJi,
+                            aa.erJi
+                        FROM
+                            t_vehicle_msg_today tvmt
+                        LEFT JOIN station_site ss ON tvmt.Station_IP = ss.Station_Port
+                        LEFT JOIN (
+                            SELECT
+                                tvmt.Station_IP,
+                                case when COUNT(1) is null then 0 else count(1) end AS erJi
+                            FROM
+                                t_vehicle_msg_today tvmt
+                            LEFT JOIN station_site ss ON tvmt.Station_IP = ss.Station_Port
+                            WHERE
+                                tvmt.Total_Weight > 100000 and FIND_IN_SET(tvmt.Station_IP,#{stationPorts})
+                            GROUP BY
+                                company
+                            ORDER BY
+                                Total_Weight limit #{limit}
+                        ) aa ON aa.Station_IP = ss.Station_Ip
+                        WHERE
+                            tvmt.Total_Weight BETWEEN 49000
+                        AND 100000 and FIND_IN_SET(tvmt.Station_IP,#{stationPorts})
+                        GROUP BY
+                            province_station
+                        ORDER BY
+                            yiJi desc limit #{limit}
+                    ) tb
+                ORDER BY
+                    tb.yiJi DESC
+            ) ta
+	</select>
+
+
     <sql id="limitSql">
         <if test='axlesCount=="2"'>
             ORDER BY chaoZai2CountMonth desc,a.Station_Name asc

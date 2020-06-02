@@ -654,4 +654,17 @@ public class tWimMsgController {
         Map map = tWimMsgDao.getGongSiTongJiYuJingData(stationPorts, limit);
         return map;
     }
+
+    /**
+     * 首页第二个页面通过轴数和站点端口获得站点车流量
+     *
+     * @param limit
+     * @param stationPorts
+     * @return
+     */
+    @RequestMapping("/initShengJieTongJiYuJingData")
+    public Map initShengJieTongJiYuJingData(String stationPorts, Integer limit) {
+        Map map = tWimMsgDao.initShengJieTongJiYuJingData(stationPorts, limit);
+        return map;
+    }
 }
