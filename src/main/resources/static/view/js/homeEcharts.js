@@ -1922,3 +1922,103 @@ let initSecChaoZaiEchars=(data,zhoushu)=>{
     // 使用刚指定的配置项和数据显示图表。
     myChart.setOption(option);
 }
+
+
+homePageInit.initGongSiTongJiYuJingData = () => {
+    $.ajax({
+        type: 'POST',
+        url: '/tWimMsg/getGongSiTongJiYuJingData',
+        dataType: 'json',
+        data: {
+            axlesCount: zhoushu,
+            stationPorts: homePageInit.stationPort.toString(),
+            limit: 4,
+        },
+        error: function (msg) {
+        },
+        success: function (json) {
+            initGongSiTongJiYuJingEcharts(json, zhoushu);
+        }
+    });
+}
+
+let initGongSiTongJiYuJingEcharts = (data, zhoushu) => {
+//==================================================================小图标==============================================
+    var myChart = echarts.init(document.getElementById("firstmain"));
+    // 指定图表的配置项和数据
+    var option = {
+
+
+        xAxis: [{
+            type: 'category',
+            data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
+            axisPointer: {
+                type: 'shadow'
+            },
+            axisLabel: {
+                show: true,
+                textStyle: {
+                    color: '#A1A2B4'
+                }
+            },
+            axisTick: { //y轴刻度线
+                show: false
+            },
+            axisLine: { //y轴
+                show: false
+            },
+            splitLine: {
+                show: false
+            }
+
+        }],
+        yAxis: [{
+            type: 'value',
+            axisLabel: {
+                color: '#abb8ce',
+            },
+            axisTick: { //y轴刻度线
+                show: false
+            },
+            axisLine: { //y轴
+                show: false
+            },
+            splitLine: {
+                show: false
+            }
+        },
+            {
+                type: 'value',
+                axisLabel: {
+                    color: '#abb8ce',
+                },
+                axisTick: { //y轴刻度线
+                    show: false
+                },
+                axisLine: { //y轴
+                    show: false
+                },
+                splitLine: {
+                    show: false
+                }
+            }
+        ],
+        series: [{
+            type: 'bar',
+            data: [150, 205, 345, 452],
+            barWidth: 20, //柱图宽度
+            color: '#305BFF'
+        },
+
+            {
+                type: 'line',
+                yAxisIndex: 1,
+                color: '#47FFCD',
+                data: [150, 205, 345, 452]
+            }
+        ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+}

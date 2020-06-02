@@ -1058,16 +1058,66 @@
             ) a
             left join (
                 select IFNULL(COUNT(*),0) chaozaiNum,b.Station_Name,a.Station_IP from t_vehicle_msg_today a
-                LEFT JOIN station_site b ON a.Station_IP = b.Station_Port
-                and  a.axles_count=#{axlesCount} and a.Over_Weight>0  and a.Total_Weight &lt;(SELECT Crux_Weight FROM crux_weight  WHERE Del_State = 1 AND lv = 2)
-                and  date(a.Evt_Time) = curdate()
-                GROUP BY b.Station_Port
-                HAVING FIND_IN_SET(b.Station_Port,#{stationPorts})
-                ORDER BY chaozaiNum desc
-            ) b on a.Station_ip=b.Station_IP <include refid="limitSql"></include>
+        LEFT JOIN station_site b ON a.Station_IP = b.Station_Port
+        and a.axles_count=#{axlesCount} and a.Over_Weight>0 and a.Total_Weight &lt;(SELECT Crux_Weight FROM crux_weight
+        WHERE Del_State = 1 AND lv = 2)
+        and date(a.Evt_Time) = curdate()
+        GROUP BY b.Station_Port
+        HAVING FIND_IN_SET(b.Station_Port,#{stationPorts})
+        ORDER BY chaozaiNum desc
+        ) b on a.Station_ip=b.Station_IP
+        <include refid="limitSql"></include>
         ) a
 
     </select>
+
+
+    <select id="getGongSiTongJiYuJingData" resultType="map">
+        SELECT
+            GROUP_CONCAT(ta.yi) AS yiJi,
+            GROUP_CONCAT(ta.er) AS erJi,
+            GROUP_CONCAT(ta.cm) AS company
+        FROM
+            (
+                SELECT
+                    tb.yiJi yi,
+                    tb.erJi er,
+                    tb.company cm
+                FROM
+                    (
+                        SELECT
+                            tvmt.*, ss.company,
+                            COUNT(1) AS yiJi,
+                            aa.erJi
+                        FROM
+                            t_vehicle_msg_today tvmt
+                        LEFT JOIN station_site ss ON tvmt.Station_IP = ss.Station_Port
+                        LEFT JOIN (
+                            SELECT
+                                tvmt.Station_IP,
+                                COUNT(1) AS erJi
+                            FROM
+                                t_vehicle_msg_today tvmt
+                            LEFT JOIN station_site ss ON tvmt.Station_IP = ss.Station_Port
+                            WHERE
+                                tvmt.Total_Weight > 100000
+                            GROUP BY
+                                company
+                            ORDER BY
+                                Total_Weight
+                        ) aa ON aa.Station_IP = ss.Station_Ip
+                        WHERE
+                            tvmt.Total_Weight BETWEEN 49000
+                        AND 100000
+                        GROUP BY
+                            company
+                        ORDER BY
+                            yiJi desc
+                    ) tb
+                ORDER BY
+                    tb.yiJi DESC
+            ) ta
+	</select>
     <sql id="limitSql">
         <if test='axlesCount=="2"'>
             ORDER BY chaoZai2CountMonth desc,a.Station_Name asc

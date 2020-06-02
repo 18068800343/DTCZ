@@ -56,11 +56,19 @@ public interface tWimMsgDao {
 
 
     HomeData getJianCeTotal(String stationPorts);
+
     CheLiuLiangEchartsList getJianCeCheLiuLiangEchartsList(String stationPorts);
+
     CheLiuLiangEchartsList getJianCechaozaiEchartsList(String stationPorts);
 
-    Map<String,String> getSecHomeTotal(String axlesCount, String stationPorts);
-    SecHomeData getSecLiuLiangEcharsList(String axlesCount, String stationPorts,Integer limit);
-    SecHomeData getSecChaoZaiEcharsList(String axlesCount, String stationPorts,Integer limit);
-    SecHomeData getSecChaoZaiEcharsListMonth(String yearMonth,String axlesCount, String stationPorts,Integer limit);
+    Map<String, String> getSecHomeTotal(String axlesCount, String stationPorts);
+
+    SecHomeData getSecLiuLiangEcharsList(String axlesCount, String stationPorts, Integer limit);
+
+    SecHomeData getSecChaoZaiEcharsList(String axlesCount, String stationPorts, Integer limit);
+
+    SecHomeData getSecChaoZaiEcharsListMonth(String yearMonth, String axlesCount, String stationPorts, Integer limit);
+
+
+    Map getGongSiTongJiYuJingData(String stationPorts, Integer limit);
 }

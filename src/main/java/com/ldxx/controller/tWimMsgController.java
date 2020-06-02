@@ -636,10 +636,22 @@ public class tWimMsgController {
      * @return
      */
     @RequestMapping("/getSecChaoZaiEcharsListMonth")
-    public SecHomeData getSecChaoZaiEcharsListMonth(String axlesCount,String stationPorts,Integer limit){
+    public SecHomeData getSecChaoZaiEcharsListMonth(String axlesCount, String stationPorts, Integer limit) {
         String yearMonth = GetThisTimeUtils.getMonth();
-        SecHomeData list = tWimMsgDao.getSecChaoZaiEcharsListMonth(yearMonth,axlesCount,stationPorts,limit);
+        SecHomeData list = tWimMsgDao.getSecChaoZaiEcharsListMonth(yearMonth, axlesCount, stationPorts, limit);
         return list;
     }
 
+    /**
+     * 首页第二个页面通过轴数和站点端口获得站点车流量
+     *
+     * @param limit
+     * @param stationPorts
+     * @return
+     */
+    @RequestMapping("/getGongSiTongJiYuJingData")
+    public Map getGongSiTongJiYuJingData(String stationPorts, Integer limit) {
+        Map map = tWimMsgDao.getGongSiTongJiYuJingData(stationPorts, limit);
+        return map;
+    }
 }
