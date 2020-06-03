@@ -566,25 +566,59 @@
                and b.link #{link}
             </if>
 			GROUP BY
-				b.Station_Port
-			HAVING FIND_IN_SET(b.Station_Port,#{stationPorts})
-			ORDER BY
-				cnt DESC,b.Station_Name ASC
-			<if test="limit!=null and limit!=''">
-                LIMIT #{limit}
-            </if>
-			)dd ORDER BY dd.cnt
-		) aa
+        b.Station_Port
+        HAVING FIND_IN_SET(b.Station_Port,#{stationPorts})
+        ORDER BY
+        cnt DESC,b.Station_Name ASC
+        <if test="limit!=null and limit!=''">
+            LIMIT #{limit}
+        </if>
+        )dd ORDER BY dd.cnt
+        ) aa
+    </select>
+    <select id="initLiuZhouChaoZaiShuLiang" resultType="CheLiuLiangEchartsList">
+        SELECT
+        group_concat(aa.cnt SEPARATOR ',') AS nums,
+        group_concat(aa.Station_Port SEPARATOR ',') AS station_ports,
+        group_concat(aa.station_name SEPARATOR ',') AS station_names
+        FROM
+        (
+        SELECT * FROM(SELECT
+        COUNT(
+        CASE
+        WHEN a.Station_IP IS NOT NULL THEN
+        0
+        END
+        ) cnt,
+        b.Station_Port,
+        b.Station_Name
+        FROM
+        t_vehicle_msg_today a
+        RIGHT JOIN station_site b ON a.Station_IP = b.Station_Port AND date(a.Evt_Time) = curdate()
+        <if test="link!=null and link!=''">
+            and b.link #{link}
+        </if>
+        WHERE a.axles_count=6
+        GROUP BY
+        b.Station_Port
+        HAVING FIND_IN_SET(b.Station_Port,#{stationPorts})
+        ORDER BY
+        cnt DESC,b.Station_Name ASC
+        <if test="limit!=null and limit!=''">
+            LIMIT #{limit}
+        </if>
+        )dd ORDER BY dd.cnt
+        ) aa
     </select>
 
     <select id="getGuanJianChaoZhongCheLiangEchartsList" resultType="CheLiuLiangEchartsList">
         SELECT
-                group_concat(aaa.cnt SEPARATOR ',') AS cnt2,
-                group_concat(aaa.Station_Port SEPARATOR ',') AS stationPorts,
-                group_concat(aaa.Station_Name SEPARATOR ',') AS stationNames,
-                group_concat(aaa.cnt2 SEPARATOR ',') AS cnt3
-                FROM
-                (select aa.cnt ,
+        group_concat(aaa.cnt SEPARATOR ',') AS cnt2,
+        group_concat(aaa.Station_Port SEPARATOR ',') AS stationPorts,
+        group_concat(aaa.Station_Name SEPARATOR ',') AS stationNames,
+        group_concat(aaa.cnt2 SEPARATOR ',') AS cnt3
+        FROM
+        (select aa.cnt ,
         aa.Station_Port ,
         aa.Station_Name ,
         IFNULL(bb.cnt ,0)cnt2
@@ -986,16 +1020,46 @@
 
     <select id="getSecLiuLiangEcharsList" resultType="SecHomeData">
         SELECT group_concat(aa.liuLiangCount SEPARATOR ',') as liuLiangCount,group_concat(aa.Station_Name SEPARATOR ',') as stationNames from (
-            select COUNT(*) liuLiangCount,b.Station_Name  from t_vehicle_msg_today a
-            LEFT JOIN station_site b ON a.Station_IP = b.Station_Port
-            and  a.axles_count=#{axlesCount} and  date(a.Evt_Time) = curdate() GROUP BY
-                        b.Station_Port
-                    HAVING FIND_IN_SET(b.Station_Port,#{stationPorts})
-                ORDER BY liuLiangCount desc
-                <if test="limit!=null and limit!=''">
-                    LIMIT #{limit}
-                </if>
+        select COUNT(*) liuLiangCount,b.Station_Name from t_vehicle_msg_today a
+        LEFT JOIN station_site b ON a.Station_IP = b.Station_Port
+        and a.axles_count=#{axlesCount} and date(a.Evt_Time) = curdate() GROUP BY
+        b.Station_Port
+        HAVING FIND_IN_SET(b.Station_Port,#{stationPorts})
+        ORDER BY liuLiangCount desc
+        <if test="limit!=null and limit!=''">
+            LIMIT #{limit}
+        </if>
         ) aa
+    </select>
+
+    <select id="getDanZhouChaoZai" resultType="map">
+        SELECT
+            GROUP_CONCAT(maxAxle) maxAxle,
+            GROUP_CONCAT(Evt_Time) evtTime
+        FROM
+            (
+                SELECT
+                    GREATEST(
+                        tvmt.Axle1,
+                        tvmt.Axle2,
+                        tvmt.Axle3,
+                        tvmt.Axle4,
+                        tvmt.Axle5,
+                        tvmt.Axle6,
+                        tvmt.Axle7,
+                        tvmt.Axle8,
+                        tvmt.Axle9,
+                        tvmt.Axle10
+                    ) maxAxle,
+                    Evt_Time
+                FROM
+                    t_vehicle_msg_today tvmt
+                WHERE FIND_IN_SET(Station_IP,#{stationPorts})
+                HAVING
+                    maxAxle >= 14000
+                ORDER BY
+                    Evt_Time DESC
+            ) a
     </select>
 
 
@@ -1099,25 +1163,28 @@
                             FROM
                                 t_vehicle_msg_today tvmt
                             LEFT JOIN station_site ss ON tvmt.Station_IP = ss.Station_Port
-                            WHERE
-                                tvmt.Total_Weight > 100000 and FIND_IN_SET(tvmt.Station_IP,#{stationPorts})
-                            GROUP BY
-                                company
-                            ORDER BY
-                                Total_Weight limit #{limit}
-                        ) aa ON aa.Station_IP = ss.Station_Ip
-                        WHERE
-                            tvmt.Total_Weight BETWEEN 49000
-                        AND 100000 and FIND_IN_SET(tvmt.Station_IP,#{stationPorts})
-                        GROUP BY
-                            company
-                        ORDER BY
-                            yiJi desc limit #{limit}
-                    ) tb
-                ORDER BY
-                    tb.yiJi DESC
-            ) ta
-	</select>
+        WHERE
+        tvmt.Total_Weight > 100000 and FIND_IN_SET(tvmt.Station_IP,#{stationPorts})
+        GROUP BY
+        company
+        ORDER BY
+        Total_Weight limit #{limit}
+        ) aa ON aa.Station_IP = ss.Station_Ip
+        WHERE
+        tvmt.Total_Weight BETWEEN 49000
+        AND 100000 and FIND_IN_SET(tvmt.Station_IP,#{stationPorts})
+        <if test="axlesCount!=null and axlesCount!=''">
+            and tvmt.Axles_Count=#{axlesCount}
+        </if>
+        GROUP BY
+        company
+        ORDER BY
+        yiJi desc,company asc limit #{limit}
+        ) tb
+        ORDER BY
+        tb.yiJi DESC
+        ) ta
+    </select>
 
     <select id="initShengJieTongJiYuJingData" resultType="map">
         SELECT
@@ -1149,7 +1216,7 @@
                             WHERE
                                 tvmt.Total_Weight > 100000 and FIND_IN_SET(tvmt.Station_IP,#{stationPorts})
                             GROUP BY
-                                company
+                                province_station
                             ORDER BY
                                 Total_Weight limit #{limit}
                         ) aa ON aa.Station_IP = ss.Station_Ip
@@ -1159,7 +1226,7 @@
                         GROUP BY
                             province_station
                         ORDER BY
-                            yiJi desc limit #{limit}
+                            yiJi desc,province_station asc limit #{limit}
                     ) tb
                 ORDER BY
                     tb.yiJi DESC

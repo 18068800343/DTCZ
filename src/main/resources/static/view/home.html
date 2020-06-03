@@ -500,9 +500,10 @@
                             <h2 style="font-size: 18px;color:#AAE6F9;font-weight: 500; padding: 10px;">
                                 按站点6轴车超载数量top5统计</h2>
                         </div>
-                        <div id="sexmain"
-                             style="width: 420px;height: 260px;display: inline-block;margin-left: 2%;"></div>
-
+                        <!--                        <div id="sexmain"-->
+                        <!--                             style="width: 420px;height: 260px;display: inline-block;margin-left: 2%;"></div>-->
+                        <div id="sexmain" style="height:330px;width:420px;top: -60px;left:30px;">
+                        </div>
                         <!--<div id="xian1" style="height:380px;top: -60px;left:30px;">
                         </div>-->
                     </div>
@@ -1002,6 +1003,8 @@
     $(document).ready(function () {
         //初始化车流量
         homePageInit.initLeftEcharts('xian1');
+        //初始化三页面右下角
+        homePageInit.initLiuZhouChaoZaiShuLiang('sexmain');
 
         //初始化环形图0
         homePageInit.initDownEcharts();
@@ -1023,6 +1026,14 @@
         homePageInit.initGongSiTongJiYuJingData();
         //初始化第3个页面省界预警统计
         homePageInit.initShengJieTongJiYuJingData();
+
+        //初始化第3个页面省界预警统计
+        homePageInit.initLiuZhouShengJieChaoZai();
+        //初始化第3个页面公司预警统计
+        homePageInit.initGongSiTongJiYuJingData_LiuZhou();
+
+        //初始化第3个页面单轴大于14T
+        homePageInit.initDanZhouChaoZai();
 
         setInterval(refresh, 1000);
         setInterval(refreshLeft, 4000);
@@ -1559,311 +1570,83 @@
     myChart.setOption(option);
 
 
-    var myChart = echarts.init(document.getElementById("thimain"));
-    // 指定图表的配置项和数据
-    var option = {
-
-
-        xAxis: [{
-            type: 'category',
-            data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
-            axisPointer: {
-                type: 'shadow'
-            },
-            axisLabel: {
-                show: true,
-                textStyle: {
-                    color: '#A1A2B4'
-                }
-            },
-            axisTick: { //y轴刻度线
-                show: false
-            },
-            axisLine: { //y轴
-                show: false
-            },
-            splitLine: {
-                show: false
-            }
-
-        }],
-        yAxis: [{
-            type: 'value',
-            axisLabel: {
-                color: '#abb8ce',
-            },
-            axisTick: { //y轴刻度线
-                show: false
-            },
-            axisLine: { //y轴
-                show: false
-            },
-            splitLine: {
-                show: false
-            }
-        },
-            {
-                type: 'value',
-                axisLabel: {
-                    color: '#abb8ce',
-                },
-                axisTick: { //y轴刻度线
-                    show: false
-                },
-                axisLine: { //y轴
-                    show: false
-                },
-                splitLine: {
-                    show: false
-                }
-            }
-        ],
-        series: [{
-            type: 'bar',
-            data: [150, 205, 345, 452],
-            barWidth: 20, //柱图宽度
-            itemStyle: {
-                normal: {
-                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                        offset: 0,
-                        color: '#FE4BA1'
-                    }, {
-                        offset: 1,
-                        color: '#FC5560'
-                    }]),
-                }
-            },
-        },
-        ]
-    };
-
-    // 使用刚指定的配置项和数据显示图表。
-    myChart.setOption(option);
-    var myChart = echarts.init(document.getElementById("foumain"));
-    // 指定图表的配置项和数据
-    var option = {
-        legend: {
-            data: ['49~100吨', '100吨以上']
-        },
-        xAxis: [
-            {
-                type: 'category',
-                data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
-                axisPointer: {
-                    type: 'shadow'
-                },
-                axisLabel: {
-                    show: true,
-                    textStyle: {
-                        color: '#A1A2B4'
-                    }
-                },
-                axisTick: { //y轴刻度线
-                    show: false
-                },
-                axisLine: { //y轴
-                    show: false
-                },
-                splitLine: {
-                    show: false
-                }
-
-            }
-        ],
-        yAxis: [
-            {
-                type: 'value',
-                axisLabel: {
-                    color: '#abb8ce',
-                },
-                axisTick: { //y轴刻度线
-                    show: false
-                },
-                axisLine: { //y轴
-                    show: false
-                },
-                splitLine: {
-                    show: false
-                }
-            },
-            {
-                type: 'value',
-                axisLabel: {
-                    color: '#abb8ce',
-                },
-                axisTick: { //y轴刻度线
-                    show: false
-                },
-                axisLine: { //y轴
-                    show: false
-                },
-                splitLine: {
-                    show: false
-                }
-            }
-        ],
-        series: [
-            {
-
-                type: 'bar',
-                data: [2.0, 4.9, 7.0, 23.2],
-                color: '#6154FD'
-            },
-            {
-
-                type: 'bar',
-                data: [2.6, 5.9, 9.0, 26.4],
-                color: '#FE545E'
-            }
-        ]
-    };
-
-    // 使用刚指定的配置项和数据显示图表。
-    myChart.setOption(option);
-    var myChart = echarts.init(document.getElementById("fivemain"));
-    // 指定图表的配置项和数据
-    var option = {
-        backgroundColor: '#001848',
-        xAxis: {
-            type: 'category',
-            axisTick: {
-                show: false,
-            },
-            boundaryGap: false,
-            axisTick: {
-                show: false,
-            },
-            axisLabel: {
-                color: '#fff'
-            },
-            axisLine: {
-                lineStyle: {
-                    color: 'rgba(12,102,173,.5)',
-                    width: 2,
-                }
-            },
-        },
-        yAxis: {
-            type: 'value',
-            axisTick: {
-                show: false,//不显示刻度线
-            },
-            axisLabel: {
-                color: '#fff'  //y轴上的字体颜色
-            },
-            axisLine: {
-                lineStyle: {
-                    width: 2,
-                    color: 'rgba(12,102,173,.5)',//y轴的轴线的宽度和颜色
-                }
-            },
-            splitLine: {
-                show: false
-            }
-        },
-        series: [
-            {
-                type: 'line',
-                symbol: 'none',
-                smooth: true,
-                areaStyle: {
-                    normal: {
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                            offset: 0,
-                            color: '#bb326f'
-                        }, {
-                            offset: 1,
-                            color: '#2A1A6B'
-                        }])
-                    }
-                },
-            }
-        ]
-    };
-
-    // 使用刚指定的配置项和数据显示图表。
-    myChart.setOption(option);
-    option.xAxis.data = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12 (月)'];
-    option.series[0].data = [21, 25, 27, 12, 22, 21, 25, 27, 12, 22, 42, 32];
-    var chart3 = echarts.init(document.getElementById('fivemain'));
-    chart3.setOption(option);
-    var myChart = echarts.init(document.getElementById("sexmain"));
-    // 指定图表的配置项和数据
-    var option = {
-
-
-        xAxis: [{
-            type: 'category',
-            data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
-            axisPointer: {
-                type: 'shadow'
-            },
-            axisLabel: {
-                show: true,
-                textStyle: {
-                    color: '#A1A2B4'
-                }
-            },
-            axisTick: { //y轴刻度线
-                show: false
-            },
-            axisLine: { //y轴
-                show: false
-            },
-            splitLine: {
-                show: false
-            }
-
-        }],
-        yAxis: [{
-            type: 'value',
-            axisLabel: {
-                color: '#abb8ce',
-            },
-            axisTick: { //y轴刻度线
-                show: false
-            },
-            axisLine: { //y轴
-                show: false
-            },
-            splitLine: {
-                show: false
-            }
-        },
-            {
-                type: 'value',
-                axisLabel: {
-                    color: '#abb8ce',
-                },
-                axisTick: { //y轴刻度线
-                    show: false
-                },
-                axisLine: { //y轴
-                    show: false
-                },
-                splitLine: {
-                    show: false
-                }
-            }
-        ],
-        series: [{
-            type: 'bar',
-            data: [150, 205, 345, 452],
-            barWidth: 20, //柱图宽度
-            color: '#305BFF'
-        },
-
-            {
-                type: 'line',
-                yAxisIndex: 1,
-                color: '#47FFCD',
-                data: [150, 205, 345, 452]
-            }
-        ]
-    };
-
-    // 使用刚指定的配置项和数据显示图表。
-    myChart.setOption(option);
+    // var myChart = echarts.init(document.getElementById("sexmain"));
+    // // 指定图表的配置项和数据
+    // var option = {
+    //
+    //
+    //     xAxis: [{
+    //         type: 'category',
+    //         data: ['苏皖省界', '苏皖省界', '苏皖省界', '苏皖省界'],
+    //         axisPointer: {
+    //             type: 'shadow'
+    //         },
+    //         axisLabel: {
+    //             show: true,
+    //             textStyle: {
+    //                 color: '#A1A2B4'
+    //             }
+    //         },
+    //         axisTick: { //y轴刻度线
+    //             show: false
+    //         },
+    //         axisLine: { //y轴
+    //             show: false
+    //         },
+    //         splitLine: {
+    //             show: false
+    //         }
+    //
+    //     }],
+    //     yAxis: [{
+    //         type: 'value',
+    //         axisLabel: {
+    //             color: '#abb8ce',
+    //         },
+    //         axisTick: { //y轴刻度线
+    //             show: false
+    //         },
+    //         axisLine: { //y轴
+    //             show: false
+    //         },
+    //         splitLine: {
+    //             show: false
+    //         }
+    //     },
+    //         {
+    //             type: 'value',
+    //             axisLabel: {
+    //                 color: '#abb8ce',
+    //             },
+    //             axisTick: { //y轴刻度线
+    //                 show: false
+    //             },
+    //             axisLine: { //y轴
+    //                 show: false
+    //             },
+    //             splitLine: {
+    //                 show: false
+    //             }
+    //         }
+    //     ],
+    //     series: [{
+    //         type: 'bar',
+    //         data: [150, 205, 345, 452],
+    //         barWidth: 20, //柱图宽度
+    //         color: '#305BFF'
+    //     },
+    //
+    //         {
+    //             type: 'line',
+    //             yAxisIndex: 1,
+    //             color: '#47FFCD',
+    //             data: [150, 205, 345, 452]
+    //         }
+    //     ]
+    // };
+    //
+    // // 使用刚指定的配置项和数据显示图表。
+    // myChart.setOption(option);
 
     var myChart = echarts.init(document.getElementById("maing"));
     // 指定图表的配置项和数据
@@ -2570,6 +2353,12 @@
         homePageInit.initGongSiTongJiYuJingData();
         //初始化第3个页面省界预警统计
         homePageInit.initShengJieTongJiYuJingData();
+        //初始化第3个页面省界预警统计
+        homePageInit.initLiuZhouShengJieChaoZai();
+        //初始化第3个页面公司预警统计
+        homePageInit.initGongSiTongJiYuJingData_LiuZhou();
+        //初始化第3个页面单轴大于14T
+        homePageInit.initDanZhouChaoZai();
     }
 
     function refreshLeft() {

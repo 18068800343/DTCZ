@@ -446,21 +446,25 @@ public class tWimMsgController {
     public List<tWimMsgVo> getChaoZaiHomePage(String roadName,HttpSession session) {
         boolean b = roadName != null && !"".equals(roadName);
         String stationName = roadName;
-        StationSite stationSite = sitedao.getStationSiteByStationNameAndRouteName(stationName,"");
+        StationSite stationSite = sitedao.getStationSiteByStationNameAndRouteName(stationName, "");
         String port = stationSite.getStationPort();
         return service.getMeiRiChaoZaiShujuByStationPort(port);
     }
 
     @RequestMapping("/getCheLiuLiangEchartsList")
-    public CheLiuLiangEchartsList getCheLiuLiangEchartsList(String stationPorts,Integer link,Integer limit,HttpSession session) {
-        return tWimMsgDao.getCheLiuLiangEchartsList(stationPorts,link,limit);
+    public CheLiuLiangEchartsList getCheLiuLiangEchartsList(String stationPorts, Integer link, Integer limit, HttpSession session) {
+        return tWimMsgDao.getCheLiuLiangEchartsList(stationPorts, link, limit);
+    }
+
+    @RequestMapping("/initLiuZhouChaoZaiShuLiang")
+    public CheLiuLiangEchartsList initLiuZhouChaoZaiShuLiang(String stationPorts, Integer link, Integer limit, HttpSession session) {
+        return tWimMsgDao.initLiuZhouChaoZaiShuLiang(stationPorts, link, limit);
     }
 
     @RequestMapping("/getGuanJianChaoZhongCheLiangEchartsList")
-    public CheLiuLiangEchartsList getGuanJianChaoZhongCheLiangEchartsList(String stationPorts,Integer link,Integer limit, HttpSession session) {
-        return tWimMsgDao.getGuanJianChaoZhongCheLiangEchartsList(2,3,stationPorts, link, limit);
+    public CheLiuLiangEchartsList getGuanJianChaoZhongCheLiangEchartsList(String stationPorts, Integer link, Integer limit, HttpSession session) {
+        return tWimMsgDao.getGuanJianChaoZhongCheLiangEchartsList(2, 3, stationPorts, link, limit);
     }
-
 
 
     @RequestMapping("/getChaoZaiEchartsList")
@@ -617,20 +621,36 @@ public class tWimMsgController {
         SecHomeData list = tWimMsgDao.getSecLiuLiangEcharsList(axlesCount, stationPorts,limit);
         return list;
     }
+
     /**
      * 首页第二个页面通过轴数和站点端口获得站点车流量
+     *
      * @param axlesCount
      * @param stationPorts
      * @return
      */
     @RequestMapping("/getSecChaoZaiEcharsList")
-    public SecHomeData getSecChaoZaiEcharsList(String axlesCount,String stationPorts,Integer limit){
-        SecHomeData list = tWimMsgDao.getSecChaoZaiEcharsList(axlesCount, stationPorts,limit);
+    public SecHomeData getSecChaoZaiEcharsList(String axlesCount, String stationPorts, Integer limit) {
+        SecHomeData list = tWimMsgDao.getSecChaoZaiEcharsList(axlesCount, stationPorts, limit);
+        return list;
+    }
+
+    /**
+     * 首页第二个页面通过轴数和站点端口获得站点车流量
+     *
+     * @param axlesCount
+     * @param stationPorts
+     * @return
+     */
+    @RequestMapping("/initLiuZhouShengJieChaoZai")
+    public SecHomeData initLiuZhouShengJieChaoZai(String axlesCount, String stationPorts, Integer limit) {
+        SecHomeData list = tWimMsgDao.getSecChaoZaiEcharsList(axlesCount, stationPorts, limit);
         return list;
     }
 
     /**
      * 首页第二个页面通过轴数和站点端口获得当月站点车流量
+     *
      * @param axlesCount
      * @param stationPorts
      * @return
@@ -650,8 +670,34 @@ public class tWimMsgController {
      * @return
      */
     @RequestMapping("/getGongSiTongJiYuJingData")
-    public Map getGongSiTongJiYuJingData(String stationPorts, Integer limit) {
-        Map map = tWimMsgDao.getGongSiTongJiYuJingData(stationPorts, limit);
+    public Map getGongSiTongJiYuJingData(String stationPorts, Integer limit, Integer axlesCount) {
+        Map map = tWimMsgDao.getGongSiTongJiYuJingData(stationPorts, limit, axlesCount);
+        return map;
+    }
+
+    /**
+     * 首页第三个页面单轴大于14吨
+     *
+     * @param limit
+     * @param stationPorts
+     * @return
+     */
+    @RequestMapping("/getDanZhouChaoZai")
+    public Map getDanZhouChaoZai(String stationPorts, Integer limit) {
+        Map map = tWimMsgDao.getDanZhouChaoZai(stationPorts, limit);
+        return map;
+    }
+
+    /**
+     * 首页第三个页面通过轴数和站点端口获得站点车流量
+     *
+     * @param limit
+     * @param stationPorts
+     * @return
+     */
+    @RequestMapping("/getGongSiTongJiYuJingData_LiuZhou")
+    public Map getGongSiTongJiYuJingData_LiuZhou(String stationPorts, Integer limit) {
+        Map map = tWimMsgDao.getGongSiTongJiYuJingData_LiuZhou(stationPorts, limit);
         return map;
     }
 

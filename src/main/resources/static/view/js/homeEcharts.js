@@ -480,6 +480,26 @@ homePageInit.initLeftEcharts = (id) => {
         }
     });
 }
+
+
+homePageInit.initLiuZhouChaoZaiShuLiang = (id) => {
+    $.ajax({
+        type: 'POST',
+        url: '/tWimMsg/initLiuZhouChaoZaiShuLiang',
+        dataType: 'json',
+        data: {
+            stationPorts: homePageInit.stationPort.toString(),
+            limit: 4
+        },
+        error: function (msg) {
+        },
+        success: function (json) {
+            let stationName = json.stationNames.split(",").reverse()
+            let nums = json.nums.split(",").reverse();
+            homePageInit.setLeftEcharts(id, stationName, nums);
+        }
+    });
+}
 //******************************************************************************环形图初始化***************************************************************************************
 
 homePageInit.initDownEcharts = () => {
@@ -2027,6 +2047,114 @@ let initGongSiTongJiYuJingEcharts = (data) => {
     myChart.setOption(option);
 }
 
+homePageInit.initGongSiTongJiYuJingData_LiuZhou = () => {
+    $.ajax({
+        type: 'POST',
+        url: '/tWimMsg/getGongSiTongJiYuJingData',
+        dataType: 'json',
+        data: {
+            axlesCount: 6,
+            stationPorts: homePageInit.stationPort.toString(),
+            limit: 4,
+        },
+        error: function (msg) {
+        },
+        success: function (json) {
+            initGongSiTongJiYuJingData_LiuZhou(json);
+        }
+    });
+}
+
+let initGongSiTongJiYuJingData_LiuZhou = (data) => {
+//==================================================================小图标==============================================
+    // 指定图表的配置项和数据
+    let myChart = echarts.init(document.getElementById("foumain"));
+
+    let company = data.company != null ? data.company.split(",") : new Array(6);
+    let yiJi = data.yiJi != null ? data.yiJi.split(",") : [0, 0, 0, 0, 0, 0, 0];
+    let erJi = data.erJi != null ? data.erJi.split(",") : [0, 0, 0, 0, 0, 0, 0];
+    let option = {
+        legend: {
+            data: ['49~100吨', '100吨以上']
+        },
+        xAxis: [
+            {
+                type: 'category',
+                data: company,
+                axisPointer: {
+                    type: 'shadow'
+                },
+                axisLabel: {
+                    show: true,
+                    textStyle: {
+                        color: '#A1A2B4'
+                    }
+                },
+                axisTick: { //y轴刻度线
+                    show: false
+                },
+                axisLine: { //y轴
+                    show: false
+                },
+                splitLine: {
+                    show: false
+                }
+
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                axisLabel: {
+                    color: '#abb8ce',
+                },
+                axisTick: { //y轴刻度线
+                    show: false
+                },
+                axisLine: { //y轴
+                    show: false
+                },
+                splitLine: {
+                    show: false
+                }
+            },
+            {
+                type: 'value',
+                axisLabel: {
+                    color: '#abb8ce',
+                },
+                axisTick: { //y轴刻度线
+                    show: false
+                },
+                axisLine: { //y轴
+                    show: false
+                },
+                splitLine: {
+                    show: false
+                }
+            }
+        ],
+        series: [
+            {
+
+                type: 'bar',
+                data: yiJi,
+                color: '#6154FD'
+            },
+            {
+
+                type: 'bar',
+                data: erJi,
+                color: '#FE545E'
+            }
+        ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+
+}
+
 
 homePageInit.initShengJieTongJiYuJingData = () => {
     $.ajax({
@@ -2046,14 +2174,14 @@ homePageInit.initShengJieTongJiYuJingData = () => {
 }
 
 let initShengJieTongJiYuJingData = (data) => {
-    var myChart = echarts.init(document.getElementById("secmain"));
+    let myChart = echarts.init(document.getElementById("secmain"));
     // 指定图表的配置项和数据
 
     let provinceStation = data.provinceStation != null ? data.provinceStation.split(",") : new Array(6);
     let yiJi = data.yiJi != null ? data.yiJi.split(",") : [0, 0, 0, 0, 0, 0, 0];
     let erJi = data.erJi != null ? data.erJi.split(",") : [0, 0, 0, 0, 0, 0, 0];
 
-    var option = {
+    let option = {
         legend: {
             data: ['49~100吨', '100吨以上']
         },
@@ -2130,5 +2258,196 @@ let initShengJieTongJiYuJingData = (data) => {
         ]
     };
     // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+}
+
+homePageInit.initLiuZhouShengJieChaoZai = () => {
+    $.ajax({
+        type: 'POST',
+        url: '/tWimMsg/getSecChaoZaiEcharsList',
+        dataType: 'json',
+        data: {
+            axlesCount: 6,
+            stationPorts: homePageInit.stationPort.toString(),
+            limit: 4,
+        },
+        error: function (msg) {
+        },
+        success: function (json) {
+            initLiuZhouShengJieChaoZai(json);
+        }
+    });
+}
+
+let initLiuZhouShengJieChaoZai = (data) => {
+    // 指定图表的配置项和数据
+    let myChart = echarts.init(document.getElementById("thimain"));
+
+    let stationNames = data.stationNames != null ? data.stationNames.split(",") : new Array(4);
+    let chaoZaicCount = data.chaoZaicCount != null ? data.chaoZaicCount.split(",") : [0, 0, 0, 0,];
+
+    let option = {
+
+
+        xAxis: [{
+            type: 'category',
+            data: stationNames,
+            axisPointer: {
+                type: 'shadow'
+            },
+            axisLabel: {
+                show: true,
+                textStyle: {
+                    color: '#A1A2B4'
+                }
+            },
+            axisTick: { //y轴刻度线
+                show: false
+            },
+            axisLine: { //y轴
+                show: false
+            },
+            splitLine: {
+                show: false
+            }
+
+        }],
+        yAxis: [{
+            type: 'value',
+            axisLabel: {
+                color: '#abb8ce',
+            },
+            axisTick: { //y轴刻度线
+                show: false
+            },
+            axisLine: { //y轴
+                show: false
+            },
+            splitLine: {
+                show: false
+            }
+        },
+            {
+                type: 'value',
+                axisLabel: {
+                    color: '#abb8ce',
+                },
+                axisTick: { //y轴刻度线
+                    show: false
+                },
+                axisLine: { //y轴
+                    show: false
+                },
+                splitLine: {
+                    show: false
+                }
+            }
+        ],
+        series: [{
+            type: 'bar',
+            data: chaoZaicCount,
+            barWidth: 20, //柱图宽度
+            itemStyle: {
+                normal: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: '#FE4BA1'
+                    }, {
+                        offset: 1,
+                        color: '#FC5560'
+                    }]),
+                }
+            },
+        },
+        ]
+    };
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+}
+
+
+homePageInit.initDanZhouChaoZai = () => {
+    $.ajax({
+        type: 'POST',
+        url: '/tWimMsg/getDanZhouChaoZai',
+        dataType: 'json',
+        data: {
+            stationPorts: homePageInit.stationPort.toString(),
+            limit: 4,
+        },
+        error: function (msg) {
+        },
+        success: function (json) {
+            getDanZhouChaoZai(json);
+        }
+    });
+}
+
+let getDanZhouChaoZai = (data) => {
+    // 指定图表的配置项和数据
+    let myChart = echarts.init(document.getElementById("fivemain"));
+    let maxAxle = data.maxAxle != null ? data.maxAxle.split(",") : new Array(10);
+    let evtTime = data.evtTime != null ? data.evtTime.split(",") : new Array(10);
+    let option = {
+        backgroundColor: '#001848',
+        xAxis: {
+            type: 'category',
+            axisTick: {
+                show: false,
+            },
+            boundaryGap: false,
+            axisTick: {
+                show: false,
+            },
+            axisLabel: {
+                color: '#fff'
+            },
+            axisLine: {
+                lineStyle: {
+                    color: 'rgba(12,102,173,.5)',
+                    width: 2,
+                }
+            },
+        },
+        yAxis: {
+            type: 'value',
+            axisTick: {
+                show: false,//不显示刻度线
+            },
+            axisLabel: {
+                color: '#fff'  //y轴上的字体颜色
+            },
+            axisLine: {
+                lineStyle: {
+                    width: 2,
+                    color: 'rgba(12,102,173,.5)',//y轴的轴线的宽度和颜色
+                }
+            },
+            splitLine: {
+                show: false
+            }
+        },
+        series: [
+            {
+                type: 'line',
+                symbol: 'none',
+                smooth: true,
+                areaStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: '#bb326f'
+                        }, {
+                            offset: 1,
+                            color: '#2A1A6B'
+                        }])
+                    }
+                },
+            }
+        ]
+    };
+    // 使用刚指定的配置项和数据显示图表。
+    option.xAxis.data = evtTime;
+    option.series[0].data = maxAxle;
     myChart.setOption(option);
 }

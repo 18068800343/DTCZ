@@ -13,23 +13,25 @@ import java.util.Map;
 
 public interface tWimMsgDao {
 
-    List<tWimMsgVo> getAlltWimMsg(@Param("stationPort")String stationPort);
+    List<tWimMsgVo> getAlltWimMsg(@Param("stationPort") String stationPort);
 
-    List<tWimMsgVo> getAlltWimMsgByCondition( TongJiTableQuery tongJiTableQuery);
+    List<tWimMsgVo> getAlltWimMsgByCondition(TongJiTableQuery tongJiTableQuery);
 
-    List<tWimMsgVo> getAlltWimMsgYiChangByCondition( TongJiTableQuery tongJiTableQuery);
+    List<tWimMsgVo> getAlltWimMsgYiChangByCondition(TongJiTableQuery tongJiTableQuery);
 
-    CheLiuLiangEchartsList getCheLiuLiangEchartsList(String stationPorts,Integer link,Integer limit);
+    CheLiuLiangEchartsList getCheLiuLiangEchartsList(String stationPorts, Integer link, Integer limit);
+
+    CheLiuLiangEchartsList initLiuZhouChaoZaiShuLiang(String stationPorts, Integer link, Integer limit);
 
 
-    CheLiuLiangEchartsList getChaoZaiEchartsList(String stationPorts,Integer link,Integer limit);
+    CheLiuLiangEchartsList getChaoZaiEchartsList(String stationPorts, Integer link, Integer limit);
 
-    CheLiuLiangEchartsList getGuanJianChaoZhongCheLiangEchartsList(Integer lv1,Integer lv2,String stationPorts,Integer link,Integer limit);
+    CheLiuLiangEchartsList getGuanJianChaoZhongCheLiangEchartsList(Integer lv1, Integer lv2, String stationPorts, Integer link, Integer limit);
 
 
     HomeData getHomeData(String stationPorts);
 
-    int getMeiRiCheLiuLiangByStationPort(@Param("stationPort")String stationPort);
+    int getMeiRiCheLiuLiangByStationPort(@Param("stationPort") String stationPort);
 
     int getMeiRiCheLiuLiangMaxByStationPort();
 
@@ -70,7 +72,11 @@ public interface tWimMsgDao {
     SecHomeData getSecChaoZaiEcharsListMonth(String yearMonth, String axlesCount, String stationPorts, Integer limit);
 
 
-    Map getGongSiTongJiYuJingData(String stationPorts, Integer limit);
+    Map getDanZhouChaoZai(String stationPorts, Integer limit);
+
+    Map getGongSiTongJiYuJingData(String stationPorts, Integer limit, Integer axlesCount);
+
+    Map getGongSiTongJiYuJingData_LiuZhou(String stationPorts, Integer limit);
 
     Map initShengJieTongJiYuJingData(String stationPorts, Integer limit);
 }
