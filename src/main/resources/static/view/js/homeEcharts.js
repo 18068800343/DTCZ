@@ -221,10 +221,10 @@ homePageInit.setLeftEcharts = (id, stationNames, nums) => {
             barCategoryGap="60%";
             break;
         case 4:
-            barCategoryGap="50%";
+            barCategoryGap="44%";
             break;
         case 5:
-            barCategoryGap="40%";
+            barCategoryGap="35%";
             break;
         case 6:
             barCategoryGap="30%";
@@ -405,7 +405,7 @@ homePageInit.initFirTongji= () =>{
             homePageInit.stationName = json.stationNames.split(",").reverse()
             homePageInit.nums = json.nums.split(",").reverse();
             initFirLiuliangtongji(homePageInit.stationName, homePageInit.nums)
-            initFirChaoZaiLvTongji()
+
         }
     });
 }
@@ -426,39 +426,38 @@ let initFirLiuliangtongji=(stationNames,nums)=>{
 
 }
 
-let initFirChaoZaiLvTongji=()=>{
+/*let initFirChaoZaiLvTongji=()=>{
 
-    $.ajax({
-        type: 'POST',
-        url: '/tWimMsg/getChaoZaiEchartsList',
-        dataType: 'json',
-        data: {
-            stationPorts: homePageInit.stationPort.toString()
-        },
-        error: function (msg) {
-        },
-        success: function (json) {
-            let stationNames = json.stationNames.split(",")
-            let nums = json.nums.split(",");
-            let numsBili = json.numsBili.split(",");
-            for(let i=0;i<stationNames.length;i++){
-                let num = numsBili[i];
-                if(undefined==num){
-                    num="0%";
-                }else{
-                    num = num*100
-                    num = num.toFixed(2)+"%";
-                }
-                let tr = "<tr><td>"+stationNames[i]+"</td><td>"+num+"</td></tr>";
-                $("#fir_chaozailv"+i+"").html("")
-                $("#fir_chaozailv"+i+"").html(num)
-                $("#fir_chaozailvName"+i+"").html("")
-                $("#fir_chaozailvName"+i+"").html(stationNames[i])
-            }
+   $.ajax({
+       type: 'POST',
+       url: '/tWimMsg/getChaoZaiEchartsList',
+       dataType: 'json',
+       data: {
+           stationPorts: homePageInit.stationPort.toString()
+       },
+       error: function (msg) {
+       },
+       success: function (json) {
+          let stationNames = json.stationNames.split(",")
+           let nums = json.nums.split(",");
+           let numsBili = json.numsBili.split(",");
+           for(let i=0;i<stationNames.length;i++){
+               let num = numsBili[i];
+               if(undefined==num){
+                   num="0%";
+               }else{
+                   num = num*100
+                   num = num.toFixed(2)+"%";
+               }
+               $("#fir_chaozailv"+i+"").html("")
+               $("#fir_chaozailv"+i+"").html(num)
+               $("#fir_chaozailvName"+i+"").html("")
+               $("#fir_chaozailvName"+i+"").html(stationNames[i])
+           }
 
-        }
-    });
-}
+       }
+   });
+}*/
 
 homePageInit.initLeftEcharts = (id) => {
     $.ajax({
@@ -476,7 +475,7 @@ homePageInit.initLeftEcharts = (id) => {
             homePageInit.nums = json.nums.split(",").reverse();
             homePageInit.setLeftEcharts(id, homePageInit.stationName, homePageInit.nums);
             initFirLiuliangtongji(homePageInit.stationName, homePageInit.nums)
-            initFirChaoZaiLvTongji(2)
+
         }
     });
 }
@@ -1298,6 +1297,24 @@ homePageInit.initFirqstjt = (id) => {
         error: function (msg) {
         },
         success: function (json) {
+            //初始化超载率统计
+            let stationNames = json.stationNames.split(",")
+            let nums = json.nums.split(",");
+            let numsBili = json.numsBili.split(",");
+            for(let i=0;i<stationNames.length;i++){
+                let num = numsBili[i];
+                if(undefined==num){
+                    num="0%";
+                }else{
+                    num = num*100
+                    num = num.toFixed(2)+"%";
+                }
+                $("#fir_chaozailv"+i+"").html("")
+                $("#fir_chaozailv"+i+"").html(num)
+                $("#fir_chaozailvName"+i+"").html("")
+                $("#fir_chaozailvName"+i+"").html(stationNames[i])
+            }
+
             homePageInit.downStationNames = json.stationNames.split(",");
             homePageInit.downNums = json.nums.split(",");
             homePageInit.numCount = json.numCount.split(",");
@@ -1649,6 +1666,12 @@ let setSecCZEchars=(data,zhoushu)=>{
     }
 // 基于准备好的dom，初始化echarts实例
     let myChart = echarts.init(document.getElementById(id));
+    var bili=data.chaoZaiBili.split(",");
+    var chaozaibili=[];
+    for(var i=0;i<bili.length;i++){
+        var bili2=(bili[i]*100).toFixed(2);
+        chaozaibili[i]=bili2;
+    }
     // 指定图表的配置项和数据
     let option = {
         textStyle: {
@@ -1729,6 +1752,9 @@ let setSecCZEchars=(data,zhoushu)=>{
                 type: 'value',
                 axisLabel: {
                     color: '#abb8ce',
+                    margin:-5,
+                    interval: 'auto',
+                    formatter: '{value} %'
                 },
                 axisTick: { //y轴刻度线
                     show: false
@@ -1759,7 +1785,14 @@ let setSecCZEchars=(data,zhoushu)=>{
                 type: 'line',
                 yAxisIndex: 1,
                 color:'#E82DA2',
-                data: data.chaoZaicCount.split(",")
+                data: chaozaibili,
+                normal: {
+                    label: {
+                        show: true,
+                        position: 'top',
+                        formatter: '{b}\n{c}%'
+                    }
+                }
             }
         ]
     };
@@ -1827,7 +1860,7 @@ let initSecChaoZaiEchars=(data,zhoushu)=> {
             fontSize: 13
         },
         title: {
-            text: '当月超载数量与比例',
+            text: '当月累计超载数量',
             padding: [20, 0, 0, 0],//标题内边距上右下
             textStyle: {//textStyle设置标题样式
                 color: '#A1A2B4',
@@ -1971,9 +2004,17 @@ let initGongSiTongJiYuJingEcharts = (data) => {
     let erJi = data.erJi != null ? data.erJi.split(",") : [0, 0, 0, 0, 0, 0, 0];
 
     let option = {
-    legend: {
-    	   data: ['bar', 'bar2']
-    	},
+        textStyle: {
+            color: '#fff',
+            fontSize: 13
+        },
+        legend: {
+            data:['49-100吨', '100吨以上'],
+            textStyle: {
+                color: '#A3DCEC',
+                fontSize: 13
+            },
+        },
         xAxis: [{
             type: 'category',
             data: company,
@@ -2029,13 +2070,24 @@ let initGongSiTongJiYuJingEcharts = (data) => {
             }
         ],
         series: [{
+            name: '49-100吨',
             type: 'bar',
             data: yiJi,
             barWidth: 20, //柱图宽度
+            itemStyle:{
+                barBorderRadius:[50,50,0,0],//柱顶弧形
+            },
+            label: {
+                normal: {
+                    show: true,
+                    position: 'top'
+                }
+            },
             color: '#305BFF'
         },
 
             {
+                name: '100吨以上',
                 type: 'line',
                 yAxisIndex: 1,
                 color: '#47FFCD',
@@ -2072,11 +2124,19 @@ let initGongSiTongJiYuJingData_LiuZhou = (data) => {
     let myChart = echarts.init(document.getElementById("foumain"));
 
     let company = data.company != null ? data.company.split(",") : new Array(6);
-    let yiJi = data.yiJi != null ? data.yiJi.split(",") : [0, 0, 0, 0, 0, 0, 0];
-    let erJi = data.erJi != null ? data.erJi.split(",") : [0, 0, 0, 0, 0, 0, 0];
+    let yiJi = data.yiJi != null ? data.yiJi.split(",") : [0, 0, 0, 0];
+    let erJi = data.erJi != null ? data.erJi.split(",") : [0, 0, 0, 0];
     let option = {
+        textStyle: {
+            color: '#fff',
+            fontSize: 13
+        },
         legend: {
-            data: ['49~100吨', '100吨以上']
+            data: ['49~100吨', '100吨以上'],
+            textStyle: {
+                color: '#A3DCEC',
+                fontSize: 13
+            },
         },
         xAxis: [
             {
@@ -2137,15 +2197,33 @@ let initGongSiTongJiYuJingData_LiuZhou = (data) => {
         ],
         series: [
             {
-
+                name:"49~100吨",
                 type: 'bar',
                 data: yiJi,
+                itemStyle:{
+                    barBorderRadius:[50,50,0,0],//柱顶弧形
+                },
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top'
+                    }
+                },
                 color: '#6154FD'
             },
             {
-
+                name:"100吨以上",
                 type: 'bar',
                 data: erJi,
+                itemStyle:{
+                    barBorderRadius:[50,50,0,0],//柱顶弧形
+                },
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top'
+                    }
+                },
                 color: '#FE545E'
             }
         ]
@@ -2179,12 +2257,20 @@ let initShengJieTongJiYuJingData = (data) => {
     // 指定图表的配置项和数据
 
     let provinceStation = data.provinceStation != null ? data.provinceStation.split(",") : new Array(6);
-    let yiJi = data.yiJi != null ? data.yiJi.split(",") : [0, 0, 0, 0, 0, 0, 0];
-    let erJi = data.erJi != null ? data.erJi.split(",") : [0, 0, 0, 0, 0, 0, 0];
+    let yiJi = data.yiJi != null ? data.yiJi.split(",") : [0, 0, 0, 0];
+    let erJi = data.erJi != null ? data.erJi.split(",") : [0, 0, 0, 0];
 
     let option = {
+        textStyle: {
+            color: '#fff',
+            fontSize: 13
+        },
         legend: {
-            data: ['49~100吨', '100吨以上']
+            data: ['49~100吨', '100吨以上'],
+            textStyle: {
+                color: '#A3DCEC',
+                fontSize: 13
+            },
         },
         xAxis: [
             {
@@ -2245,15 +2331,33 @@ let initShengJieTongJiYuJingData = (data) => {
         ],
         series: [
             {
-                name: '蒸发量',
+                name: '49~100吨',
                 type: 'bar',
                 data: yiJi,
+                itemStyle:{
+                    barBorderRadius:[50,50,0,0],//柱顶弧形
+                },
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top'
+                    }
+                },
                 color: '#05D3DB'
             },
             {
-                name: '降水量',
+                name: '100吨以上',
                 type: 'bar',
                 data: erJi,
+                itemStyle:{
+                    barBorderRadius:[50,50,0,0],//柱顶弧形
+                },
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top'
+                    }
+                },
                 color: '#B38CFF'
             }
         ]
@@ -2270,7 +2374,7 @@ homePageInit.initLiuZhouShengJieChaoZai = () => {
         data: {
             axlesCount: 6,
             stationPorts: homePageInit.stationPort.toString(),
-            limit: 4,
+            limit: 5,
         },
         error: function (msg) {
         },
@@ -2285,11 +2389,14 @@ let initLiuZhouShengJieChaoZai = (data) => {
     let myChart = echarts.init(document.getElementById("thimain"));
 
     let stationNames = data.stationNames != null ? data.stationNames.split(",") : new Array(4);
-    let chaoZaicCount = data.chaoZaicCount != null ? data.chaoZaicCount.split(",") : [0, 0, 0, 0,];
+    let chaoZaicCount = data.chaoZaicCount != null ? data.chaoZaicCount.split(",") : [0, 0, 0, 0,0];
 
     let option = {
 
-
+        textStyle: {
+            color: '#fff',
+            fontSize: 13
+        },
         xAxis: [{
             type: 'category',
             data: stationNames,
@@ -2300,6 +2407,29 @@ let initLiuZhouShengJieChaoZai = (data) => {
                 show: true,
                 textStyle: {
                     color: '#A1A2B4'
+                },
+                formatter: function (params) {
+                    let newParamsName = "";
+                    let paramsNameNumber = params.length;
+                    let provideNumber = 3;
+                    let rowNumber = Math.ceil(paramsNameNumber / provideNumber);
+                    if (paramsNameNumber > provideNumber) {
+                        for (let p = 0; p < rowNumber; p++) {
+                            let tempStr = "";
+                            let start = p * provideNumber;
+                            let end = start + provideNumber;
+                            if (p == rowNumber - 1) {
+                                tempStr = params.substring(start, paramsNameNumber);
+                            } else {
+                                tempStr = params.substring(start, end) + "\n";
+                            }
+                            newParamsName += tempStr;
+                        }
+
+                    } else {
+                        newParamsName = params;
+                    }
+                    return newParamsName
                 }
             },
             axisTick: { //y轴刻度线
@@ -2359,6 +2489,12 @@ let initLiuZhouShengJieChaoZai = (data) => {
                     }]),
                 }
             },
+            label: {
+                normal: {
+                    show: true,
+                    position: 'top'
+                }
+            },
         },
         ]
     };
@@ -2415,7 +2551,8 @@ let getDanZhouChaoZai = (data) => {
                 show: false,//不显示刻度线
             },
             axisLabel: {
-                color: '#fff'  //y轴上的字体颜色
+                color: '#fff',  //y轴上的字体颜色
+                margin:2,
             },
             axisLine: {
                 lineStyle: {
