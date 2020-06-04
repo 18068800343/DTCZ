@@ -46,7 +46,7 @@ public class tUserInfoServiceImpl implements tUserInfoService {
 
     @Override
     public int iscountUNameEdit(String name, String id) {
-        return dao.iscountUNameEdit(name,id);
+        return dao.iscountUNameEdit(name, id);
     }
 
     @Override
@@ -55,8 +55,13 @@ public class tUserInfoServiceImpl implements tUserInfoService {
     }
 
     @Override
+    public tUserInfoVo selectUserByUsrName1(String name) {
+        return dao.selectUserByUsrName1(name);
+    }
+
+    @Override
     public int updatepasswordById(String usrPwd, String usrId) {
-        return dao.updatepasswordById(usrPwd,usrId);
+        return dao.updatepasswordById(usrPwd, usrId);
     }
 
     @Override

@@ -49,62 +49,78 @@ public class LoginController {
     
     @RequestMapping(value="/userlogin",method= RequestMethod.POST)
 	public Map<String,Object> userlogin(tUserInfo user, HttpServletRequest request){
-    	int state=0;
-		tUserInfoVo loginUser=null;
-    	Map<String,Object> map=new HashMap<>();
+		int state = 0;
+		tUserInfoVo loginUser = null;
+		tUserInfoVo loginUser1 = null;
+		Map<String, Object> map = new HashMap<>();
 		HttpSession session = request.getSession();
-		if("shiro".equals(user.getUsrName())){
-			if(null!=user&&null!=user.getUsrName()&&null!=user.getUsrPwd()&&!"".equals(user.getUsrName())&&!"".equals(user.getUsrPwd())) {
-				loginUser=service.selectUserByUsrName(user.getUsrName());
-				if(null!=loginUser&&null!=loginUser.getUsrName())
-				{
-					if(user.getUsrPwd().equals(loginUser.getUsrPwd()))
-					{//成功登陆
-						session.setAttribute("user",loginUser);
-						state=1;
-					}else {state=-3;}//用户密码错误
-				}else {state=-2;}//该用户不存在
+		if ("shiro".equals(user.getUsrName())) {
+			if (null != user && null != user.getUsrName() && null != user.getUsrPwd() && !"".equals(user.getUsrName()) && !"".equals(user.getUsrPwd())) {
+				loginUser = service.selectUserByUsrName(user.getUsrName());
+				loginUser1 = service.selectUserByUsrName1(user.getUsrName());
+				if (null != loginUser && null != loginUser.getUsrName()) {
+					if (user.getUsrPwd().equals(loginUser.getUsrPwd())) {//成功登陆
+						session.setAttribute("user", loginUser);
+						session.setAttribute("user1", loginUser1);
+						state = 1;
+					} else {
+						state = -3;
+					}//用户密码错误
+				} else {
+					state = -2;
+				}//该用户不存在
 			}else {state=-1;}//用户名或密码为空
 		}
 
 		map.put("result", state);
 		map.put("user", loginUser);
 		return map;
-    }
-    
-    @RequestMapping("/getUser")
-    public tUserInfoVo getUser(HttpServletRequest request){
-		tUserInfoVo user=(tUserInfoVo) request.getSession().getAttribute("user");
-    	return user;
-    }
-    
-    @RequestMapping("/exit")//退出
-	public void exit(HttpServletRequest request){
+	}
+
+	@RequestMapping("/getUser")
+	public tUserInfoVo getUser(HttpServletRequest request) {
+		tUserInfoVo user = (tUserInfoVo) request.getSession().getAttribute("user");
+		return user;
+	}
+
+	@RequestMapping("/getUser1")
+	public tUserInfoVo getUser1(HttpServletRequest request) {
+		tUserInfoVo user1 = (tUserInfoVo) request.getSession().getAttribute("user1");
+		return user1;
+	}
+
+	@RequestMapping("/exit")//退出
+	public void exit(HttpServletRequest request) {
 		request.getSession().removeAttribute("user");
 	}
 
 	@RequestMapping("/keepSession")//退出
-	public int keepSession(){
+	public int keepSession() {
 		return 1;
 	}
 
 	@RequestMapping(value="/userloginInterface",method= RequestMethod.GET)
 	public void userloginInterface(String usrName,String usrPwd, HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException {
 		String decodeusrPwd = Base64Util.decode(usrPwd);//base64密码解码
-		int state=0;
-		tUserInfoVo loginUser=null;
-		Map<String,Object> map=new HashMap<>();
+		int state = 0;
+		tUserInfoVo loginUser = null;
+		tUserInfoVo loginUser1 = null;
+		Map<String, Object> map = new HashMap<>();
 		HttpSession session = request.getSession();
-		if(null!=usrName&&null!=decodeusrPwd&&!"".equals(usrName)&&!"".equals(decodeusrPwd)) {
-			loginUser=service.selectUserByUsrName(usrName);
-			if(null!=loginUser&&null!=loginUser.getUsrName())
-			{
-				if(decodeusrPwd.equals(loginUser.getUsrPwd()))
-				{//成功登陆
-					session.setAttribute("user",loginUser);
-					state=1;
-				}else {state=-3;}//用户密码错误
-			}else {state=-2;}//该用户不存在
+		if (null != usrName && null != decodeusrPwd && !"".equals(usrName) && !"".equals(decodeusrPwd)) {
+			loginUser = service.selectUserByUsrName(usrName);
+			loginUser1 = service.selectUserByUsrName1(usrName);
+			if (null != loginUser && null != loginUser.getUsrName()) {
+				if (decodeusrPwd.equals(loginUser.getUsrPwd())) {//成功登陆
+					session.setAttribute("user", loginUser);
+					session.setAttribute("user1", loginUser1);
+					state = 1;
+				} else {
+					state = -3;
+				}//用户密码错误
+			} else {
+				state = -2;
+			}//该用户不存在
 		}else {state=-1;}//用户名或密码为空
 
 		if(state==1){

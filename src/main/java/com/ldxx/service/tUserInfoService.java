@@ -21,7 +21,9 @@ public interface tUserInfoService {
 
     tUserInfoVo selectUserByUsrName(String name);
 
-    int updatepasswordById(String usrPwd,String usrId);
+    tUserInfoVo selectUserByUsrName1(String name);
+
+    int updatepasswordById(String usrPwd, String usrId);
 
     tUserInfoVo selectUserById(String usrId);
 }

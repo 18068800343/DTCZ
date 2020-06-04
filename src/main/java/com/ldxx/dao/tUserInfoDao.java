@@ -18,15 +18,17 @@ public interface tUserInfoDao {
 
     int deltUserInfo(String id);
 
-    int iscountUNameEdit(String name,String id);
+    int iscountUNameEdit(String name, String id);
 
     tUserInfoVo selectUserByUsrName(String name);
 
-    int updatepasswordById(String usrPwd,String usrId);
+    tUserInfoVo selectUserByUsrName1(String name);
+
+    int updatepasswordById(String usrPwd, String usrId);
 
     tUserInfoVo selectUserById(String usrId);
 
-    int updlastMonitoringSiteById(@Param("lastMonitoringSite")String lastMonitoringSite,@Param("usrId")String usrId);
+    int updlastMonitoringSiteById(@Param("lastMonitoringSite") String lastMonitoringSite, @Param("usrId") String usrId);
 
     int deltUserInfoByUsrName(String useraccount);
 
