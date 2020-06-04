@@ -1971,8 +1971,9 @@ let initGongSiTongJiYuJingEcharts = (data) => {
     let erJi = data.erJi != null ? data.erJi.split(",") : [0, 0, 0, 0, 0, 0, 0];
 
     let option = {
-
-
+    legend: {
+    	   data: ['bar', 'bar2']
+    	},
         xAxis: [{
             type: 'category',
             data: company,
@@ -2389,7 +2390,6 @@ let getDanZhouChaoZai = (data) => {
     let maxAxle = data.maxAxle != null ? data.maxAxle.split(",") : new Array(10);
     let evtTime = data.evtTime != null ? data.evtTime.split(",") : new Array(10);
     let option = {
-        backgroundColor: '#001848',
         xAxis: {
             type: 'category',
             axisTick: {
