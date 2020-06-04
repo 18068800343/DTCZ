@@ -48,5 +48,7 @@ public interface StationSiteDao {
 
     List<CompanySite> getCompanyStationSiteReport();
 
+    List<CompanySite> getCompanyStationSiteReportByGroup(String group, String roleId);
+
     List<Accessory> getAccessoryByPort(String stationPort);
 }

@@ -97,6 +97,18 @@
 		select a.*  from t_dic_lgs a
 	</select>
 
+    <select id="getCompanyStationSiteReportByGroup" resultType="CompanySite">
+        select a.* from t_dic_lgs a
+        <where>
+            <if test="group == 1">
+                id = #{roleId}
+            </if>
+            <if test="group != 0  and group != 1">
+                1!=1
+            </if>
+        </where>
+    </select>
+
     <select id="xg_iscountStationIp" resultType="int">
 		select count(Station_Ip) from station_site where Station_Ip=#{stationIp} and Del_State=1 and S_Id!=#{id}
 	</select>
@@ -105,7 +117,8 @@
 	</select>
 
     <select id="getStationSiteByPort" resultType="StationSite">
-		select a.* from station_site a where <include refid="stationPort_sql"></include>
+        select a.* from station_site a where
+        <include refid="stationPort_sql"></include>
 	</select>
 	<sql id="stationPort_sql">
 		<if test="stationPort!=null and stationPort!=''">

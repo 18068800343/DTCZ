@@ -5,6 +5,7 @@ import com.ldxx.bean.CompanySite;
 import com.ldxx.bean.StationSite;
 import com.ldxx.bean.tUserInfo;
 import com.ldxx.dao.StationSiteDao;
+import com.ldxx.dao.TDicCompanyDao;
 import com.ldxx.service.StationSiteService;
 import com.ldxx.util.LDXXUtils;
 import com.ldxx.util.MsgFormatUtils;
@@ -39,6 +40,9 @@ public class StationSiteController {
     @Resource
     private StationSiteDao stationSiteDao;
 
+    @Resource
+    private TDicCompanyDao tDicCompanyDao;
+
     @RequestMapping("/getAllStationSite")
     public List<StationSite> getAllStationSite() {
         List<StationSite> list = service.getAllStationSite();
@@ -62,9 +66,18 @@ public class StationSiteController {
     }
 
     @RequestMapping("/getCompanyStationSiteReport")
-    public List<CompanySite> getCompanyStationSiteReport() {
+    public Map getCompanyStationSiteReport(HttpSession session) {
 
-        return stationSiteDao.getCompanyStationSiteReport();
+        Map map = new HashMap();
+
+        tUserInfo user = (tUserInfo) session.getAttribute("user");
+        String roleId = user.getUsrRole();
+        Map map1 = tDicCompanyDao.getTDicCompanyById(roleId);
+        String groups = (String) map1.get("groups");
+        List<CompanySite> companySites = stationSiteDao.getCompanyStationSiteReportByGroup(groups, roleId);
+        map.put("list", companySites);
+        map.put("groups", groups);
+        return map;
     }
 
     @RequestMapping("/addStationSite")

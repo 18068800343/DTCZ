@@ -93,7 +93,7 @@
                             <input type="text" class="form-control" id="endTime"/></label>
                             &nbsp;&nbsp;&nbsp; <label class="form-inline">选择公司:
                             <select class="selectpicker" id="zhandian1">
-                                <option value="%">全部</option>
+
                             </select>
                         </label>
                             <button type="button" class="form-inline btn btn-primary" onclick="queding()">
@@ -512,13 +512,25 @@
             error: function (msg) {
             },
             success: function (json) {
+                let list = json.list;
+                let groups = json.groups;
                 $("#zhandian").html('');
-                $("#zhandian").append("<option data-id='groups'  value='控股公司'>控股公司</option>");
-                if (json != null) {
-                    for (let i = 0; i < json.length; i++) {
-                        let companyName = json[i].companyName;
-                        $("#zhandian").append("<option data-id='groups'  value='" + companyName + "'>" + companyName + "</option>");
-                        $("#zhandian1").append("<option data-id='groups'  value='" + companyName + "'>" + companyName + "</option>");
+                if (groups == '0') {
+                    $("#zhandian").append("<option data-id='groups'  value='控股'>控股公司</option>");
+                    $("#zhandian1").append("<option value='%'>全部</option>");
+                    $("#zhandian1").append("<option data-id='groups'  value='控股'>控股公司</option>");
+                }
+                if (list != null) {
+                    if (list.length == 0) {
+                        $("#zhandian1").append("<option value='*'>无</option>");
+                    } else {
+                        for (let i = 0; i < list.length; i++) {
+                            let companyName = list[i].companyName;
+                            // let groups = list[i].groups;
+                            $("#zhandian").append("<option data-id='groups'  value='" + companyName + "'>" + companyName + "</option>");
+                            $("#zhandian1").append("<option data-id='groups'  value='" + companyName + "'>" + companyName + "</option>");
+
+                        }
                     }
 
                     $(".selectpicker").selectpicker({
