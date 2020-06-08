@@ -1035,7 +1035,7 @@
         //初始化第3个页面单轴大于14T
         homePageInit.initDanZhouChaoZai();
 
-        setInterval(refresh, 1000);
+        setInterval(refresh, 4000);
         setInterval(refreshLeft, 4000);
     })
 
@@ -2160,82 +2160,82 @@
         }
     );*/
     //					Micke
-    var myChart = echarts.init(document.getElementById('main2'));
-    myChart.setOption({
-        title: {
-            text: ""
-        },
-        toolbox: {
-            show: true,
-            feature: {
-                mark: {
-                    show: true
-                },
-                dataView: {
-                    show: true,
-                    readOnly: false
-                },
-                magicType: {
-                    show: true,
-                    type: ['line', 'bar']
-                },
-                restore: {
-                    show: true
-                },
-                saveAsImage: {
-                    show: true
-                }
-            }
-        },
-        tooltip: {
-            trigger: 'axis',
-            showDelay: 0, // 显示延迟，添加显示延迟可以避免频繁切换，单位ms
-            axisPointer: { // 坐标轴指示器，坐标轴触发有效
-                type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-            }
-        },
-        legend: {
-            data: ['蒸发量', '降水量', '平均温度']
-        },
-        xAxis: [{
-            type: 'category',
-            data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
-        }],
-        yAxis: [{
-            type: 'value',
-            name: '水量',
-            axisLabel: {
-                formatter: '{value} ml'
-            }
-        },
-            {
-                type: 'value',
-                name: '温度',
-                axisLabel: {
-                    formatter: '{value} °C'
-                }
-            }
-        ],
-        series: [
-
-            {
-                name: '蒸发量',
-                type: 'bar',
-                data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
-            },
-            {
-                name: '降水量',
-                type: 'bar',
-                data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
-            },
-            {
-                name: '平均温度',
-                type: 'line',
-                yAxisIndex: 1,
-                data: [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
-            }
-        ]
-    });
+    // var myChart = echarts.init(document.getElementById('main2'));
+    // myChart.setOption({
+    //     title: {
+    //         text: ""
+    //     },
+    //     toolbox: {
+    //         show: true,
+    //         feature: {
+    //             mark: {
+    //                 show: true
+    //             },
+    //             dataView: {
+    //                 show: true,
+    //                 readOnly: false
+    //             },
+    //             magicType: {
+    //                 show: true,
+    //                 type: ['line', 'bar']
+    //             },
+    //             restore: {
+    //                 show: true
+    //             },
+    //             saveAsImage: {
+    //                 show: true
+    //             }
+    //         }
+    //     },
+    //     tooltip: {
+    //         trigger: 'axis',
+    //         showDelay: 0, // 显示延迟，添加显示延迟可以避免频繁切换，单位ms
+    //         axisPointer: { // 坐标轴指示器，坐标轴触发有效
+    //             type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+    //         }
+    //     },
+    //     legend: {
+    //         data: ['蒸发量', '降水量', '平均温度']
+    //     },
+    //     xAxis: [{
+    //         type: 'category',
+    //         data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+    //     }],
+    //     yAxis: [{
+    //         type: 'value',
+    //         name: '水量',
+    //         axisLabel: {
+    //             formatter: '{value} ml'
+    //         }
+    //     },
+    //         {
+    //             type: 'value',
+    //             name: '温度',
+    //             axisLabel: {
+    //                 formatter: '{value} °C'
+    //             }
+    //         }
+    //     ],
+    //     series: [
+    //
+    //         {
+    //             name: '蒸发量',
+    //             type: 'bar',
+    //             data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
+    //         },
+    //         {
+    //             name: '降水量',
+    //             type: 'bar',
+    //             data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
+    //         },
+    //         {
+    //             name: '平均温度',
+    //             type: 'line',
+    //             yAxisIndex: 1,
+    //             data: [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
+    //         }
+    //     ]
+    // });
     var user;
     $(document).ready(function () {
         getTime();
@@ -2333,7 +2333,7 @@
 
     //初始化左侧总数据
     homePageInit.initHomeData();
-    setInterval(refresh, 1000);
+    setInterval(refresh, 4000);
     setInterval(refreshLeft, 4000);
 
     function refresh() {
@@ -2424,24 +2424,8 @@
         methods: {}
     })
 
-    function lookMsg(e, obj) {
-        $.ajax({
-            type: 'POST',
-            url: '/tWimMsg/gettWimMsgById',
-            dataType: 'json',
-            data: {
-                idLocal: e
-            },
-            error: function (msg) {
-            },
-            success: function (json) {
-                lookxiangqing(json, obj);
-                $("#allMsg1").modal('show');
-            }
-        });
-    }
 
-    var lookxiangqing = (data, obj) => {
+    function lookxiangqing(data, obj) {
         looktWimMsg.id = data.id;
         looktWimMsg.idLocal = data.idLocal;
         looktWimMsg.stationNameRouteName = data.stationNameRouteName;
@@ -2504,11 +2488,11 @@
                 $("#chebodyDiv").html('')
 
                 if (obj != 1 && obj != 2) {
-                    var url2 = "http://" + json.imgUrlPrefix + "/port" + data.stationIP + "/" + data.idLocal + "-Image.jpg"
+                    var url2 = "http://" + json.imgUrlPrefix + "/port" + data.stationIP + "/" + getYMDStr(data.evtTime) + "/" + data.idLocal + "-Image.jpg"
                     var img2 = '<a target="_blank" href="' + url2 + '"><img id="chebodyImg" src="' + url2 + '" class="popup" width=\'80\' height=\'60\';" /></a>'
                     $("#chebodyDiv").append(img2)
                 } else {
-                    var url = "http://" + json.imgUrlPrefix + "/port" + data.stationIP + "/" + data.idLocal + "-PlateImg.jpg"
+                    var url = "http://" + json.imgUrlPrefix + "/port" + data.stationIP + "/" + getYMDStr(data.evtTime) + "/" + data.idLocal + "-PlateImg.jpg"
                     var img = '<a target="_blank" href="' + url + '"><img id="" src="' + url + '" class="popup" width=\'80\' height=\'60\';" /></a>'
                     $("#chepaiImg").append(img)
                 }
@@ -2525,6 +2509,23 @@
             sessionStorage.setItem("from", "2");
         }
 
+    }
+
+    function lookMsg(e, obj) {
+        $.ajax({
+            type: 'POST',
+            url: '/tWimMsg/gettWimMsgById',
+            dataType: 'json',
+            data: {
+                idLocal: e
+            },
+            error: function (msg) {
+            },
+            success: function (json) {
+                lookxiangqing(json, obj);
+                $("#allMsg1").modal('show');
+            }
+        });
     }
 
 </script>

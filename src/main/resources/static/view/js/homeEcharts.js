@@ -516,9 +516,9 @@ homePageInit.initDownEcharts = () => {
             homePageInit.downStationName = json.stationNames.split(",");
             homePageInit.downNums = json.nums.split(",");
             homePageInit.downNums2 = json.nums2.split(",");
-            for(let i in json.nums){
-                homePageInit.initHuanEcharts("huan"+i,i,homePageInit.downNums,homePageInit.downStationName[i], homePageInit.downNums2 );
-                homePageInit.initHuanEcharts2("by"+i,i,homePageInit.downNums[i],homePageInit.downStationName[i], homePageInit.downNums2,homePageInit.downNums,homePageInit.downNums2[i]);
+            for (let i in homePageInit.downNums) {
+                homePageInit.initHuanEcharts("huan" + i, i, homePageInit.downNums, homePageInit.downStationName[i], homePageInit.downNums2);
+                homePageInit.initHuanEcharts2("by" + i, i, homePageInit.downNums[i], homePageInit.downStationName[i], homePageInit.downNums2, homePageInit.downNums, homePageInit.downNums2[i]);
             }
         }
     });
