@@ -719,6 +719,7 @@
             }
         });
         /*initchexing();*/
+        mainVm.searchInit();
     });
 
 
@@ -1249,7 +1250,7 @@
     mainVm.timeRange = "1";
     $("#timeRange").val("1");
     mainVm.formatTimeRange();
-    mainVm.searchInit();
+
 
     let last_page_column='';
     $("#mainContent").find("th").on('click',function(){
