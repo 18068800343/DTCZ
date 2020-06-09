@@ -80,6 +80,7 @@
             <div class="UpperPart">
                 <div class="UpperPartL">
                     <button type="button" class="btn btn-primary  renyuanzhanghu Pea" data-toggle="modal" data-target="#myModal" style="margin: 5PX;float: left;background-color:#549CFD;border:1px solid #549CFD;">录入人员账户</button>
+                    <!--<button type="button" class="btn btn-primary Pfaa"  data-toggle="modal" data-target="#myModal2">导入</button>-->
                 </div>
                 <div class="UpperPartR">
                 </div>
@@ -282,10 +283,38 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal2">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"><b>导入</b></h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <form class="form-inline" id="form1" enctype="multipart/form-data" method="post">
+                        <table>
+                            <tr>
+                                <td><label ></label></td>
+                                <td><input style="width:100%;" type="file" name="file" id="file" class="form-control"></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-success" onclick="file_submit()">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 <script src="../js/jquery.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 <script src="/js/select.min.js"></script>
+<script src="../js/jquery-form.min.js"></script>
 <!--<script src="../js/bootstrap-select.js" ></script>-->
 <script src="../js/common-scripts.js"></script>
 <script src="js/datatables/jquery.dataTables.min.js"></script>
@@ -375,6 +404,31 @@
 
             }
         });
+    }
+
+
+    function file_submit(){
+        var fileName=$("#file").val();
+        if(fileName.indexOf("xls")==-1){
+            toastr.error("请选择表格")
+            return;
+        }
+        var options={
+            url:'/tUserInfo/importExcel',
+            data:{},
+            type:'POST',
+            dataType: 'json',
+            contentType : "application/x-www-form-urlencoded; charset=gbk",
+            success:function(json){
+                if(json>0){
+                    toastr.success('导入成功');
+                    location.reload([true]);
+                }else{
+                    toastr.error('导入失败');
+                }
+            }
+        }
+        $("#form1").ajaxSubmit(options);
     }
 
     function initTable(){

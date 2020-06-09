@@ -6,19 +6,18 @@ import com.ldxx.bean.tUserInfo;
 import com.ldxx.dao.StationSiteDao;
 import com.ldxx.dao.tUserInfoDao;
 import com.ldxx.service.tUserInfoService;
-import com.ldxx.util.Base64Util;
-import com.ldxx.util.LDXXUtils;
-import com.ldxx.util.MsgFormatUtils;
-import com.ldxx.util.getNumCode;
+import com.ldxx.util.*;
 import com.ldxx.vo.UserBody;
 import com.ldxx.vo.tUserInfoVo;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
@@ -184,5 +183,14 @@ public class tUserInfoController {
         jsonObject.put("success",daoMsg);
         jsonObject.put("resultMsg",i);
         return jsonObject.toString();
+    }
+
+    @RequestMapping("/importExcel")
+    @ResponseBody
+    public int importExcel(@RequestParam("file") MultipartFile file) throws IOException {
+        InputStream is=file.getInputStream();
+        ImportData importData=new ImportData();
+        int i=importData.readXls(is);
+        return i;
     }
 }
