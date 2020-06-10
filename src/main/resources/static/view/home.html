@@ -106,10 +106,10 @@
 <div class="layui-tab"
      style="position: absolute;color:white; background-color: transparent;top:5%;width: 100%;height:100%;z-index: 10;">
     <ul class="layui-tab-title">
-        <li class="layui-this"></li>
-        <li></li>
-        <li></li>
-        <li></li>
+        <li onclick="FirHomeClick()" class="layui-this"></li>
+        <li onclick="SecHomeClick()"></li>
+        <li onclick="ThreeHomeClick()"></li>
+        <li onclick="FourHomeClick()"></li>
     </ul>
     <div class="layui-tab-content">
         <div class="layui-tab-item layui-show">
@@ -1002,7 +1002,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         //初始化车流量
-        homePageInit.initLeftEcharts('xian1');
+        /*homePageInit.initLeftEcharts('xian1');
         //初始化三页面右下角
         homePageInit.initLiuZhouChaoZaiShuLiang('sexmain');
 
@@ -1036,8 +1036,124 @@
         homePageInit.initDanZhouChaoZai();
 
         setInterval(refresh, 4000);
-        setInterval(refreshLeft, 4000);
+        setInterval(refreshLeft, 4000);*/
+        FirHomeClick()
     })
+
+    var Firtimer;
+    function FirHomeClick(){
+        clearInterval(Sectimer)
+        clearInterval(Threetimer)
+        clearInterval(Fourtimer)
+        //初始化左侧总数据
+        homePageInit.initHomeData();
+        homePageInit.initLeftEcharts('xian1');
+        //初始化总流量统计和超载率统计
+        homePageInit.initFirTongji();
+        //初始化趋势图
+        homePageInit.initFirqstjt('chart3');
+        Firtimer=setInterval(Firrefresh, 5000);
+    }
+    function Firrefresh(){
+        homePageInit.initHomeData();
+        homePageInit.initLeftEcharts('xian1');
+        //初始化总流量统计和超载率统计
+        homePageInit.initFirTongji();
+        //初始化趋势图
+        homePageInit.initFirqstjt('chart3');
+    }
+    var Sectimer;
+    function SecHomeClick(){
+        clearInterval(Firtimer)
+        clearInterval(Threetimer)
+        clearInterval(Fourtimer)
+        //初始化第二个页面统计数据
+        homePageInit.initSecHomeData();
+        //初始化第二个页面当日超载柱状图
+        homePageInit.initSecChaoZaiDataToday();
+        //初始化第二个页面超载柱状图
+        homePageInit.initSecChaoZaiDataMonth();
+        Sectimer=setInterval(Secrefresh, 5000);
+    }
+    function Secrefresh(){
+        //初始化第二个页面统计数据
+        homePageInit.initSecHomeData();
+        //初始化第二个页面当日超载柱状图
+        homePageInit.initSecChaoZaiDataToday();
+        //初始化第二个页面超载柱状图
+        homePageInit.initSecChaoZaiDataMonth();
+    }
+
+    var Threetimer;
+    function ThreeHomeClick(){
+        clearInterval(Firtimer)
+        clearInterval(Sectimer)
+        clearInterval(Fourtimer)
+        //初始化第二个页面统计数据
+        homePageInit.initSecHomeData();
+        //初始化第二个页面当日超载柱状图
+        homePageInit.initSecChaoZaiDataToday();
+        //初始化第二个页面超载柱状图
+        homePageInit.initSecChaoZaiDataMonth();
+        //初始化第3个页面公司预警统计
+        homePageInit.initGongSiTongJiYuJingData();
+        //初始化第3个页面省界预警统计
+        homePageInit.initShengJieTongJiYuJingData();
+        //初始化第3个页面省界预警统计
+        homePageInit.initLiuZhouShengJieChaoZai();
+        //初始化第3个页面公司预警统计
+        homePageInit.initGongSiTongJiYuJingData_LiuZhou();
+        //初始化第3个页面单轴大于14T
+        homePageInit.initDanZhouChaoZai();
+        Threetimer=setInterval(Threerefresh, 5000);
+    }
+    function Threerefresh(){
+        //初始化第二个页面统计数据
+        homePageInit.initSecHomeData();
+        //初始化第二个页面当日超载柱状图
+        homePageInit.initSecChaoZaiDataToday();
+        //初始化第二个页面超载柱状图
+        homePageInit.initSecChaoZaiDataMonth();
+        //初始化第3个页面公司预警统计
+        homePageInit.initGongSiTongJiYuJingData();
+        //初始化第3个页面省界预警统计
+        homePageInit.initShengJieTongJiYuJingData();
+        //初始化第3个页面省界预警统计
+        homePageInit.initLiuZhouShengJieChaoZai();
+        //初始化第3个页面公司预警统计
+        homePageInit.initGongSiTongJiYuJingData_LiuZhou();
+        //初始化第3个页面单轴大于14T
+        homePageInit.initDanZhouChaoZai();
+        //初始化三页面右下角
+        homePageInit.initLiuZhouChaoZaiShuLiang('sexmain');
+    }
+
+    var Fourtimer;
+    function FourHomeClick(){
+        clearInterval(Firtimer)
+        clearInterval(Sectimer)
+        clearInterval(Threetimer)
+
+        //初始化车流量
+        homePageInit.initLeftEcharts('xian1');
+        //初始化环形图0
+        homePageInit.initDownEcharts();
+        homePageInit.initLastEcharts()
+        //初始化左侧总数据
+        homePageInit.initHomeData();
+        Fourtimer=setInterval(Fourrefresh, 5000);
+
+    }
+
+    function Fourrefresh(){
+        //初始化车流量
+        homePageInit.initLeftEcharts('xian1');
+        //初始化环形图0
+        homePageInit.initDownEcharts();
+        homePageInit.initLastEcharts()
+        //初始化左侧总数据
+        homePageInit.initHomeData();
+    }
 
 
     var myChart = echarts.init(document.getElementById("mainb"));
@@ -2325,7 +2441,7 @@
     }
 
     //初始化车流量
-    homePageInit.initLeftEcharts('xian1');
+   /* homePageInit.initLeftEcharts('xian1');
 
     //初始化环形图0
     homePageInit.initDownEcharts();
@@ -2366,7 +2482,7 @@
     function refreshLeft() {
         homePageInit.initHomeData();
         homePageInit.initSecHomeData();
-    }
+    }*/
 
     var looktWimMsg = new Vue({
         el: '#lookWimMsgDiv',

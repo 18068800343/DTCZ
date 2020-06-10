@@ -488,7 +488,7 @@ homePageInit.initLiuZhouChaoZaiShuLiang = (id) => {
         dataType: 'json',
         data: {
             stationPorts: homePageInit.stationPort.toString(),
-            limit: 4
+            limit: 5
         },
         error: function (msg) {
         },
