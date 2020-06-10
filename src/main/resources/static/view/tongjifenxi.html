@@ -2985,11 +2985,9 @@
                         let stationPort = json.stationPort.split(",");
                         let stationName = json.stationName.split(",");
                         for (let i = 0; i < stationPort.length; i++) {
-                            for (let i = 0; i < stationName.length; i++) {
                                 $("#stationPort").append("<option  value='" + stationPort[i] + "'>" + stationName[i] + "</option>");
                                 $("#stationPort_week").append("<option  value='" + stationPort[i] + "'>" + stationName[i] + "</option>");
                                 $("#stationPort2").append("<option  value='" + stationPort[i] + "'>" + stationName[i] + "</option>");
-                            }
                         }
                     } else {
                         $("#stationPort").append("<option  value='" + json.stationPort + "'>" + json.stationName + "</option>");
