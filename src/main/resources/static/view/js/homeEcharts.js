@@ -143,21 +143,27 @@ let initHomeMap = (lngLats,stationNames)=>{
                     geoCoord: geoCoordData,
                     hoverable:false,//隐藏悬浮背景色
                     markPoint: {
-                        symbol: 'emptyCircle',
-                        symbolSize: 15,
+                        symbol: 'circle',
+                        symbolSize: 10,
                         itemStyle: {
                             normal: {
                                 borderColor: '#E5E324',
                                 borderWidth: 1, // 标注边线线宽，单位px，默认为1
                                 label: {
-                                    show: true
-                                }
+                                    show: false
+                                },
+//                                show: false
                             }
                         },
-                        effect: {
+                       /* effect: {
                             show: true,
                             shadowBlur: 0,
                             loop: true
+                        },*/
+                        itemStyle: {
+                            normal: {
+                                color: 'red', //标志颜色
+                            }
                         },
                         data : markPointData
                     }
