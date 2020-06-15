@@ -144,9 +144,13 @@ let initHomeMap = (lngLats,stationNames)=>{
                     hoverable:false,//隐藏悬浮背景色
                     markPoint: {
                         symbol: 'circle',
-                        symbolSize: 10,
+                        symbolSize: function (val,params) {
+                        	  return val[1] * 3;
+                        	},
                         itemStyle: {
                             normal: {
+                            	color: '#2e70bc', //地图背景色
+                            	areaColor: '#006fff',
                                 borderColor: '#E5E324',
                                 borderWidth: 1, // 标注边线线宽，单位px，默认为1
                                 label: {
