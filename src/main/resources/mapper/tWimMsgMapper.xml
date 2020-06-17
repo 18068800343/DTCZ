@@ -1254,5 +1254,39 @@
             LIMIT #{limit}
         </if>
     </sql>
+
+    <select id="getDiTujwdByPort" resultType="CheLiuLiangEchartsList">
+        SELECT
+        group_concat(aa.cnt SEPARATOR ',') AS nums,
+        group_concat(aa.Station_Port SEPARATOR ',') AS station_ports,
+        group_concat(aa.station_name SEPARATOR ',') AS station_names,
+				GROUP_CONCAT(CONCAT(aa.Station_Longitude,"-",aa.Station_Latitude)) as lnglat
+        FROM
+		(
+			SELECT * FROM(SELECT
+			COUNT(
+				CASE
+				WHEN a.Station_IP IS NOT NULL THEN
+					0
+				END
+			) cnt,
+			b.Station_Port,
+			b.Station_Name,ss.Station_Longitude,ss.Station_Latitude
+			FROM
+				t_vehicle_msg_today a
+			RIGHT JOIN station_site b ON a.Station_IP = b.Station_Port AND date(a.Evt_Time) = curdate()
+			LEFT JOIN station_site ss on ss.Station_Port=b.Station_Port
+
+			GROUP BY
+        b.Station_Port
+        HAVING FIND_IN_SET(b.Station_Port,#{stationPort})
+
+        ORDER BY
+        cnt DESC,b.Station_Name ASC
+
+        )dd ORDER BY dd.cnt desc
+        ) aa
+
+    </select>
     
 </mapper>

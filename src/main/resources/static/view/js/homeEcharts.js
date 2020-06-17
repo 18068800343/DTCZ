@@ -46,21 +46,40 @@ let bindMaxWeight = (idLocal) => {
     $("#chart1Detail1").modal("show");
 }
 
+homePageInit.initditu = () => {
+    $.ajax({
+        type: 'POST',
+        url: '/tWimMsg/getDiTujwdByPort',
+        dataType: 'json',
+        async: false,
+        data: {},
+        error: function (msg) {
+        },
+        success: function (json) {
+            if (json != null) {
+                initHomeMap(json.lnglat.split(","),json.stationNames.split(","));
+            }
+        }
+    });
+}
+homePageInit.initditu()
 
-
-let initHomeMap = (lngLats,stationNames)=>{
+function initHomeMap(lngLats,stationNames){
     let geoCoordData = {};
     let markPointData = [];
+    var size = [16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1]
     for(let i in lngLats){
         let lngLatArray = [];
         let markPointItem = {};
         markPointItem.name = i+"";
         markPointItem.value = stationNames[i];
+        markPointItem.symbolSize=size[i];
         markPointData.push(markPointItem);
         lngLatArray.push(lngLats[i].split("-")[0]);
         lngLatArray.push(lngLats[i].split("-")[1]);
         geoCoordData[i+""] =lngLatArray;
     }
+
 
     require.config({
         paths: {
@@ -144,7 +163,7 @@ let initHomeMap = (lngLats,stationNames)=>{
                     hoverable:false,//隐藏悬浮背景色
                     markPoint: {
                         symbol: 'circle',
-                        symbolSize: function (val,params) {
+                        symbolSize: (val, params) => {
                         	  return val[1] * 3;
                         	},
                         itemStyle: {
@@ -199,7 +218,7 @@ homePageInit.initzhandian = () => {
             if (json != null) {
                 homePageInit.stationPort = json.stationPort.split(",");
                 homePageInit.stationName = json.stationName.split(",");
-                initHomeMap(json.lnglat.split(","),homePageInit.stationName);
+                //initHomeMap(json.lnglat.split(","),homePageInit.stationName);
             }
         }
     });

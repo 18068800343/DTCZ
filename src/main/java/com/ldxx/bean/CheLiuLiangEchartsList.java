@@ -12,6 +12,24 @@ public class CheLiuLiangEchartsList {
     private String cnt3;//关键车辆三级预警数量
 
     private Integer link;
+    private String lnglat;//站点经纬度
+
+    public Integer getLink() {
+        return link;
+    }
+
+    public void setLink(Integer link) {
+        this.link = link;
+    }
+
+    public String getLnglat() {
+        return lnglat;
+    }
+
+    public void setLnglat(String lnglat) {
+        this.lnglat = lnglat;
+    }
+
     public String getNumsBili() {
         return numsBili;
     }

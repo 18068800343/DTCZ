@@ -713,4 +713,16 @@ public class tWimMsgController {
         Map map = tWimMsgDao.initShengJieTongJiYuJingData(stationPorts, limit);
         return map;
     }
+
+    /**
+     * 通过登录人的站点端口号查询地图经纬度信息并按照车流量大小倒叙排
+     * @param 
+     * @return
+     */
+    @RequestMapping("/getDiTujwdByPort")
+    public CheLiuLiangEchartsList getDiTujwdByPort(HttpSession session) {
+        tUserInfo user = (tUserInfo) session.getAttribute("user");
+        String zhandianduankouhao = user.getStationPort();
+        return tWimMsgDao.getDiTujwdByPort(zhandianduankouhao);
+    }
 }
