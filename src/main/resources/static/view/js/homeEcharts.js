@@ -57,23 +57,37 @@ homePageInit.initditu = () => {
         },
         success: function (json) {
             if (json != null) {
-                initHomeMap(json.lnglat.split(","),json.stationNames.split(","));
+                initHomeMap(json.lnglat.split(","),json.stationNames.split(","),json.nums.split(","));
             }
         }
     });
 }
 homePageInit.initditu()
 
-function initHomeMap(lngLats,stationNames){
+function initHomeMap(lngLats,stationNames,nums){
     let geoCoordData = {};
     let markPointData = [];
-    var size = [16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1]
+    var size = [20,17,14,11,8,5]
     for(let i in lngLats){
+        var liuliangNums=nums[i];
         let lngLatArray = [];
         let markPointItem = {};
         markPointItem.name = i+"";
         markPointItem.value = stationNames[i];
-        markPointItem.symbolSize=size[i];
+        //markPointItem.symbolSize=size[i];
+        if(liuliangNums>40000){
+            markPointItem.symbolSize=size[0];
+        }else if(liuliangNums>30000){
+            markPointItem.symbolSize=size[1];
+        }else if(liuliangNums>20000){
+            markPointItem.symbolSize=size[2];
+        }else if(liuliangNums>10000){
+            markPointItem.symbolSize=size[3];
+        }else if(liuliangNums>5000){
+            markPointItem.symbolSize=size[4];
+        }else{
+            markPointItem.symbolSize=size[5];
+        }
         markPointData.push(markPointItem);
         lngLatArray.push(lngLats[i].split("-")[0]);
         lngLatArray.push(lngLats[i].split("-")[1]);
