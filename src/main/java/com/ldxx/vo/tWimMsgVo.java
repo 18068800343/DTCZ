@@ -29,6 +29,16 @@ public class tWimMsgVo extends tWimMsg  implements Serializable{
     private String plateImg1;//车牌图片base64二进制码
     private String plateImg2;//车牌正面照图片base64二进制码
 
+    @Override
+    public String toString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String evtTime = sdf.format(getEvtTime());
+        return stationName + "," + laneNoName +
+                "," + getPlate() + "," + licensePlateColor + "," + getLength() + "," + getSpeed() + "," + getAxlesCount() +
+                "," + getTotalWeight() + "," + getTemperature() + "," + overWeightRatioName + "," + evtTime +
+                "," + directionName + "," + isStraddleName + "," + vehicleTypeName + "," + getOverWeight();
+    }
+
     public Integer getDeviceNo() {
         return deviceNo;
     }
@@ -165,12 +175,4 @@ public class tWimMsgVo extends tWimMsg  implements Serializable{
         this.vehicleTypeName = vehicleTypeName;
     }
 
-    @Override
-    public String toString() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String evtTime = sdf.format(getEvtTime());
-        return stationName+","+laneNoName+
-                ","+getPlate()+","+licensePlateColor+","+getLength()+","+getSpeed()+","+getAxlesCount()+
-                ","+getTotalWeight()+","+getTemperature()+","+overWeightRatioName+","+evtTime;
-    }
 }
