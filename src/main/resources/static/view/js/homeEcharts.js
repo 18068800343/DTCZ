@@ -2587,11 +2587,27 @@ homePageInit.initDanZhouChaoZai = () => {
     });
 }
 
+function getListByJSON(json) {
+    let listMap = {};
+    let listx = [];
+    let listy = [];
+    for (let i in json) {
+        listx[i] = json[i].maxAxle;
+        listy[i] = json[i].Evt_Time;
+    }
+    listMap.listx = listx;
+    listMap.listy = listy;
+    return listMap;
+}
+
 let getDanZhouChaoZai = (data) => {
     // 指定图表的配置项和数据
     let myChart = echarts.init(document.getElementById("fivemain"));
-    let maxAxle = data.maxAxle != null ? data.maxAxle.split(",") : new Array(10);
-    let evtTime = data.evtTime != null ? data.evtTime.split(",") : new Array(10);
+    let listMap = getListByJSON(data);
+    // let maxAxle = data.maxAxle != null ? data.maxAxle.split(",") : new Array(10);
+    // let evtTime = data.evtTime != null ? data.evtTime.split(",") : new Array(10);
+    let maxAxle = listMap.listx;
+    let evtTime = listMap.listy;
     let option = {
         xAxis: {
             type: 'category',
@@ -2608,7 +2624,6 @@ let getDanZhouChaoZai = (data) => {
             axisLine: {
                 lineStyle: {
                     color: 'rgba(12,102,173,.5)',
-                    width: 2,
                 }
             },
         },
@@ -2623,7 +2638,6 @@ let getDanZhouChaoZai = (data) => {
             },
             axisLine: {
                 lineStyle: {
-                    width: 2,
                     color: 'rgba(12,102,173,.5)',//y轴的轴线的宽度和颜色
                 }
             },
