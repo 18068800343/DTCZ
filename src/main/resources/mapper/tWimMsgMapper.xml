@@ -1032,7 +1032,7 @@
         ) aa
     </select>
 
-    <select id="getDanZhouChaoZai" resultType="map">
+    <select id="getDanZhouChaoZai" resultType="danZhouChaoZai">
 --         SELECT
 --             GROUP_CONCAT(maxAxle) maxAxle,
 --             GROUP_CONCAT(Evt_Time) evtTime
@@ -1063,7 +1063,7 @@
                         tvmt.Axle9,
                         tvmt.Axle10
                     ) else 0 end  as maxAxle,
-                    Evt_Time
+                    Evt_Time evtTime
                 FROM
                     t_vehicle_msg_today tvmt
                 WHERE FIND_IN_SET(Station_IP,#{stationPorts})

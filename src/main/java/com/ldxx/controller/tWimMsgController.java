@@ -684,8 +684,8 @@ public class tWimMsgController {
      * @return
      */
     @RequestMapping("/getDanZhouChaoZai")
-    public List<tWimMsgVo> getDanZhouChaoZai(String stationPorts, Integer limit) {
-        List<tWimMsgVo> map = tWimMsgDao.getDanZhouChaoZai(stationPorts, limit);
+    public List<DanZhouChaoZai> getDanZhouChaoZai(String stationPorts, Integer limit) {
+        List<DanZhouChaoZai> map = tWimMsgDao.getDanZhouChaoZai(stationPorts, limit);
         return map;
     }
 

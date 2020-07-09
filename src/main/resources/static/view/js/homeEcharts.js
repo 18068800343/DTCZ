@@ -2593,7 +2593,7 @@ function getListByJSON(json) {
     let listy = [];
     for (let i in json) {
         listx[i] = json[i].maxAxle;
-        listy[i] = json[i].Evt_Time;
+        listy[i] = json[i].evtTime;
     }
     listMap.listx = listx;
     listMap.listy = listy;

@@ -69,7 +69,7 @@ public interface tWimMsgDao {
     SecHomeData getSecChaoZaiEcharsListMonth(String yearMonth, String axlesCount, String stationPorts, Integer limit);
 
 
-   List<tWimMsgVo> getDanZhouChaoZai(String stationPorts, Integer limit);
+   List<DanZhouChaoZai> getDanZhouChaoZai(String stationPorts, Integer limit);
 
     Map getGongSiTongJiYuJingData(String stationPorts, Integer limit, Integer axlesCount);
 
