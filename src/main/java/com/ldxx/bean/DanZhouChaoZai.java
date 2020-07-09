@@ -7,18 +7,17 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class DanZhouChaoZai implements Serializable {
-    //打包时间
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date evtTime;
+
+    private String evtTime;
+
     //车道号
     private Integer maxAxle;
 
-    public Date getEvtTime() {
+    public String getEvtTime() {
         return evtTime;
     }
 
-    public void setEvtTime(Date evtTime) {
+    public void setEvtTime(String evtTime) {
         this.evtTime = evtTime;
     }
 

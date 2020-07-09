@@ -1033,45 +1033,33 @@
     </select>
 
     <select id="getDanZhouChaoZai" resultType="danZhouChaoZai">
---         SELECT
---             GROUP_CONCAT(maxAxle) maxAxle,
---             GROUP_CONCAT(Evt_Time) evtTime
---         FROM
---             (
-                                SELECT
-                    case when
-                    GREATEST(
-                        tvmt.Axle1,
-                        tvmt.Axle2,
-                        tvmt.Axle3,
-                        tvmt.Axle4,
-                        tvmt.Axle5,
-                        tvmt.Axle6,
-                        tvmt.Axle7,
-                        tvmt.Axle8,
-                        tvmt.Axle9,
-                        tvmt.Axle10
-                    )>14000 then GREATEST(
-                        tvmt.Axle1,
-                        tvmt.Axle2,
-                        tvmt.Axle3,
-                        tvmt.Axle4,
-                        tvmt.Axle5,
-                        tvmt.Axle6,
-                        tvmt.Axle7,
-                        tvmt.Axle8,
-                        tvmt.Axle9,
-                        tvmt.Axle10
-                    ) else 0 end  as maxAxle,
-                    Evt_Time evtTime
-                FROM
-                    t_vehicle_msg_today tvmt
-                WHERE FIND_IN_SET(Station_IP,#{stationPorts})
---                 HAVING
---                     maxAxle >= 14000
-                ORDER BY
-                    Evt_Time DESC
---             ) a
+SELECT
+	count(maxAxle) maxAxle,left(a.Evt_Time,13) Evt_Time
+FROM
+	(
+		SELECT
+
+			GREATEST(
+				tvmt.Axle1,
+				tvmt.Axle2,
+				tvmt.Axle3,
+				tvmt.Axle4,
+				tvmt.Axle5,
+				tvmt.Axle6,
+				tvmt.Axle7,
+				tvmt.Axle8,
+				tvmt.Axle9,
+				tvmt.Axle10
+			)
+maxAxle,
+		Evt_Time
+	FROM
+		t_vehicle_msg_today tvmt
+		WHERE FIND_IN_SET(Station_IP,#{stationPorts})
+  having  maxAxle>14000
+	ORDER BY
+		Evt_Time DESC
+	)a group by left(a.Evt_Time,13)
     </select>
 
 
