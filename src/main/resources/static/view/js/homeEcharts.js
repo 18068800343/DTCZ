@@ -67,7 +67,7 @@ homePageInit.initditu()
 function initHomeMap(lngLats,stationNames,nums){
     let geoCoordData = {};
     let markPointData = [];
-    var size = [20,17,14,11,8,5]
+    var size = [23,20,17,13,10,8]
     for(let i in lngLats){
         var liuliangNums=nums[i];
         let lngLatArray = [];
@@ -176,7 +176,7 @@ function initHomeMap(lngLats,stationNames,nums){
                     geoCoord: geoCoordData,
                     hoverable:false,//隐藏悬浮背景色
                     markPoint: {
-                        symbol: 'circle',
+                        /*symbol: 'circle',*/
                         symbolSize: (val, params) => {
                         	  return val[1] * 3;
                         	},
@@ -199,7 +199,7 @@ function initHomeMap(lngLats,stationNames,nums){
                         },*/
                         itemStyle: {
                             normal: {
-                                color: 'red', //标志颜色
+                                color: '#007CFC', //标志颜色
                             }
                         },
                         data : markPointData
