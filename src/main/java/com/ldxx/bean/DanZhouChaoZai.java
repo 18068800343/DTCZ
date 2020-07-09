@@ -13,10 +13,16 @@ public class DanZhouChaoZai {
     //车道号
     private Integer maxAxle;
 
+    //打包时间
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public Date getEvt_Time() {
         return Evt_Time;
     }
 
+    //打包时间
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public void setEvt_Time(Date evt_Time) {
         Evt_Time = evt_Time;
     }

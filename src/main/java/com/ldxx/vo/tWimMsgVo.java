@@ -28,6 +28,8 @@ public class tWimMsgVo extends tWimMsg  implements Serializable{
     private Integer vehicleWeight;//车货总质量单位: 千克 数字类型
     private String plateImg1;//车牌图片base64二进制码
     private String plateImg2;//车牌正面照图片base64二进制码
+    //车道号
+    private Integer maxAxle;
 
     @Override
     public String toString() {
@@ -37,6 +39,14 @@ public class tWimMsgVo extends tWimMsg  implements Serializable{
                 "," + getPlate() + "," + licensePlateColor + "," + getLength() + "," + getSpeed() + "," + getAxlesCount() +
                 "," + getTotalWeight() + "," + getTemperature() + "," + overWeightRatioName + "," + evtTime +
                 "," + directionName + "," + isStraddleName + "," + vehicleTypeName + "," + getOverWeight();
+    }
+
+    public Integer getMaxAxle() {
+        return maxAxle;
+    }
+
+    public void setMaxAxle(Integer maxAxle) {
+        this.maxAxle = maxAxle;
     }
 
     public Integer getDeviceNo() {
