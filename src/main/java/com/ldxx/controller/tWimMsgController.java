@@ -738,6 +738,7 @@ public class tWimMsgController {
         List<tjfxTotalEchars> tjfxTotalEchars = tWimMsgDao.getsexTotalEchars();
         tjfxTotalEchars.add(0,toadynum);
 
+        Collections.reverse(tjfxTotalEchars);
         return tjfxTotalEchars;
     }
 }
