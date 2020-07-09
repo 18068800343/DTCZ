@@ -1032,6 +1032,24 @@
 			sessionStorage.setItem("from",""); //销毁 from 防止在b页面刷新 依然触发$('#xxx').click()
 		}
 
+		//点击地图站点跳转过来的
+		var stationName = sessionStorage.getItem("stationName");
+		if(stationName!=""){
+			$('#zhandian').selectpicker('val',['noneSelectedText'])
+
+			var options = document.getElementById('zhandian').options;
+
+			for(var i = 0; i < options.length; i++){
+				var option = options[i].text;
+				var stationport = options[i].value;
+				if(option == stationName){
+					$("#zhandian").val(stationport);
+					$('#zhandian').selectpicker('val', stationport);
+				}
+			}
+			quedingDianJi()
+		}
+
 	}
 
 	function clickImg(obj){

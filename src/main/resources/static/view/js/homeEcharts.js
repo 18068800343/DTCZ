@@ -208,7 +208,15 @@ function initHomeMap(lngLats,stationNames,nums){
                 }]
             },
 
-
+            myChartmainfir.on(ecConfig.EVENT.CLICK, eConsole);
+            myChart.on(ecConfig.EVENT.CLICK, eConsole);
+            function eConsole(param){
+                var name=param.value;
+                if(name!=null&&name!=""&&name!=undefined&&name!="-"){
+                    window.location.href = 'shishijiance.html';
+                    sessionStorage.setItem("stationName", name);
+                }
+            }
 
 
             myChart.setOption(option);
