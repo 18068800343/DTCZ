@@ -1764,7 +1764,7 @@ let setSecCZEchars=(data,zhoushu)=>{
 
         xAxis: [{
             type: 'category',
-            data: data.stationNames.split(","),
+            data: data.sjName.split(","),
             axisPointer: {
                 type: 'shadow'
             },
@@ -1846,6 +1846,9 @@ let setSecCZEchars=(data,zhoushu)=>{
             type: 'bar',
             data: data.chaoZaicCount.split(","),
             barWidth: 20, //柱图宽度
+            itemStyle:{
+                barBorderRadius:[50,50,0,0],//柱顶弧形
+            },
             label: {
                 normal: {
                     show: true,
@@ -1857,17 +1860,19 @@ let setSecCZEchars=(data,zhoushu)=>{
         },
 
             {
-                type: 'line',
+                type: 'bar',
                 yAxisIndex: 1,
-                color:'#E82DA2',
+                color:'#47FFCD',
                 data: chaozaibili,
-                normal: {
-                    label: {
-                        show: true,
-                        position: 'top',
-                        formatter: '{b}\n{c}%'
-                    }
+                itemStyle:{
+                    barBorderRadius:[50,50,0,0],//柱顶弧形
+                },
+                label: {
+                    show: true,
+                    position: 'top',
+                    formatter: '{c}%'
                 }
+
             }
         ]
     };
@@ -1945,7 +1950,7 @@ let initSecChaoZaiEchars=(data,zhoushu)=> {
 
         xAxis: [{
             type: 'category',
-            data: data.stationNames.split(","),
+            data: data.sjName.split(","),
             axisPointer: {
                 type: 'shadow'
             },

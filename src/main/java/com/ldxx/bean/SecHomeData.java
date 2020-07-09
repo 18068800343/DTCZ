@@ -12,6 +12,15 @@ public class SecHomeData {
     private String chaoZai4CountMonth;
     private String chaoZai5CountMonth;
     private String chaoZai6CountMonth;
+    private String sjName;
+
+    public String getSjName() {
+        return sjName;
+    }
+
+    public void setSjName(String sjName) {
+        this.sjName = sjName;
+    }
 
     public String getStationPort() {
         return stationPort;
