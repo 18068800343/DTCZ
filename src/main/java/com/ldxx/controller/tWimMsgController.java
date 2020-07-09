@@ -5,6 +5,7 @@ import com.ldxx.Thread.PageCountCallable;
 import com.ldxx.Thread.PageCountYiChangCallable;
 import com.ldxx.bean.*;
 import com.ldxx.dao.StationSiteDao;
+import com.ldxx.dao.tAvgDayDao;
 import com.ldxx.dao.tUserInfoDao;
 import com.ldxx.dao.tWimMsgDao;
 import com.ldxx.service.Impl.RedisServiceImpl;
@@ -724,5 +725,19 @@ public class tWimMsgController {
         tUserInfo user = (tUserInfo) session.getAttribute("user");
         String zhandianduankouhao = user.getStationPort();
         return tWimMsgDao.getDiTujwdByPort(zhandianduankouhao);
+    }
+
+    /**
+     * 首页趋势图，查询最近七天总流量和超载量
+     */
+    @RequestMapping("/getQushitu")
+    public List<tjfxTotalEchars> getQushitu(String stationPorts){
+        String date = GetThisTimeUtils.getDate();
+        tjfxTotalEchars toadynum = tWimMsgDao.getTodayzongliuliangAndzongchaozai(stationPorts);
+        toadynum.setAvgTime(date);
+        List<tjfxTotalEchars> tjfxTotalEchars = tWimMsgDao.getsexTotalEchars();
+        tjfxTotalEchars.add(0,toadynum);
+
+        return tjfxTotalEchars;
     }
 }

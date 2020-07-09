@@ -1358,10 +1358,34 @@ homePageInit.initFirqstjt = (id) => {
                 $("#fir_chaozailvName"+i+"").html(stationNames[i])
             }
 
-            homePageInit.downStationNames = json.stationNames.split(",");
+            /*homePageInit.downStationNames = json.stationNames.split(",");
             homePageInit.downNums = json.nums.split(",");
             homePageInit.numCount = json.numCount.split(",");
-            homePageInit.initFirqstjtEcharts(id,homePageInit.downStationNames,homePageInit.downNums, homePageInit.numCount );
+            homePageInit.initFirqstjtEcharts(id,homePageInit.downStationNames,homePageInit.downNums, homePageInit.numCount );*/
+
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: '/tWimMsg/getQushitu',
+        dataType: 'json',
+        data: {
+            stationPorts: homePageInit.stationPort.toString(),
+        },
+        error: function (msg) {
+        },
+        success: function (json) {
+            //初始化超载率统计
+            var dateArr=[];
+            var liuliangArr=[]
+            var chaizaiArr=[];
+            for(var i=0;i<json.length;i++){
+                dateArr.push(json[i].avgTime)
+                liuliangArr.push(json[i].zongliuliangnum)
+                chaizaiArr.push(json[i].zongchaozainum)
+            }
+
+            homePageInit.initFirqstjtEcharts(id,dateArr,chaizaiArr, liuliangArr );
 
         }
     });
@@ -1423,7 +1447,7 @@ homePageInit.initFirqstjtEcharts = (id,stationNames,nums,numCount) => {
                     formatter : function(params) { //文字换行
                         let newParamsName = "";// 最终拼接成的字符串
                         let paramsNameNumber = params.length;// 实际标签的个数
-                        let provideNumber = 4;// 每行能显示的字的个数
+                        let provideNumber = 5;// 每行能显示的字的个数
                         let rowNumber = Math.ceil(paramsNameNumber / provideNumber);// 换行的话，需要显示几行，向上取整
                         /**
                          * 判断标签的个数是否大于规定的个数， 如果大于，则进行换行处理 如果不大于，即等于或小于，就返回原标签

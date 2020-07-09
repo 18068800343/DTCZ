@@ -1,9 +1,6 @@
 package com.ldxx.dao;
 
-import com.ldxx.bean.CheLiuLiangEchartsList;
-import com.ldxx.bean.HomeData;
-import com.ldxx.bean.SecHomeData;
-import com.ldxx.bean.TongJiTableQuery;
+import com.ldxx.bean.*;
 import com.ldxx.vo.tWimMsgVo;
 import org.apache.ibatis.annotations.Param;
 
@@ -81,4 +78,8 @@ public interface tWimMsgDao {
     Map initShengJieTongJiYuJingData(String stationPorts, Integer limit);
 
     CheLiuLiangEchartsList getDiTujwdByPort(String stationPort);
+
+    tjfxTotalEchars getTodayzongliuliangAndzongchaozai(String stationPort);
+
+    List<tjfxTotalEchars> getsexTotalEchars();
 }
