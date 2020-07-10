@@ -107,7 +107,8 @@
                 1!=1
             </if>
         </where>
-    </select>
+		order by sort
+	</select>
 
     <select id="xg_iscountStationIp" resultType="int">
 		select count(Station_Ip) from station_site where Station_Ip=#{stationIp} and Del_State=1 and S_Id!=#{id}

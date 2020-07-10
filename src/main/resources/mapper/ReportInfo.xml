@@ -7,8 +7,8 @@
 	</insert>
 
     <select id="getAllReportByCompanyName" resultType="com.ldxx.bean.Report">
-        SELECT *  FROM report_info
-        <where>
+		SELECT a.* FROM report_info a LEFT JOIN t_dic_lgs b on a.company_name = b.company_name
+		<where>
 			<!--			<if test="companyName !='华通' ">-->
 			<!--				report_name like CONCAT("%",#{companyName},"%")-->
 			<!--			</if>-->
@@ -22,10 +22,11 @@
 				and time_type like #{timeType}
 			</if>
 			<if test="companyWhere !='' and companyWhere !=null ">
-				and  company_name like #{companyWhere}
+				and a.company_name like #{companyWhere}
 			</if>
 		</where>
-    </select>
+		order by b.sort asc,a.report_time desc
+	</select>
 
 	<update id="deleteById">
 		delete from report_info where r_id = #{id}
