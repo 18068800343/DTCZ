@@ -2168,10 +2168,16 @@ let initGongSiTongJiYuJingEcharts = (data) => {
 
             {
                 name: '100吨以上',
-                type: 'line',
+                type: 'bar',
                 yAxisIndex: 1,
                 color: '#47FFCD',
-                data: erJi
+                data: erJi,
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top'
+                    }
+                },
             }
         ]
     };
@@ -2468,7 +2474,7 @@ let initLiuZhouShengJieChaoZai = (data) => {
     // 指定图表的配置项和数据
     let myChart = echarts.init(document.getElementById("thimain"));
 
-    let stationNames = data.stationNames != null ? data.stationNames.split(",") : new Array(4);
+    let stationNames = data.sjName != null ? data.sjName.split(",") : new Array(4);
     let chaoZaicCount = data.chaoZaicCount != null ? data.chaoZaicCount.split(",") : [0, 0, 0, 0,0];
 
     let option = {

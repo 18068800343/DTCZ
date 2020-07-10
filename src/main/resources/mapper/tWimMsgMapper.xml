@@ -1097,29 +1097,29 @@ maxAxle,
                 LIMIT #{limit}
             </if>
         ) aa-->
-        SELECT group_concat(aa.chaoZaicCount SEPARATOR ',') as chaoZaicCount ,group_concat(aa.province_station_name SEPARATOR ',') as sjName ,
+        SELECT group_concat(aa.chaoZaicCount SEPARATOR ',') as chaoZaicCount ,group_concat(aa.province_station SEPARATOR ',') as sjName ,
         group_concat(aa.chaoZaiBili SEPARATOR ',') as chaoZaiBili
         from (
-            select a.chaoZaicCount,b.liuLiangCount,(a.chaoZaicCount/b.liuLiangCount) as chaoZaiBili,a.province_station_name from (
-                select sum(chaoZaicCount)	as chaoZaicCount,province_station_name from (
-                    select COUNT(*) chaoZaicCount,b.Station_Name,b.province_station_name  from t_vehicle_msg_today a
+            select a.chaoZaicCount,b.liuLiangCount,(a.chaoZaicCount/b.liuLiangCount) as chaoZaiBili,a.province_station from (
+                select sum(chaoZaicCount)	as chaoZaicCount,province_station from (
+                    select COUNT(*) chaoZaicCount,b.Station_Name,b.province_station  from t_vehicle_msg_today a
                     LEFT JOIN station_site b ON a.Station_IP = b.Station_Port
                     and  a.axles_count=#{axlesCount} and a.Over_Weight>0  and a.Total_Weight &lt;(SELECT Crux_Weight FROM crux_weight  WHERE Del_State = 1 AND lv = 2)
                     and  date(a.Evt_Time) = curdate() GROUP BY b.Station_Port
                     HAVING FIND_IN_SET(b.Station_Port,#{stationPorts})
                     ORDER BY chaoZaicCount desc
-                )  a GROUP BY a.province_station_name ORDER BY  chaoZaicCount desc
+                )  a GROUP BY a.province_station ORDER BY  chaoZaicCount desc
             ) a
             left join (
-                select sum(liuLiangCount)	as 	liuLiangCount,province_station_name from (
-                    select COUNT(*) liuLiangCount,b.Station_Name  as StationName2,b.province_station_name from t_vehicle_msg_today a
+                select sum(liuLiangCount)	as 	liuLiangCount,province_station from (
+                    select COUNT(*) liuLiangCount,b.Station_Name  as StationName2,b.province_station from t_vehicle_msg_today a
                     LEFT JOIN station_site b ON a.Station_IP = b.Station_Port
                     and  a.axles_count=#{axlesCount} and  date(a.Evt_Time) = curdate() GROUP BY
                     b.Station_Port
                     HAVING FIND_IN_SET(b.Station_Port,#{stationPorts})
                     ORDER BY liuLiangCount desc
-                ) b GROUP BY b.province_station_name ORDER BY  liuLiangCount desc
-            ) b  on a.province_station_name=b.province_station_name ORDER BY a.chaoZaicCount desc,a.province_station_name asc
+                ) b GROUP BY b.province_station ORDER BY  liuLiangCount desc
+            ) b  on a.province_station=b.province_station ORDER BY a.chaoZaicCount desc,a.province_station asc
 
             <if test="limit!=null and limit!=''">
                 LIMIT #{limit}
@@ -1163,17 +1163,17 @@ maxAxle,
         ) a-->
         select GROUP_CONCAT(a.chaoZai2CountMonth SEPARATOR ',') chaoZai2CountMonth,GROUP_CONCAT(a.chaoZai3CountMonth SEPARATOR ',') chaoZai3CountMonth,
         GROUP_CONCAT(a.chaoZai4CountMonth SEPARATOR ',') chaoZai4CountMonth,GROUP_CONCAT(a.chaoZai5CountMonth SEPARATOR ',') chaoZai5CountMonth,
-        GROUP_CONCAT(a.chaoZai6CountMonth SEPARATOR ',') chaoZai6CountMonth,GROUP_CONCAT(a.province_station_name SEPARATOR ',') sjName
+        GROUP_CONCAT(a.chaoZai6CountMonth SEPARATOR ',') chaoZai6CountMonth,GROUP_CONCAT(a.province_station SEPARATOR ',') sjName
         from (
         select (IFNULL(num2,0)+IFNULL(chaozaiNum,0)) as chaoZai2CountMonth,(IFNULL(num3,0)+IFNULL(chaozaiNum,0)) as chaoZai3CountMonth,
         (IFNULL(num4,0)+IFNULL(chaozaiNum,0)) as chaoZai4CountMonth,(IFNULL(num5,0)+IFNULL(chaozaiNum,0)) as chaoZai5CountMonth,
-        (IFNULL(num6,0)+IFNULL(chaozaiNum,0)) as chaoZai6CountMonth,a.province_station_name
+        (IFNULL(num6,0)+IFNULL(chaozaiNum,0)) as chaoZai6CountMonth,a.province_station
         from (
             select IFNULL(sum(num2),0) num2,IFNULL(sum(num3),0) num3,IFNULL(sum(num4),0) num4,IFNULL(sum(num5),0) num5,
-            IFNULL(sum(num6),0) num6,province_station_name from (
+            IFNULL(sum(num6),0) num6,province_station from (
                 SELECT
                 Avg_Overload_Count_2 as num2,Avg_Overload_Count_3 as num3,Avg_Overload_Count_4 as num4,
-                Avg_Overload_Count_5 as num5,Avg_Overload_Count_6 as num6,a.Station_IP,b.Station_Name,b.province_station_name
+                Avg_Overload_Count_5 as num5,Avg_Overload_Count_6 as num6,a.Station_IP,b.Station_Name,b.province_station
                 FROM
                 t_avg_month a
                 left join station_site b ON b.Station_Port=a.Station_IP
@@ -1181,11 +1181,11 @@ maxAxle,
                 a.Avg_Time = #{yearMonth}
                 AND FIND_IN_SET(a.Station_IP,#{stationPorts})
                 AND a.Avg_LaneNo='0'
-                ) a GROUP BY a.province_station_name
+                ) a GROUP BY a.province_station
             ) a
             left join (
-                select sum(chaozaiNum) chaozaiNum,province_station_name from (
-                select IFNULL(COUNT(*),0) chaozaiNum,b.Station_Name,a.Station_IP,b.province_station_name from t_vehicle_msg_today a
+                select sum(chaozaiNum) chaozaiNum,province_station from (
+                select IFNULL(COUNT(*),0) chaozaiNum,b.Station_Name,a.Station_IP,b.province_station from t_vehicle_msg_today a
                 LEFT JOIN station_site b ON a.Station_IP = b.Station_Port
                 and a.axles_count=#{axlesCount} and a.Over_Weight>0 and a.Total_Weight &lt;(SELECT Crux_Weight FROM crux_weight
                 WHERE Del_State = 1 AND lv = 2)
@@ -1193,8 +1193,8 @@ maxAxle,
                 GROUP BY b.Station_Port
                 HAVING FIND_IN_SET(b.Station_Port,#{stationPorts})
                 ORDER BY chaozaiNum desc
-                ) b GROUP BY b.province_station_name
-            ) b on a.province_station_name=b.province_station_name
+                ) b GROUP BY b.province_station
+            ) b on a.province_station=b.province_station
             <include refid="limitSql"></include>
         ) a
 
