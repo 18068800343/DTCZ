@@ -624,7 +624,7 @@ public class tWimMsgController {
     }
 
     /**
-     * 首页第二个页面通过轴数和站点端口获得站点车流量
+     * 首页第二个页面通过轴数和站点端口获得站点车流量 按照省界统计
      *
      * @param axlesCount
      * @param stationPorts
@@ -633,6 +633,19 @@ public class tWimMsgController {
     @RequestMapping("/getSecChaoZaiEcharsList")
     public SecHomeData getSecChaoZaiEcharsList(String axlesCount, String stationPorts, Integer limit) {
         SecHomeData list = tWimMsgDao.getSecChaoZaiEcharsList(axlesCount, stationPorts, limit);
+        return list;
+    }
+
+    /**
+     * 首页第二个页面通过轴数和站点端口获得站点车流量 按照站点统计
+     *
+     * @param axlesCount
+     * @param stationPorts
+     * @return
+     */
+    @RequestMapping("/getSecChaoZaiEcharsListByZhanDian")
+    public SecHomeData getSecChaoZaiEcharsListByZhanDian(String axlesCount, String stationPorts, Integer limit) {
+        SecHomeData list = tWimMsgDao.getSecChaoZaiEcharsListByZhanDian(axlesCount, stationPorts, limit);
         return list;
     }
 

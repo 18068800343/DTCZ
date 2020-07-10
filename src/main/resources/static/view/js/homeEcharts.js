@@ -2455,7 +2455,7 @@ let initShengJieTongJiYuJingData = (data) => {
 homePageInit.initLiuZhouShengJieChaoZai = () => {
     $.ajax({
         type: 'POST',
-        url: '/tWimMsg/getSecChaoZaiEcharsList',
+        url: '/tWimMsg/getSecChaoZaiEcharsListByZhanDian',
         dataType: 'json',
         data: {
             axlesCount: 6,
@@ -2474,7 +2474,7 @@ let initLiuZhouShengJieChaoZai = (data) => {
     // 指定图表的配置项和数据
     let myChart = echarts.init(document.getElementById("thimain"));
 
-    let stationNames = data.sjName != null ? data.sjName.split(",") : new Array(4);
+    let stationNames = data.stationNames != null ? data.stationNames.split(",") : new Array(4);
     let chaoZaicCount = data.chaoZaicCount != null ? data.chaoZaicCount.split(",") : [0, 0, 0, 0,0];
 
     let option = {

@@ -68,6 +68,7 @@ public interface tWimMsgDao {
 
     SecHomeData getSecChaoZaiEcharsListMonth(String yearMonth, String axlesCount, String stationPorts, Integer limit);
 
+    SecHomeData getSecChaoZaiEcharsListByZhanDian(String axlesCount, String stationPorts, Integer limit);
 
    List<DanZhouChaoZai> getDanZhouChaoZai(String stationPorts, Integer limit);
 
@@ -82,4 +83,5 @@ public interface tWimMsgDao {
     tjfxTotalEchars getTodayzongliuliangAndzongchaozai(String stationPort);
 
     List<tjfxTotalEchars> getsexTotalEchars();
+
 }

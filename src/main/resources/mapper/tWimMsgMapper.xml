@@ -1200,6 +1200,32 @@ maxAxle,
 
     </select>
 
+    <select id="getSecChaoZaiEcharsListByZhanDian" resultType="SecHomeData">
+
+    SELECT group_concat(aa.chaoZaicCount SEPARATOR ',') as chaoZaicCount ,group_concat(aa.Station_Name SEPARATOR ',') as stationNames ,
+    group_concat(aa.chaoZaiBili SEPARATOR ',') as chaoZaiBili
+    from (
+        select *,(a.chaoZaicCount/b.liuLiangCount) as chaoZaiBili from (  select COUNT(*) chaoZaicCount,b.Station_Name  from t_vehicle_msg_today a
+            LEFT JOIN station_site b ON a.Station_IP = b.Station_Port
+            and  a.axles_count=#{axlesCount} and a.Over_Weight>0  and a.Total_Weight &lt;(SELECT Crux_Weight FROM crux_weight  WHERE Del_State = 1 AND lv = 2)
+            and  date(a.Evt_Time) = curdate() GROUP BY b.Station_Port
+            HAVING FIND_IN_SET(b.Station_Port,#{stationPorts})
+            ORDER BY chaoZaicCount desc
+        ) a
+        left join (
+            select COUNT(*) liuLiangCount,b.Station_Name  as StationName2 from t_vehicle_msg_today a
+            LEFT JOIN station_site b ON a.Station_IP = b.Station_Port
+            and  a.axles_count=#{axlesCount} and  date(a.Evt_Time) = curdate() GROUP BY
+            b.Station_Port
+            HAVING FIND_IN_SET(b.Station_Port,#{stationPorts})
+            ORDER BY liuLiangCount desc
+        ) b  on a.Station_Name=b.StationName2 ORDER BY a.chaoZaicCount desc,a.Station_Name asc
+        <if test="limit!=null and limit!=''">
+            LIMIT #{limit}
+        </if>
+    ) aa
+    </select>
+
 
     <select id="getGongSiTongJiYuJingData" resultType="map">
         SELECT
