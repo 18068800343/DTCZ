@@ -99,7 +99,9 @@
         b.Route_Name
         ) AS stationNameRouteName,
         c.License_Plate_Color,
-        d.Vehicle_Type_Name,IFNULL(e.Overload_Standard,49000) as maxWeight
+        d.Vehicle_Type_Name,IFNULL(e.Overload_Standard,49000) as maxWeight,
+        (Axle_space1+Axle_space2+Axle_space3+Axle_space4+Axle_space5+Axle_space6+Axle_space7+Axle_space8+Axle_space9) as
+        axleSpace
         FROM
         (
         SELECT * FROM t_vehicle_msg WHERE id_local in (

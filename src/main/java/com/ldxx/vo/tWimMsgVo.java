@@ -18,6 +18,7 @@ public class tWimMsgVo extends tWimMsg  implements Serializable{
     private String laneNoName;//车道名称  1:超车道 ，2:行车道,3:应急车道
     private  String overWeightRatioName;//是否超重 如果 >0显示 超重 else  不超重
     private Integer totalCount;
+    private Integer axleSpace;
 
     private List<Integer> count;//车流量数量
     private List<String> name;
@@ -35,10 +36,23 @@ public class tWimMsgVo extends tWimMsg  implements Serializable{
     public String toString() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String evtTime = sdf.format(getEvtTime());
-        return stationName + "," + laneNoName +
-                "," + getPlate() + "," + licensePlateColor + "," + getLength() + "," + getSpeed() + "," + getAxlesCount() +
-                "," + getTotalWeight() + "," + getTemperature() + "," + overWeightRatioName + "," + evtTime +
-                "," + directionName + "," + isStraddleName + "," + vehicleTypeName + "," + getOverWeight();
+
+        return stationName + "," + evtTime + "," + laneNoName +
+
+                "," + getPlate() + "," + getAxlesCount() + "," + getTotalWeight() + "," + getAxle1() + "," + getAxle2() +
+                "," + getAxle3() + "," + getAxle4() + "," + getAxle5() + "," + getAxle6() + "," + getAxle7() + "," + getAxle8() +
+                "," + getAxle9() + "," + getAxle10() + "," + getAxleSpace1() + "," + getAxleSpace2() + "," + getAxleSpace3() + "," + getAxleSpace4() + "," + getAxleSpace5() +
+                "," + getAxleSpace6() + "," + getAxleSpace7() + "," + getAxleSpace8() + "," + getAxleSpace9() + "," + axleSpace + "," + getLength() +
+                "," + getSpeed() + "," + getIsStraddle() + "," + getTemperature() + "," + getOverWeight() +
+                "," + getOverWeightRatio();
+    }
+
+    public Integer getAxleSpace() {
+        return axleSpace;
+    }
+
+    public void setAxleSpace(Integer axleSpace) {
+        this.axleSpace = axleSpace;
     }
 
     public Integer getMaxAxle() {
