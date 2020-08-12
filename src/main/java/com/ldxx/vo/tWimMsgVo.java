@@ -42,7 +42,7 @@ public class tWimMsgVo extends tWimMsg  implements Serializable{
                 "," + getPlate() + "," + getAxlesCount() + "," + getTotalWeight() + "," + getAxle1() + "," + getAxle2() +
                 "," + getAxle3() + "," + getAxle4() + "," + getAxle5() + "," + getAxle6() + "," + getAxle7() + "," + getAxle8() +
                 "," + getAxle9() + "," + getAxle10() + "," + getAxleSpace1() + "," + getAxleSpace2() + "," + getAxleSpace3() + "," + getAxleSpace4() + "," + getAxleSpace5() +
-                "," + getAxleSpace6() + "," + getAxleSpace7() + "," + getAxleSpace8() + "," + getAxleSpace9() + "," + axleSpace + "," + getLength() +
+                "," + getAxleSpace6() + "," + getAxleSpace7() + "," + getAxleSpace8() + "," + getAxleSpace9() + "," + axleSpace + "," + getGap() + "," + getTimeGap() + "," + getHeadway() + "," + getLength() +
                 "," + getSpeed() + "," + getIsStraddle() + "," + getTemperature() + "," + getOverWeight() +
                 "," + getOverWeightRatio();
     }

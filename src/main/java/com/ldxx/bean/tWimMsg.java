@@ -77,11 +77,62 @@ public class tWimMsg implements Serializable {
     private String wIMId;
     //抓拍数据ID
     private String lPRId;
+    //有效性号
+    private Integer ValidityCode;
+    //总轴距 cm
+    private Integer Wheelbase;
+    //车间距，单位：50cm
+    private Integer Gap;
+    //车时间距，单位：毫秒
+    private Integer TimeGap;
+    //车头时距，单位：100毫秒
+    private Integer Headway;
     //测点IP地址
     private String stationIP;
 
     private String imgData;//图片流
     private Integer maxWeight;//最大允许总质量 单位: 千克 数字类型,
+
+
+    public Integer getValidityCode() {
+        return ValidityCode;
+    }
+
+    public void setValidityCode(Integer validityCode) {
+        ValidityCode = validityCode;
+    }
+
+    public Integer getWheelbase() {
+        return Wheelbase;
+    }
+
+    public void setWheelbase(Integer wheelbase) {
+        Wheelbase = wheelbase;
+    }
+
+    public Integer getGap() {
+        return Gap;
+    }
+
+    public void setGap(Integer gap) {
+        Gap = gap;
+    }
+
+    public Integer getTimeGap() {
+        return TimeGap;
+    }
+
+    public void setTimeGap(Integer timeGap) {
+        TimeGap = timeGap;
+    }
+
+    public Integer getHeadway() {
+        return Headway;
+    }
+
+    public void setHeadway(Integer headway) {
+        Headway = headway;
+    }
 
     public Integer getMaxWeight() {
         return maxWeight;
