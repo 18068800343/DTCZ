@@ -1034,6 +1034,7 @@
 
 		//点击地图站点跳转过来的
 		var stationName = sessionStorage.getItem("stationName");
+		sessionStorage.setItem("stationName","");
 		if(stationName!=""){
 			$('#zhandian').selectpicker('val',['noneSelectedText'])
 
