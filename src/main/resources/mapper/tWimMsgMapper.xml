@@ -1456,5 +1456,79 @@ maxAxle,
         WHERE
             a.Avg_LaneNo = '0'  GROUP BY a.Avg_Time ORDER BY Avg_Time desc limit 6
     </select>
+
+    <select id="getFirChaoZaiLv" resultType="CheLiuLiangEchartsList">
+        SELECT
+        aa.cntc  AS nums,
+        aa.Station_Port AS station_ports,
+        aa.station_name  AS station_names,
+        aa.cnta  AS numCount,
+        aa.cntt AS nums2,
+        (aa.cntc / aa.cnta)  AS numsBili
+        FROM
+            (
+            SELECT
+            COUNT( CASE WHEN a.Station_IP IS NOT NULL THEN 0 END ) cntc,
+            b.Station_Port,
+            b.Station_Name,
+            cc.cnt AS cnta,
+            (
+            cc.cnt - COUNT( CASE WHEN a.Station_IP IS NOT NULL THEN 0 END )) AS cntt
+            FROM
+            t_vehicle_msg_today a
+            RIGHT JOIN station_site b ON a.Station_IP = b.Station_Port
+            AND a.Over_Weight > 0
+            AND date( a.Evt_Time ) = curdate()
+            AND a.Total_Weight&lt;(
+                SELECT
+                Crux_Weight
+                FROM
+                crux_weight
+                WHERE
+                Del_State = 1
+                AND lv = 2
+            )
+            <if test="link!=null and link!=''">
+                and b.link = #{link}
+            </if>
+            RIGHT JOIN (
+                SELECT
+                COUNT( 0 ) cntc
+                FROM
+                t_vehicle_msg_today
+                WHERE
+                Over_Weight > 0
+                AND date( Evt_Time ) = curdate()
+                AND FIND_IN_SET( Station_IP, #{stationPorts}
+                )
+            ) c ON 1 = 1
+            RIGHT JOIN (
+                SELECT
+                COUNT( CASE WHEN a.Station_IP IS NOT NULL THEN 0 END ) cnt,
+                bb.Station_Port,
+                bb.Station_Name
+                FROM
+                t_vehicle_msg_today a
+                RIGHT JOIN station_site bb ON a.Station_IP = bb.Station_Port
+                AND date( a.Evt_Time ) = curdate()
+                GROUP BY
+                bb.Station_Port
+                HAVING
+                FIND_IN_SET( bb.Station_Port, #{stationPorts})
+                ORDER BY cnt DESC, bb.Station_Name
+            ) cc ON cc.Station_Port = b.Station_Port
+            GROUP BY
+            b.Station_Port
+            HAVING
+            FIND_IN_SET( b.Station_Port, #{stationPorts}
+            )
+            ORDER BY
+            cntc DESC,
+            cc.Station_Name
+        ) aa  ORDER BY numsBili desc
+        <if test="limit!=null and limit!=''">
+            LIMIT #{limit}
+        </if>
+    </select>
     
 </mapper>

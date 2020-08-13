@@ -473,6 +473,11 @@ public class tWimMsgController {
         return tWimMsgDao.getChaoZaiEchartsList(stationPorts, link, limit);
     }
 
+    @RequestMapping("/getFirChaoZaiLv")
+    public List<CheLiuLiangEchartsList> getFirChaoZaiLv(String stationPorts,Integer link,Integer limit) {
+        return tWimMsgDao.getFirChaoZaiLv(stationPorts, link, limit);
+    }
+
     @RequestMapping("/getHomeDataObject")
     public HomeData getHomeDataObject(String stationPorts, HttpSession session) {
         HomeData homeData = tWimMsgDao.getHomeData(stationPorts);
