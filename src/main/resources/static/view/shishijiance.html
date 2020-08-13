@@ -1035,7 +1035,7 @@
 		//点击地图站点跳转过来的
 		var stationName = sessionStorage.getItem("stationName");
 		sessionStorage.setItem("stationName","");
-		if(stationName!=""){
+		if(stationName!=""&&stationName!=null&&stationName!=undefined){
 			$('#zhandian').selectpicker('val',['noneSelectedText'])
 
 			var options = document.getElementById('zhandian').options;
@@ -1048,8 +1048,8 @@
 					$('#zhandian').selectpicker('val', stationport);
 				}
 			}
-			quedingDianJi()
 		}
+		quedingDianJi()
 
 	}
 
@@ -1184,11 +1184,11 @@
 				success: function (json) {
 					$('#mainContent').dataTable().fnClearTable();
 					$('#mainContent').DataTable().rows.add(json).draw(false);
+					hidMask()
 					setLeftEcharts()
 					setRightEcharts()
 					setBottomEcharts()
 					initTotalNumber()
-					hidMask()
 				}
 			});
 		}
