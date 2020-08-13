@@ -1364,7 +1364,6 @@ homePageInit.initFirqstjt = (id) => {
                     $("#fir_chaozailvName"+i+"").html(stationNames[i])
                 }
             }
-
             /*homePageInit.downStationNames = json.stationNames.split(",");
             homePageInit.downNums = json.nums.split(",");
             homePageInit.numCount = json.numCount.split(",");
