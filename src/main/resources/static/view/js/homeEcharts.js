@@ -1339,7 +1339,7 @@ let initLeftChartDetail4=(d)=>{
 homePageInit.initFirqstjt = (id) => {
     $.ajax({
         type: 'POST',
-        url: '/tWimMsg/getChaoZaiEchartsList',
+        url: '/tWimMsg/getFirChaoZaiLv',
         dataType: 'json',
         data: {
             stationPorts: homePageInit.stationPort.toString(),
@@ -1349,21 +1349,20 @@ homePageInit.initFirqstjt = (id) => {
         },
         success: function (json) {
             //初始化超载率统计
-            let stationNames = json.stationNames.split(",")
-            let nums = json.nums.split(",");
-            let numsBili = json.numsBili.split(",");
-            for(let i=0;i<stationNames.length;i++){
-                let num = numsBili[i];
-                if(undefined==num){
-                    num="0%";
-                }else{
-                    num = num*100
-                    num = num.toFixed(2)+"%";
+            if(json!=null){
+                var stationNames=[];
+                var numsBili=[]
+                for(var i=0;i<json.length;i++){
+                    stationNames.push(json[i].stationNames)
+                    numsBili.push(json[i].numsBili==undefined?"0%":((json[i].numsBili)*100).toFixed(2)+"%")
                 }
-                $("#fir_chaozailv"+i+"").html("")
-                $("#fir_chaozailv"+i+"").html(num)
-                $("#fir_chaozailvName"+i+"").html("")
-                $("#fir_chaozailvName"+i+"").html(stationNames[i])
+                for(let i=0;i<numsBili.length;i++){
+                    let num = numsBili[i];
+                    $("#fir_chaozailv"+i+"").html("")
+                    $("#fir_chaozailv"+i+"").html(num)
+                    $("#fir_chaozailvName"+i+"").html("")
+                    $("#fir_chaozailvName"+i+"").html(stationNames[i])
+                }
             }
 
             /*homePageInit.downStationNames = json.stationNames.split(",");
