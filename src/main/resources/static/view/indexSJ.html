@@ -66,7 +66,7 @@
 <!--导航栏结束-->
 <!--左半部分开始-->
 <div id="leftTab" style="position:fixed">
-    <a href="javascript:void(0);" lang="home" data-gundong="true" target="iframe_a" class="Pa yijicaidan" name="yi"
+    <a href="javascript:void(0);" lang="homeSJ" data-gundong="true" target="iframe_a" class="Pa yijicaidan" name="yi"
        style="margin-top:40%;">首页</a>
     <a href="javascript:void(0);" lang='shishijianceSJ' target="iframe_a" class="Pb yijicaidan" name="yi"
        id="pb">实时监测</a>
@@ -153,7 +153,7 @@
 </div>
 <!-- 修改model结束 -->
 
-<iframe id="iframe-player" src="home.html" class="iframe" name="iframe_a" width="100%" style="overflow:visible;"
+<iframe id="iframe-player" src="homeSJ.html" class="iframe" name="iframe_a" width="100%" style="overflow:visible;"
         scrolling="no" height="1000px"></iframe>
 <script src="../js/jquery.js"></script>
 <script src="../js/bootstrap.min.js"></script>
@@ -172,12 +172,24 @@
         //…
     });
 
+    function daohang(name){
+        if (name == 'home'||name == 'homeSJ') {
+            $('.daohang').slideUp();
+            $('#leftTab').removeClass('homeLeft')
+        } else if (name == undefined) {
+
+        } else {
+            $('#leftTab').addClass('homeLeft')
+            $('.daohang').slideDown()
+        }
+    }
+
     $('#leftTab a').bind('click', function () {
         let name = $(this).attr('lang');
         if (undefined != name && null != name) {
             $('#iframe-player').attr('src', name + '.html')
         }
-        if (name == 'home') {
+        /*if (name == 'home') {
             $('.daohang').slideUp();
             $('#leftTab').removeClass('homeLeft')
         } else if (name == undefined) {
@@ -186,7 +198,8 @@
             $('#leftTab').addClass('homeLeft')
             $('.daohang').slideDown()
 
-        }
+        }*/
+        daohang(name)
 
         let gunDong = $(this).attr("data-gundong");
         if (gunDong == 'true') {
