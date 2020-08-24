@@ -48,43 +48,74 @@ public class LoginController {
     }
     
     @RequestMapping(value="/userlogin",method= RequestMethod.POST)
-	public Map<String,Object> userlogin(tUserInfo user, HttpServletRequest request){
-		int state = 0;
-		tUserInfoVo loginUser = null;
-		tUserInfoVo loginUser1 = null;
-		Map<String, Object> map = new HashMap<>();
-		HttpSession session = request.getSession();
-		if ("shiro".equals(user.getUsrName())) {
-			if (null != user && null != user.getUsrName() && null != user.getUsrPwd() && !"".equals(user.getUsrName()) && !"".equals(user.getUsrPwd())) {
-				loginUser = service.selectUserByUsrName(user.getUsrName());
-				loginUser1 = service.selectUserByUsrName1(user.getUsrName());
-				if (null != loginUser && null != loginUser.getUsrName()) {
-					if (user.getUsrPwd().equals(loginUser.getUsrPwd())) {//成功登陆
-						session.setAttribute("user", loginUser);
-						session.setAttribute("user1", loginUser1);
-						state = 1;
-					} else {
-						state = -3;
-					}//用户密码错误
-				} else {
-					state = -2;
-				}//该用户不存在
-			}else {state=-1;}//用户名或密码为空
-		}
+    public Map<String,Object> userlogin(tUserInfo user, HttpServletRequest request){
+        int state = 0;
+        tUserInfoVo loginUser = null;
+        tUserInfoVo loginUser1 = null;
+        Map<String, Object> map = new HashMap<>();
+        HttpSession session = request.getSession();
+        if ("shiro".equals(user.getUsrName())) {
+            if (null != user && null != user.getUsrName() && null != user.getUsrPwd() && !"".equals(user.getUsrName()) && !"".equals(user.getUsrPwd())) {
+                loginUser = service.selectUserByUsrName(user.getUsrName());
+                loginUser1 = service.selectUserByUsrName1(user.getUsrName());
+                if (null != loginUser && null != loginUser.getUsrName()) {
+                    if (user.getUsrPwd().equals(loginUser.getUsrPwd())) {//成功登陆
+                        session.setAttribute("user", loginUser);
+                        session.setAttribute("user1", loginUser1);
+                        state = 1;
+                    } else {
+                        state = -3;
+                    }//用户密码错误
+                } else {
+                    state = -2;
+                }//该用户不存在
+            } else {
+                state = -1;
+            }//用户名或密码为空
+        }
 
-		map.put("result", state);
-		map.put("user", loginUser);
-		return map;
-	}
+        map.put("result", state);
+        map.put("user", loginUser);
+        return map;
+    }
 
-	@RequestMapping("/getUser")
-	public tUserInfoVo getUser(HttpServletRequest request) {
-		tUserInfoVo user = (tUserInfoVo) request.getSession().getAttribute("user");
-		return user;
-	}
+    @RequestMapping(value = "/userloginSJ", method = RequestMethod.POST)
+    public Map<String, Object> userloginSJ(tUserInfo user, HttpServletRequest request) {
+        int state = 0;
+        tUserInfoVo loginUser = null;
+        tUserInfoVo loginUser1 = null;
+        Map<String, Object> map = new HashMap<>();
+        HttpSession session = request.getSession();
+        if (null != user && null != user.getUsrName() && null != user.getUsrPwd() && !"".equals(user.getUsrName()) && !"".equals(user.getUsrPwd())) {
+            loginUser = service.selectUserByUsrName(user.getUsrName());
+            loginUser1 = service.selectUserByUsrName1(user.getUsrName());
+            if (null != loginUser && null != loginUser.getUsrName()) {
+                if (user.getUsrPwd().equals(loginUser.getUsrPwd())) {//成功登陆
+                    session.setAttribute("user", loginUser);
+                    session.setAttribute("user1", loginUser1);
+                    state = 1;
+                } else {
+                    state = -3;
+                }//用户密码错误
+            } else {
+                state = -2;
+            }//该用户不存在
+        } else {
+            state = -1;
+        }//用户名或密码为空
+        map.put("result", state);
+        map.put("user", loginUser);
+        return map;
+    }
 
-	@RequestMapping("/getUser1")
-	public tUserInfoVo getUser1(HttpServletRequest request) {
+    @RequestMapping("/getUser")
+    public tUserInfoVo getUser(HttpServletRequest request) {
+        tUserInfoVo user = (tUserInfoVo) request.getSession().getAttribute("user");
+        return user;
+    }
+
+    @RequestMapping("/getUser1")
+    public tUserInfoVo getUser1(HttpServletRequest request) {
 		tUserInfoVo user1 = (tUserInfoVo) request.getSession().getAttribute("user1");
 		return user1;
 	}
@@ -123,9 +154,10 @@ public class LoginController {
 			}//该用户不存在
 		}else {state=-1;}//用户名或密码为空
 
-		if(state==1){
-			response.sendRedirect("../view/index.html");
-		}else if(state==-1){
+		if(state==1) {
+            //response.sendRedirect("../view/index.html");
+            response.sendRedirect("../view/indexSJ.html");
+        }else if(state==-1){
 			request.setAttribute("errorMessage","用户名或密码为空");
 			//请求转发
 			request.getRequestDispatcher("../view/login.html").forward(request,response);

@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="../style/jquery-editable-select.css">
     <link href="../font3/bootstrap-select.css" rel="stylesheet">
     <link rel="stylesheet" href="/js/bootstrap-select.min.css">
-    <link rel="stylesheet"  href="css/layui.css" />
-    <link rel="stylesheet"  href="css/toastr.css"/>
+    <link rel="stylesheet" href="css/layui.css"/>
+    <link rel="stylesheet" href="css/toastr.css"/>
     <style lang="">
         body {
             background: #fff;
@@ -68,7 +68,7 @@
 </head>
 <body style="background-image: none;width: 90%;margin-left: 10%;">
 
-<div class="layui-tab" style="margin-top:-2%;">
+<div class="layui-tab">
     <ul class="layui-tab-title labelli">
         <li class="layui-this labelthis">关键超载车辆预警</li>
 
@@ -300,12 +300,14 @@
 
 
 <!-- allMsg -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg1"style="margin-top: 3%">
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg1"
+     style="margin-top: 3%">
     <div class="modal-dialog 00" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" ><b>详细信息</b></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title"><b>详细信息</b></h4>
             </div>
             <div class="modal-body">
                 <div>
@@ -454,8 +456,8 @@
 <script src="../js/common-scripts.js"></script>
 <script src="js/layui.js" charset="utf-8"></script>
 <script src="js/element.js" type="text/javascript" charset="utf-8"></script>
-<script src="../js/jquery-editable-select.js" ></script>
-<script src="js/toastr.js" ></script>
+<script src="../js/jquery-editable-select.js"></script>
+<script src="js/toastr.js"></script>
 <script src="../js/jquery-form.min.js"></script>
 <script src="js/quanxian.js"></script>
 <script src="../js/myTool.js"></script>
@@ -467,14 +469,14 @@
 <script src="js/datatables/dataTables.colVis.min.js"></script>
 <script src="js/datatables/dataTables.tableTools.min.js"></script>
 <script src="js/datatables/datatables.responsive.min.js"></script>
-<script src="js/datatables/dataTables.buttons.min.js" ></script>
-<script src="js/datatables/buttons.html5.min.js" ></script>
-<script src="js/datatables/buttons.flash.min.js" ></script>
+<script src="js/datatables/dataTables.buttons.min.js"></script>
+<script src="js/datatables/buttons.html5.min.js"></script>
+<script src="js/datatables/buttons.flash.min.js"></script>
 <script src="js/datatables/jszip.min.js"></script>
 <!--导出CSV结束-->
 <script>
     var imgUrlPrefix;
-    $(document).ready( function () {
+    $(document).ready(function () {
 
         laydate.render({
             elem: '#startTime', //指定元素
@@ -492,16 +494,15 @@
             type: 'POST',
             url: '/tVehicleOverweight/getimgUrlPrefix',
             dataType: 'json',
-            async:false,
-            data: {
-            },
+            async: false,
+            data: {},
             success: function (json) {
-                imgUrlPrefix=json.imgUrlPrefix;
+                imgUrlPrefix = json.imgUrlPrefix;
                 return imgUrlPrefix
             }
         });
     });
-    var table=$('#mainContent').dataTable({
+    var table = $('#mainContent').dataTable({
         "deferRender": true,
         "processing": true,
         "bDestroy": true,
@@ -512,21 +513,21 @@
             "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
         },
         "columns": [
-            { "data": "state", 'orderable': false },
-            { "data": "stationName"},
-            { "data": "laneNo"},
-            { "data": "plate"},
-            { "data": "licensePlateColor"},
-            { "data": "length"},
-            { "data": "speed"},
-            { "data": "axlesCount"},
-            { "data": "maxWeight"},
-            { "data": "totalWeight"},
-            { "data": "temperature",visible:false},
-            { "data": "overWeightRatio"},
+            {"data": "state", 'orderable': false},
+            {"data": "stationName"},
+            {"data": "laneNo"},
+            {"data": "plate"},
+            {"data": "licensePlateColor"},
+            {"data": "length"},
+            {"data": "speed"},
+            {"data": "axlesCount"},
+            {"data": "maxWeight"},
+            {"data": "totalWeight"},
+            {"data": "temperature", visible: false},
+            {"data": "overWeightRatio"},
             {"data": "evtTime"},
-            { "data": null},
-            { "data": null},
+            {"data": null},
+            {"data": null},
         ],
         "columnDefs": [{
             "class": "tcenter",
@@ -549,7 +550,7 @@
             "class": "tcenter",
             "targets": 13,
             "searchable": true,
-            "render": function(data, type, full) {
+            "render": function (data, type, full) {
                 /*$.ajax({
                     type: 'POST',
                     url: '/tVehicleOverweight/getimgUrlPrefix',
@@ -562,22 +563,22 @@
                         url="<a target='_blank' href="+path+"><img src="+path+"  width='50' height='40'/>"
                     }
                 });*/
-                var path="http://"+imgUrlPrefix+"/port"+full.stationIP+"/" + getYMDStr(data.evtTime) + "/" +full.idLocal+"-Image.jpg"
-                return "<a target='_blank' href="+path+"><img src="+path+"  width='50' height='40'/>"
+                var path = "http://" + imgUrlPrefix + "/port" + full.stationIP + "/" + getYMDStr(data.evtTime) + "/" + full.idLocal + "-Image.jpg"
+                return "<a target='_blank' href=" + path + "><img src=" + path + "  width='50' height='40'/>"
             }
-        },{
+        }, {
             "class": "tcenter",
             "targets": 0,
             "searchable": true,
-            "render": function(data, type, full) {
-                if(data==false || data==undefined){
-                    return '<label class="checkbox-inline" style="width: 100%;height: 100%;"><input type="checkbox" data-id="'+full.stationIP+'" name="edit_mingzi2" class="checkbox style-0 cbox"><span></span></label>';
-                }else{
-                    return '<label class="checkbox-inline" style="width: 100%;height: 100%;"><input type="checkbox" data-id="'+full.stationIP+'" name="edit_mingzi2" class="checkbox style-0 cbox" checked><span></span></label>';
+            "render": function (data, type, full) {
+                if (data == false || data == undefined) {
+                    return '<label class="checkbox-inline" style="width: 100%;height: 100%;"><input type="checkbox" data-id="' + full.stationIP + '" name="edit_mingzi2" class="checkbox style-0 cbox"><span></span></label>';
+                } else {
+                    return '<label class="checkbox-inline" style="width: 100%;height: 100%;"><input type="checkbox" data-id="' + full.stationIP + '" name="edit_mingzi2" class="checkbox style-0 cbox" checked><span></span></label>';
                 }
             }
         }
-        ],"fnDrawCallback" : function() {
+        ], "fnDrawCallback": function () {
             initTableQuanxian()
         },
         "order": [[12, 'desc']],
@@ -596,7 +597,8 @@
                 "sPrevious": "上一页",
                 "sNext": "下一页",
                 "sLast": "最后一页"
-            }},
+            }
+        },
 
     });
 
@@ -604,31 +606,32 @@
     function showMask() {
         myTool.mask.show('查询中...');
     }
+
     function showMask2() {
         myTool.mask.show('处理中...');
     }
+
     function hidMask() {
         myTool.mask.hide();
     }
 
-    function initTableQuanxian(){
+    function initTableQuanxian() {
         $.ajax({
-            type:"post",
-            url:"/login/getUser",
-            async:false,
-            data:{
-            },
-            success:function(json){
-                if(json!=null &&json!=""){
+            type: "post",
+            url: "/login/getUser",
+            async: false,
+            data: {},
+            success: function (json) {
+                if (json != null && json != "") {
                     var arr = json.usrPersmissionCoding.split(',');
-                    for(var i=0;i<arr.length;i++){
-                        if(arr[i].indexOf("Pkb") >= 0 ){
-                            if($("#chuli_state").val()==0){
+                    for (var i = 0; i < arr.length; i++) {
+                        if (arr[i].indexOf("Pkb") >= 0) {
+                            if ($("#chuli_state").val() == 0) {
                                 $(".Pkb").show();
                             }
                         }
-                        if(arr[i].indexOf("Pkc") >= 0 ){
-                            if($("#chuli_state").val()==1){
+                        if (arr[i].indexOf("Pkc") >= 0) {
+                            if ($("#chuli_state").val() == 1) {
                                 $(".Pkc").show();
                             }
                         }
@@ -643,20 +646,19 @@
     }
 
 
-
-    $("#chuli_state").change(function(){
+    $("#chuli_state").change(function () {
         searchInit()
     })
 
 
-    $("#timeRange").change(function(){
-        var timeRange=$("#timeRange").val().toString()
-        if(timeRange==""||timeRange==undefined){
+    $("#timeRange").change(function () {
+        var timeRange = $("#timeRange").val().toString()
+        if (timeRange == "" || timeRange == undefined) {
             $("#startTime").val("")
             $("#endTime").val("")
-            $("#startTime").attr("disabled",false)
-            $("#endTime").attr("disabled",false)
-        }else{
+            $("#startTime").attr("disabled", false)
+            $("#endTime").attr("disabled", false)
+        } else {
             const end = new Date();
             const start = new Date();
             start.setTime(start.getTime() - 3600 * 1000 * 24 * timeRange);
@@ -665,40 +667,40 @@
             var endTime = end.Format("yyyy-MM-dd hh:mm:ss");
             $("#startTime").val(startTime)
             $("#endTime").val(endTime)
-            $("#startTime").attr("disabled",true)
-            $("#endTime").attr("disabled",true)
+            $("#startTime").attr("disabled", true)
+            $("#endTime").attr("disabled", true)
         }
 
     })
 
-    function searchInit(){
-        var timeRange=$("#timeRange").val();
-        var startTime=$("#startTime").val();
-        var endTime=$("#endTime").val();
+    function searchInit() {
+        var timeRange = $("#timeRange").val();
+        var startTime = $("#startTime").val();
+        var endTime = $("#endTime").val();
 
         var url;
-        if($("#chuli_state").val()==0){
-            url='/tVehicleOverweight/getMeiRiGuanJianChaoZHongShujuByStationPort'
-            initTable(url,startTime,endTime)
-            $("#pichuli1").attr("style","display:block;");
-        }else{
-            url='/tVehicleOverweight/getMeiRiGuanJianChaoZHongShujuByStationPortAlreadychuli'
-            initTable(url,startTime,endTime)
-            $("#pichuli1").attr("style","display:none;");
+        if ($("#chuli_state").val() == 0) {
+            url = '/tVehicleOverweight/getMeiRiGuanJianChaoZHongShujuByStationPort'
+            initTable(url, startTime, endTime)
+            $("#pichuli1").attr("style", "display:block;");
+        } else {
+            url = '/tVehicleOverweight/getMeiRiGuanJianChaoZHongShujuByStationPortAlreadychuli'
+            initTable(url, startTime, endTime)
+            $("#pichuli1").attr("style", "display:none;");
         }
     }
 
-    function initTable(url,startTime,endTime){
-        arr=[];
+    function initTable(url, startTime, endTime) {
+        arr = [];
         showMask()
         $.ajax({
             type: 'POST',
             url: url,
             dataType: 'json',
             data: {
-                startTime:startTime,
-                endTime:endTime,
-                lv:2,
+                startTime: startTime,
+                endTime: endTime,
+                lv: 2,
             },
             error: function (msg) {
                 errMessage("请求UserController失败");
@@ -838,55 +840,55 @@
         el: '#allMsg1',
         //表单数据
         data: {
-            idLocal:"",
-            id:"",
-            stationId:"",
-            evtTime:"",
-            msgTime:"",
-            laneNo:"",
-            plate:"",
-            plateColor:"",
-            classIndex:"",
-            length:"",
-            speed:"",
-            direction:"",
-            axlesCount:"",
-            totalWeight:'',
-            wetmixingtimedeviation:'',
-            axle1:'',
-            axle2:'',
-            axle3:'',
-            axle4:'',
-            axle5:'',
-            axle6:'',
-            axle7:'',
-            axle8:'',
-            axle9:'',
-            axle10:'',
-            axleSpace1:'',
-            axleSpace2:'',
-            axleSpace3:'',
-            axleSpace4:'',
-            axleSpace5:'',
-            axleSpace6:'',
-            axleSpace7:'',
-            axleSpace8:'',
-            axleSpace9:'',
-            isStraddle:'',
-            temperature:'',
-            overWeight:'',
-            overWeightRatio:'',
-            wIMId:'',
-            lPRId:'',
-            stationIP:'',
-            stationNameRouteName:'',
-            directionName:'',
-            isStraddleName:'',
-            stationName:'',
-            routeName:'',
-            licensePlateColor:'',
-            vehicleTypeName:'',
-            maxWeight:'',
+            idLocal: "",
+            id: "",
+            stationId: "",
+            evtTime: "",
+            msgTime: "",
+            laneNo: "",
+            plate: "",
+            plateColor: "",
+            classIndex: "",
+            length: "",
+            speed: "",
+            direction: "",
+            axlesCount: "",
+            totalWeight: '',
+            wetmixingtimedeviation: '',
+            axle1: '',
+            axle2: '',
+            axle3: '',
+            axle4: '',
+            axle5: '',
+            axle6: '',
+            axle7: '',
+            axle8: '',
+            axle9: '',
+            axle10: '',
+            axleSpace1: '',
+            axleSpace2: '',
+            axleSpace3: '',
+            axleSpace4: '',
+            axleSpace5: '',
+            axleSpace6: '',
+            axleSpace7: '',
+            axleSpace8: '',
+            axleSpace9: '',
+            isStraddle: '',
+            temperature: '',
+            overWeight: '',
+            overWeightRatio: '',
+            wIMId: '',
+            lPRId: '',
+            stationIP: '',
+            stationNameRouteName: '',
+            directionName: '',
+            isStraddleName: '',
+            stationName: '',
+            routeName: '',
+            licensePlateColor: '',
+            vehicleTypeName: '',
+            maxWeight: '',
         },
         methods: {
             /*querenchuli:function(){
@@ -907,65 +909,66 @@
             },*/
         }
     })
-    var dom ;
-    var lookMs = (e)=>{
+    var dom;
+    var lookMs = (e) => {
         dom = $(e).parents('tr');
-        let data=$('#mainContent').DataTable().row(dom).data();
+        let data = $('#mainContent').DataTable().row(dom).data();
         lookxiangqing(data);
     }
 
 
-    var lookxiangqing = (data) =>{
-        looktWimMsg.id=data.id;
-        looktWimMsg.idLocal=data.idLocal;
+    var lookxiangqing = (data) => {
+        looktWimMsg.id = data.id;
+        looktWimMsg.idLocal = data.idLocal;
         //looktWimMsg.stationNameRouteName=data.stationNameRouteName;
-        looktWimMsg.stationId=data.stationId;
-        looktWimMsg.evtTime=data.evtTime;
-        looktWimMsg.msgTime=data.msgTime;
-        looktWimMsg.laneNo=data.laneNo;
-        looktWimMsg.plate=data.plate;
-        looktWimMsg.plateColor=data.plateColor;
-        looktWimMsg.classIndex=data.classIndex;
-        looktWimMsg.length=data.length;
-        looktWimMsg.speed=data.speed;
-        looktWimMsg.direction=data.direction;
-        looktWimMsg.axlesCount=data.axlesCount;
-        looktWimMsg.totalWeight=data.totalWeight;
-        looktWimMsg.wetmixingtimedeviation=data.wetmixingtimedeviation;
-        looktWimMsg.axle1=data.axle1;
-        looktWimMsg.axle2=data.axle2;
-        looktWimMsg.axle3=data.axle3;
-        looktWimMsg.axle4=data.axle4;
-        looktWimMsg.axle5=data.axle5;
-        looktWimMsg.axle6=data.axle6;
-        looktWimMsg.axle7=data.axle7;
-        looktWimMsg.axle8=data.axle8;
-        looktWimMsg.axle9=data.axle9;
-        looktWimMsg.axle10=data.axle10;
-        looktWimMsg.axleSpace1=data.axleSpace1;
-        looktWimMsg.axleSpace2=data.axleSpace2;
-        looktWimMsg.axleSpace3=data.axleSpace3;
-        looktWimMsg.axleSpace4=data.axleSpace4;
-        looktWimMsg.axleSpace5=data.axleSpace5;
-        looktWimMsg.axleSpace6=data.axleSpace6;
-        looktWimMsg.axleSpace7=data.axleSpace7;
-        looktWimMsg.axleSpace8=data.axleSpace8;
-        looktWimMsg.axleSpace9=data.axleSpace9;
-        looktWimMsg.isStraddle=data.isStraddle;
-        looktWimMsg.temperature=data.temperature;
-        looktWimMsg.overWeight=data.overWeight;
-        looktWimMsg.overWeightRatio=data.overWeightRatio;
-        looktWimMsg.wIMId=data.wIMId;
-        looktWimMsg.lPRId=data.lPRId;
-        looktWimMsg.stationIP=data.stationIP;
+        looktWimMsg.stationId = data.stationId;
+        looktWimMsg.evtTime = data.evtTime;
+        looktWimMsg.msgTime = data.msgTime;
+        looktWimMsg.laneNo = data.laneNo;
+        looktWimMsg.plate = data.plate;
+        looktWimMsg.plateColor = data.plateColor;
+        looktWimMsg.classIndex = data.classIndex;
+        looktWimMsg.length = data.length;
+        looktWimMsg.speed = data.speed;
+        looktWimMsg.direction = data.direction;
+        looktWimMsg.axlesCount = data.axlesCount;
+        looktWimMsg.totalWeight = data.totalWeight;
+        looktWimMsg.wetmixingtimedeviation = data.wetmixingtimedeviation;
+        looktWimMsg.axle1 = data.axle1;
+        looktWimMsg.axle2 = data.axle2;
+        looktWimMsg.axle3 = data.axle3;
+        looktWimMsg.axle4 = data.axle4;
+        looktWimMsg.axle5 = data.axle5;
+        looktWimMsg.axle6 = data.axle6;
+        looktWimMsg.axle7 = data.axle7;
+        looktWimMsg.axle8 = data.axle8;
+        looktWimMsg.axle9 = data.axle9;
+        looktWimMsg.axle10 = data.axle10;
+        looktWimMsg.axleSpace1 = data.axleSpace1;
+        looktWimMsg.axleSpace2 = data.axleSpace2;
+        looktWimMsg.axleSpace3 = data.axleSpace3;
+        looktWimMsg.axleSpace4 = data.axleSpace4;
+        looktWimMsg.axleSpace5 = data.axleSpace5;
+        looktWimMsg.axleSpace6 = data.axleSpace6;
+        looktWimMsg.axleSpace7 = data.axleSpace7;
+        looktWimMsg.axleSpace8 = data.axleSpace8;
+        looktWimMsg.axleSpace9 = data.axleSpace9;
+        looktWimMsg.isStraddle = data.isStraddle;
+        looktWimMsg.temperature = data.temperature;
+        looktWimMsg.overWeight = data.overWeight;
+        looktWimMsg.overWeightRatio = data.overWeightRatio;
+        looktWimMsg.wIMId = data.wIMId;
+        looktWimMsg.lPRId = data.lPRId;
+        looktWimMsg.stationIP = data.stationIP;
 
-        looktWimMsg.directionName=data.directionName;
-        looktWimMsg.isStraddleName=data.isStraddleName;
-        looktWimMsg.stationName=data.stationName;
-        looktWimMsg.routeName=data.routeName;
-        looktWimMsg.licensePlateColor=data.licensePlateColor;
-        looktWimMsg.vehicleTypeName=data.axlesCount+"轴";;
-        looktWimMsg.overWeightRatioName=(data.overWeightRatio*100).toFixed(2)+"%";
+        looktWimMsg.directionName = data.directionName;
+        looktWimMsg.isStraddleName = data.isStraddleName;
+        looktWimMsg.stationName = data.stationName;
+        looktWimMsg.routeName = data.routeName;
+        looktWimMsg.licensePlateColor = data.licensePlateColor;
+        looktWimMsg.vehicleTypeName = data.axlesCount + "轴";
+        ;
+        looktWimMsg.overWeightRatioName = (data.overWeightRatio * 100).toFixed(2) + "%";
 
         /*$.ajax({
             type: 'POST',
@@ -988,13 +991,14 @@
         $("#chebodyDiv").append(img2)
     }
 
-    function querenchuli(obj){
+    function querenchuli(obj) {
         showMask2()
         var dom = $(obj).parents('tr');
-        let data=$('#mainContent').DataTable().row(dom).data();;
+        let data = $('#mainContent').DataTable().row(dom).data();
+        ;
         var base64 = new Base64();
         var msg = "您真的确定要处理吗？\n\n请确认！";
-        if (confirm(msg)==true){
+        if (confirm(msg) == true) {
             $.ajax({
                 type: 'POST',
                 url: '/tVehicleOverweight/addtVehicleOverweight',
@@ -1005,29 +1009,30 @@
                     /*var arr = base64.decode(json);
                     json = JSON.parse(arr);*/
                     hidMask()
-                    if(json.daoMsg>0){
+                    if (json.daoMsg > 0) {
                         $('#mainContent').DataTable().row(dom).remove().draw(false); //删除行立即显示
                         toastr.success(json.resultMsg);
-                    }else{
+                    } else {
                         toastr.error(json.resultMsg);
                     }
 
                 }
             });
 
-        }else{
+        } else {
             hidMask()
             return false;
         }
     }
 
-    function quxiaochuli(obj){
+    function quxiaochuli(obj) {
         showMask2()
         var dom = $(obj).parents('tr');
-        let data=$('#mainContent').DataTable().row(dom).data();;
+        let data = $('#mainContent').DataTable().row(dom).data();
+        ;
 
         var msg = "您真的确定要处理吗？\n\n请确认！";
-        if (confirm(msg)==true){
+        if (confirm(msg) == true) {
             $.ajax({
                 type: 'POST',
                 url: '/tVehicleOverweight/quxiaotVehicleOverweight',
@@ -1036,47 +1041,46 @@
                 data: JSON.stringify(data),
                 success: function (json) {
                     hidMask()
-                    if(json.daoMsg>0){
+                    if (json.daoMsg > 0) {
                         $('#mainContent').DataTable().row(dom).remove().draw(false); //删除行立即显示
                         toastr.success(json.resultMsg);
-                    }else{
+                    } else {
                         toastr.error(json.resultMsg);
                     }
 
                 }
             });
 
-        }else{
+        } else {
             hidMask()
             return false;
         }
     }
 
 
-
-    function pichuli(){
+    function pichuli() {
         showMask2()
 
-        var arr=[];
-        var domArr=[]
+        var arr = [];
+        var domArr = []
         var tbl = $("#mainContent").dataTable();
         var trList = tbl.fnGetNodes();
-        for(var i=0;i<trList.length;i++){
+        for (var i = 0; i < trList.length; i++) {
             if (trList[i].firstElementChild.firstElementChild.firstChild.checked) {
                 var dom = $(trList[i].firstElementChild).parents('tr');
-                var data=$('#mainContent').DataTable().row(dom).data();
+                var data = $('#mainContent').DataTable().row(dom).data();
                 arr.push(data.idLocal);
                 domArr.push(dom)
             }
         }
 
-        var timeRange=$("#timeRange").val();
+        var timeRange = $("#timeRange").val();
         var startTime;
         var endTime;
-        if(timeRange==""||timeRange==undefined){
-            startTime=$("#startTime").val();
-            endTime=$("#endTime").val();
-        }else{
+        if (timeRange == "" || timeRange == undefined) {
+            startTime = $("#startTime").val();
+            endTime = $("#endTime").val();
+        } else {
             const end = new Date();
             const start = new Date();
             start.setTime(start.getTime() - 3600 * 1000 * 24 * timeRange);
@@ -1085,31 +1089,31 @@
             endTime = end.Format("yyyy-MM-dd");
         }
         var msg = "您真的确定要处理吗？\n\n请确认！";
-        if (confirm(msg)==true){
+        if (confirm(msg) == true) {
             $.ajax({
                 type: 'POST',
                 url: '/tVehicleOverweight/addtVehicleOverweightList',
                 dataType: 'json',
                 data: {
-                    startTime:startTime,
-                    endTime:endTime,
-                    lv:2,
-                    idLocals:arr.toString(),
+                    startTime: startTime,
+                    endTime: endTime,
+                    lv: 2,
+                    idLocals: arr.toString(),
                 },
                 success: function (json) {
                     hidMask()
-                    if(json.daoMsg>0){
-                        for(i=0;i<domArr.length;i++){
+                    if (json.daoMsg > 0) {
+                        for (i = 0; i < domArr.length; i++) {
                             $('#mainContent').DataTable().row(domArr[i]).remove().draw(false); //删除行立即显示
                         }
                         toastr.success(json.resultMsg);
-                    }else{
+                    } else {
                         toastr.error(json.resultMsg);
                     }
 
                 }
             });
-        }else{
+        } else {
             hidMask()
             return false;
         }
@@ -1117,30 +1121,29 @@
     }
 
     //全选
-    $('#autoChk').on('click', function(){
+    $('#autoChk').on('click', function () {
         var s = $(this).prop('checked');
         $('#mainContent .cbox').prop('checked', s).trigger('change');
     });
-    $('#mainContent').delegate('.cbox', 'change', function(){
+    $('#mainContent').delegate('.cbox', 'change', function () {
         var state = $(this).prop('checked');
         var tr = $(this).closest('tr');
         autoChk();
     });
-    $('#mainContent').on('draw.dt',function() {
+    $('#mainContent').on('draw.dt', function () {
         autoChk();
     });
-    function autoChk(){
+
+    function autoChk() {
         var s = true;
-        $('#mainContent').find('.cbox').each(function(){
-            if($(this).prop('checked')==false){
-                s=false;
+        $('#mainContent').find('.cbox').each(function () {
+            if ($(this).prop('checked') == false) {
+                s = false;
                 return false;
             }
         });
         $('#autoChk').prop('checked', s);
     }
-
-
 
 
 </script>

@@ -22,7 +22,7 @@
             padding: 5px;*/
 		}
 		#iframe-player{
-		   border:none !important;
+			border: none !important;
 		}
 
 		.lodingmsg:hover {
@@ -30,22 +30,22 @@
 			cursor: pointer;
 			border-radius: 3px;
 		}
-		.layui-nav-tree{
-		  width:100%;
-		  background-color:transparent;
+		.layui-nav-tree {
+			width: 100%;
+			background-color: transparent;
 		}
-		.layui-nav-tree .layui-nav-child dd.layui-this, .layui-nav-tree .layui-nav-child dd.layui-this a, .layui-nav-tree .layui-this, .layui-nav-tree .layui-this>a, .layui-nav-tree .layui-this>a:hover{
-		 background-color:#549CFD;
+		.layui-nav-tree .layui-nav-child dd.layui-this, .layui-nav-tree .layui-nav-child dd.layui-this a, .layui-nav-tree .layui-this, .layui-nav-tree .layui-this>a, .layui-nav-tree .layui-this>a:hover {
+			background-color: #549CFD;
 		}
-		.layui-nav-child{
-		 margin-top:0px;
+		.layui-nav-child {
+			margin-top: 0px;
 		}
 	</style>
 </head>
 
 <body>
 <!--导航栏开始-->
-<div class="col-xs-12 daohang"  style="position:fixed;z-index:1;display:none;">
+<!-- <div class="col-xs-12 daohang"  style="position:fixed;z-index:1;display:none;">
 	<img src="img/首页logo.png" />
 	<span>动态称重数据管理</span>
 	<div class="rightD">
@@ -58,7 +58,7 @@
 			<a onclick="exit()" id="tuichu"></a>
 		</p>
 	</div>
-</div>
+</div> -->
 <!--导航栏结束-->
 <!--左半部分开始-->
 <div id="leftTab" style="position:fixed">
@@ -88,7 +88,7 @@
 				<dd class="yijicaidan"><a href="javascript:void(0);" lang='xitongweihu' target="iframe_a" class="Pj">系统维护</a>
 				</dd>
 			</dl>
-          </li>
+		</li>
 	</ul>
 	<!--<a href="">系统管理</a>
     <a href="renyuanguanli.html" target="iframe_a" >人员账户管理</a>
@@ -97,7 +97,7 @@
 	<!-- <ul class="layui-nav layui-nav-tree liebiao" lay-filter="test" >
 		侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side">
 		<li class="layui-nav-item layui-nav-itemed ">
-		
+
 		</li>
 	</ul> -->
 
@@ -158,63 +158,63 @@
 <!--<script src="js/layui.js" type="text/javascript" charset="utf-8"></script>-->
 <script src="js/quanxian.js"></script>
 <script type="text/javascript">
-	
+
 	//注意：选项卡 依赖 element 模块，否则无法进行功能性操作
-layui.use('element', function(){
-  var element = layui.element;
-  
-  //…
-});
+	layui.use('element', function () {
+		var element = layui.element;
 
-$('#leftTab a').bind('click', function () {
-	let name = $(this).attr('lang');
-	if(undefined!=name&&null!=name){
-		$('#iframe-player').attr('src', name + '.html')
+		//…
+	});
+
+	$('#leftTab a').bind('click', function () {
+		let name = $(this).attr('lang');
+		if (undefined != name && null != name) {
+			$('#iframe-player').attr('src', name + '.html')
+		}
+		if (name == 'home') {
+			$('.daohang').slideUp();
+			$('#leftTab').removeClass('homeLeft')
+		} else if (name == undefined) {
+
+		} else {
+			$('#leftTab').addClass('homeLeft')
+			$('.daohang').slideDown()
+
+		}
+
+		let gunDong = $(this).attr("data-gundong");
+		if (gunDong == 'true') {
+			$("#mainHtml").removeAttr("style");
+		} else {
+			let cha = (document.body.scrollHeight - document.body.clientHeight) / 2;
+			scroll(0, cha.toFixed(0));
+			$("#mainHtml").css({"overflow": "scroll", "overflow-y": "hidden"});
+		}
+	})
+	$(".yijicaidan").click(function () {
+		$(".yijicaidan").removeClass("btn-primary");  // 删除其他兄弟元素的样式
+		$(".yijicaidan").removeClass("layui-this");  // 删除其他兄弟元素的样式
+		if (this.name == "yi") {
+			$(".layui-nav-item").removeClass("layui-nav-itemed")
+		}
+		//$(".yijicaidan").addClass('yijicaidan');
+		$(this).addClass('btn-primary');                            // 添加当前元素的样式
+
+	});
+
+	var pagestyle = function () {
+		var rframe = $("#iframe-player");
+
+		var h = rframe.width() * 9 / 16;     //根据控件宽度调节控件高度
+		rframe.height(h);
 	}
-	if (name == 'home') {
-		$('.daohang').slideUp();
-		$('#leftTab').removeClass('homeLeft')
-	}else if(name==undefined){
-
-	} else {
-		$('#leftTab').addClass('homeLeft')
-		$('.daohang').slideDown()
-
-	}
-
-	let gunDong = $(this).attr("data-gundong");
-	if(gunDong=='true'){
-		$("#mainHtml").removeAttr("style");
-	}else{
-		let cha=(document.body.scrollHeight-document.body.clientHeight)/2;
-		scroll(0,cha.toFixed(0));
-		$("#mainHtml").css({"overflow":"scroll" ,"overflow-y":"hidden"});
-	}
-})
-$(".yijicaidan").click(function() {
-	$(".yijicaidan").removeClass("btn-primary");  // 删除其他兄弟元素的样式
-	$(".yijicaidan").removeClass("layui-this");  // 删除其他兄弟元素的样式
-	if(this.name=="yi"){
-		$(".layui-nav-item").removeClass("layui-nav-itemed")
-	}
-	//$(".yijicaidan").addClass('yijicaidan');
-	$(this).addClass('btn-primary');                            // 添加当前元素的样式
-
-});
-
-var pagestyle = function () {
-    var rframe = $("#iframe-player");
- 
-    var h = rframe.width() * 9 / 16;     //根据控件宽度调节控件高度
-    rframe.height(h);
-}
-$("#iframe-player").on('load', function () {
-    pagestyle();
-this.style.height=Math.max(this.contentWindow.document.body.scrollHeight,this.contentWindow.document.documentElement.scrollHeight,200)+"px"; 
-  //  document.getElementById('iframe-player').contentWindow.xxx();  
-});
-//窗体改变大小事件
-$(window).resize(pagestyle);
+	$("#iframe-player").on('load', function () {
+		pagestyle();
+		this.style.height = Math.max(this.contentWindow.document.body.scrollHeight, this.contentWindow.document.documentElement.scrollHeight, 200) + "px";
+		//  document.getElementById('iframe-player').contentWindow.xxx();
+	});
+	//窗体改变大小事件
+	$(window).resize(pagestyle);
 </script>
 
 <script type="text/javascript">

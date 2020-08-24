@@ -1,155 +1,188 @@
 <!DOCTYPE html>
 <html class="margin_top55">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-		<title>Document</title>
-		<link href="../font2/iconfont.css" rel="stylesheet">
-		<link href="../style/bootstrap.min.css" rel="stylesheet"/>
-		<!--<link href="../font3/bootstrap-select.css" rel="stylesheet">-->
-		<link rel="stylesheet" href="/js/bootstrap-select.min.css">
-		<link rel="stylesheet" href="../style/jquery.dataTables.min.css">
-		<link href="../style/style.css" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="css/home.css"/>
-		<link rel="stylesheet" type="text/css" href="css/layui.css"/>
-		<link rel="stylesheet" href="css/toastr.css"/>
-		<style>
-			#mainContent_info {
-				margin-left: 0.5%;
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<link href="../font2/iconfont.css" rel="stylesheet">
+	<link href="../style/bootstrap.min.css" rel="stylesheet"/>
+	<!--<link href="../font3/bootstrap-select.css" rel="stylesheet">-->
+	<link rel="stylesheet" href="/js/bootstrap-select.min.css">
+	<link rel="stylesheet" href="../style/jquery.dataTables.min.css">
+	<link href="../style/style.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/home.css"/>
+	<link rel="stylesheet" type="text/css" href="css/layui.css"/>
+	<link rel="stylesheet" href="css/toastr.css"/>
+	<style>
+		#mainContent_info {
+			margin-left: 0.5%;
+		}
+
+		#mainContent_paginate {
+			margin-right: 5%;
+		}
+
+		#mainContent2_paginate {
+			margin-right: -100%;
+		}
+
+		#mainContent3_paginate {
+			margin-right: -100%;
+		}
+
+		#mainContent4_paginate {
+			margin-right: -100%;
+		}
+
+		#mainContent5_paginate {
+			margin-right: -100%;
+		}
+
+		.modal-header {
+			background-color: #549CDF;
+			color: white;
+		}
+
+		.table.dataTable thead th, table.dataTable thead td {
+			border-bottom: 0px solid #DEDEDE;
+		}
+
+		#mainContent th {
+			height: 30px;
+			line-height: 30px;
+		}
+
+		#mainContent td {
+			height: 30px;
+			line-height: 30px;
+		}
+
+		.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+			border: 0px solid #ddd;
+		}
+
+		.table.dataTable.no-footer {
+			border: 0px solid #ddd;
+		}
+
+		#mainContent_info {
+			float: right;
+			margin-right: 5%;
+		}
+
+		#mainContent_paginate {
+			margin-right: 15%;
+		}
+
+		.selected {
+			background: rgba(247, 161, 3, 0.2);
+		}
+
+		.jiance {
+			float: right;
+			margin-right: 5%;
+		}
+
+		@media screen and (max-width: 1366px) {
+			.shaixuan {
+				margin-left: 4%;
+				width: 10%;
 			}
 
-			#mainContent_paginate {
-				margin-right: 5%;
+			.bleft {
+				margin: 0 auto;
+				float: none;
 			}
-			#mainContent2_paginate{
-				margin-right: -100%;
+
+			.bottom {
+				background-color: white;
+				margin-top: 0% !important;
 			}
-			#mainContent3_paginate{
-				margin-right: -100%;
+		}
+
+		@media screen and (max-width: 1400px) {
+			.marginl {
+				margin-left: 2% !important;
 			}
-			#mainContent4_paginate{
-				margin-right: -100%;
+
+			.labelli {
+				margin-left: 2% !important;
 			}
-			#mainContent5_paginate{
-				margin-right: -100%;
+
+			.shaixuan {
+				width: 7% !important;
 			}
-		.modal-header{
-            background-color:#549CDF;
-            color:white;
-        }
-      .table.dataTable thead th, table.dataTable thead td{
-            border-bottom:0px solid #DEDEDE;
-        }
-       #mainContent th{
-            height:30px;
-            line-height:30px;
-        }
-        #mainContent td{
-            height:30px;
-            line-height:30px;
-        }
-        .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
-            border:0px solid #ddd;
-        }
-        .table.dataTable.no-footer{
-             border:0px solid #ddd;
-        }
-        #mainContent_info{
-            float:right;
-            margin-right:5%;
-        }
-        #mainContent_paginate{
-           margin-right:15%;
-        }
-			.selected{
-				background: rgba(247, 161, 3,0.2);
-			}
-			.jiance{
-				float: right;
-				margin-right: 5%;
-			}
-			@media screen and (max-width: 1366px) {
-            .shaixuan{
-                margin-left:4%;
-                width:10%;
-            }
-            .bleft{
-                margin:0 auto;
-                float:none;
-            }
-            .bottom{
-               background-color:white;
-               margin-top:0% !important;
-            }
-           }
-            @media screen and (max-width: 1400px) {
-               .marginl{
-                margin-left:2% !important;
-               }
-               .labelli{
-               margin-left:2% !important;
-               }
-               .shaixuan{
-                width:7% !important;
-               }
-}
-		</style>
-	</head>
-	<body style="background-image: none;">
-	<div id="ssjcleftTab" style="width: 160px;height: 100%;position: fixed;background-color:#232733;margin-top: -30px;"></div>
-	<div class="layui-tab" lay-filter="demo" style="margin-left:10%;">
-			  <ul class="layui-tab-title labelli">
-			    <li class="layui-this labelthis">综合信息统计</li>
-			    <li lay-id="cheliuliang">当日车流量</li>
-			    <li lay-id="chaozai">当日超载车辆</li>
-			    <li lay-id="guanjianchaozai">当日关键超载车辆</li>
-			  </ul>
-			  <div class="layui-tab-content marginl">
-			    <div class="layui-tab-item layui-show">
-			    
-			     <div class="zd col-xs-2" style="background-color:#549CFD;height:170px;color:white;border-radius:5px 5px 5px;width:20%;">
-			        <p style="font-size:15px;margin-top:7%;">所选站点当日在线情况/个</p>
-			        <img alt="" src="./img/img.png" style="float:right;margin-top:10%;">
-			        <div style="margin-top:20%;"><span style="font-size:40px;" id="jiancezhandianNum"></span><a style="margin-left:5px;color:#D6E4FE;background-color:#549CFD;color:white;border:2px solid #549CFD;cursor:pointer;" class="primary"  onclick="nowJianceSite()" data-toggle="modal" data-target="">查看</a></div>
-			     </div>
-			     <a  onclick="clickImg(2)" style="cursor: pointer">
-					 <div class="zd col-xs-2" style="background-color:#3ED75E;height:170px;color:white;border-radius:5px 5px 5px;margin-left:2%;">
-						<p style="font-size:15px;margin-top:7%;">所选站点当日车流量/辆</p>
-						<img alt="" src="./img/img.png" style="float:right;margin-top:10%;">
-						<div style="margin-top:20%;"><span style="font-size:40px;" id="jiancecheliuliangNum"></span></div>
-					 </div>
-			     </a>
-					<a  onclick="clickImg(3)" style="cursor: pointer">
-					  <div class="zd col-xs-2" style="background-color:#FDAF54;height:170px;color:white;border-radius:5px 5px 5px;margin-left:2%;">
-						<p style="font-size:15px;margin-top:7%;">所选站点当日超载车辆/辆</p>
-						<img alt="" src="./img/img.png" style="float:right;margin-top:10%;">
-						<div style="margin-top:20%;"><span style="font-size:40px;" id="jiancechaozaiNum"></span></div>
-					 </div>
-					</a>
-					<a  onclick="clickImg(4)" style="cursor: pointer">
-					  <div class="zd col-xs-2" style="background-color:#FD6854;height:170px;color:white;border-radius:5px 5px 5px;margin-left:2%;">
-						<p style="font-size:15px;margin-top:7%;">所选站点当日关键超载车辆/辆</p>
-						<img alt="" src="./img/img.png" style="float:right;margin-top:10%;">
-						<div style="margin-top:20%;"><span style="font-size:40px;" id="jianceguanjianchaozhongNum"></span></div>
-					 </div>
-					</a>
-			  <div class="labelfirst">
-			 <div class="sele" >
-				<label for="" class="col-sm-2 control-label shaixuan" >筛选站点</label>
-				<div class="col-sm-2" style="width: 20%">
-					<!-- 样式1 -->
-					<select class="form-control selectpicker" multiple data-actions-box="true"   data-live-search="true" id="zhandian" style="width:80%;">
-					</select>
-				</div>
+		}
+	</style>
+</head>
+<body style="background-image: none;">
+<div id="ssjcleftTab"
+	 style="width: 160px;height: 100%;position: fixed;background-color:#232733;margin-top: -30px;"></div>
+<div class="layui-tab" lay-filter="demo" style="margin-left:10%;margin-top:-2%">
+	<ul class="layui-tab-title labelli">
+		<li class="layui-this labelthis">综合信息统计</li>
+		<li lay-id="cheliuliang">当日车流量</li>
+		<li lay-id="chaozai">当日超载车辆</li>
+		<li lay-id="guanjianchaozai">当日关键超载车辆</li>
+	</ul>
+	<div class="layui-tab-content marginl">
+		<div class="layui-tab-item layui-show">
+
+			<div class="zd col-xs-2"
+				 style="background-color:#549CFD;height:170px;color:white;border-radius:5px 5px 5px;width:20%;">
+				<p style="font-size:15px;margin-top:7%;">所选站点当日在线情况/个</p>
+				<img alt="" src="./img/img.png" style="float:right;margin-top:10%;">
+				<div style="margin-top:20%;"><span style="font-size:40px;" id="jiancezhandianNum"></span><a
+						style="margin-left:5px;color:#D6E4FE;background-color:#549CFD;color:white;border:2px solid #549CFD;cursor:pointer;"
+						class="primary" onclick="nowJianceSite()" data-toggle="modal" data-target="">查看</a></div>
 			</div>
-			<button type="button" class="btn btn-primary" onclick="quedingDianJi()" style="margin-left: 80px;width: 100px;background-color:#549CFD;color:white;border:2px solid #549CFD;">确定</button>
-			<!--<div class="jiance">
-				<button type="button" class="btn btn-primary" onclick="nowJianceSite()" data-toggle="modal" data-target="#jianceDiv" style="width: 150px;background-color:#549CFD;color:white;border:2px solid #549CFD;">当前监测站点</button>
-			</div>-->
-			<!--表格-->
-			<table class="table table-striped table-hover" id="mainContent" style="width: 100%;margin: 0 auto; margin-top: 20px;margin-left:0%;white-space: nowrap;">
-				<thead style="background-color: white;">
+			<a onclick="clickImg(2)" style="cursor: pointer">
+				<div class="zd col-xs-2"
+					 style="background-color:#3ED75E;height:170px;color:white;border-radius:5px 5px 5px;margin-left:2%;">
+					<p style="font-size:15px;margin-top:7%;">所选站点当日车流量/辆</p>
+					<img alt="" src="./img/img.png" style="float:right;margin-top:10%;">
+					<div style="margin-top:20%;"><span style="font-size:40px;" id="jiancecheliuliangNum"></span></div>
+				</div>
+			</a>
+			<a onclick="clickImg(3)" style="cursor: pointer">
+				<div class="zd col-xs-2"
+					 style="background-color:#FDAF54;height:170px;color:white;border-radius:5px 5px 5px;margin-left:2%;">
+					<p style="font-size:15px;margin-top:7%;">所选站点当日超载车辆/辆</p>
+					<img alt="" src="./img/img.png" style="float:right;margin-top:10%;">
+					<div style="margin-top:20%;"><span style="font-size:40px;" id="jiancechaozaiNum"></span></div>
+				</div>
+			</a>
+			<a onclick="clickImg(4)" style="cursor: pointer">
+				<div class="zd col-xs-2"
+					 style="background-color:#FD6854;height:170px;color:white;border-radius:5px 5px 5px;margin-left:2%;">
+					<p style="font-size:15px;margin-top:7%;">所选站点当日关键超载车辆/辆</p>
+					<img alt="" src="./img/img.png" style="float:right;margin-top:10%;">
+					<div style="margin-top:20%;"><span style="font-size:40px;" id="jianceguanjianchaozhongNum"></span>
+					</div>
+				</div>
+			</a>
+			<div class="labelfirst">
+				<div class="sele">
+					<label for="" class="col-sm-2 control-label shaixuan">筛选站点</label>
+					<div class="col-sm-2" style="width: 20%">
+						<!-- 样式1 -->
+						<select class="form-control selectpicker" multiple data-actions-box="true"
+								data-live-search="true" id="zhandian" style="width:80%;">
+						</select>
+					</div>
+				</div>
+				<button type="button" class="btn btn-primary" onclick="quedingDianJi()"
+						style="margin-left: 80px;width: 100px;background-color:#549CFD;color:white;border:2px solid #549CFD;">
+					确定
+				</button>
+				<!--<div class="jiance">
+                    <button type="button" class="btn btn-primary" onclick="nowJianceSite()" data-toggle="modal" data-target="#jianceDiv" style="width: 150px;background-color:#549CFD;color:white;border:2px solid #549CFD;">当前监测站点</button>
+                </div>-->
+				<!--表格-->
+				<table class="table table-striped table-hover" id="mainContent"
+					   style="width: 100%;margin: 0 auto; margin-top: 20px;margin-left:0%;white-space: nowrap;">
+					<thead style="background-color: white;">
 					<tr>
 						<th style="width: 10%">站点</th>
 						<th>车道号</th>
@@ -165,32 +198,33 @@
 						<th>时间</th>
 						<th>操作</th>
 					</tr>
-				</thead>
-				<tbody>
+					</thead>
+					<tbody>
 
-				</tbody>
-			</table>
+					</tbody>
+				</table>
+			</div>
 		</div>
-		</div>
-			    <div class="layui-tab-item">
-			    			
+		<div class="layui-tab-item">
+
 			<div class="bright" style="width:90%;display: block;position: relative;margin-left: 5%;height:800px;">
 				<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
 					<ul class="layui-tab-title labelright" style="margin-top: 1%;">
 						<li class="layui-this">统计图</li>
-						<li onclick="initTables2()" >数据表</li>
+						<li onclick="initTables2()">数据表</li>
 					</ul>
-					
-					<div class="layui-tab-content" style="height: 100px;"> 
-					
+
+					<div class="layui-tab-content" style="height: 100px;">
+
 						<div class="layui-tab-item layui-show">
-							<p id="errorMsg"  style="display: inline-block;"></p>
-						
-							<div id="_top" class="col-xs-12" style="width:1300px;height:400px; margin-top: -50px;margin:0 auto">
+							<p id="errorMsg" style="display: inline-block;"></p>
+
+							<div id="_top" class="col-xs-12"
+								 style="width:1300px;height:400px; margin-top: -50px;margin:0 auto">
 							</div>
-							
+
 						</div>
-						
+
 						<div class="layui-tab-item">
 							<div id="tabBtn2" style="margin-left: 10px;margin-top: 1%;"></div>
 							<table class="layui-table" lay-skin="line" id="mainContent2" style="width: 100%;white-space: nowrap;">
@@ -219,22 +253,22 @@
 					</a>
 				</div>
 			</div>
-			    </div>
-			    <div class="layui-tab-item">
-			      <div class="bleft" style="width:90%;height:800px;display: block;position: relative;margin-left: 5%;">
+		</div>
+		<div class="layui-tab-item">
+			<div class="bleft" style="width:90%;height:800px;display: block;position: relative;margin-left: 5%;">
 				<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
 					<ul class="layui-tab-title labelright" style="float:right;z-index:10;margin-top: 0.5%;">
 						<li class="layui-this ">统计图</li>
 						<li onclick="initTables3()">数据表</li>
 					</ul>
-					 <!--<div class="sele" >
-							<label for="" class="col-sm-2 control-label shaixuan" >筛选站点</label>
-							<div class="col-sm-2" style="width: 20%">
-								&lt;!&ndash; 样式1 &ndash;&gt;
-								<select class="form-control selectpicker" multiple data-actions-box="true"   data-live-search="true" id="zhandian" style="width:80%;">
-								</select>
-							</div>
-						</div>-->
+					<!--<div class="sele" >
+                           <label for="" class="col-sm-2 control-label shaixuan" >筛选站点</label>
+                           <div class="col-sm-2" style="width: 20%">
+                               &lt;!&ndash; 样式1 &ndash;&gt;
+                               <select class="form-control selectpicker" multiple data-actions-box="true"   data-live-search="true" id="zhandian" style="width:80%;">
+                               </select>
+                           </div>
+                       </div>-->
 					<div class="layui-tab-content" style="height: 100px;">
 						<div class="layui-tab-item layui-show">
 							<p id="errorMsg2" style="display: inline-block;"></p>
@@ -246,6 +280,55 @@
 							<div id="tabBtn3" style="margin-left: 10px;margin-top: 0.5%;"></div>
 							<table class="layui-table" lay-skin="line" id="mainContent3" style="width: 100%;white-space: nowrap;">
 								<thead style="background-color: #DDE6F7;">
+								<tr>
+									<th style="width: 15%">站点</th>
+									<th>车道号</th>
+									<th>车牌号</th>
+									<th>车牌颜色</th>
+									<th>长(cm)</th>
+									<th>车速(km/h)</th>
+									<th>轴数</th>
+									<th>超限值(kg)</th>
+									<th>总重量(kg)</th>
+									<th>路面温度(°C)</th>
+									<th>超载率</th>
+									<th>时间</th>
+									<th>操作</th>
+								</tr>
+								</thead>
+								<tbody>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="layui-tab-item">
+			<div class="form-group" id="rightTab">
+
+
+				<!--左上半部分结束-->
+				<div class="bottom"
+					 style="width: 100%;height:800px;display: block;position: relative;margin-left: -5%;background-color: #ffffff">
+
+					<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+						<ul class="layui-tab-title labelright" style="float: right;margin-top: 1%;">
+							<li class="layui-this">统计图</li>
+							<li onclick="initTables4()">一级预警数据表</li>
+							<li onclick="initTables5()">二级预警数据表</li>
+						</ul>
+						<div class="layui-tab-content" style="height: 100px;">
+							<div class="layui-tab-item layui-show" style="margin-top: 5%;">
+								<p id="errorMsg3" style="display: inline-block;"></p>
+								<div id="bottom_" class="col-xs-12"
+									 style="width:1300px;height:500px; margin-left: 15px;margin-top: -50px;"></div>
+							</div>
+							<div class="layui-tab-item">
+								<div id="tabBtn4" style="margin-left: 10px;margin-top: 1%;"></div>
+								<table class="layui-table" lay-skin="line" id="mainContent4"
+									   style="width: 100%;white-space: nowrap;">
+									<thead style="background-color: #DDE6F7;">
 									<tr>
 										<th style="width: 15%">站点</th>
 										<th>车道号</th>
@@ -261,759 +344,722 @@
 										<th>时间</th>
 										<th>操作</th>
 									</tr>
-								</thead>
-								<tbody>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
-			    </div>
-			    <div class="layui-tab-item">
-			     <div class="form-group" id="rightTab">
-
-			
-			<!--左上半部分结束-->
-           <div class="bottom" style="width: 100%;height:800px;display: block;position: relative;margin-left: -5%;background-color: #ffffff">
-
-			   <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
-				   <ul class="layui-tab-title labelright" style="float: right;margin-top: 1%;">
-					   <li class="layui-this">统计图</li>
-					   <li onclick="initTables4()">一级预警数据表</li>
-					   <li onclick="initTables5()">二级预警数据表</li>
-				   </ul>
-				   <div class="layui-tab-content" style="height: 100px;">
-					   <div class="layui-tab-item layui-show" style="margin-top: 5%;">
-						   <p id="errorMsg3" style="display: inline-block;"></p>
-						   <div id="bottom_" class="col-xs-12" style="width:1300px;height:500px; margin-left: 15px;margin-top: -50px;"></div>
-					   </div>
-					   <div class="layui-tab-item">
-						   <div id="tabBtn4" style="margin-left: 10px;margin-top: 1%;"></div>
-						   <table class="layui-table" lay-skin="line" id="mainContent4" style="width: 100%;white-space: nowrap;">
-							   <thead style="background-color: #DDE6F7;">
-							   <tr>
-								   <th style="width: 15%">站点</th>
-								   <th>车道号</th>
-								   <th>车牌号</th>
-								   <th>车牌颜色</th>
-								   <th>长(cm)</th>
-								   <th>车速(km/h)</th>
-								   <th>轴数</th>
-								   <th>超限值(kg)</th>
-								   <th>总重量(kg)</th>
-								   <th>路面温度(°C)</th>
-								   <th>超载率</th>
-								   <th>时间</th>
-								   <th>操作</th>
-							   </tr>
-							   </thead>
-							   <tbody>
-							   </tbody>
-						   </table>
-					   </div>
-					   <div class="layui-tab-item">
-						   <div id="tabBtn5" style="margin-left: 10px;margin-top: 1%;"></div>
-					   <table class="layui-table" lay-skin="line" id="mainContent5" style="width: 100%;white-space: nowrap;">
-						   <thead style="background-color: #DDE6F7;">
-						   <tr>
-							   <th style="width: 15%">站点</th>
-							   <th>车道号</th>
-							   <th>车牌号</th>
-							   <th>车牌颜色</th>
-							   <th>长(cm)</th>
-							   <th>车速(km/h)</th>
-							   <th>轴数</th>
-							   <th>超限值(kg)</th>
-							   <th>总重量(kg)</th>
-							   <th>路面温度(°C)</th>
-							   <th>超载率</th>
-							   <th>时间</th>
-							   <th>操作</th>
-						   </tr>
-						   </thead>
-						   <tbody>
-						   </tbody>
-					   </table>
-				   </div>
-				   </div>
-			   </div>
-			</div>
-           </div>
-			    </div>
-			  </div>
-			</div>
- 
-		
-
-		<!-- allMsg -->
-		<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="jianceDiv">
-			<div class="modal-dialog modal-lg" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title" ><b>当日监测站点</b></h4>
-					</div>
-					<div class="modal-body">
-						<div>
-							<form class="form-inline">
-								<table class="table table-bordered table-condensed" style="height: auto;" id="jianceTable">
+									</thead>
 									<tbody>
-
 									</tbody>
 								</table>
-							</form>
+							</div>
+							<div class="layui-tab-item">
+								<div id="tabBtn5" style="margin-left: 10px;margin-top: 1%;"></div>
+								<table class="layui-table" lay-skin="line" id="mainContent5"
+									   style="width: 100%;white-space: nowrap;">
+									<thead style="background-color: #DDE6F7;">
+									<tr>
+										<th style="width: 15%">站点</th>
+										<th>车道号</th>
+										<th>车牌号</th>
+										<th>车牌颜色</th>
+										<th>长(cm)</th>
+										<th>车速(km/h)</th>
+										<th>轴数</th>
+										<th>超限值(kg)</th>
+										<th>总重量(kg)</th>
+										<th>路面温度(°C)</th>
+										<th>超载率</th>
+										<th>时间</th>
+										<th>操作</th>
+									</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
 						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-						<!--<button type="button" class="btn btn-success" id="xgup_baocun">保存</button>-->
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
+</div>
 
-		<!-- allMsg1 -->
-		<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg1" style="margin-top: 3%">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content"  id="lookWimMsgDiv">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title" ><b>详细信息</b></h4>
-					</div>
-					<div class="modal-body">
-						<div>
-							<form class="form-inline">
-								<table class="table  table-condensed" style="">
-									<tr>
-										<td>站点</td>
-										<td>{{stationName}}</td>
-										<td>轴数</td>
-										<td>{{axlesCount}}</td>
-									</tr>
-									<tr>
 
-										<td>车型</td>
-										<td>{{vehicleTypeName}}</td>
-										<td>车道号</td>
-										<td>{{laneNo}}</td>
-									</tr>
-									<tr>
-										<td>车牌号</td>
-										<td>{{plate}}</td>
-										<td>行驶方向</td>
-										<td>{{directionName}}</td>
+<!-- allMsg -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+	 id="jianceDiv">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title"><b>当日监测站点</b></h4>
+			</div>
+			<div class="modal-body">
+				<div>
+					<form class="form-inline">
+						<table class="table table-bordered table-condensed" style="height: auto;" id="jianceTable">
+							<tbody>
 
-									</tr>
-									<tr>
-										<td>超载率</td>
-										<td>{{overWeightRatioName}}</td>
-										<td>是否跨道</td>
-										<td>{{isStraddleName}}</td>
-									</tr>
-									<tr>
-										<td>车长(cm)</td>
-										<td>{{length}}</td>
-										<td>车牌颜色</td>
-										<td>{{licensePlateColor}}</td>
-									</tr>
-									<tr>
-										<td>超重量(kg)</td>
-										<td>{{overWeight}}</td>
-										<td>通行时间</td>
-										<td>{{evtTime}}</td>
-									</tr>
-									<tr>
-										<td>总重量(kg)</td>
-										<td>{{totalWeight}}</td>
-										<!--<td>打包时间</td>
-										<td>{{msgTime}}</td>-->
-										<td>路面温度(°C)</td>
-										<td>{{temperature}}</td>
-									</tr>
+							</tbody>
+						</table>
+					</form>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				<!--<button type="button" class="btn btn-success" id="xgup_baocun">保存</button>-->
+			</div>
+		</div>
+	</div>
+</div>
 
-									<tr>
-										<td>车速(km/h)</td>
-										<td>{{speed}}</td>
-										<td>查看图片</td>
-										<td rowspan="2">
-											<div id="chepaiImg">
-											</div>
-											<div id="chebodyDiv">
-											</div>
-										</td>
-									</tr>
-									<tr>
+<!-- allMsg1 -->
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg1"
+	 style="margin-top: 3%">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content" id="lookWimMsgDiv">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title"><b>详细信息</b></h4>
+			</div>
+			<div class="modal-body">
+				<div>
+					<form class="form-inline">
+						<table class="table  table-condensed" style="">
+							<tr>
+								<td>站点</td>
+								<td>{{stationName}}</td>
+								<td>轴数</td>
+								<td>{{axlesCount}}</td>
+							</tr>
+							<tr>
 
-									</tr>
-								</table>
-								<table class="table  table-condensed" style="height: auto; margin-top: -2%;">
-									<thead>
-									<td colspan="10">轴重(kg)</td>
-									</thead>
-									<tbody>
-									<tr>
-										<td width="38px;">轴1:</td>
-										<td>{{axle1}}</td>
-										<td width="38px;">轴2:</td>
-										<td>{{axle2}}</td>
-										<td width="38px;">轴3:</td>
-										<td>{{axle3}}</td>
-										<td width="38px;">轴4:</td>
-										<td>{{axle4}}</td>
-										<td width="38px;" style="text-align:right">轴5:</td>
-										<td>{{axle5}}</td>
-									</tr>
-									<tr>
-										<td width="38px;">轴6:</td>
-										<td>{{axle6}}</td>
-										<td width="38px;">轴7:</td>
-										<td>{{axle7}}</td>
-										<td width="38px;">轴8:</td>
-										<td>{{axle8}}</td>
-										<td width="38px;">轴9:</td>
-										<td>{{axle9}}</td>
-										<td width="44px;">轴10:</td>
-										<td>{{axle10}}</td>
-									</tr>
-									</tbody>
-								</table>
-								<table class="table  table-condensed" style="height: auto; margin-top: -2%">
-									<thead>
-									<td colspan="10">轴间距(cm)</td>
-									</thead>
-									<tbody>
-									<tr>
-										<td width="38px;">轴1:</td>
-										<td>{{axleSpace1}}</td>
-										<td width="38px;">轴2:</td>
-										<td>{{axleSpace2}}</td>
-										<td width="38px;">轴3:</td>
-										<td>{{axleSpace3}}</td>
-										<td width="38px;">轴4:</td>
-										<td>{{axleSpace4}}</td>
-										<td width="38px;">轴5:</td>
-										<td>{{axleSpace5}}</td>
-									</tr>
-									<tr>
-										<td width="38px;">轴6:</td>
-										<td>{{axleSpace6}}</td>
-										<td width="38px;">轴7:</td>
-										<td>{{axleSpace7}}</td>
-										<td width="38px;">轴8:</td>
-										<td>{{axleSpace8}}</td>
-										<td width="38px;">轴9:</td>
-										<td>{{axleSpace9}}</td>
-									</tr>
-									</tbody>
-								</table>
-								<!--<div>
-									<span>查看图片</span>
+								<td>车型</td>
+								<td>{{vehicleTypeName}}</td>
+								<td>车道号</td>
+								<td>{{laneNo}}</td>
+							</tr>
+							<tr>
+								<td>车牌号</td>
+								<td>{{plate}}</td>
+								<td>行驶方向</td>
+								<td>{{directionName}}</td>
+
+							</tr>
+							<tr>
+								<td>超载率</td>
+								<td>{{overWeightRatioName}}</td>
+								<td>是否跨道</td>
+								<td>{{isStraddleName}}</td>
+							</tr>
+							<tr>
+								<td>车长(cm)</td>
+								<td>{{length}}</td>
+								<td>车牌颜色</td>
+								<td>{{licensePlateColor}}</td>
+							</tr>
+							<tr>
+								<td>超重量(kg)</td>
+								<td>{{overWeight}}</td>
+								<td>通行时间</td>
+								<td>{{evtTime}}</td>
+							</tr>
+							<tr>
+								<td>总重量(kg)</td>
+								<td>{{totalWeight}}</td>
+								<!--<td>打包时间</td>
+                                <td>{{msgTime}}</td>-->
+								<td>路面温度(°C)</td>
+								<td>{{temperature}}</td>
+							</tr>
+
+							<tr>
+								<td>车速(km/h)</td>
+								<td>{{speed}}</td>
+								<td>查看图片</td>
+								<td rowspan="2">
 									<div id="chepaiImg">
 									</div>
 									<div id="chebodyDiv">
 									</div>
-								</div>-->
-							</form>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-						<!--<button type="button" class="btn btn-success" id="xgup_baocun">保存</button>-->
-					</div>
+								</td>
+							</tr>
+							<tr>
+
+							</tr>
+						</table>
+						<table class="table  table-condensed" style="height: auto; margin-top: -2%;">
+							<thead>
+							<td colspan="10">轴重(kg)</td>
+							</thead>
+							<tbody>
+							<tr>
+								<td width="38px;">轴1:</td>
+								<td>{{axle1}}</td>
+								<td width="38px;">轴2:</td>
+								<td>{{axle2}}</td>
+								<td width="38px;">轴3:</td>
+								<td>{{axle3}}</td>
+								<td width="38px;">轴4:</td>
+								<td>{{axle4}}</td>
+								<td width="38px;" style="text-align:right">轴5:</td>
+								<td>{{axle5}}</td>
+							</tr>
+							<tr>
+								<td width="38px;">轴6:</td>
+								<td>{{axle6}}</td>
+								<td width="38px;">轴7:</td>
+								<td>{{axle7}}</td>
+								<td width="38px;">轴8:</td>
+								<td>{{axle8}}</td>
+								<td width="38px;">轴9:</td>
+								<td>{{axle9}}</td>
+								<td width="44px;">轴10:</td>
+								<td>{{axle10}}</td>
+							</tr>
+							</tbody>
+						</table>
+						<table class="table  table-condensed" style="height: auto; margin-top: -2%">
+							<thead>
+							<td colspan="10">轴间距(cm)</td>
+							</thead>
+							<tbody>
+							<tr>
+								<td width="38px;">轴1:</td>
+								<td>{{axleSpace1}}</td>
+								<td width="38px;">轴2:</td>
+								<td>{{axleSpace2}}</td>
+								<td width="38px;">轴3:</td>
+								<td>{{axleSpace3}}</td>
+								<td width="38px;">轴4:</td>
+								<td>{{axleSpace4}}</td>
+								<td width="38px;">轴5:</td>
+								<td>{{axleSpace5}}</td>
+							</tr>
+							<tr>
+								<td width="38px;">轴6:</td>
+								<td>{{axleSpace6}}</td>
+								<td width="38px;">轴7:</td>
+								<td>{{axleSpace7}}</td>
+								<td width="38px;">轴8:</td>
+								<td>{{axleSpace8}}</td>
+								<td width="38px;">轴9:</td>
+								<td>{{axleSpace9}}</td>
+							</tr>
+							</tbody>
+						</table>
+						<!--<div>
+                            <span>查看图片</span>
+                            <div id="chepaiImg">
+                            </div>
+                            <div id="chebodyDiv">
+                            </div>
+                        </div>-->
+					</form>
 				</div>
 			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				<!--<button type="button" class="btn btn-success" id="xgup_baocun">保存</button>-->
+			</div>
 		</div>
+	</div>
+</div>
 
-	</body>
-	<script src="../js/jquery.js"></script>
-	<script src="../js/bootstrap.min.js"></script>
-	<script src="/js/select.min.js"></script>
-	<!--<script src="../js/bootstrap-select.js" ></script>-->
-	<script src="../js/common-scripts.js"></script>
-	<script src="js/layui.js" charset="utf-8"></script>
-	<script src="js/element.js" type="text/javascript" charset="utf-8"></script>
-	<!--<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>-->
-	<script src="js/echarts.min(1).js" type="text/javascript" charset="utf-8"></script>
-	<!--<script src="js/datatables/jquery.dataTables.min.js"></script>-->
-	<script src="js/toastr.js"></script>
-	<script src="js/jianceEcharts.js"></script>
-	<script src="../js/myTool.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-	<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
-	<!--导出CSV开始-->
-	<script src="js/datatables/jquery.dataTables.min.js"></script>
-	<script src="js/datatables/dataTables.colVis.min.js"></script>
-	<script src="js/datatables/dataTables.tableTools.min.js"></script>
-	<script src="js/datatables/datatables.responsive.min.js"></script>
-	<script src="js/datatables/dataTables.buttons.min.js" ></script>
-	<script src="js/datatables/buttons.html5.min.js" ></script>
-	<script src="js/datatables/buttons.flash.min.js" ></script>
-	<script src="js/datatables/jszip.min.js"></script>
-	<!--导出CSV结束-->
-	<script>
-	layui.use('element', function(){
-		  var element = layui.element;
+</body>
+<script src="../js/jquery.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="/js/select.min.js"></script>
+<!--<script src="../js/bootstrap-select.js" ></script>-->
+<script src="../js/common-scripts.js"></script>
+<script src="js/layui.js" charset="utf-8"></script>
+<script src="js/element.js" type="text/javascript" charset="utf-8"></script>
+<!--<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>-->
+<script src="js/echarts.min(1).js" type="text/javascript" charset="utf-8"></script>
+<!--<script src="js/datatables/jquery.dataTables.min.js"></script>-->
+<script src="js/toastr.js"></script>
+<script src="js/jianceEcharts.js"></script>
+<script src="../js/myTool.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+<!--导出CSV开始-->
+<script src="js/datatables/jquery.dataTables.min.js"></script>
+<script src="js/datatables/dataTables.colVis.min.js"></script>
+<script src="js/datatables/dataTables.tableTools.min.js"></script>
+<script src="js/datatables/datatables.responsive.min.js"></script>
+<script src="js/datatables/dataTables.buttons.min.js"></script>
+<script src="js/datatables/buttons.html5.min.js"></script>
+<script src="js/datatables/buttons.flash.min.js"></script>
+<script src="js/datatables/jszip.min.js"></script>
+<!--导出CSV结束-->
+<script>
+	layui.use('element', function () {
+		var element = layui.element;
 
-		  //…
+		//…
+	});
+
+	$(document).ready(function () {
+		$('#zhandian').selectpicker({
+			'selectedText': 'cat',
+			'noneSelectedText': '请选择',
+			'deselectAllText': '全不选',
+			'selectAllText': '全选'
 		});
-	
-		$(document).ready( function () {
-			$('#zhandian').selectpicker({
-				'selectedText': 'cat',
-				'noneSelectedText': '请选择',
-				'deselectAllText': '全不选',
-				'selectAllText': '全选'
-			});
-			initzhandian()
-			queding()
-			setLeftEcharts()
-			setRightEcharts()
-			setBottomEcharts()
-			initTotalNumber();
-			setInterval(refresh, 6000);
+		initzhandian()
+		queding()
+		setLeftEcharts()
+		setRightEcharts()
+		setBottomEcharts()
+		initTotalNumber();
+		setInterval(refresh, 6000);
 
-		});
-		var table=$('#mainContent').dataTable({
-			"deferRender": true,
-			"processing": true,
-			"bDestroy": true,
-			"iDisplayLength": 10,
-			"searching": false,
-			"bLengthChange": false,
-			'paging':false,
-			"oLanguage": {
-				"sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
-			},
-			"columns": [
-				{ "data": "stationName"},
-				{ "data": "laneNo"},
-				{ "data": "plate"},
-				{ "data": "licensePlateColor"},
-				{ "data": "length"},
-				{ "data": "speed"},
-				{ "data": "axlesCount"},
-				{ "data": "maxWeight"},
-				{ "data": "totalWeight"},
-				{ "data": "temperature",visible:false},
-				{ "data": "overWeightRatioName"},
-				{"data": "evtTime"},
-				{ "data": null},
+	});
+	var table = $('#mainContent').dataTable({
+		"deferRender": true,
+		"processing": true,
+		"bDestroy": true,
+		"iDisplayLength": 10,
+		"searching": false,
+		"bLengthChange": false,
+		'paging': false,
+		"oLanguage": {
+			"sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+		},
+		"columns": [
+			{"data": "stationName"},
+			{"data": "laneNo"},
+			{"data": "plate"},
+			{"data": "licensePlateColor"},
+			{"data": "length"},
+			{"data": "speed"},
+			{"data": "axlesCount"},
+			{"data": "maxWeight"},
+			{"data": "totalWeight"},
+			{"data": "temperature", visible: false},
+			{"data": "overWeightRatioName"},
+			{"data": "evtTime"},
+			{"data": null},
 
-			],
-			"columnDefs": [{
+		],
+		"columnDefs": [{
+			"class": "tcenter",
+			"targets": 12,
+			"searchable": true,
+			"render": function (data, type, full) {
+				return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="' + full.idLocal + '" onclick="lookMsg(this,1)" id="lookDetall"></i>';
+			}
+		}, {
+			"class": "tcenter",
+			"targets": 10,
+			"searchable": true,
+			"render": function (data, type, full) {
+				if (data == "超载") {
+					return ((full.overWeightRatio * 100).toFixed(2)) + "%";
+				} else {
+					return data;
+				}
+			}
+		}],
+		"fnDrawCallback": function () {
+			getLoginUser()
+		},
+		"order": [[11, 'desc']],
+		"oLanguage": { //国际化配置
+			"sProcessing": "正在获取数据，请稍后...",
+			"sLengthMenu": "显示 _MENU_ 条",
+			"sZeroRecords": "查询不到相关数据",
+			"sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
+			"sInfoEmpty": "记录数为0",
+			"sInfoFiltered": "(全部记录数 _MAX_ 条)",
+			"sInfoPostFix": "",
+			"sSearch": "搜索",
+			"sUrl": "",
+			"oPaginate": {
+				"sFirst": "第一页",
+				"sPrevious": "上一页",
+				"sNext": "下一页",
+				"sLast": "最后一页"
+			}
+		},
+
+	});
+	var table2 = $('#mainContent2').DataTable({
+		"deferRender": true,
+		"processing": true,
+		"bDestroy": true,
+		"iDisplayLength": 10,
+		"sDom":
+				"t" +
+				"<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+		"searching": true,
+		"searching": false,
+		"bLengthChange": false,
+		"oLanguage": {
+			"sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+		},
+		"columns": [
+			{"data": "stationName"},
+			{"data": "laneNo"},
+			{"data": "plate"},
+			{"data": "licensePlateColor"},
+			{"data": "length"},
+			{"data": "speed"},
+			{"data": "axlesCount"},
+			{"data": "maxWeight"},
+			{"data": "totalWeight"},
+			{"data": "temperature", visible: false},
+			{"data": "overWeightRatioName"},
+			{"data": "evtTime"},
+			{"data": null},
+
+		],
+		"columnDefs": [
+			{
 				"class": "tcenter",
 				"targets": 12,
 				"searchable": true,
-				"render": function(data, type, full) {
-					return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="'+full.idLocal+'" onclick="lookMsg(this,1)" id="lookDetall"></i>';
+				"render": function (data, type, full) {
+					return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="' + full.idLocal + '" onclick="lookMsg(this,2)"  id="lookDetall"></i>';
 				}
-			},{
+			}, {
 				"class": "tcenter",
 				"targets": 10,
 				"searchable": true,
-				"render": function(data, type, full) {
-					if(data=="超载"){
-						return ((full.overWeightRatio*100).toFixed(2))+"%";
-					}else{
+				"render": function (data, type, full) {
+					if (data == "超载") {
+						return ((full.overWeightRatio * 100).toFixed(2)) + "%";
+					} else {
 						return data;
 					}
 				}
 			}],
-			"fnDrawCallback" : function() {
-				getLoginUser()
-			},
-			"order": [[11, 'desc']],
-			"oLanguage": { //国际化配置
-				"sProcessing": "正在获取数据，请稍后...",
-				"sLengthMenu": "显示 _MENU_ 条",
-				"sZeroRecords": "查询不到相关数据",
-				"sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
-				"sInfoEmpty": "记录数为0",
-				"sInfoFiltered": "(全部记录数 _MAX_ 条)",
-				"sInfoPostFix": "",
-				"sSearch": "搜索",
-				"sUrl": "",
-				"oPaginate": {
-					"sFirst": "第一页",
-					"sPrevious": "上一页",
-					"sNext": "下一页",
-					"sLast": "最后一页"
-				}},
 
-		});
-		var table2=$('#mainContent2').DataTable({
-			"deferRender": true,
-			"processing": true,
-			"bDestroy": true,
-			"iDisplayLength": 10,
-			"sDom":
-					"t"+
-					"<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-			"searching": true,
-			"searching": false,
-			"bLengthChange": false,
-			"oLanguage": {
-				"sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
-			},
-			"columns": [
-				{ "data": "stationName"},
-				{ "data": "laneNo"},
-				{ "data": "plate"},
-				{ "data": "licensePlateColor"},
-				{ "data": "length"},
-				{ "data": "speed"},
-				{ "data": "axlesCount"},
-				{ "data": "maxWeight"},
-				{ "data": "totalWeight"},
-				{ "data": "temperature",visible:false},
-				{ "data": "overWeightRatioName"},
-				{"data": "evtTime"},
-				{ "data": null},
-
-			],
-			"columnDefs": [
-				{
-					"class": "tcenter",
-					"targets": 12,
-					"searchable": true,
-					"render": function(data, type, full) {
-						return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="'+full.idLocal+'" onclick="lookMsg(this,2)"  id="lookDetall"></i>';
-					}
-				},{
-					"class": "tcenter",
-					"targets": 10,
-					"searchable": true,
-					"render": function(data, type, full) {
-						if(data=="超载"){
-							return ((full.overWeightRatio*100).toFixed(2))+"%";
-						}else{
+		"order": [[11, 'desc']],
+		"oLanguage": { //国际化配置
+			"sProcessing": "正在获取数据，请稍后...",
+			"sLengthMenu": "显示 _MENU_ 条",
+			"sZeroRecords": "查询不到相关数据",
+			"sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
+			"sInfoEmpty": "记录数为0",
+			"sInfoFiltered": "(全部记录数 _MAX_ 条)",
+			"sInfoPostFix": "",
+			"sSearch": "搜索",
+			"sUrl": "",
+			"oPaginate": {
+				"sFirst": "第一页",
+				"sPrevious": "上一页",
+				"sNext": "下一页",
+				"sLast": "最后一页"
+			}
+		},
+		"buttons": [
+			{
+				extend: "csv",
+				text: "导出EXCEL",
+				bom: true,
+				filename: '当日车流量',
+				fieldSeparator: ',',
+				exportOptions: {
+					format: {
+						header: function (data) {
+							return data;
+						},
+						body: function (data, columnIdx, rowIdx, code) {
 							return data;
 						}
-					}
-				}],
-
-			"order": [[11, 'desc']],
-			"oLanguage": { //国际化配置
-				"sProcessing": "正在获取数据，请稍后...",
-				"sLengthMenu": "显示 _MENU_ 条",
-				"sZeroRecords": "查询不到相关数据",
-				"sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
-				"sInfoEmpty": "记录数为0",
-				"sInfoFiltered": "(全部记录数 _MAX_ 条)",
-				"sInfoPostFix": "",
-				"sSearch": "搜索",
-				"sUrl": "",
-				"oPaginate": {
-					"sFirst": "第一页",
-					"sPrevious": "上一页",
-					"sNext": "下一页",
-					"sLast": "最后一页"
-				}},
-			"buttons": [
-				{
-					extend: "csv",
-					text: "导出EXCEL",
-					bom: true,
-					filename: '当日车流量',
-					fieldSeparator: ',',
-					exportOptions: {
-						format: {
-							header: function ( data) {
-								return data;
-							},
-							body: function ( data, columnIdx, rowIdx, code ) {
-								return data;
-							}
-						},
-						columns:[0,1,2,3,4,5,6,7,8,10,11]
-					}
+					},
+					columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11]
 				}
-			]
-		});
-	table2.buttons().container().appendTo( $('#tabBtn2') );
+			}
+		]
+	});
+	table2.buttons().container().appendTo($('#tabBtn2'));
 	$('.buttons-csv').addClass('btn btn-primary');
 
-		var table3=$('#mainContent3').DataTable({
-			"deferRender": true,
-			"processing": true,
-			"bDestroy": true,
-			"iDisplayLength": 10,
-			"sDom":
-					"t"+
-					"<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-			"searching": true,
-			"searching": false,
-			"bLengthChange": false,
+	var table3 = $('#mainContent3').DataTable({
+		"deferRender": true,
+		"processing": true,
+		"bDestroy": true,
+		"iDisplayLength": 10,
+		"sDom":
+				"t" +
+				"<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+		"searching": true,
+		"searching": false,
+		"bLengthChange": false,
 
-			"oLanguage": {
-				"sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
-			},
-			"columns": [
-				{ "data": "stationName"},
-				{ "data": "laneNo"},
-				{ "data": "plate"},
-				{ "data": "licensePlateColor"},
-				{ "data": "length"},
-				{ "data": "speed"},
-				{ "data": "axlesCount"},
-				{ "data": "maxWeight"},
-				{ "data": "totalWeight"},
-				{ "data": "temperature",visible:false},
-				{ "data": "overWeightRatio"},
-				{"data": "evtTime"},
-				{ "data": null},
+		"oLanguage": {
+			"sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+		},
+		"columns": [
+			{"data": "stationName"},
+			{"data": "laneNo"},
+			{"data": "plate"},
+			{"data": "licensePlateColor"},
+			{"data": "length"},
+			{"data": "speed"},
+			{"data": "axlesCount"},
+			{"data": "maxWeight"},
+			{"data": "totalWeight"},
+			{"data": "temperature", visible: false},
+			{"data": "overWeightRatio"},
+			{"data": "evtTime"},
+			{"data": null},
 
-			],
-			"columnDefs": [
-				{
-					"class": "tcenter",
-					"targets": 12,
-					"searchable": true,
-					"render": function(data, type, full) {
-						return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="'+full.idLocal+'" onclick="lookMsg(this,3)"  id="lookDetall"></i>';
-					}
-				},{
-					"class": "tcenter",
-					"targets": 10,
-					"searchable": true,
-					"render": function(data, type, full) {
-							return (data*100).toFixed(2)+"%";
-					}
-				}],
-
-			"order": [[11, 'desc']],
-			"oLanguage": { //国际化配置
-				"sProcessing": "正在获取数据，请稍后...",
-				"sLengthMenu": "显示 _MENU_ 条",
-				"sZeroRecords": "查询不到相关数据",
-				"sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
-				"sInfoEmpty": "记录数为0",
-				"sInfoFiltered": "(全部记录数 _MAX_ 条)",
-				"sInfoPostFix": "",
-				"sSearch": "搜索",
-				"sUrl": "",
-				"oPaginate": {
-					"sFirst": "第一页",
-					"sPrevious": "上一页",
-					"sNext": "下一页",
-					"sLast": "最后一页"
-				}},
-			"buttons": [
-				{
-					extend: "csv",
-					text: "导出EXCEL",
-					bom: true,
-					filename: '当日超载车辆',
-					fieldSeparator: ',',
-					exportOptions: {
-						format: {
-							header: function ( data) {
-								return data;
-							},
-							body: function ( data, columnIdx, rowIdx, code ) {
-								return data;
-							}
-						},
-						columns:[0,1,2,3,4,5,6,7,8,10,11]
-					}
+		],
+		"columnDefs": [
+			{
+				"class": "tcenter",
+				"targets": 12,
+				"searchable": true,
+				"render": function (data, type, full) {
+					return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="' + full.idLocal + '" onclick="lookMsg(this,3)"  id="lookDetall"></i>';
 				}
-			]
-		});
-	table3.buttons().container().appendTo( $('#tabBtn3') );
-	$('.buttons-csv').addClass('btn btn-primary');
+			}, {
+				"class": "tcenter",
+				"targets": 10,
+				"searchable": true,
+				"render": function (data, type, full) {
+					return (data * 100).toFixed(2) + "%";
+				}
+			}],
 
-		var table4=$('#mainContent4').DataTable({
-			"deferRender": true,
-			"processing": true,
-			"bDestroy": true,
-			"iDisplayLength": 10,
-			"sDom":
-					"t"+
-					"<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-			"searching": true,
-			"searching": false,
-			"bLengthChange": false,
-
-			"oLanguage": {
-				"sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
-			},
-			"columns": [
-				{ "data": "stationName"},
-				{ "data": "laneNo"},
-				{ "data": "plate"},
-				{ "data": "licensePlateColor"},
-				{ "data": "length"},
-				{ "data": "speed"},
-				{ "data": "axlesCount"},
-				{ "data": "maxWeight"},
-				{ "data": "totalWeight"},
-				{ "data": "temperature",visible:false},
-				{ "data": "overWeightRatioName"},
-                {"data": "evtTime"},
-				{ "data": null},
-
-			],
-			"columnDefs": [
-				{
-					"class": "tcenter",
-					"targets": 12,
-					"searchable": true,
-					"render": function(data, type, full) {
-						return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="'+full.idLocal+'" onclick="lookMsg(this,4)"  id="lookDetall"></i>';
-					}
-				},{
-					"class": "tcenter",
-					"targets": 10,
-					"searchable": true,
-					"render": function(data, type, full) {
-						if(data=="超载"){
-							return ((full.overWeightRatio*100).toFixed(2))+"%";
-						}else{
+		"order": [[11, 'desc']],
+		"oLanguage": { //国际化配置
+			"sProcessing": "正在获取数据，请稍后...",
+			"sLengthMenu": "显示 _MENU_ 条",
+			"sZeroRecords": "查询不到相关数据",
+			"sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
+			"sInfoEmpty": "记录数为0",
+			"sInfoFiltered": "(全部记录数 _MAX_ 条)",
+			"sInfoPostFix": "",
+			"sSearch": "搜索",
+			"sUrl": "",
+			"oPaginate": {
+				"sFirst": "第一页",
+				"sPrevious": "上一页",
+				"sNext": "下一页",
+				"sLast": "最后一页"
+			}
+		},
+		"buttons": [
+			{
+				extend: "csv",
+				text: "导出EXCEL",
+				bom: true,
+				filename: '当日超载车辆',
+				fieldSeparator: ',',
+				exportOptions: {
+					format: {
+						header: function (data) {
+							return data;
+						},
+						body: function (data, columnIdx, rowIdx, code) {
 							return data;
 						}
-					}
-				}],
-
-			"order": [[11, 'desc']],
-			"oLanguage": { //国际化配置
-				"sProcessing": "正在获取数据，请稍后...",
-				"sLengthMenu": "显示 _MENU_ 条",
-				"sZeroRecords": "查询不到相关数据",
-				"sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
-				"sInfoEmpty": "记录数为0",
-				"sInfoFiltered": "(全部记录数 _MAX_ 条)",
-				"sInfoPostFix": "",
-				"sSearch": "搜索",
-				"sUrl": "",
-				"oPaginate": {
-					"sFirst": "第一页",
-					"sPrevious": "上一页",
-					"sNext": "下一页",
-					"sLast": "最后一页"
-				}},
-			"buttons": [
-				{
-					extend: "csv",
-					text: "导出EXCEL",
-					bom: true,
-					filename: '当日一级预警车辆',
-					fieldSeparator: ',',
-					exportOptions: {
-						format: {
-							header: function ( data) {
-								return data;
-							},
-							body: function ( data, columnIdx, rowIdx, code ) {
-								return data;
-							}
-						},
-						columns:[0,1,2,3,4,5,6,7,8,10,11]
-					}
+					},
+					columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11]
 				}
-			]
-		});
-	table4.buttons().container().appendTo( $('#tabBtn4') );
+			}
+		]
+	});
+	table3.buttons().container().appendTo($('#tabBtn3'));
 	$('.buttons-csv').addClass('btn btn-primary');
 
-		var table5=$('#mainContent5').DataTable({
-			"deferRender": true,
-			"processing": true,
-			"bDestroy": true,
-			"iDisplayLength": 10,
-			"sDom":
-					"t"+
-					"<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-			"searching": true,
-			"searching": false,
-			"bLengthChange": false,
+	var table4 = $('#mainContent4').DataTable({
+		"deferRender": true,
+		"processing": true,
+		"bDestroy": true,
+		"iDisplayLength": 10,
+		"sDom":
+				"t" +
+				"<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+		"searching": true,
+		"searching": false,
+		"bLengthChange": false,
 
-			"oLanguage": {
-				"sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
-			},
-			"columns": [
-				{ "data": "stationName"},
-				{ "data": "laneNo"},
-				{ "data": "plate"},
-				{ "data": "licensePlateColor"},
-				{ "data": "length"},
-				{ "data": "speed"},
-				{ "data": "axlesCount"},
-				{ "data": "maxWeight"},
-				{ "data": "totalWeight"},
-				{ "data": "temperature",visible:false},
-				{ "data": "overWeightRatioName"},
-				{"data": "evtTime"},
-				{ "data": null},
+		"oLanguage": {
+			"sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+		},
+		"columns": [
+			{"data": "stationName"},
+			{"data": "laneNo"},
+			{"data": "plate"},
+			{"data": "licensePlateColor"},
+			{"data": "length"},
+			{"data": "speed"},
+			{"data": "axlesCount"},
+			{"data": "maxWeight"},
+			{"data": "totalWeight"},
+			{"data": "temperature", visible: false},
+			{"data": "overWeightRatioName"},
+			{"data": "evtTime"},
+			{"data": null},
 
-			],
-			"columnDefs": [
-				{
-					"class": "tcenter",
-					"targets": 12,
-					"searchable": true,
-					"render": function(data, type, full) {
-						return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="'+full.idLocal+'" onclick="lookMsg(this,5)"  id="lookDetall"></i>';
-					}
-				},{
-					"class": "tcenter",
-					"targets": 10,
-					"searchable": true,
-					"render": function(data, type, full) {
-						if(data=="超载"){
-							return ((full.overWeightRatio*100).toFixed(2))+"%";
-						}else{
-							return data;
-						}
-					}
-				}],
-
-			"order": [[11, 'desc']],
-			"oLanguage": { //国际化配置
-				"sProcessing": "正在获取数据，请稍后...",
-				"sLengthMenu": "显示 _MENU_ 条",
-				"sZeroRecords": "查询不到相关数据",
-				"sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
-				"sInfoEmpty": "记录数为0",
-				"sInfoFiltered": "(全部记录数 _MAX_ 条)",
-				"sInfoPostFix": "",
-				"sSearch": "搜索",
-				"sUrl": "",
-				"oPaginate": {
-					"sFirst": "第一页",
-					"sPrevious": "上一页",
-					"sNext": "下一页",
-					"sLast": "最后一页"
-				}},
-			"buttons": [
-				{
-					extend: "csv",
-					text: "导出EXCEL",
-					bom: true,
-					filename: '当日二级预警车辆',
-					fieldSeparator: ',',
-					exportOptions: {
-						format: {
-							header: function ( data) {
-								return data;
-							},
-							body: function ( data, columnIdx, rowIdx, code ) {
-								return data;
-							}
-						},
-						columns:[0,1,2,3,4,5,6,7,8,10,11]
+		],
+		"columnDefs": [
+			{
+				"class": "tcenter",
+				"targets": 12,
+				"searchable": true,
+				"render": function (data, type, full) {
+					return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="' + full.idLocal + '" onclick="lookMsg(this,4)"  id="lookDetall"></i>';
+				}
+			}, {
+				"class": "tcenter",
+				"targets": 10,
+				"searchable": true,
+				"render": function (data, type, full) {
+					if (data == "超载") {
+						return ((full.overWeightRatio * 100).toFixed(2)) + "%";
+					} else {
+						return data;
 					}
 				}
-			]
-		});
+			}],
+
+		"order": [[11, 'desc']],
+		"oLanguage": { //国际化配置
+			"sProcessing": "正在获取数据，请稍后...",
+			"sLengthMenu": "显示 _MENU_ 条",
+			"sZeroRecords": "查询不到相关数据",
+			"sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
+			"sInfoEmpty": "记录数为0",
+			"sInfoFiltered": "(全部记录数 _MAX_ 条)",
+			"sInfoPostFix": "",
+			"sSearch": "搜索",
+			"sUrl": "",
+			"oPaginate": {
+				"sFirst": "第一页",
+				"sPrevious": "上一页",
+				"sNext": "下一页",
+				"sLast": "最后一页"
+			}
+		},
+		"buttons": [
+			{
+				extend: "csv",
+				text: "导出EXCEL",
+				bom: true,
+				filename: '当日一级预警车辆',
+				fieldSeparator: ',',
+				exportOptions: {
+					format: {
+						header: function (data) {
+							return data;
+						},
+						body: function (data, columnIdx, rowIdx, code) {
+							return data;
+						}
+					},
+					columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11]
+				}
+			}
+		]
+	});
+	table4.buttons().container().appendTo($('#tabBtn4'));
+	$('.buttons-csv').addClass('btn btn-primary');
+
+	var table5 = $('#mainContent5').DataTable({
+		"deferRender": true,
+		"processing": true,
+		"bDestroy": true,
+		"iDisplayLength": 10,
+		"sDom":
+				"t" +
+				"<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+		"searching": true,
+		"searching": false,
+		"bLengthChange": false,
+
+		"oLanguage": {
+			"sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+		},
+		"columns": [
+			{"data": "stationName"},
+			{"data": "laneNo"},
+			{"data": "plate"},
+			{"data": "licensePlateColor"},
+			{"data": "length"},
+			{"data": "speed"},
+			{"data": "axlesCount"},
+			{"data": "maxWeight"},
+			{"data": "totalWeight"},
+			{"data": "temperature", visible: false},
+			{"data": "overWeightRatioName"},
+			{"data": "evtTime"},
+			{"data": null},
+
+		],
+		"columnDefs": [
+			{
+				"class": "tcenter",
+				"targets": 12,
+				"searchable": true,
+				"render": function (data, type, full) {
+					return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" data-id="' + full.idLocal + '" onclick="lookMsg(this,5)"  id="lookDetall"></i>';
+				}
+			}, {
+				"class": "tcenter",
+				"targets": 10,
+				"searchable": true,
+				"render": function (data, type, full) {
+					if (data == "超载") {
+						return ((full.overWeightRatio * 100).toFixed(2)) + "%";
+					} else {
+						return data;
+					}
+				}
+			}],
+
+		"order": [[11, 'desc']],
+		"oLanguage": { //国际化配置
+			"sProcessing": "正在获取数据，请稍后...",
+			"sLengthMenu": "显示 _MENU_ 条",
+			"sZeroRecords": "查询不到相关数据",
+			"sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
+			"sInfoEmpty": "记录数为0",
+			"sInfoFiltered": "(全部记录数 _MAX_ 条)",
+			"sInfoPostFix": "",
+			"sSearch": "搜索",
+			"sUrl": "",
+			"oPaginate": {
+				"sFirst": "第一页",
+				"sPrevious": "上一页",
+				"sNext": "下一页",
+				"sLast": "最后一页"
+			}
+		},
+		"buttons": [
+			{
+				extend: "csv",
+				text: "导出EXCEL",
+				bom: true,
+				filename: '当日二级预警车辆',
+				fieldSeparator: ',',
+				exportOptions: {
+					format: {
+						header: function (data) {
+							return data;
+						},
+						body: function (data, columnIdx, rowIdx, code) {
+							return data;
+						}
+					},
+					columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11]
+				}
+			}
+		]
+	});
 	table5.buttons().container().appendTo( $('#tabBtn5') );
 	$('.buttons-csv').addClass('btn btn-primary');
 
 	var element
-	layui.use('element', function(){
-		 element = layui.element;
+	layui.use('element', function() {
+		element = layui.element;
 		//一些事件监听
-		element.on('tab(demo)', function(data){
+		element.on('tab(demo)', function (data) {
 			console.log(data);
 		});
 
@@ -1053,668 +1099,668 @@
 
 	}
 
-	function clickImg(obj){
-		if(obj=="2"){
+	function clickImg(obj) {
+		if (obj == "2") {
 			element.tabChange("demo", "cheliuliang");
-		}else if(obj=="3"){
+		} else if (obj == "3") {
 			element.tabChange("demo", "chaozai");
-		}else if(obj=="4"){
+		} else if (obj == "4") {
 			element.tabChange("demo", "guanjianchaozai");
 		}
 
 	}
-		var user;
-		function getLoginUser(){
-			$.ajax({
-				type: 'POST',
-				url: '/login/getUser',
-				dataType: 'json',
-				async:false,
-				data: {
-				},
-				error: function (msg) {
-					errMessage("请求UserController失败");
-				},
-				success: function (json) {
-					user = json;
-				}
-			});
-			return user;
-		}
-		/*var user;*/
-		function initzhandian(){
-			$.ajax({
-				type: 'POST',
-				//url: '/tUserInfo/selectUserById',
-				url: '/login/getUser',
-				dataType: 'json',
-				async:false,
-				data: {
-					//id:user.usrId,
-				},
-				error: function (msg) {
-					errMessage("请求UserController失败");
-				},
-				success: function (json) {
-					user=json;
-					$("#zhandian").html('');
-					if(json!=null){
-						if(json.stationPort.indexOf(",")!=-1&&json.stationName.indexOf(",")!=-1){
-							var stationPort=json.stationPort.split(",");
-							var stationName=json.stationName.split(",");
-							for(var i=0;i<stationPort.length;i++){
-								for(var i=0;i<stationName.length;i++){
-									$("#zhandian").append("<option  value='"+stationPort[i]+"'>"+stationName[i]+"</option>");
-								}
-							}
-						}else{
-							$("#zhandian").append("<option  value='"+json.stationPort+"'>"+json.stationName+"</option>");
-						}
-						$(".selectpicker").selectpicker({
-							noneSelectedText: '请选择',
-						});
-						if(user.lastMonitoringSite!=null&&user.lastMonitoringSite!=""&&user.lastMonitoringSite!=undefined){
-							if(user.lastMonitoringSite.indexOf(",")!=-1){
-								$("#zhandian").val(user.lastMonitoringSite.split(","));
-								$('#zhandian').selectpicker('val', user.lastMonitoringSite.split(","));
-							}else{
-								$("#zhandian").val(user.lastMonitoringSite);
-								$('#zhandian').selectpicker('val', user.lastMonitoringSite);
-							}
 
+	var user;
+
+	function getLoginUser() {
+		$.ajax({
+			type: 'POST',
+			url: '/login/getUser',
+			dataType: 'json',
+			async: false,
+			data: {},
+			error: function (msg) {
+				errMessage("请求UserController失败");
+			},
+			success: function (json) {
+				user = json;
+			}
+		});
+		return user;
+	}
+
+	/*var user;*/
+	function initzhandian() {
+		$.ajax({
+			type: 'POST',
+			//url: '/tUserInfo/selectUserById',
+			url: '/login/getUser',
+			dataType: 'json',
+			async: false,
+			data: {
+				//id:user.usrId,
+			},
+			error: function (msg) {
+				errMessage("请求UserController失败");
+			},
+			success: function (json) {
+				user = json;
+				$("#zhandian").html('');
+				if (json != null) {
+					if (json.stationPort.indexOf(",") != -1 && json.stationName.indexOf(",") != -1) {
+						var stationPort = json.stationPort.split(",");
+						var stationName = json.stationName.split(",");
+						for (var i = 0; i < stationPort.length; i++) {
+							for (var i = 0; i < stationName.length; i++) {
+								$("#zhandian").append("<option  value='" + stationPort[i] + "'>" + stationName[i] + "</option>");
+							}
 						}
-						$("#zhandian").selectpicker("refresh");
-						$('#zhandian').selectpicker('render');
+					} else {
+						$("#zhandian").append("<option  value='" + json.stationPort + "'>" + json.stationName + "</option>");
+					}
+					$(".selectpicker").selectpicker({
+						noneSelectedText: '请选择',
+					});
+					if (user.lastMonitoringSite != null && user.lastMonitoringSite != "" && user.lastMonitoringSite != undefined) {
+						if (user.lastMonitoringSite.indexOf(",") != -1) {
+							$("#zhandian").val(user.lastMonitoringSite.split(","));
+							$('#zhandian').selectpicker('val', user.lastMonitoringSite.split(","));
+						} else {
+							$("#zhandian").val(user.lastMonitoringSite);
+							$('#zhandian').selectpicker('val', user.lastMonitoringSite);
+						}
 
 					}
+					$("#zhandian").selectpicker("refresh");
+					$('#zhandian').selectpicker('render');
+
 				}
-			});
-		}
-
-
-
-		function queding(){
-			var stationPort;
-			if($("#zhandian").val()!=""&&$("#zhandian").val()!=undefined&&$("#zhandian").val()!=null){
-				stationPort=$("#zhandian").val().toString();
-			}else{
-				stationPort=""
 			}
-			$.ajax({
-				type: 'POST',
-				url: '/tWimMsg/getAlltWimMsg',
-				dataType: 'json',
-				data: {
-					stationPort:stationPort,
+		});
+	}
 
-				},
-				error: function (msg) {
-					errMessage("请求UserController失败");
-				},
-				success: function (json) {
-					$('#mainContent').dataTable().fnClearTable();
-					$('#mainContent').DataTable().rows.add(json).draw(false);
-					setLeftEcharts()
-					setRightEcharts()
-					setBottomEcharts()
-					initTotalNumber()
-				}
-			});
+
+	function queding() {
+		var stationPort;
+		if ($("#zhandian").val() != "" && $("#zhandian").val() != undefined && $("#zhandian").val() != null) {
+			stationPort = $("#zhandian").val().toString();
+		} else {
+			stationPort = ""
 		}
+		$.ajax({
+			type: 'POST',
+			url: '/tWimMsg/getAlltWimMsg',
+			dataType: 'json',
+			data: {
+				stationPort: stationPort,
 
-		function quedingDianJi(){
-			showMask()
-			var stationPort;
-			if($("#zhandian").val()!=""&&$("#zhandian").val()!=undefined&&$("#zhandian").val()!=null){
-				stationPort=$("#zhandian").val().toString();
-			}else{
-				stationPort=""
-			}
-			$.ajax({
-				type: 'POST',
-				url: '/tWimMsg/getAlltWimMsg',
-				dataType: 'json',
-				data: {
-					stationPort:stationPort,
-
-				},
-				error: function (msg) {
-					errMessage("请求UserController失败");
-				},
-				success: function (json) {
-					$('#mainContent').dataTable().fnClearTable();
-					$('#mainContent').DataTable().rows.add(json).draw(false);
-					hidMask()
-					setLeftEcharts()
-					setRightEcharts()
-					setBottomEcharts()
-					initTotalNumber()
-				}
-			});
-		}
-
-
-
-		function nowJianceSite(){
-			showMask()
-			var stationPort;
-			if($("#zhandian").val()!=""&&$("#zhandian").val()!=undefined&&$("#zhandian").val()!=null){
-				stationPort=$("#zhandian").val().toString();
-			}else{
-				stationPort=""
-			}
-			$.ajax({
-				type: 'POST',
-				url: '/tWimMsg/getHomeDataObject',
-				dataType: 'json',
-				data: {
-					stationPorts: stationPort,
-				},
-				error: function (msg) {
-				},
-				success: function (json) {
-					hidMask()
-					$("#jianceDiv").modal('show');
-					var stationNames = json.stationNames.split(",");
-					var links = json.links.split(",");
-					$("#jianceTable tbody").empty();
-					var dom;
-					for(let i=0;i<stationNames.length;i++){
-						let link = links[i];
-						if(link==0){
-							link="<label style='color: #843534'>未接通</label>";
-						}else{
-							link = "<label style='color: #1B5ACB'>已接通</label>"
-						}
-						let tr = "<tr><td>"+stationNames[i]+"</td><td>"+link+"</td></tr>";
-						dom+=tr;
-					}
-					$("#jianceTable tbody").append(dom);
-				}
-			});
-
-		}
-
-		function refresh(){
-			if(user!=null&&user!=""&&user!=undefined){
-				queding()
+			},
+			error: function (msg) {
+				errMessage("请求UserController失败");
+			},
+			success: function (json) {
+				$('#mainContent').dataTable().fnClearTable();
+				$('#mainContent').DataTable().rows.add(json).draw(false);
 				setLeftEcharts()
 				setRightEcharts()
 				setBottomEcharts()
 				initTotalNumber()
 			}
-		}
+		});
+	}
 
-		function initTotalNumber(){
-			var stationPort=getstationPort(user);
-			$.ajax({
-				type: 'POST',
-				url: '/tWimMsg/getJianCeTotal',
-				dataType: 'json',
-				data: {
-					stationPorts:stationPort,
-				},
-				error: function (msg) {
-					errMessage("请求UserController失败");
-				},
-				success: function (json) {
-					$("#jiancezhandianNum").html('')
-					$("#jiancezhandianNum").html(json.stationNums);
-					$("#jiancecheliuliangNum").html('');
-					$("#jiancecheliuliangNum").html(json.totalCheLiu);
-					$("#jiancechaozaiNum").html('');
-					$("#jiancechaozaiNum").html(json.totalChaoZai);
-					$("#jianceguanjianchaozhongNum").html('');
-					$("#jianceguanjianchaozhongNum").html(json.totalGuanJian);
-				}
-			});
+	function quedingDianJi() {
+		showMask()
+		var stationPort;
+		if ($("#zhandian").val() != "" && $("#zhandian").val() != undefined && $("#zhandian").val() != null) {
+			stationPort = $("#zhandian").val().toString();
+		} else {
+			stationPort = ""
 		}
+		$.ajax({
+			type: 'POST',
+			url: '/tWimMsg/getAlltWimMsg',
+			dataType: 'json',
+			data: {
+				stationPort: stationPort,
+
+			},
+			error: function (msg) {
+				errMessage("请求UserController失败");
+			},
+			success: function (json) {
+				$('#mainContent').dataTable().fnClearTable();
+				$('#mainContent').DataTable().rows.add(json).draw(false);
+				hidMask()
+				setLeftEcharts()
+				setRightEcharts()
+				setBottomEcharts()
+				initTotalNumber()
+			}
+		});
+	}
+
+
+	function nowJianceSite() {
+		showMask()
+		var stationPort;
+		if ($("#zhandian").val() != "" && $("#zhandian").val() != undefined && $("#zhandian").val() != null) {
+			stationPort = $("#zhandian").val().toString();
+		} else {
+			stationPort = ""
+		}
+		$.ajax({
+			type: 'POST',
+			url: '/tWimMsg/getHomeDataObject',
+			dataType: 'json',
+			data: {
+				stationPorts: stationPort,
+			},
+			error: function (msg) {
+			},
+			success: function (json) {
+				hidMask()
+				$("#jianceDiv").modal('show');
+				var stationNames = json.stationNames.split(",");
+				var links = json.links.split(",");
+				$("#jianceTable tbody").empty();
+				var dom;
+				for (let i = 0; i < stationNames.length; i++) {
+					let link = links[i];
+					if (link == 0) {
+						link = "<label style='color: #843534'>未接通</label>";
+					} else {
+						link = "<label style='color: #1B5ACB'>已接通</label>"
+					}
+					let tr = "<tr><td>" + stationNames[i] + "</td><td>" + link + "</td></tr>";
+					dom += tr;
+				}
+				$("#jianceTable tbody").append(dom);
+			}
+		});
+
+	}
+
+	function refresh() {
+		if (user != null && user != "" && user != undefined) {
+			queding()
+			setLeftEcharts()
+			setRightEcharts()
+			setBottomEcharts()
+			initTotalNumber()
+		}
+	}
+
+	function initTotalNumber() {
+		var stationPort = getstationPort(user);
+		$.ajax({
+			type: 'POST',
+			url: '/tWimMsg/getJianCeTotal',
+			dataType: 'json',
+			data: {
+				stationPorts: stationPort,
+			},
+			error: function (msg) {
+				errMessage("请求UserController失败");
+			},
+			success: function (json) {
+				$("#jiancezhandianNum").html('')
+				$("#jiancezhandianNum").html(json.stationNums);
+				$("#jiancecheliuliangNum").html('');
+				$("#jiancecheliuliangNum").html(json.totalCheLiu);
+				$("#jiancechaozaiNum").html('');
+				$("#jiancechaozaiNum").html(json.totalChaoZai);
+				$("#jianceguanjianchaozhongNum").html('');
+				$("#jianceguanjianchaozhongNum").html(json.totalGuanJian);
+			}
+		});
+	}
 
 	<!--======================================================================================左边柱状图（当日车流量）===============================================================================-->
 
 
-		function initTables2(){
-			showMask()
-			var stationPort;
-			if($("#zhandian").val()!=""&&$("#zhandian").val()!=undefined&&$("#zhandian").val()!=null){
-				stationPort=$("#zhandian").val().toString();
-			}else{
-				stationPort=""
-			}
-			$.ajax({
-				type: 'POST',
-				url: '/tWimMsg/getMeiRiCheLiuLiangShujuByStationPort',
-				dataType: 'json',
-				data: {
-					stationPort:stationPort,
-				},
-				error: function (msg) {
-					errMessage("请求UserController失败");
-				},
-				success: function (json) {
-					hidMask()
-					$('#mainContent2').dataTable().fnClearTable();
-					$('#mainContent2').DataTable().rows.add(json).draw(false);
-				}
-			});
+	function initTables2() {
+		showMask()
+		var stationPort;
+		if ($("#zhandian").val() != "" && $("#zhandian").val() != undefined && $("#zhandian").val() != null) {
+			stationPort = $("#zhandian").val().toString();
+		} else {
+			stationPort = ""
 		}
-
-		function getstationName(user){
-			var stationName
-			if($("#zhandian").val()!=""&&$("#zhandian").val()!=undefined&&$("#zhandian").val()!=null){
-				var text=[];
-				var checkParam = $('#zhandian').find('option:selected');
-				for (var i=0;i<checkParam.length;i++) {
-					text.push(checkParam[i].textContent);
-				}
-				stationName=text;
-			}else{
-				stationName=user.stationName.split(",")
+		$.ajax({
+			type: 'POST',
+			url: '/tWimMsg/getMeiRiCheLiuLiangShujuByStationPort',
+			dataType: 'json',
+			data: {
+				stationPort: stationPort,
+			},
+			error: function (msg) {
+				errMessage("请求UserController失败");
+			},
+			success: function (json) {
+				hidMask()
+				$('#mainContent2').dataTable().fnClearTable();
+				$('#mainContent2').DataTable().rows.add(json).draw(false);
 			}
-			return stationName;
-		}
+		});
+	}
 
-		function getstationPort(user){
-			var stationPort
-			if($("#zhandian").val()!=""&&$("#zhandian").val()!=undefined&&$("#zhandian").val()!=null){
-				stationPort=$("#zhandian").val().toString();
-			}else{
-				stationPort=user.stationPort
+	function getstationName(user) {
+		var stationName
+		if ($("#zhandian").val() != "" && $("#zhandian").val() != undefined && $("#zhandian").val() != null) {
+			var text = [];
+			var checkParam = $('#zhandian').find('option:selected');
+			for (var i = 0; i < checkParam.length; i++) {
+				text.push(checkParam[i].textContent);
 			}
-			return stationPort;
+			stationName = text;
+		} else {
+			stationName = user.stationName.split(",")
 		}
+		return stationName;
+	}
 
-		function setLeftEcharts(){
-			var user=getLoginUser();
-			var stationName=getstationName(user);
-			var stationPort=getstationPort(user);
-
-			$.ajax({
-				type: 'POST',
-				url: '/tWimMsg/getJianCeCheLiuLiangEchartsList',
-				dataType: 'json',
-				data: {
-					stationPorts: stationPort,
-				},
-				error: function (msg) {
-					errMessage("请求UserController失败");
-				},
-				success: function (json) {
-					setEcharts(json)
-
-				}
-			});
+	function getstationPort(user) {
+		var stationPort
+		if ($("#zhandian").val() != "" && $("#zhandian").val() != undefined && $("#zhandian").val() != null) {
+			stationPort = $("#zhandian").val().toString();
+		} else {
+			stationPort = user.stationPort
 		}
+		return stationPort;
+	}
 
-		function setEcharts(list){
-			/*
-			//不显示为0的站点
-			var arr='';
-			for(var i=0;i<list.length;i++){
-				for (var i=0;i<stationName.length;i++){
-					if(list[i]==0){
-						arr+=stationName[i]+"今日无车流量,"
-						list.splice($.inArray(list[i],list),1);
-						stationName.splice($.inArray(stationName[i],stationName),1);
-					}
-				}
+	function setLeftEcharts() {
+		var user = getLoginUser();
+		var stationName = getstationName(user);
+		var stationPort = getstationPort(user);
+
+		$.ajax({
+			type: 'POST',
+			url: '/tWimMsg/getJianCeCheLiuLiangEchartsList',
+			dataType: 'json',
+			data: {
+				stationPorts: stationPort,
+			},
+			error: function (msg) {
+				errMessage("请求UserController失败");
+			},
+			success: function (json) {
+				setEcharts(json)
+
 			}
-			arr=arr.substring(0,arr.length-1);
-			var flag=0;
-			for(var i=0;i<list.list.length;i++){
-				flag+=list[i];
-			}
-			if(flag==0){
-				$("#errorMsg").html('今日无车流量').css({
-					"margin-left":"30px",
-					"color":"red",
-				})
-			}*/
-			var myChart = echarts.init(document.getElementById('_top'));
-			let option = setjiancezhandianLeft(list);
-			// 使用刚指定的配置项和数据显示图表。
-			myChart.setOption(option);
+		});
+	}
+
+	function setEcharts(list) {
+		/*
+        //不显示为0的站点
+        var arr='';
+        for(var i=0;i<list.length;i++){
+            for (var i=0;i<stationName.length;i++){
+                if(list[i]==0){
+                    arr+=stationName[i]+"今日无车流量,"
+                    list.splice($.inArray(list[i],list),1);
+                    stationName.splice($.inArray(stationName[i],stationName),1);
+                }
+            }
+        }
+        arr=arr.substring(0,arr.length-1);
+        var flag=0;
+        for(var i=0;i<list.list.length;i++){
+            flag+=list[i];
+        }
+        if(flag==0){
+            $("#errorMsg").html('今日无车流量').css({
+                "margin-left":"30px",
+                "color":"red",
+            })
+        }*/
+		var myChart = echarts.init(document.getElementById('_top'));
+		let option = setjiancezhandianLeft(list);
+		// 使用刚指定的配置项和数据显示图表。
+		myChart.setOption(option);
 
 
-		}
-
+	}
 
 
 	<!--==========================================================饼状图（当日超载车辆）===========================================-->
 
-		function initTables3(){
-			showMask()
-			var stationPort;
-			if($("#zhandian").val()!=""&&$("#zhandian").val()!=undefined&&$("#zhandian").val()!=null){
-				stationPort=$("#zhandian").val().toString();
-			}else{
-				stationPort=""
+	function initTables3() {
+		showMask()
+		var stationPort;
+		if ($("#zhandian").val() != "" && $("#zhandian").val() != undefined && $("#zhandian").val() != null) {
+			stationPort = $("#zhandian").val().toString();
+		} else {
+			stationPort = ""
+		}
+		$.ajax({
+			type: 'POST',
+			url: '/tWimMsg/getMeiRiChaoZaiShujuByStationPort',
+			dataType: 'json',
+			data: {
+				stationPort: stationPort,
+			},
+			error: function (msg) {
+				errMessage("请求UserController失败");
+			},
+			success: function (json) {
+				hidMask()
+				$('#mainContent3').dataTable().fnClearTable();
+				$('#mainContent3').DataTable().rows.add(json).draw(false);
 			}
-			$.ajax({
-				type: 'POST',
-				url: '/tWimMsg/getMeiRiChaoZaiShujuByStationPort',
-				dataType: 'json',
-				data: {
-					stationPort:stationPort,
-				},
-				error: function (msg) {
-					errMessage("请求UserController失败");
-				},
-				success: function (json) {
-					hidMask()
-					$('#mainContent3').dataTable().fnClearTable();
-					$('#mainContent3').DataTable().rows.add(json).draw(false);
-				}
-			});
-		}
+		});
+	}
 
-		function setRightEcharts(){
-			var user=getLoginUser();
-			var stationName=getstationName(user);
-			var stationPort=getstationPort(user);
+	function setRightEcharts() {
+		var user = getLoginUser();
+		var stationName = getstationName(user);
+		var stationPort = getstationPort(user);
 
-			$.ajax({
-				type: 'POST',
-				url: '/tWimMsg/getJianCechaozaiEchartsList',
-				dataType: 'json',
-				data: {
-					stationPorts: stationPort,
-				},
-				error: function (msg) {
-					errMessage("请求UserController失败");
-				},
-				success: function (json) {
-					setEcharts2(json)
+		$.ajax({
+			type: 'POST',
+			url: '/tWimMsg/getJianCechaozaiEchartsList',
+			dataType: 'json',
+			data: {
+				stationPorts: stationPort,
+			},
+			error: function (msg) {
+				errMessage("请求UserController失败");
+			},
+			success: function (json) {
+				setEcharts2(json)
 
-				}
-			});
-		}
-
-		function setEcharts2(list){
-			/*var flag=0;
-			for(var i=0;i<list.length;i++){
-				flag+=list[i].value;
 			}
-			if(flag==0){
-				$("#errorMsg2").html('今日无超载车辆').css({
-					"margin-left":"30px",
-					"color":"red",
-				})
-			}*/
-			var myChart2 = echarts.init(document.getElementById('_right'));
-			let option2 = setjiancezhandianRight(list);
-			// 使用刚指定的配置项和数据显示图表。
-			myChart2.setOption(option2);
+		});
+	}
+
+	function setEcharts2(list) {
+		/*var flag=0;
+        for(var i=0;i<list.length;i++){
+            flag+=list[i].value;
+        }
+        if(flag==0){
+            $("#errorMsg2").html('今日无超载车辆').css({
+                "margin-left":"30px",
+                "color":"red",
+            })
+        }*/
+		var myChart2 = echarts.init(document.getElementById('_right'));
+		let option2 = setjiancezhandianRight(list);
+		// 使用刚指定的配置项和数据显示图表。
+		myChart2.setOption(option2);
 
 
-		}
-
+	}
 
 
 	<!--==========================================================下面的柱状图（当日关键车辆）===========================================-->
 
-		function initTables4(){
-			showMask()
-			var stationPort;
-			if($("#zhandian").val()!=""&&$("#zhandian").val()!=undefined&&$("#zhandian").val()!=null){
-				stationPort=$("#zhandian").val().toString();
-			}else{
-				stationPort=""
-			}
-			$.ajax({
-				type: 'POST',
-				url: '/tWimMsg/getMeiRiGuanJianChaoZHongShujuByStationPort',
-				dataType: 'json',
-				data: {
-					stationPort:stationPort,
-					lv:2
-				},
-				error: function (msg) {
-					errMessage("请求UserController失败");
-				},
-				success: function (json) {
-					hidMask()
-					$('#mainContent4').dataTable().fnClearTable();
-					$('#mainContent4').DataTable().rows.add(json).draw(false);
-				}
-			});
+	function initTables4() {
+		showMask()
+		var stationPort;
+		if ($("#zhandian").val() != "" && $("#zhandian").val() != undefined && $("#zhandian").val() != null) {
+			stationPort = $("#zhandian").val().toString();
+		} else {
+			stationPort = ""
 		}
-		function initTables5(){
-			showMask()
-			var stationPort;
-			if($("#zhandian").val()!=""&&$("#zhandian").val()!=undefined&&$("#zhandian").val()!=null){
-				stationPort=$("#zhandian").val().toString();
-			}else{
-				stationPort=""
-			}
-			$.ajax({
-				type: 'POST',
-				url: '/tWimMsg/getMeiRiGuanJianChaoZHongShujuByStationPort',
-				dataType: 'json',
-				data: {
-					stationPort:stationPort,
-					lv:3
-				},
-				error: function (msg) {
-					errMessage("请求UserController失败");
-				},
-				success: function (json) {
-					hidMask()
-					$('#mainContent5').dataTable().fnClearTable();
-					$('#mainContent5').DataTable().rows.add(json).draw(false);
-				}
-			});
-		}
-		function setBottomEcharts(){
-			var user=getLoginUser();
-			var stationName=getstationName(user);
-			var stationPort=getstationPort(user);
-
-			$.ajax({
-				type: 'POST',
-				url: '/tWimMsg/getGuanJianChaoZhongCheLiangEchartsList2',
-				dataType: 'json',
-				data: {
-					stationPorts: stationPort,
-				},
-				error: function (msg) {
-					errMessage("请求UserController失败");
-				},
-				success: function (json) {
-					setEcharts3(json)
-
-				}
-			});
-		}
-		function setEcharts3(list){
-			var flag=0;
-			/*for(var i=0;i<list.split(",").length;i++){
-				flag+=list[i];
-			}
-			if(flag==0){
-				$("#errorMsg3").html('今日无关键超重车辆').css({
-					"margin-left":"30px",
-					"color":"red",
-				})
-			}*/
-			var myChart3 = echarts.init(document.getElementById('bottom_'));
-			//if(list!=null&&list.length!=0){
-				let option = setjiancezhandianBottom(/*list.list,stationName,list.max*/list);
-				// 使用刚指定的配置项和数据显示图表。
-				myChart3.setOption(option);
-			//}
-
-		}
-
-		function showMask() {
-			myTool.mask.show('查询中...');
-		}
-		function hidMask() {
-			myTool.mask.hide();
-		}
-
-
-		var looktWimMsg = new Vue({
-			el: '#lookWimMsgDiv',
-			//表单数据
+		$.ajax({
+			type: 'POST',
+			url: '/tWimMsg/getMeiRiGuanJianChaoZHongShujuByStationPort',
+			dataType: 'json',
 			data: {
-				idLocal:"",
-				id:"",
-				stationId:"",
-				evtTime:"",
-				msgTime:"",
-				laneNo:"",
-				plate:"",
-				plateColor:"",
-				classIndex:"",
-				length:"",
-				speed:"",
-				direction:"",
-				axlesCount:"",
-				totalWeight:'',
-				wetmixingtimedeviation:'',
-				axle1:'',
-				axle2:'',
-				axle3:'',
-				axle4:'',
-				axle5:'',
-				axle6:'',
-				axle7:'',
-				axle8:'',
-				axle9:'',
-				axle10:'',
-				axleSpace1:'',
-				axleSpace2:'',
-				axleSpace3:'',
-				axleSpace4:'',
-				axleSpace5:'',
-				axleSpace6:'',
-				axleSpace7:'',
-				axleSpace8:'',
-				axleSpace9:'',
-				isStraddle:'',
-				temperature:'',
-				overWeight:'',
-				overWeightRatio:'',
-				wIMId:'',
-				lPRId:'',
-				stationIP:'',
-				stationNameRouteName:'',
-				directionName:'',
-				isStraddleName:'',
-				stationName:'',
-				routeName:'',
-				licensePlateColor:'',
-				vehicleTypeName:'',
+				stationPort: stationPort,
+				lv: 2
 			},
-			methods: {
+			error: function (msg) {
+				errMessage("请求UserController失败");
+			},
+			success: function (json) {
+				hidMask()
+				$('#mainContent4').dataTable().fnClearTable();
+				$('#mainContent4').DataTable().rows.add(json).draw(false);
 			}
-		})
+		});
+	}
 
-		function lookMsg(e,obj){
-			var dom = $(e).parents('tr');
-			var main;
-			if(obj==1){
-				main='#mainContent';
-			}else{
-				main='#mainContent'+obj;
+	function initTables5() {
+		showMask()
+		var stationPort;
+		if ($("#zhandian").val() != "" && $("#zhandian").val() != undefined && $("#zhandian").val() != null) {
+			stationPort = $("#zhandian").val().toString();
+		} else {
+			stationPort = ""
+		}
+		$.ajax({
+			type: 'POST',
+			url: '/tWimMsg/getMeiRiGuanJianChaoZHongShujuByStationPort',
+			dataType: 'json',
+			data: {
+				stationPort: stationPort,
+				lv: 3
+			},
+			error: function (msg) {
+				errMessage("请求UserController失败");
+			},
+			success: function (json) {
+				hidMask()
+				$('#mainContent5').dataTable().fnClearTable();
+				$('#mainContent5').DataTable().rows.add(json).draw(false);
 			}
-			let data=$(main).DataTable().row(dom).data();
-			showMask()
-			$.ajax({
-				type: 'POST',
-				url: '/tWimMsg/gettWimMsgById',
-				dataType: 'json',
-				data: {
-					idLocal:data.idLocal
-				},
-				error: function (msg) {
-					errMessage("请求UserController失败");
-				},
-				success: function (json) {
-					lookxiangqing(json,obj);
-					hidMask()
-					$("#allMsg1").modal('show');
-				}
-			});
+		});
+	}
+
+	function setBottomEcharts() {
+		var user = getLoginUser();
+		var stationName = getstationName(user);
+		var stationPort = getstationPort(user);
+
+		$.ajax({
+			type: 'POST',
+			url: '/tWimMsg/getGuanJianChaoZhongCheLiangEchartsList2',
+			dataType: 'json',
+			data: {
+				stationPorts: stationPort,
+			},
+			error: function (msg) {
+				errMessage("请求UserController失败");
+			},
+			success: function (json) {
+				setEcharts3(json)
+
+			}
+		});
+	}
+
+	function setEcharts3(list) {
+		var flag = 0;
+		/*for(var i=0;i<list.split(",").length;i++){
+            flag+=list[i];
+        }
+        if(flag==0){
+            $("#errorMsg3").html('今日无关键超重车辆').css({
+                "margin-left":"30px",
+                "color":"red",
+            })
+        }*/
+		var myChart3 = echarts.init(document.getElementById('bottom_'));
+		//if(list!=null&&list.length!=0){
+		let option = setjiancezhandianBottom(/*list.list,stationName,list.max*/list);
+		// 使用刚指定的配置项和数据显示图表。
+		myChart3.setOption(option);
+		//}
+
+	}
+
+	function showMask() {
+		myTool.mask.show('查询中...');
+	}
+
+	function hidMask() {
+		myTool.mask.hide();
+	}
+
+
+	var looktWimMsg = new Vue({
+		el: '#lookWimMsgDiv',
+		//表单数据
+		data: {
+			idLocal: "",
+			id: "",
+			stationId: "",
+			evtTime: "",
+			msgTime: "",
+			laneNo: "",
+			plate: "",
+			plateColor: "",
+			classIndex: "",
+			length: "",
+			speed: "",
+			direction: "",
+			axlesCount: "",
+			totalWeight: '',
+			wetmixingtimedeviation: '',
+			axle1: '',
+			axle2: '',
+			axle3: '',
+			axle4: '',
+			axle5: '',
+			axle6: '',
+			axle7: '',
+			axle8: '',
+			axle9: '',
+			axle10: '',
+			axleSpace1: '',
+			axleSpace2: '',
+			axleSpace3: '',
+			axleSpace4: '',
+			axleSpace5: '',
+			axleSpace6: '',
+			axleSpace7: '',
+			axleSpace8: '',
+			axleSpace9: '',
+			isStraddle: '',
+			temperature: '',
+			overWeight: '',
+			overWeightRatio: '',
+			wIMId: '',
+			lPRId: '',
+			stationIP: '',
+			stationNameRouteName: '',
+			directionName: '',
+			isStraddleName: '',
+			stationName: '',
+			routeName: '',
+			licensePlateColor: '',
+			vehicleTypeName: '',
+		},
+		methods: {}
+	})
+
+	function lookMsg(e, obj) {
+		var dom = $(e).parents('tr');
+		var main;
+		if (obj == 1) {
+			main = '#mainContent';
+		} else {
+			main = '#mainContent' + obj;
 		}
+		let data = $(main).DataTable().row(dom).data();
+		showMask()
+		$.ajax({
+			type: 'POST',
+			url: '/tWimMsg/gettWimMsgById',
+			dataType: 'json',
+			data: {
+				idLocal: data.idLocal
+			},
+			error: function (msg) {
+				errMessage("请求UserController失败");
+			},
+			success: function (json) {
+				lookxiangqing(json, obj);
+				hidMask()
+				$("#allMsg1").modal('show');
+			}
+		});
+	}
 
-		var lookxiangqing = (data,obj) =>{
-			looktWimMsg.id=data.id;
-			looktWimMsg.idLocal=data.idLocal;
-			looktWimMsg.stationNameRouteName=data.stationNameRouteName;
-			looktWimMsg.stationId=data.stationId;
-			looktWimMsg.evtTime=data.evtTime;
-			looktWimMsg.msgTime=data.msgTime;
-			looktWimMsg.laneNo=data.laneNo;
-			looktWimMsg.plate=data.plate;
-			looktWimMsg.plateColor=data.plateColor;
-			looktWimMsg.classIndex=data.classIndex;
-			looktWimMsg.length=data.length;
-			looktWimMsg.speed=data.speed;
-			looktWimMsg.direction=data.direction;
-			looktWimMsg.axlesCount=data.axlesCount;
-			looktWimMsg.totalWeight=data.totalWeight;
-			looktWimMsg.wetmixingtimedeviation=data.wetmixingtimedeviation;
-			looktWimMsg.axle1=data.axle1;
-			looktWimMsg.axle2=data.axle2;
-			looktWimMsg.axle3=data.axle3;
-			looktWimMsg.axle4=data.axle4;
-			looktWimMsg.axle5=data.axle5;
-			looktWimMsg.axle6=data.axle6;
-			looktWimMsg.axle7=data.axle7;
-			looktWimMsg.axle8=data.axle8;
-			looktWimMsg.axle9=data.axle9;
-			looktWimMsg.axle10=data.axle10;
-			looktWimMsg.axleSpace1=data.axleSpace1;
-			looktWimMsg.axleSpace2=data.axleSpace2;
-			looktWimMsg.axleSpace3=data.axleSpace3;
-			looktWimMsg.axleSpace4=data.axleSpace4;
-			looktWimMsg.axleSpace5=data.axleSpace5;
-			looktWimMsg.axleSpace6=data.axleSpace6;
-			looktWimMsg.axleSpace7=data.axleSpace7;
-			looktWimMsg.axleSpace8=data.axleSpace8;
-			looktWimMsg.axleSpace9=data.axleSpace9;
-			looktWimMsg.isStraddle=data.isStraddle;
-			looktWimMsg.temperature=data.temperature;
-			looktWimMsg.overWeight=data.overWeight;
-			looktWimMsg.overWeightRatio=data.overWeightRatio;
-			looktWimMsg.wIMId=data.wIMId;
-			looktWimMsg.lPRId=data.lPRId;
-			looktWimMsg.stationIP=data.stationIP;
-			looktWimMsg.stationNameRouteName=data.stationNameRouteName;
-			looktWimMsg.directionName=data.directionName;
-			looktWimMsg.isStraddleName=data.isStraddleName;
-			looktWimMsg.stationName=data.stationName;
-			looktWimMsg.routeName=data.routeName;
-			looktWimMsg.licensePlateColor=data.licensePlateColor;
-			looktWimMsg.vehicleTypeName=data.axlesCount+"轴";
-			looktWimMsg.overWeightRatioName=data.overWeightRatioName=="超载"? (data.overWeightRatio*100).toFixed(2)+"%":data.overWeightRatioName;
+	var lookxiangqing = (data, obj) => {
+		looktWimMsg.id = data.id;
+		looktWimMsg.idLocal = data.idLocal;
+		looktWimMsg.stationNameRouteName = data.stationNameRouteName;
+		looktWimMsg.stationId = data.stationId;
+		looktWimMsg.evtTime = data.evtTime;
+		looktWimMsg.msgTime = data.msgTime;
+		looktWimMsg.laneNo = data.laneNo;
+		looktWimMsg.plate = data.plate;
+		looktWimMsg.plateColor = data.plateColor;
+		looktWimMsg.classIndex = data.classIndex;
+		looktWimMsg.length = data.length;
+		looktWimMsg.speed = data.speed;
+		looktWimMsg.direction = data.direction;
+		looktWimMsg.axlesCount = data.axlesCount;
+		looktWimMsg.totalWeight = data.totalWeight;
+		looktWimMsg.wetmixingtimedeviation = data.wetmixingtimedeviation;
+		looktWimMsg.axle1 = data.axle1;
+		looktWimMsg.axle2 = data.axle2;
+		looktWimMsg.axle3 = data.axle3;
+		looktWimMsg.axle4 = data.axle4;
+		looktWimMsg.axle5 = data.axle5;
+		looktWimMsg.axle6 = data.axle6;
+		looktWimMsg.axle7 = data.axle7;
+		looktWimMsg.axle8 = data.axle8;
+		looktWimMsg.axle9 = data.axle9;
+		looktWimMsg.axle10 = data.axle10;
+		looktWimMsg.axleSpace1 = data.axleSpace1;
+		looktWimMsg.axleSpace2 = data.axleSpace2;
+		looktWimMsg.axleSpace3 = data.axleSpace3;
+		looktWimMsg.axleSpace4 = data.axleSpace4;
+		looktWimMsg.axleSpace5 = data.axleSpace5;
+		looktWimMsg.axleSpace6 = data.axleSpace6;
+		looktWimMsg.axleSpace7 = data.axleSpace7;
+		looktWimMsg.axleSpace8 = data.axleSpace8;
+		looktWimMsg.axleSpace9 = data.axleSpace9;
+		looktWimMsg.isStraddle = data.isStraddle;
+		looktWimMsg.temperature = data.temperature;
+		looktWimMsg.overWeight = data.overWeight;
+		looktWimMsg.overWeightRatio = data.overWeightRatio;
+		looktWimMsg.wIMId = data.wIMId;
+		looktWimMsg.lPRId = data.lPRId;
+		looktWimMsg.stationIP = data.stationIP;
+		looktWimMsg.stationNameRouteName = data.stationNameRouteName;
+		looktWimMsg.directionName = data.directionName;
+		looktWimMsg.isStraddleName = data.isStraddleName;
+		looktWimMsg.stationName = data.stationName;
+		looktWimMsg.routeName = data.routeName;
+		looktWimMsg.licensePlateColor = data.licensePlateColor;
+		looktWimMsg.vehicleTypeName = data.axlesCount + "轴";
+		looktWimMsg.overWeightRatioName = data.overWeightRatioName == "超载" ? (data.overWeightRatio * 100).toFixed(2) + "%" : data.overWeightRatioName;
 
-			$.ajax({
-				type: 'POST',
-				url: '/tVehicleOverweight/getimgUrlPrefix',
-				dataType: 'json',
-				data: {
-				},
-				success: function (json) {
-					$("#chepaiImg").html('')
-					$("#chebodyDiv").html('')
+		$.ajax({
+			type: 'POST',
+			url: '/tVehicleOverweight/getimgUrlPrefix',
+			dataType: 'json',
+			data: {},
+			success: function (json) {
+				$("#chepaiImg").html('')
+				$("#chebodyDiv").html('')
 
-					if(data.overWeightRatioName=="不超载"){
-						var url = "http://" + json.imgUrlPrefix + "/port" + data.stationIP + "/" + getYMDStr(data.evtTime) + "/" + data.idLocal + "-PlateImg.jpg"
-						var img = '<a target="_blank" href="' + url + '"><img id="" src="' + url + '" class="popup" width=\'80\' height=\'60\' /></a>'
-						$("#chepaiImg").append(img)
-					}else {
-						var url2 = "http://" + json.imgUrlPrefix + "/port" + data.stationIP + "/" + getYMDStr(data.evtTime) + "/" + data.idLocal + "-Image.jpg"
-						var img2 = '<a target="_blank" href="' + url2 + '"><img id="chebodyImg" src="' + url2 + '" class="popup" width=\'80\' height=\'60\';" /></a>'
-						$("#chebodyDiv").append(img2)
-					}
-
-
+				if (data.overWeightRatioName == "不超载") {
+					var url = "http://" + json.imgUrlPrefix + "/port" + data.stationIP + "/" + getYMDStr(data.evtTime) + "/" + data.idLocal + "-PlateImg.jpg"
+					var img = '<a target="_blank" href="' + url + '"><img id="" src="' + url + '" class="popup" width=\'80\' height=\'60\' /></a>'
+					$("#chepaiImg").append(img)
+				} else {
+					var url2 = "http://" + json.imgUrlPrefix + "/port" + data.stationIP + "/" + getYMDStr(data.evtTime) + "/" + data.idLocal + "-Image.jpg"
+					var img2 = '<a target="_blank" href="' + url2 + '"><img id="chebodyImg" src="' + url2 + '" class="popup" width=\'80\' height=\'60\';" /></a>'
+					$("#chebodyDiv").append(img2)
 				}
-			});
-		}
 
-    </script>
+
+			}
+		});
+	}
+
+</script>
 </html>

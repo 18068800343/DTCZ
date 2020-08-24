@@ -128,7 +128,7 @@
 </head>
 <body style="background-image: none;background-color:#F5F5F5;">
 
-<div class="form-group" id="rightTab">
+<div class="form-group" id="rightTab" style="margin-top:-2%;">
     <!-- Nav tabs -->
     <ul class="nav nav-pills" role="tablist" style="margin-bottom:20px;">
         <li role="presentation" class="active"><a href="#home_zhtj" aria-controls="home" role="tab"
@@ -205,9 +205,9 @@
                 </div>
                 <!--<div id="echarts_first" class="col-xs-6" style="height: 30%" ></div>-->
                 <div id="echarts_sec" class="col-xs-6" style="height: 30%" ></div>
-                 <div id="echarts_thr" class="col-xs-6" style="height: 30%" ></div>
+                <div id="echarts_thr" class="col-xs-6" style="height: 30%"></div>
                 <div id="echarts_four" class="col-xs-6" style="height: 30%" ></div>
-                  <div id="echarts_five" class="col-xs-6" style="height: 30%" ></div>
+                <div id="echarts_five" class="col-xs-6" style="height: 30%"></div>
                 <!-- <div id="echarts_six" class="col-xs-6" style="height: 30%" ></div> -->
             </div>
         </div>
@@ -2985,9 +2985,9 @@
                         let stationPort = json.stationPort.split(",");
                         let stationName = json.stationName.split(",");
                         for (let i = 0; i < stationPort.length; i++) {
-                                $("#stationPort").append("<option  value='" + stationPort[i] + "'>" + stationName[i] + "</option>");
-                                $("#stationPort_week").append("<option  value='" + stationPort[i] + "'>" + stationName[i] + "</option>");
-                                $("#stationPort2").append("<option  value='" + stationPort[i] + "'>" + stationName[i] + "</option>");
+                            $("#stationPort").append("<option  value='" + stationPort[i] + "'>" + stationName[i] + "</option>");
+                            $("#stationPort_week").append("<option  value='" + stationPort[i] + "'>" + stationName[i] + "</option>");
+                            $("#stationPort2").append("<option  value='" + stationPort[i] + "'>" + stationName[i] + "</option>");
                         }
                     } else {
                         $("#stationPort").append("<option  value='" + json.stationPort + "'>" + json.stationName + "</option>");
@@ -4098,19 +4098,19 @@
     var myChart = echarts.init(document.getElementById("echarts_six"));
     // 指定图表的配置项和数据
     var option = {
-    	    xAxis: {
-    	        type: 'category',
-    	        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-    	    },
-    	    yAxis: {
-    	        type: 'value'
-    	    },
-    	    series: [{
-    	        data: [820, 932, 901, 934, 1290, 1330, 1320],
-    	        type: 'line',
-    	        smooth: true
-    	    }]
-    	};
+        xAxis: {
+            type: 'category',
+            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            data: [820, 932, 901, 934, 1290, 1330, 1320],
+            type: 'line',
+            smooth: true
+        }]
+    };
 
 
     // 使用刚指定的配置项和数据显示图表。
@@ -6632,38 +6632,38 @@
         myChart.setOption(option);
     }
 
-function setzongerjiyujingEchars(time,data){
-    var myChart = echarts.init(document.getElementById("echarts_five"));
-    // 指定图表的配置项和数据
-    var option = {
-        title: {
-            text: '二级预警统计'
+    function setzongerjiyujingEchars(time, data) {
+        var myChart = echarts.init(document.getElementById("echarts_five"));
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: '二级预警统计'
 
-        },
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                animation: false
-            }
-        },
-        xAxis: {
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    animation: false
+                }
+            },
+            xAxis: {
 
-            type: 'category',
-            data: time.split(",")
-        },
-        yAxis: {
-            type: 'value'
-        },
-        series: [{
-            data: data.split(","),
-            type: 'line',
-            smooth: true
-        }]
-    };
+                type: 'category',
+                data: time.split(",")
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: data.split(","),
+                type: 'line',
+                smooth: true
+            }]
+        };
 
-    // 使用刚指定的配置项和数据显示图表。
-    myChart.setOption(option);
-}
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    }
 
 
 

@@ -15,6 +15,17 @@ public class ImgUrlPrefixVo {
     @Value("${fujianUrl}")
     private String fujianUrl;//附件路径
 
+    @Value("${loginUrl}")
+    private String loginUrl;//附件路径
+
+    public String getLoginUrl() {
+        return loginUrl;
+    }
+
+    public void setLoginUrl(String loginUrl) {
+        this.loginUrl = loginUrl;
+    }
+
     public String getFujianUrl() {
         return fujianUrl;
     }
