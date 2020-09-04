@@ -47,8 +47,8 @@ public class ReportListener implements ApplicationListener<ContextRefreshedEvent
             schedule.scheduleWithFixedDelay(new AutoReportDayCallable(), waitTime + 5400, 86400, TimeUnit.SECONDS);
         }
         if (Const.REPORT_MONTH) {
-//                schedule.scheduleWithFixedDelay(new AutoReportMonthCallable(), waitTime + 5400, 86400, TimeUnit.SECONDS);
-            schedule.scheduleWithFixedDelay(new AutoReportMonthCallable(), 0, 86400, TimeUnit.SECONDS);
+            schedule.scheduleWithFixedDelay(new AutoReportMonthCallable(), waitTime + 5400, 86400, TimeUnit.SECONDS);
+//            schedule.scheduleWithFixedDelay(new AutoReportMonthCallable(), 0, 86400, TimeUnit.SECONDS);
         }
 
         if (Const.REPORT_WEEK) {
