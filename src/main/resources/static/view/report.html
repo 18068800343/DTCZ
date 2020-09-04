@@ -283,8 +283,13 @@
             "render": function (data, type, full) {
                 let xiugai = '<i class="glyphicon glyphicon-download-alt Plb" style="font-size:20px;cursor:pointer;display: none;" id="upd" title="下载" onclick="down(this)"></i>';
                 let shanchu = '<i class="iconfont icon-shanchu Plc" style="font-size:20px;cursor:pointer;display: none;" id="del"  title="删除"></i>';
+                let reportName = full.reportName;
+                if (reportName != "" && reportName.split("_").length == 4) {
+                    return xiugai + shanchu;
+                } else {
+                    return xiugai;
+                }
                 //let look='<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息" onclick="lookMs(this)" data-toggle="modal" data-target="#allMsg1" id="lookDetall"></i>'
-                return xiugai + shanchu;
             }
         }, {
             "class": "tcenter",
