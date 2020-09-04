@@ -434,12 +434,25 @@
         }
 
     })
+
+    function GetMonday(dd) {
+        dd = new Date(dd);
+        let week = dd.getDay(); //获取时间的星期数
+        let minus = week ? week - 1 : 6;
+        dd.setDate(dd.getDate() - minus); //获取minus天前的日期
+        let y = dd.getFullYear();
+        let m = dd.getMonth() + 1; //获取月份
+        let d = dd.getDate();
+        return y + "-" + m + "-" + d;
+    }
+
     //生成报告
     $('#myModal').delegate('#baocun', 'click', function () {
         let companyNames = $("#zhandian").val();
         let dayTime = $("#dayTime").val();
         let monthTime = $("#monthTime").val();
         let weekTime = $("#weekTime").val();
+        weekTime = GetMonday(weekTime);
         if (pageConst.flag) {
             if (companyNames == "" || companyNames == null || companyNames == undefined) {
                 toastr.error("请选择生成单位!");
