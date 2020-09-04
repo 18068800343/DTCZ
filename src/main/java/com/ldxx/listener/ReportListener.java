@@ -47,15 +47,13 @@ public class ReportListener implements ApplicationListener<ContextRefreshedEvent
             schedule.scheduleWithFixedDelay(new AutoReportDayCallable(), waitTime + 5400, 86400, TimeUnit.SECONDS);
         }
         if (Const.REPORT_MONTH) {
-            if (monthStr.equals("01")) {
-                schedule.scheduleWithFixedDelay(new AutoReportMonthCallable(), waitTime + 5400, 86400, TimeUnit.SECONDS);
-            }
+//                schedule.scheduleWithFixedDelay(new AutoReportMonthCallable(), waitTime + 5400, 86400, TimeUnit.SECONDS);
+            schedule.scheduleWithFixedDelay(new AutoReportMonthCallable(), 0, 86400, TimeUnit.SECONDS);
         }
 
         if (Const.REPORT_WEEK) {
-            if (weekday == 2) {
                 schedule.scheduleWithFixedDelay(new AutoReportWeekCallable(), waitTime + 5400, 86400, TimeUnit.SECONDS);
-            }
+//                schedule.scheduleWithFixedDelay(new AutoReportWeekCallable(), 0, 86400, TimeUnit.SECONDS);
         }
     }
 }
