@@ -12,6 +12,7 @@ public class TongJiTableQuery implements Serializable {
     String chepai;
     Double chesuStart;
     Double chesuEnd;
+    Double chedao;
     Double cheChangStart;
     Double cheChangEnd;
     Double zhoushu;
@@ -22,6 +23,14 @@ public class TongJiTableQuery implements Serializable {
     Integer start;
     Integer length;
     String columnName;
+
+    public Double getChedao() {
+        return chedao;
+    }
+
+    public void setChedao(Double chedao) {
+        this.chedao = chedao;
+    }
 
     public Double getCheChangStart() {
         return cheChangStart;

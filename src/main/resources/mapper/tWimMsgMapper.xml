@@ -156,6 +156,10 @@
                 and Axles_Count = #{zhoushu}
             </if>
 
+            <if test="chedao!=null and chedao!='' ">
+                and Lane_No = #{chedao}
+            </if>
+
 
             <include refid="CheXing_IP_sql_tongji">
             </include>
@@ -455,6 +459,9 @@
                 and Axles_Count = #{zhoushu}
             </if>
 
+            <if test="chedao!=null and chedao!='' ">
+                and Lane_No = #{chedao}
+            </if>
 
             <include refid="CheXing_IP_sql_tongji">
             </include>

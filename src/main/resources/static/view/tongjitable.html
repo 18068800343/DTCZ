@@ -440,30 +440,36 @@
                            style="height: 34px;border-radius: 5px;box-shadow: none;width: 120%;border:1px solid #DDD;padding:3px;">
 
                 </div>
-                 
-                <div class="col-sm-2 chesukk" style="width:5%;">
-                    <div class="xian2"
-                         style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: -5%;margin-top: 15%;">
-                    </div>
-                    <input type="text" class="text4" value="请输入" v-model="chesuEnd" @input="checknum('chesuEnd')"
-                           style="height: 34px;border-radius: 5px;box-shadow: none;width:120%;margin-left: 30px;border:1px solid #DDD;padding:3px;">
-                </div>	
-               <!-- <label for="" class="col-sm-2 control-label lumianwendu" style="margin-left:7%;font-weight:normal;">路面温度</label>
-                <div class="col-sm-2 lmwd" style="margin-left:-2%;width:5%;padding-right: 0px;padding-left: 28px;">
-                    &lt;!&ndash; 样式1 &ndash;&gt;
-                    <input type="text" class="text6" value="请输入" v-model="roadTmpStart"
-                           @input="checknum('roadTmpStart')"
-                           style="height: 34px;border-radius: 5px;box-shadow: none;width: 70%;border:1px solid #DDD;padding:3px;">
-                </div>-->
 
-<!--                <div class="col-sm-2 lmwdt" style="width:5%;">
-                    <div class="xian2"
-                         style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: -35%;margin-top: 15%;">
-                    </div>
-                    <input type="text" class="text7" v-model="roadTmpEnd" value="请输入" @input="checknum('roadTmpEnd')"
-                           style="height: 34px;border-radius: 5px;box-shadow: none;width:70%;margin-left: -10px;border:1px solid #DDD;padding:3px;">
-                </div>-->
-            </div>
+                 <div class="col-sm-2 chesukk" style="width:5%;">
+                     <div class="xian2"
+                          style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: -5%;margin-top: 15%;">
+                     </div>
+                     <input type="text" class="text4" value="请输入" v-model="chesuEnd" @input="checknum('chesuEnd')"
+                            style="height: 34px;border-radius: 5px;box-shadow: none;width:120%;margin-left: 30px;border:1px solid #DDD;padding:3px;">
+                 </div>
+                 <label class="col-sm-2 control-label lumianwendu"
+                        style="margin-left:6.1%;font-weight:normal;">车道号</label>
+                 <div class="col-sm-2 lmwd" style="margin-left:-1.7%;width:5%;padding-right: 0px;padding-left: 28px;">
+                     <select type="text" class="text6" value="请选择" v-model="chedao"
+                             @input="checknum('chedao')"
+                             style="height: 34px;border-radius: 5px;box-shadow: none;width: 290%;border:1px solid #DDD;padding:3px;">
+                         <option value="">全部</option>
+                         <option value="1">1</option>
+                         <option value="2">2</option>
+                         <option value="3">3</option>
+                         <option value="4">4</option>
+                     </select>
+                 </div>
+
+                 <!--                <div class="col-sm-2 lmwdt" style="width:5%;">
+                                     <div class="xian2"
+                                          style="width: 10px;height: 2px;background-color: #DEDEDE;position: absolute;margin-left: -35%;margin-top: 15%;">
+                                     </div>
+                                     <input type="text" class="text7" v-model="roadTmpEnd" value="请输入" @input="checknum('roadTmpEnd')"
+                                            style="height: 34px;border-radius: 5px;box-shadow: none;width:70%;margin-left: -10px;border:1px solid #DDD;padding:3px;">
+                                 </div>-->
+             </div>
         </div>
         </div>
     </div>
@@ -820,6 +826,7 @@
             chepai: "",
             chesuStart: "",
             chesuEnd: "",
+            chedao: "",
             cheChangStart: "",
             cheChangEnd: "",
             zhoushu: "",
@@ -827,7 +834,7 @@
             roadTmpEnd: "",
             chaozhongStart: "",
             chaozhongEnd: "",
-            columnName:"",
+            columnName: "",
         },
         methods: {
             //新建生产计划保存按钮事件
@@ -867,6 +874,7 @@
                             param.chepai = mainVm.chepai;
                             param.chesuStart = mainVm.chesuStart;
                             param.chesuEnd = mainVm.chesuEnd;
+                            param.chedao = mainVm.chedao;
                             param.cheChangStart = mainVm.cheChangStart;
                             param.cheChangEnd = mainVm.cheChangEnd;
                             param.zhoushu = mainVm.zhoushu;

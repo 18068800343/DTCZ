@@ -447,7 +447,13 @@
         dd.setDate(dd.getDate() - minus); //获取minus天前的日期
         let y = dd.getFullYear();
         let m = dd.getMonth() + 1; //获取月份
+        if (m.toString().length == 1) {
+            m = "0" + m;
+        }
         let d = dd.getDate();
+        if (d.toString().length == 1) {
+            d = "0" + d;
+        }
         return y + "-" + m + "-" + d;
     }
 

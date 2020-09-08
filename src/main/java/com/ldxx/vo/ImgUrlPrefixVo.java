@@ -18,6 +18,17 @@ public class ImgUrlPrefixVo {
     @Value("${loginUrl}")
     private String loginUrl;//附件路径
 
+    @Value("${indexUrl}")
+    private String indexUrl;//附件路径
+
+    public String getIndexUrl() {
+        return indexUrl;
+    }
+
+    public void setIndexUrl(String indexUrl) {
+        this.indexUrl = indexUrl;
+    }
+
     public String getLoginUrl() {
         return loginUrl;
     }
