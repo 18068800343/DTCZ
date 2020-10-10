@@ -60,7 +60,7 @@ dayAndMonthTongjiDom_lgs.initTableBodyAjax = (companyName, avgTime) => {
 dayAndMonthTongjiDom_lgs_week.initTableBodyAjax = (companyName, avgTime) => {
     $.ajax({
         type: 'POST',
-        url: '/tAvgDay/gettAvgDayColumnByCompanyNameAndTime_lgs',
+        url: '/tAvgDay/gettAvgDayColumnByCompanyNameAndTime_lgs_week',
         dataType: 'json',
         data: {
             companyName: companyName,

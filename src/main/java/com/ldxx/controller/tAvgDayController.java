@@ -3,7 +3,9 @@ package com.ldxx.controller;
 import com.ldxx.bean.tAvgDay;
 import com.ldxx.bean.tAvgMonth;
 import com.ldxx.bean.tjfxTotalEchars;
+import com.ldxx.config.Const;
 import com.ldxx.dao.tAvgDayDao;
+import com.ldxx.util.DateUtil;
 import com.ldxx.vo.tAvgDayColumn;
 import com.ldxx.service.tAvgDayService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -42,13 +47,22 @@ public class tAvgDayController {
 
     @RequestMapping("/gettAvgDayColumnByCompanyNameAndTime_lgs")
     public List<tAvgDayColumn> gettAvgDayColumnByCompanyNameAndTime_lgs(String companyName, String avgTime, int avgLaneNo) {
+
         List<tAvgDayColumn> tAvgDayColumn = tAvgDayDao.gettAvgDayColumnByCompanyNameAndTime_lgs(companyName, avgTime, avgLaneNo);
         return tAvgDayColumn;
     }
 
     @RequestMapping("/gettAvgDayColumnByCompanyNameAndTime_lgs_week")
     public List<tAvgDayColumn> gettAvgDayColumnByCompanyNameAndTime_lgs_week(String companyName, String avgTime, int avgLaneNo) {
-        List<tAvgDayColumn> tAvgDayColumn = tAvgDayDao.gettAvgDayColumnByCompanyNameAndTime_lgs_week(companyName, avgTime, avgLaneNo);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        List<tAvgDayColumn> tAvgDayColumn = null;
+        try {
+            Date date = sdf.parse(avgTime);
+            avgTime = sdf.format(DateUtil.geLastWeekMonday(date));
+            tAvgDayColumn = tAvgDayDao.gettAvgDayColumnByCompanyNameAndTime_lgs_week(companyName, avgTime, avgLaneNo);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         return tAvgDayColumn;
     }
 
@@ -60,7 +74,15 @@ public class tAvgDayController {
 
     @RequestMapping("/gettAvgDayColumnByCompanyNameAndTime_sj_week")
     public List<tAvgDayColumn> gettAvgDayColumnByCompanyNameAndTime_sj_week(String provinceName, String avgTime, int avgLaneNo) {
-        List<tAvgDayColumn> tAvgDayColumn = tAvgDayDao.gettAvgDayColumnByCompanyNameAndTime_sj_week(provinceName, avgTime, avgLaneNo);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        List<tAvgDayColumn> tAvgDayColumn = null;
+        try {
+            Date date = sdf.parse(avgTime);
+            avgTime = sdf.format(DateUtil.geLastWeekMonday(date));
+            tAvgDayColumn = tAvgDayDao.gettAvgDayColumnByCompanyNameAndTime_sj_week(provinceName, avgTime, avgLaneNo);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         return tAvgDayColumn;
     }
 
@@ -72,7 +94,15 @@ public class tAvgDayController {
 
     @RequestMapping("/gettAvgDayColumnByIpAndTime_week")
     public List<tAvgDayColumn> gettAvgDayColumnByIpAndTime_week(String stationIP, String avgTime, int avgLaneNo) {
-        List<tAvgDayColumn> tAvgDayColumn = service.gettAvgDayColumnByIpAndTime_week(stationIP, avgTime, avgLaneNo);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        List<tAvgDayColumn> tAvgDayColumn = null;
+        try {
+            Date date = sdf.parse(avgTime);
+            avgTime = sdf.format(DateUtil.geLastWeekMonday(date));
+            tAvgDayColumn = service.gettAvgDayColumnByIpAndTime_week(stationIP, avgTime, avgLaneNo);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         return tAvgDayColumn;
     }
 

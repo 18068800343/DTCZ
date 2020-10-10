@@ -191,7 +191,7 @@
         SELECT
         ID,
         Avg_Time,
-        --Avg_LaneNo,
+        Avg_LaneNo,
         Avg_Max,
         Avg_Count column5,
         Axles_Count_2 column6,
@@ -218,7 +218,6 @@
         ROUND(Avg_Overload_Count_5/Axles_Count_5*100,2) column27,
         ROUND(Avg_Overload_Count_6/Axles_Count_6*100,2) column28,
         Avg_Max_ID
-        -- Station_IP
         FROM
         t_avg_day_lgs
         <where>
@@ -231,7 +230,6 @@
         SELECT
         ID,
         Avg_Time,
-        --Avg_LaneNo,
         Avg_Max,
         Avg_Count column5,
         Axles_Count_2 column6,
@@ -258,7 +256,6 @@
         ROUND(Avg_Overload_Count_5/Axles_Count_5*100,2) column27,
         ROUND(Avg_Overload_Count_6/Axles_Count_6*100,2) column28,
         Avg_Max_ID
-        -- Station_IP
         FROM
         t_avg_week_lgs
         <where>
