@@ -451,10 +451,11 @@
                  <label class="col-sm-2 control-label lumianwendu"
                         style="margin-left:6.1%;font-weight:normal;">车道号</label>
                  <div class="col-sm-2 lmwd" style="margin-left:-1.7%;width:5%;padding-right: 0px;padding-left: 28px;">
-                     <select type="text" class="text6" value="请选择" v-model="chedao"
+                     <select  type="text" class="text6 selectpicker" multiple data-actions-box="true"
+                             data-live-search="true" value="请选择" id="chedao" v-model="chedao"
                              @input="checknum('chedao')"
                              style="height: 34px;border-radius: 5px;box-shadow: none;width: 290%;border:1px solid #DDD;padding:3px;">
-                         <option value="">全部</option>
+                         <!--<option value="">全部</option>-->
                          <option value="1">1</option>
                          <option value="2">2</option>
                          <option value="3">3</option>
@@ -705,10 +706,12 @@
 <script src="js/toastr.js"></script>
 <script src="js/myUtil.js"></script>
 <script src="../js/myTool.js"></script>
+<script src="js/selectMultip.js"></script>
 <script>
 
 
     $(document).ready(function () {
+        selectMultip.register();
         initzhandian();
         laydate.render({
             elem: '#startTime', //指定元素
@@ -842,6 +845,7 @@
                 showMask();
                 this.stationPort = $("#zhandian").val() == null ? "" : $("#zhandian").val().toString();
                 this.zhoushu = $("#chexing").val() == null ? "" : $("#chexing").val().toString();
+                this.chedao=$("#chedao").val() == null ? "" : $("#chedao").val().toString();
                 //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
                 /*                this.$http.post('/tWimMsg/getAlltWimMsgByCondiTion', this._data, {emulateJSON: true}).then((res) => {
 

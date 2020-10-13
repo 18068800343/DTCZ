@@ -157,7 +157,7 @@
             </if>
 
             <if test="chedao!=null and chedao!='' ">
-                and Lane_No = #{chedao}
+                and  FIND_IN_SET(Lane_No,#{chedao})
             </if>
 
 
@@ -460,7 +460,7 @@
             </if>
 
             <if test="chedao!=null and chedao!='' ">
-                and Lane_No = #{chedao}
+                and FIND_IN_SET(Lane_No,#{chedao})
             </if>
 
             <include refid="CheXing_IP_sql_tongji">
