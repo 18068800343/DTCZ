@@ -395,9 +395,15 @@
                         if (arr[i].indexOf("Plc") >= 0) {
                             $(".Plc").show();
                         }
-                        if (arr[i].indexOf("Pld") >= 0) {
+                        /*if (arr[i].indexOf("Pld") >= 0) {
                             $(".Pld").show();
-                        }
+                        }*/
+
+                    }
+                    if(json.groups==0){//如果是控股就显示
+                        $(".Pld").show();
+                    }else {
+                        $(".Pld").hide();
                     }
 
                 }
