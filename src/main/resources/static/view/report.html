@@ -102,6 +102,10 @@
                             <button type="button" class="form-inline btn btn-primary Pla" data-toggle="modal"
                                     data-target="#myModal">生成
                             </button>
+
+                            <button type="button" class="form-inline btn btn-primary Pld" data-toggle="modal"
+                                    data-target="#allMsg1">上传周报
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -139,27 +143,27 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title"><b>账户信息</b></h4>
+                <h4 class="modal-title"><b>上传周报</b></h4>
             </div>
             <div class="modal-body">
                 <div>
-                    <form class="form-inline">
-                        <table class="table table-bordered table-condensed" style="height: auto;">
-                            <tr>
-                                <td style="width: 20%;">用户名</td>
-                                <td><input type="text" id="xg_username" class="form-control" placeholder="请输入"
-                                           style="width: 80%;"></td>
-                                <td>密码</td>
-                                <td><input type="password" id="xg_password" class="form-control" placeholder="请输入"
-                                           style="width: 80%;"></td>
-                            </tr>
+                    <form class="form-inline" id="new_form" enctype="multipart/form-data" method="post">
+                        <table class="table table-bordered table-condensed" id="edit_accessory">
+                            <thead>
+                                <tr>
+                                    <td><label ></label></td>
+                                    <td><input style="width:100%;" type="file" name="file" id="file" class="form-control"></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
                         </table>
                     </form>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-success" id="xgup_baocun">保存</button>
+                <button type="button" class="btn btn-success" id="baocunzhoubao">保存</button>
             </div>
         </div>
     </div>
@@ -230,6 +234,7 @@
 <script src="js/toastr.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+<script src="../js/jquery-form.min.js"></script>
 <script src="js/quanxian.js"></script>
 <script src="../js/myTool.js"></script>
 <script>
@@ -345,6 +350,32 @@
     });
     $.fn.dataTable.ext.errMode = 'none';       //屏蔽掉报错弹窗
 
+
+    //上传报告
+    $("#baocunzhoubao").click(function(){
+        var options={
+            type: 'POST',
+            url: '/ReportInfoController/shangchuanzhoubao',
+            dataType: 'json',
+            data: {
+            },
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                if(json.flag>0){
+                    $('#mainContent').DataTable().row.add(json.obj).draw(false);     //新增行立即显示
+                    $("#allMsg1").modal('hide');
+                    toastr.success("上传成功")
+                    queding()
+                }else{
+                    toastr.error("添加失败");
+                }
+            }
+        }
+        $("#new_form").ajaxSubmit(options);
+    })
+
     function initTableQuanxian() {
         $.ajax({
             type: "post",
@@ -363,6 +394,9 @@
                         }
                         if (arr[i].indexOf("Plc") >= 0) {
                             $(".Plc").show();
+                        }
+                        if (arr[i].indexOf("Pld") >= 0) {
+                            $(".Pld").show();
                         }
                     }
 
