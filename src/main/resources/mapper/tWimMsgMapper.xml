@@ -1464,14 +1464,27 @@ maxAxle,
             a.Avg_LaneNo = '0'  GROUP BY a.Avg_Time ORDER BY Avg_Time desc limit 6
     </select>
 
+    <select id="getsexTotalEcharsByStationPorts" resultType="tjfxTotalEchars">
+        SELECT
+            a.Avg_Time,
+            sum(a.Avg_Count) as zongliuliangnum,
+            sum(a.Avg_Overload_Count) as zongchaozainum,
+            sum(Range80Count2) as yijiyujingnum,
+            sum(a.RangeCount3) as erjiyujingnum
+        FROM
+            t_avg_day a
+        WHERE
+            a.Avg_LaneNo = '0' AND  FIND_IN_SET( a.Station_IP, #{stationPorts} ) GROUP BY a.Avg_Time ORDER BY Avg_Time desc limit 6
+    </select>
+
     <select id="getFirChaoZaiLv" resultType="CheLiuLiangEchartsList">
         SELECT
-        aa.cntc  AS nums,
+        aa.cntc AS nums,
         aa.Station_Port AS station_ports,
-        aa.station_name  AS station_names,
-        aa.cnta  AS numCount,
+        aa.station_name AS station_names,
+        aa.cnta AS numCount,
         aa.cntt AS nums2,
-        (aa.cntc / aa.cnta)  AS numsBili
+        (aa.cntc / aa.cnta) AS numsBili
         FROM
             (
             SELECT

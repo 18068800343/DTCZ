@@ -1336,14 +1336,16 @@ let initLeftChartDetail4=(d)=>{
 }
 
 //***************************************************************初始化趋势统计图***************************************************************
-homePageInit.initFirqstjt = (id) => {
+homePageInit.initFirqstjt = (id, callback) => {
+
+
     $.ajax({
         type: 'POST',
         url: '/tWimMsg/getFirChaoZaiLv',
         dataType: 'json',
         data: {
             stationPorts: homePageInit.stationPort.toString(),
-            limit:6
+            limit: 6
         },
         error: function (msg) {
         },
@@ -1382,17 +1384,17 @@ homePageInit.initFirqstjt = (id) => {
         },
         success: function (json) {
             //初始化超载率统计
-            var dateArr=[];
-            var liuliangArr=[]
-            var chaizaiArr=[];
-            for(var i=0;i<json.length;i++){
+            var dateArr = [];
+            var liuliangArr = []
+            var chaizaiArr = [];
+            for (var i = 0; i < json.length; i++) {
                 dateArr.push(json[i].avgTime)
                 liuliangArr.push(json[i].zongliuliangnum)
                 chaizaiArr.push(json[i].zongchaozainum)
             }
 
-            homePageInit.initFirqstjtEcharts(id,dateArr,chaizaiArr, liuliangArr );
-
+            let chart = homePageInit.initFirqstjtEcharts(id, dateArr, chaizaiArr, liuliangArr);
+            callBackEchart(chart);
         }
     });
 }
@@ -1559,6 +1561,7 @@ homePageInit.initFirqstjtEcharts = (id,stationNames,nums,numCount) => {
 
 
     myChart.setOption(option)
+    return myChart;
 }
 
 
@@ -1859,11 +1862,12 @@ let setSecCZEchars=(data,zhoushu)=>{
 
             {
                 type: 'bar',
+                barWidth: 20, //柱图宽度
                 yAxisIndex: 1,
-                color:'#47FFCD',
+                color: '#47FFCD',
                 data: chaozaibili,
-                itemStyle:{
-                    barBorderRadius:[50,50,0,0],//柱顶弧形
+                itemStyle: {
+                    barBorderRadius: [50, 50, 0, 0],//柱顶弧形
                 },
                 label: {
                     show: true,
@@ -2281,11 +2285,12 @@ let initGongSiTongJiYuJingData_LiuZhou = (data) => {
         ],
         series: [
             {
-                name:"49~100吨",
+                name: "49~100吨",
                 type: 'bar',
+                barWidth: 20, //柱图宽度
                 data: yiJi,
-                itemStyle:{
-                    barBorderRadius:[50,50,0,0],//柱顶弧形
+                itemStyle: {
+                    barBorderRadius: [50, 50, 0, 0],//柱顶弧形
                 },
                 label: {
                     normal: {
@@ -2296,11 +2301,12 @@ let initGongSiTongJiYuJingData_LiuZhou = (data) => {
                 color: '#6154FD'
             },
             {
-                name:"100吨以上",
+                name: "100吨以上",
                 type: 'bar',
+                barWidth: 20, //柱图宽度
                 data: erJi,
-                itemStyle:{
-                    barBorderRadius:[50,50,0,0],//柱顶弧形
+                itemStyle: {
+                    barBorderRadius: [50, 50, 0, 0],//柱顶弧形
                 },
                 label: {
                     normal: {
@@ -2417,9 +2423,10 @@ let initShengJieTongJiYuJingData = (data) => {
             {
                 name: '49~100吨',
                 type: 'bar',
+                barWidth: 20, //柱图宽度
                 data: yiJi,
-                itemStyle:{
-                    barBorderRadius:[50,50,0,0],//柱顶弧形
+                itemStyle: {
+                    barBorderRadius: [50, 50, 0, 0],//柱顶弧形
                 },
                 label: {
                     normal: {
@@ -2432,9 +2439,10 @@ let initShengJieTongJiYuJingData = (data) => {
             {
                 name: '100吨以上',
                 type: 'bar',
+                barWidth: 20, //柱图宽度
                 data: erJi,
-                itemStyle:{
-                    barBorderRadius:[50,50,0,0],//柱顶弧形
+                itemStyle: {
+                    barBorderRadius: [50, 50, 0, 0],//柱顶弧形
                 },
                 label: {
                     normal: {

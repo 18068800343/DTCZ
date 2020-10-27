@@ -2675,6 +2675,12 @@
 			}
 		});
 	}
+
+	$(window).resize(function () {
+		for (var i = 0; i < charts.length; i++) {
+			charts[i].resize();
+		}
+	})
 </script>
 
 </html>

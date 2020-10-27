@@ -7,6 +7,7 @@ import com.ldxx.service.tUserInfoService;
 import com.ldxx.util.Base64Util;
 import com.ldxx.vo.ImgUrlPrefixVo;
 import com.ldxx.vo.tUserInfoVo;
+import org.apache.http.HttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -46,14 +47,52 @@ public class LoginController {
     public String test() {
         return "redirect:/view/login.html";
     }
-    
+
     @RequestMapping("/login")
-    public String login(){ 
+    public String login() {
         return "redirect:../view/login.html";
     }
-    
-    @RequestMapping(value="/userlogin",method= RequestMethod.POST)
-    public Map<String,Object> userlogin(tUserInfo user, HttpServletRequest request){
+
+    @RequestMapping("/homeApi")
+    public String homeApi(HttpSession session, String token, String ren, HttpServletResponse response) throws IOException {
+
+        String usrName = ren;
+        tUserInfoVo loginUser = null;
+        tUserInfoVo loginUser1 = null;
+        if (null != token && !"".equals(token) && "jiance".equals(token)) {
+            String user = "";
+            loginUser = service.selectUserByUsrName(usrName);
+            loginUser1 = service.selectUserByUsrName1(usrName);
+            session.setAttribute("user", loginUser);
+            session.setAttribute("user1", loginUser1);
+            response.sendRedirect("../view/" + imgUrlPrefixVo.getIndexUrl());
+        } else {
+            response.sendRedirect("../view/" + imgUrlPrefixVo.getLoginUrl());
+        }
+        return "";
+    }
+
+    @RequestMapping("/homeApiLoginToUrl")
+    public String homeApiLogin(HttpSession session, String userName, String urlPrefix, HttpServletResponse response) throws IOException {
+
+        tUserInfoVo loginUser = null;
+        tUserInfoVo loginUser1 = null;
+        String user = "";
+        loginUser = service.selectUserByUsrName(userName);
+        loginUser1 = service.selectUserByUsrName1(userName);
+        if (null != loginUser) {
+            session.setAttribute("user", loginUser);
+            session.setAttribute("user1", loginUser1);
+            response.sendRedirect(urlPrefix + "/view/" + imgUrlPrefixVo.getIndexUrl());
+        } else {
+            response.sendRedirect(urlPrefix + "/view/" + imgUrlPrefixVo.getLoginUrl());
+//                response.sendRedirect("../view/" + imgUrlPrefixVo.getLoginUrl());
+        }
+        return "";
+    }
+
+    @RequestMapping(value = "/userlogin", method = RequestMethod.POST)
+    public Map<String, Object> userlogin(tUserInfo user, HttpServletRequest request) {
         int state = 0;
         tUserInfoVo loginUser = null;
         tUserInfoVo loginUser1 = null;

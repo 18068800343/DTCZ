@@ -1071,6 +1071,10 @@
 
     var Firtimer;
 
+    function callBackEchart(backChart) {
+        backChart.resize();
+    }
+
     function FirHomeClick() {
         clearInterval(Sectimer)
         clearInterval(Threetimer)
@@ -1081,7 +1085,7 @@
         //初始化总流量统计和超载率统计
         homePageInit.initFirTongji();
         //初始化趋势图
-        homePageInit.initFirqstjt('chart3');
+        homePageInit.initFirqstjt('chart3', callBackEchart);
         Firtimer = setInterval(Firrefresh, 5000);
     }
 
@@ -2674,6 +2678,7 @@
             }
         });
     }
+
 </script>
 
 </html>

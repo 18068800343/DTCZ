@@ -85,4 +85,6 @@ public interface tWimMsgDao {
 
     List<tjfxTotalEchars> getsexTotalEchars();
 
+    List<tjfxTotalEchars> getsexTotalEcharsByStationPorts(String stationPort);
+
 }

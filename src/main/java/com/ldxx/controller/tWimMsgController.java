@@ -475,7 +475,8 @@ public class tWimMsgController {
 
     @RequestMapping("/getFirChaoZaiLv")
     public List<CheLiuLiangEchartsList> getFirChaoZaiLv(String stationPorts,Integer link,Integer limit) {
-        return tWimMsgDao.getFirChaoZaiLv(stationPorts, link, limit);
+        List<CheLiuLiangEchartsList> list = tWimMsgDao.getFirChaoZaiLv(stationPorts, link, limit);
+        return list;
     }
 
     @RequestMapping("/getHomeDataObject")
@@ -753,7 +754,7 @@ public class tWimMsgController {
         String date = GetThisTimeUtils.getDate();
         tjfxTotalEchars toadynum = tWimMsgDao.getTodayzongliuliangAndzongchaozai(stationPorts);
         toadynum.setAvgTime(date);
-        List<tjfxTotalEchars> tjfxTotalEchars = tWimMsgDao.getsexTotalEchars();
+        List<tjfxTotalEchars> tjfxTotalEchars = tWimMsgDao.getsexTotalEcharsByStationPorts(stationPorts);
         tjfxTotalEchars.add(0,toadynum);
 
         Collections.reverse(tjfxTotalEchars);
