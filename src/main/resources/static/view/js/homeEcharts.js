@@ -1774,7 +1774,7 @@ let setSecCZEchars=(data,zhoushu)=>{
                 formatter: function (params) {
                     let newParamsName = "";
                     let paramsNameNumber = params.length;
-                    let provideNumber = 3;
+                    let provideNumber = 2;
                     let rowNumber = Math.ceil(paramsNameNumber / provideNumber);
                     if (paramsNameNumber > provideNumber) {
                         for (let p = 0; p < rowNumber; p++) {
@@ -1960,7 +1960,7 @@ let initSecChaoZaiEchars=(data,zhoushu)=> {
                 formatter: function (params) {
                     let newParamsName = "";
                     let paramsNameNumber = params.length;
-                    let provideNumber = 3;
+                    let provideNumber = 2;
                     let rowNumber = Math.ceil(paramsNameNumber / provideNumber);
                     if (paramsNameNumber > provideNumber) {
                         for (let p = 0; p < rowNumber; p++) {
