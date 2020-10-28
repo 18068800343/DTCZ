@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.ldxx.Thread.PageCountCallable;
 import com.ldxx.Thread.PageCountYiChangCallable;
 import com.ldxx.bean.*;
+import com.ldxx.config.DS;
 import com.ldxx.dao.StationSiteDao;
 import com.ldxx.dao.tAvgDayDao;
 import com.ldxx.dao.tUserInfoDao;
@@ -749,13 +750,15 @@ public class tWimMsgController {
     /**
      * 首页趋势图，查询最近七天总流量和超载量
      */
+
+    @DS("db2")
     @RequestMapping("/getQushitu")
-    public List<tjfxTotalEchars> getQushitu(String stationPorts){
+    public List<tjfxTotalEchars> getQushitu(String stationPorts) {
         String date = GetThisTimeUtils.getDate();
         tjfxTotalEchars toadynum = tWimMsgDao.getTodayzongliuliangAndzongchaozai(stationPorts);
         toadynum.setAvgTime(date);
         List<tjfxTotalEchars> tjfxTotalEchars = tWimMsgDao.getsexTotalEcharsByStationPorts(stationPorts);
-        tjfxTotalEchars.add(0,toadynum);
+        tjfxTotalEchars.add(0, toadynum);
 
         Collections.reverse(tjfxTotalEchars);
         return tjfxTotalEchars;
