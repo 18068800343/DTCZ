@@ -121,6 +121,7 @@
         <li onclick="SecHomeClick()"></li>
         <li onclick="ThreeHomeClick()"></li>
         <li onclick="FourHomeClick()"></li>
+        <li onclick="FiveHomeClick()"></li>
     </ul>
     <div class="layui-tab-content">
         <div class="layui-tab-item layui-show">
@@ -659,6 +660,156 @@
                     </a>
                 </div>
                 <div id="liti" class="col-xs-12" style="height: 400px; margin-top: 48%;width:500px;">
+                </div>
+            </div>
+        </div>
+        <div class="layui-tab-item layui-show">
+            <div>
+                <div id="mainfir" class="col-xs-5"
+                     style="height:800px;margin:0 15px;float:left;margin-left: 10%;margin-top: 3%;"></div>
+                <div class="title">
+                    <div class="leftdiv1 col-xs-5">
+                        <div class="leftsj"
+                             style="background-color: #020957;padding: 3%;height: 140px;border: 1px solid #020957;border-radius: 8px;background-color: rgba(2, 10, 85, 0.4);color: #C0C0CB;">
+                            <h2 class="jianceh"
+                                style="font-size: 17px;color:#007AFF;position: absolute;margin-top: 3px;font-weight: bolder;">
+                                实时统计</h2>
+                            <div class="left1" style="margin-left: 14%;margin-top: -1%;">
+                                <a href="javascript:;" onclick="leftfirstTb(1)"><img src="img/first_img.png"
+                                                                                     style="height: 40px;"></a>
+                                <p class="leftp" id="leftTable1fir"></p><span>辆</span>
+                                <p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日总流量</p>
+                            </div>
+                            <div class="left2" style="margin-left: 14%;">
+                                <a href="javascript:;" onclick="leftfirstTb(2)"><img src="./img/second_img.png"
+                                                                                     style="height: 40px;"></a>
+                                <p class="leftp" id="leftTable2fir"></p><span>辆</span>
+                                <p style="margin-left: 12%;margin-top: -1%;font-size:13px;">当日超载车辆数</p>
+                            </div>
+                            <div class="left3" style="margin-top:-17%;margin-left:450px;">
+                                <a href="javascript:;" onclick="lookMsg(homePageInit.idLocal,3)"><img
+                                        src="img/third_img.png" style="height: 40px;"></a>
+                                <p class="leftp" id="leftTable3fir"></p><span>吨</span>
+                                <input type="input" id="idLocalfir" style="display: none">
+                                <p style="margin-left: 16%;margin-top: -2%;font-size:13px;">当日最大车重</p>
+                            </div>
+                            <div class="left4" style="margin-left: 450px;">
+                                <a href="javascript:;"
+                                   onclick="bindLeftLinks(homePageInit.linkStationNames,homePageInit.links)"> <img
+                                        src="img/first_img.png" style="height: 40px;"></a>
+                                <p class="leftp" id="leftTable4fir"></p><span>个</span>
+                                <p style="margin-left: 16%;margin-top: -2%;font-size:13px;">当日监测站点</p>
+                            </div>
+                        </div>
+                        <!--<div class="y-span10 y-last">
+                <div class="table">
+                    <div class="bj_nav y-clearfix">
+                        <div>
+                            <div id="main" style="height:500px;width:100%;margin-left:-80px;float:left;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+                        <div class="rleft col-xs-6"
+                             style="margin-top: 5%;color: #C0C0CB;background-color: #020957;border: 1px solid #020957;border-radius: 8px;background-color: rgba(2, 10, 85, 0.4);color: #C0C0CB;padding: 20px;width: 48%;margin-right: 2%;">
+                            <h2 class="jianceh"
+                                style="font-size: 17px;color:#007AFF;font-weight: bolder;margin-bottom: 5%;">总流量统计</h2>
+                            <p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_1.png"
+                                                                               style="margin-right: 5%;"><span
+                                    style="color: white;">1</span><span id="fir_liuliangName5"
+                                                                        style="margin-left: 10%;font-size: 12px; "></span><span
+                                    id="fir_liuliang5"
+                                    style="margin-left: 50%;font-size: 19px;width:100px;color: #FF2929;font-weight: bolder;"></span><span
+                                    style="margin-left: 10%;">辆</span></p>
+                            <p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_2.png"
+                                                                               style="margin-right: 5%;"><span
+                                    style="color: white;">2</span><span id="fir_liuliangName4"
+                                                                        style="margin-left: 10%;font-size: 12px;"></span><span
+                                    id="fir_liuliang4"
+                                    style="margin-left: 50%;font-size: 19px;color: #FF7329;font-weight: bolder;"></span><span
+                                    style="margin-left: 10%;">辆</span></p>
+                            <p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_3.png"
+                                                                               style="margin-right: 5%;"><span
+                                    style="color: white;">3</span><span id="fir_liuliangName3"
+                                                                        style="margin-left: 10%;font-size: 12px;"></span><span
+                                    id="fir_liuliang3"
+                                    style="margin-left: 50%;font-size: 19px;color: #FDA82B;font-weight: bolder;"></span><span
+                                    style="margin-left: 10%;">辆</span></p>
+                            <p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_4.png"
+                                                                               style="margin-right: 5%;"><span
+                                    style="color: white;">4</span><span id="fir_liuliangName2"
+                                                                        style="margin-left: 10%;font-size: 12px;"></span><span
+                                    id="fir_liuliang2"
+                                    style="margin-left: 50%;font-size: 19px;color: #1AC2F9;font-weight: bolder;"></span><span
+                                    style="margin-left: 10%;">辆</span></p>
+                            <p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_4.png"
+                                                                               style="margin-right: 5%;"><span
+                                    style="color: white;">5</span><span id="fir_liuliangName1"
+                                                                        style="margin-left: 10%;font-size: 12px;"></span><span
+                                    id="fir_liuliang1"
+                                    style="margin-left: 50%;font-size: 19px;color: #1AC2F9;font-weight: bolder;"></span><span
+                                    style="margin-left: 10%;">辆</span></p>
+                            <p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_4.png"
+                                                                               style="margin-right: 5%;"><span
+                                    style="color: white;">6</span><span id="fir_liuliangName0"
+                                                                        style="margin-left: 10%;font-size: 12px;"></span><span
+                                    id="fir_liuliang0"
+                                    style="margin-left: 50%;font-size: 19px;color: #1AC2F9;font-weight: bolder;"></span><span
+                                    style="margin-left: 10%;">辆</span></p>
+                        </div>
+                        <div class="rright col-xs-6"
+                             style="margin-top: 5%;color: #C0C0CB;background-color: #020957;border: 1px solid #020957;border-radius: 8px;background-color: rgba(2, 10, 85, 0.4);color: #C0C0CB;padding: 20px;">
+                            <h2 class="jianceh"
+                                style="font-size: 17px;color:#007AFF;font-weight: bolder;margin-bottom: 5%;">超载比例统计</h2>
+                            <p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_1.png"
+                                                                               style="margin-right: 5%;"><span
+                                    style="color: white;">1</span><span id="fir_chaozailvName0"
+                                                                        style="margin-left: 10%;font-size: 12px;"></span><span
+                                    id="fir_chaozailv0"
+                                    style="margin-left: 50%;font-size: 19px;color: #FF2929;font-weight: bolder;"></span><span
+                                    style="margin-left: 13%;"></span></p>
+                            <p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_2.png"
+                                                                               style="margin-right: 5%;"><span
+                                    style="color: white;">2</span><span id="fir_chaozailvName1"
+                                                                        style="margin-left: 10%;font-size: 12px;"></span><span
+                                    id="fir_chaozailv1"
+                                    style="margin-left: 50%;font-size: 19px;color: #FF7329;font-weight: bolder;"></span><span
+                                    style="margin-left: 13%;"></span></p>
+                            <p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_3.png"
+                                                                               style="margin-right: 5%;"><span
+                                    style="color: white;">3</span><span id="fir_chaozailvName2"
+                                                                        style="margin-left: 10%;font-size: 12px;"></span><span
+                                    id="fir_chaozailv2"
+                                    style="margin-left: 50%;font-size: 19px;color: #FDA82B;font-weight: bolder;"></span><span
+                                    style="margin-left: 13%;"></span></p>
+                            <p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_4.png"
+                                                                               style="margin-right: 5%;"><span
+                                    style="color: white;">4</span><span id="fir_chaozailvName3"
+                                                                        style="margin-left: 10%;font-size: 12px;"></span><span
+                                    id="fir_chaozailv3"
+                                    style="margin-left: 50%;font-size: 19px;color: #1AC2F9;font-weight: bolder;"></span><span
+                                    style="margin-left: 13%;"></span></p>
+                            <p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_4.png"
+                                                                               style="margin-right: 5%;"><span
+                                    style="color: white;">5</span><span id="fir_chaozailvName4"
+                                                                        style="margin-left: 10%;font-size: 12px;"></span><span
+                                    id="fir_chaozailv4"
+                                    style="margin-left: 50%;font-size: 19px;color: #1AC2F9;font-weight: bolder;"></span><span
+                                    style="margin-left: 13%;"></span></p>
+                            <p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_4.png"
+                                                                               style="margin-right: 5%;"><span
+                                    style="color: white;">6</span><span id="fir_chaozailvName5"
+                                                                        style="margin-left: 10%;font-size: 12px;"></span><span
+                                    id="fir_chaozailv5"
+                                    style="margin-left: 50%;font-size: 19px;color: #1AC2F9;font-weight: bolder;"></span><span
+                                    style="margin-left: 13%;"></span></p>
+                        </div>
+                        <div class="rbottom col-xs-12"
+                             style="margin-top: 5%;color: #C0C0CB;background-color: #020957;border: 1px solid #020957;border-radius: 8px;background-color: rgba(2, 10, 85, 0.4);color: #C0C0CB;padding: 20px;">
+                            <h2 class="jianceh" style="font-size: 17px;color:#007AFF;font-weight: bolder;">趋势统计</h2>
+                            <div id="chart3" style="width:750px; height: 350px;"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
