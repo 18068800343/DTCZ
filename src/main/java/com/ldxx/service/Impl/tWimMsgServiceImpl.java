@@ -2,15 +2,21 @@ package com.ldxx.service.Impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.ldxx.bean.CheLiuLiangEchartsList;
+import com.ldxx.bean.HomeData;
 import com.ldxx.bean.TongJiTableQuery;
+import com.ldxx.bean.tjfxTotalEchars;
+import com.ldxx.config.DS;
 import com.ldxx.dao.tWimMsgDao;
 import com.ldxx.service.tWimMsgService;
+import com.ldxx.util.GetThisTimeUtils;
 import com.ldxx.vo.tWimMsgVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -106,5 +112,69 @@ public class tWimMsgServiceImpl implements tWimMsgService {
     @Override
     public tWimMsgVo gettWimMsgYiChangById(String idLocal) {
         return dao.gettWimMsgYiChangById(idLocal);
+    }
+
+
+    @Override
+    public List<tjfxTotalEchars> getQushitu(String stationPorts) {
+        String date = GetThisTimeUtils.getDate();
+        tjfxTotalEchars toadynum = dao.getTodayzongliuliangAndzongchaozai(stationPorts);
+        if(toadynum!=null){
+            toadynum.setAvgTime(date);
+        }
+
+        List<tjfxTotalEchars> tjfxTotalEchars = dao.getsexTotalEcharsByStationPorts(stationPorts);
+        if(tjfxTotalEchars!=null&&tjfxTotalEchars.size()!=0){
+            tjfxTotalEchars.add(0, toadynum);
+        }
+
+        Collections.reverse(tjfxTotalEchars);
+        return tjfxTotalEchars;
+    }
+    @DS("db2")
+    @Override
+    public List<tjfxTotalEchars> getQushitu2(String stationPorts) {
+        String date = GetThisTimeUtils.getDate();
+        tjfxTotalEchars toadynum = dao.getTodayzongliuliangAndzongchaozai(stationPorts);
+        if(toadynum!=null){
+            toadynum.setAvgTime(date);
+        }
+        List<tjfxTotalEchars> tjfxTotalEchars = dao.getsexTotalEcharsByStationPorts(stationPorts);
+        if(tjfxTotalEchars!=null&&tjfxTotalEchars.size()!=0){
+            tjfxTotalEchars.add(0, toadynum);
+        }
+
+        Collections.reverse(tjfxTotalEchars);
+        return tjfxTotalEchars;
+    }
+
+    @Override
+    public CheLiuLiangEchartsList getDiTujwdByPort(String zhandianduankouhao) {
+        return dao.getDiTujwdByPort(zhandianduankouhao);
+    }
+    @DS("db2")
+    @Override
+    public CheLiuLiangEchartsList getDiTujwdByPort2(String zhandianduankouhao) {
+        return dao.getDiTujwdByPort(zhandianduankouhao);
+    }
+
+    @Override
+    public HomeData getHomeData(String stationPorts) {
+        return  dao.getHomeData(stationPorts);
+    }
+    @DS("db2")
+    @Override
+    public HomeData getHomeData2(String stationPorts) {
+        return  dao.getHomeData(stationPorts);
+    }
+
+    @Override
+    public CheLiuLiangEchartsList getCheLiuLiangEchartsList(String stationPorts, Integer link, Integer limit) {
+        return dao.getCheLiuLiangEchartsList(stationPorts, link, limit);
+    }
+    @DS("db2")
+    @Override
+    public CheLiuLiangEchartsList getCheLiuLiangEchartsList2(String stationPorts, Integer link, Integer limit) {
+        return dao.getCheLiuLiangEchartsList(stationPorts, link, limit);
     }
 }

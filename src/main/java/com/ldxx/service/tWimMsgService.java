@@ -1,7 +1,10 @@
 package com.ldxx.service;
 
 import com.github.pagehelper.PageInfo;
+import com.ldxx.bean.CheLiuLiangEchartsList;
+import com.ldxx.bean.HomeData;
 import com.ldxx.bean.TongJiTableQuery;
+import com.ldxx.bean.tjfxTotalEchars;
 import com.ldxx.vo.tWimMsgVo;
 import org.apache.ibatis.annotations.Param;
 
@@ -36,4 +39,16 @@ public interface tWimMsgService {
     tWimMsgVo gettWimMsgById(String idLocal);
 
     tWimMsgVo gettWimMsgYiChangById(String idLocal);
+
+    List<tjfxTotalEchars> getQushitu(String stationPorts);
+    List<tjfxTotalEchars> getQushitu2(String stationPorts);
+
+    CheLiuLiangEchartsList getDiTujwdByPort(String zhandianduankouhao);
+    CheLiuLiangEchartsList getDiTujwdByPort2(String zhandianduankouhao);
+
+    HomeData getHomeData(String stationPorts);
+    HomeData getHomeData2(String stationPorts);
+
+    CheLiuLiangEchartsList getCheLiuLiangEchartsList(String stationPorts, Integer link, Integer limit);
+    CheLiuLiangEchartsList getCheLiuLiangEchartsList2(String stationPorts, Integer link, Integer limit);
 }
