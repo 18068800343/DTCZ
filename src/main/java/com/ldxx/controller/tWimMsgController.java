@@ -789,10 +789,10 @@ public class tWimMsgController {
         String zhandianduankouhao = user.getStationPort();
         CheLiuLiangEchartsList obj1= service.getDiTujwdByPort(zhandianduankouhao);
         CheLiuLiangEchartsList obj2= service.getDiTujwdByPort2();
-        obj1.setNums(obj1.getNums()+obj2.getNums());
-        obj1.setStationPorts(obj1.getStationPorts()+obj2.getStationPorts());
-        obj1.setStationNames(obj1.getStationNames()+obj2.getStationNames());
-        obj1.setLnglat(obj1.getLnglat()+obj2.getLnglat());
+        obj1.setNums(obj1.getNums()+","+obj2.getNums());
+        obj1.setStationPorts(obj1.getStationPorts()+","+obj2.getStationPorts());
+        obj1.setStationNames(obj1.getStationNames()+","+obj2.getStationNames());
+        obj1.setLnglat(obj1.getLnglat()+","+obj2.getLnglat());
         return obj1;
     }
 
