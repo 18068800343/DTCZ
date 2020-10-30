@@ -131,10 +131,10 @@
 <div class="layui-tab"
 	 style="position: absolute;color:white; background-color: transparent;top:5%;width: 100%;height:100%;z-index: 10;">
 	<ul class="layui-tab-title">
-		<li onclick="FirHomeClick()" class="layui-this"></li>
-		<li onclick="SecHomeClick()"></li>
-		<li onclick="ThreeHomeClick()"></li>
-		<li onclick="FourHomeClick()"></li>
+		<li onclick="FirHomeClick()" class="layui-this" id="fir"></li>
+		<li onclick="SecHomeClick()" id="sec"></li>
+		<li onclick="ThreeHomeClick()" id="three"></li>
+		<li onclick="FourHomeClick()" id="four"></li>
 		<li onclick="FiveHomeClick()" id="five"></li>
 	</ul>
 	<div class="layui-tab-content">
@@ -1196,8 +1196,28 @@
 <script src="js/toastr.js"></script>
 <script src="js/layui.all.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
-var five = document.getElementById("five");
+	var fir = document.getElementById("fir");
+	$(fir).click(function(){
+		$("body").css("background-image","url(./img/bg.png)");
+	});
+	var sec = document.getElementById("sec");
+	$(sec).click(function(){
+		$("body").css("background-image","url(./img/bg.png)");
+	});
+	var three = document.getElementById("three");
+	$(three).click(function(){
+		$("body").css("background-image","url(./img/bg.png)");
+	});
+	var four = document.getElementById("four");
+	$(four).click(function(){
+		$("body").css("background-image","url(./img/bg.png)");
+	});
+	var five = document.getElementById("five");
+	$(five).click(function(){
+		$("body").css("background-image","url(./img/kg.png)");
+	});
 
+var five = document.getElementById("five");
 	$(five).click(function(){
 		$("body").css("background-image","url(./img/kg.png)");
 	});
