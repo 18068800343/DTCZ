@@ -965,7 +965,8 @@ homePageInit.initHomeData = ()=>{
             $("#leftTable1").html(json.totalCheLiu);
             $("#leftTable1fir").html('');
             $("#leftTable1fir").html(json.totalCheLiu);
-
+            
+            
             $("#leftTable2").html('');
             $("#leftTable2").html(json.totalChaoZai);
             $("#leftTable2fir").html('');
@@ -987,7 +988,35 @@ homePageInit.initHomeData = ()=>{
         }
     });
 }
+//第五
+homePagefiveInit.initHomeData = ()=>{
+    $.ajax({
+        type: 'POST',
+        url: '/tWimMsg/getHomeDataObject',
+        dataType: 'json',
+        data: {
+            stationPorts: homePagefiveInit.stationPort.toString(),
+        },
+        error: function (msg) {
+        },
+        success: function (json) {
+            $("#leftTable1fir5").html('');
+            $("#leftTable1fir5").html(json.totalCheLiu);
+            
+            $("#leftTable2fir5").html('');
+            $("#leftTable2fir5").html(json.totalChaoZai);
+            homePagefiveInit.idLocal = json.idLocal;;
+            $("#leftTable3fir5").html('');
+            $("#leftTable3fir5").html((json.maxWeight/1000).toFixed(2));
 
+            $("#leftTable4fir5").html('');
+            $("#leftTable4fir5").html(json.stationNums);
+           
+            homePagefiveInit.linkStationNames = json.stationNames.split(",");
+            homePagefiveInit.links = json.links.split(",");
+        }
+    });
+}
 //******************************************************************************柱状图初始化***************************************************************************************
 
 homePageInit.initLastEcharts = () => {
