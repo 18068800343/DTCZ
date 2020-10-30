@@ -991,20 +991,20 @@
                     <div class="UpperPartR"></div>
                 </div>
                 <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief" style="">
-                   <button type="button" class="btn btn-primary" 
-                                style="background-color:#549CFD;border:none;">获取最新数据
-                        </button>
-                	<table class="layui-table">
-						<thead>
-							<tr style="background-color:#FFF;">
-								<th>当日总流量</th>
-								<th>当日最大车重</th>
-								<th>当日超载车辆数</th>
-								<th>当日监测站点</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
+                    <button type="button" class="btn btn-primary" onclick="initTodayTable()"
+                            style="background-color:#549CFD;border:none;">获取最新数据
+                    </button>
+                    <table class="layui-table" id="todayTable">
+                        <thead>
+                        <tr style="background-color:#FFF;">
+                            <th>当日总流量</th>
+                            <th>当日最大车重</th>
+                            <th>当日超载车辆数</th>
+                            <th>当日监测站点</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
 								<td>120102</td>
 								<td>2232</td> 
 								<td>52052</td>
@@ -3019,6 +3019,7 @@
     });
 
 
+    let page_stationPort;
     function initzhandian() {
         /*$.ajax({
             type: 'POST',
@@ -3054,6 +3055,7 @@
             },
             success: function (json) {
                 user = json;
+                page_stationPort = json.stationPort;
                 $("#stationPort").html('');
                 $("#stationPort_week").html('');
                 $("#stationPort2").html('');
@@ -3066,12 +3068,36 @@
                             $("#stationPort_week").append("<option  value='" + stationPort[i] + "'>" + stationName[i] + "</option>");
                             $("#stationPort2").append("<option  value='" + stationPort[i] + "'>" + stationName[i] + "</option>");
                         }
+                        initTodayTable();
                     } else {
                         $("#stationPort").append("<option  value='" + json.stationPort + "'>" + json.stationName + "</option>");
                         $("#stationPort_week").append("<option  value='" + json.stationPort + "'>" + json.stationName + "</option>");
                         $("#stationPort2").append("<option  value='" + json.stationPort + "'>" + json.stationName + "</option>");
+                        initTodayTable();
                     }
                 }
+            }
+        });
+    }
+
+    function initTodayTable() {
+        $.ajax({
+            type: 'POST',
+            url: '/tWimMsg/getHomeDataObject2',
+            dataType: 'json',
+            data: {
+                stationPorts: page_stationPort,
+            },
+            error: function (msg) {
+            },
+            success: function (json) {
+                // $("#leftTable15").html(json.totalCheLiu);
+                // $("#leftTable25").html(json.totalChaoZai);
+                // $("#leftTable35").html((json.maxWeight/1000).toFixed(2));
+                // $("#leftTable45").html(json.stationNums);
+                // $("#lastZuiDaCheZhong5").html((json.maxWeight/1000).toFixed(2))
+                $("#todayTable tbody").empty();
+                $("#todayTable tbody").append(`<tr><td>${json.totalCheLiu}</td><td>${(json.maxWeight / 1000).toFixed(2)}</td><td>${json.totalChaoZai}</td><td>${json.stationNums}</td></tr>`);
             }
         });
     }
@@ -3094,6 +3120,7 @@
                     $("#stationPort_lgs_week").append("<option  value='" + json[i].companyName + "'>" + json[i].companyName + "</option>");
                     $("#stationPort2_lgs").append("<option  value='" + json[i].companyName + "'>" + json[i].companyName + "</option>");
                 }
+
             }
         });
     }
