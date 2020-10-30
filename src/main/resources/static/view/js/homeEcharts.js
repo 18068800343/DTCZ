@@ -117,7 +117,7 @@ function initHomeMap(lngLats,stationNames,nums){
             }
             let myChart = ec.init(document.getElementById('main'));
             let myChartmainfir = ec.init(document.getElementById('mainfir'));
-            let myChartmaintwo = ec.init(document.getElementById('maintwo'));
+
             let ecConfig = require('echarts/config');
             let zrEvent = require('zrender/tool/event');
             let curIndx = 0;
@@ -208,91 +208,7 @@ function initHomeMap(lngLats,stationNames,nums){
 
                 }]
             },
-            myChartmaintwo.on(ecConfig.EVENT.MAP_SELECTED, function(param) {});
-            option = {
 
-                tooltip: {
-                    trigger: 'item',
-                    //formatter:'dede{b}'
-                    confine:true,
-                    formatter: '{b}',
-                    formatter: function (params,ticket,callback){
-                        let $pna = params.name;
-                        let res = '';
-                        console.log(params,ticket)
-                        if(stationNames[$pna]!=undefined){
-                            return stationNames[$pna];
-                        }else{
-                            return $pna;
-                        }
-
-                    }
-                },
-                legend: {
-                    orient: 'vertical',
-                    x: '',
-                    data: [' ']
-                },
-
-                series: [{
-                    name: '',
-                    type: 'map',
-                    symbolSize: 10,
-                    symbolRotate: 35,
-                    mapType: 'jiangsu',
-                    selectedMode: false,
-                    itemStyle: {
-                        normal: {
-                            label: {
-                                show: true
-                            },
-                            borderColor: '#6F9BD5',
-                            borderWidth: 1
-                        },
-                        areaStyle: {
-                            color: '#6F9BD5',//默认的地图板块颜色
-                        },
-                        emphasis: {
-                            label: {
-                                show: false
-                            }
-                        }
-                    },
-                    data: markPointData,
-                    geoCoord: geoCoordData,
-                    hoverable:false,//隐藏悬浮背景色
-                    markPoint: {
-                        /*symbol: 'circle',*/
-                        symbolSize: (val, params) => {
-                        	  return val[1] * 3;
-                        	},
-                        itemStyle: {
-                            normal: {
-                            	color: '#2e70bc', //地图背景色
-                            	areaColor: '#006fff',
-                                borderColor: '#E5E324',
-                                borderWidth: 1, // 标注边线线宽，单位px，默认为1
-                                label: {
-                                    show: false
-                                },
-//                                show: false
-                            }
-                        },
-                       /* effect: {
-                            show: true,
-                            shadowBlur: 0,
-                            loop: true
-                        },*/
-                        itemStyle: {
-                            normal: {
-                                color: '#007CFC', //标志颜色
-                            }
-                        },
-                        data : markPointData
-                    }
-
-                }]
-            },
             myChartmainfir.on(ecConfig.EVENT.CLICK, eConsole);
             myChart.on(ecConfig.EVENT.CLICK, eConsole);
             function eConsole(param){
@@ -306,7 +222,7 @@ function initHomeMap(lngLats,stationNames,nums){
 
             myChart.setOption(option);
             myChartmainfir.setOption(option);
-            myChartmaintwo.setOption(option);
+
 
         }
     );
@@ -552,12 +468,16 @@ let initFirLiuliangtongji=(stationNames,nums)=>{
         for(let i=0;i<nums.length+1;i++){
             $("#fir_liuliang"+i+"").html("")
             $("#fir_liuliang"+i+"").html(nums[i])
+            $("#Five_liuliang"+i+"").html("")
+            $("#Five_liuliang"+i+"").html(nums[i])
         }
     }
     if(stationNames!=null&&stationNames.length>0){
         for(let i=0;i<stationNames.length+1;i++){
             $("#fir_liuliangName"+i+"").html("")
             $("#fir_liuliangName"+i+"").html(stationNames[i])
+            $("#Five_liuliangName"+i+"").html("")
+            $("#Five_liuliangName"+i+"").html(stationNames[i])
         }
     }
 
@@ -2771,4 +2691,464 @@ let getDanZhouChaoZai = (data) => {
     option.xAxis.data = evtTime;
     option.series[0].data = maxAxle;
     myChart.setOption(option);
+}
+
+
+    //=======================5========
+
+    homePageInit.initditu5 = () => {
+        $.ajax({
+            type: 'POST',
+            url: '/tWimMsg/getDiTujwdByPort2',
+            dataType: 'json',
+            async: false,
+            data: {},
+            error: function (msg) {
+            },
+            success: function (json) {
+                if (json != null) {
+                    initHomeMap5(json.lnglat.split(","),json.stationNames.split(","),json.nums.split(","));
+                }
+            }
+        });
+    }
+    homePageInit.initditu5()
+
+
+
+
+function initHomeMap5(lngLats,stationNames,nums){
+    let geoCoordData = {};
+    let markPointData = [];
+    var size = [23,20,17,13,10,8]
+    for(let i in lngLats){
+        var liuliangNums=nums[i];
+        let lngLatArray = [];
+        let markPointItem = {};
+        markPointItem.name = i+"";
+        markPointItem.value = stationNames[i];
+        //markPointItem.symbolSize=size[i];
+        if(liuliangNums>40000){
+            markPointItem.symbolSize=size[0];
+        }else if(liuliangNums>30000){
+            markPointItem.symbolSize=size[1];
+        }else if(liuliangNums>20000){
+            markPointItem.symbolSize=size[2];
+        }else if(liuliangNums>10000){
+            markPointItem.symbolSize=size[3];
+        }else if(liuliangNums>5000){
+            markPointItem.symbolSize=size[4];
+        }else{
+            markPointItem.symbolSize=size[5];
+        }
+        markPointData.push(markPointItem);
+        lngLatArray.push(lngLats[i].split("-")[0]);
+        lngLatArray.push(lngLats[i].split("-")[1]);
+        geoCoordData[i+""] =lngLatArray;
+    }
+
+
+    require.config({
+        paths: {
+            echarts: 'js/build/dist'
+        }
+    });
+    require(
+        [
+            'echarts',
+            'echarts/chart/map'
+        ],
+        function(ec) {
+            require('echarts/util/mapData/params').params.jiangsu = {
+
+                getGeoJson: function(callback) {
+                    $.getJSON('geoJson/jiangsu.json', function(data) {
+                        // 压缩后的地图数据必须使用 decode 函数转换
+                        callback(require('echarts/util/mapData/params').decode(data));
+                    });
+                }
+            }
+            let myChart = ec.init(document.getElementById('main'));
+            let myChartmainfir = ec.init(document.getElementById('mainfir'));
+            let myChartmaintwo = ec.init(document.getElementById('maintwo'));
+            let ecConfig = require('echarts/config');
+            let zrEvent = require('zrender/tool/event');
+            let curIndx = 0;
+            let mapType = ["江苏"];
+
+            myChart.on(ecConfig.EVENT.MAP_SELECTED, function(param) {});
+            option = {
+
+                tooltip: {
+                    trigger: 'item',
+                    //formatter:'dede{b}'
+                    confine:true,
+                    formatter: '{b}',
+                    formatter: function (params,ticket,callback){
+                        let $pna = params.name;
+                        let res = '';
+                        console.log(params,ticket)
+                        if(stationNames[$pna]!=undefined){
+                            return stationNames[$pna];
+                        }else{
+                            return $pna;
+                        }
+
+                    }
+                },
+                legend: {
+                    orient: 'vertical',
+                    x: '',
+                    data: [' ']
+                },
+
+                series: [{
+                    name: '',
+                    type: 'map',
+                    symbolSize: 10,
+                    symbolRotate: 35,
+                    mapType: 'jiangsu',
+                    selectedMode: false,
+                    itemStyle: {
+                        normal: {
+                            label: {
+                                show: true
+                            },
+                            borderColor: '#6F9BD5',
+                            borderWidth: 1
+                        },
+                        areaStyle: {
+                            color: '#6F9BD5',//默认的地图板块颜色
+                        },
+                        emphasis: {
+                            label: {
+                                show: false
+                            }
+                        }
+                    },
+                    data: markPointData,
+                    geoCoord: geoCoordData,
+                    hoverable:false,//隐藏悬浮背景色
+                    markPoint: {
+                        /*symbol: 'circle',*/
+                        symbolSize: (val, params) => {
+                            return val[1] * 3;
+                        },
+                        itemStyle: {
+                            normal: {
+                                color: '#2e70bc', //地图背景色
+                                areaColor: '#006fff',
+                                borderColor: '#E5E324',
+                                borderWidth: 1, // 标注边线线宽，单位px，默认为1
+                                label: {
+                                    show: false
+                                },
+//                                show: false
+                            }
+                        },
+                        /* effect: {
+                             show: true,
+                             shadowBlur: 0,
+                             loop: true
+                         },*/
+                        itemStyle: {
+                            normal: {
+                                color: '#007CFC', //标志颜色
+                            }
+                        },
+                        data : markPointData
+                    }
+
+                }]
+            },
+
+
+            myChartmaintwo.setOption(option);
+
+        }
+    );
+}
+
+
+homePageInit.initHomeData5 = ()=>{
+    $.ajax({
+        type: 'POST',
+        url: '/tWimMsg/getHomeDataObject2',
+        dataType: 'json',
+        data: {
+            stationPorts: homePageInit.stationPort.toString(),
+        },
+        error: function (msg) {
+        },
+        success: function (json) {
+            $("#leftTable15").html('');
+            $("#leftTable15").html(json.totalCheLiu);
+            $("#leftTable1fir5").html('');
+            $("#leftTable1fir5").html(json.totalCheLiu);
+
+            $("#leftTable25").html('');
+            $("#leftTable25").html(json.totalChaoZai);
+            $("#leftTable2fir5").html('');
+            $("#leftTable2fir5").html(json.totalChaoZai);
+            homePageInit.idLocal = json.idLocal;
+            $("#leftTable35").html('');
+            $("#leftTable35").html((json.maxWeight/1000).toFixed(2));
+            $("#leftTable3fir5").html('');
+            $("#leftTable3fir5").html((json.maxWeight/1000).toFixed(2));
+
+            $("#leftTable45").html('');
+            $("#leftTable45").html(json.stationNums);
+            $("#leftTable4fir5").html('');
+            $("#leftTable4fir5").html(json.stationNums);
+            $("#lastZuiDaCheZhong5").html('')
+            $("#lastZuiDaCheZhong5").html((json.maxWeight/1000).toFixed(2))
+            homePageInit.linkStationNames = json.stationNames.split(",");
+            homePageInit.links = json.links.split(",");
+        }
+    });
+}
+
+
+homePageInit.initFirTongji5= () =>{
+    $.ajax({
+        type: 'POST',
+        url: '/tWimMsg/getCheLiuLiangEchartsList2',
+        dataType: 'json',
+        data: {
+            stationPorts: homePageInit.stationPort.toString(),
+            limit:6
+        },
+        error: function (msg) {
+        },
+        success: function (json) {
+            homePageInit.stationName = json.stationNames.split(",")
+            homePageInit.nums = json.nums.split(",");
+            initFirLiuliangtongji(homePageInit.stationName, homePageInit.nums)
+
+        }
+    });
+}
+
+
+homePageInit.initFirqstjt5 = (id) => {
+    /*$.ajax({
+        type: 'POST',
+        url: '/tWimMsg/getFirChaoZaiLv',
+        dataType: 'json',
+        data: {
+            stationPorts: homePageInit.stationPort.toString(),
+            limit:6
+        },
+        error: function (msg) {
+        },
+        success: function (json) {
+            //初始化超载率统计
+            if(json!=null){
+                var stationNames=[];
+                var numsBili=[]
+                for(var i=0;i<json.length;i++){
+                    stationNames.push(json[i].stationNames)
+                    numsBili.push(json[i].numsBili==undefined?"0%":((json[i].numsBili)*100).toFixed(2)+"%")
+                }
+                for(let i=0;i<numsBili.length;i++){
+                    let num = numsBili[i];
+                    $("#fir_chaozailv"+i+"").html("")
+                    $("#fir_chaozailv"+i+"").html(num)
+                    $("#fir_chaozailvName"+i+"").html("")
+                    $("#fir_chaozailvName"+i+"").html(stationNames[i])
+                }
+            }
+
+        }
+    });*/
+    $.ajax({
+        type: 'POST',
+        url: '/tWimMsg/getQushitu2',
+        dataType: 'json',
+        data: {
+            stationPorts: homePageInit.stationPort.toString(),
+        },
+        error: function (msg) {
+        },
+        success: function (json) {
+            //初始化超载率统计
+            var dateArr=[];
+            var liuliangArr=[]
+            var chaizaiArr=[];
+            for(var i=0;i<json.length;i++){
+                dateArr.push(json[i].avgTime)
+                liuliangArr.push(json[i].zongliuliangnum)
+                chaizaiArr.push(json[i].zongchaozainum)
+            }
+
+            homePageInit.initFirqstjtEcharts5(id,dateArr,chaizaiArr, liuliangArr );
+
+        }
+    });
+}
+
+
+homePageInit.initFirqstjtEcharts5 = (id,stationNames,nums,numCount) => {
+    // 趋势统计图
+    let myChart = echarts.init(document.getElementById(id));
+
+    let colors = ['#00f1b5', '#fd2b2a'];
+
+
+    option = {
+        color: colors,
+        textStyle: {
+            color: '#fff',
+            fontSize: 13
+        },
+        tooltip: {
+            trigger: 'none',
+            axisPointer: {
+                type: 'cross'
+            }
+        },
+        legend: {
+            data:['总流量', '超载量'],
+            textStyle: {
+                color: '#A3DCEC',
+                fontSize: 13
+            },
+        },
+        grid: {
+            top: 70,
+            bottom: 50
+        },
+        xAxis: [
+            {
+                type: 'category',
+                axisTick: {
+                    alignWithLabel: true
+                },
+                axisLine: { //y轴
+                    show: false
+                },
+                splitLine: {
+                    show: false
+                },
+                axisPointer: {
+                    label: {
+                        formatter: function (params) {
+                            return '总流量  ' + params.value
+                                + (params.seriesData.length ? '：' + params.seriesData[0].data : '');
+                        }
+                    }
+                },
+                data: stationNames,
+                axisLabel : {//坐标轴刻度标签的相关设置。
+                    interval:0,
+                    //rotate:"45" //文字倾斜
+                    formatter : function(params) { //文字换行
+                        let newParamsName = "";// 最终拼接成的字符串
+                        let paramsNameNumber = params.length;// 实际标签的个数
+                        let provideNumber = 5;// 每行能显示的字的个数
+                        let rowNumber = Math.ceil(paramsNameNumber / provideNumber);// 换行的话，需要显示几行，向上取整
+                        /**
+                         * 判断标签的个数是否大于规定的个数， 如果大于，则进行换行处理 如果不大于，即等于或小于，就返回原标签
+                         */
+                        // 条件等同于rowNumber>1
+                        if (paramsNameNumber > provideNumber) {
+                            /** 循环每一行,p表示行 */
+                            for (let p = 0; p < rowNumber; p++) {
+                                let tempStr = "";// 表示每一次截取的字符串
+                                let start = p * provideNumber;// 开始截取的位置
+                                let end = start + provideNumber;// 结束截取的位置
+                                // 此处特殊处理最后一行的索引值
+                                if (p == rowNumber - 1) {
+                                    // 最后一次不换行
+                                    tempStr = params.substring(start, paramsNameNumber);
+                                } else {
+                                    // 每一次拼接字符串并换行
+                                    tempStr = params.substring(start, end) + "\n";
+                                }
+                                newParamsName += tempStr;// 最终拼成的字符串
+                            }
+
+                        } else {
+                            // 将旧标签的值赋给新标签
+                            newParamsName = params;
+                        }
+                        //将最终的字符串返回
+                        return newParamsName
+                    }
+                },
+            },
+            {
+                type: 'category',
+                axisTick: {
+                    alignWithLabel: true
+                },
+                axisLine: {
+                    onZero: false,
+                    lineStyle: {
+                        color: colors[0]
+                    }
+                },
+                axisLine: { //y轴
+                    show: false
+                },
+                splitLine: {
+                    show: false
+                },
+                axisPointer: {
+                    label: {
+                        formatter: function (params) {
+                            return '超载量  ' + params.value
+                                + (params.seriesData.length ? '：' + params.seriesData[0].data : '');
+                        }
+                    }
+                },
+
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                position: 'left',
+                splitLine: {
+                    show: false
+                },
+                axisLine: { //y轴
+                    show: false
+                },
+                splitLine: {
+                    show: false
+                },
+            }
+        ],
+        series: [
+            {
+                name: '总流量',
+                type: 'line',
+                xAxisIndex: 1,
+                smooth: true,
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top'
+                    }
+                },
+                data: numCount
+            },
+            {
+                name: '超载量',
+                type: 'line',
+                smooth: true,
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top'
+                    }
+                },
+                data: nums
+            }
+        ]
+    };
+
+
+    myChart.setOption(option)
 }
