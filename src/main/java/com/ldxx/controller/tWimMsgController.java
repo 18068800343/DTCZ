@@ -751,7 +751,6 @@ public class tWimMsgController {
      * 首页趋势图，查询最近七天总流量和超载量
      */
 
-    @DS("db2")
     @RequestMapping("/getQushitu")
     public List<tjfxTotalEchars> getQushitu(String stationPorts) {
         String date = GetThisTimeUtils.getDate();
@@ -763,4 +762,17 @@ public class tWimMsgController {
         Collections.reverse(tjfxTotalEchars);
         return tjfxTotalEchars;
     }
+
+//    @DS("db2")
+//    @RequestMapping("/getQushitu")
+//    public List<tjfxTotalEchars> getQushitu(String stationPorts) {
+//        String date = GetThisTimeUtils.getDate();
+//        tjfxTotalEchars toadynum = tWimMsgDao.getTodayzongliuliangAndzongchaozai(stationPorts);
+//        toadynum.setAvgTime(date);
+//        List<tjfxTotalEchars> tjfxTotalEchars = tWimMsgDao.getsexTotalEcharsByStationPorts(stationPorts);
+//        tjfxTotalEchars.add(0, toadynum);
+//
+//        Collections.reverse(tjfxTotalEchars);
+//        return tjfxTotalEchars;
+//    }
 }
