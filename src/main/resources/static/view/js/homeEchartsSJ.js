@@ -475,7 +475,8 @@ let initFirLiuliangtongji=(stationNames,nums)=>{
         for(let i=0;i<stationNames.length+1;i++){
             $("#fir_liuliangName"+i+"").html("")
             $("#fir_liuliangName"+i+"").html(stationNames[i])
-             $("#fir_liuliangName"+i+"").attr('title', stationNames[i])
+            $("#fir_liuliangName"+i+"").attr('title', stationNames[i])
+            $("#Five_liuliangName"+i+"").attr('title', stationNames[i])
             $("#Five_liuliangName"+i+"").html("")
             $("#Five_liuliangName"+i+"").html(stationNames[i])
         }
