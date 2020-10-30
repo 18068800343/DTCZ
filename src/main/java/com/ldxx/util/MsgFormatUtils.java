@@ -1,9 +1,11 @@
 package com.ldxx.util;
 
 import com.ldxx.bean.CheLiuLiangEchartsList;
+import com.ldxx.bean.tjfxTotalEchars;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MsgFormatUtils {
@@ -17,6 +19,19 @@ public class MsgFormatUtils {
 		return vMsg;
 	}
 
+	public static List<tjfxTotalEchars> gettjfxTotalEchartsByTowList(List<tjfxTotalEchars> A, List<tjfxTotalEchars> B) {
+		for (int i = 0; i < A.size(); i++) {
+			tjfxTotalEchars itemA = A.get(i);
+			tjfxTotalEchars itemB = B.get(i);
+
+			itemA.setZongchaozainum(Integer.parseInt(itemA.getZongchaozainum()) + Integer.parseInt(itemB.getZongchaozainum()) + "");
+			itemA.setZongliuliangnum(Integer.parseInt(itemA.getZongliuliangnum()) + Integer.parseInt(itemB.getZongliuliangnum()) + "");
+
+			itemA.setYijiyujingnum(Integer.parseInt(itemA.getYijiyujingnum() == null ? "0" : itemA.getYijiyujingnum()) + Integer.parseInt(itemB.getYijiyujingnum() == null ? "0" : itemB.getYijiyujingnum()) + "");
+			itemA.setErjiyujingnum(Integer.parseInt(itemA.getErjiyujingnum() == null ? "0" : itemA.getErjiyujingnum()) + Integer.parseInt(itemB.getErjiyujingnum() == null ? "0" : itemB.getErjiyujingnum()) + "");
+		}
+		return A;
+	}
 
 	public static CheLiuLiangEchartsList getCheLiuLiangEchartsByTow(CheLiuLiangEchartsList A, CheLiuLiangEchartsList B) {
 		String numA = A.getNums();

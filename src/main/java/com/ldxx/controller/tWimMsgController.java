@@ -842,9 +842,7 @@ public class tWimMsgController {
         String date = GetThisTimeUtils.getDate();
         List<tjfxTotalEchars> tjfxTotalEchars = service.getQushitu(stationPorts);
         List<tjfxTotalEchars> tjfxTotalEchars2 = service.getQushitu2();
-        if(tjfxTotalEchars2!=null&&tjfxTotalEchars2.size()!=0){
-            tjfxTotalEchars.addAll(tjfxTotalEchars2);
-        }
+        tjfxTotalEchars = MsgFormatUtils.gettjfxTotalEchartsByTowList(tjfxTotalEchars, tjfxTotalEchars2);
         return tjfxTotalEchars;
     }
 }
