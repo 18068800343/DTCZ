@@ -780,22 +780,23 @@ public class tWimMsgController {
 
     //
 
-    //=============================================================以下首页第五个界面，省界和路公司的加一起
+    //=============================================================以下首页第五个界面，省界和控股的加一起===============================
 
     @RequestMapping("/getDiTujwdByPort2")
-    public String getDiTujwdByPort2(HttpSession session) {
-        JSONObject jsonObject=new JSONObject();
+    public CheLiuLiangEchartsList getDiTujwdByPort2(HttpSession session) {
         tUserInfo user = (tUserInfo) session.getAttribute("user");
         String zhandianduankouhao = user.getStationPort();
-        CheLiuLiangEchartsList list= service.getDiTujwdByPort(zhandianduankouhao);
-        CheLiuLiangEchartsList list2= service.getDiTujwdByPort2(zhandianduankouhao);
-        jsonObject.put("obj1",list);
-        jsonObject.put("obj2",list2);
-        return jsonObject.toString();
+        CheLiuLiangEchartsList obj1= service.getDiTujwdByPort(zhandianduankouhao);
+        CheLiuLiangEchartsList obj2= service.getDiTujwdByPort2();
+        obj1.setNums(obj1.getNums()+obj2.getNums());
+        obj1.setStationPorts(obj1.getStationPorts()+obj2.getStationPorts());
+        obj1.setStationNames(obj1.getStationNames()+obj2.getStationNames());
+        obj1.setLnglat(obj1.getLnglat()+obj2.getLnglat());
+        return obj1;
     }
 
     @RequestMapping("/getHomeDataObject2")
-    public String getHomeDataObject2(String stationPorts, HttpSession session) {
+    public HomeData getHomeDataObject2(String stationPorts, HttpSession session) {
         JSONObject jsonObject=new JSONObject();
         HomeData homeData = service.getHomeData(stationPorts);
         String[] nums = homeData.getLinks().split(",");
@@ -806,27 +807,28 @@ public class tWimMsgController {
             }
         }
         homeData.setStationNums(m);
-        HomeData homeData2 = service.getHomeData2(stationPorts);
-        if(homeData2.getLinks()!=null){
-            String[] nums2 = homeData2.getLinks().split(",");
-            int m2=0;
-            for(String num2:nums2){
-                if("1".equals(num2)){
-                    m2++;
-                }
+        HomeData homeData2 = service.getHomeData2();
+        String[] nums2 = homeData2.getLinks().split(",");
+        int m2=0;
+        for(String num2:nums2){
+            if("1".equals(num2)){
+                m2++;
             }
-            homeData2.setStationNums(m2);
-            jsonObject.put("obj2",homeData2);
         }
-        jsonObject.put("obj1",homeData);
-        return jsonObject.toString();
+        homeData2.setStationNums(m2);
+        homeData.setIdLocal(homeData.getIdLocal()+homeData2.getIdLocal());
+        homeData.setLinks(homeData.getLinks()+homeData2.getLinks());
+        homeData.setMaxWeight(homeData.getMaxWeight()>homeData2.getMaxWeight()?homeData.getMaxWeight():homeData2.getMaxWeight());
+        homeData.setStationNames(homeData.getStationNames()+homeData2.getStationNames());
+
+        return homeData;
     }
 
     @RequestMapping("/getCheLiuLiangEchartsList2")
     public String getCheLiuLiangEchartsList2(String stationPorts, Integer link, Integer limit, HttpSession session) {
         JSONObject jsonObject=new JSONObject();
         CheLiuLiangEchartsList list=service.getCheLiuLiangEchartsList(stationPorts, link, limit);
-        CheLiuLiangEchartsList list2=service.getCheLiuLiangEchartsList2(stationPorts, link, limit);
+        CheLiuLiangEchartsList list2=service.getCheLiuLiangEchartsList2();
 
         jsonObject.put("obj1",list);
         jsonObject.put("obj2",list2);
@@ -837,7 +839,7 @@ public class tWimMsgController {
     public List<tjfxTotalEchars> getQushitu2(String stationPorts) {
         String date = GetThisTimeUtils.getDate();
         List<tjfxTotalEchars> tjfxTotalEchars = service.getQushitu(stationPorts);
-        List<tjfxTotalEchars> tjfxTotalEchars2 = service.getQushitu2(stationPorts);//省界
+        List<tjfxTotalEchars> tjfxTotalEchars2 = service.getQushitu2();
         if(tjfxTotalEchars2!=null&&tjfxTotalEchars2.size()!=0){
             tjfxTotalEchars.addAll(tjfxTotalEchars2);
         }

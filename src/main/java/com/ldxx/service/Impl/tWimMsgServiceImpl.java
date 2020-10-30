@@ -7,9 +7,11 @@ import com.ldxx.bean.HomeData;
 import com.ldxx.bean.TongJiTableQuery;
 import com.ldxx.bean.tjfxTotalEchars;
 import com.ldxx.config.DS;
+import com.ldxx.dao.tUserInfoDao;
 import com.ldxx.dao.tWimMsgDao;
 import com.ldxx.service.tWimMsgService;
 import com.ldxx.util.GetThisTimeUtils;
+import com.ldxx.vo.tUserInfoVo;
 import com.ldxx.vo.tWimMsgVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,8 @@ public class tWimMsgServiceImpl implements tWimMsgService {
 
     @Resource
     private tWimMsgDao dao;
+    @Autowired
+    private tUserInfoDao uDao;
 
     @Override
     public List<tWimMsgVo> getAlltWimMsg(String stationPort) {
@@ -133,7 +137,9 @@ public class tWimMsgServiceImpl implements tWimMsgService {
     }
     @DS("db2")
     @Override
-    public List<tjfxTotalEchars> getQushitu2(String stationPorts) {
+    public List<tjfxTotalEchars> getQushitu2() {
+        tUserInfoVo shiro = uDao.selectUserByUsrName("shiro");
+        String stationPorts = shiro.getStationPort();
         String date = GetThisTimeUtils.getDate();
         tjfxTotalEchars toadynum = dao.getTodayzongliuliangAndzongchaozai(stationPorts);
         if(toadynum!=null){
@@ -154,8 +160,10 @@ public class tWimMsgServiceImpl implements tWimMsgService {
     }
     @DS("db2")
     @Override
-    public CheLiuLiangEchartsList getDiTujwdByPort2(String zhandianduankouhao) {
-        return dao.getDiTujwdByPort(zhandianduankouhao);
+    public CheLiuLiangEchartsList getDiTujwdByPort2() {
+        tUserInfoVo shiro = uDao.selectUserByUsrName("shiro");
+        String stationPorts = shiro.getStationPort();
+        return dao.getDiTujwdByPort(stationPorts);
     }
 
     @Override
@@ -164,7 +172,9 @@ public class tWimMsgServiceImpl implements tWimMsgService {
     }
     @DS("db2")
     @Override
-    public HomeData getHomeData2(String stationPorts) {
+    public HomeData getHomeData2() {
+        tUserInfoVo shiro = uDao.selectUserByUsrName("shiro");
+        String stationPorts = shiro.getStationPort();
         return  dao.getHomeData(stationPorts);
     }
 
@@ -174,7 +184,9 @@ public class tWimMsgServiceImpl implements tWimMsgService {
     }
     @DS("db2")
     @Override
-    public CheLiuLiangEchartsList getCheLiuLiangEchartsList2(String stationPorts, Integer link, Integer limit) {
-        return dao.getCheLiuLiangEchartsList(stationPorts, link, limit);
+    public CheLiuLiangEchartsList getCheLiuLiangEchartsList2() {
+        tUserInfoVo shiro = uDao.selectUserByUsrName("shiro");
+        String stationPorts = shiro.getStationPort();
+        return dao.getCheLiuLiangEchartsList(stationPorts, null, 6);
     }
 }

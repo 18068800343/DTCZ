@@ -41,14 +41,14 @@ public interface tWimMsgService {
     tWimMsgVo gettWimMsgYiChangById(String idLocal);
 
     List<tjfxTotalEchars> getQushitu(String stationPorts);
-    List<tjfxTotalEchars> getQushitu2(String stationPorts);
+    List<tjfxTotalEchars> getQushitu2();
 
     CheLiuLiangEchartsList getDiTujwdByPort(String zhandianduankouhao);
-    CheLiuLiangEchartsList getDiTujwdByPort2(String zhandianduankouhao);
+    CheLiuLiangEchartsList getDiTujwdByPort2();
 
     HomeData getHomeData(String stationPorts);
-    HomeData getHomeData2(String stationPorts);
+    HomeData getHomeData2();
 
     CheLiuLiangEchartsList getCheLiuLiangEchartsList(String stationPorts, Integer link, Integer limit);
-    CheLiuLiangEchartsList getCheLiuLiangEchartsList2(String stationPorts, Integer link, Integer limit);
+    CheLiuLiangEchartsList getCheLiuLiangEchartsList2();
 }
