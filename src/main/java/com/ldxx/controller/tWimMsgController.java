@@ -14,6 +14,7 @@ import com.ldxx.service.tWimMsgService;
 import com.ldxx.util.Base64Util;
 import com.ldxx.util.FormatUtil;
 import com.ldxx.util.GetThisTimeUtils;
+import com.ldxx.util.MsgFormatUtils;
 import com.ldxx.vo.ChaoZaiVo;
 import com.ldxx.vo.tWimMsgVo;
 import net.sf.json.JSONObject;
@@ -828,14 +829,12 @@ public class tWimMsgController {
     }
 
     @RequestMapping("/getCheLiuLiangEchartsList2")
-    public String getCheLiuLiangEchartsList2(String stationPorts, Integer link, Integer limit, HttpSession session) {
-        JSONObject jsonObject=new JSONObject();
-        CheLiuLiangEchartsList list=service.getCheLiuLiangEchartsList(stationPorts, link, limit);
-        CheLiuLiangEchartsList list2=service.getCheLiuLiangEchartsList2();
+    public CheLiuLiangEchartsList getCheLiuLiangEchartsList2(String stationPorts, Integer link, Integer limit, HttpSession session) {
+        CheLiuLiangEchartsList list = service.getCheLiuLiangEchartsList(stationPorts, link, limit);
+        CheLiuLiangEchartsList list2 = service.getCheLiuLiangEchartsList2();
 
-        jsonObject.put("obj1",list);
-        jsonObject.put("obj2",list2);
-        return jsonObject.toString();
+        CheLiuLiangEchartsList cheLiuLiangEchartsListEnd = MsgFormatUtils.getCheLiuLiangEchartsByTow(list, list2);
+        return cheLiuLiangEchartsListEnd;
     }
 
     @RequestMapping("/getQushitu2")

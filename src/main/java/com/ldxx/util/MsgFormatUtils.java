@@ -2,6 +2,7 @@ package com.ldxx.util;
 
 import com.ldxx.bean.CheLiuLiangEchartsList;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,9 +18,7 @@ public class MsgFormatUtils {
 	}
 
 
-	public CheLiuLiangEchartsList getCheLiuLiangEchartsByTow(CheLiuLiangEchartsList A, CheLiuLiangEchartsList B) {
-
-
+	public static CheLiuLiangEchartsList getCheLiuLiangEchartsByTow(CheLiuLiangEchartsList A, CheLiuLiangEchartsList B) {
 		String numA = A.getNums();
 		if (!"".equals(numA) && numA.contains(",")) {
 			String numsA[] = numA.split(",");
@@ -30,25 +29,47 @@ public class MsgFormatUtils {
 			String stationNamesB[] = B.getStationNames().split(",");
 			String stationPortsB[] = B.getStationPorts().split(",");
 
-			String[] numsAll = new String[12];
+			Integer[] numsAll = new Integer[12];
 
 			Map map = new HashMap();
 			for (int i = 0; i < numsA.length; i++) {
 				map.put(numsA[i] + "-" + "name", stationNamesA[i]);
 				map.put(numsA[i] + "-" + "port", stationPortsA[i]);
-				numsAll[i] = numsA[i];
+				numsAll[i] = Integer.parseInt(numsA[i]);
 			}
 			for (int i = 0; i < numsB.length; i++) {
 				map.put(numsB[i] + "-" + "name", stationNamesB[i]);
 				map.put(numsB[i] + "-" + "port", stationPortsB[i]);
-				numsAll[i + 6] = numsA[i];
+				numsAll[i + 6] = Integer.parseInt(numsB[i]);
 			}
 
+			Arrays.sort(numsAll);
+			StringBuffer numEnd = new StringBuffer();
+			StringBuffer stationPorts = new StringBuffer();
+			StringBuffer stationNames = new StringBuffer();
+			for (int i = 6; i < numsAll.length; i++) {
+				if (i == numsAll.length - 1) {
+					numEnd.append(numsAll[i]);
+					stationNames.append(map.get(numsAll[i] + "-" + "name"));
+					stationPorts.append(map.get(numsAll[i] + "-" + "port"));
+				} else {
+					numEnd.append(numsAll[i]).append(",");
+					stationNames.append(map.get(numsAll[i] + "-" + "name")).append(",");
+					stationPorts.append(map.get(numsAll[i] + "-" + "port")).append(",");
+				}
 
-			return null;
+			}
+			A.setNums(numEnd.toString());
+			A.setStationNames(stationNames.toString());
+			A.setStationPorts(stationPorts.toString());
+			return A;
 		} else {
-			return null;
+			return A;
 		}
 	}
 
+	public static void main(String[] args) {
+
+
+	}
 }
