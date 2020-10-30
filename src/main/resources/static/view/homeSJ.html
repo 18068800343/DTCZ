@@ -127,7 +127,7 @@
         <li onclick="FirHomeClick()" class="layui-this"></li>
         <li onclick="SecHomeClick()"></li>
         <li onclick="ThreeHomeClick()"></li>
-        <li onclick="FourHomeClick()"></li>
+        <li onclick="FourHomeClick()" id="five"></li>
     </ul>
     <div class="layui-tab-content">
         <div class="layui-tab-item layui-show">
@@ -1038,6 +1038,10 @@
 <script src="js/toastr.js"></script>
 <script src="js/layui.all.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
+var five = document.getElementById("five");
+five.addEventListener('click', function() {
+  alert("hello wrold");
+
     $(document).ready(function () {
         //初始化车流量
         /*homePageInit.initLeftEcharts('xian1');
