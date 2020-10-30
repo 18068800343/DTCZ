@@ -39,7 +39,12 @@
             /* width: 200px !important; */
             position: absolute !important;
         }
-
+		#Five_liuliangName5,#Five_liuliangName4,#Five_liuliangName3,#Five_liuliangName2,#Five_liuliangName1,#Five_liuliangName0{
+            position: absolute !important;
+        }
+        #Five_chaozailvName1,#Five_chaozailvName0,#Five_chaozailvName2,#Five_chaozailvName3,#Five_chaozailvName4,#Five_chaozailvName5{
+           position: absolute !important;
+        }
         @media screen and (min-width: 1920px) {
             .righttop {
                 margin-top: -20% !important;
@@ -115,7 +120,7 @@
 <div class="rightD" style="float: right;margin-top: -3.5%;margin-right: 5%;float: right;margin-top: -50.5%;">
     <i></i>
     <!-- <p class="lodingmsg time"></p> -->
-    <a id="loginToSJ" target="_parent" style="text-decoration:none;color:#6FD0FF;">省界称重系统入口</a>
+    <a id="loginToSJ" target="_parent" style="text-decoration:none;color:#FFFFFF;font-size:17px;">省界称重系统入口</a>
     <!-- <i></i>
     <p class="lodingmsg" id="usrName" onclick="tanchulai()"></p>
     <i>&nbsp;</i>
@@ -125,13 +130,13 @@
 </div>
 <div class="layui-tab"
      style="position: absolute;color:white; background-color: transparent;top:5%;width: 100%;height:100%;z-index: 10;">
-    <ul class="layui-tab-title">
-        <li onclick="FirHomeClick()" class="layui-this"></li>
-        <li onclick="SecHomeClick()"></li>
-        <li onclick="ThreeHomeClick()"></li>
-        <li onclick="FourHomeClick()"></li>
-        <li onclick="FiveHomeClick()"></li>
-    </ul>
+   <ul class="layui-tab-title">
+		<li onclick="FirHomeClick()" class="layui-this" id="fir"></li>
+		<li onclick="SecHomeClick()" id="sec"></li>
+		<li onclick="ThreeHomeClick()" id="three"></li>
+		<li onclick="FourHomeClick()" id="four"></li>
+		<li onclick="FiveHomeClick()" id="five"></li>
+	</ul>
     <div class="layui-tab-content">
         <div class="layui-tab-item layui-show">
             <div>
@@ -726,42 +731,42 @@
                                 style="font-size: 17px;color:#007AFF;font-weight: bolder;margin-bottom: 5%;">总流量统计</h2>
                             <p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_1.png"
                                                                                style="margin-right: 5%;"><span
-                                    style="color: white;">1</span><span id="Five_liuliangName5"
+                                    style="color: white;">1</span><span id="Five_liuliangName5" class="text_slice"
                                                                         style="margin-left: 10%;font-size: 12px; "></span><span
                                     id="Five_liuliang5"
                                     style="margin-left: 50%;font-size: 19px;width:100px;color: #FF2929;font-weight: bolder;"></span><span
                                     style="margin-left: 10%;">辆</span></p>
                             <p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_2.png"
                                                                                style="margin-right: 5%;"><span
-                                    style="color: white;">2</span><span id="Five_liuliangName4"
+                                    style="color: white;">2</span><span id="Five_liuliangName4" class="text_slice"
                                                                         style="margin-left: 10%;font-size: 12px;"></span><span
                                     id="Five_liuliang4"
                                     style="margin-left: 50%;font-size: 19px;color: #FF7329;font-weight: bolder;"></span><span
                                     style="margin-left: 10%;">辆</span></p>
                             <p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_3.png"
                                                                                style="margin-right: 5%;"><span
-                                    style="color: white;">3</span><span id="Five_liuliangName3"
+                                    style="color: white;">3</span><span id="Five_liuliangName3" class="text_slice"
                                                                         style="margin-left: 10%;font-size: 12px;"></span><span
                                     id="Five_liuliang3"
                                     style="margin-left: 50%;font-size: 19px;color: #FDA82B;font-weight: bolder;"></span><span
                                     style="margin-left: 10%;">辆</span></p>
                             <p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_4.png"
                                                                                style="margin-right: 5%;"><span
-                                    style="color: white;">4</span><span id="Five_liuliangName2"
+                                    style="color: white;">4</span><span id="Five_liuliangName2" class="text_slice"
                                                                         style="margin-left: 10%;font-size: 12px;"></span><span
                                     id="Five_liuliang2"
                                     style="margin-left: 50%;font-size: 19px;color: #1AC2F9;font-weight: bolder;"></span><span
                                     style="margin-left: 10%;">辆</span></p>
-                            <p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_4.png"
+                            <p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_4.png" 
                                                                                style="margin-right: 5%;"><span
-                                    style="color: white;">5</span><span id="Five_liuliangName1"
+                                    style="color: white;">5</span><span id="Five_liuliangName1" class="text_slice"
                                                                         style="margin-left: 10%;font-size: 12px;"></span><span
                                     id="Five_liuliang1"
                                     style="margin-left: 50%;font-size: 19px;color: #1AC2F9;font-weight: bolder;"></span><span
                                     style="margin-left: 10%;">辆</span></p>
                             <p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_4.png"
                                                                                style="margin-right: 5%;"><span
-                                    style="color: white;">6</span><span id="Five_liuliangName0"
+                                    style="color: white;">6</span><span id="Five_liuliangName0" class="text_slice"
                                                                         style="margin-left: 10%;font-size: 12px;"></span><span
                                     id="Five_liuliang0"
                                     style="margin-left: 50%;font-size: 19px;color: #1AC2F9;font-weight: bolder;"></span><span
@@ -773,42 +778,42 @@
                                 style="font-size: 17px;color:#007AFF;font-weight: bolder;margin-bottom: 5%;">超载比例统计</h2>
                             <p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_1.png"
                                                                                style="margin-right: 5%;"><span
-                                    style="color: white;">1</span><span id="Five_chaozailvName0"
+                                    style="color: white;">1</span><span id="Five_chaozailvName0" class="text_slice"
                                                                         style="margin-left: 10%;font-size: 12px;"></span><span
                                     id="Five_chaozailv0"
                                     style="margin-left: 50%;font-size: 19px;color: #FF2929;font-weight: bolder;"></span><span
                                     style="margin-left: 13%;"></span></p>
-                            <p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_2.png"
+                            <p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_2.png" 
                                                                                style="margin-right: 5%;"><span
-                                    style="color: white;">2</span><span id="Five_chaozailvName1"
+                                    style="color: white;">2</span><span id="Five_chaozailvName1" class="text_slice"
                                                                         style="margin-left: 10%;font-size: 12px;"></span><span
                                     id="Five_chaozailv1"
                                     style="margin-left: 50%;font-size: 19px;color: #FF7329;font-weight: bolder;"></span><span
                                     style="margin-left: 13%;"></span></p>
                             <p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_3.png"
                                                                                style="margin-right: 5%;"><span
-                                    style="color: white;">3</span><span id="Five_chaozailvName2"
+                                    style="color: white;">3</span><span id="Five_chaozailvName2" class="text_slice"
                                                                         style="margin-left: 10%;font-size: 12px;"></span><span
                                     id="Five_chaozailv2"
                                     style="margin-left: 50%;font-size: 19px;color: #FDA82B;font-weight: bolder;"></span><span
                                     style="margin-left: 13%;"></span></p>
                             <p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_4.png"
                                                                                style="margin-right: 5%;"><span
-                                    style="color: white;">4</span><span id="Five_chaozailvName3"
+                                    style="color: white;">4</span><span id="Five_chaozailvName3" class="text_slice"
                                                                         style="margin-left: 10%;font-size: 12px;"></span><span
                                     id="Five_chaozailv3"
                                     style="margin-left: 50%;font-size: 19px;color: #1AC2F9;font-weight: bolder;"></span><span
                                     style="margin-left: 13%;"></span></p>
                             <p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_4.png"
                                                                                style="margin-right: 5%;"><span
-                                    style="color: white;">5</span><span id="Five_chaozailvName4"
+                                    style="color: white;">5</span><span id="Five_chaozailvName4" class="text_slice"
                                                                         style="margin-left: 10%;font-size: 12px;"></span><span
                                     id="Five_chaozailv4"
                                     style="margin-left: 50%;font-size: 19px;color: #1AC2F9;font-weight: bolder;"></span><span
                                     style="margin-left: 13%;"></span></p>
                             <p style="margin-bottom: 3%;margin-left: 5%;"><img src="img/flag_4.png"
                                                                                style="margin-right: 5%;"><span
-                                    style="color: white;">6</span><span id="Five_chaozailvName5"
+                                    style="color: white;">6</span><span id="Five_chaozailvName5" class="text_slice"
                                                                         style="margin-left: 10%;font-size: 12px;"></span><span
                                     id="Five_chaozailv5"
                                     style="margin-left: 50%;font-size: 19px;color: #1AC2F9;font-weight: bolder;"></span><span
@@ -1192,6 +1197,31 @@
 <script src="js/toastr.js"></script>
 <script src="js/layui.all.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
+var fir = document.getElementById("fir");
+$(fir).click(function(){
+	$("body").css("background-image","url(./img/bg.png)");
+});
+var sec = document.getElementById("sec");
+$(sec).click(function(){
+	$("body").css("background-image","url(./img/bg.png)");
+});
+var three = document.getElementById("three");
+$(three).click(function(){
+	$("body").css("background-image","url(./img/bg.png)");
+});
+var four = document.getElementById("four");
+$(four).click(function(){
+	$("body").css("background-image","url(./img/bg.png)");
+});
+var five = document.getElementById("five");
+$(five).click(function(){
+	$("body").css("background-image","url(./img/kg.png)");
+});
+
+var five = document.getElementById("five");
+$(five).click(function(){
+	$("body").css("background-image","url(./img/kg.png)");
+});
     $(document).ready(function () {
         //初始化车流量
         /*homePageInit.initLeftEcharts('xian1');
