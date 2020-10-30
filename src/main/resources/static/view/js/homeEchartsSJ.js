@@ -466,12 +466,16 @@ let initFirLiuliangtongji=(stationNames,nums)=>{
         for(let i=0;i<nums.length+1;i++){
             $("#fir_liuliang"+i+"").html("")
             $("#fir_liuliang"+i+"").html(nums[i])
+            /* ($("#fir_liuliang"+i+"").attr("title",stationNames[i]))*/
+           
         }
     }
     if(stationNames!=null&&stationNames.length>0){
         for(let i=0;i<stationNames.length+1;i++){
             $("#fir_liuliangName"+i+"").html("")
             $("#fir_liuliangName"+i+"").html(stationNames[i])
+             $("#fir_liuliangName"+i+"").attr('title', stationNames[i])
+            
         }
     }
 
@@ -1365,6 +1369,7 @@ homePageInit.initFirqstjt = (id, callback) => {
                     $("#fir_chaozailv"+i+"").html(num)
                     $("#fir_chaozailvName"+i+"").html("")
                     $("#fir_chaozailvName"+i+"").html(stationNames[i])
+                     $("#fir_chaozailvName"+i+"").attr('title',stationNames[i])
                 }
             }
             /*homePageInit.downStationNames = json.stationNames.split(",");
