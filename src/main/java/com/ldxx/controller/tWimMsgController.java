@@ -817,7 +817,7 @@ public class tWimMsgController {
             }
         }
         homeData2.setStationNums(m2);
-        homeData.setIdLocal(homeData.getIdLocal()+","+homeData2.getIdLocal());
+        homeData.setIdLocal(homeData.getMaxWeight()>homeData2.getMaxWeight()?homeData.getIdLocal():homeData2.getIdLocal());
         homeData.setLinks(homeData.getLinks()+homeData2.getLinks());
         homeData.setMaxWeight(homeData.getMaxWeight()>homeData2.getMaxWeight()?homeData.getMaxWeight():homeData2.getMaxWeight());
         homeData.setStationNames(homeData.getStationNames()+homeData2.getStationNames());
@@ -835,6 +835,21 @@ public class tWimMsgController {
 
         CheLiuLiangEchartsList cheLiuLiangEchartsListEnd = MsgFormatUtils.getCheLiuLiangEchartsByTow(list, list2);
         return cheLiuLiangEchartsListEnd;
+    }
+
+    @RequestMapping("/getFirChaoZaiLv2")
+    public List<CheLiuLiangEchartsList> getFirChaoZaiLv2(String stationPorts,Integer link,Integer limit) {
+        List<CheLiuLiangEchartsList> list = service.getFirChaoZaiLv(stationPorts, link, limit);
+        List<CheLiuLiangEchartsList> list2 = service.getFirChaoZaiLv2( link, limit);
+        list.addAll(list2);
+        Collections.sort(list, new Comparator<CheLiuLiangEchartsList>() {
+            @Override
+            public int compare(CheLiuLiangEchartsList o1, CheLiuLiangEchartsList o2) {
+                //降序
+                return o2.getNumsBili().compareTo(o1.getNumsBili());
+            }
+        });
+        return list;
     }
 
     @RequestMapping("/getQushitu2")

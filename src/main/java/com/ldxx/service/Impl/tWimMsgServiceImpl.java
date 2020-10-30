@@ -189,4 +189,18 @@ public class tWimMsgServiceImpl implements tWimMsgService {
         String stationPorts = shiro.getStationPort();
         return dao.getCheLiuLiangEchartsList(stationPorts, null, 6);
     }
+
+    @Override
+    public List<CheLiuLiangEchartsList> getFirChaoZaiLv(String stationPorts, Integer link, Integer limit) {
+        List<CheLiuLiangEchartsList> list = dao.getFirChaoZaiLv(stationPorts, link, limit);
+        return list;
+    }
+    @DS("db2")
+    @Override
+    public List<CheLiuLiangEchartsList> getFirChaoZaiLv2(Integer link, Integer limit) {
+        tUserInfoVo shiro = uDao.selectUserByUsrName("shiro");
+        String stationPorts = shiro.getStationPort();
+        List<CheLiuLiangEchartsList> list = dao.getFirChaoZaiLv(stationPorts, link, limit);
+        return list;
+    }
 }

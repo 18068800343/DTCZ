@@ -51,4 +51,8 @@ public interface tWimMsgService {
 
     CheLiuLiangEchartsList getCheLiuLiangEchartsList(String stationPorts, Integer link, Integer limit);
     CheLiuLiangEchartsList getCheLiuLiangEchartsList2();
+
+    List<CheLiuLiangEchartsList> getFirChaoZaiLv(String stationPorts, Integer link, Integer limit);
+    List<CheLiuLiangEchartsList> getFirChaoZaiLv2( Integer link, Integer limit);
+
 }
