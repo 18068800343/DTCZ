@@ -2931,9 +2931,9 @@ homePageInit.initFirTongji5= () =>{
 
 
 homePageInit.initFirqstjt5 = (id) => {
-    /*$.ajax({
+    $.ajax({
         type: 'POST',
-        url: '/tWimMsg/getFirChaoZaiLv',
+        url: '/tWimMsg/getFirChaoZaiLv2',
         dataType: 'json',
         data: {
             stationPorts: homePageInit.stationPort.toString(),
@@ -2952,15 +2952,15 @@ homePageInit.initFirqstjt5 = (id) => {
                 }
                 for(let i=0;i<numsBili.length;i++){
                     let num = numsBili[i];
-                    $("#fir_chaozailv"+i+"").html("")
-                    $("#fir_chaozailv"+i+"").html(num)
-                    $("#fir_chaozailvName"+i+"").html("")
-                    $("#fir_chaozailvName"+i+"").html(stationNames[i])
+                    $("#Five_chaozailv"+i+"").html("")
+                    $("#Five_chaozailv"+i+"").html(num)
+                    $("#Five_chaozailvName"+i+"").html("")
+                    $("#Five_chaozailvName"+i+"").html(stationNames[i])
                 }
             }
 
         }
-    });*/
+    });
     $.ajax({
         type: 'POST',
         url: '/tWimMsg/getQushitu2',
