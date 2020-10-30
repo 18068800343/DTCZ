@@ -117,6 +117,7 @@ function initHomeMap(lngLats,stationNames,nums){
             }
             let myChart = ec.init(document.getElementById('main'));
             let myChartmainfir = ec.init(document.getElementById('mainfir'));
+            let myChartmaintwo = ec.init(document.getElementById('maintwo'));
             let ecConfig = require('echarts/config');
             let zrEvent = require('zrender/tool/event');
             let curIndx = 0;
@@ -207,7 +208,91 @@ function initHomeMap(lngLats,stationNames,nums){
 
                 }]
             },
+            myChartmaintwo.on(ecConfig.EVENT.MAP_SELECTED, function(param) {});
+            option = {
 
+                tooltip: {
+                    trigger: 'item',
+                    //formatter:'dede{b}'
+                    confine:true,
+                    formatter: '{b}',
+                    formatter: function (params,ticket,callback){
+                        let $pna = params.name;
+                        let res = '';
+                        console.log(params,ticket)
+                        if(stationNames[$pna]!=undefined){
+                            return stationNames[$pna];
+                        }else{
+                            return $pna;
+                        }
+
+                    }
+                },
+                legend: {
+                    orient: 'vertical',
+                    x: '',
+                    data: [' ']
+                },
+
+                series: [{
+                    name: '',
+                    type: 'map',
+                    symbolSize: 10,
+                    symbolRotate: 35,
+                    mapType: 'jiangsu',
+                    selectedMode: false,
+                    itemStyle: {
+                        normal: {
+                            label: {
+                                show: true
+                            },
+                            borderColor: '#6F9BD5',
+                            borderWidth: 1
+                        },
+                        areaStyle: {
+                            color: '#6F9BD5',//默认的地图板块颜色
+                        },
+                        emphasis: {
+                            label: {
+                                show: false
+                            }
+                        }
+                    },
+                    data: markPointData,
+                    geoCoord: geoCoordData,
+                    hoverable:false,//隐藏悬浮背景色
+                    markPoint: {
+                        /*symbol: 'circle',*/
+                        symbolSize: (val, params) => {
+                        	  return val[1] * 3;
+                        	},
+                        itemStyle: {
+                            normal: {
+                            	color: '#2e70bc', //地图背景色
+                            	areaColor: '#006fff',
+                                borderColor: '#E5E324',
+                                borderWidth: 1, // 标注边线线宽，单位px，默认为1
+                                label: {
+                                    show: false
+                                },
+//                                show: false
+                            }
+                        },
+                       /* effect: {
+                            show: true,
+                            shadowBlur: 0,
+                            loop: true
+                        },*/
+                        itemStyle: {
+                            normal: {
+                                color: '#007CFC', //标志颜色
+                            }
+                        },
+                        data : markPointData
+                    }
+
+                }]
+            },
             myChartmainfir.on(ecConfig.EVENT.CLICK, eConsole);
             myChart.on(ecConfig.EVENT.CLICK, eConsole);
             function eConsole(param){
@@ -221,6 +306,7 @@ function initHomeMap(lngLats,stationNames,nums){
 
             myChart.setOption(option);
             myChartmainfir.setOption(option);
+            myChartmaintwo.setOption(option);
 
         }
     );
