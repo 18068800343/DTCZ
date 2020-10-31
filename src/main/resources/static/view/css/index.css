@@ -1,6 +1,6 @@
 body{
-	background-image: url(../img/bg.png);
-	background-size: 100% 115% ;
+	background-image: url(../img/sj.png);
+	background-size: 100% 115%;
 	background-repeat: no-repeat;
 }
 .leftdiv{
@@ -34,9 +34,9 @@ body{
 	background-repeat: no-repeat no-repeat; 
 	background-position:0 90%, 100% 90%; 
 }
-.bg{
- /* width: 75%; */
- background-image: linear-gradient(to right, rgb(5, 33, 137), transparent), url("bg.png");
+.bg {
+	/* width: 75%; */
+	background-image: linear-gradient(to right, rgb(5, 33, 137), transparent), url("sj.png");
 }
 .dangqianche{
 	background-image: -webkit-linear-gradient(top, rgb(0, 122, 255), rgb(143, 240, 249));
