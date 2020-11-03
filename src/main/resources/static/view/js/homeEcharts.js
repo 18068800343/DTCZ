@@ -1426,7 +1426,7 @@ homePageInit.initFirqstjtEcharts = (id,stationNames,nums,numCount) => {
         legend: {
             data:['总流量', '超载量'],
             textStyle: {
-                color: '#A3DCEC',
+                color: '#FFFFFF',
                 fontSize: 13
             },
         },

@@ -7,9 +7,7 @@ body{
 	margin-left: 16%;
 }
 .jianceh{
-	 background-image: -webkit-linear-gradient(bottom, rgb(169, 236,237), rgb(208, 231, 220));
-	 -webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
+   color:#FFF !important;
 }
 .leftp{
 	display: inline-block;
