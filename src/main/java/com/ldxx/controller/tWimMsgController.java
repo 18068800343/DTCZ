@@ -812,7 +812,7 @@ public class tWimMsgController {
         String[] port = obj1.getStationPorts().split(",");
         List<String> list=new ArrayList<>();
         String[] port1 = obj1.getStationNames().split(",");
-        for(int i=0;i<port.length;i++){
+        for(int i=0;i<port1.length;i++){
             if(port1[i].equals("泰州大桥")||port1[i].equals("苏通大桥")||port1[i].equals("江阴大桥")||port1[i].equals("润扬大桥")){
                 list.add("3");
             }else{
