@@ -854,13 +854,13 @@ public class tWimMsgController {
         }
         homeData2.setStationNums(m2);
         homeData.setIdLocal(homeData.getMaxWeight() > homeData2.getMaxWeight() ? homeData.getIdLocal() : homeData2.getIdLocal());
-        homeData.setLinks(homeData.getLinks() + homeData2.getLinks());
+        homeData.setLinks(homeData.getLinks() +","+ homeData2.getLinks());
 
         //DTCZ
         homeData.setMaxWeight(homeData.getMaxWeight() > homeData2.getMaxWeight() ? homeData2.getMaxWeight() : homeData.getMaxWeight());
         //DTCZ2
 //        homeData.setMaxWeight(homeData.getMaxWeight()>homeData2.getMaxWeight()?homeData2.getMaxWeight():homeData.getMaxWeight());
-        homeData.setStationNames(homeData.getStationNames() + homeData2.getStationNames());
+        homeData.setStationNames(homeData.getStationNames() +","+ homeData2.getStationNames());
         homeData.setStationNums(homeData.getStationNums() + homeData2.getStationNums());
         homeData.setTotalChaoZai(homeData.getTotalChaoZai() + homeData2.getTotalChaoZai());
         homeData.setTotalCheLiu(homeData.getTotalCheLiu() + homeData2.getTotalCheLiu());
