@@ -2994,7 +2994,7 @@ homePageInit.initFirqstjtEcharts5 = (id,stationNames,nums,numCount) => {
     // 趋势统计图
     let myChart = echarts.init(document.getElementById(id));
 
-    let colors = ['#00f1b5', '#fd2b2a'];
+    let colors = ['#007Cfc', '#fd2b2a'];
 
 
     option = {
@@ -3125,8 +3125,9 @@ homePageInit.initFirqstjtEcharts5 = (id,stationNames,nums,numCount) => {
         series: [
             {
                 name: '总流量',
-                type: 'line',
+                type: 'bar',
                 xAxisIndex: 1,
+                barWidth : 30,//柱图宽度
                 smooth: true,
                 label: {
                     normal: {
