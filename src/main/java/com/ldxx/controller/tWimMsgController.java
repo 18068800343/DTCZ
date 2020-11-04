@@ -811,8 +811,13 @@ public class tWimMsgController {
         CheLiuLiangEchartsList obj1= service.getDiTujwdByPort(zhandianduankouhao);
         String[] port = obj1.getStationPorts().split(",");
         List<String> list=new ArrayList<>();
+        String[] port1 = obj1.getStationNames().split(",");
         for(int i=0;i<port.length;i++){
-            list.add("1");
+            if(port1[i].equals("泰州大桥")||port1[i].equals("苏通大桥")||port1[i].equals("江阴大桥")||port1[i].equals("润扬大桥")){
+                list.add("3");
+            }else{
+                list.add("1");
+            }
         }
 
         CheLiuLiangEchartsList obj2= service.getDiTujwdByPort2();
