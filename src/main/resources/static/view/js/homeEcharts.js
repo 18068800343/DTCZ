@@ -2709,7 +2709,7 @@ let getDanZhouChaoZai = (data) => {
             },
             success: function (json) {
                 if (json != null) {
-                    initHomeMap5(json.lnglat.split(","),json.stationNames.split(","),json.nums.split(","));
+                    initHomeMap5(json.lnglat.split(","),json.stationNames.split(","),json.nums.split(","),json.colorState.split(","));
                 }
             }
         });
@@ -2719,7 +2719,7 @@ let getDanZhouChaoZai = (data) => {
 
 
 
-function initHomeMap5(lngLats,stationNames,nums){
+function initHomeMap5(lngLats,stationNames,nums,colorState){
     let geoCoordData = {};
     let markPointData = [];
     var size = [23,20,17,13,10,8]
@@ -2749,6 +2749,17 @@ function initHomeMap5(lngLats,stationNames,nums){
         geoCoordData[i+""] =lngLatArray;
     }
 
+    let color=[];
+    for(let i in colorState){
+        if(colorState[i]=="1"){
+            color.push('#007CFC')
+        }else if(colorState[i]=="2"){
+            color.push('blue')
+        }else if(colorState[i]=="3"){
+            color.push('#F8AE42')
+        }
+
+    }
 
     require.config({
         paths: {
@@ -2798,11 +2809,7 @@ function initHomeMap5(lngLats,stationNames,nums){
 
                     }
                 },
-                legend: {
-                    orient: 'vertical',
-                    x: '',
-                    data: [' ']
-                },
+
 
                 series: [{
                     name: '',
@@ -2831,6 +2838,7 @@ function initHomeMap5(lngLats,stationNames,nums){
                     data: markPointData,
                     geoCoord: geoCoordData,
                     hoverable:false,//隐藏悬浮背景色
+                    colorState:colorState,
                     markPoint: {
                         /*symbol: 'circle',*/
                         symbolSize: (val, params) => {
@@ -2855,7 +2863,11 @@ function initHomeMap5(lngLats,stationNames,nums){
                          },*/
                         itemStyle: {
                             normal: {
-                                color: '#007CFC', //标志颜色
+                                //color: "#007CFC", //标志颜色
+                                color: (val, params) => {
+                                    return color[val.dataIndex];
+                                },
+
                             }
                         },
                         data : markPointData
