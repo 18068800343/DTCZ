@@ -44,7 +44,7 @@ public class MsgFormatUtils {
 			String stationNamesB[] = B.getStationNames().split(",");
 			String stationPortsB[] = B.getStationPorts().split(",");
 
-			Integer[] numsAll = new Integer[12];
+			Integer[] numsAll = new Integer[numsA.length + numsB.length];
 
 			Map map = new HashMap();
 			for (int i = 0; i < numsA.length; i++) {
@@ -55,14 +55,14 @@ public class MsgFormatUtils {
 			for (int i = 0; i < numsB.length; i++) {
 				map.put(numsB[i] + "-" + "name", stationNamesB[i]);
 				map.put(numsB[i] + "-" + "port", stationPortsB[i]);
-				numsAll[i + 6] = Integer.parseInt(numsB[i]);
+				numsAll[i + numsA.length] = Integer.parseInt(numsB[i]);
 			}
 
 			Arrays.sort(numsAll);
 			StringBuffer numEnd = new StringBuffer();
 			StringBuffer stationPorts = new StringBuffer();
 			StringBuffer stationNames = new StringBuffer();
-			for (int i = 6; i < numsAll.length; i++) {
+			for (int i = 0; i < numsAll.length; i++) {
 				if (i == numsAll.length - 1) {
 					numEnd.append(numsAll[i]);
 					stationNames.append(map.get(numsAll[i] + "-" + "name"));
