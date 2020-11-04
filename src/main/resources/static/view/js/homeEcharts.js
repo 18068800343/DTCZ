@@ -2922,6 +2922,7 @@ homePageInit.initHomeData5 = ()=>{
 }
 
 
+let flag = true;
 homePageInit.initFirTongji5= () =>{
     $.ajax({
         type: 'POST',
@@ -2929,51 +2930,95 @@ homePageInit.initFirTongji5= () =>{
         dataType: 'json',
         data: {
             stationPorts: homePageInit.stationPort.toString(),
-            limit:6
+            limit: 17
         },
         error: function (msg) {
         },
         success: function (json) {
-            homePageInit.stationName = json.stationNames.split(",")
-            homePageInit.nums = json.nums.split(",");
-            initFirLiuliangtongji(homePageInit.stationName, homePageInit.nums)
-
+            homePageInit.stationName = json.stationNames.split(",").reverse();
+            homePageInit.nums = json.nums.split(",").reverse();
+            if (flag) {
+                initFirLiuliangtongjiByAB(homePageInit.stationName, homePageInit.nums, 0, 9)
+                initFiveChaoZaiLvByAB(homePageInit.stationName, homePageInit.nums, 9, 18)
+            } else {
+                initFirLiuliangtongjiByAB(homePageInit.stationName, homePageInit.nums, 15, 24)
+                initFiveChaoZaiLvByAB(homePageInit.stationName, homePageInit.nums, 24, 33)
+            }
+            flag = !flag;
         }
     });
 }
 
+let initFiveChaoZaiLvByAB = (stationNames, nums, a, b) => {
+    if (nums != null && nums.length > 0) {
+        let k = 0;
+        for (let i = a; i < b; i++) {
+            $("#Five_chaozailv" + k + "").html("")
+            $("#Five_chaozailv" + k + "").html(nums[i])
+            $("#Five_chaozailvName" + k + "").html("")
+            $("#Five_chaozailvName" + k + "").html(stationNames[i])
+            k++;
+        }
+    }
+}
+
+let initFirLiuliangtongjiByAB = (stationNames, nums, a, b) => {
+    if (nums != null && nums.length > 0) {
+        let k = 0;
+        for (let i = a; i < b; i++) {
+            $("#fir_liuliang" + k + "").html("")
+            $("#fir_liuliang" + k + "").html(nums[i])
+            /* ($("#fir_liuliang"+i+"").attr("title",stationNames[i]))*/
+            $("#Five_liuliang" + k + "").html("")
+            $("#Five_liuliang" + k + "").html(nums[i])
+            k++;
+        }
+    }
+    if (stationNames != null && stationNames.length > 0) {
+        let k = 0;
+        for (let i = a; i < b; i++) {
+            $("#fir_liuliangName" + k + "").html("")
+            $("#fir_liuliangName" + k + "").html(stationNames[i])
+            $("#fir_liuliangName" + k + "").attr('title', stationNames[i])
+            $("#Five_liuliangName" + k + "").attr('title', stationNames[i])
+            $("#Five_liuliangName" + k + "").html("")
+            $("#Five_liuliangName" + k + "").html(stationNames[i])
+            k++;
+        }
+    }
+}
 
 homePageInit.initFirqstjt5 = (id) => {
-    $.ajax({
-        type: 'POST',
-        url: '/tWimMsg/getFirChaoZaiLv2',
-        dataType: 'json',
-        data: {
-            stationPorts: homePageInit.stationPort.toString(),
-            limit:6
-        },
-        error: function (msg) {
-        },
-        success: function (json) {
-            //初始化超载率统计
-            if(json!=null){
-                var stationNames=[];
-                var numsBili=[]
-                for(var i=0;i<json.length;i++){
-                    stationNames.push(json[i].stationNames)
-                    numsBili.push(json[i].numsBili==undefined?"0%":((json[i].numsBili)*100).toFixed(2)+"%")
-                }
-                for(let i=0;i<numsBili.length;i++){
-                    let num = numsBili[i];
-                    $("#Five_chaozailv"+i+"").html("")
-                    $("#Five_chaozailv"+i+"").html(num)
-                    $("#Five_chaozailvName"+i+"").html("")
-                    $("#Five_chaozailvName"+i+"").html(stationNames[i])
-                }
-            }
-
-        }
-    });
+    // $.ajax({
+    //     type: 'POST',
+    //     url: '/tWimMsg/getFirChaoZaiLv2',
+    //     dataType: 'json',
+    //     data: {
+    //         stationPorts: homePageInit.stationPort.toString(),
+    //         limit:6
+    //     },
+    //     error: function (msg) {
+    //     },
+    //     success: function (json) {
+    //         //初始化超载率统计
+    //         if(json!=null){
+    //             var stationNames=[];
+    //             var numsBili=[]
+    //             for(var i=0;i<json.length;i++){
+    //                 stationNames.push(json[i].stationNames)
+    //                 numsBili.push(json[i].numsBili==undefined?"0%":((json[i].numsBili)*100).toFixed(2)+"%")
+    //             }
+    //             for(let i=0;i<numsBili.length;i++){
+    //                 let num = numsBili[i];
+    //                 $("#Five_chaozailv"+i+"").html("")
+    //                 $("#Five_chaozailv"+i+"").html(num)
+    //                 $("#Five_chaozailvName"+i+"").html("")
+    //                 $("#Five_chaozailvName"+i+"").html(stationNames[i])
+    //             }
+    //         }
+    //
+    //     }
+    // });
     $.ajax({
         type: 'POST',
         url: '/tWimMsg/getQushitu2',

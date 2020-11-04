@@ -2989,8 +2989,8 @@ homePageInit.initFirTongji5= () =>{
                 initFirLiuliangtongjiByAB(homePageInit.stationName, homePageInit.nums, 0, 9)
                 initFiveChaoZaiLvByAB(homePageInit.stationName, homePageInit.nums, 9, 18)
             } else {
-                initFirLiuliangtongjiByAB(homePageInit.stationName, homePageInit.nums, 16, 25)
-                initFiveChaoZaiLvByAB(homePageInit.stationName, homePageInit.nums, 25, 34)
+                initFirLiuliangtongjiByAB(homePageInit.stationName, homePageInit.nums, 15, 24)
+                initFiveChaoZaiLvByAB(homePageInit.stationName, homePageInit.nums, 24, 33)
             }
             flag = !flag;
         }
