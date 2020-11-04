@@ -11,9 +11,10 @@ body{
 }
 .leftp{
 	display: inline-block;
-	background-image: -webkit-linear-gradient(bottom, rgb(227, 227, 211), rgb(143, 240, 249));
+	/* background-image: -webkit-linear-gradient(bottom, rgb(227, 227, 211), rgb(143, 240, 249));
 	 -webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
+	-webkit-text-fill-color: transparent; */
+	color:white;
 	font-size:30px;
 	font-family:pangshi;
 	font-weight: bolder;

@@ -3018,7 +3018,7 @@ homePageInit.initFirqstjtEcharts5 = (id,stationNames,nums,numCount) => {
             }
         },
         legend: {
-            data:['总流量', '超载量'],
+            data:['总流量'],
             textStyle: {
                 color: '#A3DCEC',
                 fontSize: 13
@@ -3143,7 +3143,7 @@ homePageInit.initFirqstjtEcharts5 = (id,stationNames,nums,numCount) => {
                     }
                 },
                 data: numCount
-            },
+            }/*,
             {
                 name: '超载量',
                 type: 'line',
@@ -3155,7 +3155,7 @@ homePageInit.initFirqstjtEcharts5 = (id,stationNames,nums,numCount) => {
                     }
                 },
                 data: nums
-            }
+            }*/
         ]
     };
 
