@@ -22,12 +22,15 @@ public interface tWimMsgDao {
 
 
     CheLiuLiangEchartsList getChaoZaiEchartsList(String stationPorts, Integer link, Integer limit);
+
     List<CheLiuLiangEchartsList> getFirChaoZaiLv(String stationPorts, Integer link, Integer limit);
 
     CheLiuLiangEchartsList getGuanJianChaoZhongCheLiangEchartsList(Integer lv1, Integer lv2, String stationPorts, Integer link, Integer limit);
 
 
     HomeData getHomeData(String stationPorts);
+
+    Double getMaxWeightByWeight(String stationPorts, Double weight);
 
     int getMeiRiCheLiuLiangByStationPort(@Param("stationPort") String stationPort);
 

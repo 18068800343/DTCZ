@@ -485,9 +485,29 @@ public class tWimMsgController {
     public HomeData getHomeDataObject(String stationPorts, HttpSession session) {
         HomeData homeData = tWimMsgDao.getHomeData(stationPorts);
         String[] nums = homeData.getLinks().split(",");
-        int m=0;
-        for(String num:nums){
-            if("1".equals(num)){
+        int m = 0;
+        for (String num : nums) {
+            if ("1".equals(num)) {
+                m++;
+            }
+        }
+        homeData.setStationNums(m);
+        return homeData;
+    }
+
+    @RequestMapping("/getHomeDataObject1")
+    public HomeData getHomeDataObject1(String stationPorts, HttpSession session) {
+        HomeData homeData2 = service.getHomeData2();
+        HomeData homeData = tWimMsgDao.getHomeData(stationPorts);
+
+        String[] nums = homeData.getLinks().split(",");
+        int m = 0;
+        Double db2MaxWeight = homeData2.getMaxWeight();
+
+        Double lessWeight = tWimMsgDao.getMaxWeightByWeight(stationPorts, db2MaxWeight);
+        homeData.setMaxWeight(lessWeight);
+        for (String num : nums) {
+            if ("1".equals(num)) {
                 m++;
             }
         }
@@ -496,10 +516,10 @@ public class tWimMsgController {
     }
 
     @RequestMapping("/getMeiRiGuanJianChaoZHongShujuByStationPort")
-    public List<tWimMsgVo> getMeiRiGuanJianChaoZHongShujuByStationPort(String stationPort,Integer lv,HttpSession session) {
-        String zhandianduankouhao="";
+    public List<tWimMsgVo> getMeiRiGuanJianChaoZHongShujuByStationPort(String stationPort, Integer lv, HttpSession session) {
+        String zhandianduankouhao = "";
         tUserInfo user = (tUserInfo) session.getAttribute("user");
-        if(stationPort!=null&&stationPort!=""){
+        if (stationPort != null && stationPort != "") {
             zhandianduankouhao=stationPort;
         }else{
             if(user!=null){
@@ -810,20 +830,24 @@ public class tWimMsgController {
         homeData.setStationNums(m);
         HomeData homeData2 = service.getHomeData2();
         String[] nums2 = homeData2.getLinks().split(",");
-        int m2=0;
-        for(String num2:nums2){
-            if("1".equals(num2)){
+        int m2 = 0;
+        for (String num2 : nums2) {
+            if ("1".equals(num2)) {
                 m2++;
             }
         }
         homeData2.setStationNums(m2);
-        homeData.setIdLocal(homeData.getMaxWeight()>homeData2.getMaxWeight()?homeData.getIdLocal():homeData2.getIdLocal());
-        homeData.setLinks(homeData.getLinks()+","+homeData2.getLinks());
-        homeData.setMaxWeight(homeData.getMaxWeight()>homeData2.getMaxWeight()?homeData.getMaxWeight():homeData2.getMaxWeight());
-        homeData.setStationNames(homeData.getStationNames()+","+homeData2.getStationNames());
-        homeData.setStationNums(homeData.getStationNums()+homeData2.getStationNums());
-        homeData.setTotalChaoZai(homeData.getTotalChaoZai()+homeData2.getTotalChaoZai());
-        homeData.setTotalCheLiu(homeData.getTotalCheLiu()+homeData2.getTotalCheLiu());
+        homeData.setIdLocal(homeData.getMaxWeight() > homeData2.getMaxWeight() ? homeData.getIdLocal() : homeData2.getIdLocal());
+        homeData.setLinks(homeData.getLinks() + homeData2.getLinks());
+
+        //DTCZ
+        homeData.setMaxWeight(homeData.getMaxWeight() > homeData2.getMaxWeight() ? homeData2.getMaxWeight() : homeData.getMaxWeight());
+        //DTCZ2
+//        homeData.setMaxWeight(homeData.getMaxWeight()>homeData2.getMaxWeight()?homeData2.getMaxWeight():homeData.getMaxWeight());
+        homeData.setStationNames(homeData.getStationNames() + homeData2.getStationNames());
+        homeData.setStationNums(homeData.getStationNums() + homeData2.getStationNums());
+        homeData.setTotalChaoZai(homeData.getTotalChaoZai() + homeData2.getTotalChaoZai());
+        homeData.setTotalCheLiu(homeData.getTotalCheLiu() + homeData2.getTotalCheLiu());
 
         return homeData;
     }

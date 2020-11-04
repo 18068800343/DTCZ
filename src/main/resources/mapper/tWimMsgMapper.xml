@@ -552,15 +552,20 @@
         )ee on 1= 1
     </select>
 
+
+    <select id="getMaxWeightByWeight" resultType="double">
+        select a.Total_Weight maxWeight,id_local FROM t_vehicle_overweight a  WHERE   date(a.Evt_Time) = curdate() and FIND_IN_SET(a.Station_IP,#{stationPorts}) and a.Total_Weight &lt; #{weight}  order by a.Total_Weight desc LIMIT 1
+    </select>
+
     <select id="getCheLiuLiangEchartsList" resultType="CheLiuLiangEchartsList">
         SELECT
         group_concat(aa.cnt SEPARATOR ',') AS nums,
         group_concat(aa.Station_Port SEPARATOR ',') AS station_ports,
         group_concat(aa.station_name SEPARATOR ',') AS station_names
         FROM
-		(
-			SELECT * FROM(SELECT
-			COUNT(
+        (
+        SELECT * FROM(SELECT
+        COUNT(
 				CASE
 				WHEN a.Station_IP IS NOT NULL THEN
 					0
