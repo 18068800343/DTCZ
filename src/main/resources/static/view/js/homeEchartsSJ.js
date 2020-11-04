@@ -2801,9 +2801,9 @@ function initHomeMap5(lngLats,stationNames,nums,colorState){
         if(colorState[i]=="1"){
             color.push('#F8AE42')
         }else if(colorState[i]=="2"){
-            color.push('blue')
+            color.push('#007CFC')
         }else if(colorState[i]=="3"){
-            color.push('red')
+            color.push('#B22222')
         }
     }
 
