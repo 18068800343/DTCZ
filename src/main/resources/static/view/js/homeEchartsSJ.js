@@ -2757,7 +2757,7 @@ homePageInit.initditu5 = () => {
         },
         success: function (json) {
             if (json != null) {
-                initHomeMap5(json.lnglat.split(","),json.stationNames.split(","),json.nums.split(","));
+                initHomeMap5(json.lnglat.split(","),json.stationNames.split(","),json.nums.split(","),json.colorState.split(","));
             }
         }
     });
@@ -2767,7 +2767,7 @@ homePageInit.initditu5()
 
 
 
-function initHomeMap5(lngLats,stationNames,nums){
+function initHomeMap5(lngLats,stationNames,nums,colorState){
     let geoCoordData = {};
     let markPointData = [];
     var size = [23,20,17,13,10,8]
@@ -2796,7 +2796,16 @@ function initHomeMap5(lngLats,stationNames,nums){
         lngLatArray.push(lngLats[i].split("-")[1]);
         geoCoordData[i+""] =lngLatArray;
     }
-
+    let color=[];
+    for(let i in colorState){
+        if(colorState[i]=="1"){
+            color.push('#F8AE42')
+        }else if(colorState[i]=="2"){
+            color.push('blue')
+        }else if(colorState[i]=="3"){
+            color.push('red')
+        }
+    }
 
     require.config({
         paths: {
@@ -2903,7 +2912,10 @@ function initHomeMap5(lngLats,stationNames,nums){
                          },*/
                         itemStyle: {
                             normal: {
-                                color: '#007CFC', //标志颜色
+                                // color: '#007CFC', //标志颜色
+                                color: (val, params) => {
+                                    return color[val.dataIndex];
+                                },
                             }
                         },
                         data : markPointData
