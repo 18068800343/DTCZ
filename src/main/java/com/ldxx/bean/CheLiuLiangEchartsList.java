@@ -13,6 +13,15 @@ public class CheLiuLiangEchartsList {
 
     private Integer link;
     private String lnglat;//站点经纬度
+    private String colorState;//颜色区分状态
+
+    public String getColorState() {
+        return colorState;
+    }
+
+    public void setColorState(String colorState) {
+        this.colorState = colorState;
+    }
 
     public Integer getLink() {
         return link;

@@ -18,6 +18,7 @@ import com.ldxx.util.MsgFormatUtils;
 import com.ldxx.vo.ChaoZaiVo;
 import com.ldxx.vo.tWimMsgVo;
 import net.sf.json.JSONObject;
+import org.apache.commons.lang.StringUtils;
 import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -808,11 +809,26 @@ public class tWimMsgController {
         tUserInfo user = (tUserInfo) session.getAttribute("user");
         String zhandianduankouhao = user.getStationPort();
         CheLiuLiangEchartsList obj1= service.getDiTujwdByPort(zhandianduankouhao);
+        String[] port = obj1.getStationPorts().split(",");
+        List<String> list=new ArrayList<>();
+        for(int i=0;i<port.length;i++){
+            list.add("1");
+        }
+
         CheLiuLiangEchartsList obj2= service.getDiTujwdByPort2();
+        String[] port2 = obj2.getStationNames().split(",");
+        for(int i=0;i<port2.length;i++){
+            if(port2[i].equals("泰州大桥")||port2[i].equals("苏通大桥")||port2[i].equals("江阴大桥")||port2[i].equals("润扬大桥")){
+                list.add("3");
+            }else{
+                list.add("2");
+            }
+        }
         obj1.setNums(obj1.getNums()+","+obj2.getNums());
         obj1.setStationPorts(obj1.getStationPorts()+","+obj2.getStationPorts());
         obj1.setStationNames(obj1.getStationNames()+","+obj2.getStationNames());
         obj1.setLnglat(obj1.getLnglat()+","+obj2.getLnglat());
+        obj1.setColorState(StringUtils.join(list.toArray(),","));
         return obj1;
     }
 
