@@ -2752,13 +2752,12 @@ function initHomeMap5(lngLats,stationNames,nums,colorState){
     let color=[];
     for(let i in colorState){
         if(colorState[i]=="1"){
-            color.push('#007CFC')
+            color.push('#F8AE42')
         }else if(colorState[i]=="2"){
             color.push('blue')
         }else if(colorState[i]=="3"){
-            color.push('#F8AE42')
+            color.push('red')
         }
-
     }
 
     require.config({
