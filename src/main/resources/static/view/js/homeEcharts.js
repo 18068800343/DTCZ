@@ -3226,6 +3226,11 @@ homePageInit.initFirqstjtEcharts5 = (id,stationNames,nums,numCount) => {
                 splitLine: {
                     show: false
                 },
+                axisLine: { //y轴
+                 	 lineStyle:{
+                          color:'#FFFFFF', 
+                      }
+                 }
             }
         ],
         series: [
