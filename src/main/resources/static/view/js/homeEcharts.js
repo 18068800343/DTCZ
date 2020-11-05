@@ -450,7 +450,7 @@ homePageInit.initFirTongji= () =>{
         dataType: 'json',
         data: {
             stationPorts: homePageInit.stationPort.toString(),
-            limit: 16
+            limit: 17
         },
         error: function (msg) {
         },
@@ -458,7 +458,7 @@ homePageInit.initFirTongji= () =>{
             homePageInit.stationName = json.stationNames.split(",")
             homePageInit.nums = json.nums.split(",");
             initTab2LiuliangtongjiByAB(homePageInit.stationName, homePageInit.nums, 0, 8)
-            initFirChaoZaiLvByAB(homePageInit.stationName, homePageInit.nums, 8, 16)
+            initFirChaoZaiLvByAB(homePageInit.stationName, homePageInit.nums, 8, 17)
         }
     });
 }
