@@ -466,20 +466,20 @@ homePageInit.initFirTongji= () =>{
 let initFirLiuliangtongji=(stationNames,nums)=>{
     if(nums!=null&&nums.length>0){
         for(let i=0;i<nums.length+1;i++){
-            $("#fir_liuliang"+i+"").html("")
-            $("#fir_liuliang"+i+"").html(nums[i])
-            $("#Five_liuliang"+i+"").html("")
-            $("#Five_liuliang"+i+"").html(nums[i])
+            // $("#fir_liuliang"+i+"").html("")
+            // $("#fir_liuliang"+i+"").html(nums[i])
+            $("#Five_liuliang" + i + "").html("")
+            $("#Five_liuliang" + i + "").html(nums[i])
         }
     }
     if(stationNames!=null&&stationNames.length>0){
-        for(let i=0;i<stationNames.length+1;i++){
-            $("#fir_liuliangName"+i+"").html("")
-            $("#fir_liuliangName"+i+"").html(stationNames[i])
-            $("#fir_liuliangName"+i+"").attr('title', stationNames[i])
-            $("#Five_liuliangName"+i+"").attr('title', stationNames[i])
-            $("#Five_liuliangName"+i+"").html("")
-            $("#Five_liuliangName"+i+"").html(stationNames[i])
+        for(let i=0;i<stationNames.length+1;i++) {
+            // $("#fir_liuliangName"+i+"").html("")
+            // $("#fir_liuliangName"+i+"").html(stationNames[i])
+            // $("#fir_liuliangName"+i+"").attr('title', stationNames[i])
+            $("#Five_liuliangName" + i + "").attr('title', stationNames[i])
+            $("#Five_liuliangName" + i + "").html("")
+            $("#Five_liuliangName" + i + "").html(stationNames[i])
         }
     }
 
