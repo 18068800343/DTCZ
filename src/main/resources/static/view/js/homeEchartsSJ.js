@@ -1638,19 +1638,17 @@ homePageInit.initFirqstjtEcharts = (id,stationNames,nums,numCount) => {
                     }
                 },
                 data: numCount
-            }/*,
-            {
-                name: '超载量',
+            },{
                 type: 'line',
                 smooth: true,
-                label: {
+               /* label: {
                     normal: {
                         show: true,
                         position: 'top'
                     }
-                },
-                data: nums
-            }*/
+                },*/
+                data:numCount
+            }
         ]
     };
 
@@ -3225,19 +3223,17 @@ homePageInit.initFirqstjtEcharts5 = (id,stationNames,nums,numCount) => {
                     }
                 },
                 data: numCount
-            }/*,
-            {
-                name: '超载量',
+            },{
                 type: 'line',
                 smooth: true,
-                label: {
+               /* label: {
                     normal: {
                         show: true,
                         position: 'top'
                     }
-                },
-                data: nums
-            }*/
+                },*/
+                data:numCount
+            }
         ]
     };
 
