@@ -1501,12 +1501,12 @@ homePageInit.initFirqstjtEcharts = (id,stationNames,nums,numCount) => {
             color: '#fff',
             fontSize: 13
         },
-        tooltip: {
+       /* tooltip: {
             trigger: 'none',
             axisPointer: {
                 type: 'cross'
             }
-        },
+        },*/
         legend: {
             data:['总流量'],
             textStyle: {
@@ -3085,12 +3085,12 @@ homePageInit.initFirqstjtEcharts5 = (id,stationNames,nums,numCount) => {
             color: '#fff',
             fontSize: 13
         },
-        tooltip: {
+       /* tooltip: {
             trigger: 'none',
             axisPointer: {
                 type: 'cross'
             }
-        },
+        },*/
         legend: {
             data:['总流量'],
             textStyle: {
