@@ -1492,7 +1492,7 @@ homePageInit.initFirqstjtEcharts = (id,stationNames,nums,numCount) => {
     // 趋势统计图
     let myChart = echarts.init(document.getElementById(id));
 
-    let colors = ['#00f1b5', '#fd2b2a'];
+    let colors = ['#007CFC', '#fd2b2a'];
 
 
     option = {
@@ -1508,7 +1508,7 @@ homePageInit.initFirqstjtEcharts = (id,stationNames,nums,numCount) => {
             }
         },
         legend: {
-            data:['总流量', '超载量'],
+            data:['总流量'],
             textStyle: {
                 color: '#FFFFFF',
                 fontSize: 13
@@ -1525,8 +1525,10 @@ homePageInit.initFirqstjtEcharts = (id,stationNames,nums,numCount) => {
                     alignWithLabel: true
                 },
                 axisLine: { //y轴
-                    show: false
-                },
+                  	 lineStyle:{
+                           color:'#FFFFFF', 
+                       }
+                  },
                 splitLine: {
                     show: false
                 },
@@ -1613,8 +1615,10 @@ homePageInit.initFirqstjtEcharts = (id,stationNames,nums,numCount) => {
                     show: false
                 },
                 axisLine: { //y轴
-                    show: false
-                },
+                  	 lineStyle:{
+                           color:'#FFFFFF', 
+                       }
+                  },
                 splitLine: {
                     show: false
                 },
@@ -1623,7 +1627,8 @@ homePageInit.initFirqstjtEcharts = (id,stationNames,nums,numCount) => {
         series: [
             {
                 name: '总流量',
-                type: 'line',
+                type: 'bar',
+                barWidth : 30,//柱图宽度
                 xAxisIndex: 1,
                 smooth: true,
                 label: {
@@ -1633,7 +1638,7 @@ homePageInit.initFirqstjtEcharts = (id,stationNames,nums,numCount) => {
                     }
                 },
                 data: numCount
-            },
+            }/*,
             {
                 name: '超载量',
                 type: 'line',
@@ -1645,7 +1650,7 @@ homePageInit.initFirqstjtEcharts = (id,stationNames,nums,numCount) => {
                     }
                 },
                 data: nums
-            }
+            }*/
         ]
     };
 
@@ -3103,9 +3108,11 @@ homePageInit.initFirqstjtEcharts5 = (id,stationNames,nums,numCount) => {
                 axisTick: {
                     alignWithLabel: true
                 },
-               /* axisLine: { //y轴
-                    show: false
-                },*/
+                axisLine: { //y轴
+                  	 lineStyle:{
+                           color:'#FFFFFF', 
+                       }
+                  },
                 splitLine: {
                     show: false
                 },
@@ -3168,8 +3175,10 @@ homePageInit.initFirqstjtEcharts5 = (id,stationNames,nums,numCount) => {
                     }
                 },
                 axisLine: { //y轴
-                    show: false
-                },
+                  	 lineStyle:{
+                           color:'#FFFFFF', 
+                       }
+                  },
                 splitLine: {
                     show: false
                 },
