@@ -22,6 +22,7 @@ public class HelloController {
 
     public HelloController(TradingDetailsService tradingDetailsService) {
         this.tradingDetailsService = tradingDetailsService;
+
     }
 
     @GetMapping("/download_csv")
