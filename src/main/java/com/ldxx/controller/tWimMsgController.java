@@ -816,7 +816,11 @@ public class tWimMsgController {
             if(port1[i].equals("泰州大桥")||port1[i].equals("苏通大桥")||port1[i].equals("江阴大桥")||port1[i].equals("润扬大桥")){
                 list.add("3");
             }else{
-                list.add("1");
+                if (!Arrays.asList(port1).contains("泰州大桥")||!Arrays.asList(port1).contains("苏通大桥")||!Arrays.asList(port1).contains("江阴大桥")||!Arrays.asList(port1).contains("润扬大桥")){
+                    list.add("1");
+                }else{
+                    list.add("2");
+                }
             }
         }
 
@@ -826,7 +830,11 @@ public class tWimMsgController {
             if(port2[i].equals("泰州大桥")||port2[i].equals("苏通大桥")||port2[i].equals("江阴大桥")||port2[i].equals("润扬大桥")){
                 list.add("3");
             }else{
-                list.add("2");
+                if (!Arrays.asList(port2).contains("泰州大桥")||!Arrays.asList(port2).contains("苏通大桥")||!Arrays.asList(port2).contains("江阴大桥")||!Arrays.asList(port2).contains("润扬大桥")){
+                    list.add("1");
+                }else{
+                    list.add("2");
+                }
             }
         }
         obj1.setNums(obj1.getNums()+","+obj2.getNums());
