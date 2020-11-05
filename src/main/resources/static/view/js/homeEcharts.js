@@ -450,15 +450,15 @@ homePageInit.initFirTongji= () =>{
         dataType: 'json',
         data: {
             stationPorts: homePageInit.stationPort.toString(),
-            limit:6
+            limit: 16
         },
         error: function (msg) {
         },
         success: function (json) {
-            homePageInit.stationName = json.stationNames.split(",").reverse()
-            homePageInit.nums = json.nums.split(",").reverse();
-            initFirLiuliangtongji(homePageInit.stationName, homePageInit.nums)
-
+            homePageInit.stationName = json.stationNames.split(",")
+            homePageInit.nums = json.nums.split(",");
+            initTab2LiuliangtongjiByAB(homePageInit.stationName, homePageInit.nums, 0, 8)
+            initFirChaoZaiLvByAB(homePageInit.stationName, homePageInit.nums, 8, 16)
         }
     });
 }
@@ -1345,40 +1345,40 @@ let initLeftChartDetail4=(d)=>{
 
 //***************************************************************初始化趋势统计图***************************************************************
 homePageInit.initFirqstjt = (id) => {
-    $.ajax({
-        type: 'POST',
-        url: '/tWimMsg/getFirChaoZaiLv',
-        dataType: 'json',
-        data: {
-            stationPorts: homePageInit.stationPort.toString(),
-            limit:6
-        },
-        error: function (msg) {
-        },
-        success: function (json) {
-            //初始化超载率统计
-            if(json!=null){
-                var stationNames=[];
-                var numsBili=[]
-                for(var i=0;i<json.length;i++){
-                    stationNames.push(json[i].stationNames)
-                    numsBili.push(json[i].numsBili==undefined?"0%":((json[i].numsBili)*100).toFixed(2)+"%")
-                }
-                for(let i=0;i<numsBili.length;i++){
-                    let num = numsBili[i];
-                    $("#fir_chaozailv"+i+"").html("")
-                    $("#fir_chaozailv"+i+"").html(num)
-                    $("#fir_chaozailvName"+i+"").html("")
-                    $("#fir_chaozailvName"+i+"").html(stationNames[i])
-                }
-            }
-            /*homePageInit.downStationNames = json.stationNames.split(",");
-            homePageInit.downNums = json.nums.split(",");
-            homePageInit.numCount = json.numCount.split(",");
-            homePageInit.initFirqstjtEcharts(id,homePageInit.downStationNames,homePageInit.downNums, homePageInit.numCount );*/
-
-        }
-    });
+    // $.ajax({
+    //     type: 'POST',
+    //     url: '/tWimMsg/getFirChaoZaiLv',
+    //     dataType: 'json',
+    //     data: {
+    //         stationPorts: homePageInit.stationPort.toString(),
+    //         limit:6
+    //     },
+    //     error: function (msg) {
+    //     },
+    //     success: function (json) {
+    //         //初始化超载率统计
+    //         if(json!=null){
+    //             var stationNames=[];
+    //             var numsBili=[]
+    //             for(var i=0;i<json.length;i++){
+    //                 stationNames.push(json[i].stationNames)
+    //                 numsBili.push(json[i].numsBili==undefined?"0%":((json[i].numsBili)*100).toFixed(2)+"%")
+    //             }
+    //             for(let i=0;i<numsBili.length;i++){
+    //                 let num = numsBili[i];
+    //                 $("#fir_chaozailv"+i+"").html("")
+    //                 $("#fir_chaozailv"+i+"").html(num)
+    //                 $("#fir_chaozailvName"+i+"").html("")
+    //                 $("#fir_chaozailvName"+i+"").html(stationNames[i])
+    //             }
+    //         }
+    //         /*homePageInit.downStationNames = json.stationNames.split(",");
+    //         homePageInit.downNums = json.nums.split(",");
+    //         homePageInit.numCount = json.numCount.split(",");
+    //         homePageInit.initFirqstjtEcharts(id,homePageInit.downStationNames,homePageInit.downNums, homePageInit.numCount );*/
+    //
+    //     }
+    // });
     $.ajax({
         type: 'POST',
         url: '/tWimMsg/getQushitu',
@@ -2957,6 +2957,24 @@ let initFiveChaoZaiLvByAB = (stationNames, nums, a, b) => {
             $("#Five_chaozailv" + k + "").html(nums[i])
             $("#Five_chaozailvName" + k + "").html("")
             $("#Five_chaozailvName" + k + "").html(stationNames[i])
+            $("#Five_chaozailvName" + k + "").prev().empty();
+            $("#Five_chaozailvName" + k + "").prev().append(i + 1);
+            k++;
+        }
+    }
+}
+
+
+let initFirChaoZaiLvByAB = (stationNames, nums, a, b) => {
+    if (nums != null && nums.length > 0) {
+        let k = 0;
+        for (let i = a; i < b; i++) {
+            $("#fir_chaozailv" + k + "").html("")
+            $("#fir_chaozailv" + k + "").html(nums[i])
+            $("#fir_chaozailvName" + k + "").html("")
+            $("#fir_chaozailvName" + k + "").html(stationNames[i])
+            $("#fir_chaozailvName" + k + "").prev().empty();
+            $("#fir_chaozailvName" + k + "").prev().append(i + 1);
             k++;
         }
     }
@@ -2966,8 +2984,8 @@ let initFirLiuliangtongjiByAB = (stationNames, nums, a, b) => {
     if (nums != null && nums.length > 0) {
         let k = 0;
         for (let i = a; i < b; i++) {
-            $("#fir_liuliang" + k + "").html("")
-            $("#fir_liuliang" + k + "").html(nums[i])
+            // $("#fir_liuliang" + k + "").html("")
+            // $("#fir_liuliang" + k + "").html(nums[i])
             /* ($("#fir_liuliang"+i+"").attr("title",stationNames[i]))*/
             $("#Five_liuliang" + k + "").html("")
             $("#Five_liuliang" + k + "").html(nums[i])
@@ -2977,12 +2995,37 @@ let initFirLiuliangtongjiByAB = (stationNames, nums, a, b) => {
     if (stationNames != null && stationNames.length > 0) {
         let k = 0;
         for (let i = a; i < b; i++) {
-            $("#fir_liuliangName" + k + "").html("")
-            $("#fir_liuliangName" + k + "").html(stationNames[i])
-            $("#fir_liuliangName" + k + "").attr('title', stationNames[i])
+            // $("#fir_liuliangName" + k + "").html("")
+            // $("#fir_liuliangName" + k + "").html(stationNames[i])
+            // $("#fir_liuliangName" + k + "").attr('title', stationNames[i])
             $("#Five_liuliangName" + k + "").attr('title', stationNames[i])
             $("#Five_liuliangName" + k + "").html("")
             $("#Five_liuliangName" + k + "").html(stationNames[i])
+            $("#Five_liuliangName" + k + "").prev().empty();
+            $("#Five_liuliangName" + k + "").prev().append(i + 1);
+            k++;
+        }
+    }
+}
+
+
+let initTab2LiuliangtongjiByAB = (stationNames, nums, a, b) => {
+    if (nums != null && nums.length > 0) {
+        let k = 0;
+        for (let i = a; i < b; i++) {
+            $("#fir_liuliang" + k + "").html("")
+            $("#fir_liuliang" + k + "").html(nums[i])
+            k++;
+        }
+    }
+    if (stationNames != null && stationNames.length > 0) {
+        let k = 0;
+        for (let i = a; i < b; i++) {
+            $("#fir_liuliangName" + k + "").html("")
+            $("#fir_liuliangName" + k + "").html(stationNames[i])
+            $("#fir_liuliangName" + k + "").attr('title', stationNames[i])
+            $("#fir_liuliangName" + k + "").prev().empty();
+            $("#fir_liuliangName" + k + "").prev().append(i + 1);
             k++;
         }
     }
