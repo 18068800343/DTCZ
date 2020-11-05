@@ -3082,9 +3082,9 @@ homePageInit.initFirqstjtEcharts5 = (id,stationNames,nums,numCount) => {
                 axisTick: {
                     alignWithLabel: true
                 },
-                axisLine: { //y轴
+              /*  axisLine: { //y轴
                     show: false
-                },
+                },*/
                 splitLine: {
                     show: false
                 },
@@ -3167,12 +3167,6 @@ homePageInit.initFirqstjtEcharts5 = (id,stationNames,nums,numCount) => {
             {
                 type: 'value',
                 position: 'left',
-                splitLine: {
-                    show: false
-                },
-                axisLine: { //y轴
-                    show: false
-                },
                 splitLine: {
                     show: false
                 },
