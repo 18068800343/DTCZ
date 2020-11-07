@@ -45,13 +45,13 @@ let bindMaxWeight = (idLocal) => {
     $("#mainContent1 tbody").append(dom);
     $("#chart1Detail1").modal("show");
 }
-
+let sj_page_flag=true;
 homePageInit.initditu = () => {
+    sj_page_flag=false;
     $.ajax({
         type: 'POST',
         url: '/tWimMsg/getDiTujwdByPort',
         dataType: 'json',
-        async: false,
         data: {},
         error: function (msg) {
         },
@@ -62,6 +62,7 @@ homePageInit.initditu = () => {
         }
     });
 }
+
 homePageInit.initditu()
 
 function initHomeMap(lngLats,stationNames,nums){
@@ -2795,13 +2796,14 @@ homePageInit.initditu5 = () => {
         type: 'POST',
         url: '/tWimMsg/getDiTujwdByPort2',
         dataType: 'json',
-        async: false,
         data: {},
         error: function (msg) {
         },
         success: function (json) {
-            if (json != null) {
-                initHomeMap5(json.lnglat.split(","),json.stationNames.split(","),json.nums.split(","),json.colorState.split(","));
+            if(sj_page_flag){
+                if (json != null) {
+                    initHomeMap5(json.lnglat.split(","),json.stationNames.split(","),json.nums.split(","),json.colorState.split(","));
+                }
             }
         }
     });

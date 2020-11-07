@@ -1396,6 +1396,7 @@
 	var Firtimer;
 
 	function FirHomeClick() {
+		homePageInit.initditu();
 		clearInterval(Sectimer)
 		clearInterval(Threetimer)
 		clearInterval(Fourtimer)
@@ -1526,7 +1527,8 @@
 		clearInterval(Sectimer)
 		clearInterval(Threetimer)
 		clearInterval(Fourtimer)
-
+		sj_page_flag=true;
+		homePageInit.initditu5()
 		homePageInit.initHomeData5();
 		homePageInit.initFirTongji5();
 		homePageInit.initFirqstjt5('chart5');
