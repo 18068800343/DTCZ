@@ -813,9 +813,9 @@ public class tWimMsgController {
         List<String> list=new ArrayList<>();
         String[] port1 = obj1.getStationNames().split(",");
         for(int i=0;i<port1.length;i++){
-            if(port1[i].equals("泰州大桥")||port1[i].equals("苏通大桥")||port1[i].equals("江阴大桥")||port1[i].equals("润扬大桥")){
+            if(port1[i].equals("泰州大桥")||port1[i].equals("苏通大桥")||port1[i].equals("江阴大桥")||port1[i].equals("润扬大桥")||port1[i].equals("崇启大桥")){//设置固定站点的红颜色
                 list.add("3");
-            }else{
+            }else{//区分省界和路网站点
                 if (!Arrays.asList(port1).contains("泰州大桥")||!Arrays.asList(port1).contains("苏通大桥")||!Arrays.asList(port1).contains("江阴大桥")||!Arrays.asList(port1).contains("润扬大桥")){
                     list.add("1");
                 }else{
@@ -827,9 +827,9 @@ public class tWimMsgController {
         CheLiuLiangEchartsList obj2= service.getDiTujwdByPort2();
         String[] port2 = obj2.getStationNames().split(",");
         for(int i=0;i<port2.length;i++){
-            if(port2[i].equals("泰州大桥")||port2[i].equals("苏通大桥")||port2[i].equals("江阴大桥")||port2[i].equals("润扬大桥")){
+            if(port2[i].equals("泰州大桥")||port2[i].equals("苏通大桥")||port2[i].equals("江阴大桥")||port2[i].equals("润扬大桥")||port2[i].equals("崇启大桥")){//设置固定站点的红颜色
                 list.add("3");
-            }else{
+            }else{//区分省界和路网站点
                 if (!Arrays.asList(port2).contains("泰州大桥")||!Arrays.asList(port2).contains("苏通大桥")||!Arrays.asList(port2).contains("江阴大桥")||!Arrays.asList(port2).contains("润扬大桥")){
                     list.add("1");
                 }else{
