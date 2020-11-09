@@ -2730,7 +2730,8 @@ let getDanZhouChaoZai = (data) => {
 function initHomeMap5(lngLats,stationNames,nums,colorState){
     let geoCoordData = {};
     let markPointData = [];
-    var size = [23,20,17,13,10,8]
+//    var size = [23,20,17,13,10,8]
+    var size = [10,10,10,10,10,10]
     for(let i in lngLats){
         var liuliangNums=nums[i];
         let lngLatArray = [];
