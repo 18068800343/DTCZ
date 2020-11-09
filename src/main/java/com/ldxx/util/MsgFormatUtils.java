@@ -47,14 +47,29 @@ public class MsgFormatUtils {
 			Integer[] numsAll = new Integer[numsA.length + numsB.length];
 
 			Map map = new HashMap();
+
+			int flag1 = 0;
 			for (int i = 0; i < numsA.length; i++) {
-				map.put(numsA[i] + "-" + "name", stationNamesA[i]);
-				map.put(numsA[i] + "-" + "port", stationPortsA[i]);
+				if ("0".equals(numsA[i])) {
+					flag1++;
+					map.put(flag1 + "-" + "name", stationNamesA[i]);
+					map.put(flag1 + "-" + "port", stationPortsA[i]);
+				} else {
+					map.put(numsA[i] + "-" + "name", stationNamesA[i]);
+					map.put(numsA[i] + "-" + "port", stationPortsA[i]);
+				}
+
 				numsAll[i] = Integer.parseInt(numsA[i]);
 			}
 			for (int i = 0; i < numsB.length; i++) {
-				map.put(numsB[i] + "-" + "name", stationNamesB[i]);
-				map.put(numsB[i] + "-" + "port", stationPortsB[i]);
+				if ("0".equals(numsB[i])) {
+					flag1++;
+					map.put(flag1 + "-" + "name", stationNamesB[i]);
+					map.put(flag1 + "-" + "port", stationPortsB[i]);
+				} else {
+					map.put(numsB[i] + "-" + "name", stationNamesB[i]);
+					map.put(numsB[i] + "-" + "port", stationPortsB[i]);
+				}
 				numsAll[i + numsA.length] = Integer.parseInt(numsB[i]);
 			}
 
@@ -62,15 +77,31 @@ public class MsgFormatUtils {
 			StringBuffer numEnd = new StringBuffer();
 			StringBuffer stationPorts = new StringBuffer();
 			StringBuffer stationNames = new StringBuffer();
+			flag1 = 0;
 			for (int i = 0; i < numsAll.length; i++) {
 				if (i == numsAll.length - 1) {
-					numEnd.append(numsAll[i]);
-					stationNames.append(map.get(numsAll[i] + "-" + "name"));
-					stationPorts.append(map.get(numsAll[i] + "-" + "port"));
+					if (0 == (numsAll[i])) {
+						flag1++;
+						numEnd.append(numsAll[i]);
+						stationNames.append(map.get(flag1 + "-" + "name"));
+						stationPorts.append(map.get(flag1 + "-" + "port"));
+					} else {
+						numEnd.append(numsAll[i]);
+						stationNames.append(map.get(numsAll[i] + "-" + "name"));
+						stationPorts.append(map.get(numsAll[i] + "-" + "port"));
+					}
+
 				} else {
-					numEnd.append(numsAll[i]).append(",");
-					stationNames.append(map.get(numsAll[i] + "-" + "name")).append(",");
-					stationPorts.append(map.get(numsAll[i] + "-" + "port")).append(",");
+					if (0 == (numsAll[i])) {
+						flag1++;
+						numEnd.append(numsAll[i]).append(",");
+						stationNames.append(map.get(flag1 + "-" + "name")).append(",");
+						stationPorts.append(map.get(flag1 + "-" + "port")).append(",");
+					} else {
+						numEnd.append(numsAll[i]).append(",");
+						stationNames.append(map.get(numsAll[i] + "-" + "name")).append(",");
+						stationPorts.append(map.get(numsAll[i] + "-" + "port")).append(",");
+					}
 				}
 
 			}
