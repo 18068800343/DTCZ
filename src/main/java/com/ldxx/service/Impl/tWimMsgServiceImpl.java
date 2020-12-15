@@ -187,7 +187,7 @@ public class tWimMsgServiceImpl implements tWimMsgService {
     public CheLiuLiangEchartsList getCheLiuLiangEchartsList2() {
         tUserInfoVo shiro = uDao.selectUserByUsrName("shiro");
         String stationPorts = shiro.getStationPort();
-        return dao.getCheLiuLiangEchartsList(stationPorts, null, 17);
+        return dao.getCheLiuLiangEchartsList(stationPorts, null, 19);
     }
 
     @Override
