@@ -101,6 +101,36 @@ public class ReportUtil {
         return path;
     }
 
+
+    public static void execReport(String op, int i, String endStr, String otherName) throws IOException {
+        Process process = Runtime.getRuntime().exec(op);
+        InputStream is = process.getInputStream();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is, "GBK"));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            System.out.println(line);
+            if (line != null && !line.trim().equals("")) {
+                if (line.endsWith(endStr)) {
+                    String[] strs = line.split("\\\\");
+                    String str = strs[strs.length - 1];
+                    String companyName = str.split("_")[0];
+                    String reportName = str;
+                    String reportUrl = line.replace("info:", "").replace("success:", "");
+                    Report report = new Report();
+                    report.setrId(LDXXUtils.getUUID32());
+                    report.setCompanyName("".equals(otherName) ? companyName : otherName);
+                    report.setReportName(reportName);
+                    report.setReportStatus(1);
+                    report.setReportTime(new Date());
+                    report.setTimeType(i);
+                    report.setReportUrl(reportUrl);
+                    int k = reportUtil.dao.insertReport(report);
+                }
+            }
+        }
+        is.close();
+    }
+
     /**
      * @param day
      * @param month
@@ -115,37 +145,17 @@ public class ReportUtil {
                     if (!"".equals(day) && null != day) {
                         for (String companyNameOut : companyNames) {
                             String op = "";
+                            String op_east = "";
                             if (companyNameOut.contains("控股")) {
                                 op = reportUtil.config.getReportCmd() + File.separator + "CreateDayReport.exe 1 " + day;
                             } else {
                                 op = reportUtil.config.getReportCmd() + File.separator + cmdOp + " " + companyNameOut + " " + day;
-                            }
-                            Process process = Runtime.getRuntime().exec(op);
-                            InputStream is = process.getInputStream();
-                            BufferedReader reader = new BufferedReader(new InputStreamReader(is, "GBK"));
-                            String line;
-                            while ((line = reader.readLine()) != null) {
-                                System.out.println(line);
-                                if (line != null && !line.trim().equals("")) {
-                                    if (line.endsWith("docx")) {
-                                        String[] strs = line.split("\\\\");
-                                        String str = strs[strs.length - 1];
-                                        String companyName = str.split("_")[0];
-                                        String reportName = str;
-                                        String reportUrl = line.replace("info:", "").replace("success:", "");
-                                        Report report = new Report();
-                                        report.setrId(LDXXUtils.getUUID32());
-                                        report.setCompanyName(companyName);
-                                        report.setReportName(reportName);
-                                        report.setReportStatus(1);
-                                        report.setReportTime(new Date());
-                                        report.setTimeType(i);
-                                        report.setReportUrl(reportUrl);
-                                        int k = reportUtil.dao.insertReport(report);
-                                    }
+                                if (companyNameOut.contains("东部")) {
+                                    op_east = reportUtil.config.getReportCmdWeekEast() + File.separator + "daily_DongBuGongSi.exe " + day;
+                                    execReport(op_east, i, "xlsx", "东部公司");
                                 }
                             }
-                            is.close();
+                            execReport(op, i, "docx", "");
                         }
 
                     }
@@ -190,37 +200,18 @@ public class ReportUtil {
                     if (!"".equals(week) && null != week) {
                         for (String companyNameOut : companyNames) {
                             String op = "";
+                            String op_east = "";
                             if (companyNameOut.contains("控股")) {
                                 op = reportUtil.config.getReportCmdWeek() + File.separator + "CreateWeekReport.exe 1 " + week;
                             } else {
                                 op = reportUtil.config.getReportCmdWeek() + File.separator + "CreateWeekReport.exe 3 " + companyNameOut + " " + week;
-                            }
-                            Process process = Runtime.getRuntime().exec(op);
-                            InputStream is = process.getInputStream();
-                            BufferedReader reader = new BufferedReader(new InputStreamReader(is, "GBK"));
-                            String line;
-                            while ((line = reader.readLine()) != null) {
-                                System.out.println(line);
-                                if (line != null && !line.trim().equals("")) {
-                                    if (line.endsWith("docx")) {
-                                        String[] strs = line.split("\\\\");
-                                        String str = strs[strs.length - 1];
-                                        String companyName = str.split("_")[0];
-                                        String reportName = str;
-                                        String reportUrl = line.replace("info:", "").replace("success:", "");
-                                        Report report = new Report();
-                                        report.setrId(LDXXUtils.getUUID32());
-                                        report.setCompanyName(companyName);
-                                        report.setReportName(reportName);
-                                        report.setReportStatus(1);
-                                        report.setReportTime(new Date());
-                                        report.setTimeType(i);
-                                        report.setReportUrl(reportUrl);
-                                        int k = reportUtil.dao.insertReport(report);
-                                    }
+                                if (companyNameOut.contains("东部")) {
+                                    op_east = reportUtil.config.getReportCmdWeekEast() + File.separator + "weekly_DongBuGongSi.exe " + week;
+                                    execReport(op_east, i, "xlsx", "东部公司");
                                 }
                             }
-                            is.close();
+                            execReport(op, i, "docx", "");
+
                         }
                     }
                 }

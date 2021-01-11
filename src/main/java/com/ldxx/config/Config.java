@@ -17,6 +17,15 @@ public class Config {
     private String reportCmd;
     private String reportCmdMonth;
     private String reportCmdWeek;
+    private String reportCmdWeekEast;
+
+    public String getReportCmdWeekEast() {
+        return reportCmdWeekEast;
+    }
+
+    public void setReportCmdWeekEast(String reportCmdWeekEast) {
+        this.reportCmdWeekEast = reportCmdWeekEast;
+    }
 
     public String getReportCmdWeek() {
         return reportCmdWeek;
