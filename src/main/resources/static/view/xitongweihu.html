@@ -813,9 +813,22 @@
     })
 
     function getLocalPath(){
-        var pathArray = window.location.pathname.split('/');
+        /*var pathArray = window.location.pathname.split('/');
         var secondLevelLocation = pathArray[1];
         var loginUrl = window.location.protocol + "//"  + window.location.host ;
+        return loginUrl;*/
+        var loginUrl;
+        $.ajax({
+            type: 'POST',
+            url: '/tVehicleOverweight/getimgUrlPrefix',
+            dataType: 'json',
+            async:false,
+            data: {
+            },
+            success: function (json) {
+                loginUrl="http://"+json.imgUrlPrefix+""
+            }
+        });
         return loginUrl;
     }
 
