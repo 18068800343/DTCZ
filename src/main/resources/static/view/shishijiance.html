@@ -772,7 +772,19 @@
 					columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11]
 				}
 			}
-		]
+		],
+		fnDrawCallback: function (table) {
+			$("#mainContent2_paginate").append("  到第 <input style='height:28px;line-height:28px;width:40px;' class='margin text-center' id='changePage' type='text'> 页  <a class='btn btn-default shiny' style='margin-bottom:5px' href='javascript:void(0);' id='dataTable-btn'>确认</a>");
+			var oTable = $("#mainContent2").dataTable();
+			$('#dataTable-btn').click(function (e) {
+				if ($("#changePage").val() && $("#changePage").val() > 0) {
+					var redirectpage = $("#changePage").val() - 1;
+				} else {
+					var redirectpage = 0;
+				}
+				oTable.fnPageChange(redirectpage);
+			});
+		}
 	});
 	table2.buttons().container().appendTo($('#tabBtn2'));
 	$('.buttons-csv').addClass('btn btn-primary');
@@ -862,7 +874,19 @@
 					columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11]
 				}
 			}
-		]
+		],
+		fnDrawCallback: function (table) {
+			$("#mainContent3_paginate").append("  到第 <input style='height:28px;line-height:28px;width:40px;' class='margin text-center' id='changePage1' type='text'> 页  <a class='btn btn-default shiny' style='margin-bottom:5px' href='javascript:void(0);' id='dataTable-btn'>确认</a>");
+			var oTable = $("#mainContent3").dataTable();
+			$('#dataTable-btn').click(function (e) {
+				if ($("#changePage1").val() && $("#changePage1").val() > 0) {
+					var redirectpage = $("#changePage1").val() - 1;
+				} else {
+					var redirectpage = 0;
+				}
+				oTable.fnPageChange(redirectpage);
+			})
+		}
 	});
 	table3.buttons().container().appendTo($('#tabBtn3'));
 	$('.buttons-csv').addClass('btn btn-primary');

@@ -775,7 +775,19 @@
                     columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11]
                 }
             }
-        ]
+        ],
+        fnDrawCallback: function (table) {
+            $("#mainContent2_paginate").append("  到第 <input style='height:28px;line-height:28px;width:40px;' class='margin text-center' id='changePage' type='text'> 页  <a class='btn btn-default shiny' style='margin-bottom:5px' href='javascript:void(0);' id='dataTable-btn'>确认</a>");
+            var oTable = $("#mainContent2").dataTable();
+            $('#dataTable-btn').click(function (e) {
+                if ($("#changePage").val() && $("#changePage").val() > 0) {
+                    var redirectpage = $("#changePage").val() - 1;
+                } else {
+                    var redirectpage = 0;
+                }
+                oTable.fnPageChange(redirectpage);
+            });
+        }
     });
     table2.buttons().container().appendTo($('#tabBtn2'));
     $('.buttons-csv').addClass('btn btn-primary');
@@ -865,7 +877,19 @@
                     columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11]
                 }
             }
-        ]
+        ],
+        fnDrawCallback: function (table) {
+            $("#mainContent3_paginate").append("  到第 <input style='height:28px;line-height:28px;width:40px;' class='margin text-center' id='changePage1' type='text'> 页  <a class='btn btn-default shiny' style='margin-bottom:5px' href='javascript:void(0);' id='dataTable-btn'>确认</a>");
+            var oTable = $("#mainContent3").dataTable();
+            $('#dataTable-btn').click(function (e) {
+                if ($("#changePage1").val() && $("#changePage1").val() > 0) {
+                    var redirectpage = $("#changePage1").val() - 1;
+                } else {
+                    var redirectpage = 0;
+                }
+                oTable.fnPageChange(redirectpage);
+            })
+        }
     });
     table3.buttons().container().appendTo($('#tabBtn3'));
     $('.buttons-csv').addClass('btn btn-primary');
@@ -1054,7 +1078,8 @@
                 }
             }
         ]
-    });
+        })
+    ;
     table5.buttons().container().appendTo($('#tabBtn5'));
     $('.buttons-csv').addClass('btn btn-primary');
 
@@ -1765,6 +1790,71 @@
             }
         });
     }
+
+
+    // START 2016-12-27添加，用于输入分页页码
+    $(".gotoPage").remove();
+    var pageHtml = "<span class='gotoPage' style='margin-left: 10px;'>" +
+        "<span>到第</span>" +
+        "<input type='text' style='width: 40px; padding-left: 2px; padding-right: 2px; text-align: center;' class='integer' id='textGotoPage' data-prev='" + (page + 1) + "' value='" + (page + 1) + "'>" +
+        "<span>页</span>" +
+        "<a class='paginate_button' style='width: 40px; border-right: 1px solid #e4e4e4;' id='btnGotoPage'>确认</a>" +
+        "</span>";
+    $(pageHtml).appendTo(container);
+
+    // 对页码输入进行限制，只能输入数字
+    var sfn = function () {
+        var value = $(this).val();
+        if (value == '') {
+            $(this).data("prev", $(this).val());
+            return;
+        }
+
+        var max = $(this).attr("maxlength");
+        if (value.length > max)
+            $(this).val(value.slice(0, max));
+
+        var regex = /^\d+$/;
+        if (!regex.test(value)) {
+            $(this).val($(this).data("prev"));
+        }
+
+        $(this).data("prev", $(this).val());
+    };
+
+    var testinput = document.createElement('input');
+    if ('oninput' in testinput) {
+        document.getElementById("textGotoPage").addEventListener("input", sfn, false);
+    } else {
+        $("#textGotoPage").onpropertychange = sfn;
+    }
+
+    // 为确认按钮添加点击事件，执行分页跳转
+    $("#btnGotoPage").click(function () {
+        var textGotoPage = $("#textGotoPage").val();
+        if (textGotoPage == null || textGotoPage === '' || textGotoPage.match(/[^0-9]/)) {
+            // 没有输入或者输入了非数字，清除非数字
+            $("#textGotoPage").val(textGotoPage.replace(/[^\d]/g, ''));
+            return;
+        }
+
+        if (parseInt(textGotoPage) > 0) {
+            var oSettings = settings;
+
+            var iNewStart = oSettings._iDisplayLength * (textGotoPage - 1);
+            if (iNewStart < 0) {
+                iNewStart = 0;
+            }
+            if (iNewStart >= oSettings.fnRecordsDisplay()) {
+                iNewStart = (Math.ceil((oSettings.fnRecordsDisplay()) / oSettings._iDisplayLength) - 1) * oSettings._iDisplayLength;
+            }
+
+            oSettings._iDisplayStart = iNewStart;
+            _fnDraw(oSettings);
+        }
+    });
+    // END
+
 
 </script>
 </html>
