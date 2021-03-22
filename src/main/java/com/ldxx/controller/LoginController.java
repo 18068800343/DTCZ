@@ -98,7 +98,7 @@ public class LoginController {
         tUserInfoVo loginUser1 = null;
         Map<String, Object> map = new HashMap<>();
         HttpSession session = request.getSession();
-        if ("shiro".equals(user.getUsrName())) {
+//        if ("shiro".equals(user.getUsrName())) {
             if (null != user && null != user.getUsrName() && null != user.getUsrPwd() && !"".equals(user.getUsrName()) && !"".equals(user.getUsrPwd())) {
                 loginUser = service.selectUserByUsrName(user.getUsrName());
                 loginUser1 = service.selectUserByUsrName1(user.getUsrName());
@@ -116,7 +116,7 @@ public class LoginController {
             } else {
                 state = -1;
             }//用户名或密码为空
-        }
+//        }
 
         map.put("result", state);
         map.put("user", loginUser);
