@@ -562,7 +562,7 @@
                         url="<a target='_blank' href="+path+"><img src="+path+"  width='50' height='40'/>"
                     }
                 });*/
-                var path="http://"+imgUrlPrefix+"/port"+full.stationIP+"/" + getYMDStr(data.evtTime) + "/" +full.idLocal+"-Image.jpg"
+                var path="https://"+imgUrlPrefix+"/port"+full.stationIP+"/" + getYMDStr(data.evtTime) + "/" +full.idLocal+"-Image.jpg"
                 return "<a target='_blank' href="+path+"><img src="+path+"  width='50' height='40'/>"
             }
         },{
@@ -983,7 +983,7 @@
             }
         });*/
         $("#chebodyDiv").html('')
-        var url2 = "http://" + imgUrlPrefix + "/port" + data.stationIP + "/" + getYMDStr(data.evtTime) + "/" + data.idLocal + "-Image.jpg"
+        var url2 = "https://" + imgUrlPrefix + "/port" + data.stationIP + "/" + getYMDStr(data.evtTime) + "/" + data.idLocal + "-Image.jpg"
         var img2 = '<a target="_blank" href="' + url2 + '" ><img id="chebodyImg" src="' + url2 + '" class="popup" " width=\'80\' height=\'60\'/></a>'
         $("#chebodyDiv").append(img2)
     }

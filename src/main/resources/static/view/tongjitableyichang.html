@@ -1201,7 +1201,7 @@
             success: function (json) {
                 $("#chepaiImg").html('')
                 $("#chebodyDiv").html('')
-                var url2 = "http://" + json.imgUrlPrefix + "/port" + data.stationIP + "/" + getYMDStr(data.evtTime) + "/" + data.idLocal + "-Image.jpg"
+                var url2 = "https://" + json.imgUrlPrefix + "/port" + data.stationIP + "/" + getYMDStr(data.evtTime) + "/" + data.idLocal + "-Image.jpg"
                 var img2 = '<a target="_blank" href="' + url2 + '"><img id="chebodyImg" src="' + url2 + '" class="popup" width=\'80\' height=\'60\';" /></a>'
                 $("#chebodyDiv").append(img2)
             }
