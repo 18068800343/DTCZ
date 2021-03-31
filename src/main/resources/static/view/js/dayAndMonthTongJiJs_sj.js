@@ -571,7 +571,7 @@ let getLocalPath2_sj = () => {
         async: false,
         data: {},
         success: function (json) {
-            loginUrl = "http://" + json.imgUrlPrefix + "" + "/dtcz_file/"
+            loginUrl = "https://" + json.imgUrlPrefix + "" + "/dtcz_file/"
         }
     });
     return loginUrl;
